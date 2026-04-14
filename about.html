@@ -550,5 +550,32 @@
 
 
 
+
+    <script id="header-scroll-script">
+        document.addEventListener('DOMContentLoaded', function () {
+            const header = document.querySelector('header');
+            if (!header) return;
+            const container = header.querySelector('.container');
+            
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    header.classList.remove('bg-transparent');
+                    header.classList.add('bg-white', 'shadow-sm');
+                    if (container) {
+                        container.classList.remove('py-6', 'md:py-6');
+                        container.classList.add('py-4', 'md:py-4');
+                    }
+                } else {
+                    header.classList.remove('bg-white', 'shadow-sm');
+                    header.classList.add('bg-transparent');
+                    if (container) {
+                        container.classList.remove('py-4', 'md:py-4');
+                        container.classList.add('py-6', 'md:py-6');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
