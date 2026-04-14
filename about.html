@@ -116,71 +116,74 @@
 </div>
 </header>
     <!-- ======== ABOUT US HERO ======== -->
-    <section class="w-full pt-28 pb-20 bg-[#FDFCF9] overflow-hidden">
-        <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+    <section style="width:100%; padding-top:7rem; padding-bottom:5rem; background:#FDFCF9; overflow:hidden;">
+        <div style="max-width:1280px; margin:0 auto; padding:0 1.5rem;">
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; align-items: center;">
+            <div style="display:grid; grid-template-columns: 1.4fr 0.9fr 1fr; gap:60px; align-items:center;">
 
-                <!-- COL 1: Title + Venn Diagram -->
+                <!-- COL 1: Title + Venn Diagram + Labels side-by-side -->
                 <div>
                     <h2 style="font-size:2.8rem; font-weight:700; color:#0C1E28; margin-bottom:2.5rem; font-family:'Satoshi',sans-serif; line-height:1.1;">About us:</h2>
 
-                    <!-- Venn Circles wrapper — relative container -->
-                    <div style="position:relative; width:320px; height:310px;">
+                    <!-- Venn + inline labels layout -->
+                    <div style="display:flex; gap:24px; align-items:flex-start;">
 
-                        <!-- Circle 2019 (top-left) -->
-                        <div style="position:absolute; top:30px; left:0; width:160px; height:160px; border-radius:50%; border:2px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:1;">
-                            <span style="font-size:1.6rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2019</span>
+                        <!-- Circles only -->
+                        <div style="position:relative; width:240px; min-width:240px; height:290px; flex-shrink:0;">
+                            <!-- 2019 -->
+                            <div style="position:absolute; top:20px; left:0; width:150px; height:150px; border-radius:50%; border:1.5px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:1; background:rgba(253,252,249,0.6);">
+                                <span style="font-size:1.5rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2019</span>
+                            </div>
+                            <!-- 2024 -->
+                            <div style="position:absolute; top:0; left:88px; width:150px; height:150px; border-radius:50%; border:1.5px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:2; background:rgba(253,252,249,0.6);">
+                                <span style="font-size:1.5rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2024</span>
+                            </div>
+                            <!-- 2020 -->
+                            <div style="position:absolute; top:100px; left:44px; width:150px; height:150px; border-radius:50%; border:1.5px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:3; background:rgba(253,252,249,0.6);">
+                                <span style="font-size:1.5rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2020</span>
+                            </div>
                         </div>
 
-                        <!-- Circle 2024 (top-right) -->
-                        <div style="position:absolute; top:0; left:100px; width:160px; height:160px; border-radius:50%; border:2px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:2;">
-                            <span style="font-size:1.6rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2024</span>
+                        <!-- Labels column, aligned with their circles -->
+                        <div style="display:flex; flex-direction:column; justify-content:space-between; height:290px; padding-top:10px;">
+                            <!-- 2019 label — top -->
+                            <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.55; max-width:180px;">
+                                Foundation of Smith &amp; Adams Group and launch of real estate advisory services.
+                            </p>
+                            <!-- 2024 label — mid -->
+                            <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.55; max-width:180px;">
+                                Launch of Urban Collection in Lisbon and consolidation as a full-service real estate and residency platform for international investors.
+                            </p>
+                            <!-- 2020 label — bottom -->
+                            <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.55; max-width:180px;">
+                                Expansion into citizenship-by-investment, D2 advisory, and property management.
+                            </p>
                         </div>
-
-                        <!-- Circle 2020 (bottom-center) -->
-                        <div style="position:absolute; top:110px; left:50px; width:160px; height:160px; border-radius:50%; border:2px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:3;">
-                            <span style="font-size:1.6rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2020</span>
-                        </div>
-
-                        <!-- Labels -->
-                        <div style="position:absolute; bottom:-30px; left:0; width:150px;">
-                            <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.5;">Foundation of Smith &amp; Adams Group and launch of real estate advisory services.</p>
-                        </div>
-                        <div style="position:absolute; bottom:-30px; right:-20px; width:160px;">
-                            <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.5;">Launch of Urban Collection in Lisbon and consolidation as a full-service real estate and residency platform for international investors.</p>
-                        </div>
-                    </div>
-
-                    <!-- 2020 label below -->
-                    <div style="margin-top:100px; padding-left:55px; max-width:230px;">
-                        <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.5;">Expansion into citizenship-by-investment, D2 advisory, and property management.</p>
                     </div>
                 </div>
 
-                <!-- COL 2: Portugal Map -->
-                <div style="display:flex; justify-content:center; align-items:center; min-height:450px;">
+                <!-- COL 2: Portugal Map (monochrome, proper display) -->
+                <div style="display:flex; justify-content:center; align-items:center; min-height:380px;">
                     <img src="./about/map.png" alt="Portugal Map"
-                         style="max-height:420px; width:auto; object-fit:contain;
-                                filter: grayscale(100%) brightness(0.3) contrast(1.2);
-                                mix-blend-mode: multiply; opacity:0.85;" />
+                         style="max-height:380px; width:auto; max-width:100%; object-fit:contain;
+                                filter: grayscale(100%) opacity(0.75);" />
                 </div>
 
                 <!-- COL 3: Video + Image -->
-                <div style="display:flex; flex-direction:column; gap:20px;">
+                <div style="display:flex; flex-direction:column; gap:16px;">
                     <!-- Video -->
-                    <div style="position:relative; width:100%; border-radius:14px; overflow:hidden; cursor:pointer; box-shadow:0 8px 32px rgba(12,30,40,0.18);">
-                        <img src="./about/aboutHero.png" alt="About Video" style="width:100%; height:230px; object-fit:cover; display:block;" />
-                        <div style="position:absolute; inset:0; background:rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center;">
-                            <div style="width:56px; height:56px; background:rgba(255,255,255,0.25); backdrop-filter:blur(8px); border-radius:50%; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,255,255,0.5);">
-                                <svg width="22" height="22" fill="white" viewBox="0 0 24 24" style="margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
+                    <div style="position:relative; width:100%; border-radius:14px; overflow:hidden; cursor:pointer; box-shadow:0 8px 32px rgba(12,30,40,0.15);">
+                        <img src="./about/aboutHero.png" alt="Smith &amp; Adams Video" style="width:100%; height:210px; object-fit:cover; display:block;" />
+                        <div style="position:absolute; inset:0; background:rgba(0,0,0,0.15); display:flex; align-items:center; justify-content:center;">
+                            <div style="width:52px; height:52px; background:rgba(255,255,255,0.28); backdrop-filter:blur(8px); border-radius:50%; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,255,255,0.5);">
+                                <svg width="20" height="20" fill="white" viewBox="0 0 24 24" style="margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
                             </div>
                         </div>
                     </div>
 
                     <!-- Image placeholder -->
-                    <div style="width:100%; height:170px; border-radius:14px; background:#E6EEF4; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(12,30,40,0.08);">
-                        <span style="color:#0C1E28; opacity:0.35; letter-spacing:0.25em; font-family:'Satoshi',sans-serif; font-size:0.8rem; font-weight:500;">IMAGEM</span>
+                    <div style="width:100%; height:160px; border-radius:14px; background:#E6EEF4; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(12,30,40,0.07);">
+                        <span style="color:#0C1E28; opacity:0.35; letter-spacing:0.25em; font-family:'Satoshi',sans-serif; font-size:0.78rem; font-weight:500;">IMAGEM</span>
                     </div>
                 </div>
 
