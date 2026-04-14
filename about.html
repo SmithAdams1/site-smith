@@ -116,63 +116,71 @@
 </div>
 </header>
     <!-- ======== ABOUT US HERO ======== -->
-    <section class="w-full pt-28 pb-20 bg-[#0C1E28] text-white overflow-hidden relative">
-        <!-- Background Map watermark -->
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <img src="./about/map.png" alt="" class="w-[600px] h-auto opacity-[0.04]" />
-        </div>
+    <section class="w-full pt-28 pb-20 bg-[#FDFCF9] overflow-hidden">
+        <div class="container mx-auto px-4 md:px-6 max-w-7xl">
 
-        <div class="container mx-auto px-4 md:px-6 max-w-7xl relative z-10">
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; align-items: center;">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-                <!-- LEFT COLUMN: Title + Timeline -->
+                <!-- COL 1: Title + Venn Diagram -->
                 <div>
-                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold geist leading-tight mb-12">About us:</h2>
+                    <h2 style="font-size:2.8rem; font-weight:700; color:#0C1E28; margin-bottom:2.5rem; font-family:'Satoshi',sans-serif; line-height:1.1;">About us:</h2>
 
-                    <!-- Vertical Timeline -->
-                    <div class="relative pl-8 border-l-2 border-white/20 space-y-12">
+                    <!-- Venn Circles wrapper — relative container -->
+                    <div style="position:relative; width:320px; height:310px;">
 
-                        <!-- 2019 -->
-                        <div class="relative">
-                            <div class="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-white border-4 border-[#0C1E28]"></div>
-                            <span class="text-2xl font-bold geist text-white">2019</span>
-                            <p class="text-[15px] text-gray-300 satoshi leading-relaxed mt-2 max-w-md">Foundation of Smith &amp; Adams Group and launch of real estate advisory services.</p>
+                        <!-- Circle 2019 (top-left) -->
+                        <div style="position:absolute; top:30px; left:0; width:160px; height:160px; border-radius:50%; border:2px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:1;">
+                            <span style="font-size:1.6rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2019</span>
                         </div>
 
-                        <!-- 2020 -->
-                        <div class="relative">
-                            <div class="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-white border-4 border-[#0C1E28]"></div>
-                            <span class="text-2xl font-bold geist text-white">2020</span>
-                            <p class="text-[15px] text-gray-300 satoshi leading-relaxed mt-2 max-w-md">Expansion into citizenship-by-investment, D2 advisory, and property management.</p>
+                        <!-- Circle 2024 (top-right) -->
+                        <div style="position:absolute; top:0; left:100px; width:160px; height:160px; border-radius:50%; border:2px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:2;">
+                            <span style="font-size:1.6rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2024</span>
                         </div>
 
-                        <!-- 2024 -->
-                        <div class="relative">
-                            <div class="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-white border-4 border-[#0C1E28]"></div>
-                            <span class="text-2xl font-bold geist text-white">2024</span>
-                            <p class="text-[15px] text-gray-300 satoshi leading-relaxed mt-2 max-w-md">Launch of Urban Collection in Lisbon and consolidation as a full-service real estate and residency platform for international investors.</p>
+                        <!-- Circle 2020 (bottom-center) -->
+                        <div style="position:absolute; top:110px; left:50px; width:160px; height:160px; border-radius:50%; border:2px solid #0C1E28; display:flex; align-items:center; justify-content:center; z-index:3;">
+                            <span style="font-size:1.6rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif;">2020</span>
                         </div>
 
+                        <!-- Labels -->
+                        <div style="position:absolute; bottom:-30px; left:0; width:150px;">
+                            <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.5;">Foundation of Smith &amp; Adams Group and launch of real estate advisory services.</p>
+                        </div>
+                        <div style="position:absolute; bottom:-30px; right:-20px; width:160px;">
+                            <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.5;">Launch of Urban Collection in Lisbon and consolidation as a full-service real estate and residency platform for international investors.</p>
+                        </div>
+                    </div>
+
+                    <!-- 2020 label below -->
+                    <div style="margin-top:100px; padding-left:55px; max-width:230px;">
+                        <p style="font-size:0.72rem; color:#555; font-family:'Satoshi',sans-serif; line-height:1.5;">Expansion into citizenship-by-investment, D2 advisory, and property management.</p>
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN: Video + Image -->
-                <div class="flex flex-col gap-6">
+                <!-- COL 2: Portugal Map -->
+                <div style="display:flex; justify-content:center; align-items:center; min-height:450px;">
+                    <img src="./about/map.png" alt="Portugal Map"
+                         style="max-height:420px; width:auto; object-fit:contain;
+                                filter: grayscale(100%) brightness(0.3) contrast(1.2);
+                                mix-blend-mode: multiply; opacity:0.85;" />
+                </div>
+
+                <!-- COL 3: Video + Image -->
+                <div style="display:flex; flex-direction:column; gap:20px;">
                     <!-- Video -->
-                    <div class="relative w-full aspect-video rounded-2xl overflow-hidden group cursor-pointer shadow-2xl">
-                        <img src="./about/aboutHero.png" alt="Smith &amp; Adams Team" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-white/30 border border-white/30">
-                                <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <div style="position:relative; width:100%; border-radius:14px; overflow:hidden; cursor:pointer; box-shadow:0 8px 32px rgba(12,30,40,0.18);">
+                        <img src="./about/aboutHero.png" alt="About Video" style="width:100%; height:230px; object-fit:cover; display:block;" />
+                        <div style="position:absolute; inset:0; background:rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center;">
+                            <div style="width:56px; height:56px; background:rgba(255,255,255,0.25); backdrop-filter:blur(8px); border-radius:50%; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(255,255,255,0.5);">
+                                <svg width="22" height="22" fill="white" viewBox="0 0 24 24" style="margin-left:3px;"><path d="M8 5v14l11-7z"/></svg>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Image Placeholder -->
-                    <div class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden bg-[#14303F] flex items-center justify-center shadow-2xl border border-white/5">
-                        <span class="text-white/30 font-medium tracking-[0.3em] satoshi text-sm">IMAGEM</span>
+                    <!-- Image placeholder -->
+                    <div style="width:100%; height:170px; border-radius:14px; background:#E6EEF4; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(12,30,40,0.08);">
+                        <span style="color:#0C1E28; opacity:0.35; letter-spacing:0.25em; font-family:'Satoshi',sans-serif; font-size:0.8rem; font-weight:500;">IMAGEM</span>
                     </div>
                 </div>
 
