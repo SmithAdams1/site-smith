@@ -8,7 +8,6 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon"/>
   
   <link rel="stylesheet" href="_next/static/css/8414200374d39713.css?v=4" data-precedence="next"/>
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -20,6 +19,7 @@
     body { font-family: 'Satoshi', sans-serif; margin: 0; padding: 0; overflow-x: hidden; background-color: #FDFCF9;}
     .geist { font-family: 'Geist', sans-serif; }
     .satoshi { font-family: 'Satoshi', sans-serif; }
+    .hidden { display: none !important; }
 
     /* Editorial Theme Variables */
     :root {
@@ -74,11 +74,15 @@
       overflow: hidden;
     }
     .featured-img {
+      display: block;
       width: 100%;
       height: 100%;
       min-height: 480px;
       object-fit: cover;
+      object-position: center;
       transition: transform 0.7s ease;
+      margin: 0;
+      padding: 0;
     }
     .featured-article:hover .featured-img {
       transform: scale(1.05);
@@ -226,35 +230,14 @@
       overflow: hidden;
     }
     
-    /* CTA Banner */
-    .cta-banner {
-      max-width: 1400px;
-      margin: 0 auto 120px;
-      padding: 0 4%;
-    }
-    .cta-inner {
-      background: var(--dark);
-      border-radius: 24px;
-      padding: 100px 8%;
-      text-align: center;
-      color: white;
-    }
-    .btn-white {
-      display: inline-block;
-      background: white;
-      color: var(--dark);
-      font-weight: 700;
-      padding: 18px 40px;
-      border-radius: 40px;
-      margin-top: 40px;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-    .btn-white:hover {
-      background: #f0f0f0;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
+    /* Loader & CTA Banner */
+    .cta-banner { max-width: 1400px; margin: 0 auto 120px; padding: 0 4%; }
+    .cta-inner { background: var(--dark); border-radius: 24px; padding: 100px 8%; text-align: center; color: white; }
+    .btn-white { display: inline-block; background: white; color: var(--dark); font-weight: 700; padding: 18px 40px; border-radius: 40px; margin-top: 40px; text-decoration: none; transition: all 0.3s; }
+    .btn-white:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    
+    .spinner { border: 4px solid rgba(12, 30, 40, 0.1); width: 40px; height: 40px; border-radius: 50%; border-left-color: #0C1E28; animation: spin 1s linear infinite; margin: 0 auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
     @media (max-width: 768px) {
       .journal-title { font-size: 48px; }
@@ -266,40 +249,20 @@
   </style>
 </head>
 <body>
-
-  <!-- Exact Header from original blog.html -->
+  <!-- Header -->
   <header class="fixed w-full z-50 transition-all duration-300 bg-[#0C1E28]">
     <div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center">
       <a class="relative z-40" href="index.html">
         <img alt="Smith & Adams Logo" loading="lazy" width="150" height="40" class="h-10 w-auto invert" src="./logo.png"/>
       </a>
       <nav class="hidden lg:flex items-center space-x-8">
-        <div class="relative group">
-          <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="index.html">Home</a>
-        </div>
-        <div class="relative group">
-          <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="about.html">About Us</a>
-        </div>
-        <div class="relative group">
-          <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="property-management.html">Property Management</a>
-        </div>
-        <div class="relative group">
-          <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="urban-collection.html">Urban Collection</a>
-        </div>
-        <div class="relative group">
-          <a class="text-white transition-colors duration-300 font-satoshi font-medium satoshi" href="blog.html">Blog<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></span></a>
-        </div>
-        <div>
-          <a class="bg-white text-[#0C1E28] px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 satoshi font-medium" href="contact.html">Contact Us</a>
-        </div>
+        <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300" href="index.html">Home</a>
+        <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300" href="about.html">About Us</a>
+        <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300" href="property-management.html">Property Management</a>
+        <a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300" href="urban-collection.html">Urban Collection</a>
+        <div><a class="text-white transition-colors duration-300 font-satoshi font-medium" href="blog.html">Blog<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></span></a></div>
+        <a class="bg-white text-[#0C1E28] px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 font-medium" href="contact.html">Contact Us</a>
       </nav>
-      <button class="lg:hidden relative z-50 focus:outline-none" aria-label="Toggle menu">
-        <div class="w-6 flex flex-col justify-between items-end">
-          <span class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span>
-          <span class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span>
-          <span class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span>
-        </div>
-      </button>
     </div>
   </header>
 
@@ -310,137 +273,34 @@
   </section>
 
   <main>
+    <div id="blog-loader" class="text-center py-32"><div class="spinner"></div></div>
+
     <!-- Featured Article Split -->
-    <article class="featured-article px-4 md:px-0">
-      <div class="featured-img-wrap">
-        <img src="./home/heroImage.png" alt="Portugal Golden Visa 2024" class="featured-img">
-      </div>
+    <article id="featured-article" class="featured-article hidden">
+      <div class="featured-img-wrap"><img id="feat-img" src="" alt="Featured" class="featured-img"></div>
       <div class="featured-content">
-        <span class="c-pill satoshi">Investment</span>
+        <span id="feat-category" class="c-pill satoshi">Category</span>
         <div class="article-meta mb-4" style="margin-top:-10px;">
-          <span>12 Aug 2024</span> <span class="text-gray-400">•</span> <span>8 Min Read</span>
+          <span id="feat-date">Date</span> <span class="text-gray-400">•</span> <span id="feat-read">Read Time</span>
         </div>
-        <h2 class="geist featured-title">
-          <a href="blog/portugal-golden-visa-2024-complete-guide.html">Portugal Golden Visa 2024: Complete Investment Guide</a>
-        </h2>
-        <p class="satoshi featured-excerpt">Everything you need to know about Portugal's Golden Visa program, from minimum investment requirements to citizenship pathways and tax benefits. Discover how to secure your EU residency through strategic real estate investments in Europe's most attractive market.</p>
-        <a href="blog/portugal-golden-visa-2024-complete-guide.html" class="read-more">
-          Read Full Article
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
-        </a>
+        <h2 id="feat-title" class="geist featured-title"><a id="feat-link" href="#">Title</a></h2>
+        <p id="feat-excerpt" class="satoshi featured-excerpt">Excerpt</p>
+        <a id="feat-link-btn" href="#" class="read-more">Read Full Article <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
       </div>
     </article>
 
     <!-- Filters -->
-    <div class="filters-wrap">
-      <button class="filter-btn active">All Topics</button>
-      <button class="filter-btn">Marketing</button>
-      <button class="filter-btn">Real Estate</button>
-      <button class="filter-btn">Investment</button>
-      <button class="filter-btn">Lifestyle</button>
-      <button class="filter-btn">Portugal</button>
+    <div class="filters-wrap" id="filters-wrap">
+      <button class="filter-btn active" onclick="filterPosts('All Topics', this)">All Topics</button>
+      <button class="filter-btn" onclick="filterPosts('Marketing', this)">Marketing</button>
+      <button class="filter-btn" onclick="filterPosts('Real Estate', this)">Real Estate</button>
+      <button class="filter-btn" onclick="filterPosts('Investment', this)">Investment</button>
+      <button class="filter-btn" onclick="filterPosts('Lifestyle', this)">Lifestyle</button>
+      <button class="filter-btn" onclick="filterPosts('Portugal', this)">Portugal</button>
     </div>
 
     <!-- Editorial Grid -->
-    <section class="articles-grid">
-      
-      <!-- Article 2 -->
-      <a href="blog/lisbon-urban-collection-premium-investment.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="./home/urbanCollectionsCardImage.png" alt="Urban Collection" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Real Estate</span> <span>•</span> <span>10 Aug 2024</span> <span>•</span> <span>7 min read</span>
-        </div>
-        <h3 class="geist article-title">Lisbon Urban Collection: Premium Real Estate Investment Opportunities</h3>
-        <p class="satoshi article-excerpt">Discover exclusive investment opportunities in Lisbon's Urban Collection - premium residential developments in the heart of Portugal's dynamic capital.</p>
-      </a>
-
-      <!-- Article 3 -->
-      <a href="blog/portugal-fastest-growing-investment-destination.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="./about/aboutHero.png" alt="Portugal Growing Destination" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Investment</span> <span>•</span> <span>8 Aug 2024</span> <span>•</span> <span>6 min read</span>
-        </div>
-        <h3 class="geist article-title">Why Portugal is Europe's Fastest-Growing Investment Destination</h3>
-        <p class="satoshi article-excerpt">Discover why Portugal has become Europe's most attractive investment destination, combining economic growth, political stability, and exceptional quality of life.</p>
-      </a>
-
-      <!-- Article 4 -->
-      <a href="blog/portuguese-tax-benefits-nhr-program.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="./home/benefitsImage.png" alt="Tax Benefits" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Investment</span> <span>•</span> <span>6 Aug 2024</span> <span>•</span> <span>6 min read</span>
-        </div>
-        <h3 class="geist article-title">Portuguese Tax Benefits: Non-Habitual Resident Program Explained</h3>
-        <p class="satoshi article-excerpt">Discover how Portugal's Non-Habitual Resident program offers significant tax advantages for new residents, including reduced income tax rates and exemptions.</p>
-      </a>
-
-      <!-- Article 5 -->
-      <a href="blog/lisbon-vs-porto-investment-comparison.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="./urban-collections/heroImg1.png" alt="Lisbon vs Porto" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Real Estate</span> <span>•</span> <span>4 Aug 2024</span> <span>•</span> <span>8 min read</span>
-        </div>
-        <h3 class="geist article-title">Lisbon vs Porto: Which Portuguese City Offers Better Investment Returns?</h3>
-        <p class="satoshi article-excerpt">Compare investment opportunities between Portugal's two major cities - Lisbon and Porto - to determine which offers better returns for real estate investors.</p>
-      </a>
-
-      <!-- Article 6 -->
-      <a href="blog/portuguese-property-law-international-investors.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="./home/processImg2.png" alt="Property Law" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Portugal</span> <span>•</span> <span>2 Aug 2024</span> <span>•</span> <span>9 min read</span>
-        </div>
-        <h3 class="geist article-title">The Complete Guide to Portuguese Property Law for International Investors</h3>
-        <p class="satoshi article-excerpt">Navigate Portuguese property law with confidence - essential legal knowledge for international investors buying real estate in Portugal.</p>
-      </a>
-
-      <!-- Article 7 -->
-      <a href="blog/financing-portuguese-property-international-buyers.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="./home/processImg3.png" alt="Financing Property" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Investment</span> <span>•</span> <span>31 Jul 2024</span> <span>•</span> <span>7 min read</span>
-        </div>
-        <h3 class="geist article-title">Financing Your Portuguese Property Investment: Options for International Buyers</h3>
-        <p class="satoshi article-excerpt">Explore financing options available to international buyers purchasing property in Portugal, from local mortgages to alternative funding solutions.</p>
-      </a>
-
-      <!-- Article 8 -->
-      <a href="blog/portuguese-lifestyle-international-residents.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="images/external/61e45eb9b853b959a583b9478933ee8a.jpg" alt="Lifestyle" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Lifestyle</span> <span>•</span> <span>29 Jul 2024</span> <span>•</span> <span>6 min read</span>
-        </div>
-        <h3 class="geist article-title">Portuguese Lifestyle: Why International Residents Choose Portugal</h3>
-        <p class="satoshi article-excerpt">Discover what makes Portugal so attractive to international residents - from climate and culture to safety and community.</p>
-      </a>
-
-      <!-- Article 9 -->
-      <a href="blog/urban-collection-floor-plans-lisbon-luxury.html" class="article-card">
-        <div class="article-img-wrap">
-          <img src="./urban-collections/floor1.png" alt="Floor Plans" class="article-img">
-        </div>
-        <div class="article-meta satoshi">
-          <span class="article-category">Real Estate</span> <span>•</span> <span>27 Jul 2024</span> <span>•</span> <span>7 min read</span>
-        </div>
-        <h3 class="geist article-title">Urban Collection Floor Plans: Maximizing Space and Luxury in Lisbon</h3>
-        <p class="satoshi article-excerpt">Explore the innovative floor plans and design concepts that make Urban Collection properties the pinnacle of luxury living in Lisbon.</p>
-      </a>
-
-    </section>
+    <section id="articles-grid" class="articles-grid hidden"></section>
 
     <!-- CTA Module -->
     <section class="cta-banner">
@@ -452,65 +312,86 @@
     </section>
   </main>
 
-  <!-- Exact Footer from original blog.html -->
   <footer class="w-full py-12 md:py-16 bg-[#0C1E28]">
     <div class="container mx-auto px-4 md:px-6 max-w-7xl">
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
-        <div class="md:col-span-4 flex flex-col">
-          <a class="cursor-pointer" href="index.html">
-            <div class="relative h-8 w-40">
-              <img alt="Smith & Adams Logo" loading="lazy" width="160" height="32" class="invert" src="./logo.png"/>
-            </div>
-          </a>
-          <p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith & Adams makes second citizenship simple, offering tailored investments in Portugal with secure returns and a trusted path to residency and EU access.</p>
-          <div class="flex gap-4 mt-6">
-            <a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white hover:text-gray-300"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
-            </a>
-            <a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white hover:text-gray-300"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
-            <a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white hover:text-gray-300"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg>
-            </a>
-          </div>
-        </div>
-        <div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0">
-          <div class="flex flex-col">
-            <h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4>
-            <ul class="list-none mt-4 space-y-3">
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html">Urban Collection</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html#">Terms &amp; Conditions</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html#">Privacy Policy</a></li>
-            </ul>
-          </div>
-          <div class="flex flex-col">
-            <h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4>
-            <ul class="list-none mt-4 space-y-3">
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300"><a href="tel:+351938227348">+351938227348</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300"><a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li>
-              <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li>
-            </ul>
-          </div>
-          <div class="flex flex-col col-span-2">
-            <div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center">
-              <h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4">Visit Our Office</h4>
-              <p class="font-normal satoshi text-[15px] text-gray-300 mb-4">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p>
-              <a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center">Get Directions</a>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12">
         <p class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © 2025 Smith &amp; Adams</p>
-        <p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="blog.html#">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="blog.html#">Privacy Policy</a></p>
       </div>
     </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
+    
+    // We wait for DOM Load to avoid execution block
+    document.addEventListener("DOMContentLoaded", () => {
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        let allPosts = [];
+
+        async function fetchPosts() {
+            const { data, error } = await supabaseClient.from('posts').select('*').order('created_at', { ascending: false });
+            if (error) return console.error(error);
+            allPosts = data;
+            
+            document.getElementById('blog-loader').classList.add('hidden');
+            renderPosts(allPosts);
+        }
+        
+        window.filterPosts = function(category, element) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(element) element.classList.add('active');
+            
+            if (category === 'All Topics') renderPosts(allPosts);
+            else renderPosts(allPosts.filter(p => (p.category || '').toLowerCase() === category.toLowerCase()));
+        }
+
+        function renderPosts(posts) {
+            if (!posts || posts.length === 0) {
+                document.getElementById('featured-article').classList.add('hidden');
+                document.getElementById('articles-grid').classList.remove('hidden');
+                document.getElementById('articles-grid').innerHTML = '<p class="col-span-full text-center text-gray-500 py-12 text-xl">No posts found.</p>';
+                return;
+            }
+
+            // Render Featured
+            const feat = posts[0];
+            document.getElementById('featured-article').classList.remove('hidden');
+            document.getElementById('feat-title').innerHTML = `<a id="feat-link" href="article.html?slug=${feat.slug}">${feat.title}</a>`;
+            document.getElementById('feat-link-btn').href = `article.html?slug=${feat.slug}`;
+            document.getElementById('feat-category').textContent = feat.category;
+            document.getElementById('feat-date').textContent = new Date(feat.created_at).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'});
+            document.getElementById('feat-read').textContent = feat.read_time;
+            document.getElementById('feat-excerpt').textContent = feat.excerpt;
+            let cimg = feat.image_url;
+            if(cimg && !cimg.startsWith('http') && cimg.startsWith('.')) cimg = cimg.substring(1);
+            document.getElementById('feat-img').src = cimg;
+
+            // Render Grid
+            const grid = document.getElementById('articles-grid');
+            grid.innerHTML = '';
+            grid.classList.remove('hidden');
+            
+            posts.slice(1).forEach(post => {
+                let img = post.image_url;
+                if(img && !img.startsWith('http') && img.startsWith('.')) img = img.substring(1);
+                
+                const a = document.createElement('a');
+                a.href = `article.html?slug=${post.slug}`;
+                a.className = "article-card";
+                a.innerHTML = `
+                    <div class="article-img-wrap"><img src="${img}" class="article-img"></div>
+                    <div class="article-meta satoshi"><span class="article-category">${post.category}</span> <span>•</span> <span>${new Date(post.created_at).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'})}</span> <span>•</span> <span>${post.read_time}</span></div>
+                    <h3 class="geist article-title">${post.title}</h3>
+                    <p class="satoshi article-excerpt">${post.excerpt}</p>
+                `;
+                grid.appendChild(a);
+            });
+        }
+
+        fetchPosts();
+    });
+  </script>
 </body>
 </html>

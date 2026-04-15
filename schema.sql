@@ -1,0 +1,79 @@
+-- 1. Create the posts table
+CREATE TABLE public.posts (
+    id uuid default gen_random_uuid() primary key,
+    title text not null,
+    slug text not null unique,
+    excerpt text not null,
+    content text not null,
+    category text not null,
+    read_time text not null,
+    image_url text not null,
+    created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- 2. Enable Row Level Security (RLS) on posts
+ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
+
+-- 3. RLS Policies for Posts
+CREATE POLICY "Allow public read access on posts"
+ON public.posts
+FOR SELECT
+USING (true);
+
+CREATE POLICY "Allow authenticated insert on posts"
+ON public.posts
+FOR INSERT
+WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Allow authenticated update on posts"
+ON public.posts
+FOR UPDATE
+USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Allow authenticated delete on posts"
+ON public.posts
+FOR DELETE
+USING (auth.role() = 'authenticated');
+
+-- 4. Create Storage Bucket for Blog Images
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('blog-media', 'blog-media', true);
+
+-- 5. Storage Bucket RLS Policies
+CREATE POLICY "Public read access to blog-media"
+ON storage.objects FOR SELECT
+USING (bucket_id = 'blog-media');
+
+CREATE POLICY "Authenticated users can insert into blog-media"
+ON storage.objects FOR INSERT
+WITH CHECK (bucket_id = 'blog-media' AND auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can update blog-media"
+ON storage.objects FOR UPDATE
+USING (bucket_id = 'blog-media' AND auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated users can delete from blog-media"
+ON storage.objects FOR DELETE
+USING (bucket_id = 'blog-media' AND auth.role() = 'authenticated');
+
+-- 6. Create Admin User (admin@smithandadams.com / b9FyTKJj>=HU9dP=A)
+-- Requires pgcrypto extension (enabled by default in Supabase)
+DO $$
+DECLARE
+    new_user_id uuid := gen_random_uuid();
+    encrypted_pw text;
+BEGIN
+    encrypted_pw := crypt('b9FyTKJj>=HU9dP=A', gen_salt('bf'));
+
+    INSERT INTO auth.users (
+        instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, recovery_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token
+    ) VALUES (
+        '00000000-0000-0000-0000-000000000000', new_user_id, 'authenticated', 'authenticated', 'admin@smithandadams.com', encrypted_pw, now(), now(), now(), '{"provider":"email","providers":["email"]}', '{}', now(), now(), '', '', '', ''
+    );
+
+    INSERT INTO auth.identities (
+        id, user_id, identity_data, provider, provider_id, last_sign_in_at, created_at, updated_at
+    ) VALUES (
+        gen_random_uuid(), new_user_id, format('{"sub":"%s","email":"%s"}', new_user_id::text, 'admin@smithandadams.com')::jsonb, 'email', 'admin@smithandadams.com', now(), now(), now()
+    );
+END $$;
