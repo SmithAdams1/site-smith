@@ -83,7 +83,7 @@
        </a>
 </div>
 </nav>
-<button aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none">
+<button onclick="document.getElementById('mobile-menu').classList.toggle('opacity-0'); document.getElementById('mobile-menu').classList.toggle('opacity-100'); document.getElementById('mobile-menu').classList.toggle('invisible'); document.getElementById('mobile-menu').classList.toggle('pointer-events-none');" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none">
 <div class="w-6 flex flex-col justify-between items-end">
 <span class="block h-0.5 bg-[#0C1E28] transition-all duration-300 ease-out w-6">
 </span>
@@ -94,7 +94,7 @@
 </div>
 </button>
 </div>
-<div class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none" style="height:100vh">
+<div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none" style="height:100vh">
 <div class="flex flex-col items-center justify-center h-full space-y-8">
 <a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="index.html">
        Home
@@ -119,11 +119,11 @@
     <section style="width:100%; padding-top:8rem; padding-bottom:7rem; background:#FDFCF9; overflow:hidden;">
         <div style="max-width:1280px; margin:0 auto; padding:0 2.5rem;">
 
-            <div style="display:grid; grid-template-columns: 1.3fr 0.75fr 1fr; gap:72px; align-items:center; min-height:560px;">
+            <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_0.75fr_1fr] gap-12 lg:gap-[72px] items-center min-h-[560px]">
 
                 <!-- COL 1: Title + Vertical Timeline -->
                 <div>
-                    <h2 style="font-size:3.5rem; font-weight:700; color:#0C1E28; margin-bottom:3.5rem; font-family:'Satoshi',sans-serif; line-height:1.0;">About us:</h2>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0C1E28] mb-8 lg:mb-14 satoshi leading-none">About us:</h2>
 
                     <!-- Timeline -->
                     <div style="position:relative; padding-left:32px; border-left:2px solid rgba(12,30,40,0.2);">
@@ -203,11 +203,11 @@
     <!-- ======== ABOUT: INTRO SECTION ======== -->
     <section style="width:100%; padding:6rem 0; background:#0C1E28;">
         <div style="max-width:1100px; margin:0 auto; padding:0 2.5rem;">
-            <div style="display:grid; grid-template-columns:1fr 1.5fr; gap:80px; align-items:start;">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-10 lg:gap-20 items-start">
                 <!-- Left: Label + Title -->
                 <div>
                     <span style="display:inline-block; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:rgba(255,255,255,0.45); text-transform:uppercase; font-family:'Satoshi',sans-serif; margin-bottom:1.5rem;">About the Group</span>
-                    <h2 style="font-size:2.4rem; font-weight:700; color:#FDFCF9; font-family:'Satoshi',sans-serif; line-height:1.1; margin:0;">Smith &amp;<br/>Adams Group</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#FDFCF9] satoshi leading-tight m-0">Smith &amp;<br/>Adams Group</h2>
                     <div style="width:40px; height:2px; background:rgba(255,255,255,0.25); margin-top:2rem;"></div>
                 </div>
                 <!-- Right: Text -->
@@ -229,11 +229,11 @@
             <!-- Header -->
             <div style="margin-bottom:4rem;">
                 <span style="display:inline-block; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:rgba(12,30,40,0.4); text-transform:uppercase; font-family:'Satoshi',sans-serif; margin-bottom:1rem;">What We Do</span>
-                <h2 style="font-size:2.2rem; font-weight:700; color:#0C1E28; font-family:'Satoshi',sans-serif; line-height:1.1; margin:0; max-width:500px;">A Holding of Integrated<br/>Real Estate Solutions</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#0C1E28] satoshi leading-tight custom-fade-in transition-all">A Holding of Integrated<br/>Real Estate Solutions</h2>
             </div>
 
             <!-- 2-col service cards -->
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#0C1E28; border-radius:16px; overflow:hidden;">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-[2px] bg-[#0C1E28] rounded-2xl overflow-hidden">
 
                 <!-- Card 1: Investment -->
                 <div style="background:#FDFCF9; padding:2.5rem;">
@@ -265,10 +265,10 @@
     <section style="width:100%; padding:6rem 0; background:#0C1E28;">
         <div style="max-width:1100px; margin:0 auto; padding:0 2.5rem;">
             <!-- Header -->
-            <div style="margin-bottom:4rem; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end;">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-end mb-10 md:mb-16">
                 <div>
                     <span style="display:inline-block; font-size:0.65rem; font-weight:700; letter-spacing:0.3em; color:rgba(255,255,255,0.4); text-transform:uppercase; font-family:'Satoshi',sans-serif; margin-bottom:1rem;">Since 2019</span>
-                    <h2 style="font-size:2.2rem; font-weight:700; color:#FDFCF9; font-family:'Satoshi',sans-serif; line-height:1.1; margin:0;">Track Record &amp;<br/>Global Footprint</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#FDFCF9] satoshi leading-tight">Track Record &amp;<br/>Global Footprint</h2>
                 </div>
                 <p style="font-size:0.9rem; color:rgba(253,252,249,0.6); font-family:'Satoshi',sans-serif; line-height:1.75; margin:0;">
                     Founded in 2019, Smith &amp; Adams Group has grown into a multi-entity platform serving both property owners and international investors. The leadership team brings over a decade of combined experience across real estate, investments, and citizenship-by-investment.
@@ -276,7 +276,7 @@
             </div>
 
             <!-- Stats row -->
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; margin-bottom:3rem; background:rgba(255,255,255,0.08); border-radius:16px; overflow:hidden;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-[2px] mb-8 md:mb-12 bg-[#ffffff14] rounded-2xl overflow-hidden">
                 <div style="padding:2.5rem 2rem; background:rgba(255,255,255,0.04);">
                     <p style="font-size:3rem; font-weight:700; color:#FDFCF9; font-family:'Satoshi',sans-serif; margin:0; line-height:1;">130<span style="font-size:1.5rem; opacity:0.5;">+</span></p>
                     <p style="font-size:0.78rem; color:rgba(253,252,249,0.5); font-family:'Satoshi',sans-serif; margin-top:0.75rem; letter-spacing:0.05em; text-transform:uppercase;">Investors Advised</p>
