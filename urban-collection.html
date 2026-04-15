@@ -134,25 +134,8 @@
 
     .c-dark { background: #0C1E28; color: white; padding: 120px 60px; }
     
-    .v-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      position: relative;
-      height: 340px;
-    }
-    .v-text {
-      position: absolute;
-      top: 50px;
-      white-space: nowrap;
-      transform: rotate(-90deg);
-      transform-origin: left top;
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
+    .v-container { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+    .v-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; white-space: nowrap; }
 
     .c-gallery-sec { background: #FDFCF9; padding: 120px 60px; }
     .c-grid {
@@ -184,7 +167,7 @@
       .c-right { margin-left: 0; margin-top: 0; }
       .c-dark > div { flex-direction: column; }
       .v-texts-wrapper { flex-direction: row !important; justify-content: space-around; flex-wrap: wrap; margin-top: 60px; }
-      .v-container { height: 260px; }
+      .v-container { display: flex; flex-direction: column; align-items: center; gap: 30px; }
     }
   </style>
 
@@ -255,9 +238,8 @@
         
         <div class="v-container">
           <span class="geist" style="color: white; font-size: 16px;">02</span>
-          <!-- Active indicator -->
-          <div style="width: 1px; height: 40px; background: white; position: absolute; top: 30px;"></div>
-          <span class="geist v-text" style="color: white; top: 90px;">GYM & FITNESS</span>
+          <div style="width: 1px; height: 40px; background: white;"></div>
+          <span class="geist v-text" style="color: white;">GYM & FITNESS</span>
         </div>
         
         <div class="v-container">
