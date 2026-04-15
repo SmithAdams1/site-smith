@@ -216,6 +216,83 @@
 </section>
 
 
+
+<!-- ══════════════════════════════════════
+     URBAN COLLECTION FEATURE
+══════════════════════════════════════ -->
+<section style="padding:80px 40px 0; background:#0C1E28;">
+  <div style="max-width:1280px; margin:0 auto;">
+
+    <!-- header row -->
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:32px; flex-wrap:wrap; margin-bottom:56px;">
+      <div>
+        <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:16px;">Smith &amp; Adams</p>
+        <h2 class="geist" style="font-size:clamp(32px,4vw,56px); font-weight:800; color:#ffffff; letter-spacing:-0.02em; line-height:1.05; margin:0;">
+          Urban Collection
+        </h2>
+      </div>
+      <p class="satoshi" style="font-size:16px; color:rgba(255,255,255,0.55); line-height:1.8; max-width:480px; margin:0; padding-bottom:4px;">
+        Investment with integrated management. At S&amp;A Urban Collection, Smith &amp; Adams handles the daily management of the apartments, ensuring consistent operations aligned with each investor's income strategy.
+      </p>
+    </div>
+
+    <!-- main image + thumbnails -->
+    <div style="border-radius:24px 24px 0 0; overflow:hidden; position:relative;">
+
+      <!-- large featured image -->
+      <div id="uc-main-img" style="width:100%; aspect-ratio:16/7; overflow:hidden; background:#132631;">
+        <img id="uc-main" src="urban-collections/heroImg1.png" alt="Urban Collection" style="width:100%; height:100%; object-fit:cover; display:block; transition:opacity 0.4s ease;">
+      </div>
+
+      <!-- thumbnails strip -->
+      <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:3px; margin-top:3px;">
+        <img src="urban-collections/heroImg1.png" alt="" onclick="switchImg(this,'urban-collections/heroImg1.png')" style="width:100%; aspect-ratio:4/3; object-fit:cover; cursor:pointer; opacity:1; transition:opacity 0.2s;" class="uc-thumb">
+        <img src="urban-collections/heroImg2.png" alt="" onclick="switchImg(this,'urban-collections/heroImg2.png')" style="width:100%; aspect-ratio:4/3; object-fit:cover; cursor:pointer; opacity:0.45; transition:opacity 0.2s;" class="uc-thumb">
+        <img src="urban-collections/heroImg3.png" alt="" onclick="switchImg(this,'urban-collections/heroImg3.png')" style="width:100%; aspect-ratio:4/3; object-fit:cover; cursor:pointer; opacity:0.45; transition:opacity 0.2s;" class="uc-thumb">
+        <img src="urban-collections/heroImg4.png" alt="" onclick="switchImg(this,'urban-collections/heroImg4.png')" style="width:100%; aspect-ratio:4/3; object-fit:cover; cursor:pointer; opacity:0.45; transition:opacity 0.2s;" class="uc-thumb">
+        <img src="urban-collections/heroImg5.png" alt="" onclick="switchImg(this,'urban-collections/heroImg5.png')" style="width:100%; aspect-ratio:4/3; object-fit:cover; cursor:pointer; opacity:0.45; transition:opacity 0.2s;" class="uc-thumb">
+        <img src="urban-collections/heroImg6.png" alt="" onclick="switchImg(this,'urban-collections/heroImg6.png')" style="width:100%; aspect-ratio:4/3; object-fit:cover; cursor:pointer; opacity:0.45; transition:opacity 0.2s;" class="uc-thumb">
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA strip below the gallery -->
+<section style="background:#0C1E28; padding:80px 40px 100px;">
+  <div style="max-width:1280px; margin:0 auto;">
+    <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:56px 64px; display:flex; align-items:center; justify-content:space-between; gap:48px; flex-wrap:wrap;">
+
+      <div style="flex:1; min-width:260px;">
+        <h3 class="geist" style="font-size:clamp(22px,3vw,36px); font-weight:700; color:#ffffff; line-height:1.2; margin-bottom:20px; letter-spacing:-0.01em;">
+          Would you like your property in Portugal<br>to be fully managed by Smith &amp; Adams?
+        </h3>
+        <p class="satoshi" style="font-size:16px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0; max-width:480px;">
+          Talk to our team and discover how we can take over the management of your apartment or integrate your assets into the Smith &amp; Adams Group's investment strategy.
+        </p>
+      </div>
+
+      <div style="flex-shrink:0;">
+        <a href="contact.html" class="satoshi" style="display:inline-flex; align-items:center; gap:10px; background:#ffffff; color:#0C1E28; font-weight:700; font-size:15px; padding:17px 36px; border-radius:100px; text-decoration:none; white-space:nowrap;">
+          Talk to our team
+          <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+function switchImg(el, src) {
+  document.getElementById('uc-main').src = src;
+  document.querySelectorAll('.uc-thumb').forEach(t => t.style.opacity = '0.45');
+  el.style.opacity = '1';
+}
+</script>
+
+
 <footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams makes second citizenship simple, offering tailored investments in Portugal with secure returns and a trusted path to residency and EU access.</p><div class="flex gap-4 mt-6"><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html">Urban Collection</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="developments.html#">Terms &amp; Conditions</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="developments.html#">Privacy Policy</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center">Get Directions</a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2025<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="#">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="#">Privacy Policy</a></p></div></div></footer>
 </main><!--$--><!--/$--><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template><!--/$-->
     <script id="header-scroll-script">
