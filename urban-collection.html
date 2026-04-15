@@ -111,7 +111,7 @@
     .c-gallery-sec { background: #FDFCF9; padding: 120px 60px; }
     .c-grid { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; align-items: center; margin-bottom: 100px; margin-top: 60px; }
     .g-item { position: relative; }
-    .g-num { position: absolute; color: rgba(12,30,40,0.1); font-size: 40px; font-weight: 800; z-index: 0; }
+    .g-num { position: absolute; color: rgba(12,30,40,0.25); font-size: 90px; font-weight: 800; z-index: 0; line-height: 0.8; letter-spacing: -0.04em; }
     .g-img { position: relative; z-index: 10; object-fit: cover; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
 
     @media (max-width: 1024px) {
@@ -275,34 +275,53 @@
 
     <!-- Staggered grid -->
     <div class="c-grid">
-      <div class="g-item" style="width: 260px; transform: translateY(-30px);">
-         <span class="g-num geist" style="top:-35px; left:-10px;">00</span>
-         <img src="images/external/f7719623359d0bd8a6f7137d1f268033.png" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+      <div class="g-item" style="width: 250px; transform: translateY(-30px);">
+         <div class="relative group">
+            <img src="urban-collections/floor0_real.webp" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+            <div class="absolute bottom-6 right-6 w-10 h-10 bg-[#0C1E28] text-white rounded-full flex items-center justify-center shadow-lg opacity-70 transition-all duration-300 z-20 pointer-events-none group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1">
+               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
+            </div>
+         </div>
          <p class="geist mt-4 text-center text-[#0C1E28] font-bold text-xl">FLOOR 0</p>
-         <p class="satoshi text-center text-sm text-gray-500 mt-2">Ground floor with amenities and common areas</p>
       </div>
       
-      <div class="g-item" style="width: 220px; transform: translateY(40px);">
-         <span class="g-num geist" style="top:-25px; left:-10px;">01</span>
-         <img src="images/external/a9ad1fca5705abd188c94c8c35561d50.png" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+      <div class="g-item" style="width: 250px; transform: translateY(40px);">
+         <div class="relative group">
+            <img src="urban-collections/floor1_real.webp" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+            <div class="absolute bottom-6 right-6 w-10 h-10 bg-[#0C1E28] text-white rounded-full flex items-center justify-center shadow-lg opacity-70 transition-all duration-300 z-20 pointer-events-none group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1">
+               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
+            </div>
+         </div>
          <p class="geist mt-4 text-center text-[#0C1E28] font-bold text-xl">FLOOR 1</p>
       </div>
       
-      <div class="g-item" style="width: 280px; transform: translateY(-10px); z-index: 20;">
-         <span class="g-num geist" style="top:-30px; left:-20px;">02</span>
-         <img src="images/external/a75b51ecf50adfec819022f768895e4a.png" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+      <div class="g-item" style="width: 250px; transform: translateY(-10px); z-index: 20;">
+         <div class="relative group">
+            <img src="urban-collections/floor2_real.webp" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+            <div class="absolute bottom-6 right-6 w-10 h-10 bg-[#0C1E28] text-white rounded-full flex items-center justify-center shadow-lg opacity-70 transition-all duration-300 z-20 pointer-events-none group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1">
+               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
+            </div>
+         </div>
          <p class="geist mt-4 text-center text-[#0C1E28] font-bold text-xl">FLOOR 2</p>
       </div>
       
-      <div class="g-item" style="width: 200px; transform: translateY(30px);">
-         <span class="g-num geist" style="bottom:-30px; right:-20px;">03</span>
-         <img src="images/external/9efffc5bbbc76d48543feca6d8bd4b6f.png" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+      <div class="g-item" style="width: 250px; transform: translateY(30px);">
+         <div class="relative group">
+            <img src="urban-collections/floor3_real.webp" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+            <div class="absolute bottom-6 right-6 w-10 h-10 bg-[#0C1E28] text-white rounded-full flex items-center justify-center shadow-lg opacity-70 transition-all duration-300 z-20 pointer-events-none group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1">
+               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
+            </div>
+         </div>
          <p class="geist mt-4 text-center text-[#0C1E28] font-bold text-xl">FLOOR 3</p>
       </div>
       
-      <div class="g-item" style="width: 220px; transform: translateY(-10px);">
-         <span class="g-num geist" style="top:-30px; right:-20px;">04</span>
-         <img src="images/external/ab226c0a8ac550b9cb929317ad682698.png" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+      <div class="g-item" style="width: 250px; transform: translateY(-10px);">
+         <div class="relative group">
+            <img src="urban-collections/floor4_real.webp" class="g-img bg-white border border-gray-100 p-4" style="width:100%; aspect-ratio:4/5; object-fit:contain;">
+            <div class="absolute bottom-6 right-6 w-10 h-10 bg-[#0C1E28] text-white rounded-full flex items-center justify-center shadow-lg opacity-70 transition-all duration-300 z-20 pointer-events-none group-hover:opacity-100 group-hover:scale-110 group-hover:-translate-y-1">
+               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M9 21H3v-6"></path><path d="M21 3l-7 7"></path><path d="M3 21l7-7"></path></svg>
+            </div>
+         </div>
          <p class="geist mt-4 text-center text-[#0C1E28] font-bold text-xl">FLOOR 4</p>
       </div>
     </div>
@@ -311,5 +330,93 @@
   <footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams makes second citizenship simple, offering tailored investments in Portugal with secure returns and a trusted path to residency and EU access.</p><div class="flex gap-4 mt-6"><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html">Urban Collection</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html#">Terms &amp; Conditions</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html#">Privacy Policy</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center">Get Directions</a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2025<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="urban-collection.html#">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="urban-collection.html#">Privacy Policy</a></p></div></div></footer>
 
 </main>
+
+<!-- Lightbox Modal -->
+<style>
+  .lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(12, 30, 40, 0.95);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox-modal.show {
+    opacity: 1;
+  }
+  .lightbox-content {
+    display: block;
+    max-width: 90%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #f1f1f1;
+    font-size: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-family: 'Satoshi', sans-serif;
+  }
+  .lightbox-close:hover {
+    color: #9ab4c2;
+  }
+  .g-img {
+    cursor: zoom-in;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .g-img:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+  }
+</style>
+
+<div id="image-modal" class="lightbox-modal">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const images = document.querySelectorAll(".g-img");
+    const closeBtn = document.querySelector(".lightbox-close");
+
+    images.forEach(img => {
+      img.addEventListener("click", function() {
+        modal.style.display = "flex";
+        setTimeout(() => modal.classList.add("show"), 10);
+        modalImg.src = this.src;
+      });
+    });
+
+    const closeModal = () => {
+      modal.classList.remove("show");
+      setTimeout(() => modal.style.display = "none", 300);
+    };
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape" && modal.classList.contains("show")) closeModal();
+    });
+  });
+</script>
+
 </body>
 </html>
