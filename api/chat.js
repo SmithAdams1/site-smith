@@ -166,11 +166,38 @@ const DEFAULT_OWNER = 29249359;
 const PIPELINE_ID   = 16;
 const STAGE_ID      = 110;
 
+// Market/Country enum option IDs (field: 468abeb93ff2e92ca6182eb5b2028faf545ae7ac)
+const COUNTRY_MARKET_IDS = {
+  'angola':                291,
+  'bangladesh':            292,
+  'canada':                293,
+  'china':                 294,
+  'dubai':                 295,
+  'uae':                   295,
+  'united arab emirates':  295,
+  'hong kong':             305,
+  'hongkong':              305,
+  'india':                 296,
+  'pakistan':              297,
+  'singapore':             298,
+  'south africa':          299,
+  'taiwan':                300,
+  'turkey':                301,
+  'turquia':               301,
+  'uk':                    302,
+  'united kingdom':        302,
+  'us':                    303,
+  'usa':                   303,
+  'united states':         303,
+  'united states of america': 303,
+};
+
 async function createPipedriveRecords(lead, intent, leadStage) {
   const TOKEN = process.env.PIPEDRIVE_TOKEN;
 
   const country  = (lead.country_of_residence || '').toLowerCase().trim();
   const ownerId  = COUNTRY_OWNERS[country] ?? DEFAULT_OWNER;
+  const marketId = COUNTRY_MARKET_IDS[country] ?? null;
 
   // 1. Person
   const personRes  = await fetch(`https://api.pipedrive.com/v1/persons?api_token=${TOKEN}`, {
@@ -196,6 +223,8 @@ async function createPipedriveRecords(lead, intent, leadStage) {
       pipeline_id: PIPELINE_ID,
       stage_id:    STAGE_ID,
       user_id:     ownerId,
+      '216e52d1153fd4853583f5683a557caf61cc2614': 315,          // Lead Source Channel = Landing Page
+      ...(marketId && { '468abeb93ff2e92ca6182eb5b2028faf545ae7ac': marketId }), // Market/Country
     }),
   });
   const dealId = (await dealRes.json())?.data?.id;

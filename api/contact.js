@@ -24,9 +24,27 @@ export default async function handler(req, res) {
   };
   const DEFAULT_OWNER = 29249359;
 
+  // Market/Country enum option IDs
+  const codeToMarket = {
+    '+90':  301, // Turkey
+    '+971': 295, // Dubai/UAE
+    '+1':   303, // United States
+    '+44':  302, // United Kingdom
+    '+91':  296, // India
+    '+886': 300, // Taiwan
+    '+852': 305, // Hong Kong
+    '+880': 292, // Bangladesh
+    '+86':  294, // China
+    '+65':  298, // Singapore
+    '+27':  299, // South Africa
+    '+92':  297, // Pakistan
+    '+244': 291, // Angola
+  };
+
   // Normalise phone code key (strip variant suffixes like +1-809)
-  const codeKey = phoneCode.split('-')[0];
-  const ownerId = codeToOwner[codeKey] ?? DEFAULT_OWNER;
+  const codeKey  = phoneCode.split('-')[0];
+  const ownerId  = codeToOwner[codeKey]  ?? DEFAULT_OWNER;
+  const marketId = codeToMarket[codeKey] ?? null;
 
   const fullName  = `${firstName} ${lastName}`.trim();
   const fullPhone = `${phoneCode} ${phoneNumber}`.trim();
@@ -70,6 +88,8 @@ export default async function handler(req, res) {
           pipeline_id: PIPELINE_ID,
           stage_id:    STAGE_ID,
           user_id:     ownerId,
+          '216e52d1153fd4853583f5683a557caf61cc2614': 315,
+          ...(marketId && { '468abeb93ff2e92ca6182eb5b2028faf545ae7ac': marketId }),
         }),
       }
     );
