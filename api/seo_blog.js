@@ -37,17 +37,46 @@ export default async function handler(req, res) {
       const title = `${post.title} | Smith & Adams Blog`;
       const desc = post.excerpt || '';
 
+      const canonicalUrl = `https://smithandadams.com/blog/${slug}`;
+
+      const jsonLd = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.title,
+        "description": desc,
+        "image": img || undefined,
+        "author": {
+          "@type": "Organization",
+          "name": "Smith & Adams Group"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Smith & Adams Group",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://smithandadams.com/logo.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": canonicalUrl
+        }
+      });
+
       const seoTags = `
         <title>${title}</title>
         <meta name="description" content="${desc}">
+        <link rel="canonical" href="${canonicalUrl}">
         <meta property="og:title" content="${title}">
         <meta property="og:description" content="${desc}">
         <meta property="og:image" content="${img}">
         <meta property="og:type" content="article">
+        <meta property="og:url" content="${canonicalUrl}">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="${title}">
         <meta name="twitter:description" content="${desc}">
         <meta name="twitter:image" content="${img}">
+        <script type="application/ld+json">${jsonLd}</script>
       `;
 
       // Replace generic title with all our rich structured tags
