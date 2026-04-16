@@ -420,27 +420,34 @@
         </section>
 
         <!-- New Video Section: Building Your Dreams -->
-        <section class="custom-fade-in" style="background-color:#0C1E28; width:100%; transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
-          <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; align-items:stretch; gap:0; min-height:420px;">
+        <section class="custom-fade-in" style="background:#FDFCF9; width:100%; padding:80px 0; transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4; overflow:hidden;">
+          <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; align-items:center; gap:80px; flex-wrap:wrap;">
 
-            <!-- Left: Text -->
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:60px 48px 60px 0; border-right:1px solid rgba(255,255,255,0.08);">
-              <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Building your dreams:</p>
-              <h2 class="geist" style="font-size:clamp(1.75rem,3.5vw,3rem); font-weight:800; color:#ffffff; line-height:1.05; margin-bottom:8px; letter-spacing:-0.03em;">Real Estate in Portugal:</h2>
-              <h3 class="geist" style="font-size:clamp(1.25rem,2.5vw,2rem); font-weight:700; color:rgba(255,255,255,0.5); line-height:1.2; letter-spacing:-0.02em; margin:0;">Ideal for Living and Investing</h3>
+            <!-- Left: Display text -->
+            <div style="flex:1; min-width:320px;">
+              <p class="satoshi" style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:#9ca3af; margin-bottom:24px;">Smith &amp; Adams · Portugal</p>
+              <h2 class="geist" style="font-size:clamp(2.5rem,5vw,4.5rem); font-weight:900; color:#0C1E28; line-height:0.95; letter-spacing:-0.04em; margin:0 0 12px;">
+                Building<br>
+                <span style="color:#9ca3af; font-weight:300; font-style:italic;">your</span><br>
+                dreams.
+              </h2>
+              <div style="width:48px; height:3px; background:#0C1E28; margin:28px 0;"></div>
+              <p class="satoshi" style="font-size:17px; color:#4b5563; line-height:1.8; max-width:400px; margin:0 0 36px;">Real Estate in Portugal — Ideal for Living and Investing</p>
             </div>
 
-            <!-- Right: Video (portrait, fixed width) -->
-            <div style="width:320px; flex-shrink:0; position:relative; overflow:hidden;">
-              <video
-                src="aboutVideo.mp4"
-                poster="capa-video.jpg"
-                controls
-                playsinline
-                style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;"
-              >
-                <p class="text-white text-center p-4">Your browser does not support the video tag.</p>
-              </video>
+            <!-- Right: Portrait video card -->
+            <div style="flex-shrink:0; width:340px; border-radius:24px; overflow:hidden; box-shadow:0 32px 80px rgba(12,30,40,0.18), 0 8px 24px rgba(12,30,40,0.10);">
+              <div style="position:relative; width:100%; aspect-ratio:4/5;">
+                <video
+                  src="aboutVideo.mp4"
+                  poster="capa-video.jpg"
+                  controls
+                  playsinline
+                  style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; object-position:center top; display:block;"
+                >
+                  <p>Your browser does not support the video tag.</p>
+                </video>
+              </div>
             </div>
 
           </div>
