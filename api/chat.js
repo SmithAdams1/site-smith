@@ -271,7 +271,7 @@ export default async function handler(req, res) {
     raw = aiData.candidates[0].content.parts[0].text.trim();
   } catch (err) {
     console.error('[chat] Gemini error:', err.message);
-    return res.status(500).json({ error: 'AI service unavailable' });
+    return res.status(200).json({ reply: `[DEBUG] Gemini error: ${err.message}` });
   }
 
   // Clean markdown fences if present
