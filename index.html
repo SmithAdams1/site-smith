@@ -420,36 +420,30 @@
         </section>
 
         <!-- New Video Section: Building Your Dreams -->
-        <section class="custom-fade-in" style="background-color: #ffffff; width: 100%; transition: all 1s ease-out; transform: translateY(20px); filter: blur(4px); opacity: 0.4;">
-            <div style="display: flex; flex-direction: row; width: 100%; max-height: 480px; flex-wrap: wrap;">
-                <!-- Left Side: Text -->
-                <div style="flex: 1 1 40%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 3rem 2rem; text-align: center;">
-                    <div style="max-width: 400px;">
-                        <p style="font-family: 'Satoshi', sans-serif; font-size: 1rem; font-weight: 500; color: #4B5563; margin-bottom: 0.75rem;">
-                            Building your dreams:
-                        </p>
-                        <h2 style="font-family: 'Geist', sans-serif; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; color: #0C1E28; line-height: 1.1; margin-bottom: 0.4rem; letter-spacing: -0.03em;">
-                            Real Estate in Portugal:
-                        </h2>
-                        <h3 style="font-family: 'Geist', sans-serif; font-size: clamp(1.25rem, 2.5vw, 1.75rem); font-weight: 700; color: #222222; line-height: 1.2; letter-spacing: -0.02em;">
-                            Ideal for Living and Investing
-                        </h3>
-                    </div>
-                </div>
+        <section class="custom-fade-in" style="background-color:#0C1E28; width:100%; transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
+          <div style="max-width:1280px; margin:0 auto; padding:0 48px; display:flex; align-items:stretch; gap:0; min-height:420px;">
 
-                <!-- Right Side: Video -->
-                <div style="flex: 1 1 60%; position: relative; aspect-ratio: 16/9; background-color: #f3f4f6; overflow: hidden; min-width: 320px; max-height: 480px;">
-                    <video 
-                        src="aboutVideo.mp4" 
-                        poster="capa-video.jpg" 
-                        controls 
-                        playsinline
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;"
-                    >
-                        <p class="text-white text-center p-4">Your browser does not support the video tag.</p>
-                    </video>
-                </div>
+            <!-- Left: Text -->
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:60px 48px 60px 0; border-right:1px solid rgba(255,255,255,0.08);">
+              <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Building your dreams:</p>
+              <h2 class="geist" style="font-size:clamp(1.75rem,3.5vw,3rem); font-weight:800; color:#ffffff; line-height:1.05; margin-bottom:8px; letter-spacing:-0.03em;">Real Estate in Portugal:</h2>
+              <h3 class="geist" style="font-size:clamp(1.25rem,2.5vw,2rem); font-weight:700; color:rgba(255,255,255,0.5); line-height:1.2; letter-spacing:-0.02em; margin:0;">Ideal for Living and Investing</h3>
             </div>
+
+            <!-- Right: Video (portrait, fixed width) -->
+            <div style="width:320px; flex-shrink:0; position:relative; overflow:hidden;">
+              <video
+                src="aboutVideo.mp4"
+                poster="capa-video.jpg"
+                controls
+                playsinline
+                style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;"
+              >
+                <p class="text-white text-center p-4">Your browser does not support the video tag.</p>
+              </video>
+            </div>
+
+          </div>
         </section>
 
         <section class="bg-[#FDFCF9] py-16 md:py-24" id="testimonials">
