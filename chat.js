@@ -60,7 +60,11 @@
       '#sa-send{width:40px;height:40px;flex-shrink:0;background:#0C1E28;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .15s}',
       '#sa-send:hover{background:#1a3242;transform:scale(1.06)}',
       '#sa-send:disabled{background:rgba(12,30,40,.18);cursor:not-allowed;transform:none}',
-      '#sa-powered{text-align:center;padding:5px 0 10px;font-size:11px;color:rgba(12,30,40,.28);font-family:Satoshi,sans-serif;flex-shrink:0;letter-spacing:.02em}'
+      '#sa-powered{text-align:center;padding:5px 0 10px;font-size:11px;color:rgba(12,30,40,.28);font-family:Satoshi,sans-serif;flex-shrink:0;letter-spacing:.02em}',
+      '#sa-notice{background:#D6EAF5;padding:10px 16px;display:flex;align-items:flex-start;gap:9px;flex-shrink:0;border-bottom:1px solid rgba(12,30,40,.06)}',
+      '#sa-notice-icon{flex-shrink:0;margin-top:1px;color:#2074A0}',
+      '#sa-notice-text{font-size:12.5px;line-height:1.45;color:#1A3E52;font-family:Satoshi,sans-serif}',
+      '#sa-notice-text strong{font-weight:700}'
     ].join('');
     var el = document.createElement('style');
     el.textContent = css;
@@ -86,6 +90,10 @@
         '</div>' +
         '<button id="sa-close" aria-label="Close">' + iconX() + '</button>' +
       '</div>' +
+      '<div id="sa-notice">' +
+        '<div id="sa-notice-icon">' + iconCalendar() + '</div>' +
+        '<div id="sa-notice-text"><strong>Book a free consultation</strong> — chat with our AI assistant and a specialist will contact you within 24 hours.</div>' +
+      '</div>' +
       '<div id="sa-msgs"></div>' +
       '<div id="sa-footer">' +
         '<textarea id="sa-input" rows="1" placeholder="Type a message\u2026" maxlength="600"></textarea>' +
@@ -98,10 +106,11 @@
   }
 
   // ─── ICONS ─────────────────────────────────────────────────────────────────
-  function iconChat() { return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'; }
-  function iconX()    { return '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'; }
-  function iconUser() { return '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'; }
-  function iconSend() { return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>'; }
+  function iconChat()     { return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'; }
+  function iconX()        { return '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'; }
+  function iconUser()     { return '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'; }
+  function iconSend()     { return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>'; }
+  function iconCalendar() { return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'; }
 
   // ─── MESSAGES ──────────────────────────────────────────────────────────────
   function renderAll() {
