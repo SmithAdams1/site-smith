@@ -332,176 +332,203 @@ function switchImg(el, src) {
 
   <!-- Cards grid -->
   <div style="border-top:1px solid rgba(12,30,40,0.1);">
-    <div style="max-width:1280px; margin:0 auto; padding:0 48px 80px;">
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); border-left:1px solid rgba(12,30,40,0.1);">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-12 pt-12 pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
         <!-- Card 1 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-right:1px solid rgba(12,30,40,0.1); border-bottom:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail1.png" alt="Campolide Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail1.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2025</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Campolide Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">12</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€250K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">12</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 2 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-right:1px solid rgba(12,30,40,0.1); border-bottom:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail2.png" alt="Campolide Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail2.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2025</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Campolide Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">14</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€250K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">14</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 3 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-bottom:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail3.png" alt="Campolide Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail3.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2024</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Campolide Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">8</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€250K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">8</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 4 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-right:1px solid rgba(12,30,40,0.1); border-bottom:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail4.png" alt="Alcântara Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail4.png" alt="Alcântara Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2024</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Alcântara Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">45</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€320K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Alcântara Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">45</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€320K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 5 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-right:1px solid rgba(12,30,40,0.1); border-bottom:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail5.png" alt="Campolide Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail5.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2023</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Campolide Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">22</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€250K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">22</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 6 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-bottom:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail6.png" alt="São Julião Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail6.png" alt="São Julião Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential + Commercial</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2023</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential + Commercial</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">São Julião Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">58</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€380K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">São Julião Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">58</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€380K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 7 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-right:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail7.png" alt="Arroios Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail7.png" alt="Arroios Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2023</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Arroios Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">42</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€340K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Arroios Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">42</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€340K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 8 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; border-right:1px solid rgba(12,30,40,0.1); overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail8.png" alt="Penha de França Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail8.png" alt="Penha de França Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2022</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Penha de França Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">30</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€290K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Penha de França Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">30</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€290K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 9 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" style="display:block; text-decoration:none; overflow:hidden; transition:background 0.2s;" onmouseover="this.style.background='rgba(12,30,40,0.03)'" onmouseout="this.style.background='transparent'">
-          <div style="width:100%; height:200px; overflow:hidden;">
-            <img src="development/projectCardThumbnail9.png" alt="Campolide Project" style="width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+          <div class="w-full h-[220px] overflow-hidden">
+            <img src="development/projectCardThumbnail9.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
-          <div style="padding:32px;">
-            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-              <span class="satoshi" style="font-size:11px; font-weight:700; letter-spacing:0.1em; color:rgba(12,30,40,0.3); text-transform:uppercase;">Residential Development</span>
-              <span style="font-size:12px; font-weight:600; color:#0C1E28; background:rgba(12,30,40,0.08); padding:4px 10px; border-radius:100px;">2022</span>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center justify-between mb-4">
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
+              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
             </div>
-            <h3 class="geist" style="font-size:19px; font-weight:700; color:#0C1E28; margin:0 0 6px;">Campolide Project</h3>
-            <p class="satoshi" style="font-size:13px; color:rgba(12,30,40,0.5); margin:0 0 20px;">📍 Lisbon, Portugal</p>
-            <div style="display:flex; gap:24px;">
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">38</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">Units</p></div>
-              <div><p class="geist" style="font-size:20px; font-weight:800; color:#0C1E28; margin:0;">€305K</p><p class="satoshi" style="font-size:11px; color:rgba(12,30,40,0.45); margin:4px 0 0; text-transform:uppercase; letter-spacing:0.06em;">From</p></div>
+            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <div class="flex gap-6 mb-8 mt-auto">
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">38</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€305K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+            </div>
+            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+              Book Now <span class="ml-1">→</span>
             </div>
           </div>
         </a>
