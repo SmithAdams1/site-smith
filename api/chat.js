@@ -252,7 +252,7 @@ export default async function handler(req, res) {
   let raw;
   try {
     const aiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -271,7 +271,7 @@ export default async function handler(req, res) {
     raw = aiData.candidates[0].content.parts[0].text.trim();
   } catch (err) {
     console.error('[chat] Gemini error:', err.message);
-    return res.status(200).json({ reply: `[DEBUG] Gemini error: ${err.message}` });
+    return res.status(500).json({ error: 'AI service unavailable' });
   }
 
   // Clean markdown fences if present
