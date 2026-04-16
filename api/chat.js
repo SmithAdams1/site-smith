@@ -288,7 +288,11 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           system_instruction: { parts: [{ text: systemFull }] },
           contents,
-          generationConfig: { maxOutputTokens: 1024, temperature: 0.7 },
+          generationConfig: { 
+            maxOutputTokens: 1024, 
+            temperature: 0.7,
+            responseMimeType: "application/json"
+          },
         }),
       }
     );
@@ -308,11 +312,20 @@ export default async function handler(req, res) {
 
   let parsed;
   try {
+    // Sometimes Gemini forgets the opening brace if the context is weird, let's just parse
     parsed = JSON.parse(raw);
-  } catch {
-    // If JSON parse fails return the raw text as reply
-    return res.status(200).json({ reply: raw, leadData, shouldCreateCrm: false });
+  } catch (parseErr) {
+    console.error('[chat] JSON Parse Error. Raw string was:', raw);
+    // If JSON parse fails, return a safe fallback message so we don't leak broken code to the UI
+    return res.status(200).json({ 
+      reply: "I'm sorry, I encountered an error saving your data. Could you please try again or rephrase what you provided?", 
+      leadData, 
+      shouldCreateCrm: false 
+    });
   }
+
+  // Gracefully handle if AI named the key "message" instead of "reply"
+  const finalReply = parsed.reply || parsed.message || "I'm here to help, could you tell me more?";
 
   // Merge new extracted fields with existing lead data
   const normalize = v => (v == null || String(v).trim() === '') ? null : String(v).trim();
@@ -336,7 +349,7 @@ export default async function handler(req, res) {
   }
 
   return res.status(200).json({
-    reply:         parsed.reply,
+    reply:         finalReply,
     leadData:      merged,
     shouldCreateCrm,
     handover:      parsed.handover  || false,
