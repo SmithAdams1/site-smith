@@ -239,33 +239,35 @@ export default async function handler(req, res) {
     ? `${SYSTEM_PROMPT}\n\nALREADY COLLECTED — do NOT ask for these again:\n${collected}`
     : SYSTEM_PROMPT;
 
-  // Build Anthropic messages (history + current message)
-  const messages = [
-    ...history.map(h => ({ role: h.role, content: h.content })),
-    { role: 'user', content: message },
+  // Build Gemini contents (history + current message)
+  // Gemini uses "model" instead of "assistant" for AI turns
+  const contents = [
+    ...history.map(h => ({
+      role:  h.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: h.content }],
+    })),
+    { role: 'user', parts: [{ text: message }] },
   ];
 
   let raw;
   try {
-    const aiRes = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key':         process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type':      'application/json',
-      },
-      body: JSON.stringify({
-        model:      'claude-haiku-4-5-20251001',
-        max_tokens: 1024,
-        system:     systemFull,
-        messages,
-      }),
-    });
+    const aiRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          system_instruction: { parts: [{ text: systemFull }] },
+          contents,
+          generationConfig: { maxOutputTokens: 1024, temperature: 0.7 },
+        }),
+      }
+    );
     const aiData = await aiRes.json();
     if (!aiRes.ok) throw new Error(JSON.stringify(aiData));
-    raw = aiData.content[0].text.trim();
+    raw = aiData.candidates[0].content.parts[0].text.trim();
   } catch (err) {
-    console.error('[chat] Anthropic error:', err.message);
+    console.error('[chat] Gemini error:', err.message);
     return res.status(500).json({ error: 'AI service unavailable' });
   }
 
