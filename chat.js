@@ -28,8 +28,18 @@
   // ─── STYLES ────────────────────────────────────────────────────────────────
   function injectStyles() {
     var css = [
-      '#sa-btn{position:fixed;bottom:28px;right:28px;z-index:99999;width:56px;height:56px;border-radius:50%;background:#0C1E28;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(12,30,40,.22);transition:transform .2s,box-shadow .2s}',
-      '#sa-btn:hover{transform:scale(1.07);box-shadow:0 6px 32px rgba(12,30,40,.32)}',
+      '#sa-btn-wrap{position:fixed;bottom:28px;right:28px;z-index:99999;display:flex;flex-direction:column;align-items:flex-end;gap:10px}',
+      '#sa-btn{position:relative;width:56px;height:56px;border-radius:50%;background:#38BDF8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(56,189,248,.55);transition:transform .2s,box-shadow .2s;flex-shrink:0}',
+      '#sa-btn:hover{transform:scale(1.08);box-shadow:0 6px 32px rgba(56,189,248,.7)}',
+      '#sa-btn::before{content:"";position:absolute;inset:-6px;border-radius:50%;border:2.5px solid rgba(56,189,248,.5);animation:sa-pulse 2.2s ease-out infinite}',
+      '#sa-btn::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(56,189,248,.22);animation:sa-pulse 2.2s ease-out .5s infinite}',
+      '@keyframes sa-pulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.45);opacity:0}}',
+      '#sa-tooltip{background:#fff;color:#0C1E28;font-size:12.5px;line-height:1.45;font-family:Satoshi,sans-serif;padding:9px 13px 9px 13px;border-radius:10px;box-shadow:0 4px 20px rgba(12,30,40,.18);max-width:190px;text-align:right;position:relative;opacity:0;transform:translateY(6px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}',
+      '#sa-tooltip.sa-tt-show{opacity:1;transform:translateY(0);pointer-events:all}',
+      '#sa-tooltip::after{content:"";position:absolute;bottom:-6px;right:20px;width:12px;height:12px;background:#fff;transform:rotate(45deg);box-shadow:3px 3px 8px rgba(12,30,40,.08)}',
+      '#sa-tooltip strong{display:block;font-weight:700;font-size:13px;margin-bottom:2px;color:#0284C7}',
+      '#sa-tt-close{position:absolute;top:5px;left:7px;background:none;border:none;cursor:pointer;color:rgba(12,30,40,.3);font-size:15px;line-height:1;padding:0;transition:color .15s}',
+      '#sa-tt-close:hover{color:#0C1E28}',
       '#sa-win{position:fixed;bottom:96px;right:28px;z-index:99999;width:360px;max-width:calc(100vw - 40px);height:520px;max-height:calc(100vh - 120px);background:#FDFCF9;border-radius:16px;box-shadow:0 16px 56px rgba(12,30,40,.18);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(16px) scale(.97);pointer-events:none;transition:opacity .2s ease,transform .25s cubic-bezier(.34,1.56,.64,1);font-family:Satoshi,sans-serif}',
       '#sa-win.sa-open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}',
       '#sa-hdr{background:#0C1E28;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}',
@@ -73,10 +83,26 @@
 
   // ─── BUILD DOM ─────────────────────────────────────────────────────────────
   function buildDOM() {
+    // Wrapper holds tooltip + button
+    var wrap = document.createElement('div');
+    wrap.id = 'sa-btn-wrap';
+
+    // Tooltip callout above button
+    var tooltip = document.createElement('div');
+    tooltip.id = 'sa-tooltip';
+    tooltip.innerHTML =
+      '<button id="sa-tt-close" aria-label="Close">&times;</button>' +
+      '<strong>&#128197; Schedule a Consultant</strong>' +
+      'Speak with one of our consultants \u2014 we\u2019ll get back to you within 24 hours.';
+
+    // Main FAB button
     var btn = document.createElement('button');
     btn.id = 'sa-btn';
-    btn.setAttribute('aria-label', 'Open chat');
+    btn.setAttribute('aria-label', 'Abrir chat — agendar consulta');
     btn.innerHTML = iconChat();
+
+    wrap.appendChild(tooltip);
+    wrap.appendChild(btn);
 
     var win = document.createElement('div');
     win.id = 'sa-win';
@@ -101,8 +127,19 @@
       '</div>' +
       '<div id="sa-powered">Smith &amp; Adams &middot; AI Assistant</div>';
 
-    document.body.appendChild(btn);
+    document.body.appendChild(wrap);
     document.body.appendChild(win);
+
+    // Auto-show tooltip after 1.5s, auto-hide after 7s
+    setTimeout(function () {
+      tooltip.classList.add('sa-tt-show');
+      setTimeout(function () { tooltip.classList.remove('sa-tt-show'); }, 7000);
+    }, 1500);
+
+    document.getElementById('sa-tt-close').addEventListener('click', function (e) {
+      e.stopPropagation();
+      tooltip.classList.remove('sa-tt-show');
+    });
   }
 
   // ─── ICONS ─────────────────────────────────────────────────────────────────
@@ -210,10 +247,12 @@
   function openChat() {
     var win = document.getElementById('sa-win');
     var btn = document.getElementById('sa-btn');
+    var tooltip = document.getElementById('sa-tooltip');
     state.open = true;
     win.classList.add('sa-open');
     btn.innerHTML = iconX();
-    btn.style.background = '#1a3242';
+    btn.style.background = '#0C1E28';
+    if (tooltip) tooltip.classList.remove('sa-tt-show');
     renderAll();
     setTimeout(function () { document.getElementById('sa-input').focus(); }, 280);
   }
@@ -224,7 +263,7 @@
     state.open = false;
     win.classList.remove('sa-open');
     btn.innerHTML = iconChat();
-    btn.style.background = '#0C1E28';
+    btn.style.background = '#38BDF8';
   }
 
   // ─── INIT ──────────────────────────────────────────────────────────────────
@@ -233,6 +272,9 @@
     injectStyles();
     buildDOM();
 
+    document.getElementById('sa-btn-wrap').addEventListener('click', function (e) {
+      if (e.target.id === 'sa-tt-close') return;
+    });
     document.getElementById('sa-btn').addEventListener('click', function () {
       state.open ? closeChat() : openChat();
     });
