@@ -252,7 +252,7 @@ export default async function handler(req, res) {
   let raw;
   try {
     const aiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -264,7 +264,10 @@ export default async function handler(req, res) {
       }
     );
     const aiData = await aiRes.json();
-    if (!aiRes.ok) throw new Error(JSON.stringify(aiData));
+    if (!aiRes.ok) throw new Error(`Gemini ${aiRes.status}: ${JSON.stringify(aiData)}`);
+    if (!aiData.candidates?.[0]?.content?.parts?.[0]?.text) {
+      throw new Error(`Unexpected Gemini response: ${JSON.stringify(aiData)}`);
+    }
     raw = aiData.candidates[0].content.parts[0].text.trim();
   } catch (err) {
     console.error('[chat] Gemini error:', err.message);
