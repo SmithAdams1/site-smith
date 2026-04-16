@@ -510,8 +510,8 @@
             // Render Featured
             const feat = posts[0];
             document.getElementById('featured-article').classList.remove('hidden');
-            document.getElementById('feat-title').innerHTML = `<a id="feat-link" href="article.html?slug=${feat.slug}">${feat.title}</a>`;
-            document.getElementById('feat-link-btn').href = `article.html?slug=${feat.slug}`;
+            document.getElementById('feat-title').innerHTML = `<a id="feat-link" href="/blog/${feat.slug}">${feat.title}</a>`;
+            document.getElementById('feat-link-btn').href = `/blog/${feat.slug}`;
             document.getElementById('feat-category').textContent = feat.category;
             document.getElementById('feat-date').textContent = new Date(feat.created_at).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'});
             document.getElementById('feat-read').textContent = feat.read_time;
@@ -530,7 +530,7 @@
                 if(img && !img.startsWith('http') && img.startsWith('.')) img = img.substring(1);
                 
                 const a = document.createElement('a');
-                a.href = `article.html?slug=${post.slug}`;
+                a.href = `/blog/${post.slug}`;
                 a.className = "article-card";
                 a.innerHTML = `
                     <div class="article-img-wrap"><img src="${img}" class="article-img"></div>

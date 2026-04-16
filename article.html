@@ -153,11 +153,19 @@
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     async function fetchPost() {
-        // Get slug from URL ?slug=
-        const urlParams = new URLSearchParams(window.location.search);
-        const slug = urlParams.get('slug');
+        // Get slug from injected variable, pathname, or URL ?slug=
+        let slug = null;
+        if(window.INJECTED_SLUG) {
+            slug = window.INJECTED_SLUG;
+        } else {
+            const urlParams = new URLSearchParams(window.location.search);
+            slug = urlParams.get('slug');
+            if(!slug && window.location.pathname.includes('/blog/')) {
+                slug = window.location.pathname.split('/').filter(Boolean).pop();
+            }
+        }
 
-        if(!slug) return window.location.href = 'blog.html';
+        if(!slug) return window.location.href = '/blog.html';
 
         const { data, error } = await supabaseClient
             .from('posts')
