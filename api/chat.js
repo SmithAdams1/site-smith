@@ -271,7 +271,8 @@ export default async function handler(req, res) {
     raw = aiData.candidates[0].content.parts[0].text.trim();
   } catch (err) {
     console.error('[chat] Gemini error:', err.message);
-    return res.status(500).json({ error: 'AI service unavailable' });
+    const keyStatus = process.env.GEMINI_API_KEY ? `key_length:${process.env.GEMINI_API_KEY.length}` : 'key_undefined';
+    return res.status(200).json({ reply: `[DEBUG] ${keyStatus} | ${err.message.slice(0, 200)}` });
   }
 
   // Clean markdown fences if present
