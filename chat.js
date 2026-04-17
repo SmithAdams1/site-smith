@@ -71,6 +71,7 @@
       '#sa-send:hover{background:#1a3242;transform:scale(1.06)}',
       '#sa-send:disabled{background:rgba(12,30,40,.18);cursor:not-allowed;transform:none}',
       '#sa-powered{text-align:center;padding:5px 0 10px;font-size:11px;color:rgba(12,30,40,.28);font-family:Satoshi,sans-serif;flex-shrink:0;letter-spacing:.02em}',
+      '@media(max-width:480px){#sa-btn-wrap{bottom:16px;right:14px}#sa-win{bottom:82px;right:10px;left:10px;width:auto;max-width:none}#sa-tooltip{max-width:calc(100vw - 100px)}}',
       '#sa-notice{background:#D6EAF5;padding:10px 16px;display:flex;align-items:flex-start;gap:9px;flex-shrink:0;border-bottom:1px solid rgba(12,30,40,.06)}',
       '#sa-notice-icon{flex-shrink:0;margin-top:1px;color:#2074A0}',
       '#sa-notice-text{font-size:12.5px;line-height:1.45;color:#1A3E52;font-family:Satoshi,sans-serif}',
