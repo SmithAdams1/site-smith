@@ -819,90 +819,150 @@
                 </div>
             </div>
         </section>
-        <section class="bg-[#FDFCF9] py-16 md:py-20">
-            <div class="container mx-auto px-4 md:px-6 max-w-7xl">
-                <div class="text-center mb-12 transition-all duration-1000 opacity-100">
-                    <div class="max-w-[900px] mx-auto mb-8 lg:mb-12">
-                        <div class="inline-block px-4 py-1.5 mb-4 rounded-full bg-[#E6EEF4]">
-                            <p class="text-[#0C1E28] font-medium satoshi text-sm text-center">Connect With Us</p>
-                        </div>
-                        <h2
-                            class="text-3xl md:text-4xl xl:text-5xl font-bold leading-tight mx-auto geist text-[#0C1E28] tracking-tight max-w-4xl">
-                            Follow Our Social Media</h2>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 transition-all duration-1000 opacity-100 max-w-5xl mx-auto items-stretch">
-                    <!-- Instagram -->
-                    <div class="flex flex-col items-center text-center transition-all duration-500">
-                        <div class="mb-6 flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram">
-                                <defs>
-                                    <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#f09433"/>
-                                        <stop offset="25%" stop-color="#e6683c"/>
-                                        <stop offset="50%" stop-color="#dc2743"/>
-                                        <stop offset="75%" stop-color="#cc2366"/>
-                                        <stop offset="100%" stop-color="#bc1888"/>
-                                    </linearGradient>
-                                </defs>
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-bold geist text-[#000000] mb-1">Instagram</h3>
-                        <p class="text-gray-700 satoshi text-sm mb-4">@smithandadams</p>
-                        <p class="text-[#222222] satoshi text-[15px] leading-relaxed mb-6">Gain privileged access to our select real estate portfolios, high-yield investment data, and regulatory updates on Portugal's Golden Visa.</p>
-                        <p class="text-[#000000] font-medium satoshi text-lg mb-8">1,234 Posts</p>
-                        <a href="http://instagram.com/smithandadamsgroup" target="_blank" rel="noopener noreferrer" class="mt-auto bg-[#000000] text-white tracking-widest text-sm font-bold uppercase py-4 px-8 rounded-xl w-full max-w-[280px] hover:bg-gray-800 transition-colors flex items-center justify-center">
-                            FOLLOW INSTAGRAM <span class="ml-2">→</span>
-                        </a>
-                    </div>
-                    
-                    <!-- LinkedIn -->
-                    <div class="flex flex-col items-center text-center transition-all duration-500">
-                        <div class="mb-6 flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" fill="#0A66C2" stroke="#0A66C2" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-bold geist text-[#000000] mb-1">LinkedIn</h3>
-                        <p class="text-gray-700 satoshi text-sm mb-4">Smith & Adams</p>
-                        <p class="text-[#222222] satoshi text-[15px] leading-relaxed mb-6">Trusted market intelligence, structural analysis, and professional advisory on strategic international real estate holdings.</p>
-                        <p class="text-[#000000] font-medium satoshi text-lg mb-8">5,678 Followers</p>
-                        <a href="https://www.linkedin.com/company/smith-and-adams/" target="_blank" rel="noopener noreferrer" class="mt-auto bg-[#000000] text-white tracking-widest text-sm font-bold uppercase py-4 px-8 rounded-xl w-full max-w-[280px] hover:bg-gray-800 transition-colors flex items-center justify-center">
-                            FOLLOW LINKEDIN <span class="ml-2">→</span>
-                        </a>
-                    </div>
+        <!-- ══════════════════════════════════════
+             SOCIAL — Instagram feed + LinkedIn + Google
+        ══════════════════════════════════════ -->
+        <section id="sa-social" style="background:#0C1E28; padding:clamp(60px,8vw,96px) 0 0;">
+            <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px);">
 
-                    <!-- Google -->
-                    <div class="flex flex-col items-center text-center transition-all duration-500">
-                        <div class="mb-6 flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24">
-                              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-bold geist text-[#000000] mb-1">Google</h3>
-                        <p class="text-gray-700 satoshi text-sm mb-4">Smith & Adams</p>
-                        <p class="text-[#222222] satoshi text-[15px] leading-relaxed mb-6">Consult verified reviews and locate our headquarters. Confirmed expertise in residency and wealth management.</p>
-                        <p class="text-[#000000] font-medium satoshi text-lg mb-8 flex items-center justify-center gap-1">4.9 
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <!-- Header row -->
+                <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:clamp(36px,5vw,56px);">
+                    <div>
+                        <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:16px;">
+                            Follow Us · @smithandadamsgroup
                         </p>
-                        <a href="https://share.google/RUwoPr3ByPmDXdcBC" target="_blank" rel="noopener noreferrer" class="mt-auto bg-[#000000] text-white tracking-widest text-sm font-bold uppercase py-4 px-8 rounded-xl w-full max-w-[280px] hover:bg-gray-800 transition-colors flex items-center justify-center">
-                            REVIEW US <span class="ml-2">→</span>
-                        </a>
+                        <h2 class="geist" style="font-size:clamp(32px,5vw,64px); font-weight:800; color:#ffffff; line-height:1.0; letter-spacing:-0.02em; text-transform:uppercase; margin:0;">
+                            Discover Our<br>World of Property<br>Investing
+                        </h2>
+                    </div>
+                    <a href="https://www.instagram.com/smithandadamsgroup/" target="_blank" rel="noopener noreferrer"
+                        class="satoshi"
+                        style="display:inline-flex; align-items:center; gap:10px; background:#ffffff; color:#0C1E28; font-size:13px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:15px 30px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:opacity .2s;"
+                        onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        Open our feed
+                    </a>
+                </div>
+
+                <!-- Instagram 6-col grid -->
+                <div id="sa-ig-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:clamp(4px,0.7vw,10px);">
+                    <!-- Posts inserted by JS -->
+                </div>
+
+            </div>
+
+            <!-- LinkedIn + Google strip -->
+            <div style="background:#FDFCF9; margin-top:clamp(48px,7vw,80px);">
+                <div style="max-width:1280px; margin:0 auto;">
+                    <div id="sa-social-strip" style="display:grid; grid-template-columns:1fr 1fr; border-left:1px solid rgba(12,30,40,0.08); border-top:1px solid rgba(12,30,40,0.08);">
+
+                        <!-- LinkedIn -->
+                        <div style="padding:clamp(36px,5vw,64px) clamp(24px,4vw,56px); border-right:1px solid rgba(12,30,40,0.08);">
+                            <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#0A66C2" stroke="#0A66C2" stroke-width="0.5">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                    <rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
+                                </svg>
+                                <div>
+                                    <p class="geist" style="font-size:clamp(20px,2.5vw,28px); font-weight:800; color:#0C1E28; letter-spacing:-0.01em; line-height:1; margin:0;">LinkedIn</p>
+                                    <p class="satoshi" style="font-size:12px; color:rgba(12,30,40,0.45); margin-top:4px; letter-spacing:0.04em;">Smith &amp; Adams · 5,678 Followers</p>
+                                </div>
+                            </div>
+                            <p class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.6); line-height:1.7; margin-bottom:28px; max-width:420px;">
+                                Trusted market intelligence, structural analysis, and professional advisory on strategic international real estate holdings.
+                            </p>
+                            <a href="https://www.linkedin.com/company/smith-and-adams/" target="_blank" rel="noopener noreferrer"
+                                class="satoshi"
+                                style="display:inline-flex; align-items:center; gap:8px; background:#0C1E28; color:#ffffff; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:12px 24px; border-radius:8px; text-decoration:none; transition:opacity .2s;"
+                                onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+                                Follow LinkedIn →
+                            </a>
+                        </div>
+
+                        <!-- Google -->
+                        <div style="padding:clamp(36px,5vw,64px) clamp(24px,4vw,56px); border-right:1px solid rgba(12,30,40,0.08);">
+                            <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                                <div>
+                                    <p class="geist" style="font-size:clamp(20px,2.5vw,28px); font-weight:800; color:#0C1E28; letter-spacing:-0.01em; line-height:1; margin:0;">Google</p>
+                                    <p class="satoshi" style="font-size:12px; color:rgba(12,30,40,0.45); margin-top:4px; letter-spacing:0.04em; display:flex; align-items:center; gap:5px;">
+                                        Smith &amp; Adams · 4.9
+                                        <span style="display:inline-flex; gap:2px; color:#FBBC05;">
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.6); line-height:1.7; margin-bottom:28px; max-width:420px;">
+                                Consult verified reviews and locate our headquarters. Confirmed expertise in residency and wealth management.
+                            </p>
+                            <a href="https://share.google/RUwoPr3ByPmDXdcBC" target="_blank" rel="noopener noreferrer"
+                                class="satoshi"
+                                style="display:inline-flex; align-items:center; gap:8px; background:#0C1E28; color:#ffffff; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:12px 24px; border-radius:8px; text-decoration:none; transition:opacity .2s;"
+                                onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+                                Review Us →
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </section>
+
+        <style>
+            @media(max-width:900px){#sa-ig-grid{grid-template-columns:repeat(3,1fr) !important;}}
+            @media(max-width:540px){#sa-ig-grid{grid-template-columns:repeat(2,1fr) !important;}}
+            @media(max-width:640px){#sa-social-strip{grid-template-columns:1fr !important;}}
+            .sa-ig-item{position:relative;overflow:hidden;border-radius:0;aspect-ratio:1/1;display:block;background:#1a2e3a;}
+            .sa-ig-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+            .sa-ig-item:hover img{transform:scale(1.07);}
+            .sa-ig-overlay{position:absolute;inset:0;background:rgba(12,30,40,0);transition:background .3s;}
+            .sa-ig-item:hover .sa-ig-overlay{background:rgba(12,30,40,0.3);}
+            .sa-ig-badge{position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.88);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;}
+        </style>
+        <script>
+        (function(){
+            fetch('https://feeds.behold.so/M11QO4EktnuznZ4yL35u')
+                .then(function(r){return r.json();})
+                .then(function(data){
+                    var posts = (data.posts || data).slice(0,6);
+                    var grid = document.getElementById('sa-ig-grid');
+                    if(!grid) return;
+                    grid.innerHTML = '';
+                    posts.forEach(function(p){
+                        var imgSrc = (p.mediaType === 'VIDEO' && p.thumbnailUrl) ? p.thumbnailUrl
+                            : (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) ? p.sizes.medium.mediaUrl
+                            : (p.mediaUrl || '');
+                        var isVideo = p.mediaType === 'VIDEO';
+                        var isCarousel = p.mediaType === 'CAROUSEL_ALBUM';
+                        var badge = '';
+                        if(isVideo){
+                            badge = '<div class="sa-ig-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="#0C1E28"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>';
+                        } else if(isCarousel){
+                            badge = '<div class="sa-ig-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="2.5"><rect x="2" y="7" width="15" height="15" rx="2"/><path d="M17 2h3a2 2 0 0 1 2 2v13"/></svg></div>';
+                        }
+                        grid.insertAdjacentHTML('beforeend',
+                            '<a href="'+p.permalink+'" target="_blank" rel="noopener noreferrer" class="sa-ig-item">'
+                            +'<img src="'+imgSrc+'" alt="'+(p.prunedCaption||'Instagram post').replace(/"/g,'&quot;').slice(0,80)+'" loading="lazy" />'
+                            +'<div class="sa-ig-overlay"></div>'
+                            +badge
+                            +'</a>'
+                        );
+                    });
+                })
+                .catch(function(){/* silently fail */});
+        })();
+        </script>
+
         <footer class="w-full py-12 md:py-16 bg-[#0C1E28]">
             <div class="container mx-auto px-4 md:px-6 max-w-7xl">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
