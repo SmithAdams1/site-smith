@@ -67,6 +67,16 @@
   "email": "geral@smithandadams.com"
 }
 </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18073134136');
+</script>
+<script defer src="/cms-loader.js"></script>
 </head>
 
 <body class="antialiased bg-[#FDFCF9] __variable_f367f3 __variable_646807 overflow-x-hidden w-full">
@@ -134,7 +144,7 @@
             style="height: 80vh; min-height: 600px; max-height: 1000px;">
             <video autoplay playsinline loop muted class="absolute inset-0 w-full h-full object-cover pointer-events-none"
                 style="width: 100%; height: 100%; object-fit: cover;">
-                <source src="urban-collections/Smith_e_Adams_Site_20s_Wide803_h264_03.mp4" type="video/mp4" />
+                <source data-cms="index.hero.video_url" src="urban-collections/Smith_e_Adams_Site_20s_Wide803_h264_03.mp4" type="video/mp4" />
             </video>
         </section>
         <section id="custom-stats-section" style="background-color:#0C1E28; color:white; width:100%;">
@@ -142,7 +152,7 @@
           <!-- Quote header -->
           <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px); text-align:center;">
             <div class="custom-fade-in" style="transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
-              <h2 class="satoshi" style="font-size:clamp(18px,2vw,24px); font-weight:300; line-height:1.7; color:rgba(255,255,255,0.82); max-width:760px; margin:0 auto;">
+              <h2 data-cms="index.hero.quote" data-cms-attr="html" class="satoshi" style="font-size:clamp(18px,2vw,24px); font-weight:300; line-height:1.7; color:rgba(255,255,255,0.82); max-width:760px; margin:0 auto;">
                 The world's smartest investors are already turning to Portugal.<br>
                 Smith &amp; Adams ensures the most exclusive opportunities reach you first.
               </h2>
@@ -156,24 +166,24 @@
 
                 <!-- Stat 1 -->
                 <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+10</div>
-                  <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
+                  <div data-cms="index.hero.stat1.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+10</div>
+                  <p data-cms="index.hero.stat1.label" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     in real estate investment and management in Portugal
                   </p>
                 </div>
 
                 <!-- Stat 2 -->
                 <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+500</div>
-                  <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
+                  <div data-cms="index.hero.stat2.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+500</div>
+                  <p data-cms="index.hero.stat2.label" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     units delivered in premium residential projects, with integrated management and a focus on stable euro-denominated returns.
                   </p>
                 </div>
 
                 <!-- Stat 3 -->
                 <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+€30M</div>
-                  <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
+                  <div data-cms="index.hero.stat3.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+€30M</div>
+                  <p data-cms="index.hero.stat3.label" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     in real estate investments advised for international investors who chose Portugal to protect and grow their euro-denominated capital.
                   </p>
                 </div>
@@ -184,9 +194,9 @@
 
           <!-- CTA -->
           <div style="max-width:1280px; margin:0 auto; padding:clamp(24px,4vw,48px) 24px clamp(40px,6vw,80px); display:flex; justify-content:center;">
-            <a href="contact.html" style="text-decoration:none;">
+            <a data-cms="index.hero.cta_url" href="contact.html" style="text-decoration:none;">
               <button class="satoshi" style="background-color:white; color:#0C1E28; border:none; font-weight:700; font-size:1.1rem; padding:17px 40px; border-radius:100px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; transition:opacity .2s;">
-                I want to invest in Portugal
+                <span data-cms="index.hero.cta_label">I want to invest in Portugal</span>
                 <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="18"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
               </button>
             </a>
@@ -201,11 +211,11 @@
               <div style="display:inline-block; padding:6px 20px; background:#0C1E28; border-radius:9999px; margin-bottom:20px;">
                 <span class="satoshi" style="color:white; font-weight:600; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">Benefits</span>
               </div>
-              <h2 class="geist" style="font-size:clamp(32px,4.5vw,56px); font-weight:800; color:#0C1E28; letter-spacing:-0.03em; line-height:1.05; margin:0;">Why Invest In Portugal?</h2>
+              <h2 data-cms="index.why.title" class="geist" style="font-size:clamp(32px,4.5vw,56px); font-weight:800; color:#0C1E28; letter-spacing:-0.03em; line-height:1.05; margin:0;">Why Invest In Portugal?</h2>
             </div>
-            <a href="blog.html" style="text-decoration:none; flex-shrink:0;">
+            <a data-cms="index.why.cta_url" href="blog.html" style="text-decoration:none; flex-shrink:0;">
               <button class="satoshi" style="background:#0C1E28; color:white; border:none; font-weight:700; font-size:15px; padding:15px 36px; border-radius:100px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; transition:opacity .2s;">
-                Learn More About Portugal
+                <span data-cms="index.why.cta_label">Learn More About Portugal</span>
                 <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
               </button>
             </a>
@@ -219,30 +229,30 @@
               <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
                 <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">01</div>
                 <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img src="./_next/static/media/benefitsImage.5a4386fa.png" alt="Portuguese real estate market in 2025 is experiencing dynamic growth" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  <img data-cms="index.why.card1.image" src="./_next/static/media/benefitsImage.5a4386fa.png" alt="Portuguese real estate market in 2025 is experiencing dynamic growth" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
-                <h3 class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Portuguese real estate market in 2025 is experiencing dynamic growth</h3>
-                <p class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">High standard of living and economic stability — Portugal offers a high quality of life, political stability, and a thriving economy driven by innovation, tourism, and foreign investment. With its location in Western Europe and strong infrastructure, the country is ideal for families and investors. Enjoy a mild climate, top-tier healthcare, excellent education, and a dynamic real estate market.</p>
+                <h3 data-cms="index.why.card1.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Portuguese real estate market in 2025 is experiencing dynamic growth</h3>
+                <p data-cms="index.why.card1.body" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">High standard of living and economic stability — Portugal offers a high quality of life, political stability, and a thriving economy driven by innovation, tourism, and foreign investment. With its location in Western Europe and strong infrastructure, the country is ideal for families and investors. Enjoy a mild climate, top-tier healthcare, excellent education, and a dynamic real estate market.</p>
               </div>
 
               <!-- Card 2 -->
               <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
                 <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">02</div>
                 <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img src="./_next/static/media/benefitsImage2.1defde2a.jpg" alt="Natural Beauty and Rich Culture" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  <img data-cms="index.why.card2.image" src="./_next/static/media/benefitsImage2.1defde2a.jpg" alt="Natural Beauty and Rich Culture" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
-                <h3 class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Natural Beauty and Rich Culture</h3>
-                <p class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">Portugal is a land shaped by the Atlantic Ocean, from the sunny Algarve to the wild western cliffs and the green northern coast. Each region offers its own unique climate, golden beaches, charming towns, and breathtaking coastal landscapes.</p>
+                <h3 data-cms="index.why.card2.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Natural Beauty and Rich Culture</h3>
+                <p data-cms="index.why.card2.body" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">Portugal is a land shaped by the Atlantic Ocean, from the sunny Algarve to the wild western cliffs and the green northern coast. Each region offers its own unique climate, golden beaches, charming towns, and breathtaking coastal landscapes.</p>
               </div>
 
               <!-- Card 3 -->
               <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-bottom:1px solid #e5e7eb;">
                 <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">03</div>
                 <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img src="./_next/static/media/benefitImage3.7ce71e79.jpg" alt="Family Benefits &amp; Lifestyle" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  <img data-cms="index.why.card3.image" src="./_next/static/media/benefitImage3.7ce71e79.jpg" alt="Family Benefits &amp; Lifestyle" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
-                <h3 class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Family Benefits &amp; Lifestyle</h3>
-                <p class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">Extend your Portuguese residency to your entire family, including spouse, children under 18, and dependent parents over 65. Portugal offers world-class healthcare, excellent education system, and a high quality of life. Enjoy the Mediterranean climate, rich culture, and strategic location that provides easy access to the rest of Europe.</p>
+                <h3 data-cms="index.why.card3.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Family Benefits &amp; Lifestyle</h3>
+                <p data-cms="index.why.card3.body" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">Extend your Portuguese residency to your entire family, including spouse, children under 18, and dependent parents over 65. Portugal offers world-class healthcare, excellent education system, and a high quality of life. Enjoy the Mediterranean climate, rich culture, and strategic location that provides easy access to the rest of Europe.</p>
               </div>
 
             </div>
@@ -254,8 +264,8 @@
           <!-- Section header -->
           <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px);">
             <div class="custom-fade-in" style="transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
-              <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Step by Step</p>
-              <h2 class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:700px;">
+              <p data-cms="index.steps.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Step by Step</p>
+              <h2 data-cms="index.steps.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:700px;">
                 Discover how Smith &amp; Adams makes your property work for you
               </h2>
             </div>
@@ -269,33 +279,33 @@
                 <!-- Step 1 -->
                 <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">01</div>
-                  <h3 class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">You invest in selected assets</h3>
-                  <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Purchase in carefully selected developments</p>
-                  <p class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">Invest in residential projects strategically located across Portugal, structured and overseen by the Smith &amp; Adams Group.</p>
+                  <h3 data-cms="index.steps.0.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">You invest in selected assets</h3>
+                  <p data-cms="index.steps.0.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Purchase in carefully selected developments</p>
+                  <p data-cms="index.steps.0.body" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">Invest in residential projects strategically located across Portugal, structured and overseen by the Smith &amp; Adams Group.</p>
                 </div>
 
                 <!-- Step 2 -->
                 <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">02</div>
-                  <h3 class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">We handle full management</h3>
-                  <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Professional management of your property and tenants</p>
-                  <p class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">The Smith &amp; Adams team takes care of everything—marketing, tenant selection, contracts, maintenance, and daily operations.</p>
+                  <h3 data-cms="index.steps.1.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">We handle full management</h3>
+                  <p data-cms="index.steps.1.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Professional management of your property and tenants</p>
+                  <p data-cms="index.steps.1.body" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">The Smith &amp; Adams team takes care of everything—marketing, tenant selection, contracts, maintenance, and daily operations.</p>
                 </div>
 
                 <!-- Step 3 -->
                 <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">03</div>
-                  <h3 class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">You receive euro&#8209;denominated income</h3>
-                  <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Earn predictable income in euros, hassle&#8209;free</p>
-                  <p class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">Rental income is consolidated, expenses are managed by Smith &amp; Adams, and you receive your returns regularly with transparent reporting.</p>
+                  <h3 data-cms="index.steps.2.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">You receive euro&#8209;denominated income</h3>
+                  <p data-cms="index.steps.2.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Earn predictable income in euros, hassle&#8209;free</p>
+                  <p data-cms="index.steps.2.body" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">Rental income is consolidated, expenses are managed by Smith &amp; Adams, and you receive your returns regularly with transparent reporting.</p>
                 </div>
 
                 <!-- Step 4 -->
                 <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">04</div>
-                  <h3 class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">Protected and appreciating assets</h3>
-                  <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Capital protection and long&#8209;term growth</p>
-                  <p class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">By combining stable rental income with property appreciation in strong markets, your wealth grows in euros with the support of a group specialized in international investors.</p>
+                  <h3 data-cms="index.steps.3.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">Protected and appreciating assets</h3>
+                  <p data-cms="index.steps.3.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Capital protection and long&#8209;term growth</p>
+                  <p data-cms="index.steps.3.body" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">By combining stable rental income with property appreciation in strong markets, your wealth grows in euros with the support of a group specialized in international investors.</p>
                 </div>
 
               </div>
@@ -980,8 +990,8 @@
                                     data-nimg="1" decoding="async" height="32" loading="lazy" src="./logo.png"
                                     srcset="./logo.png 2x" style="color:transparent" width="160" /></div>
                         </a>
-                        <p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long&#8209;term access to the European market.</p>
-                        <div class="flex gap-4 mt-6"><a
+                        <p data-cms="global.footer.description" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long&#8209;term access to the European market.</p>
+                        <div class="flex gap-4 mt-6"><a data-cms="global.social.instagram"
                                 class="w-8 h-8 flex items-center justify-center transition-all duration-300"
                                 href="https://www.instagram.com/smithandadamsgroup/" target="_blank"><svg
                                     aria-hidden="true" class="lucide lucide-instagram text-white hover:text-gray-300"
@@ -991,7 +1001,7 @@
                                     <rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
                                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                                </svg></a><a
+                                </svg></a><a data-cms="global.social.linkedin"
                                 class="w-8 h-8 flex items-center justify-center transition-all duration-300"
                                 href="https://www.linkedin.com/company/smith-and-adams/" target="_blank"><svg
                                     aria-hidden="true" class="lucide lucide-linkedin text-white hover:text-gray-300"
@@ -1003,7 +1013,7 @@
                                     </path>
                                     <rect height="12" width="4" x="2" y="9"></rect>
                                     <circle cx="4" cy="4" r="2"></circle>
-                                </svg></a><a
+                                </svg></a><a data-cms="global.social.youtube"
                                 class="w-8 h-8 flex items-center justify-center transition-all duration-300"
                                 href="https://www.youtube.com/@smithandadamsgroup" target="_blank"><svg
                                     aria-hidden="true" class="lucide lucide-youtube text-white hover:text-gray-300"
@@ -1049,13 +1059,13 @@
                                 <li
                                     class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
                                     <a href="contact.html">Contact Us</a></li>
-                                <li class="font-normal satoshi text-[15px] text-gray-300"><a
+                                <li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone"
                                         href="tel:+351938227348">+351938227348</a></li>
-                                <li class="font-normal satoshi text-[15px] text-gray-300"><a
+                                <li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email"
                                         href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li>
                                 <li
                                     class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer"
+                                    <a data-cms="global.footer.directions_url" href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer"
                                         target="_blank">Get Directions</a></li>
                             </ul>
                         </div>
@@ -1074,8 +1084,7 @@
                 </div>
                 <div
                     class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12">
-                    <p class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith
-                        &amp; Adams</p>
+                    <p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © 2026 Smith &amp; Adams</p>
                     <p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a
                             class="text-gray-300 hover:text-white ml-1" href="index.html#">Terms and Conditions</a> |<a
                             class="text-gray-300 hover:text-white ml-1" href="index.html#">Privacy Policy</a></p>

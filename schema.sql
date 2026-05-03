@@ -56,7 +56,48 @@ CREATE POLICY "Authenticated users can delete from blog-media"
 ON storage.objects FOR DELETE
 USING (bucket_id = 'blog-media' AND auth.role() = 'authenticated');
 
--- 6. Create Admin User (admin@smithandadams.com / b9FyTKJj>=HU9dP=A)
+-- 6. Site Content key-value store (CMS for static pages)
+CREATE TABLE public.site_content (
+    key   text primary key,
+    value text not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+ALTER TABLE public.site_content ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Public read site_content"
+  ON public.site_content FOR SELECT USING (true);
+
+CREATE POLICY "Authenticated insert site_content"
+  ON public.site_content FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated update site_content"
+  ON public.site_content FOR UPDATE USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated delete site_content"
+  ON public.site_content FOR DELETE USING (auth.role() = 'authenticated');
+
+-- 7. Storage bucket for site-wide media (separate from blog-media)
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('site-media', 'site-media', true);
+
+CREATE POLICY "Public read site-media"
+  ON storage.objects FOR SELECT
+  USING (bucket_id = 'site-media');
+
+CREATE POLICY "Authenticated insert site-media"
+  ON storage.objects FOR INSERT
+  WITH CHECK (bucket_id = 'site-media' AND auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated update site-media"
+  ON storage.objects FOR UPDATE
+  USING (bucket_id = 'site-media' AND auth.role() = 'authenticated');
+
+CREATE POLICY "Authenticated delete site-media"
+  ON storage.objects FOR DELETE
+  USING (bucket_id = 'site-media' AND auth.role() = 'authenticated');
+
+-- 8. Create Admin User (admin@smithandadams.com / b9FyTKJj>=HU9dP=A)
 -- Requires pgcrypto extension (enabled by default in Supabase)
 DO $$
 DECLARE

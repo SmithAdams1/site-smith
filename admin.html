@@ -19,6 +19,16 @@
     </style>
 
   <script defer src="/_vercel/insights/script.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18073134136');
+</script>
+<script defer src="/cms-loader.js"></script>
 </head>
 <body class="overflow-x-hidden w-full">
 
@@ -53,11 +63,14 @@
                 <h2 class="font-bold text-xl uppercase tracking-widest">S&A Admin</h2>
             </div>
             <nav class="flex-1 p-4 space-y-2">
-                <button onclick="showView('posts-view')" class="w-full text-left px-4 py-3 rounded-lg bg-white/10 font-medium flex items-center gap-3">
+                <button onclick="showView('posts-view')" class="nav-btn w-full text-left px-4 py-3 rounded-lg bg-white/10 font-medium flex items-center gap-3" data-view="posts-view">
                     <i data-lucide="file-text"></i> All Posts
                 </button>
-                <button onclick="showView('editor-view')" class="w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 font-medium flex items-center gap-3">
+                <button onclick="showView('editor-view')" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 font-medium flex items-center gap-3" data-view="editor-view">
                     <i data-lucide="plus-circle"></i> Create Post
+                </button>
+                <button onclick="showView('content-view')" class="nav-btn w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 font-medium flex items-center gap-3" data-view="content-view">
+                    <i data-lucide="layout-template"></i> Site Content
                 </button>
             </nav>
             <div class="p-4 border-t border-gray-700">
@@ -144,6 +157,28 @@
                         <span>PUBLISH POST</span>
                     </button>
                     <div id="editor-error" class="text-red-500 text-sm hidden text-center"></div>
+                </form>
+            </div>
+
+            <!-- Site Content View -->
+            <div id="content-view" class="hidden max-w-5xl">
+                <div class="flex justify-between items-center mb-2">
+                    <h1 class="text-3xl font-bold text-[#0C1E28]">Site Content</h1>
+                    <a id="content-preview-link" href="index.html" target="_blank" class="text-sm text-[#466DEE] font-bold hover:underline">Preview página ↗</a>
+                </div>
+                <p class="text-sm text-gray-500 mb-6">Selecione a página para editar. Cada campo já mostra o texto atual do site.</p>
+
+                <!-- Page nav buttons -->
+                <div id="content-page-nav" class="flex flex-wrap gap-2 mb-6"></div>
+
+                <div id="content-status" class="mb-4 text-sm hidden"></div>
+
+                <form id="content-form" class="space-y-5 bg-white border border-gray-100 rounded-xl p-6 shadow-sm">
+                    <div id="content-page-title" class="text-xs font-bold uppercase tracking-widest text-[#466DEE] mb-2"></div>
+                    <div id="content-fields" class="space-y-5"></div>
+                    <button type="submit" id="content-save-btn" class="w-full bg-[#0C1E28] text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all text-lg flex justify-center items-center gap-2">
+                        <span>SAVE CHANGES</span>
+                    </button>
                 </form>
             </div>
 
@@ -322,10 +357,15 @@
         // DASHBOARD NAVIGATION
         // -------------------------
         function showView(viewId) {
-            document.getElementById('posts-view').classList.add('hidden');
-            document.getElementById('editor-view').classList.add('hidden');
+            ['posts-view', 'editor-view', 'content-view'].forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
             document.getElementById(viewId).classList.remove('hidden');
-            
+
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.toggle('bg-white/10', b.dataset.view === viewId);
+            });
+
             if(viewId === 'editor-view') {
                 document.getElementById('post-form').reset();
                 document.getElementById('post-id').value = '';
@@ -334,6 +374,7 @@
                 document.getElementById('editor-title').textContent = 'Create New Post';
             }
             if(viewId === 'posts-view') loadPosts();
+            if(viewId === 'content-view') openSiteContent();
         }
 
         // -------------------------
@@ -472,6 +513,619 @@
             }
             
             btn.innerHTML = originalText;
+        });
+
+        // =========================================================
+        // SITE CONTENT CMS
+        // =========================================================
+
+        // Schema declarativo: cada entrada vira um campo de formulário.
+        // type: text | longtext | richtext | image | video | url
+        // min/max: limite de caracteres (text/longtext/richtext) ou caracteres da URL (url/video)
+        const SITE_SCHEMA = {
+            'index': {
+                label: 'Home',
+                preview: 'index.html',
+                sections: [
+                    { title: 'Hero — vídeo', fields: [
+                        { key: 'index.hero.video_url', label: 'URL do vídeo de fundo (mp4)', type: 'video', min: 5, max: 400, helper: 'Caminho do .mp4 ou URL externa',
+                          default: 'urban-collections/Smith_e_Adams_Site_20s_Wide803_h264_03.mp4' },
+                    ]},
+                    { title: 'Hero — frase', fields: [
+                        { key: 'index.hero.quote', label: 'Frase principal', type: 'longtext', min: 20, max: 220,
+                          default: "The world's smartest investors are already turning to Portugal.<br>Smith &amp; Adams ensures the most exclusive opportunities reach you first." },
+                    ]},
+                    { title: 'Hero — Stats (3)', fields: [
+                        { key: 'index.hero.stat1.value', label: 'Stat 1 — número', type: 'text', min: 1, max: 12, default: '+10' },
+                        { key: 'index.hero.stat1.label', label: 'Stat 1 — descrição', type: 'longtext', min: 5, max: 200,
+                          default: 'in real estate investment and management in Portugal' },
+                        { key: 'index.hero.stat2.value', label: 'Stat 2 — número', type: 'text', min: 1, max: 12, default: '+500' },
+                        { key: 'index.hero.stat2.label', label: 'Stat 2 — descrição', type: 'longtext', min: 5, max: 200,
+                          default: 'units delivered in premium residential projects, with integrated management and a focus on stable euro-denominated returns.' },
+                        { key: 'index.hero.stat3.value', label: 'Stat 3 — número', type: 'text', min: 1, max: 12, default: '+€30M' },
+                        { key: 'index.hero.stat3.label', label: 'Stat 3 — descrição', type: 'longtext', min: 5, max: 200,
+                          default: 'in real estate investments advised for international investors who chose Portugal to protect and grow their euro-denominated capital.' },
+                    ]},
+                    { title: 'Hero — CTA', fields: [
+                        { key: 'index.hero.cta_label', label: 'Texto do botão', type: 'text', min: 2, max: 40, default: 'I want to invest in Portugal' },
+                        { key: 'index.hero.cta_url', label: 'Link do botão', type: 'url', min: 1, max: 200, default: 'contact.html' },
+                    ]},
+                    { title: 'Why Invest — header', fields: [
+                        { key: 'index.why.title', label: 'Título da seção', type: 'text', min: 5, max: 60, default: 'Why Invest In Portugal?' },
+                        { key: 'index.why.cta_label', label: 'CTA "Learn More" — texto', type: 'text', min: 2, max: 40, default: 'Learn More About Portugal' },
+                        { key: 'index.why.cta_url', label: 'CTA "Learn More" — link', type: 'url', min: 1, max: 200, default: 'blog.html' },
+                    ]},
+                    { title: 'Why Invest — Card 1', fields: [
+                        { key: 'index.why.card1.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: './_next/static/media/benefitsImage.5a4386fa.png' },
+                        { key: 'index.why.card1.title', label: 'Título', type: 'longtext', min: 5, max: 100,
+                          default: 'Portuguese real estate market in 2025 is experiencing dynamic growth' },
+                        { key: 'index.why.card1.body', label: 'Texto', type: 'longtext', min: 20, max: 600,
+                          default: 'High standard of living and economic stability — Portugal offers a high quality of life, political stability, and a thriving economy driven by innovation, tourism, and foreign investment. With its location in Western Europe and strong infrastructure, the country is ideal for families and investors. Enjoy a mild climate, top-tier healthcare, excellent education, and a dynamic real estate market.' },
+                    ]},
+                    { title: 'Why Invest — Card 2', fields: [
+                        { key: 'index.why.card2.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: './_next/static/media/benefitsImage2.1defde2a.jpg' },
+                        { key: 'index.why.card2.title', label: 'Título', type: 'longtext', min: 5, max: 100, default: 'Natural Beauty and Rich Culture' },
+                        { key: 'index.why.card2.body', label: 'Texto', type: 'longtext', min: 20, max: 600,
+                          default: 'Portugal is a land shaped by the Atlantic Ocean, from the sunny Algarve to the wild western cliffs and the green northern coast. Each region offers its own unique climate, golden beaches, charming towns, and breathtaking coastal landscapes.' },
+                    ]},
+                    { title: 'Why Invest — Card 3', fields: [
+                        { key: 'index.why.card3.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: './_next/static/media/benefitImage3.7ce71e79.jpg' },
+                        { key: 'index.why.card3.title', label: 'Título', type: 'longtext', min: 5, max: 100, default: 'Family Benefits & Lifestyle' },
+                        { key: 'index.why.card3.body', label: 'Texto', type: 'longtext', min: 20, max: 600,
+                          default: 'Extend your Portuguese residency to your entire family, including spouse, children under 18, and dependent parents over 65. Portugal offers world-class healthcare, excellent education system, and a high quality of life. Enjoy the Mediterranean climate, rich culture, and strategic location that provides easy access to the rest of Europe.' },
+                    ]},
+                    { title: 'Step by Step — header', fields: [
+                        { key: 'index.steps.eyebrow', label: 'Eyebrow (texto pequeno)', type: 'text', min: 3, max: 30, default: 'Step by Step' },
+                        { key: 'index.steps.title', label: 'Título', type: 'longtext', min: 10, max: 120,
+                          default: 'Discover how Smith & Adams makes your property work for you' },
+                    ]},
+                    { title: 'Step 1', fields: [
+                        { key: 'index.steps.0.title', label: 'Título', type: 'text', min: 5, max: 80, default: 'You invest in selected assets' },
+                        { key: 'index.steps.0.tag', label: 'Tag (uppercase)', type: 'text', min: 5, max: 80, default: 'Purchase in carefully selected developments' },
+                        { key: 'index.steps.0.body', label: 'Descrição', type: 'longtext', min: 20, max: 300,
+                          default: 'Invest in residential projects strategically located across Portugal, structured and overseen by the Smith & Adams Group.' },
+                    ]},
+                    { title: 'Step 2', fields: [
+                        { key: 'index.steps.1.title', label: 'Título', type: 'text', min: 5, max: 80, default: 'We handle full management' },
+                        { key: 'index.steps.1.tag', label: 'Tag (uppercase)', type: 'text', min: 5, max: 80, default: 'Professional management of your property and tenants' },
+                        { key: 'index.steps.1.body', label: 'Descrição', type: 'longtext', min: 20, max: 300,
+                          default: 'The Smith & Adams team takes care of everything—marketing, tenant selection, contracts, maintenance, and daily operations.' },
+                    ]},
+                    { title: 'Step 3', fields: [
+                        { key: 'index.steps.2.title', label: 'Título', type: 'text', min: 5, max: 80, default: 'You receive euro-denominated income' },
+                        { key: 'index.steps.2.tag', label: 'Tag (uppercase)', type: 'text', min: 5, max: 80, default: 'Earn predictable income in euros, hassle-free' },
+                        { key: 'index.steps.2.body', label: 'Descrição', type: 'longtext', min: 20, max: 300,
+                          default: 'Rental income is consolidated, expenses are managed by Smith & Adams, and you receive your returns regularly with transparent reporting.' },
+                    ]},
+                    { title: 'Step 4', fields: [
+                        { key: 'index.steps.3.title', label: 'Título', type: 'text', min: 5, max: 80, default: 'Protected and appreciating assets' },
+                        { key: 'index.steps.3.tag', label: 'Tag (uppercase)', type: 'text', min: 5, max: 80, default: 'Capital protection and long-term growth' },
+                        { key: 'index.steps.3.body', label: 'Descrição', type: 'longtext', min: 20, max: 300,
+                          default: 'By combining stable rental income with property appreciation in strong markets, your wealth grows in euros with the support of a group specialized in international investors.' },
+                    ]},
+                ]
+            },
+            'propmgmt': {
+                label: 'Property Management',
+                preview: 'property-management.html',
+                sections: [
+                    { title: 'Hero', fields: [
+                        { key: 'propmgmt.hero.eyebrow', label: 'Eyebrow', type: 'text', min: 5, max: 80, default: 'Property Management · Smith & Adams Group' },
+                        { key: 'propmgmt.hero.headline', label: 'Headline (HTML, use <br>)', type: 'longtext', min: 5, max: 200, default: 'Complete<br><span style="color:rgba(255,255,255,0.25);">Property</span><br>Management.' },
+                        { key: 'propmgmt.hero.subtitle', label: 'Subtítulo', type: 'longtext', min: 20, max: 300,
+                          default: "The Smith & Adams Group manages 100% of your apartment's operations — so you enjoy steady euro-denominated income, effortlessly and from anywhere." },
+                        { key: 'propmgmt.hero.cta_label', label: 'Texto do botão', type: 'text', min: 2, max: 30, default: 'Get Started' },
+                        { key: 'propmgmt.hero.cta_url', label: 'Link do botão', type: 'url', min: 1, max: 200, default: 'contact.html' },
+                    ]},
+                    { title: 'Stats (4)', fields: [
+                        { key: 'propmgmt.stats.0.value', label: 'Stat 1 — número', type: 'text', min: 1, max: 12, default: '100%' },
+                        { key: 'propmgmt.stats.0.label', label: 'Stat 1 — label', type: 'text', min: 3, max: 60, default: 'Operations Managed' },
+                        { key: 'propmgmt.stats.1.value', label: 'Stat 2 — número', type: 'text', min: 1, max: 12, default: '10+' },
+                        { key: 'propmgmt.stats.1.label', label: 'Stat 2 — label', type: 'text', min: 3, max: 60, default: 'Years Experience' },
+                        { key: 'propmgmt.stats.2.value', label: 'Stat 3 — número', type: 'text', min: 1, max: 12, default: '500+' },
+                        { key: 'propmgmt.stats.2.label', label: 'Stat 3 — label', type: 'text', min: 3, max: 60, default: 'Units Delivered' },
+                        { key: 'propmgmt.stats.3.value', label: 'Stat 4 — número', type: 'text', min: 1, max: 12, default: '€0' },
+                        { key: 'propmgmt.stats.3.label', label: 'Stat 4 — label', type: 'text', min: 3, max: 60, default: 'Hassle for You' },
+                    ]},
+                    { title: 'Intro', fields: [
+                        { key: 'propmgmt.intro.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Our Service' },
+                        { key: 'propmgmt.intro.title', label: 'Título (HTML)', type: 'longtext', min: 10, max: 200, default: 'We treat your property<br>as a true investment asset.' },
+                        { key: 'propmgmt.intro.body', label: 'Texto', type: 'longtext', min: 20, max: 400,
+                          default: 'We manage the daily operations of your apartment already listed on rental platforms — ensuring professional management and consistent euro-denominated income with complete peace of mind.' },
+                    ]},
+                    { title: 'How it works — header', fields: [
+                        { key: 'propmgmt.howitworks.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'How it works' },
+                    ]},
+                    { title: 'How it works — Step 1', fields: [
+                        { key: 'propmgmt.howitworks.0.title', label: 'Título', type: 'text', min: 3, max: 80, default: 'Property integration' },
+                        { key: 'propmgmt.howitworks.0.body', label: 'Descrição', type: 'longtext', min: 10, max: 300, default: 'We connect your apartment to our operational systems, integrating it with the rental platforms you already use.' },
+                    ]},
+                    { title: 'How it works — Step 2', fields: [
+                        { key: 'propmgmt.howitworks.1.title', label: 'Título', type: 'text', min: 3, max: 80, default: 'Day-to-day tenant management' },
+                        { key: 'propmgmt.howitworks.1.body', label: 'Descrição', type: 'longtext', min: 10, max: 300, default: 'We handle all tenant relations: communication, check-ins, check-outs, and issue resolution.' },
+                    ]},
+                    { title: 'How it works — Step 3', fields: [
+                        { key: 'propmgmt.howitworks.2.title', label: 'Título', type: 'text', min: 3, max: 80, default: 'Maintenance & asset care' },
+                        { key: 'propmgmt.howitworks.2.body', label: 'Descrição', type: 'longtext', min: 10, max: 300, default: 'We coordinate cleaning and maintenance teams, perform regular inspections, and monitor the overall condition of your property.' },
+                    ]},
+                    { title: 'How it works — Step 4', fields: [
+                        { key: 'propmgmt.howitworks.3.title', label: 'Título', type: 'text', min: 3, max: 80, default: 'Financial control & reporting' },
+                        { key: 'propmgmt.howitworks.3.body', label: 'Descrição', type: 'longtext', min: 10, max: 300, default: 'We manage payments and recurring expenses and send you clear monthly reports — track performance from anywhere.' },
+                    ]},
+                    { title: "Who it's for — header", fields: [
+                        { key: 'propmgmt.clients.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Our Clients' },
+                        { key: 'propmgmt.clients.title', label: 'Título', type: 'text', min: 5, max: 60, default: "Who it's for" },
+                    ]},
+                    { title: 'Card cliente 1 (dark)', fields: [
+                        { key: 'propmgmt.clients.0.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Smith & Adams investors' },
+                        { key: 'propmgmt.clients.0.body', label: 'Descrição', type: 'longtext', min: 20, max: 300, default: 'Owners of units in projects such as the Urban Collection whose daily operations are managed by our specialised team.' },
+                    ]},
+                    { title: 'Card cliente 2 (light)', fields: [
+                        { key: 'propmgmt.clients.1.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Independent property owners' },
+                        { key: 'propmgmt.clients.1.body', label: 'Descrição', type: 'longtext', min: 20, max: 300, default: 'Those who already have an apartment listed on rental platforms and want to delegate operational management to a professional company based in Lisbon.' },
+                    ]},
+                    { title: 'Why Smith & Adams — CTA', fields: [
+                        { key: 'propmgmt.why.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 40, default: 'Why Smith & Adams' },
+                        { key: 'propmgmt.why.title', label: 'Título (HTML)', type: 'longtext', min: 10, max: 200, default: 'Experience, local team,<br>and a proven track record.' },
+                        { key: 'propmgmt.why.body', label: 'Descrição', type: 'longtext', min: 20, max: 400, default: 'We combine real estate development, operational management, and investor advisory — offering a complete solution for those seeking secure euro-denominated income.' },
+                        { key: 'propmgmt.why.cta_label', label: 'Texto do botão', type: 'text', min: 2, max: 30, default: 'Contact Us Today' },
+                        { key: 'propmgmt.why.cta_url', label: 'Link do botão', type: 'url', min: 1, max: 200, default: 'contact.html' },
+                    ]},
+                    { title: 'Urban Collection feature', fields: [
+                        { key: 'propmgmt.uc.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Smith & Adams' },
+                        { key: 'propmgmt.uc.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Urban Collection' },
+                        { key: 'propmgmt.uc.body', label: 'Descrição', type: 'longtext', min: 20, max: 400, default: "Investment with integrated management. At S&A Urban Collection, Smith & Adams handles the daily management of the apartments, ensuring consistent operations aligned with each investor's income strategy." },
+                    ]},
+                    { title: 'CTA pré-portfólio', fields: [
+                        { key: 'propmgmt.preportfolio.title', label: 'Título (HTML)', type: 'longtext', min: 10, max: 200, default: 'Would you like your property in Portugal<br>to be fully managed by Smith & Adams?' },
+                        { key: 'propmgmt.preportfolio.body', label: 'Descrição', type: 'longtext', min: 20, max: 400, default: "Talk to our team and discover how we can take over the management of your apartment or integrate your assets into the Smith & Adams Group's investment strategy." },
+                        { key: 'propmgmt.preportfolio.cta_label', label: 'Texto do botão', type: 'text', min: 2, max: 30, default: 'Talk to our team' },
+                        { key: 'propmgmt.preportfolio.cta_url', label: 'Link do botão', type: 'url', min: 1, max: 200, default: 'contact.html' },
+                    ]},
+                    { title: 'Portfólio — header', fields: [
+                        { key: 'propmgmt.portfolio.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Our Portfolio' },
+                        { key: 'propmgmt.portfolio.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Previous Projects' },
+                        { key: 'propmgmt.portfolio.body', label: 'Descrição', type: 'longtext', min: 20, max: 400, default: 'Explore our successful developments across Portugal. Each project represents our commitment to quality construction, strategic locations, and investment excellence.' },
+                    ]},
+                    { title: 'Card 1 — Campolide 2025 (12 units)', fields: [
+                        { key: 'propmgmt.cards.0.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail1.png' },
+                        { key: 'propmgmt.cards.0.year', label: 'Ano (badge)', type: 'text', min: 4, max: 12, default: '2025' },
+                        { key: 'propmgmt.cards.0.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Campolide Project' },
+                        { key: 'propmgmt.cards.0.units', label: 'Número de unidades', type: 'text', min: 1, max: 8, default: '12' },
+                        { key: 'propmgmt.cards.0.price', label: 'Preço (a partir de)', type: 'text', min: 2, max: 12, default: '€250K' },
+                        { key: 'propmgmt.cards.0.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 2 — Campolide 2025 (14 units)', fields: [
+                        { key: 'propmgmt.cards.1.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail2.png' },
+                        { key: 'propmgmt.cards.1.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2025' },
+                        { key: 'propmgmt.cards.1.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Campolide Project' },
+                        { key: 'propmgmt.cards.1.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '14' },
+                        { key: 'propmgmt.cards.1.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€250K' },
+                        { key: 'propmgmt.cards.1.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 3 — Campolide 2024 (8 units)', fields: [
+                        { key: 'propmgmt.cards.2.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail3.png' },
+                        { key: 'propmgmt.cards.2.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2024' },
+                        { key: 'propmgmt.cards.2.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Campolide Project' },
+                        { key: 'propmgmt.cards.2.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '8' },
+                        { key: 'propmgmt.cards.2.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€250K' },
+                        { key: 'propmgmt.cards.2.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 4 — Alcântara 2024', fields: [
+                        { key: 'propmgmt.cards.3.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail4.png' },
+                        { key: 'propmgmt.cards.3.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2024' },
+                        { key: 'propmgmt.cards.3.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Alcântara Project' },
+                        { key: 'propmgmt.cards.3.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '45' },
+                        { key: 'propmgmt.cards.3.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€320K' },
+                        { key: 'propmgmt.cards.3.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 5 — Campolide 2023', fields: [
+                        { key: 'propmgmt.cards.4.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail5.png' },
+                        { key: 'propmgmt.cards.4.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2023' },
+                        { key: 'propmgmt.cards.4.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Campolide Project' },
+                        { key: 'propmgmt.cards.4.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '22' },
+                        { key: 'propmgmt.cards.4.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€250K' },
+                        { key: 'propmgmt.cards.4.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 6 — São Julião 2023', fields: [
+                        { key: 'propmgmt.cards.5.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail6.png' },
+                        { key: 'propmgmt.cards.5.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2023' },
+                        { key: 'propmgmt.cards.5.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'São Julião Project' },
+                        { key: 'propmgmt.cards.5.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '58' },
+                        { key: 'propmgmt.cards.5.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€380K' },
+                        { key: 'propmgmt.cards.5.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 7 — Arroios 2023', fields: [
+                        { key: 'propmgmt.cards.6.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail7.png' },
+                        { key: 'propmgmt.cards.6.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2023' },
+                        { key: 'propmgmt.cards.6.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Arroios Project' },
+                        { key: 'propmgmt.cards.6.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '42' },
+                        { key: 'propmgmt.cards.6.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€340K' },
+                        { key: 'propmgmt.cards.6.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 8 — Penha de França 2022', fields: [
+                        { key: 'propmgmt.cards.7.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail8.png' },
+                        { key: 'propmgmt.cards.7.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2022' },
+                        { key: 'propmgmt.cards.7.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Penha de França Project' },
+                        { key: 'propmgmt.cards.7.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '30' },
+                        { key: 'propmgmt.cards.7.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€290K' },
+                        { key: 'propmgmt.cards.7.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                    { title: 'Card 9 — Campolide 2022', fields: [
+                        { key: 'propmgmt.cards.8.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail9.png' },
+                        { key: 'propmgmt.cards.8.year', label: 'Ano', type: 'text', min: 4, max: 12, default: '2022' },
+                        { key: 'propmgmt.cards.8.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'Campolide Project' },
+                        { key: 'propmgmt.cards.8.units', label: 'Unidades', type: 'text', min: 1, max: 8, default: '38' },
+                        { key: 'propmgmt.cards.8.price', label: 'Preço', type: 'text', min: 2, max: 12, default: '€305K' },
+                        { key: 'propmgmt.cards.8.url', label: 'Link de booking', type: 'url', min: 5, max: 300, default: 'https://www.booking.com' },
+                    ]},
+                ]
+            },
+            'urban': {
+                label: 'Urban Collection',
+                preview: 'urban-collection.html',
+                sections: [
+                    { title: 'Hero', fields: [
+                        { key: 'urban.hero.title', label: 'Título (HTML)', type: 'text', min: 5, max: 100, default: 'URBAN COLLECTION<span class="hero-dot">.</span>' },
+                        { key: 'urban.hero.subtitle', label: 'Subtítulo', type: 'longtext', min: 5, max: 200, default: "€280K Investment Opportunity in Lisbon's Beato District" },
+                        { key: 'urban.hero.body', label: 'Texto de hero', type: 'longtext', min: 20, max: 600, default: "S&A Collection is a modern residential development offering 206 units and a full range of premium amenities, including a swimming pool, gym, landscaped common areas, and more, creating an exceptional lifestyle experience in a vibrant Lisbon neighbourhood that's rapidly becoming a hub of innovation, culture, and urban sophistication." },
+                        { key: 'urban.hero.brochure_label', label: 'Texto botão brochura', type: 'text', min: 2, max: 30, default: 'Download Brochure' },
+                        { key: 'urban.hero.brochure_url', label: 'URL da brochura (PDF)', type: 'url', min: 5, max: 300, default: 'Urban%20Collection%20Beato.pdf' },
+                    ]},
+                    { title: 'Hero Stats', fields: [
+                        { key: 'urban.hero.stat1.value', label: 'Stat 1 — valor', type: 'text', min: 1, max: 30, default: 'Lisbon' },
+                        { key: 'urban.hero.stat1.label', label: 'Stat 1 — label', type: 'text', min: 3, max: 60, default: 'District / Location' },
+                        { key: 'urban.hero.stat2.value', label: 'Stat 2 — valor', type: 'text', min: 1, max: 30, default: 'December 2026' },
+                        { key: 'urban.hero.stat2.label', label: 'Stat 2 — label', type: 'text', min: 3, max: 60, default: 'Date of Conclusion' },
+                        { key: 'urban.hero.stat3.value', label: 'Stat 3 — valor', type: 'text', min: 1, max: 30, default: 'From €280,000' },
+                        { key: 'urban.hero.stat3.label', label: 'Stat 3 — label', type: 'text', min: 3, max: 60, default: 'Investment Starting Price' },
+                    ]},
+                    { title: 'Quote section', fields: [
+                        { key: 'urban.quote.title', label: 'Título', type: 'text', min: 5, max: 80, default: "Modern Living in Lisbon's Innovation Hub" },
+                        { key: 'urban.quote.body1', label: 'Parágrafo 1', type: 'longtext', min: 20, max: 500, default: "Located in Lisbon's rapidly developing Beato District, Urban Collection represents the perfect blend of contemporary design and urban convenience. This premium residential development offers 206 carefully designed units, each featuring modern amenities and thoughtful layouts that cater to today's lifestyle demands." },
+                        { key: 'urban.quote.body2', label: 'Parágrafo 2', type: 'longtext', min: 20, max: 500, default: "The development is strategically positioned in one of Lisbon's most promising neighborhoods, where innovation meets tradition, creating an exceptional investment opportunity in Portugal's thriving real estate market." },
+                    ]},
+                    { title: 'Advantages — Accordion', fields: [
+                        { key: 'urban.advantages.0.title', label: 'Item 1 — título', type: 'text', min: 3, max: 60, default: 'GUARANTEED 4% RETURN' },
+                        { key: 'urban.advantages.0.body', label: 'Item 1 — descrição', type: 'longtext', min: 20, max: 500, default: 'Investors benefit from a guaranteed 4% annual return and co-ownership in a prime Lisbon development backed by Smith&Adams Group, a trusted name in real estate with over a decade of experience.' },
+                        { key: 'urban.advantages.1.title', label: 'Item 2 — título', type: 'text', min: 3, max: 60, default: 'D2 VISA ELIGIBILITY' },
+                        { key: 'urban.advantages.1.body', label: 'Item 2 — descrição', type: 'longtext', min: 20, max: 500, default: 'This exclusive €280,000 investment package qualifies for the D2 VISA, granting a 5-year residency in Portugal and visa-free travel within the Schengen Area — currently one of the fastest and most secure pathways to Portuguese citizenship.' },
+                    ]},
+                    { title: 'Imagem destaque', fields: [
+                        { key: 'urban.prime.title', label: 'Texto da overlay', type: 'text', min: 5, max: 100, default: 'A PRIME INVESTMENT OPPORTUNITY' },
+                    ]},
+                    { title: 'Premium Amenities', fields: [
+                        { key: 'urban.amenities.title', label: 'Título', type: 'text', min: 5, max: 80, default: 'Premium Amenities & Facilities' },
+                        { key: 'urban.amenities.body', label: 'Descrição', type: 'longtext', min: 20, max: 400, default: 'Urban Collection offers an extensive range of premium amenities designed to enhance your lifestyle and provide everything you need within the comfort of your residential community.' },
+                    ]},
+                    { title: 'Floorplans', fields: [
+                        { key: 'urban.floorplans.title', label: 'Título', type: 'text', min: 5, max: 40, default: 'FLOORPLANS' },
+                    ]},
+                ]
+            },
+            'about': {
+                label: 'About Us',
+                preview: 'about.html',
+                sections: [
+                    { title: 'Hero', fields: [
+                        { key: 'about.hero.title', label: 'Título', type: 'text', min: 3, max: 50, default: 'About us:' },
+                    ]},
+                    { title: 'Timeline', fields: [
+                        { key: 'about.timeline.0.year', label: 'Marco 1 — ano', type: 'text', min: 4, max: 12, default: '2019' },
+                        { key: 'about.timeline.0.body', label: 'Marco 1 — descrição', type: 'longtext', min: 10, max: 300, default: 'Foundation of Smith & Adams Group and launch of real estate advisory services in Portugal.' },
+                        { key: 'about.timeline.1.year', label: 'Marco 2 — ano', type: 'text', min: 4, max: 12, default: '2020' },
+                        { key: 'about.timeline.1.body', label: 'Marco 2 — descrição', type: 'longtext', min: 10, max: 300, default: 'Expansion into citizenship-by-investment, D2 visa advisory, and full-service property management.' },
+                        { key: 'about.timeline.2.year', label: 'Marco 3 — ano', type: 'text', min: 4, max: 12, default: '2024' },
+                        { key: 'about.timeline.2.body', label: 'Marco 3 — descrição', type: 'longtext', min: 10, max: 300, default: 'Launch of Urban Collection in Lisbon. Consolidation as the leading full-service real estate and residency platform for international investors.' },
+                    ]},
+                    { title: 'About the Group', fields: [
+                        { key: 'about.group.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 40, default: 'About the Group' },
+                        { key: 'about.group.title', label: 'Título (HTML)', type: 'text', min: 3, max: 60, default: 'Smith &<br/>Adams Group' },
+                        { key: 'about.group.body1', label: 'Parágrafo 1', type: 'longtext', min: 20, max: 500, default: 'Smith & Adams is a Portugal-based real estate and investment group, structured as a holding of integrated property solutions for international investors and families relocating to Europe.' },
+                        { key: 'about.group.body2', label: 'Parágrafo 2', type: 'longtext', min: 20, max: 500, default: 'With experience spanning investments, real estate development, construction, and property management, the Group combines financial structuring, legal coordination, and on-the-ground operations in Portugal.' },
+                    ]},
+                    { title: 'Integrated Solutions', fields: [
+                        { key: 'about.solutions.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'What We Do' },
+                        { key: 'about.solutions.title', label: 'Título (HTML)', type: 'longtext', min: 5, max: 100, default: 'A Holding of Integrated<br/>Real Estate Solutions' },
+                        { key: 'about.solutions.0.title', label: 'Card 1 — título (HTML)', type: 'text', min: 5, max: 60, default: 'Investment Advisory<br/>& Structuring' },
+                        { key: 'about.solutions.0.body', label: 'Card 1 — descrição', type: 'longtext', min: 20, max: 600, default: 'The Group designs and structures institutional-grade real estate investments in Portugal, from Urban Collection to new, upcoming products. We advise investors on asset selection, legal and tax framework, financing, and long-term strategy — always focusing on capital preservation, euro income, and clear residency pathways.' },
+                        { key: 'about.solutions.1.title', label: 'Card 2 — título (HTML)', type: 'text', min: 5, max: 60, default: 'Immigration &<br/>Legal Coordination' },
+                        { key: 'about.solutions.1.body', label: 'Card 2 — descrição', type: 'longtext', min: 20, max: 600, default: 'Smith & Adams coordinates immigration and legal services for clients pursuing residency or citizenship in Portugal, including D2 and other residency routes. Working alongside specialized law firms and regulated partners, the Group manages visa procedures, residency applications, property transactions, and family inclusion.' },
+                    ]},
+                    { title: 'Track Record', fields: [
+                        { key: 'about.track.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Since 2019' },
+                        { key: 'about.track.title', label: 'Título (HTML)', type: 'text', min: 5, max: 60, default: 'Track Record &<br/>Global Footprint' },
+                        { key: 'about.track.body', label: 'Descrição', type: 'longtext', min: 20, max: 500, default: 'Founded in 2019, Smith & Adams Group has grown into a multi-entity platform serving both property owners and international investors. The leadership team brings over a decade of combined experience across real estate, investments, and citizenship-by-investment.' },
+                    ]},
+                ]
+            },
+            'contact': {
+                label: 'Contact',
+                preview: 'contact.html',
+                sections: [
+                    { title: 'Hero (left panel)', fields: [
+                        { key: 'contact.hero.title', label: 'Título (HTML)', type: 'text', min: 5, max: 60, default: 'Get In<br>Touch.' },
+                        { key: 'contact.hero.subtitle', label: 'Subtítulo', type: 'longtext', min: 20, max: 400, default: 'Ready to secure your Portugal Golden Visa? Connect with our expert team for highly personalized guidance on residency and real estate investment.' },
+                    ]},
+                    { title: 'Endereço', fields: [
+                        { key: 'contact.info.address_label', label: 'Label do escritório', type: 'text', min: 3, max: 40, default: 'Lisbon Office' },
+                        { key: 'contact.info.address', label: 'Endereço (HTML)', type: 'longtext', min: 5, max: 200, default: 'Av. José Malhoa 14<br>1070-073 Lisboa, Portugal' },
+                    ]},
+                    { title: 'Formulário', fields: [
+                        { key: 'contact.form.title', label: 'Título', type: 'text', min: 3, max: 40, default: 'Direct Inquiry' },
+                        { key: 'contact.form.success_title', label: 'Mensagem de sucesso — título', type: 'text', min: 3, max: 40, default: 'Thank you!' },
+                        { key: 'contact.form.success_body', label: 'Mensagem de sucesso — corpo', type: 'longtext', min: 10, max: 300, default: 'We have received your inquiry and a member of our team will be in touch with you shortly.' },
+                    ]},
+                ]
+            },
+            'blog': {
+                label: 'Blog (listagem)',
+                preview: 'blog.html',
+                sections: [
+                    { title: 'Hero', fields: [
+                        { key: 'blog.hero.title', label: 'Título', type: 'text', min: 3, max: 60, default: 'The Journal' },
+                        { key: 'blog.hero.subtitle', label: 'Subtítulo', type: 'longtext', min: 10, max: 300, default: 'Stay updated with the latest insights on Portugal Golden Visa, prime real estate investment, lifestyle, and market trends.' },
+                    ]},
+                    { title: 'CTA Banner', fields: [
+                        { key: 'blog.cta.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Ready to grow your capital?' },
+                        { key: 'blog.cta.body', label: 'Descrição', type: 'longtext', min: 20, max: 400, default: 'Discover how a €280,000 investment in Lisbon real estate can elevate your portfolio, with predictable income, strong appreciation potential, and long-term security.' },
+                        { key: 'blog.cta.label', label: 'Texto do botão', type: 'text', min: 3, max: 30, default: "LET'S GET STARTED" },
+                        { key: 'blog.cta.url', label: 'Link do botão', type: 'url', min: 5, max: 200, default: 'contact.html' },
+                    ]},
+                ]
+            },
+            'global': {
+                label: 'Global (footer)',
+                preview: 'index.html',
+                sections: [
+                    { title: 'Footer — descrição', fields: [
+                        { key: 'global.footer.description', label: 'Descrição da empresa', type: 'longtext', min: 20, max: 400,
+                          default: 'Smith & Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long-term access to the European market.' },
+                    ]},
+                    { title: 'Footer — contatos', fields: [
+                        { key: 'global.footer.email', label: 'Email (mailto)', type: 'text', min: 5, max: 100, default: 'mailto:geral@smithandadams.com', helper: 'Use formato mailto:email@dominio' },
+                        { key: 'global.footer.phone', label: 'Telefone (tel)', type: 'text', min: 5, max: 30, default: 'tel:+351938227348', helper: 'Use formato tel:+351...' },
+                        { key: 'global.footer.directions_url', label: 'Link Google Maps', type: 'url', min: 5, max: 300, default: 'https://share.google/xGcxWcLXDJqykmNq6' },
+                        { key: 'global.footer.copyright', label: 'Texto de copyright', type: 'text', min: 5, max: 80, default: 'Copyright © 2026 Smith & Adams' },
+                    ]},
+                    { title: 'Redes sociais', fields: [
+                        { key: 'global.social.instagram', label: 'Instagram URL', type: 'url', min: 5, max: 200, default: 'https://www.instagram.com/smithandadamsgroup/' },
+                        { key: 'global.social.linkedin',  label: 'LinkedIn URL',  type: 'url', min: 5, max: 200, default: 'https://www.linkedin.com/company/smith-and-adams/' },
+                        { key: 'global.social.youtube',   label: 'YouTube URL',   type: 'url', min: 5, max: 200, default: 'https://www.youtube.com/@smithandadamsgroup' },
+                    ]},
+                ]
+            },
+        };
+
+        const contentValues = {};   // valores atuais carregados do banco
+        const contentDirty  = {};   // chaves alteradas que precisam salvar
+
+        let currentPageId = null;
+
+        function buildPageNav() {
+            const nav = document.getElementById('content-page-nav');
+            nav.innerHTML = '';
+            Object.entries(SITE_SCHEMA).forEach(([id, page]) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.dataset.pageId = id;
+                btn.className = 'page-pill px-4 py-2 rounded-full text-sm font-bold border transition-colors';
+                btn.textContent = page.label;
+                btn.onclick = () => selectPage(id);
+                nav.appendChild(btn);
+            });
+        }
+
+        function selectPage(id) {
+            if (Object.keys(contentDirty).length > 0 && id !== currentPageId) {
+                if (!confirm('Você tem alterações não salvas. Trocar de página vai descartá-las.')) return;
+                for (const k in contentDirty) delete contentDirty[k];
+            }
+            currentPageId = id;
+            const page = SITE_SCHEMA[id];
+            document.getElementById('content-preview-link').href = page.preview;
+            document.getElementById('content-page-title').textContent = 'Editando: ' + page.label;
+            document.querySelectorAll('.page-pill').forEach(b => {
+                const active = b.dataset.pageId === id;
+                b.classList.toggle('bg-[#0C1E28]', active);
+                b.classList.toggle('text-white', active);
+                b.classList.toggle('border-[#0C1E28]', active);
+                b.classList.toggle('bg-white', !active);
+                b.classList.toggle('text-[#0C1E28]', !active);
+                b.classList.toggle('border-gray-200', !active);
+                b.classList.toggle('hover:border-[#0C1E28]', !active);
+            });
+            renderContentFields(id);
+        }
+
+        async function openSiteContent() {
+            buildPageNav();
+            await loadContentValues();
+            selectPage(currentPageId || Object.keys(SITE_SCHEMA)[0]);
+        }
+
+        async function loadContentValues() {
+            const { data, error } = await supabaseClient.from('site_content').select('key,value');
+            if (error) {
+                showContentStatus('Erro ao carregar conteúdo: ' + error.message, true);
+                return;
+            }
+            data.forEach(r => contentValues[r.key] = r.value);
+        }
+
+        function renderContentFields(pageId) {
+            const page = SITE_SCHEMA[pageId];
+            const wrap = document.getElementById('content-fields');
+            const previewLink = document.getElementById('content-preview-link');
+            previewLink.href = page.preview;
+
+            // Reset dirty when switching pages
+            for (const k in contentDirty) delete contentDirty[k];
+
+            wrap.innerHTML = '';
+            page.sections.forEach(section => {
+                const sec = document.createElement('div');
+                sec.innerHTML = `<h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3 mt-2">${section.title}</h3>`;
+                section.fields.forEach(field => {
+                    sec.appendChild(buildFieldEl(field));
+                });
+                wrap.appendChild(sec);
+            });
+        }
+
+        function buildFieldEl(field) {
+            const stored = contentValues[field.key];               // valor já no banco (ou undefined)
+            const isEdited = stored !== undefined;
+            const initial = isEdited ? stored : (field.default ?? '');  // pré-preenche com texto atual do HTML
+            const wrapper = document.createElement('div');
+            wrapper.className = 'space-y-1';
+
+            const labelRow = document.createElement('div');
+            labelRow.className = 'flex justify-between items-center gap-2';
+            const labelLeft = document.createElement('div');
+            labelLeft.className = 'flex items-center gap-2';
+            labelLeft.innerHTML = `<label class="block text-sm font-bold text-gray-700">${field.label}</label>`;
+            const badge = document.createElement('span');
+            badge.className = isEdited
+                ? 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 font-bold'
+                : 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold';
+            badge.textContent = isEdited ? 'Editado' : 'Texto atual';
+            labelLeft.appendChild(badge);
+            labelRow.appendChild(labelLeft);
+            const counter = document.createElement('span');
+            counter.className = 'text-xs text-gray-400 font-mono';
+            labelRow.appendChild(counter);
+            wrapper.appendChild(labelRow);
+
+            const updateCounter = (val) => {
+                const len = (val || '').length;
+                counter.textContent = `${len}/${field.max}`;
+                counter.classList.toggle('text-red-500', len > field.max || (field.min && len < field.min));
+            };
+
+            if (field.type === 'longtext') {
+                const ta = document.createElement('textarea');
+                ta.rows = 3;
+                ta.className = 'w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]';
+                ta.minLength = field.min || 0;
+                ta.maxLength = field.max;
+                ta.value = initial;
+                ta.oninput = () => { contentDirty[field.key] = ta.value; updateCounter(ta.value); };
+                wrapper.appendChild(ta);
+                updateCounter(initial);
+            } else if (field.type === 'image') {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'image/*';
+                fileInput.className = 'w-full border border-gray-200 rounded-lg p-2 bg-white text-sm';
+
+                const urlInput = document.createElement('input');
+                urlInput.type = 'text';
+                urlInput.value = initial;
+                urlInput.placeholder = 'URL da imagem (preenchida ao fazer upload)';
+                urlInput.className = 'w-full border border-gray-200 rounded-lg p-2 mt-2 text-sm';
+                urlInput.oninput = () => { contentDirty[field.key] = urlInput.value; };
+
+                const preview = document.createElement('img');
+                preview.className = 'mt-2 h-24 rounded-lg object-cover';
+                preview.style.display = initial ? 'block' : 'none';
+                preview.src = initial;
+
+                fileInput.onchange = async () => {
+                    const f = fileInput.files[0];
+                    if (!f) return;
+                    fileInput.disabled = true;
+                    try {
+                        const compressed = await compressImage(f, 1600, 0.75);
+                        const fname = `site_${Date.now()}_${Math.random().toString(36).slice(2,8)}.webp`;
+                        const { error: up } = await supabaseClient.storage.from('site-media').upload(fname, compressed);
+                        if (up) throw up;
+                        const { data: u } = supabaseClient.storage.from('site-media').getPublicUrl(fname);
+                        urlInput.value = u.publicUrl;
+                        contentDirty[field.key] = u.publicUrl;
+                        preview.src = u.publicUrl;
+                        preview.style.display = 'block';
+                    } catch(e) {
+                        alert('Falha no upload: ' + (e.message || e));
+                    } finally {
+                        fileInput.disabled = false;
+                    }
+                };
+
+                wrapper.appendChild(fileInput);
+                wrapper.appendChild(urlInput);
+                wrapper.appendChild(preview);
+            } else {
+                // text | url | video → input
+                const input = document.createElement('input');
+                input.type = (field.type === 'url' || field.type === 'video') ? 'url' : 'text';
+                input.className = 'w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]';
+                input.minLength = field.min || 0;
+                input.maxLength = field.max;
+                input.value = initial;
+                input.oninput = () => { contentDirty[field.key] = input.value; updateCounter(input.value); };
+                wrapper.appendChild(input);
+                updateCounter(initial);
+            }
+
+            if (field.helper) {
+                const h = document.createElement('p');
+                h.className = 'text-xs text-gray-400';
+                h.textContent = field.helper;
+                wrapper.appendChild(h);
+            }
+            return wrapper;
+        }
+
+        function showContentStatus(msg, isError) {
+            const el = document.getElementById('content-status');
+            el.textContent = msg;
+            el.className = `mb-4 text-sm ${isError ? 'text-red-500' : 'text-green-600'}`;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 4000);
+        }
+
+        document.getElementById('content-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('content-save-btn');
+            const original = btn.innerHTML;
+            btn.innerHTML = 'Saving...';
+            btn.disabled = true;
+
+            // Validate all dirty fields against schema
+            const pageId = currentPageId;
+            const allFields = SITE_SCHEMA[pageId].sections.flatMap(s => s.fields);
+            const fieldByKey = Object.fromEntries(allFields.map(f => [f.key, f]));
+            const errors = [];
+            for (const [key, val] of Object.entries(contentDirty)) {
+                const f = fieldByKey[key];
+                if (!f) continue;
+                const len = (val || '').length;
+                if (f.min && len < f.min) errors.push(`"${f.label}" precisa de pelo menos ${f.min} caracteres`);
+                if (f.max && len > f.max) errors.push(`"${f.label}" excede ${f.max} caracteres`);
+            }
+            if (errors.length) {
+                showContentStatus(errors.join(' · '), true);
+                btn.innerHTML = original; btn.disabled = false;
+                return;
+            }
+
+            const rows = Object.entries(contentDirty).map(([key, value]) => ({ key, value }));
+            if (rows.length === 0) {
+                showContentStatus('Nada para salvar.', false);
+                btn.innerHTML = original; btn.disabled = false;
+                return;
+            }
+
+            const { error } = await supabaseClient.from('site_content').upsert(rows, { onConflict: 'key' });
+            if (error) {
+                showContentStatus('Erro ao salvar: ' + error.message, true);
+            } else {
+                Object.assign(contentValues, contentDirty);
+                for (const k in contentDirty) delete contentDirty[k];
+                showContentStatus(`${rows.length} campo(s) salvo(s).`, false);
+            }
+            btn.innerHTML = original; btn.disabled = false;
         });
 
     </script>

@@ -22,6 +22,16 @@
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config = { corePlugins: { preflight: false } }</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18073134136');
+</script>
+<script defer src="/cms-loader.js"></script>
 </head><body class="antialiased bg-[#FDFCF9] __variable_f367f3 __variable_646807 overflow-x-hidden w-full"><div hidden=""><!--$--><!--/$--></div><main class="min-h-screen">
 <header class="fixed w-full z-50 transition-all duration-300 bg-transparent"><div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center"><a class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" loading="lazy" width="150" height="40" decoding="async" data-nimg="1" class="h-10 w-auto invert-[1]" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></a><nav class="hidden lg:flex items-center space-x-8"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="index.html">Home</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="about.html">About Us</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi font-semibold text-white satoshi" href="property-management.html">Property Management</a><div class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></div><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="urban-collection.html">Urban Collection</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="blog.html">Blog</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 transform hover:-translate-y-0.5 satoshi" href="contact.html">Contact Us</a></div></nav><button onclick="document.getElementById('mobile-menu').classList.toggle('opacity-0'); document.getElementById('mobile-menu').classList.toggle('opacity-100'); document.getElementById('mobile-menu').classList.toggle('invisible'); document.getElementById('mobile-menu').classList.toggle('pointer-events-none');" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span></div></button></div><div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none" style="height:100vh"><div class="flex flex-col items-center justify-center h-full space-y-8"><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="index.html">Home</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="about.html">About Us</a><a class="text-2xl font-medium transition-colors duration-300 text-white font-semibold satoshi" href="property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="urban-collection.html">Urban Collection</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="blog.html">Blog</a><a class="bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi" href="contact.html">Contact Us</a></div></div></header>
 
@@ -40,12 +50,12 @@
   <div style="max-width:1280px; margin:0 auto; padding:0 24px 0; width:100%; position:relative; z-index:1;">
 
     <!-- eyebrow -->
-    <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:32px;">
+    <p data-cms="propmgmt.hero.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:32px;">
       Property Management · Smith &amp; Adams Group
     </p>
 
     <!-- mega headline -->
-    <h1 class="text-[28px] sm:text-[42px] md:text-6xl lg:text-[110px] geist font-extrabold text-white leading-[0.95] tracking-tight mb-0 uppercase">
+    <h1 data-cms="propmgmt.hero.headline" data-cms-attr="html" class="text-[28px] sm:text-[42px] md:text-6xl lg:text-[110px] geist font-extrabold text-white leading-[0.95] tracking-tight mb-0 uppercase">
       Complete<br>
       <span style="color:rgba(255,255,255,0.25);">Property</span><br>
       Management.
@@ -53,11 +63,11 @@
 
     <!-- divider + subtitle row -->
     <div style="border-top:1px solid rgba(255,255,255,0.12); margin-top:48px; padding-top:32px; padding-bottom:60px; display:flex; align-items:flex-start; justify-content:space-between; gap:40px; flex-wrap:wrap;">
-      <p class="satoshi" style="font-size:17px; color:rgba(255,255,255,0.65); line-height:1.75; max-width:480px; margin:0;">
+      <p data-cms="propmgmt.hero.subtitle" class="satoshi" style="font-size:17px; color:rgba(255,255,255,0.65); line-height:1.75; max-width:480px; margin:0;">
         The Smith &amp; Adams Group manages 100% of your apartment's operations — so you enjoy steady euro&#8209;denominated income, effortlessly and from anywhere.
       </p>
-      <a href="contact.html" class="satoshi" style="display:inline-flex; align-items:center; gap:10px; background:#ffffff; color:#0C1E28; font-weight:700; font-size:15px; padding:16px 32px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0;">
-        Get Started
+      <a data-cms="propmgmt.hero.cta_url" href="contact.html" class="satoshi" style="display:inline-flex; align-items:center; gap:10px; background:#ffffff; color:#0C1E28; font-weight:700; font-size:15px; padding:16px 32px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0;">
+        <span data-cms="propmgmt.hero.cta_label">Get Started</span>
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
       </a>
     </div>
@@ -73,23 +83,23 @@
     <div class="grid grid-cols-2 md:grid-cols-4" style="border-left:1px solid rgba(255,255,255,0.08);">
 
       <div style="padding:48px 40px; border-right:1px solid rgba(255,255,255,0.08);">
-        <div class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">100%</div>
-        <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Operations Managed</p>
+        <div data-cms="propmgmt.stats.0.value" class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">100%</div>
+        <p data-cms="propmgmt.stats.0.label" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Operations Managed</p>
       </div>
 
       <div style="padding:48px 40px; border-right:1px solid rgba(255,255,255,0.08);">
-        <div class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">10+</div>
-        <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Years Experience</p>
+        <div data-cms="propmgmt.stats.1.value" class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">10+</div>
+        <p data-cms="propmgmt.stats.1.label" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Years Experience</p>
       </div>
 
       <div style="padding:48px 40px; border-right:1px solid rgba(255,255,255,0.08);">
-        <div class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">500+</div>
-        <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Units Delivered</p>
+        <div data-cms="propmgmt.stats.2.value" class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">500+</div>
+        <p data-cms="propmgmt.stats.2.label" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Units Delivered</p>
       </div>
 
       <div style="padding:48px 40px;">
-        <div class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">€0</div>
-        <p class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Hassle for You</p>
+        <div data-cms="propmgmt.stats.3.value" class="geist" style="font-size:clamp(42px,5vw,64px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1;">€0</div>
+        <p data-cms="propmgmt.stats.3.label" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:10px; letter-spacing:0.05em; text-transform:uppercase;">Hassle for You</p>
       </div>
 
     </div>
@@ -103,14 +113,14 @@
   <div style="max-width:1280px; margin:0 auto; display:flex; align-items:center; gap:clamp(24px,6vw,80px); flex-wrap:wrap;">
 
     <div style="flex:1; min-width:280px;">
-      <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9ca3af; margin-bottom:20px;">Our Service</p>
-      <h2 class="geist" style="font-size:clamp(32px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; line-height:1.1; margin:0;">
+      <p data-cms="propmgmt.intro.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9ca3af; margin-bottom:20px;">Our Service</p>
+      <h2 data-cms="propmgmt.intro.title" data-cms-attr="html" class="geist" style="font-size:clamp(32px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; line-height:1.1; margin:0;">
         We treat your property<br>as a true investment asset.
       </h2>
     </div>
 
     <div style="flex:1; min-width:280px;">
-      <p class="satoshi" style="font-size:17px; color:#4b5563; line-height:1.85; margin:0;">
+      <p data-cms="propmgmt.intro.body" class="satoshi" style="font-size:17px; color:#4b5563; line-height:1.85; margin:0;">
         We manage the daily operations of your apartment already listed on rental platforms — ensuring professional management and consistent euro&#8209;denominated income with complete peace of mind.
       </p>
     </div>
@@ -126,7 +136,7 @@
 
     <!-- section label -->
     <div style="border-top:1px solid #e5e7eb; padding-top:56px; margin-bottom:72px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
-      <h2 class="geist" style="font-size:clamp(28px,3.5vw,46px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; margin:0;">
+      <h2 data-cms="propmgmt.howitworks.title" class="geist" style="font-size:clamp(28px,3.5vw,46px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; margin:0;">
         How it works
       </h2>
       <p class="satoshi" style="font-size:13px; letter-spacing:0.2em; text-transform:uppercase; color:#9ca3af; margin:0;">4 Steps</p>
@@ -137,26 +147,26 @@
 
       <div style="background:#FDFCF9; padding:32px 24px;">
         <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:32px;">01</div>
-        <h3 class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Property integration</h3>
-        <p class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We connect your apartment to our operational systems, integrating it with the rental platforms you already use.</p>
+        <h3 data-cms="propmgmt.howitworks.0.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Property integration</h3>
+        <p data-cms="propmgmt.howitworks.0.body" class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We connect your apartment to our operational systems, integrating it with the rental platforms you already use.</p>
       </div>
 
       <div style="background:#FDFCF9; padding:32px 24px;">
         <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:32px;">02</div>
-        <h3 class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Day&#8209;to&#8209;day tenant management</h3>
-        <p class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We handle all tenant relations: communication, check&#8209;ins, check&#8209;outs, and issue resolution.</p>
+        <h3 data-cms="propmgmt.howitworks.1.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Day&#8209;to&#8209;day tenant management</h3>
+        <p data-cms="propmgmt.howitworks.1.body" class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We handle all tenant relations: communication, check&#8209;ins, check&#8209;outs, and issue resolution.</p>
       </div>
 
       <div style="background:#FDFCF9; padding:32px 24px;">
         <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:32px;">03</div>
-        <h3 class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Maintenance &amp; asset care</h3>
-        <p class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We coordinate cleaning and maintenance teams, perform regular inspections, and monitor the overall condition of your property.</p>
+        <h3 data-cms="propmgmt.howitworks.2.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Maintenance &amp; asset care</h3>
+        <p data-cms="propmgmt.howitworks.2.body" class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We coordinate cleaning and maintenance teams, perform regular inspections, and monitor the overall condition of your property.</p>
       </div>
 
       <div style="background:#FDFCF9; padding:32px 24px;">
         <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:32px;">04</div>
-        <h3 class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Financial control &amp; reporting</h3>
-        <p class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We manage payments and recurring expenses and send you clear monthly reports — track performance from anywhere.</p>
+        <h3 data-cms="propmgmt.howitworks.3.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.25;">Financial control &amp; reporting</h3>
+        <p data-cms="propmgmt.howitworks.3.body" class="satoshi" style="font-size:14.5px; color:#6b7280; line-height:1.8; margin:0;">We manage payments and recurring expenses and send you clear monthly reports — track performance from anywhere.</p>
       </div>
 
     </div>
@@ -170,8 +180,8 @@
   <div style="max-width:1280px; margin:0 auto;">
 
     <div style="margin-bottom:64px;">
-      <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9ca3af; margin-bottom:20px;">Our Clients</p>
-      <h2 class="geist" style="font-size:clamp(32px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; line-height:1.1; margin:0;">Who it's for</h2>
+      <p data-cms="propmgmt.clients.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9ca3af; margin-bottom:20px;">Our Clients</p>
+      <h2 data-cms="propmgmt.clients.title" class="geist" style="font-size:clamp(32px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; line-height:1.1; margin:0;">Who it's for</h2>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -184,8 +194,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
           </svg>
         </div>
-        <h3 class="geist" style="font-size:24px; font-weight:700; color:#ffffff; margin-bottom:16px; line-height:1.2;">Smith &amp; Adams investors</h3>
-        <p class="satoshi" style="font-size:15px; color:rgba(255,255,255,0.6); line-height:1.8; margin:0; max-width:340px;">
+        <h3 data-cms="propmgmt.clients.0.title" class="geist" style="font-size:24px; font-weight:700; color:#ffffff; margin-bottom:16px; line-height:1.2;">Smith &amp; Adams investors</h3>
+        <p data-cms="propmgmt.clients.0.body" class="satoshi" style="font-size:15px; color:rgba(255,255,255,0.6); line-height:1.8; margin:0; max-width:340px;">
           Owners of units in projects such as the Urban Collection whose daily operations are managed by our specialised team.
         </p>
       </div>
@@ -198,8 +208,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
           </svg>
         </div>
-        <h3 class="geist" style="font-size:24px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.2;">Independent property owners</h3>
-        <p class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0; max-width:340px;">
+        <h3 data-cms="propmgmt.clients.1.title" class="geist" style="font-size:24px; font-weight:700; color:#0C1E28; margin-bottom:16px; line-height:1.2;">Independent property owners</h3>
+        <p data-cms="propmgmt.clients.1.body" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0; max-width:340px;">
           Those who already have an apartment listed on rental platforms and want to delegate operational management to a professional company based in Lisbon.
         </p>
       </div>
@@ -218,18 +228,18 @@
       <div style="position:absolute; right:-20px; top:50%; transform:translateY(-50%); color:rgba(255,255,255,0.04); font-size:360px; font-weight:900; line-height:1; font-family:serif; user-select:none; pointer-events:none;">*</div>
 
       <div style="flex:1; min-width:280px; position:relative; z-index:1;">
-        <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Why Smith &amp; Adams</p>
-        <h2 class="geist" style="font-size:clamp(28px,4vw,48px); font-weight:800; color:#ffffff; letter-spacing:-0.02em; line-height:1.1; margin-bottom:24px;">
+        <p data-cms="propmgmt.why.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Why Smith &amp; Adams</p>
+        <h2 data-cms="propmgmt.why.title" data-cms-attr="html" class="geist" style="font-size:clamp(28px,4vw,48px); font-weight:800; color:#ffffff; letter-spacing:-0.02em; line-height:1.1; margin-bottom:24px;">
           Experience, local team,<br>and a proven track record.
         </h2>
-        <p class="satoshi" style="font-size:16px; color:rgba(255,255,255,0.6); line-height:1.85; margin:0; max-width:440px;">
+        <p data-cms="propmgmt.why.body" class="satoshi" style="font-size:16px; color:rgba(255,255,255,0.6); line-height:1.85; margin:0; max-width:440px;">
           We combine real estate development, operational management, and investor advisory — offering a complete solution for those seeking secure euro&#8209;denominated income.
         </p>
       </div>
 
       <div style="position:relative; z-index:1; flex-shrink:0;">
-        <a href="contact.html" class="satoshi" style="display:inline-flex; align-items:center; gap:12px; background:#ffffff; color:#0C1E28; font-weight:700; font-size:16px; padding:18px 40px; border-radius:100px; text-decoration:none;">
-          Contact Us Today
+        <a data-cms="propmgmt.why.cta_url" href="contact.html" class="satoshi" style="display:inline-flex; align-items:center; gap:12px; background:#ffffff; color:#0C1E28; font-weight:700; font-size:16px; padding:18px 40px; border-radius:100px; text-decoration:none;">
+          <span data-cms="propmgmt.why.cta_label">Contact Us Today</span>
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
@@ -248,12 +258,12 @@
     <!-- header row -->
     <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:32px; flex-wrap:wrap; margin-bottom:56px;">
       <div>
-        <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9ca3af; margin-bottom:16px;">Smith &amp; Adams</p>
-        <h2 class="geist" style="font-size:clamp(32px,4vw,56px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; line-height:1.05; margin:0;">
+        <p data-cms="propmgmt.uc.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9ca3af; margin-bottom:16px;">Smith &amp; Adams</p>
+        <h2 data-cms="propmgmt.uc.title" class="geist" style="font-size:clamp(32px,4vw,56px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; line-height:1.05; margin:0;">
           Urban Collection
         </h2>
       </div>
-      <p class="satoshi" style="font-size:16px; color:#4b5563; line-height:1.8; max-width:480px; margin:0; padding-bottom:4px;">
+      <p data-cms="propmgmt.uc.body" class="satoshi" style="font-size:16px; color:#4b5563; line-height:1.8; max-width:480px; margin:0; padding-bottom:4px;">
         Investment with integrated management. At S&amp;A Urban Collection, Smith &amp; Adams handles the daily management of the apartments, ensuring consistent operations aligned with each investor's income strategy.
       </p>
     </div>
@@ -286,17 +296,17 @@
   <div class="max-w-[1280px] mx-auto px-6 md:px-10 lg:px-[40px] flex items-center justify-between gap-8 lg:gap-12 flex-wrap">
 
       <div style="flex:1; min-width:260px;">
-        <h3 class="geist" style="font-size:clamp(22px,3vw,36px); font-weight:700; color:#ffffff; line-height:1.2; margin-bottom:20px; letter-spacing:-0.01em;">
+        <h3 data-cms="propmgmt.preportfolio.title" data-cms-attr="html" class="geist" style="font-size:clamp(22px,3vw,36px); font-weight:700; color:#ffffff; line-height:1.2; margin-bottom:20px; letter-spacing:-0.01em;">
           Would you like your property in Portugal<br>to be fully managed by Smith &amp; Adams?
         </h3>
-        <p class="satoshi" style="font-size:16px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0; max-width:480px;">
+        <p data-cms="propmgmt.preportfolio.body" class="satoshi" style="font-size:16px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0; max-width:480px;">
           Talk to our team and discover how we can take over the management of your apartment or integrate your assets into the Smith &amp; Adams Group's investment strategy.
         </p>
       </div>
 
       <div style="flex-shrink:0;">
-        <a href="contact.html" class="satoshi" style="display:inline-flex; align-items:center; gap:10px; background:#ffffff; color:#0C1E28; font-weight:700; font-size:15px; padding:17px 36px; border-radius:100px; text-decoration:none; white-space:nowrap;">
-          Talk to our team
+        <a data-cms="propmgmt.preportfolio.cta_url" href="contact.html" class="satoshi" style="display:inline-flex; align-items:center; gap:10px; background:#ffffff; color:#0C1E28; font-weight:700; font-size:15px; padding:17px 36px; border-radius:100px; text-decoration:none; white-space:nowrap;">
+          <span data-cms="propmgmt.preportfolio.cta_label">Talk to our team</span>
           <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
         </a>
       </div>
@@ -319,12 +329,12 @@ function switchImg(el, src) {
 
   <!-- Section header -->
   <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(16px,4vw,48px) clamp(32px,5vw,56px);">
-    <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(12,30,40,0.4); margin-bottom:20px;">Our Portfolio</p>
+    <p data-cms="propmgmt.portfolio.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(12,30,40,0.4); margin-bottom:20px;">Our Portfolio</p>
     <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:24px;">
-      <h2 class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:600px;">
+      <h2 data-cms="propmgmt.portfolio.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:600px;">
         Previous Projects
       </h2>
-      <p class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.55); max-width:420px; line-height:1.7; margin:0;">
+      <p data-cms="propmgmt.portfolio.body" class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.55); max-width:420px; line-height:1.7; margin:0;">
         Explore our successful developments across Portugal. Each project represents our commitment to quality construction, strategic locations, and investment excellence.
       </p>
     </div>
@@ -336,20 +346,20 @@ function switchImg(el, src) {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
         <!-- Card 1 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.0.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail1.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.0.image" src="development/projectCardThumbnail1.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
+              <span data-cms="propmgmt.cards.0.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <h3 data-cms="propmgmt.cards.0.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">12</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.0.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">12</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.0.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -358,20 +368,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 2 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.1.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail2.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.1.image" src="development/projectCardThumbnail2.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
+              <span data-cms="propmgmt.cards.1.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <h3 data-cms="propmgmt.cards.1.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">14</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.1.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">14</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.1.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -380,20 +390,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 3 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.2.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail3.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.2.image" src="development/projectCardThumbnail3.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
+              <span data-cms="propmgmt.cards.2.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <h3 data-cms="propmgmt.cards.2.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">8</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.2.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">8</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.2.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -402,20 +412,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 4 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.3.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail4.png" alt="Alcântara Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.3.image" src="development/projectCardThumbnail4.png" alt="Alcântara Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
+              <span data-cms="propmgmt.cards.3.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Alcântara Project</h3>
+            <h3 data-cms="propmgmt.cards.3.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Alcântara Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">45</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€320K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.3.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">45</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.3.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€320K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -424,20 +434,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 5 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.4.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail5.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.4.image" src="development/projectCardThumbnail5.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
+              <span data-cms="propmgmt.cards.4.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <h3 data-cms="propmgmt.cards.4.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">22</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.4.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">22</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.4.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -446,20 +456,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 6 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.5.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail6.png" alt="São Julião Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.5.image" src="development/projectCardThumbnail6.png" alt="São Julião Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential + Commercial</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
+              <span data-cms="propmgmt.cards.5.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">São Julião Project</h3>
+            <h3 data-cms="propmgmt.cards.5.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">São Julião Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">58</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€380K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.5.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">58</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.5.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€380K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -468,20 +478,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 7 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.6.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail7.png" alt="Arroios Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.6.image" src="development/projectCardThumbnail7.png" alt="Arroios Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
+              <span data-cms="propmgmt.cards.6.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Arroios Project</h3>
+            <h3 data-cms="propmgmt.cards.6.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Arroios Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">42</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€340K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.6.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">42</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.6.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€340K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -490,20 +500,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 8 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.7.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail8.png" alt="Penha de França Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.7.image" src="development/projectCardThumbnail8.png" alt="Penha de França Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
+              <span data-cms="propmgmt.cards.7.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Penha de França Project</h3>
+            <h3 data-cms="propmgmt.cards.7.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Penha de França Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">30</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€290K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.7.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">30</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.7.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€290K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -512,20 +522,20 @@ function switchImg(el, src) {
         </a>
 
         <!-- Card 9 -->
-        <a href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="propmgmt.cards.8.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
-            <img src="development/projectCardThumbnail9.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <img data-cms="propmgmt.cards.8.image" src="development/projectCardThumbnail9.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
               <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
+              <span data-cms="propmgmt.cards.8.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
             </div>
-            <h3 class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
+            <h3 data-cms="propmgmt.cards.8.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
             <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">38</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€305K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="propmgmt.cards.8.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">38</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="propmgmt.cards.8.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€305K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
             <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               Book Now <span class="ml-1">→</span>
@@ -539,7 +549,7 @@ function switchImg(el, src) {
 
 </section>
 
-<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long&#8209;term access to the European market.</p><div class="flex gap-4 mt-6"><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html">Urban Collection</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="developments.html#">Terms &amp; Conditions</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="developments.html#">Privacy Policy</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center">Get Directions</a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="#">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="#">Privacy Policy</a></p></div></div></footer>
+<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p data-cms="global.footer.description" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long&#8209;term access to the European market.</p><div class="flex gap-4 mt-6"><a data-cms="global.social.instagram" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a data-cms="global.social.linkedin" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a data-cms="global.social.youtube" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html">Urban Collection</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="developments.html#">Terms &amp; Conditions</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="developments.html#">Privacy Policy</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center">Get Directions</a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="#">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="#">Privacy Policy</a></p></div></div></footer>
 </main><!--$--><!--/$--><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template><!--/$-->
     <script id="header-scroll-script">
         document.addEventListener('DOMContentLoaded', function () {

@@ -273,6 +273,16 @@
   </style>
 
   <script defer src="/_vercel/insights/script.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-18073134136');
+</script>
+<script defer src="/cms-loader.js"></script>
 </head>
 <body class="overflow-x-hidden w-full">
   <!-- Header -->
@@ -337,8 +347,8 @@
 
   <!-- Hero Section -->
   <section class="journal-hero">
-    <h1 class="geist journal-title">The Journal</h1>
-    <p class="satoshi journal-subtitle">Stay updated with the latest insights on Portugal Golden Visa, prime real estate investment, lifestyle, and market trends.</p>
+    <h1 data-cms="blog.hero.title" class="geist journal-title">The Journal</h1>
+    <p data-cms="blog.hero.subtitle" class="satoshi journal-subtitle">Stay updated with the latest insights on Portugal Golden Visa, prime real estate investment, lifestyle, and market trends.</p>
   </section>
 
   <main>
@@ -374,9 +384,9 @@
     <!-- CTA Module -->
     <section class="cta-banner">
       <div class="cta-inner">
-        <h2 class="geist text-4xl md:text-5xl font-bold mb-6">Ready to grow your capital?</h2>
-        <p class="satoshi text-lg text-gray-300 max-w-2xl mx-auto mb-8">Discover how a €280,000 investment in Lisbon real estate can elevate your portfolio, with predictable income, strong appreciation potential, and long-term security.</p>
-        <a href="contact.html" class="satoshi btn-white">LET'S GET STARTED</a>
+        <h2 data-cms="blog.cta.title" class="geist text-4xl md:text-5xl font-bold mb-6">Ready to grow your capital?</h2>
+        <p data-cms="blog.cta.body" class="satoshi text-lg text-gray-300 max-w-2xl mx-auto mb-8">Discover how a €280,000 investment in Lisbon real estate can elevate your portfolio, with predictable income, strong appreciation potential, and long-term security.</p>
+        <a data-cms="blog.cta.url" href="contact.html" class="satoshi btn-white"><span data-cms="blog.cta.label">LET'S GET STARTED</span></a>
       </div>
     </section>
   </main>
@@ -389,9 +399,9 @@
                                     data-nimg="1" decoding="async" height="32" loading="lazy" src="./logo.png"
                                     srcset="./logo.png 2x" style="color:transparent" width="160" /></div>
                         </a>
-                        <p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long&#8209;term access to the European market.</p>
+                        <p data-cms="global.footer.description" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long&#8209;term access to the European market.</p>
                         <div class="flex gap-4 mt-6"><a
-                                class="w-8 h-8 flex items-center justify-center transition-all duration-300"
+                                data-cms="global.social.instagram" class="w-8 h-8 flex items-center justify-center transition-all duration-300"
                                 href="https://www.instagram.com/smithandadamsgroup/" target="_blank"><svg
                                     aria-hidden="true" class="lucide lucide-instagram text-white hover:text-gray-300"
                                     fill="none" height="18" stroke="currentColor" stroke-linecap="round"
@@ -401,7 +411,7 @@
                                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                                     <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
                                 </svg></a><a
-                                class="w-8 h-8 flex items-center justify-center transition-all duration-300"
+                                data-cms="global.social.linkedin" class="w-8 h-8 flex items-center justify-center transition-all duration-300"
                                 href="https://www.linkedin.com/company/smith-and-adams/" target="_blank"><svg
                                     aria-hidden="true" class="lucide lucide-linkedin text-white hover:text-gray-300"
                                     fill="none" height="18" stroke="currentColor" stroke-linecap="round"
@@ -413,7 +423,7 @@
                                     <rect height="12" width="4" x="2" y="9"></rect>
                                     <circle cx="4" cy="4" r="2"></circle>
                                 </svg></a><a
-                                class="w-8 h-8 flex items-center justify-center transition-all duration-300"
+                                data-cms="global.social.youtube" class="w-8 h-8 flex items-center justify-center transition-all duration-300"
                                 href="https://www.youtube.com/@smithandadamsgroup" target="_blank"><svg
                                     aria-hidden="true" class="lucide lucide-youtube text-white hover:text-gray-300"
                                     fill="none" height="18" stroke="currentColor" stroke-linecap="round"
@@ -459,9 +469,9 @@
                                     class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
                                     <a href="contact.html">Contact Us</a></li>
                                 <li class="font-normal satoshi text-[15px] text-gray-300"><a
-                                        href="tel:+351938227348">+351938227348</a></li>
+                                        data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li>
                                 <li class="font-normal satoshi text-[15px] text-gray-300"><a
-                                        href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li>
+                                        data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li>
                                 <li
                                     class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
                                     <a href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer"
@@ -483,7 +493,7 @@
                 </div>
                 <div
                     class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12">
-                    <p class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith
+                    <p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith
                         &amp; Adams</p>
                     <p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a
                             class="text-gray-300 hover:text-white ml-1" href="index.html#">Terms and Conditions</a> |<a
