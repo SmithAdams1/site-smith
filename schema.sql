@@ -57,11 +57,22 @@ ON storage.objects FOR DELETE
 USING (bucket_id = 'blog-media' AND auth.role() = 'authenticated');
 
 -- 6. Site Content key-value store (CMS for static pages)
+-- (Originalmente PK simples em key. Em 2026 virou PK composta (key, locale)
+--  para suportar i18n EN + PT-BR. Migration ALTER abaixo.)
 CREATE TABLE public.site_content (
-    key   text primary key,
-    value text not null,
-    updated_at timestamp with time zone default timezone('utc'::text, now()) not null
+    key    text not null,
+    locale text not null default 'en',
+    value  text not null,
+    updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
+    primary key (key, locale)
 );
+CREATE INDEX site_content_locale_idx ON public.site_content (locale);
+
+-- Migration para tabelas existentes (se a tabela já foi criada com PK simples):
+-- ALTER TABLE public.site_content DROP CONSTRAINT site_content_pkey;
+-- ALTER TABLE public.site_content ADD COLUMN IF NOT EXISTS locale text NOT NULL DEFAULT 'en';
+-- ALTER TABLE public.site_content ADD CONSTRAINT site_content_pkey PRIMARY KEY (key, locale);
+-- CREATE INDEX IF NOT EXISTS site_content_locale_idx ON public.site_content (locale);
 
 ALTER TABLE public.site_content ENABLE ROW LEVEL SECURITY;
 

@@ -171,10 +171,13 @@
                 <!-- Page nav buttons -->
                 <div id="content-page-nav" class="flex flex-wrap gap-2 mb-4"></div>
 
-                <!-- Filter input -->
-                <div class="mb-4 relative">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">🔍</span>
-                    <input id="content-filter" type="text" placeholder="Filtrar campos por nome (ex: hero, card 1, footer...)" class="w-full border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm focus:outline-none focus:border-[#466DEE]">
+                <!-- Filter + Bulk translate -->
+                <div class="mb-4 flex gap-2">
+                    <div class="flex-1 relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">🔍</span>
+                        <input id="content-filter" type="text" placeholder="Filtrar campos por nome (ex: hero, card 1, footer...)" class="w-full border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm focus:outline-none focus:border-[#466DEE]">
+                    </div>
+                    <button type="button" id="bulk-translate-btn" class="shrink-0 border border-gray-200 hover:border-[#466DEE] hover:text-[#466DEE] text-gray-700 px-4 py-2 rounded-lg text-sm font-bold transition-colors">🌐 Traduzir tudo p/ PT-BR</button>
                 </div>
 
                 <div id="content-status" class="mb-4 text-sm hidden"></div>
@@ -987,13 +990,26 @@
             selectPage(currentPageId || Object.keys(SITE_SCHEMA)[0]);
         }
 
+        // ============================================================
+        // i18n — chaves traduzíveis vs compartilhadas
+        // ============================================================
+        const TRANSLATABLE_TYPES = new Set(['text', 'longtext', 'richtext']);
+        const LOCALES = ['en', 'pt'];
+        const LOCALE_LABEL = { en: '🇬🇧 EN', pt: '🇧🇷 PT-BR' };
+        const isTranslatable = (field) => TRANSLATABLE_TYPES.has(field.type);
+        // contentValues e contentDirty agora são chaveados por "key::locale"
+        // (string com '::' separador, escolhido para não colidir com nada do schema).
+        const dk = (key, loc) => key + '::' + loc;
+
         async function loadContentValues() {
-            const { data, error } = await supabaseClient.from('site_content').select('key,value');
+            const { data, error } = await supabaseClient.from('site_content').select('key,value,locale');
             if (error) {
                 showContentStatus('Erro ao carregar conteúdo: ' + error.message, true);
                 return;
             }
-            data.forEach(r => contentValues[r.key] = r.value);
+            data.forEach(r => {
+                contentValues[dk(r.key, r.locale || 'en')] = r.value;
+            });
         }
 
         function renderContentFields(pageId) {
@@ -1002,8 +1018,10 @@
             const previewLink = document.getElementById('content-preview-link');
             previewLink.href = page.preview;
 
-            // Reset resetters; dirty is reset by selectPage before this is called
+            // Reset resetters/getters/setters; dirty é zerado pelo selectPage antes desta chamada
             for (const k in fieldResetters) delete fieldResetters[k];
+            for (const k in fieldGetters) delete fieldGetters[k];
+            for (const k in fieldSetters) delete fieldSetters[k];
 
             wrap.innerHTML = '';
             page.sections.forEach(section => {
@@ -1021,42 +1039,77 @@
             updateDirtyUI();
         }
 
-        // Mapa: key → função reset(value) chamada quando user clica reset ou descartar tudo
+        // Mapa: dirtyKey → função reset() chamada quando user clica reset ou descartar tudo
         const fieldResetters = {};
+        // Mapa: dirtyKey → função getValue() para coletar valor atual da UI (usado pelo bulk translate
+        // para pegar o EN antes de chamar a API).
+        const fieldGetters = {};
+        // Mapa: dirtyKey → função setValue(v) — usado pelo bulk translate para preencher PT
+        const fieldSetters = {};
 
-        function buildFieldEl(field) {
-            const stored = contentValues[field.key];
+        const stripOuterP = (html) => {
+            const t = (html || '').trim();
+            if (t === '<p><br></p>' || t === '<p></p>') return '';
+            const m = t.match(/^<p>([\s\S]*?)<\/p>$/);
+            if (m && !/<p[\s>]/i.test(m[1])) return m[1];
+            return t;
+        };
+
+        // ----------------------------------------------------------------
+        // buildLocaleEditor: cria o editor para UM idioma. Retorna o DOM
+        // e instala o resetter/getter/setter no map global.
+        // ----------------------------------------------------------------
+        function buildLocaleEditor(field, locale, opts) {
+            opts = opts || {};
+            const dirtyK = dk(field.key, locale);
+            const stored = contentValues[dirtyK];
             const isEditedFromDB = stored !== undefined;
-            const initial = isEditedFromDB ? stored : (field.default ?? '');
-            const wrapper = document.createElement('div');
-            wrapper.className = 'space-y-1 cms-field-row';
-            // Texto pesquisável (label + chave): usado pelo filtro
-            wrapper.dataset.search = (field.label + ' ' + field.key).toLowerCase();
-            wrapper.dataset.cmsKey = field.key;
+            // Default só faz sentido para EN. Para PT, default é vazio.
+            const initial = isEditedFromDB ? stored
+                : (locale === 'en' ? (field.default ?? '') : '');
 
-            const labelRow = document.createElement('div');
-            labelRow.className = 'flex justify-between items-center gap-2';
-            const labelLeft = document.createElement('div');
-            labelLeft.className = 'flex items-center gap-2 flex-wrap';
-            labelLeft.innerHTML = `<label class="block text-sm font-bold text-gray-700">${field.label}</label>`;
+            const block = document.createElement('div');
+            block.className = 'space-y-1';
+
+            // Header com label do locale, badge, reset, contador
+            const header = document.createElement('div');
+            header.className = 'flex justify-between items-center gap-2';
+            const left = document.createElement('div');
+            left.className = 'flex items-center gap-2 flex-wrap';
+            const localeLbl = document.createElement('span');
+            localeLbl.textContent = LOCALE_LABEL[locale];
+            localeLbl.className = 'text-[11px] font-bold text-gray-500';
+            left.appendChild(localeLbl);
+
             const badge = document.createElement('span');
             badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold';
             const resetBtn = document.createElement('button');
             resetBtn.type = 'button';
             resetBtn.className = 'text-[11px] text-gray-400 hover:text-red-500 underline hidden';
             resetBtn.textContent = '↺ Resetar';
-            resetBtn.title = 'Voltar ao texto atual do site';
-            labelLeft.appendChild(badge);
-            labelLeft.appendChild(resetBtn);
-            labelRow.appendChild(labelLeft);
+            resetBtn.title = locale === 'en' ? 'Voltar ao texto atual do site' : 'Limpar tradução';
+            left.appendChild(badge);
+            left.appendChild(resetBtn);
+
+            // Botão "Traduzir do EN" só aparece em editores PT
+            let translateBtn = null;
+            if (locale === 'pt') {
+                translateBtn = document.createElement('button');
+                translateBtn.type = 'button';
+                translateBtn.className = 'text-[11px] text-[#466DEE] hover:text-[#0C1E28] underline';
+                translateBtn.textContent = '↻ Traduzir do EN';
+                translateBtn.title = 'Pegar o texto em EN e gerar tradução automática';
+                left.appendChild(translateBtn);
+            }
+
+            header.appendChild(left);
             const counter = document.createElement('span');
             counter.className = 'text-xs text-gray-400 font-mono shrink-0';
-            labelRow.appendChild(counter);
-            wrapper.appendChild(labelRow);
+            header.appendChild(counter);
+            block.appendChild(header);
 
-            // Estado do badge: "Texto atual" (default), "Editado" (salvo no banco), "Modificado" (dirty, não salvo)
             const refreshBadge = () => {
-                const isDirty = field.key in contentDirty;
+                const isDirty = dirtyK in contentDirty;
                 if (isDirty) {
                     badge.textContent = 'Modificado';
                     badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold bg-orange-50 text-orange-600';
@@ -1065,6 +1118,10 @@
                     badge.textContent = 'Editado';
                     badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold bg-blue-50 text-blue-600';
                     resetBtn.classList.add('hidden');
+                } else if (locale === 'pt' && initial === '') {
+                    badge.textContent = 'Sem tradução';
+                    badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold bg-yellow-50 text-yellow-700';
+                    resetBtn.classList.add('hidden');
                 } else {
                     badge.textContent = 'Texto atual';
                     badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold bg-gray-100 text-gray-500';
@@ -1072,35 +1129,40 @@
                 }
             };
 
-            const updateCounter = (val) => {
+            const updateCounterPlain = (val) => {
                 const len = (val || '').length;
                 counter.textContent = `${len}/${field.max}`;
                 counter.classList.toggle('text-red-500', len > field.max || (field.min && len < field.min));
             };
 
             const onEdit = (val) => {
-                contentDirty[field.key] = val;
+                contentDirty[dirtyK] = val;
                 refreshBadge();
                 updateDirtyUI();
             };
 
+            // Renderiza o input apropriado conforme o tipo
             if (field.type === 'longtext') {
                 const ta = document.createElement('textarea');
                 ta.rows = 3;
                 ta.className = 'w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]';
-                ta.minLength = field.min || 0;
                 ta.maxLength = field.max;
                 ta.value = initial;
-                ta.oninput = () => { onEdit(ta.value); updateCounter(ta.value); };
-                wrapper.appendChild(ta);
-                updateCounter(initial);
-                fieldResetters[field.key] = () => { ta.value = initial; updateCounter(initial); };
+                ta.oninput = () => { onEdit(ta.value); updateCounterPlain(ta.value); };
+                block.appendChild(ta);
+                updateCounterPlain(initial);
+                fieldResetters[dirtyK] = () => {
+                    ta.value = locale === 'en' ? initial : '';
+                    if (locale === 'en') updateCounterPlain(initial); else updateCounterPlain('');
+                };
+                fieldGetters[dirtyK] = () => ta.value;
+                fieldSetters[dirtyK] = (v) => { ta.value = v || ''; onEdit(ta.value); updateCounterPlain(ta.value); };
             } else if (field.type === 'richtext') {
                 const editorWrap = document.createElement('div');
                 editorWrap.style.background = 'white';
                 editorWrap.style.borderRadius = '8px';
                 editorWrap.style.border = '1px solid #e5e7eb';
-                wrapper.appendChild(editorWrap);
+                block.appendChild(editorWrap);
 
                 const editorEl = document.createElement('div');
                 editorEl.style.minHeight = '110px';
@@ -1120,14 +1182,6 @@
                 };
                 setQuillFromValue(initial);
 
-                const stripOuterP = (html) => {
-                    const t = html.trim();
-                    if (t === '<p><br></p>' || t === '<p></p>') return '';
-                    const m = t.match(/^<p>([\s\S]*?)<\/p>$/);
-                    if (m && !/<p[\s>]/i.test(m[1])) return m[1];
-                    return t;
-                };
-
                 let suppressChange = false;
                 q.on('text-change', () => {
                     if (suppressChange) return;
@@ -1137,19 +1191,28 @@
                     counter.textContent = `${len}/${field.max}`;
                     counter.classList.toggle('text-red-500', len > field.max || (field.min && len < field.min));
                 });
-
                 const initLen = q.getText().replace(/\n+$/, '').length;
                 counter.textContent = `${initLen}/${field.max}`;
 
-                fieldResetters[field.key] = () => {
+                fieldResetters[dirtyK] = () => {
                     suppressChange = true;
-                    setQuillFromValue(initial);
+                    setQuillFromValue(locale === 'en' ? initial : '');
                     const l = q.getText().replace(/\n+$/, '').length;
                     counter.textContent = `${l}/${field.max}`;
                     counter.classList.remove('text-red-500');
                     suppressChange = false;
                 };
+                fieldGetters[dirtyK] = () => stripOuterP(q.root.innerHTML);
+                fieldSetters[dirtyK] = (v) => {
+                    suppressChange = true;
+                    setQuillFromValue(v || '');
+                    suppressChange = false;
+                    onEdit(stripOuterP(q.root.innerHTML));
+                    const l = q.getText().replace(/\n+$/, '').length;
+                    counter.textContent = `${l}/${field.max}`;
+                };
             } else if (field.type === 'image') {
+                // Image NÃO é traduzível, esta função só é chamada com locale='en' para ele.
                 const fileInput = document.createElement('input');
                 fileInput.type = 'file';
                 fileInput.accept = 'image/*';
@@ -1188,35 +1251,94 @@
                     }
                 };
 
-                wrapper.appendChild(fileInput);
-                wrapper.appendChild(urlInput);
-                wrapper.appendChild(preview);
-                fieldResetters[field.key] = () => {
+                block.appendChild(fileInput);
+                block.appendChild(urlInput);
+                block.appendChild(preview);
+                fieldResetters[dirtyK] = () => {
                     urlInput.value = initial;
                     preview.src = initial;
                     preview.style.display = initial ? 'block' : 'none';
                     fileInput.value = '';
                 };
+                fieldGetters[dirtyK] = () => urlInput.value;
+                fieldSetters[dirtyK] = (v) => { urlInput.value = v || ''; onEdit(urlInput.value); };
             } else {
+                // text, url, video → input simples
                 const input = document.createElement('input');
                 input.type = (field.type === 'url' || field.type === 'video') ? 'url' : 'text';
                 input.className = 'w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]';
-                input.minLength = field.min || 0;
                 input.maxLength = field.max;
                 input.value = initial;
-                input.oninput = () => { onEdit(input.value); updateCounter(input.value); };
-                wrapper.appendChild(input);
-                updateCounter(initial);
-                fieldResetters[field.key] = () => { input.value = initial; updateCounter(initial); };
+                input.oninput = () => { onEdit(input.value); updateCounterPlain(input.value); };
+                block.appendChild(input);
+                updateCounterPlain(initial);
+                fieldResetters[dirtyK] = () => {
+                    input.value = locale === 'en' ? initial : '';
+                    updateCounterPlain(input.value);
+                };
+                fieldGetters[dirtyK] = () => input.value;
+                fieldSetters[dirtyK] = (v) => { input.value = v || ''; onEdit(input.value); updateCounterPlain(input.value); };
+            }
+
+            // Botão de tradução por campo
+            if (translateBtn) {
+                translateBtn.onclick = async () => {
+                    const enValue = fieldGetters[dk(field.key, 'en')] && fieldGetters[dk(field.key, 'en')]();
+                    if (!enValue) {
+                        alert('Preencha o EN antes de traduzir.');
+                        return;
+                    }
+                    const orig = translateBtn.innerHTML;
+                    translateBtn.disabled = true;
+                    translateBtn.textContent = '⏳ Traduzindo…';
+                    try {
+                        const r = await fetch('/api/translate', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ texts: [enValue], target: 'pt' }),
+                        });
+                        const d = await r.json();
+                        if (!r.ok || !Array.isArray(d.translations)) throw new Error(d.error || 'falha');
+                        fieldSetters[dirtyK](d.translations[0]);
+                    } catch (e) {
+                        alert('Erro ao traduzir: ' + (e.message || e));
+                    } finally {
+                        translateBtn.disabled = false;
+                        translateBtn.innerHTML = orig;
+                    }
+                };
             }
 
             resetBtn.onclick = () => {
-                const fn = fieldResetters[field.key];
+                const fn = fieldResetters[dirtyK];
                 if (fn) fn();
-                delete contentDirty[field.key];
+                delete contentDirty[dirtyK];
                 refreshBadge();
                 updateDirtyUI();
             };
+
+            refreshBadge();
+            return block;
+        }
+
+        function buildFieldEl(field) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'space-y-3 cms-field-row pb-4 border-b border-gray-100';
+            wrapper.dataset.search = (field.label + ' ' + field.key).toLowerCase();
+            wrapper.dataset.cmsKey = field.key;
+
+            const title = document.createElement('label');
+            title.className = 'block text-sm font-bold text-gray-700';
+            title.textContent = field.label;
+            wrapper.appendChild(title);
+
+            if (isTranslatable(field)) {
+                wrapper.appendChild(buildLocaleEditor(field, 'en'));
+                wrapper.appendChild(buildLocaleEditor(field, 'pt'));
+            } else {
+                // Tipos compartilhados (image/url/video): sempre locale='en' (uma linha só)
+                wrapper.appendChild(buildLocaleEditor(field, 'en'));
+            }
 
             if (field.helper) {
                 const h = document.createElement('p');
@@ -1224,7 +1346,6 @@
                 h.textContent = field.helper;
                 wrapper.appendChild(h);
             }
-            refreshBadge();
             return wrapper;
         }
 
@@ -1267,12 +1388,11 @@
         function discardAllDirty() {
             if (Object.keys(contentDirty).length === 0) return;
             if (!confirm('Descartar todas as alterações pendentes?')) return;
-            for (const k of Object.keys(contentDirty)) {
-                const fn = fieldResetters[k];
+            for (const dirtyK of Object.keys(contentDirty)) {
+                const fn = fieldResetters[dirtyK];
                 if (fn) fn();
-                delete contentDirty[k];
+                delete contentDirty[dirtyK];
             }
-            // Re-render badges (cheaper: just re-render the whole page)
             renderContentFields(currentPageId);
             updateDirtyUI();
         }
@@ -1293,52 +1413,140 @@
             btn.innerHTML = '<span>Saving…</span>';
             btn.disabled = true;
 
-            // Validação em cima do schema da página atual + global (caso edite chave global)
             const pages = Object.values(SITE_SCHEMA);
             const allFields = pages.flatMap(p => p.sections.flatMap(s => s.fields));
             const fieldByKey = Object.fromEntries(allFields.map(f => [f.key, f]));
+
+            // dirtyKey "key::locale" → { key, locale, value }
+            const rows = [];
             const errors = [];
-            for (const [key, val] of Object.entries(contentDirty)) {
+            for (const [dirtyK, val] of Object.entries(contentDirty)) {
+                const sep = dirtyK.lastIndexOf('::');
+                if (sep < 0) continue;
+                const key = dirtyK.slice(0, sep);
+                const locale = dirtyK.slice(sep + 2);
                 const f = fieldByKey[key];
                 if (!f) continue;
-                // Para richtext o limite é em texto plano: a validação de length em cima do HTML
-                // pode dar falsos positivos. Validamos com o length do texto sem tags.
+
+                // Para tipos compartilhados forçamos locale='en' (não deveria ter dirty em pt mas just in case)
+                const finalLocale = isTranslatable(f) ? locale : 'en';
+
+                // Validação só para texto. PT vazio é OK (apaga a tradução).
                 const plain = String(val || '').replace(/<[^>]*>/g, '');
                 const len = plain.length;
-                if (f.min && len < f.min) errors.push(`"${f.label}" precisa de pelo menos ${f.min} caracteres`);
-                if (f.max && len > f.max) errors.push(`"${f.label}" excede ${f.max} caracteres`);
+                const isPtEmpty = (locale === 'pt' && len === 0);
+                if (!isPtEmpty) {
+                    if (f.min && len < f.min) errors.push(`"${f.label}" (${LOCALE_LABEL[finalLocale]}): mín. ${f.min} caracteres`);
+                    if (f.max && len > f.max) errors.push(`"${f.label}" (${LOCALE_LABEL[finalLocale]}): excede ${f.max} caracteres`);
+                }
+                rows.push({ key, locale: finalLocale, value: val || '' });
             }
+
             if (errors.length) {
                 showContentStatus(errors.join(' · '), true);
                 btn.innerHTML = original; btn.disabled = false;
                 return;
             }
-
-            const rows = Object.entries(contentDirty).map(([key, value]) => ({ key, value }));
             if (rows.length === 0) {
                 showContentStatus('Nada para salvar.', false);
                 btn.innerHTML = original; btn.disabled = false;
                 return;
             }
 
-            const { error } = await supabaseClient.from('site_content').upsert(rows, { onConflict: 'key' });
-            if (error) {
-                showContentStatus('Erro ao salvar: ' + error.message, true);
-            } else {
-                Object.assign(contentValues, contentDirty);
+            // Separa: rows com value vazio em pt → DELETE (limpa tradução); resto → UPSERT
+            const toDelete = rows.filter(r => r.locale === 'pt' && (r.value === '' || r.value === null));
+            const toUpsert = rows.filter(r => !(r.locale === 'pt' && (r.value === '' || r.value === null)));
+
+            try {
+                if (toUpsert.length) {
+                    const { error } = await supabaseClient.from('site_content')
+                        .upsert(toUpsert, { onConflict: 'key,locale' });
+                    if (error) throw error;
+                }
+                for (const r of toDelete) {
+                    await supabaseClient.from('site_content').delete().eq('key', r.key).eq('locale', r.locale);
+                }
+                // Atualiza cache local
+                for (const r of toUpsert) contentValues[dk(r.key, r.locale)] = r.value;
+                for (const r of toDelete) delete contentValues[dk(r.key, r.locale)];
                 for (const k in contentDirty) delete contentDirty[k];
                 showContentStatus(`${rows.length} campo(s) salvo(s) com sucesso.`, false);
-                // Re-render para atualizar badges "Modificado" → "Editado"
                 renderContentFields(currentPageId);
                 updateDirtyUI();
+            } catch (error) {
+                showContentStatus('Erro ao salvar: ' + (error.message || error), true);
+            } finally {
+                btn.innerHTML = original; btn.disabled = false;
             }
-            btn.innerHTML = original; btn.disabled = false;
+        }
+
+        // ============================================================
+        // Bulk translate — pega todos os campos traduzíveis da página
+        // atual, coleta valor EN (do editor ou do default), chama
+        // /api/translate em batches e popula os editores PT.
+        // Não salva sozinho — o admin revisa e clica Save.
+        // ============================================================
+        async function bulkTranslateCurrentPage() {
+            const btn = document.getElementById('bulk-translate-btn');
+            if (!currentPageId) return;
+            const fields = SITE_SCHEMA[currentPageId].sections.flatMap(s => s.fields).filter(isTranslatable);
+            if (!fields.length) {
+                alert('Esta página não tem campos traduzíveis.');
+                return;
+            }
+
+            // Coleta: para cada campo, pega o valor EN (preferência: editor atual, depois banco, depois default)
+            const work = fields.map(f => {
+                const enKey = dk(f.key, 'en');
+                let enVal = (fieldGetters[enKey] && fieldGetters[enKey]()) || contentValues[enKey] || f.default || '';
+                return { field: f, en: String(enVal).trim() };
+            }).filter(w => w.en.length > 0);
+
+            if (!work.length) { alert('Nenhum texto EN para traduzir.'); return; }
+
+            const confirmed = confirm(`Traduzir ${work.length} campo(s) para PT-BR?\n\nO PT atual será sobrescrito (você ainda precisa clicar Save depois).`);
+            if (!confirmed) return;
+
+            const orig = btn.innerHTML;
+            btn.disabled = true;
+
+            // Batches de 30 para não estourar o limite do Gemini
+            const BATCH = 30;
+            let done = 0;
+            try {
+                for (let i = 0; i < work.length; i += BATCH) {
+                    const slice = work.slice(i, i + BATCH);
+                    btn.textContent = `Traduzindo ${i + 1}-${Math.min(i + BATCH, work.length)} / ${work.length}…`;
+                    const r = await fetch('/api/translate', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ texts: slice.map(s => s.en), target: 'pt' }),
+                    });
+                    const d = await r.json();
+                    if (!r.ok || !Array.isArray(d.translations) || d.translations.length !== slice.length) {
+                        throw new Error(d.error || 'Resposta inválida da tradução');
+                    }
+                    slice.forEach((w, idx) => {
+                        const ptKey = dk(w.field.key, 'pt');
+                        const setter = fieldSetters[ptKey];
+                        if (setter) setter(d.translations[idx]);
+                        done++;
+                    });
+                }
+                showContentStatus(`${done} traduções pré-preenchidas. Revise e clique Save.`, false);
+            } catch (e) {
+                showContentStatus('Erro ao traduzir: ' + (e.message || e), true);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = orig;
+            }
         }
 
         // Mantém o submit handler do form (Enter dentro de um input dispara isso) e o botão
         document.getElementById('content-form').addEventListener('submit', (e) => { e.preventDefault(); saveSiteContent(); });
         document.getElementById('content-save-btn').addEventListener('click', saveSiteContent);
         document.getElementById('discard-btn').addEventListener('click', discardAllDirty);
+        document.getElementById('bulk-translate-btn').addEventListener('click', bulkTranslateCurrentPage);
 
         // Filtro com debounce simples
         let filterTimer;
