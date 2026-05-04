@@ -213,7 +213,7 @@
           <span data-cms="urban.hero.stat3.label" class="hero-stat-lbl">Investment Starting Price</span>
         </div>
         <div style="flex-grow: 1; display: flex; justify-content: flex-end;">
-          <a data-cms="urban.hero.brochure_url" href="Urban%20Collection%20Beato.pdf" target="_blank" class="c-btn"><span data-cms="urban.hero.brochure_label">Download Brochure</span></a>
+          <a id="brochure-btn" data-cms="urban.hero.brochure_url" href="Urban%20Collection%20Beato.pdf" target="_blank" class="c-btn"><span data-cms="urban.hero.brochure_label">Download Brochure</span></a>
         </div>
       </div>
     </div>
@@ -388,6 +388,144 @@
   </section>
 
   <footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p data-cms="global.footer.description" data-cms-attr="html" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal, offering tailored investment opportunities with secure returns and long&#8209;term access to the European market.</p><div class="flex gap-4 mt-6"><a data-cms="global.social.instagram" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a data-cms="global.social.linkedin" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a data-cms="global.social.youtube" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html">Urban Collection</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html#">Terms &amp; Conditions</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html#">Privacy Policy</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center">Get Directions</a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="urban-collection.html#">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="urban-collection.html#">Privacy Policy</a></p></div></div></footer>
+
+<!-- BROCHURE LEAD MODAL -->
+<div id="brochure-modal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(12,30,40,0.78); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:24px;">
+  <div style="background:#FDFCF9; border-radius:20px; max-width:520px; width:100%; padding:40px 36px; position:relative; box-shadow:0 30px 80px rgba(0,0,0,0.3);">
+    <button id="brochure-close" type="button" aria-label="Fechar" style="position:absolute; top:16px; right:16px; width:36px; height:36px; border:none; background:transparent; font-size:24px; color:#9ca3af; cursor:pointer; line-height:1;">×</button>
+
+    <div id="brochure-form-state">
+      <div style="display:inline-block; padding:6px 14px; background:#0C1E28; border-radius:9999px; margin-bottom:16px;">
+        <span style="color:white; font-weight:600; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; font-family:'Satoshi',sans-serif;">Urban Collection</span>
+      </div>
+      <h3 style="font-family:'Geist','Satoshi',sans-serif; font-size:26px; font-weight:800; color:#0C1E28; line-height:1.15; margin:0 0 8px;">Get the brochure</h3>
+      <p style="font-family:'Satoshi',sans-serif; font-size:14px; color:#6b7280; line-height:1.6; margin:0 0 24px;">Deixe os seus dados e abrimos a brochura completa do Urban Collection Beato em segundos.</p>
+
+      <form id="brochure-form" style="display:flex; flex-direction:column; gap:14px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <input type="text" id="b-firstName" placeholder="First name" required style="width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:10px; font-family:'Satoshi',sans-serif; font-size:14px; outline:none;">
+          <input type="text" id="b-lastName"  placeholder="Last name"  style="width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:10px; font-family:'Satoshi',sans-serif; font-size:14px; outline:none;">
+        </div>
+        <input type="email" id="b-email" placeholder="you@company.com" required style="width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:10px; font-family:'Satoshi',sans-serif; font-size:14px; outline:none;">
+        <div style="display:grid; grid-template-columns:170px 1fr; gap:8px;">
+          <select id="b-phoneCode" style="padding:12px 10px; border:1px solid #e5e7eb; border-radius:10px; font-family:'Satoshi',sans-serif; font-size:13px; background:white; outline:none;">
+            <optgroup label="Popular">
+              <option value="+351" selected>🇵🇹 +351 — Portugal</option>
+              <option value="+90">🇹🇷 +90 — Turkey</option>
+              <option value="+971">🇦🇪 +971 — UAE</option>
+              <option value="+1">🇺🇸 +1 — United States</option>
+              <option value="+44">🇬🇧 +44 — United Kingdom</option>
+              <option value="+91">🇮🇳 +91 — India</option>
+              <option value="+886">🇹🇼 +886 — Taiwan</option>
+              <option value="+852">🇭🇰 +852 — Hong Kong</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="+33">🇫🇷 +33 — France</option>
+              <option value="+34">🇪🇸 +34 — Spain</option>
+              <option value="+39">🇮🇹 +39 — Italy</option>
+              <option value="+49">🇩🇪 +49 — Germany</option>
+              <option value="+55">🇧🇷 +55 — Brazil</option>
+              <option value="+86">🇨🇳 +86 — China</option>
+              <option value="+65">🇸🇬 +65 — Singapore</option>
+              <option value="+27">🇿🇦 +27 — South Africa</option>
+              <option value="+92">🇵🇰 +92 — Pakistan</option>
+              <option value="+880">🇧🇩 +880 — Bangladesh</option>
+              <option value="+244">🇦🇴 +244 — Angola</option>
+            </optgroup>
+          </select>
+          <input type="tel" id="b-phoneNumber" placeholder="Phone number" required style="width:100%; padding:12px 14px; border:1px solid #e5e7eb; border-radius:10px; font-family:'Satoshi',sans-serif; font-size:14px; outline:none;">
+        </div>
+        <button type="submit" id="b-submit" style="margin-top:8px; padding:14px; background:#0C1E28; color:white; border:none; border-radius:9999px; font-family:'Satoshi',sans-serif; font-weight:700; font-size:14px; letter-spacing:0.04em; text-transform:uppercase; cursor:pointer;">Download Brochure →</button>
+        <div id="b-error" style="display:none; color:#dc2626; font-size:13px; font-family:'Satoshi',sans-serif;"></div>
+        <p style="font-family:'Satoshi',sans-serif; font-size:11px; color:#9ca3af; margin:4px 0 0; line-height:1.5;">Ao enviar, você concorda em receber comunicações da Smith & Adams sobre Urban Collection.</p>
+      </form>
+    </div>
+
+    <div id="brochure-success-state" style="display:none; text-align:center; padding:20px 0;">
+      <div style="width:56px; height:56px; margin:0 auto 16px; border-radius:50%; background:#dcfce7; display:flex; align-items:center; justify-content:center; font-size:28px;">✓</div>
+      <h3 style="font-family:'Geist','Satoshi',sans-serif; font-size:22px; font-weight:800; color:#0C1E28; margin:0 0 8px;">Thank you!</h3>
+      <p style="font-family:'Satoshi',sans-serif; font-size:14px; color:#6b7280; line-height:1.6; margin:0 0 20px;">A brochura abriu numa nova aba. Caso não tenha aberto, clique abaixo:</p>
+      <a id="brochure-fallback-link" href="Urban%20Collection%20Beato.pdf" target="_blank" style="display:inline-block; padding:12px 28px; background:#0C1E28; color:white; border-radius:9999px; font-family:'Satoshi',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; text-decoration:none;">Open Brochure ↗</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const btn = document.getElementById('brochure-btn');
+  const modal = document.getElementById('brochure-modal');
+  if (!btn || !modal) return;
+
+  const formState = document.getElementById('brochure-form-state');
+  const successState = document.getElementById('brochure-success-state');
+  const form = document.getElementById('brochure-form');
+  const submit = document.getElementById('b-submit');
+  const errorEl = document.getElementById('b-error');
+  const closeBtn = document.getElementById('brochure-close');
+  const fallback = document.getElementById('brochure-fallback-link');
+
+  function openModal() {
+    formState.style.display = '';
+    successState.style.display = 'none';
+    errorEl.style.display = 'none';
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.style.display === 'flex') closeModal(); });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errorEl.style.display = 'none';
+    const original = submit.innerHTML;
+    submit.innerHTML = 'Sending…';
+    submit.disabled = true;
+
+    const payload = {
+      firstName:  document.getElementById('b-firstName').value.trim(),
+      lastName:   document.getElementById('b-lastName').value.trim(),
+      email:      document.getElementById('b-email').value.trim(),
+      phoneCode:  document.getElementById('b-phoneCode').value,
+      phoneNumber:document.getElementById('b-phoneNumber').value.trim(),
+      interest:   'real-estate',
+      message:    'Brochure request — Urban Collection Beato',
+    };
+
+    try {
+      const r = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.success) throw new Error(data.error || 'Falha ao enviar');
+
+      // Pega a URL real da brochura (pode ter sido alterada via CMS)
+      const brochureUrl = btn.getAttribute('href') || 'Urban%20Collection%20Beato.pdf';
+      fallback.href = brochureUrl;
+
+      // Abre o PDF em nova aba
+      window.open(brochureUrl, '_blank', 'noopener');
+
+      formState.style.display = 'none';
+      successState.style.display = '';
+    } catch (err) {
+      errorEl.textContent = err.message || 'Erro ao enviar. Tente de novo.';
+      errorEl.style.display = '';
+    } finally {
+      submit.innerHTML = original;
+      submit.disabled = false;
+    }
+  });
+})();
+</script>
 
 </main>
 
