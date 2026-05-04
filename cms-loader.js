@@ -140,20 +140,25 @@
 
     const sel = document.createElement('select');
     sel.setAttribute('aria-label', 'Language');
-    const isDark = theme === 'dark';
+    // theme === 'dark'  → header com fundo escuro (texto branco). Switcher fica BRANCO.
+    // theme === 'light' → header com fundo branco (texto escuro). Switcher fica AZUL.
+    const isDarkBg = theme === 'dark';
+    const bg     = isDarkBg ? '#ffffff' : '#0C1E28';
+    const fg     = isDarkBg ? '#0C1E28' : '#ffffff';
+    const stroke = isDarkBg ? '%230C1E28' : '%23ffffff';
     sel.style.cssText = [
       'appearance:none',
       '-webkit-appearance:none',
-      'background:transparent',
-      `color:${isDark ? '#0C1E28' : '#ffffff'}`,
-      `border:1px solid ${isDark ? 'rgba(12,30,40,0.3)' : 'rgba(255,255,255,0.3)'}`,
+      `background-color:${bg}`,
+      `color:${fg}`,
+      'border:none',
       'padding:6px 28px 6px 12px',
       'border-radius:9999px',
       'font-size:13px',
-      'font-weight:500',
+      'font-weight:600',
       'cursor:pointer',
       'font-family:inherit',
-      "background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='" + (isDark ? '%230C1E28' : '%23ffffff') + "' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>\")",
+      "background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='" + stroke + "' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>\")",
       'background-repeat:no-repeat',
       'background-position:right 8px center',
       'background-size:10px',
@@ -161,7 +166,7 @@
 
     sel.innerHTML = `
       <option value="en" ${currentLocale==='en'?'selected':''}>🇬🇧 EN</option>
-      <option value="pt" ${currentLocale==='pt'?'selected':''}>🇧🇷 PT</option>
+      <option value="pt" ${currentLocale==='pt'?'selected':''}>🇧🇷 pt-BR</option>
     `;
     // Forçar a cor das options no mobile/desktop (background dropdown branco)
     sel.querySelectorAll('option').forEach(o => { o.style.color = '#0C1E28'; o.style.background = '#ffffff'; });
