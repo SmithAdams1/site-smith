@@ -78,8 +78,11 @@
   }
 
   async function loadContent() {
-    const targets = document.querySelectorAll('[data-cms]');
-    if (targets.length === 0) return;
+    // Não capturamos os targets aqui: alguns scripts da página (ex: marquee de
+    // testimonials no index.html) clonam/recriam nós com data-cms durante o
+    // DOMContentLoaded. Se guardarmos referências antes do fetch, aplicamos
+    // valores em nós que já foram removidos do DOM. Re-query depois do fetch.
+    if (document.querySelector('[data-cms]') === null) return;
 
     const locale = getLocale();
     // Busca linhas no idioma escolhido + o default (en) como fallback,
@@ -113,7 +116,9 @@
         }
       }
 
-      targets.forEach((el) => {
+      // Re-query agora — após o fetch — para pegar nós clonados/movidos por
+      // scripts que rodam em paralelo (ex: marquee de testimonials).
+      document.querySelectorAll('[data-cms]').forEach((el) => {
         const key = el.dataset.cms;
         if (key in map) applyValue(el, map[key]);
       });
