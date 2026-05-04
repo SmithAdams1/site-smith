@@ -833,12 +833,93 @@
                     { title: 'Imagem destaque', fields: [
                         { key: 'urban.prime.title', label: 'Texto da overlay', type: 'text', min: 5, max: 100, default: 'A PRIME INVESTMENT OPPORTUNITY' },
                     ]},
-                    { title: 'Premium Amenities', fields: [
+                    { title: 'Premium Amenities — header', fields: [
                         { key: 'urban.amenities.title', label: 'Título', type: 'text', min: 5, max: 80, default: 'Premium Amenities & Facilities' },
                         { key: 'urban.amenities.body', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: 'Urban Collection offers an extensive range of premium amenities designed to enhance your lifestyle and provide everything you need within the comfort of your residential community.' },
                     ]},
-                    { title: 'Floorplans', fields: [
+                    { title: 'Amenidade 1 — Gym/Fitness', fields: [
+                        { key: 'urban.amenities.0.icon', label: 'Ícone (SVG/PNG)', type: 'image', min: 0, max: 500, default: 'urban-collections/1.svg' },
+                        { key: 'urban.amenities.0.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Gym/Fitness' },
+                        { key: 'urban.amenities.0.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'State-of-the-art fitness center' },
+                    ]},
+                    { title: 'Amenidade 2 — Yoga', fields: [
+                        { key: 'urban.amenities.1.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/2.svg' },
+                        { key: 'urban.amenities.1.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Yoga' },
+                        { key: 'urban.amenities.1.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Dedicated yoga and meditation space' },
+                    ]},
+                    { title: 'Amenidade 3 — Swimming Pool', fields: [
+                        { key: 'urban.amenities.2.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/3.svg' },
+                        { key: 'urban.amenities.2.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Swimming Pool' },
+                        { key: 'urban.amenities.2.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Outdoor swimming pool with deck' },
+                    ]},
+                    { title: 'Amenidade 4 — Coworking Space', fields: [
+                        { key: 'urban.amenities.3.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/4.svg' },
+                        { key: 'urban.amenities.3.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Coworking Space' },
+                        { key: 'urban.amenities.3.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Modern workspace for professionals' },
+                    ]},
+                    { title: 'Amenidade 5 — Grocery Store', fields: [
+                        { key: 'urban.amenities.4.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/5.svg' },
+                        { key: 'urban.amenities.4.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Grocery Store' },
+                        { key: 'urban.amenities.4.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Convenient on-site shopping' },
+                    ]},
+                    { title: 'Amenidade 6 — Pet Wash Grooming', fields: [
+                        { key: 'urban.amenities.5.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/6.svg' },
+                        { key: 'urban.amenities.5.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Pet Wash Grooming' },
+                        { key: 'urban.amenities.5.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Professional pet care services' },
+                    ]},
+                    { title: 'Amenidade 7 — Laundry', fields: [
+                        { key: 'urban.amenities.6.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/7.svg' },
+                        { key: 'urban.amenities.6.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Laundry' },
+                        { key: 'urban.amenities.6.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Full-service laundry facilities' },
+                    ]},
+                    { title: 'Amenidade 8 — Cinema Room', fields: [
+                        { key: 'urban.amenities.7.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/8.svg' },
+                        { key: 'urban.amenities.7.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Cinema Room' },
+                        { key: 'urban.amenities.7.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Private movie screening room' },
+                    ]},
+                    { title: 'Amenidade 9 — Parking Bike', fields: [
+                        { key: 'urban.amenities.8.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/9.svg' },
+                        { key: 'urban.amenities.8.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Parking Bike' },
+                        { key: 'urban.amenities.8.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Secure bicycle storage' },
+                    ]},
+                    { title: 'Amenidade 10 — Sauna', fields: [
+                        { key: 'urban.amenities.9.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/10.svg' },
+                        { key: 'urban.amenities.9.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Sauna' },
+                        { key: 'urban.amenities.9.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Relaxing sauna facilities' },
+                    ]},
+                    { title: 'Amenidade 11 — Garden', fields: [
+                        { key: 'urban.amenities.10.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/11.svg' },
+                        { key: 'urban.amenities.10.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Garden' },
+                        { key: 'urban.amenities.10.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Landscaped common areas' },
+                    ]},
+                    { title: 'Amenidade 12 — Parking', fields: [
+                        { key: 'urban.amenities.11.icon', label: 'Ícone', type: 'image', min: 0, max: 500, default: 'urban-collections/12.svg' },
+                        { key: 'urban.amenities.11.title', label: 'Título', type: 'text', min: 2, max: 40, default: 'Parking' },
+                        { key: 'urban.amenities.11.desc', label: 'Descrição', type: 'text', min: 5, max: 120, default: 'Secure underground parking' },
+                    ]},
+                    { title: 'Floorplans — header', fields: [
+                        { key: 'urban.floorplans.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 40, default: 'S&A Urban Collection' },
                         { key: 'urban.floorplans.title', label: 'Título', type: 'text', min: 5, max: 40, default: 'FLOORPLANS' },
+                    ]},
+                    { title: 'Floor 0', fields: [
+                        { key: 'urban.floorplans.0.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'urban-collections/floor0_real.webp' },
+                        { key: 'urban.floorplans.0.label', label: 'Label', type: 'text', min: 2, max: 30, default: 'FLOOR 0' },
+                    ]},
+                    { title: 'Floor 1', fields: [
+                        { key: 'urban.floorplans.1.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'urban-collections/floor1_real.webp' },
+                        { key: 'urban.floorplans.1.label', label: 'Label', type: 'text', min: 2, max: 30, default: 'FLOOR 1' },
+                    ]},
+                    { title: 'Floor 2', fields: [
+                        { key: 'urban.floorplans.2.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'urban-collections/floor2_real.webp' },
+                        { key: 'urban.floorplans.2.label', label: 'Label', type: 'text', min: 2, max: 30, default: 'FLOOR 2' },
+                    ]},
+                    { title: 'Floor 3', fields: [
+                        { key: 'urban.floorplans.3.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'urban-collections/floor3_real.webp' },
+                        { key: 'urban.floorplans.3.label', label: 'Label', type: 'text', min: 2, max: 30, default: 'FLOOR 3' },
+                    ]},
+                    { title: 'Floor 4', fields: [
+                        { key: 'urban.floorplans.4.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'urban-collections/floor4_real.webp' },
+                        { key: 'urban.floorplans.4.label', label: 'Label', type: 'text', min: 2, max: 30, default: 'FLOOR 4' },
                     ]},
                 ]
             },
