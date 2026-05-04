@@ -140,6 +140,22 @@
                         href="contact.html">Contact Us</a></div>
             </div>
         </header>
+        <style>
+          /* Mobile: a section adota a proporção do vídeo retrato (1080×1200)
+             para que o vídeo apareça inteiro, sem corte nas laterais nem no topo. */
+          @media (max-width: 768px) {
+            #hero-video-space {
+              height: auto !important;
+              min-height: 0 !important;
+              max-height: none !important;
+              aspect-ratio: 1080 / 1200;
+            }
+            #hero-video {
+              object-fit: cover; /* aspect-ratio bate, então não há corte */
+              object-position: center;
+            }
+          }
+        </style>
         <section class="relative w-full overflow-hidden bg-black" id="hero-video-space"
             style="height: 80vh; min-height: 600px; max-height: 1000px;">
             <video id="hero-video" autoplay playsinline loop muted class="absolute inset-0 w-full h-full object-cover pointer-events-none"
