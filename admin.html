@@ -911,10 +911,27 @@
                         { key: 'global.footer.directions_url', label: 'Link Google Maps', type: 'url', min: 5, max: 300, default: 'https://share.google/xGcxWcLXDJqykmNq6' },
                         { key: 'global.footer.copyright', label: 'Texto de copyright', type: 'text', min: 5, max: 80, default: 'Copyright © 2026 Smith & Adams' },
                     ]},
-                    { title: 'Redes sociais', fields: [
+                    { title: 'Redes sociais — URLs', fields: [
                         { key: 'global.social.instagram', label: 'Instagram URL', type: 'url', min: 5, max: 200, default: 'https://www.instagram.com/smithandadamsgroup/' },
                         { key: 'global.social.linkedin',  label: 'LinkedIn URL',  type: 'url', min: 5, max: 200, default: 'https://www.linkedin.com/company/smith-and-adams/' },
                         { key: 'global.social.youtube',   label: 'YouTube URL',   type: 'url', min: 5, max: 200, default: 'https://www.youtube.com/@smithandadamsgroup' },
+                        { key: 'global.social.google_review_url', label: 'Google Reviews URL', type: 'url', min: 5, max: 300, default: 'https://share.google/RUwoPr3ByPmDXdcBC' },
+                    ]},
+                    { title: 'Card Instagram (home + about)', fields: [
+                        { key: 'global.social.instagram_handle', label: 'Handle (@user)', type: 'text', min: 2, max: 60, default: '@smithandadamsgroup' },
+                        { key: 'global.social.instagram_count', label: 'Contagem (ex: +150 Posts)', type: 'text', min: 1, max: 40, default: '+150 Posts' },
+                        { key: 'global.social.instagram_description', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: 'Gain privileged access to our select real estate portfolios, high-yield investment data, and key market updates from Portugal.' },
+                    ]},
+                    { title: 'Card LinkedIn (home + about)', fields: [
+                        { key: 'global.social.linkedin_handle', label: 'Nome', type: 'text', min: 2, max: 60, default: 'Smith & Adams' },
+                        { key: 'global.social.linkedin_count', label: 'Contagem (ex: +3 mil seguidores)', type: 'text', min: 1, max: 40, default: '+3 mil seguidores' },
+                        { key: 'global.social.linkedin_description', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: 'Trusted market intelligence, structural analysis, and professional advisory on strategic international real estate holdings.' },
+                    ]},
+                    { title: 'Card Google (home + about)', fields: [
+                        { key: 'global.social.google_handle', label: 'Nome', type: 'text', min: 2, max: 60, default: 'Smith & Adams' },
+                        { key: 'global.social.google_rating', label: 'Nota (ex: 4.7)', type: 'text', min: 1, max: 8, default: '4.7' },
+                        { key: 'global.social.google_stars', label: 'Estrelas preenchidas (1-5)', type: 'text', min: 1, max: 1, default: '5', helper: 'Quantas estrelas amarelas mostrar (número inteiro de 1 a 5)' },
+                        { key: 'global.social.google_description', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: 'Consult verified reviews and locate our headquarters. Confirmed expertise in residency and wealth management.' },
                     ]},
                 ]
             },
