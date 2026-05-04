@@ -507,6 +507,13 @@
     const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
     
+    // i18n: pega title/excerpt/content traduzidos quando disponíveis. Fallback EN.
+    function pickPostText(post, field) {
+        const locale = (localStorage.getItem('cmsLocale') || 'en');
+        if (locale === 'en') return post[field];
+        return (post.translations && post.translations[locale] && post.translations[locale][field]) || post[field];
+    }
+
     // We wait for DOM Load to avoid execution block
     document.addEventListener("DOMContentLoaded", () => {
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -540,12 +547,12 @@
             // Render Featured
             const feat = posts[0];
             document.getElementById('featured-article').classList.remove('hidden');
-            document.getElementById('feat-title').innerHTML = `<a id="feat-link" href="/blog/${feat.slug}">${feat.title}</a>`;
+            document.getElementById('feat-title').innerHTML = `<a id="feat-link" href="/blog/${feat.slug}">${pickPostText(feat, 'title')}</a>`;
             document.getElementById('feat-link-btn').href = `/blog/${feat.slug}`;
             document.getElementById('feat-category').textContent = feat.category;
             document.getElementById('feat-date').textContent = new Date(feat.created_at).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'});
             document.getElementById('feat-read').textContent = feat.read_time;
-            document.getElementById('feat-excerpt').textContent = feat.excerpt;
+            document.getElementById('feat-excerpt').textContent = pickPostText(feat, 'excerpt');
             let cimg = feat.image_url;
             if(cimg && !cimg.startsWith('http') && cimg.startsWith('.')) cimg = cimg.substring(1);
             document.getElementById('feat-img').src = cimg;
@@ -565,8 +572,8 @@
                 a.innerHTML = `
                     <div class="article-img-wrap"><img src="${img}" class="article-img"></div>
                     <div class="article-meta satoshi"><span class="article-category">${post.category}</span> <span>•</span> <span>${new Date(post.created_at).toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'})}</span> <span>•</span> <span>${post.read_time}</span></div>
-                    <h3 class="geist article-title">${post.title}</h3>
-                    <p class="satoshi article-excerpt">${post.excerpt}</p>
+                    <h3 class="geist article-title">${pickPostText(post, 'title')}</h3>
+                    <p class="satoshi article-excerpt">${pickPostText(post, 'excerpt')}</p>
                 `;
                 grid.appendChild(a);
             });

@@ -116,12 +116,26 @@
                 
                 <form id="post-form" class="space-y-6">
                     <input type="hidden" id="post-id">
-                    
+
+                    <div class="flex justify-end">
+                        <button type="button" id="bulk-translate-post-btn" class="text-sm font-bold text-[#466DEE] border border-[#466DEE] px-3 py-2 rounded-lg hover:bg-[#466DEE] hover:text-white transition-colors">🌐 Traduzir post para PT-BR</button>
+                    </div>
+
                     <div class="grid grid-cols-2 gap-6">
+                        <!-- Title (translatable) -->
                         <div class="col-span-2">
-                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Title</label>
+                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">🇬🇧 Title (EN)</label>
                             <input type="text" id="post-title" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]" required>
                         </div>
+                        <div class="col-span-2 -mt-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider">🇧🇷 Title (PT-BR)</label>
+                                <button type="button" data-translate-from-en="post-title" data-translate-to="post-title-pt" class="text-xs font-bold text-[#466DEE] hover:underline">↻ Traduzir do EN</button>
+                            </div>
+                            <input type="text" id="post-title-pt" placeholder="(opcional — vazio cai no EN)" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE] bg-blue-50/30">
+                        </div>
+
+                        <!-- Category & Read time (shared) -->
                         <div>
                             <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Category</label>
                             <select id="post-category" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]" required>
@@ -136,21 +150,43 @@
                             <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Read Time</label>
                             <input type="text" id="post-readtime" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]" placeholder="ex: 6 min read" required>
                         </div>
+
+                        <!-- Cover Image (shared) -->
                         <div class="col-span-2">
                             <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Cover Image Upload</label>
                             <input type="file" id="post-image" accept="image/*" class="w-full border border-gray-200 rounded-lg p-2 bg-white">
                             <input type="hidden" id="post-image-url">
                             <img id="image-preview" class="mt-4 h-40 rounded-lg object-cover hidden">
                         </div>
+
+                        <!-- Excerpt (translatable) -->
                         <div class="col-span-2">
-                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Short Excerpt</label>
+                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">🇬🇧 Short Excerpt (EN)</label>
                             <textarea id="post-excerpt" rows="2" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]" required></textarea>
+                        </div>
+                        <div class="col-span-2 -mt-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider">🇧🇷 Short Excerpt (PT-BR)</label>
+                                <button type="button" data-translate-from-en="post-excerpt" data-translate-to="post-excerpt-pt" class="text-xs font-bold text-[#466DEE] hover:underline">↻ Traduzir do EN</button>
+                            </div>
+                            <textarea id="post-excerpt-pt" rows="2" placeholder="(opcional — vazio cai no EN)" class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE] bg-blue-50/30"></textarea>
                         </div>
                     </div>
 
+                    <!-- Content EN (translatable) -->
                     <div class="col-span-2 mt-4">
-                        <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Full Content</label>
+                        <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">🇬🇧 Full Content (EN)</label>
                         <div id="editor-container"></div>
+                    </div>
+
+                    <!-- Content PT (translatable) -->
+                    <div class="col-span-2 mt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider">🇧🇷 Full Content (PT-BR)</label>
+                            <button type="button" id="translate-content-btn" class="text-xs font-bold text-[#466DEE] hover:underline">↻ Traduzir do EN</button>
+                        </div>
+                        <div id="editor-container-pt" class="bg-blue-50/30"></div>
+                        <p class="text-xs text-gray-500 mt-1">Vazio cai no EN.</p>
                     </div>
 
                     <button type="submit" id="save-btn" class="w-full bg-[#0C1E28] text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all text-lg flex justify-center items-center gap-2">
@@ -234,23 +270,30 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Rich Text Editor Initialization
+        // Rich Text Editor Initialization (EN + PT-BR)
+        const quillToolbar = {
+            container: [
+                [{ 'header': [2, 3, false] }],
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link', 'image'],
+                ['clean']
+            ],
+            handlers: {
+                image: selectLocalImage
+            }
+        };
         const quill = new Quill('#editor-container', {
             theme: 'snow',
-            modules: { 
-                toolbar: {
-                    container: [
-                        [{ 'header': [2, 3, false] }],
-                        ['bold', 'italic', 'underline', 'strike'],
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        ['link', 'image'],
-                        ['clean']
-                    ],
-                    handlers: {
-                        image: selectLocalImage
-                    }
-                }
-            }
+            modules: { toolbar: quillToolbar }
+        });
+        const quillPT = new Quill('#editor-container-pt', {
+            theme: 'snow',
+            placeholder: 'Versão em PT-BR (opcional — deixe vazio para usar a versão EN).',
+            modules: { toolbar: {
+                container: quillToolbar.container,
+                handlers: { image: selectLocalImage }
+            } }
         });
 
         // Quill Custom Image Handler to upload direct to Supabase
@@ -396,6 +439,9 @@
                 document.getElementById('post-form').reset();
                 document.getElementById('post-id').value = '';
                 quill.root.innerHTML = '';
+                quillPT.root.innerHTML = '';
+                document.getElementById('post-title-pt').value = '';
+                document.getElementById('post-excerpt-pt').value = '';
                 document.getElementById('image-preview').classList.add('hidden');
                 document.getElementById('editor-title').textContent = 'Create New Post';
             }
@@ -436,13 +482,19 @@
             document.getElementById('post-readtime').value = post.read_time;
             document.getElementById('post-excerpt').value = post.excerpt;
             document.getElementById('post-image-url').value = post.image_url;
-            
+
             if (post.image_url) {
                 const img = document.getElementById('image-preview');
                 img.src = post.image_url;
                 img.classList.remove('hidden');
             }
             quill.root.innerHTML = post.content;
+
+            // Popular PT-BR (vazio se ainda não traduzido)
+            const pt = (post.translations && post.translations.pt) || {};
+            document.getElementById('post-title-pt').value = pt.title || '';
+            document.getElementById('post-excerpt-pt').value = pt.excerpt || '';
+            quillPT.root.innerHTML = pt.content || '';
         };
 
         let postToDeleteId = null;
@@ -511,15 +563,33 @@
 
                 if (!publicUrl) throw new Error("A cover image is required!");
 
-                // 2. Save Post
+                // 2. Save Post — EN é canon, PT-BR opcional vai em translations.pt
+                const enTitle   = document.getElementById('post-title').value;
+                const enExcerpt = document.getElementById('post-excerpt').value;
+                const enContent = quill.root.innerHTML;
+
+                const ptTitle   = document.getElementById('post-title-pt').value.trim();
+                const ptExcerpt = document.getElementById('post-excerpt-pt').value.trim();
+                const ptContentRaw = quillPT.root.innerHTML;
+                const ptContent = (ptContentRaw && ptContentRaw !== '<p><br></p>') ? ptContentRaw : '';
+
+                const translations = {};
+                if (ptTitle || ptExcerpt || ptContent) {
+                    translations.pt = {};
+                    if (ptTitle)   translations.pt.title   = ptTitle;
+                    if (ptExcerpt) translations.pt.excerpt = ptExcerpt;
+                    if (ptContent) translations.pt.content = ptContent;
+                }
+
                 const postData = {
-                    title: document.getElementById('post-title').value,
-                    slug: generateSlug(document.getElementById('post-title').value),
-                    category: document.getElementById('post-category').value,
+                    title:     enTitle,
+                    slug:      generateSlug(enTitle),
+                    category:  document.getElementById('post-category').value,
                     read_time: document.getElementById('post-readtime').value,
-                    excerpt: document.getElementById('post-excerpt').value,
-                    content: quill.root.innerHTML,
-                    image_url: publicUrl
+                    excerpt:   enExcerpt,
+                    content:   enContent,
+                    image_url: publicUrl,
+                    translations
                 };
 
                 const id = document.getElementById('post-id').value;
@@ -539,6 +609,97 @@
             }
             
             btn.innerHTML = originalText;
+        });
+
+        // -------------------------
+        // POST TRANSLATION HELPERS
+        // -------------------------
+        async function translateTexts(texts) {
+            const r = await fetch('/api/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ texts, target: 'pt' })
+            });
+            if (!r.ok) {
+                const err = await r.json().catch(() => ({}));
+                throw new Error(err.error || `HTTP ${r.status}`);
+            }
+            const j = await r.json();
+            return j.translations;
+        }
+
+        function flashBtn(btn, text, ms = 1500) {
+            const orig = btn.innerHTML;
+            btn.innerHTML = text;
+            btn.disabled = true;
+            setTimeout(() => { btn.innerHTML = orig; btn.disabled = false; }, ms);
+        }
+
+        // Botões "↻ Traduzir do EN" para inputs/textareas (title, excerpt)
+        document.querySelectorAll('button[data-translate-from-en]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const fromId = btn.dataset.translateFromEn;
+                const toId   = btn.dataset.translateTo;
+                const en = document.getElementById(fromId).value.trim();
+                if (!en) { alert('Preencha o EN primeiro.'); return; }
+                const orig = btn.innerHTML;
+                btn.innerHTML = '⏳ Traduzindo...';
+                btn.disabled = true;
+                try {
+                    const [pt] = await translateTexts([en]);
+                    document.getElementById(toId).value = pt;
+                    flashBtn(btn, '✓ Traduzido', 1200);
+                } catch (e) {
+                    alert('Erro ao traduzir: ' + e.message);
+                    btn.innerHTML = orig;
+                    btn.disabled = false;
+                }
+            });
+        });
+
+        // Botão "↻ Traduzir do EN" para o conteúdo (Quill richtext)
+        document.getElementById('translate-content-btn').addEventListener('click', async (e) => {
+            const btn = e.currentTarget;
+            const en = quill.root.innerHTML;
+            if (!en || en === '<p><br></p>') { alert('Preencha o conteúdo EN primeiro.'); return; }
+            const orig = btn.innerHTML;
+            btn.innerHTML = '⏳ Traduzindo...';
+            btn.disabled = true;
+            try {
+                const [pt] = await translateTexts([en]);
+                quillPT.root.innerHTML = pt;
+                flashBtn(btn, '✓ Traduzido', 1200);
+            } catch (err) {
+                alert('Erro ao traduzir: ' + err.message);
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            }
+        });
+
+        // Botão "🌐 Traduzir post para PT-BR" — title + excerpt + content de uma vez
+        document.getElementById('bulk-translate-post-btn').addEventListener('click', async (e) => {
+            const btn = e.currentTarget;
+            const enTitle   = document.getElementById('post-title').value.trim();
+            const enExcerpt = document.getElementById('post-excerpt').value.trim();
+            const enContent = quill.root.innerHTML;
+            if (!enTitle || !enExcerpt || !enContent || enContent === '<p><br></p>') {
+                alert('Preencha title, excerpt e content em EN antes de traduzir.');
+                return;
+            }
+            const orig = btn.innerHTML;
+            btn.innerHTML = '⏳ Traduzindo...';
+            btn.disabled = true;
+            try {
+                const [tTitle, tExcerpt, tContent] = await translateTexts([enTitle, enExcerpt, enContent]);
+                document.getElementById('post-title-pt').value = tTitle;
+                document.getElementById('post-excerpt-pt').value = tExcerpt;
+                quillPT.root.innerHTML = tContent;
+                flashBtn(btn, '✓ Post traduzido — revise e publique', 2500);
+            } catch (err) {
+                alert('Erro ao traduzir: ' + err.message);
+                btn.innerHTML = orig;
+                btn.disabled = false;
+            }
         });
 
         // =========================================================

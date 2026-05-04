@@ -8,8 +8,16 @@ CREATE TABLE public.posts (
     category text not null,
     read_time text not null,
     image_url text not null,
+    -- i18n: per-locale overrides for title/excerpt/content. Shape:
+    --   { "pt": { "title": "...", "excerpt": "...", "content": "<p>...</p>" } }
+    -- Loader/article use EN columns as fallback when a locale or field is missing.
+    translations jsonb not null default '{}'::jsonb,
     created_at timestamp with time zone default timezone('utc'::text, now()) not null
 );
+
+-- Migration para tabelas existentes:
+-- ALTER TABLE public.posts
+--   ADD COLUMN IF NOT EXISTS translations jsonb NOT NULL DEFAULT '{}'::jsonb;
 
 -- 2. Enable Row Level Security (RLS) on posts
 ALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;
