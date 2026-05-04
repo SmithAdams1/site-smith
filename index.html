@@ -1094,6 +1094,16 @@
       const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
       const supabaseHomeClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+      // i18n: pega title/excerpt traduzidos quando disponíveis. Fallback EN.
+      function pickPostText(post, field) {
+          const locale = (localStorage.getItem('cmsLocale') || 'en');
+          if (locale === 'en') return post[field];
+          return (post.translations && post.translations[locale] && post.translations[locale][field]) || post[field];
+      }
+      function readArticleLabel() {
+          return (localStorage.getItem('cmsLocale') || 'en') === 'pt' ? 'Ler o artigo' : 'Read the Article';
+      }
+
       async function loadHomeBlogs() {
           const container = document.getElementById('home-blog-container');
           if(!container) return;
@@ -1118,17 +1128,19 @@
                   if (coverImg.startsWith('/')) coverImg = '.' + coverImg;
               }
 
+              const tTitle   = pickPostText(post, 'title');
+              const tExcerpt = pickPostText(post, 'excerpt');
               html += `
               <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full transition-all duration-300 hover:shadow-md flex flex-col">
                   <div class="relative aspect-[16/9] w-full">
-                      <img alt="${post.title}" class="object-cover w-full h-full absolute inset-0" src="${coverImg}" />
+                      <img alt="${tTitle}" class="object-cover w-full h-full absolute inset-0" src="${coverImg}" />
                   </div>
                   <div class="p-6 flex flex-col flex-grow">
-                      <h3 class="text-xl font-bold mb-3 geist text-[#0C1E28] leading-tight">${post.title}</h3>
-                      <p class="text-gray-600 satoshi mb-6 line-clamp-3 text-sm">${post.excerpt || 'Discover the latest insights from our editorial team in this exclusive article.'}</p>
+                      <h3 class="text-xl font-bold mb-3 geist text-[#0C1E28] leading-tight">${tTitle}</h3>
+                      <p class="text-gray-600 satoshi mb-6 line-clamp-3 text-sm">${tExcerpt || 'Discover the latest insights from our editorial team in this exclusive article.'}</p>
                       <div class="mt-auto">
                         <a class="inline-block bg-[#0C1E28] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-300 satoshi font-medium w-full text-center"
-                           href="/blog/${post.slug}">Read the Article</a>
+                           href="/blog/${post.slug}">${readArticleLabel()}</a>
                       </div>
                   </div>
               </div>
