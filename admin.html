@@ -116,6 +116,7 @@
                 
                 <form id="post-form" class="space-y-6">
                     <input type="hidden" id="post-id">
+                    <input type="hidden" id="post-original-slug">
 
                     <div class="flex justify-end">
                         <button type="button" id="bulk-translate-post-btn" class="text-sm font-bold text-[#466DEE] border border-[#466DEE] px-3 py-2 rounded-lg hover:bg-[#466DEE] hover:text-white transition-colors">🌐 Traduzir post para PT-BR</button>
@@ -438,6 +439,7 @@
             if(viewId === 'editor-view') {
                 document.getElementById('post-form').reset();
                 document.getElementById('post-id').value = '';
+                document.getElementById('post-original-slug').value = '';
                 quill.root.innerHTML = '';
                 quillPT.root.innerHTML = '';
                 document.getElementById('post-title-pt').value = '';
@@ -477,6 +479,7 @@
             showView('editor-view');
             document.getElementById('editor-title').textContent = 'Edit Post';
             document.getElementById('post-id').value = post.id;
+            document.getElementById('post-original-slug').value = post.slug || '';
             document.getElementById('post-title').value = post.title;
             document.getElementById('post-category').value = post.category;
             document.getElementById('post-readtime').value = post.read_time;
@@ -527,9 +530,11 @@
 
         function generateSlug(text) {
             return text.toString().toLowerCase().trim()
-                .replace(/\\s+/g, '-')
-                .replace(/[^\\w\\-]+/g, '')
-                .replace(/\\-\\-+/g, '-');
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove acentos
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-')
+                .replace(/^-+|-+$/g, '');
         }
 
         document.getElementById('post-form').addEventListener('submit', async (e) => {
@@ -581,9 +586,15 @@
                     if (ptContent) translations.pt.content = ptContent;
                 }
 
+                // Em edição, preservar o slug original (URL imutável, evita conflito de unique key).
+                // Em criação, gerar a partir do título.
+                const existingId   = document.getElementById('post-id').value;
+                const originalSlug = document.getElementById('post-original-slug').value;
+                const slug = existingId && originalSlug ? originalSlug : generateSlug(enTitle);
+
                 const postData = {
                     title:     enTitle,
-                    slug:      generateSlug(enTitle),
+                    slug,
                     category:  document.getElementById('post-category').value,
                     read_time: document.getElementById('post-readtime').value,
                     excerpt:   enExcerpt,
@@ -592,9 +603,8 @@
                     translations
                 };
 
-                const id = document.getElementById('post-id').value;
-                if (id) {
-                    const { error } = await supabaseClient.from('posts').update(postData).eq('id', id);
+                if (existingId) {
+                    const { error } = await supabaseClient.from('posts').update(postData).eq('id', existingId);
                     if (error) throw error;
                 } else {
                     // Create New
