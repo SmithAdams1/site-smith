@@ -876,10 +876,24 @@
                         { key: 'about.track.title', label: 'Título (HTML)', type: 'text', min: 5, max: 60, default: 'Track Record &<br/>Global Footprint' },
                         { key: 'about.track.body', label: 'Descrição', type: 'richtext', min: 20, max: 500, default: 'Founded in 2019, Smith & Adams Group has grown into a multi-entity platform serving both property owners and international investors. The leadership team brings over a decade of combined experience across real estate, investments, and citizenship-by-investment.' },
                     ]},
+                    { title: 'Track Record — Stats', fields: [
+                        { key: 'about.track.stats.0.value', label: 'Stat 1 — número (HTML)', type: 'text', min: 1, max: 30, default: '130<span style="font-size:1.5rem; opacity:0.5;">+</span>' },
+                        { key: 'about.track.stats.0.label', label: 'Stat 1 — label', type: 'text', min: 3, max: 40, default: 'Investors Advised' },
+                        { key: 'about.track.stats.1.value', label: 'Stat 2 — número (HTML)', type: 'text', min: 1, max: 30, default: '30<span style="font-size:1.5rem; opacity:0.5;">+</span>' },
+                        { key: 'about.track.stats.1.label', label: 'Stat 2 — label', type: 'text', min: 3, max: 40, default: 'Countries Represented' },
+                        { key: 'about.track.stats.2.value', label: 'Stat 3 — número (HTML)', type: 'text', min: 1, max: 30, default: '5<span style="font-size:1.5rem; opacity:0.5;">yr</span>' },
+                        { key: 'about.track.stats.2.label', label: 'Stat 3 — label', type: 'text', min: 3, max: 40, default: 'Lisbon-Based Operations' },
+                    ]},
+                    { title: 'Track Record — Bullets', fields: [
+                        { key: 'about.track.bullets.0', label: 'Bullet 1 (HTML)', type: 'richtext', min: 10, max: 400, default: 'Advised and supported more than <strong style="color:#FDFCF9; font-weight:600;">100–130 international investors</strong> in their move to Portugal and in building local portfolios.' },
+                        { key: 'about.track.bullets.1', label: 'Bullet 2 (HTML)', type: 'richtext', min: 10, max: 400, default: 'Expanded its presence <strong style="color:#FDFCF9; font-weight:600;">across Lisbon and key Portuguese cities</strong>, operating from Lisbon as its main hub.' },
+                        { key: 'about.track.bullets.2', label: 'Bullet 3 (HTML)', type: 'richtext', min: 10, max: 400, default: 'Attracted clients from <strong style="color:#FDFCF9; font-weight:600;">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> — reflecting a truly global client base.' },
+                    ]},
                     { title: 'Portfólio — header', fields: [
                         { key: 'about.portfolio.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Our Portfolio' },
                         { key: 'about.portfolio.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Previous Projects' },
                         { key: 'about.portfolio.body', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: 'Explore our successful developments across Portugal. Each project represents our commitment to quality construction, strategic locations, and investment excellence.' },
+                        { key: 'about.cards.cta', label: 'Texto do botão (todos os cards)', type: 'text', min: 2, max: 30, default: 'Reserve' },
                     ]},
                     { title: 'Card 1 — Campolide 2025 (12 units)', fields: [
                         { key: 'about.cards.0.image', label: 'Imagem', type: 'image', min: 0, max: 500, default: 'development/projectCardThumbnail1.png' },
