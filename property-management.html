@@ -250,6 +250,158 @@
 
 
 <!-- ══════════════════════════════════════
+     BOOKING SEARCH WIDGET
+══════════════════════════════════════ -->
+<section style="padding:clamp(40px,6vw,80px) clamp(16px,3.5vw,40px) 0; background:#FDFCF9;">
+  <div style="max-width:1280px; margin:0 auto;">
+    <div style="text-align:center; margin-bottom:32px;">
+      <p class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:#9ca3af; margin-bottom:16px;">Smith &amp; Adams</p>
+      <h2 id="boom-title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.02em; line-height:1.05; margin:0;">Book your stay</h2>
+      <p id="boom-subtitle" class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.55); max-width:520px; line-height:1.6; margin:16px auto 0;">Choose your dates and let us host your stay in one of our managed apartments in Lisbon.</p>
+    </div>
+
+    <form id="boom-search-form" class="satoshi" style="max-width:1100px; margin:0 auto; background:#ffffff; border:1px solid rgba(12,30,40,0.08); border-radius:24px; padding:clamp(16px,2.5vw,28px); box-shadow:0 12px 32px rgba(12,30,40,0.05); display:grid; grid-template-columns:1.2fr 1.2fr 1fr 1fr auto; gap:clamp(8px,1.5vw,16px); align-items:end;">
+
+      <div class="boom-field">
+        <label class="boom-label" data-i18n="checkin">Check-in</label>
+        <input type="date" id="boom-checkin" required class="boom-input">
+      </div>
+
+      <div class="boom-field">
+        <label class="boom-label" data-i18n="checkout">Check-out</label>
+        <input type="date" id="boom-checkout" required class="boom-input">
+      </div>
+
+      <div class="boom-field">
+        <label class="boom-label" data-i18n="adults">Adults</label>
+        <div class="boom-stepper">
+          <button type="button" class="boom-step-btn" data-step="adults" data-delta="-1" aria-label="Less">−</button>
+          <span id="boom-adults-val" class="boom-step-val">2</span>
+          <button type="button" class="boom-step-btn" data-step="adults" data-delta="1" aria-label="More">+</button>
+        </div>
+        <input type="hidden" id="boom-adults" value="2">
+      </div>
+
+      <div class="boom-field">
+        <label class="boom-label" data-i18n="children">Children</label>
+        <div class="boom-stepper">
+          <button type="button" class="boom-step-btn" data-step="children" data-delta="-1" aria-label="Less">−</button>
+          <span id="boom-children-val" class="boom-step-val">0</span>
+          <button type="button" class="boom-step-btn" data-step="children" data-delta="1" aria-label="More">+</button>
+        </div>
+        <input type="hidden" id="boom-children" value="0">
+      </div>
+
+      <button id="boom-submit" type="submit" class="boom-submit" data-i18n="search">Search →</button>
+    </form>
+
+    <p id="boom-hint" class="satoshi" style="font-size:12px; color:rgba(12,30,40,0.4); text-align:center; margin-top:14px;">Opens results in a new tab.</p>
+  </div>
+</section>
+
+<style>
+  .boom-field { display:flex; flex-direction:column; gap:8px; min-width:0; }
+  .boom-label { font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(12,30,40,0.55); font-weight:700; }
+  .boom-input { width:100%; min-width:0; height:52px; padding:0 16px; border:1px solid rgba(12,30,40,0.12); border-radius:14px; font:inherit; font-size:15px; color:#0C1E28; background:#FDFCF9; outline:none; transition:border-color .2s; }
+  .boom-input:focus { border-color:#0C1E28; }
+  .boom-stepper { display:flex; align-items:center; justify-content:space-between; height:52px; padding:0 8px; border:1px solid rgba(12,30,40,0.12); border-radius:14px; background:#FDFCF9; gap:8px; }
+  .boom-step-btn { width:34px; height:34px; border-radius:9999px; border:1px solid rgba(12,30,40,0.15); background:#ffffff; color:#0C1E28; font-size:18px; font-weight:700; cursor:pointer; line-height:1; display:flex; align-items:center; justify-content:center; transition:background .2s,color .2s; flex-shrink:0; }
+  .boom-step-btn:hover:not(:disabled) { background:#0C1E28; color:#ffffff; }
+  .boom-step-btn:disabled { opacity:.35; cursor:not-allowed; }
+  .boom-step-val { font-size:17px; font-weight:700; color:#0C1E28; min-width:24px; text-align:center; }
+  .boom-submit { height:52px; padding:0 28px; border-radius:14px; background:#0C1E28; color:#ffffff; font-size:15px; font-weight:700; letter-spacing:0.04em; border:none; cursor:pointer; transition:background .25s; white-space:nowrap; }
+  .boom-submit:hover { background:#1a3240; }
+  @media (max-width:980px) {
+    #boom-search-form { grid-template-columns:1fr 1fr; }
+    .boom-submit { grid-column:1 / -1; }
+  }
+  @media (max-width:520px) {
+    #boom-search-form { grid-template-columns:1fr; }
+    .boom-submit { grid-column:auto; }
+  }
+</style>
+
+<script>
+  (function () {
+    // i18n estática (não passa pelo CMS)
+    const I18N = {
+      en: { title: 'Book your stay', subtitle: 'Choose your dates and let us host your stay in one of our managed apartments in Lisbon.', checkin: 'Check-in', checkout: 'Check-out', adults: 'Adults', children: 'Children', search: 'Search →', hint: 'Opens results in a new tab.' },
+      pt: { title: 'Reserve sua estadia', subtitle: 'Escolha as datas e deixe-nos hospedar você em um dos nossos apartamentos geridos em Lisboa.', checkin: 'Check-in', checkout: 'Check-out', adults: 'Adultos', children: 'Crianças', search: 'Pesquisar →', hint: 'Abre os resultados em nova aba.' }
+    };
+    const locale = (localStorage.getItem('cmsLocale') || 'en').toLowerCase();
+    const t = I18N[locale] || I18N.en;
+
+    document.getElementById('boom-title').textContent    = t.title;
+    document.getElementById('boom-subtitle').textContent = t.subtitle;
+    document.getElementById('boom-hint').textContent     = t.hint;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (t[key]) el.textContent = t[key];
+    });
+
+    // Defaults: check-in = hoje + 7 dias, check-out = hoje + 10 dias
+    const fmt = d => d.toISOString().slice(0, 10);
+    const today = new Date();
+    const inDate  = new Date(today); inDate.setDate(today.getDate() + 7);
+    const outDate = new Date(today); outDate.setDate(today.getDate() + 10);
+    const ci = document.getElementById('boom-checkin');
+    const co = document.getElementById('boom-checkout');
+    ci.min = fmt(today);
+    ci.value = fmt(inDate);
+    co.min = fmt(inDate);
+    co.value = fmt(outDate);
+    ci.addEventListener('change', () => {
+      // garantir checkout > checkin
+      if (co.value <= ci.value) {
+        const next = new Date(ci.value);
+        next.setDate(next.getDate() + 1);
+        co.value = fmt(next);
+      }
+      co.min = ci.value;
+    });
+
+    // Steppers
+    function updateStepper(name) {
+      const v = parseInt(document.getElementById('boom-' + name).value, 10);
+      document.getElementById('boom-' + name + '-val').textContent = v;
+      const min = name === 'adults' ? 1 : 0;
+      const max = 16;
+      document.querySelectorAll('[data-step="' + name + '"]').forEach(b => {
+        const d = parseInt(b.dataset.delta, 10);
+        b.disabled = (d < 0 && v <= min) || (d > 0 && v >= max);
+      });
+    }
+    document.querySelectorAll('.boom-step-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const name = btn.dataset.step;
+        const delta = parseInt(btn.dataset.delta, 10);
+        const input = document.getElementById('boom-' + name);
+        const min = name === 'adults' ? 1 : 0;
+        const v = Math.max(min, Math.min(16, parseInt(input.value, 10) + delta));
+        input.value = v;
+        updateStepper(name);
+      });
+    });
+    updateStepper('adults');
+    updateStepper('children');
+
+    // Submit → abre Bookingsboom em nova aba com query string
+    document.getElementById('boom-search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const params = new URLSearchParams({
+        check_in:  ci.value,
+        check_out: co.value,
+        adults:    document.getElementById('boom-adults').value,
+        children:  document.getElementById('boom-children').value,
+        lang:      locale === 'pt' ? 'pt' : 'en'
+      });
+      window.open('https://smithandadams.bookingsboom.com/listings?' + params.toString(), '_blank', 'noopener');
+    });
+  })();
+</script>
+
+
+<!-- ══════════════════════════════════════
      URBAN COLLECTION FEATURE
 ══════════════════════════════════════ -->
 <section style="padding:clamp(40px,6vw,80px) clamp(16px,3.5vw,40px) 0; background:#FDFCF9;">
