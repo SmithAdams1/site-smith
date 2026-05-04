@@ -67,7 +67,14 @@
       el.setAttribute('href', value);
       return;
     }
-    el.textContent = value;
+    // Auto-detecta HTML: se o valor contém tags ou HTML entities (&amp;, &lt;, etc.),
+    // aplica via innerHTML para que o browser decodifique. Isso evita o bug onde
+    // valores como "S&amp;A" salvos por richtext apareciam literais com textContent.
+    if (/<[a-z][\s\S]*?>/i.test(value) || /&[a-zA-Z]+;|&#\d+;/.test(value)) {
+      el.innerHTML = value;
+    } else {
+      el.textContent = value;
+    }
   }
 
   async function loadContent() {
