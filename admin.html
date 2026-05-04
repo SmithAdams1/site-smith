@@ -161,25 +161,48 @@
             </div>
 
             <!-- Site Content View -->
-            <div id="content-view" class="hidden max-w-5xl">
+            <div id="content-view" class="hidden max-w-5xl pb-24">
                 <div class="flex justify-between items-center mb-2">
                     <h1 class="text-3xl font-bold text-[#0C1E28]">Site Content</h1>
                     <a id="content-preview-link" href="index.html" target="_blank" class="text-sm text-[#466DEE] font-bold hover:underline">Preview página ↗</a>
                 </div>
-                <p class="text-sm text-gray-500 mb-6">Selecione a página para editar. Cada campo já mostra o texto atual do site.</p>
+                <p class="text-sm text-gray-500 mb-4">Selecione a página para editar. Cada campo já mostra o texto atual do site. Atalho: <kbd class="px-1.5 py-0.5 bg-gray-100 rounded text-xs border border-gray-200">⌘ S</kbd> para salvar.</p>
 
                 <!-- Page nav buttons -->
-                <div id="content-page-nav" class="flex flex-wrap gap-2 mb-6"></div>
+                <div id="content-page-nav" class="flex flex-wrap gap-2 mb-4"></div>
+
+                <!-- Filter input -->
+                <div class="mb-4 relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">🔍</span>
+                    <input id="content-filter" type="text" placeholder="Filtrar campos por nome (ex: hero, card 1, footer...)" class="w-full border border-gray-200 rounded-lg pl-10 pr-3 py-2 text-sm focus:outline-none focus:border-[#466DEE]">
+                </div>
 
                 <div id="content-status" class="mb-4 text-sm hidden"></div>
 
                 <form id="content-form" class="space-y-5 bg-white border border-gray-100 rounded-xl p-6 shadow-sm">
                     <div id="content-page-title" class="text-xs font-bold uppercase tracking-widest text-[#466DEE] mb-2"></div>
                     <div id="content-fields" class="space-y-5"></div>
-                    <button type="submit" id="content-save-btn" class="w-full bg-[#0C1E28] text-white py-4 rounded-xl font-bold hover:bg-opacity-90 transition-all text-lg flex justify-center items-center gap-2">
-                        <span>SAVE CHANGES</span>
-                    </button>
+                    <div id="content-empty" class="hidden text-center py-12 text-gray-400 text-sm">Nenhum campo bate com o filtro.</div>
                 </form>
+            </div>
+
+            <!-- Sticky save bar (visible only when there are unsaved changes) -->
+            <div id="sticky-save-bar" class="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-30 shadow-[0_-4px_24px_rgba(0,0,0,0.06)] hidden">
+                <div class="max-w-5xl mx-auto flex justify-between items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-orange-50">
+                            <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
+                        </span>
+                        <div>
+                            <div id="dirty-count" class="font-bold text-[#0C1E28] text-sm">0 alterações pendentes</div>
+                            <button type="button" id="discard-btn" class="text-xs text-gray-500 hover:text-red-500 underline">Descartar todas</button>
+                        </div>
+                    </div>
+                    <button type="button" id="content-save-btn" class="bg-[#0C1E28] text-white px-8 py-3 rounded-full font-bold hover:bg-opacity-90 transition-all flex items-center gap-2">
+                        <span>SAVE</span>
+                        <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-[10px] font-mono">⌘ S</kbd>
+                    </button>
+                </div>
             </div>
 
         </main>
@@ -920,6 +943,7 @@
             if (Object.keys(contentDirty).length > 0 && id !== currentPageId) {
                 if (!confirm('Você tem alterações não salvas. Trocar de página vai descartá-las.')) return;
                 for (const k in contentDirty) delete contentDirty[k];
+                updateDirtyUI();
             }
             currentPageId = id;
             const page = SITE_SCHEMA[id];
@@ -959,8 +983,8 @@
             const previewLink = document.getElementById('content-preview-link');
             previewLink.href = page.preview;
 
-            // Reset dirty when switching pages
-            for (const k in contentDirty) delete contentDirty[k];
+            // Reset resetters; dirty is reset by selectPage before this is called
+            for (const k in fieldResetters) delete fieldResetters[k];
 
             wrap.innerHTML = '';
             page.sections.forEach(section => {
@@ -971,36 +995,74 @@
                 });
                 wrap.appendChild(sec);
             });
+
+            // Reaplica o filtro em cima do novo conteúdo
+            const filter = document.getElementById('content-filter');
+            if (filter && filter.value) applyFieldFilter(filter.value);
+            updateDirtyUI();
         }
 
+        // Mapa: key → função reset(value) chamada quando user clica reset ou descartar tudo
+        const fieldResetters = {};
+
         function buildFieldEl(field) {
-            const stored = contentValues[field.key];               // valor já no banco (ou undefined)
-            const isEdited = stored !== undefined;
-            const initial = isEdited ? stored : (field.default ?? '');  // pré-preenche com texto atual do HTML
+            const stored = contentValues[field.key];
+            const isEditedFromDB = stored !== undefined;
+            const initial = isEditedFromDB ? stored : (field.default ?? '');
             const wrapper = document.createElement('div');
-            wrapper.className = 'space-y-1';
+            wrapper.className = 'space-y-1 cms-field-row';
+            // Texto pesquisável (label + chave): usado pelo filtro
+            wrapper.dataset.search = (field.label + ' ' + field.key).toLowerCase();
+            wrapper.dataset.cmsKey = field.key;
 
             const labelRow = document.createElement('div');
             labelRow.className = 'flex justify-between items-center gap-2';
             const labelLeft = document.createElement('div');
-            labelLeft.className = 'flex items-center gap-2';
+            labelLeft.className = 'flex items-center gap-2 flex-wrap';
             labelLeft.innerHTML = `<label class="block text-sm font-bold text-gray-700">${field.label}</label>`;
             const badge = document.createElement('span');
-            badge.className = isEdited
-                ? 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 font-bold'
-                : 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold';
-            badge.textContent = isEdited ? 'Editado' : 'Texto atual';
+            badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold';
+            const resetBtn = document.createElement('button');
+            resetBtn.type = 'button';
+            resetBtn.className = 'text-[11px] text-gray-400 hover:text-red-500 underline hidden';
+            resetBtn.textContent = '↺ Resetar';
+            resetBtn.title = 'Voltar ao texto atual do site';
             labelLeft.appendChild(badge);
+            labelLeft.appendChild(resetBtn);
             labelRow.appendChild(labelLeft);
             const counter = document.createElement('span');
-            counter.className = 'text-xs text-gray-400 font-mono';
+            counter.className = 'text-xs text-gray-400 font-mono shrink-0';
             labelRow.appendChild(counter);
             wrapper.appendChild(labelRow);
+
+            // Estado do badge: "Texto atual" (default), "Editado" (salvo no banco), "Modificado" (dirty, não salvo)
+            const refreshBadge = () => {
+                const isDirty = field.key in contentDirty;
+                if (isDirty) {
+                    badge.textContent = 'Modificado';
+                    badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold bg-orange-50 text-orange-600';
+                    resetBtn.classList.remove('hidden');
+                } else if (isEditedFromDB) {
+                    badge.textContent = 'Editado';
+                    badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold bg-blue-50 text-blue-600';
+                    resetBtn.classList.add('hidden');
+                } else {
+                    badge.textContent = 'Texto atual';
+                    badge.className = 'text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full font-bold bg-gray-100 text-gray-500';
+                    resetBtn.classList.add('hidden');
+                }
+            };
 
             const updateCounter = (val) => {
                 const len = (val || '').length;
                 counter.textContent = `${len}/${field.max}`;
                 counter.classList.toggle('text-red-500', len > field.max || (field.min && len < field.min));
+            };
+
+            const onEdit = (val) => {
+                contentDirty[field.key] = val;
+                refreshBadge();
+                updateDirtyUI();
             };
 
             if (field.type === 'longtext') {
@@ -1010,12 +1072,11 @@
                 ta.minLength = field.min || 0;
                 ta.maxLength = field.max;
                 ta.value = initial;
-                ta.oninput = () => { contentDirty[field.key] = ta.value; updateCounter(ta.value); };
+                ta.oninput = () => { onEdit(ta.value); updateCounter(ta.value); };
                 wrapper.appendChild(ta);
                 updateCounter(initial);
+                fieldResetters[field.key] = () => { ta.value = initial; updateCounter(initial); };
             } else if (field.type === 'richtext') {
-                // Quill com toolbar mínima (formatação inline) — sem cabeçalhos/listas para
-                // não introduzir <h1>, <ul> dentro de elementos cujo container é <p>.
                 const editorWrap = document.createElement('div');
                 editorWrap.style.background = 'white';
                 editorWrap.style.borderRadius = '8px';
@@ -1028,45 +1089,47 @@
 
                 const q = new Quill(editorEl, {
                     theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            ['bold', 'italic', 'underline'],
-                            ['link'],
-                            ['clean'],
-                        ],
-                    },
+                    modules: { toolbar: [['bold','italic','underline'], ['link'], ['clean']] },
                 });
 
-                if (initial) {
-                    // initial pode vir como inline ('texto <strong>foo</strong>') ou bloco ('<p>...</p>').
-                    // Quill aceita tanto, mas para inline puro precisamos envolver em <p> antes.
-                    const looksBlock = /^<p[\s>]/i.test(initial.trim());
-                    q.clipboard.dangerouslyPasteHTML(0, looksBlock ? initial : '<p>' + initial + '</p>');
-                }
+                const setQuillFromValue = (val) => {
+                    q.setContents([]);
+                    if (val) {
+                        const looksBlock = /^<p[\s>]/i.test(val.trim());
+                        q.clipboard.dangerouslyPasteHTML(0, looksBlock ? val : '<p>' + val + '</p>');
+                    }
+                };
+                setQuillFromValue(initial);
 
                 const stripOuterP = (html) => {
                     const t = html.trim();
                     if (t === '<p><br></p>' || t === '<p></p>') return '';
-                    // Se for um único <p>...</p>, devolve só o conteúdo interno.
                     const m = t.match(/^<p>([\s\S]*?)<\/p>$/);
                     if (m && !/<p[\s>]/i.test(m[1])) return m[1];
                     return t;
                 };
 
-                const updateRich = () => {
+                let suppressChange = false;
+                q.on('text-change', () => {
+                    if (suppressChange) return;
                     const html = stripOuterP(q.root.innerHTML);
-                    contentDirty[field.key] = html;
+                    onEdit(html);
                     const len = q.getText().replace(/\n+$/, '').length;
                     counter.textContent = `${len}/${field.max}`;
                     counter.classList.toggle('text-red-500', len > field.max || (field.min && len < field.min));
-                };
+                });
 
-                q.on('text-change', updateRich);
-
-                // Counter inicial
                 const initLen = q.getText().replace(/\n+$/, '').length;
                 counter.textContent = `${initLen}/${field.max}`;
-                counter.classList.toggle('text-red-500', initLen > field.max || (field.min && initLen < field.min));
+
+                fieldResetters[field.key] = () => {
+                    suppressChange = true;
+                    setQuillFromValue(initial);
+                    const l = q.getText().replace(/\n+$/, '').length;
+                    counter.textContent = `${l}/${field.max}`;
+                    counter.classList.remove('text-red-500');
+                    suppressChange = false;
+                };
             } else if (field.type === 'image') {
                 const fileInput = document.createElement('input');
                 fileInput.type = 'file';
@@ -1078,10 +1141,10 @@
                 urlInput.value = initial;
                 urlInput.placeholder = 'URL da imagem (preenchida ao fazer upload)';
                 urlInput.className = 'w-full border border-gray-200 rounded-lg p-2 mt-2 text-sm';
-                urlInput.oninput = () => { contentDirty[field.key] = urlInput.value; };
+                urlInput.oninput = () => { onEdit(urlInput.value); preview.src = urlInput.value; preview.style.display = urlInput.value ? 'block' : 'none'; };
 
                 const preview = document.createElement('img');
-                preview.className = 'mt-2 h-24 rounded-lg object-cover';
+                preview.className = 'mt-2 h-40 rounded-lg object-cover border border-gray-100';
                 preview.style.display = initial ? 'block' : 'none';
                 preview.src = initial;
 
@@ -1096,7 +1159,7 @@
                         if (up) throw up;
                         const { data: u } = supabaseClient.storage.from('site-media').getPublicUrl(fname);
                         urlInput.value = u.publicUrl;
-                        contentDirty[field.key] = u.publicUrl;
+                        onEdit(u.publicUrl);
                         preview.src = u.publicUrl;
                         preview.style.display = 'block';
                     } catch(e) {
@@ -1109,18 +1172,32 @@
                 wrapper.appendChild(fileInput);
                 wrapper.appendChild(urlInput);
                 wrapper.appendChild(preview);
+                fieldResetters[field.key] = () => {
+                    urlInput.value = initial;
+                    preview.src = initial;
+                    preview.style.display = initial ? 'block' : 'none';
+                    fileInput.value = '';
+                };
             } else {
-                // text | url | video → input
                 const input = document.createElement('input');
                 input.type = (field.type === 'url' || field.type === 'video') ? 'url' : 'text';
                 input.className = 'w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:border-[#466DEE]';
                 input.minLength = field.min || 0;
                 input.maxLength = field.max;
                 input.value = initial;
-                input.oninput = () => { contentDirty[field.key] = input.value; updateCounter(input.value); };
+                input.oninput = () => { onEdit(input.value); updateCounter(input.value); };
                 wrapper.appendChild(input);
                 updateCounter(initial);
+                fieldResetters[field.key] = () => { input.value = initial; updateCounter(initial); };
             }
+
+            resetBtn.onclick = () => {
+                const fn = fieldResetters[field.key];
+                if (fn) fn();
+                delete contentDirty[field.key];
+                refreshBadge();
+                updateDirtyUI();
+            };
 
             if (field.helper) {
                 const h = document.createElement('p');
@@ -1128,33 +1205,87 @@
                 h.textContent = field.helper;
                 wrapper.appendChild(h);
             }
+            refreshBadge();
             return wrapper;
+        }
+
+        // ----- DIRTY UI / FILTER / DISCARD -----
+        function updateDirtyUI() {
+            const n = Object.keys(contentDirty).length;
+            const bar = document.getElementById('sticky-save-bar');
+            const counter = document.getElementById('dirty-count');
+            if (n === 0) {
+                bar.classList.add('hidden');
+            } else {
+                bar.classList.remove('hidden');
+                counter.textContent = n === 1 ? '1 alteração pendente' : `${n} alterações pendentes`;
+            }
+        }
+
+        function applyFieldFilter(query) {
+            const q = (query || '').trim().toLowerCase();
+            const rows = document.querySelectorAll('#content-fields .cms-field-row');
+            const headings = document.querySelectorAll('#content-fields h3');
+            let visible = 0;
+            rows.forEach(row => {
+                const match = !q || row.dataset.search.includes(q);
+                row.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+            // Mostra/esconde os títulos de seção que não têm nenhum campo visível
+            headings.forEach(h => {
+                let next = h.nextElementSibling;
+                let any = false;
+                while (next && !next.matches('h3')) {
+                    if (next.classList && next.classList.contains('cms-field-row') && next.style.display !== 'none') any = true;
+                    next = next.nextElementSibling;
+                }
+                h.style.display = any || !q ? '' : 'none';
+            });
+            document.getElementById('content-empty').classList.toggle('hidden', visible > 0 || !q);
+        }
+
+        function discardAllDirty() {
+            if (Object.keys(contentDirty).length === 0) return;
+            if (!confirm('Descartar todas as alterações pendentes?')) return;
+            for (const k of Object.keys(contentDirty)) {
+                const fn = fieldResetters[k];
+                if (fn) fn();
+                delete contentDirty[k];
+            }
+            // Re-render badges (cheaper: just re-render the whole page)
+            renderContentFields(currentPageId);
+            updateDirtyUI();
         }
 
         function showContentStatus(msg, isError) {
             const el = document.getElementById('content-status');
-            el.textContent = msg;
-            el.className = `mb-4 text-sm ${isError ? 'text-red-500' : 'text-green-600'}`;
+            el.innerHTML = `<div class="${isError ? 'bg-red-50 text-red-700 border-red-200' : 'bg-green-50 text-green-700 border-green-200'} border rounded-lg px-4 py-3 flex justify-between items-center">
+                <span>${isError ? '⚠️ ' : '✓ '} ${msg}</span>
+                <button type="button" onclick="document.getElementById('content-status').classList.add('hidden')" class="text-xs opacity-60 hover:opacity-100">×</button>
+            </div>`;
             el.classList.remove('hidden');
-            setTimeout(() => el.classList.add('hidden'), 4000);
+            // Status fica visível até o usuário começar a editar de novo (gerenciado em onEdit) ou clicar no X
         }
 
-        document.getElementById('content-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        async function saveSiteContent() {
             const btn = document.getElementById('content-save-btn');
             const original = btn.innerHTML;
-            btn.innerHTML = 'Saving...';
+            btn.innerHTML = '<span>Saving…</span>';
             btn.disabled = true;
 
-            // Validate all dirty fields against schema
-            const pageId = currentPageId;
-            const allFields = SITE_SCHEMA[pageId].sections.flatMap(s => s.fields);
+            // Validação em cima do schema da página atual + global (caso edite chave global)
+            const pages = Object.values(SITE_SCHEMA);
+            const allFields = pages.flatMap(p => p.sections.flatMap(s => s.fields));
             const fieldByKey = Object.fromEntries(allFields.map(f => [f.key, f]));
             const errors = [];
             for (const [key, val] of Object.entries(contentDirty)) {
                 const f = fieldByKey[key];
                 if (!f) continue;
-                const len = (val || '').length;
+                // Para richtext o limite é em texto plano: a validação de length em cima do HTML
+                // pode dar falsos positivos. Validamos com o length do texto sem tags.
+                const plain = String(val || '').replace(/<[^>]*>/g, '');
+                const len = plain.length;
                 if (f.min && len < f.min) errors.push(`"${f.label}" precisa de pelo menos ${f.min} caracteres`);
                 if (f.max && len > f.max) errors.push(`"${f.label}" excede ${f.max} caracteres`);
             }
@@ -1177,9 +1308,42 @@
             } else {
                 Object.assign(contentValues, contentDirty);
                 for (const k in contentDirty) delete contentDirty[k];
-                showContentStatus(`${rows.length} campo(s) salvo(s).`, false);
+                showContentStatus(`${rows.length} campo(s) salvo(s) com sucesso.`, false);
+                // Re-render para atualizar badges "Modificado" → "Editado"
+                renderContentFields(currentPageId);
+                updateDirtyUI();
             }
             btn.innerHTML = original; btn.disabled = false;
+        }
+
+        // Mantém o submit handler do form (Enter dentro de um input dispara isso) e o botão
+        document.getElementById('content-form').addEventListener('submit', (e) => { e.preventDefault(); saveSiteContent(); });
+        document.getElementById('content-save-btn').addEventListener('click', saveSiteContent);
+        document.getElementById('discard-btn').addEventListener('click', discardAllDirty);
+
+        // Filtro com debounce simples
+        let filterTimer;
+        document.getElementById('content-filter').addEventListener('input', (e) => {
+            clearTimeout(filterTimer);
+            filterTimer = setTimeout(() => applyFieldFilter(e.target.value), 120);
+        });
+
+        // Atalho Cmd+S / Ctrl+S — só ativa quando a aba Site Content está visível
+        document.addEventListener('keydown', (e) => {
+            const isSave = (e.metaKey || e.ctrlKey) && (e.key === 's' || e.key === 'S');
+            if (!isSave) return;
+            const view = document.getElementById('content-view');
+            if (!view || view.classList.contains('hidden')) return;
+            e.preventDefault();
+            saveSiteContent();
+        });
+
+        // Aviso se tentar fechar a aba com alterações pendentes
+        window.addEventListener('beforeunload', (e) => {
+            if (Object.keys(contentDirty).length > 0) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
         });
 
     </script>
