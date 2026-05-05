@@ -43,10 +43,15 @@
   h1,h2,h3 { margin:0; }
 
   /* TOP BAR */
-  .lp-top { position:absolute; top:0; left:0; right:0; z-index:30; padding:24px clamp(16px,4vw,40px); display:flex; align-items:center; justify-content:space-between; }
+  .lp-top { position:absolute; top:0; left:0; right:0; z-index:30; padding:24px clamp(16px,4vw,40px); display:flex; align-items:center; justify-content:space-between; gap:16px; }
   .lp-top img { height:34px; width:auto; filter:brightness(0) invert(1); }
+  .lp-top-right { display:flex; align-items:center; gap:18px; }
   .lp-top .phone { font-size:14px; color:rgba(255,255,255,0.85); text-decoration:none; font-weight:500; letter-spacing:.02em; }
   .lp-top .phone:hover { color:#fff; }
+  .lp-lang { display:inline-flex; gap:4px; padding:4px; border:1px solid rgba(255,255,255,0.25); border-radius:9999px; background:rgba(255,255,255,0.05); }
+  .lp-lang button { background:transparent; border:none; color:rgba(255,255,255,0.65); font:inherit; font-size:12px; font-weight:700; padding:6px 12px; border-radius:9999px; cursor:pointer; letter-spacing:.05em; transition:background .2s,color .2s; }
+  .lp-lang button.active { background:#fff; color:var(--dark); }
+  .lp-lang button:not(.active):hover { color:#fff; }
 
   /* HERO */
   .hero { position:relative; background:#0C1E28; padding:clamp(110px,14vw,150px) 0 clamp(60px,8vw,90px); overflow:hidden; }
@@ -156,6 +161,17 @@
   .lp-foot a  { color:#fff; text-decoration:none; }
   .lp-foot p  { margin:6px 0; }
 
+  /* BROCHURE MODAL */
+  .lp-modal { display:none; position:fixed; inset:0; z-index:100; background:rgba(12,30,40,.7); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:20px; }
+  .lp-modal.active { display:flex; }
+  .lp-modal-card { background:var(--cream); border-radius:18px; padding:clamp(24px,3vw,40px); width:100%; max-width:480px; position:relative; box-shadow:0 30px 80px rgba(0,0,0,.4); max-height:90vh; overflow-y:auto; }
+  .lp-modal-close { position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:9999px; background:transparent; border:none; cursor:pointer; color:var(--dark); display:flex; align-items:center; justify-content:center; transition:background .2s; }
+  .lp-modal-close:hover { background:rgba(12,30,40,.06); }
+  .lp-modal-eyebrow { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:rgba(12,30,40,.5); margin-bottom:10px; }
+  .lp-modal-title { font-family:'Geist',sans-serif; font-size:24px; font-weight:800; color:var(--dark); letter-spacing:-.01em; line-height:1.2; margin-bottom:8px; }
+  .lp-modal-sub { font-size:14px; color:rgba(12,30,40,.6); line-height:1.55; margin-bottom:24px; }
+  .lp-modal .lp-form { gap:14px; }
+
   /* RESPONSIVE */
   @media (max-width:980px) {
     .hero > .container { grid-template-columns:1fr; gap:40px; }
@@ -180,46 +196,52 @@
 <!-- TOP BAR -->
 <div class="lp-top">
   <img src="logo.png" alt="Smith &amp; Adams">
-  <a class="phone" href="tel:+351938227348">+351 938 227 348</a>
+  <div class="lp-top-right">
+    <a class="phone" href="tel:+351938227348">+351 938 227 348</a>
+    <div class="lp-lang" role="tablist" aria-label="Language">
+      <button type="button" data-lang="en" class="active" aria-label="English">🇬🇧 EN</button>
+      <button type="button" data-lang="pt" aria-label="Portugu&ecirc;s">🇧🇷 PT</button>
+    </div>
+  </div>
 </div>
 
 <!-- HERO with FORM -->
 <section class="hero">
   <div class="container">
     <div>
-      <span class="hero-eyebrow">Urban Collection · Beato, Lisbon</span>
-      <h1 class="hero-title geist">Invest in Lisbon with a <em>4% guaranteed annual return</em></h1>
-      <p class="hero-sub">Modern residential units from €280,000 in one of Lisbon&rsquo;s most promising districts &mdash; with D2&nbsp;Visa eligibility and a clear pathway to residency in Portugal.</p>
+      <span class="hero-eyebrow" data-i18n="hero.eyebrow">Urban Collection · Beato, Lisbon</span>
+      <h1 class="hero-title geist" data-i18n-html="hero.title">Invest in Lisbon with a <em>4% guaranteed annual return</em></h1>
+      <p class="hero-sub" data-i18n-html="hero.sub">Modern residential units from €280,000 in one of Lisbon&rsquo;s most promising districts &mdash; with D2&nbsp;Visa eligibility and a clear pathway to residency in Portugal.</p>
       <ul class="hero-bullets">
-        <li><strong style="color:#fff;">4% guaranteed annual return</strong>&nbsp;in euros, contractually backed.</li>
-        <li>Co-ownership in a <strong style="color:#fff;">206-unit Lisbon development</strong> with full amenities.</li>
-        <li><strong style="color:#fff;">€280,000 package qualifies for the D2 Visa</strong> &mdash; 5-year residency &amp; visa-free Schengen travel.</li>
+        <li data-i18n-html="hero.bullet1"><strong style="color:#fff;">4% guaranteed annual return</strong>&nbsp;in euros, contractually backed.</li>
+        <li data-i18n-html="hero.bullet2">Co-ownership in a <strong style="color:#fff;">206-unit Lisbon development</strong> with full amenities.</li>
+        <li data-i18n-html="hero.bullet3"><strong style="color:#fff;">€280,000 package qualifies for the D2 Visa</strong> &mdash; 5-year residency &amp; visa-free Schengen travel.</li>
       </ul>
-      <a class="hero-secondary" href="Urban%20Collection%20Beato.pdf" target="_blank" rel="noopener">Download the full investment brochure &rarr;</a>
+      <a class="hero-secondary" data-i18n="hero.brochure_link" data-brochure="hero" href="#brochure-modal">Download the full investment brochure &rarr;</a>
     </div>
 
     <!-- FORM CARD -->
     <div class="form-card" id="lp-form">
-      <h2 class="form-card-title">Schedule a free consultation</h2>
-      <p class="form-card-sub">Speak with a Smith &amp; Adams specialist within 24 hours.</p>
+      <h2 class="form-card-title" data-i18n="form.title">Schedule a free consultation</h2>
+      <p class="form-card-sub" data-i18n="form.sub">Speak with a Smith &amp; Adams specialist within 24 hours.</p>
       <div class="lp-error" id="lp-error"></div>
       <form id="lp-lead-form" class="lp-form" novalidate>
         <div class="lp-grid-2">
           <div class="lp-input-group">
-            <label class="lp-label" for="firstName">First name</label>
+            <label class="lp-label" for="firstName" data-i18n="form.first_name">First name</label>
             <input type="text" id="firstName" class="lp-input" autocomplete="given-name" required>
           </div>
           <div class="lp-input-group">
-            <label class="lp-label" for="lastName">Last name</label>
+            <label class="lp-label" for="lastName" data-i18n="form.last_name">Last name</label>
             <input type="text" id="lastName" class="lp-input" autocomplete="family-name" required>
           </div>
         </div>
         <div class="lp-input-group">
-          <label class="lp-label" for="email">Email</label>
-          <input type="email" id="email" class="lp-input" placeholder="you@company.com" autocomplete="email" required>
+          <label class="lp-label" for="email" data-i18n="form.email">Email</label>
+          <input type="email" id="email" class="lp-input" placeholder="you@company.com" autocomplete="email" required data-i18n-placeholder="form.email_placeholder">
         </div>
         <div class="lp-input-group">
-          <label class="lp-label">Phone number</label>
+          <label class="lp-label" data-i18n="form.phone">Phone number</label>
           <div class="lp-phone-wrap">
             <select class="lp-phone-code" id="phoneCode" name="phone_code">
               <optgroup label="Popular">
@@ -405,20 +427,20 @@
           </div>
         </div>
         <div class="lp-input-group">
-          <label class="lp-label" for="message">Message <span style="font-weight:400; opacity:.55; text-transform:none; letter-spacing:0;">(optional)</span></label>
-          <textarea id="message" class="lp-input" rows="2" placeholder="Tell us a bit about your investment goals."></textarea>
+          <label class="lp-label" for="message" data-i18n-html="form.message">Message <span style="font-weight:400; opacity:.55; text-transform:none; letter-spacing:0;">(optional)</span></label>
+          <textarea id="message" class="lp-input" rows="2" placeholder="Tell us a bit about your investment goals." data-i18n-placeholder="form.message_placeholder"></textarea>
         </div>
-        <button type="submit" class="lp-submit" id="lp-submit">Schedule consultation &rarr;</button>
-        <p class="lp-foot-note">By submitting, you agree to be contacted by Smith &amp; Adams about Urban Collection. We respect your privacy.</p>
+        <button type="submit" class="lp-submit" id="lp-submit" data-i18n="form.submit">Schedule consultation &rarr;</button>
+        <p class="lp-foot-note" data-i18n="form.foot_note">By submitting, you agree to be contacted by Smith &amp; Adams about Urban Collection. We respect your privacy.</p>
       </form>
 
       <div class="lp-success" id="lp-success">
         <div class="lp-success-icon">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
-        <h3 class="geist">Thank you!</h3>
-        <p>Your request has been received. A specialist will reach out within 24 hours.</p>
-        <a href="Urban%20Collection%20Beato.pdf" class="brochure" target="_blank" rel="noopener">Download brochure &rarr;</a>
+        <h3 class="geist">Thank you!</h3 data-i18n="form.success_title">
+        <p data-i18n="form.success_body">Your request has been received. A specialist will reach out within 24 hours.</p>
+        <a href="Urban%20Collection%20Beato.pdf" class="brochure" target="_blank" rel="noopener" data-i18n="form.success_brochure">Download brochure &rarr;</a>
       </div>
     </div>
   </div>
@@ -429,14 +451,14 @@
   <div class="container">
     <div class="two-col">
       <div>
-        <span class="sec-eyebrow">The opportunity</span>
-        <h2 class="sec-title geist">A modern residential development in Lisbon&rsquo;s innovation hub</h2>
-        <p class="sec-body">S&amp;A Urban Collection is a contemporary residential development offering <strong>206 carefully designed units</strong> in Lisbon&rsquo;s rapidly developing Beato district. Combining modern architecture with urban convenience, the project delivers an exceptional lifestyle proposition in a neighbourhood becoming a hub for innovation, culture, and creativity.</p>
-        <p class="sec-body">For investors, Urban Collection represents a compelling balance between <strong>secure income and long-term capital appreciation</strong> in one of Europe&rsquo;s most dynamic real estate markets.</p>
+        <span class="sec-eyebrow" data-i18n="why.eyebrow">The opportunity</span>
+        <h2 class="sec-title geist" data-i18n="why.title">A modern residential development in Lisbon&rsquo;s innovation hub</h2>
+        <p class="sec-body"><span data-i18n-html="why.body1">S&amp;A Urban Collection is a contemporary residential development offering <strong>206 carefully designed units</strong> in Lisbon&rsquo;s rapidly developing Beato district. Combining modern architecture with urban convenience, the project delivers an exceptional lifestyle proposition in a neighbourhood becoming a hub for innovation, culture, and creativity.</span></p>
+        <p class="sec-body"><span data-i18n-html="why.body2">For investors, Urban Collection represents a compelling balance between <strong>secure income and long-term capital appreciation</strong> in one of Europe&rsquo;s most dynamic real estate markets.</span></p>
         <ul class="pill-bullets">
-          <li>206 residential units with modern layouts.</li>
-          <li>Scheduled completion in <strong>December 2026</strong>.</li>
-          <li>Prime location in Beato &mdash; rapid urban transformation.</li>
+          <li data-i18n="why.bullet1">206 residential units with modern layouts.</li>
+          <li data-i18n-html="why.bullet2">Scheduled completion in <strong>December 2026</strong>.</li>
+          <li data-i18n="why.bullet3">Prime location in Beato — rapid urban transformation.</li>
         </ul>
       </div>
       <img src="lp-urban-collection/cam1.jpg" alt="Urban Collection Beato — exterior rendering" loading="lazy">
@@ -447,30 +469,30 @@
 <!-- 3. RETURN & SECURITY -->
 <section class="sec dark">
   <div class="container">
-    <span class="sec-eyebrow light">Return &amp; security</span>
-    <h2 class="sec-title light geist">A 4% guaranteed annual return backed by a real Lisbon asset</h2>
+    <span class="sec-eyebrow light" data-i18n="ret.eyebrow">Return &amp; security</span>
+    <h2 class="sec-title light geist" data-i18n="ret.title">A 4% guaranteed annual return backed by a real Lisbon asset</h2>
 
     <div class="return-card">
       <div class="return-num">4<span>%</span></div>
-      <p>Guaranteed annual return for the contractual period &mdash; passive income in euros, with no tenants, maintenance, or operations to manage. <strong style="color:#fff;">Minimum investment: &euro;280,000</strong>.</p>
+      <p data-i18n-html="ret.card_body">Guaranteed annual return for the contractual period — passive income in euros, with no tenants, maintenance, or operations to manage. <strong style="color:#fff;">Minimum investment: €280,000</strong>.</p>
     </div>
 
-    <p class="sec-body light">The project is developed and managed by <strong style="color:#fff;">Smith &amp; Adams Group</strong> &mdash; a trusted name in Portuguese real estate with over a decade of experience operating prime residential assets.</p>
+    <p class="sec-body light"><span data-i18n-html="ret.body">The project is developed and managed by <strong style="color:#fff;">Smith &amp; Adams Group</strong> — a trusted name in Portuguese real estate with over a decade of experience operating prime residential assets.</span></p>
 
     <ul class="pill-bullets light">
-      <li>Minimum investment: <strong style="color:#fff;">&euro;280,000</strong> in a Lisbon residential unit.</li>
-      <li><strong style="color:#fff;">4% guaranteed</strong> annual return for the contractual period.</li>
-      <li>Exposure to a physical real estate asset in a high-demand European capital.</li>
-      <li>Fully managed by Smith &amp; Adams &mdash; leasing, maintenance, operations.</li>
+      <li data-i18n-html="ret.bullet1">Minimum investment: <strong style="color:#fff;">€280,000</strong> in a Lisbon residential unit.</li>
+      <li data-i18n-html="ret.bullet2"><strong style="color:#fff;">4% guaranteed</strong> annual return for the contractual period.</li>
+      <li data-i18n="ret.bullet3">Exposure to a physical real estate asset in a high-demand European capital.</li>
+      <li data-i18n="ret.bullet4">Fully managed by Smith & Adams — leasing, maintenance, operations.</li>
     </ul>
 
     <div class="micro-quote">
-      &ldquo;Earn guaranteed income in euros from a professionally managed Lisbon asset &mdash; with none of the headaches of traditional property ownership.&rdquo;
+      <span data-i18n="ret.quote">"Earn guaranteed income in euros from a professionally managed Lisbon asset — with none of the headaches of traditional property ownership."</span>
     </div>
 
     <div class="cta-strip">
-      <h3>Lock in 4% guaranteed returns and your residency in Portugal.</h3>
-      <a href="#lp-form">Schedule consultation &rarr;</a>
+      <h3 data-i18n="ret.cta_title">Lock in 4% guaranteed returns and your residency in Portugal.</h3>
+      <a href="#lp-form" data-i18n="cta.consultation">Schedule consultation →</a>
     </div>
   </div>
 </section>
@@ -478,21 +500,21 @@
 <!-- 4. D2 VISA -->
 <section class="sec">
   <div class="container">
-    <span class="sec-eyebrow">Residency &amp; mobility</span>
-    <h2 class="sec-title geist">An investment that unlocks residency in Portugal</h2>
-    <p class="sec-body">The &euro;280,000 Urban Collection package is designed to qualify for Portugal&rsquo;s <strong>D2 Visa</strong> &mdash; one of the fastest and most secure routes to residency in the country. By investing, you can apply for a 5-year residence permit with the right to live in Portugal and travel visa-free across the Schengen Area.</p>
-    <p class="sec-body">Beyond the financial return, your investment becomes a <strong>strategic tool for global mobility and family planning</strong> &mdash; offering more security, quality of life, and flexibility for the future.</p>
+    <span class="sec-eyebrow" data-i18n="d2.eyebrow">Residency &amp; mobility</span>
+    <h2 class="sec-title geist" data-i18n="d2.title">An investment that unlocks residency in Portugal</h2>
+    <p class="sec-body"><span data-i18n-html="d2.body1">The €280,000 Urban Collection package is designed to qualify for Portugal's <strong>D2 Visa</strong> — one of the fastest and most secure routes to residency in the country. By investing, you can apply for a 5-year residence permit with the right to live in Portugal and travel visa-free across the Schengen Area.</span></p>
+    <p class="sec-body"><span data-i18n-html="d2.body2">Beyond the financial return, your investment becomes a <strong>strategic tool for global mobility and family planning</strong> — offering more security, quality of life, and flexibility for the future.</span></p>
 
     <ul class="pill-bullets" style="margin-top:8px;">
-      <li><strong>D2 Visa eligibility</strong> with the &euro;280,000 investment package.</li>
-      <li>Initial <strong>5-year residence permit</strong>, renewable under current law.</li>
-      <li><strong>Visa-free Schengen</strong> travel while the permit is valid.</li>
-      <li>Family Reunification possible for relatives.</li>
-      <li>Potential pathway to <strong>Portuguese citizenship</strong>.</li>
+      <li data-i18n-html="d2.bullet1"><strong>D2 Visa eligibility</strong> with the €280,000 investment package.</li>
+      <li data-i18n-html="d2.bullet2">Initial <strong>5-year residence permit</strong>, renewable under current law.</li>
+      <li data-i18n-html="d2.bullet3"><strong>Visa-free Schengen</strong> travel while the permit is valid.</li>
+      <li data-i18n="d2.bullet4">Family Reunification possible for relatives.</li>
+      <li data-i18n-html="d2.bullet5">Potential pathway to <strong>Portuguese citizenship</strong>.</li>
     </ul>
 
     <div class="micro-quote">
-      &ldquo;More than an investment: a strategic route to European residency, with income in euros today and the possibility of citizenship tomorrow.&rdquo;
+      <span data-i18n="d2.quote">"More than an investment: a strategic route to European residency, with income in euros today and the possibility of citizenship tomorrow."</span>
     </div>
   </div>
 </section>
@@ -504,14 +526,14 @@
     <div class="two-col" style="grid-template-columns:1fr 1.15fr;">
       <img src="lp-urban-collection/drone.jpg" alt="Beato district aerial view" loading="lazy">
       <div>
-        <span class="sec-eyebrow">Location</span>
-        <h2 class="sec-title geist">Beato: where industrial heritage meets innovation</h2>
-        <p class="sec-body">Urban Collection sits in Lisbon&rsquo;s <strong>Beato district</strong> &mdash; a riverside area rapidly transforming into one of the city&rsquo;s key hubs for innovation, culture, and entrepreneurship. Former industrial buildings are being converted into creative hubs, tech spaces, and new residential projects, driving demand for high-quality housing and long-term rentals.</p>
-        <p class="sec-body">For investors, this transformation creates a favourable environment: an emerging district with strong rental demand, lifestyle appeal for young professionals, and clear potential for capital appreciation as the neighbourhood matures.</p>
+        <span class="sec-eyebrow" data-i18n="loc.eyebrow">Location</span>
+        <h2 class="sec-title geist" data-i18n="loc.title">Beato: where industrial heritage meets innovation</h2>
+        <p class="sec-body"><span data-i18n-html="loc.body1">Urban Collection sits in Lisbon's <strong>Beato district</strong> — a riverside area rapidly transforming into one of the city's key hubs for innovation, culture, and entrepreneurship. Former industrial buildings are being converted into creative hubs, tech spaces, and new residential projects, driving demand for high-quality housing and long-term rentals.</span></p>
+        <p class="sec-body"><span data-i18n="loc.body2">For investors, this transformation creates a favourable environment: an emerging district with strong rental demand, lifestyle appeal for young professionals, and clear potential for capital appreciation as the neighbourhood matures.</span></p>
         <ul class="pill-bullets" style="grid-template-columns:1fr;">
-          <li>Growing creative and tech ecosystem.</li>
-          <li>Close to Lisbon&rsquo;s historic centre and the riverside.</li>
-          <li>Capital appreciation potential linked to public &amp; private investment.</li>
+          <li data-i18n="loc.bullet1">Growing creative and tech ecosystem.</li>
+          <li data-i18n="loc.bullet2">Close to Lisbon's historic centre and the riverside.</li>
+          <li data-i18n="loc.bullet3">Capital appreciation potential linked to public & private investment.</li>
         </ul>
       </div>
     </div>
@@ -522,29 +544,29 @@
 <section class="sec dark">
   <div class="container">
     <div style="text-align:center; max-width:760px; margin:0 auto 56px;">
-      <span class="sec-eyebrow light">Lifestyle</span>
-      <h2 class="sec-title light geist">A complete residential community under one roof</h2>
-      <p class="sec-body light" style="margin:0 auto;">A curated mix of wellness, work, leisure, and convenience amenities turns Urban Collection into a modern residential community that stands out in the Lisbon market.</p>
+      <span class="sec-eyebrow light" data-i18n="am.eyebrow">Lifestyle</span>
+      <h2 class="sec-title light geist" data-i18n="am.title">A complete residential community under one roof</h2>
+      <p class="sec-body light" style="margin:0 auto;"><span data-i18n="am.body">A curated mix of wellness, work, leisure, and convenience amenities turns Urban Collection into a modern residential community that stands out in the Lisbon market.</span></p>
     </div>
 
     <div class="am-grid">
-      <div class="am-item"><img class="am-icon" src="urban-collections/1.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Gym &amp; fitness</span><span class="am-desc">State-of-the-art fitness center.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/2.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Yoga</span><span class="am-desc">Dedicated yoga and meditation space.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/3.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Swimming pool</span><span class="am-desc">Outdoor pool with deck.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/4.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Coworking</span><span class="am-desc">Modern workspace for residents.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/5.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Grocery store</span><span class="am-desc">On-site convenience shop.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/6.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Pet wash</span><span class="am-desc">Professional pet care services.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/7.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Laundry</span><span class="am-desc">Full-service laundry facilities.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/8.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Cinema room</span><span class="am-desc">Private screening room.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/9.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Bike parking</span><span class="am-desc">Secure bicycle storage.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/10.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Sauna</span><span class="am-desc">Relaxing sauna facilities.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/11.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Garden</span><span class="am-desc">Landscaped communal areas.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/12.svg" style="filter:brightness(0) invert(1);"><span class="am-title">Parking</span><span class="am-desc">Secure underground parking.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/1.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.gym_t">Gym &amp; fitness</span><span class="am-desc" data-i18n="am.gym_d">State-of-the-art fitness center.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/2.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.yoga_t">Yoga</span><span class="am-desc" data-i18n="am.yoga_d">Dedicated yoga and meditation space.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/3.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.pool_t">Swimming pool</span><span class="am-desc" data-i18n="am.pool_d">Outdoor pool with deck.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/4.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.cowork_t">Coworking</span><span class="am-desc" data-i18n="am.cowork_d">Modern workspace for residents.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/5.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.grocery_t">Grocery store</span><span class="am-desc" data-i18n="am.grocery_d">On-site convenience shop.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/6.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.pet_t">Pet wash</span><span class="am-desc" data-i18n="am.pet_d">Professional pet care services.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/7.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.laundry_t">Laundry</span><span class="am-desc" data-i18n="am.laundry_d">Full-service laundry facilities.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/8.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.cinema_t">Cinema room</span><span class="am-desc" data-i18n="am.cinema_d">Private screening room.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/9.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.bike_t">Bike parking</span><span class="am-desc" data-i18n="am.bike_d">Secure bicycle storage.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/10.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.sauna_t">Sauna</span><span class="am-desc" data-i18n="am.sauna_d">Relaxing sauna facilities.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/11.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.garden_t">Garden</span><span class="am-desc" data-i18n="am.garden_d">Landscaped communal areas.</span></div>
+      <div class="am-item"><img class="am-icon" src="urban-collections/12.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.parking_t">Parking</span><span class="am-desc" data-i18n="am.parking_d">Secure underground parking.</span></div>
     </div>
 
     <div class="cta-strip" style="margin-top:64px;">
-      <h3>Get the full amenities list, floorplans, and pricing.</h3>
-      <a href="#lp-form">Talk to a specialist &rarr;</a>
+      <h3 data-i18n="am.cta_title">Get the full amenities list, floorplans, and pricing.</h3>
+      <a href="#lp-form" data-i18n="cta.specialist">Talk to a specialist →</a>
     </div>
   </div>
 </section>
@@ -554,10 +576,10 @@
   <div class="container">
     <div class="two-col" style="grid-template-columns:1.1fr 1fr;">
       <div>
-        <span class="sec-eyebrow">About us</span>
-        <h2 class="sec-title geist">Smith &amp; Adams: your real estate partner in Portugal</h2>
-        <p class="sec-body">Smith &amp; Adams develops and manages prime residential real estate in Portugal &mdash; offering tailored investment opportunities with secure returns and long-term access to the European market. With over a decade of experience, the group provides integrated solutions, from asset selection and development to property management and support throughout the residency process.</p>
-        <p class="sec-body">For investors, this means <strong>transparency, professional execution, and a clear focus on income generation and capital preservation</strong>.</p>
+        <span class="sec-eyebrow" data-i18n="about.eyebrow">About us</span>
+        <h2 class="sec-title geist" data-i18n="about.title">Smith &amp; Adams: your real estate partner in Portugal</h2>
+        <p class="sec-body"><span data-i18n="about.body1">Smith & Adams develops and manages prime residential real estate in Portugal — offering tailored investment opportunities with secure returns and long-term access to the European market. With over a decade of experience, the group provides integrated solutions, from asset selection and development to property management and support throughout the residency process.</span></p>
+        <p class="sec-body"><span data-i18n-html="about.body2">For investors, this means <strong>transparency, professional execution, and a clear focus on income generation and capital preservation</strong>.</span></p>
       </div>
       <img src="lp-urban-collection/cam7.jpg" alt="Urban Collection — interior amenities" loading="lazy">
     </div>
@@ -569,17 +591,17 @@
   <div class="container">
     <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(32px,5vw,60px); align-items:center;" class="final-grid">
       <div>
-        <span class="sec-eyebrow light">Next steps</span>
-        <h2 class="sec-title light geist">Schedule a consultation and receive your personalised investment plan</h2>
-        <p class="sec-body light">Our team will review your profile, explain how the D2 Visa works in practice, and build a tailored plan around Urban Collection. Share your details and a specialist will contact you within 24 hours.</p>
+        <span class="sec-eyebrow light" data-i18n="next.eyebrow">Next steps</span>
+        <h2 class="sec-title light geist" data-i18n="next.title">Schedule a consultation and receive your personalised investment plan</h2>
+        <p class="sec-body light"><span data-i18n="next.body">Our team will review your profile, explain how the D2 Visa works in practice, and build a tailored plan around Urban Collection. Share your details and a specialist will contact you within 24 hours.</span></p>
         <ul class="pill-bullets light" style="margin-top:8px;">
-          <li>Personalised investment plan based on your goals.</li>
-          <li>Step-by-step D2 Visa guidance.</li>
-          <li>Local expertise on Lisbon real estate, financing, and residency.</li>
+          <li data-i18n="next.bullet1">Personalised investment plan based on your goals.</li>
+          <li data-i18n="next.bullet2">Step-by-step D2 Visa guidance.</li>
+          <li data-i18n="next.bullet3">Local expertise on Lisbon real estate, financing, and residency.</li>
         </ul>
       </div>
       <a href="#lp-form" style="display:inline-flex; align-items:center; justify-content:center; gap:12px; background:#fff; color:var(--dark); padding:22px 32px; border-radius:9999px; font-weight:700; font-size:14px; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; box-shadow:0 12px 30px rgba(255,255,255,.08); justify-self:center; align-self:center; transition:transform .2s,background .25s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='var(--cream)';" onmouseout="this.style.transform=''; this.style.background='#fff';">
-        Book a free consultation &rarr;
+        <span data-i18n="next.cta">Book a free consultation →</span>
       </a>
     </div>
   </div>
@@ -588,9 +610,9 @@
 <!-- FOOTER -->
 <footer class="lp-foot">
   <img src="logo.png" alt="Smith &amp; Adams">
-  <p>Smith &amp; Adams Group &mdash; Av. Jos&eacute; Malhoa 14, 1070-073 Lisboa, Portugal.</p>
+  <p data-i18n="foot.address">Smith & Adams Group — Av. José Malhoa 14, 1070-073 Lisboa, Portugal.</p>
   <p><a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a> &middot; <a href="tel:+351938227348">+351 938 227 348</a></p>
-  <p style="margin-top:18px; font-size:11px; opacity:.5;">Copyright &copy; 2026 Smith &amp; Adams. Investment subject to terms and conditions. D2 Visa eligibility depends on individual circumstances and prevailing legal requirements.</p>
+  <p style="margin-top:18px; font-size:11px; opacity:.5;"><span data-i18n="foot.copy">Copyright © 2026 Smith & Adams. Investment subject to terms and conditions. D2 Visa eligibility depends on individual circumstances and prevailing legal requirements.</span></p>
 </footer>
 
 <script>
@@ -668,6 +690,414 @@
         document.getElementById('lp-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => document.getElementById('firstName').focus(), 600);
       });
+    });
+  })();
+</script>
+
+<!-- BROCHURE MODAL -->
+<div class="lp-modal" id="brochure-modal" role="dialog" aria-modal="true" aria-labelledby="brochure-title">
+  <div class="lp-modal-card">
+    <button type="button" class="lp-modal-close" aria-label="Close" onclick="closeBrochureModal()">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <span class="lp-modal-eyebrow" data-i18n="brochure.eyebrow">Investment brochure</span>
+    <h3 id="brochure-title" class="lp-modal-title" data-i18n="brochure.title">Get the full brochure</h3>
+    <p class="lp-modal-sub" data-i18n="brochure.sub">Tell us where to send it. The PDF opens automatically after you submit.</p>
+    <div class="lp-error" id="brochure-error"></div>
+    <form id="brochure-form" class="lp-form" novalidate>
+      <div class="lp-grid-2">
+        <div class="lp-input-group">
+          <label class="lp-label" for="b_firstName" data-i18n="form.first_name">First name</label>
+          <input type="text" id="b_firstName" class="lp-input" autocomplete="given-name" required>
+        </div>
+        <div class="lp-input-group">
+          <label class="lp-label" for="b_lastName" data-i18n="form.last_name">Last name</label>
+          <input type="text" id="b_lastName" class="lp-input" autocomplete="family-name" required>
+        </div>
+      </div>
+      <div class="lp-input-group">
+        <label class="lp-label" for="b_email" data-i18n="form.email">Email</label>
+        <input type="email" id="b_email" class="lp-input" placeholder="you@company.com" data-i18n-placeholder="form.email_placeholder" autocomplete="email" required>
+      </div>
+      <div class="lp-input-group">
+        <label class="lp-label" data-i18n="form.phone">Phone number</label>
+        <div class="lp-phone-wrap">
+          <select class="lp-phone-code" id="b_phoneCode" name="phone_code">
+            <option value="+90"  data-placeholder="532 123 4567">🇹🇷 +90</option>
+            <option value="+971" data-placeholder="50 123 4567">🇦🇪 +971</option>
+            <option value="+1"   data-placeholder="(555) 012-3456">🇺🇸 +1</option>
+            <option value="+44"  data-placeholder="7700 900000">🇬🇧 +44</option>
+            <option value="+91"  data-placeholder="98765 43210">🇮🇳 +91</option>
+            <option value="+886" data-placeholder="912 345 678">🇹🇼 +886</option>
+            <option value="+852" data-placeholder="9123 4567">🇭🇰 +852</option>
+            <option value="+351" data-placeholder="912 345 678" selected>🇵🇹 +351</option>
+            <option value="+55"  data-placeholder="(11) 91234-5678">🇧🇷 +55</option>
+            <option value="+34"  data-placeholder="612 345 678">🇪🇸 +34</option>
+            <option value="+33"  data-placeholder="6 12 34 56 78">🇫🇷 +33</option>
+            <option value="+49"  data-placeholder="151 2345 6789">🇩🇪 +49</option>
+            <option value="+39"  data-placeholder="312 345 6789">🇮🇹 +39</option>
+          </select>
+          <input type="tel" id="b_phoneNumber" class="lp-phone-input" placeholder="912 345 678" autocomplete="tel" required>
+        </div>
+      </div>
+      <button type="submit" class="lp-submit" id="b_submit" data-i18n="brochure.submit">Send &amp; download &rarr;</button>
+      <p class="lp-foot-note" data-i18n="form.foot_note">By submitting, you agree to be contacted by Smith &amp; Adams about Urban Collection. We respect your privacy.</p>
+    </form>
+  </div>
+</div>
+
+<!-- I18N + MODAL HANDLER -->
+<script>
+  (function () {
+    // ─── i18n strings ───────────────────────────────────────────────
+    const I18N = {
+      en: {
+        hero: {
+          eyebrow: 'Urban Collection · Beato, Lisbon',
+          title: 'Invest in Lisbon with a <em>4% guaranteed annual return</em>',
+          sub: 'Modern residential units from €280,000 in one of Lisbon&rsquo;s most promising districts &mdash; with D2&nbsp;Visa eligibility and a clear pathway to residency in Portugal.',
+          bullet1: '<strong style="color:#fff;">4% guaranteed annual return</strong>&nbsp;in euros, contractually backed.',
+          bullet2: 'Co-ownership in a <strong style="color:#fff;">206-unit Lisbon development</strong> with full amenities.',
+          bullet3: '<strong style="color:#fff;">€280,000 package qualifies for the D2 Visa</strong> &mdash; 5-year residency &amp; visa-free Schengen travel.',
+          brochure_link: 'Download the full investment brochure →'
+        },
+        form: {
+          title: 'Schedule a free consultation',
+          sub: 'Speak with a Smith & Adams specialist within 24 hours.',
+          first_name: 'First name',
+          last_name: 'Last name',
+          email: 'Email',
+          phone: 'Phone number',
+          message: 'Message <span style="font-weight:400; opacity:.55; text-transform:none; letter-spacing:0;">(optional)</span>',
+          email_placeholder: 'you@company.com',
+          message_placeholder: 'Tell us a bit about your investment goals.',
+          submit: 'Schedule consultation →',
+          foot_note: 'By submitting, you agree to be contacted by Smith & Adams about Urban Collection. We respect your privacy.',
+          success_title: 'Thank you!',
+          success_body: 'Your request has been received. A specialist will reach out within 24 hours.',
+          success_brochure: 'Download brochure →'
+        },
+        why: {
+          eyebrow: 'The opportunity',
+          title: 'A modern residential development in Lisbon’s innovation hub',
+          body1: 'S&amp;A Urban Collection is a contemporary residential development offering <strong>206 carefully designed units</strong> in Lisbon’s rapidly developing Beato district. Combining modern architecture with urban convenience, the project delivers an exceptional lifestyle proposition in a neighbourhood becoming a hub for innovation, culture, and creativity.',
+          body2: 'For investors, Urban Collection represents a compelling balance between <strong>secure income and long-term capital appreciation</strong> in one of Europe’s most dynamic real estate markets.',
+          bullet1: '206 residential units with modern layouts.',
+          bullet2: 'Scheduled completion in <strong>December 2026</strong>.',
+          bullet3: 'Prime location in Beato — rapid urban transformation.'
+        },
+        ret: {
+          eyebrow: 'Return & security',
+          title: 'A 4% guaranteed annual return backed by a real Lisbon asset',
+          card_body: 'Guaranteed annual return for the contractual period — passive income in euros, with no tenants, maintenance, or operations to manage. <strong style="color:#fff;">Minimum investment: €280,000</strong>.',
+          body: 'The project is developed and managed by <strong style="color:#fff;">Smith & Adams Group</strong> — a trusted name in Portuguese real estate with over a decade of experience operating prime residential assets.',
+          bullet1: 'Minimum investment: <strong style="color:#fff;">€280,000</strong> in a Lisbon residential unit.',
+          bullet2: '<strong style="color:#fff;">4% guaranteed</strong> annual return for the contractual period.',
+          bullet3: 'Exposure to a physical real estate asset in a high-demand European capital.',
+          bullet4: 'Fully managed by Smith & Adams — leasing, maintenance, operations.',
+          quote: '"Earn guaranteed income in euros from a professionally managed Lisbon asset — with none of the headaches of traditional property ownership."',
+          cta_title: 'Lock in 4% guaranteed returns and your residency in Portugal.'
+        },
+        d2: {
+          eyebrow: 'Residency & mobility',
+          title: 'An investment that unlocks residency in Portugal',
+          body1: 'The €280,000 Urban Collection package is designed to qualify for Portugal’s <strong>D2 Visa</strong> — one of the fastest and most secure routes to residency in the country. By investing, you can apply for a 5-year residence permit with the right to live in Portugal and travel visa-free across the Schengen Area.',
+          body2: 'Beyond the financial return, your investment becomes a <strong>strategic tool for global mobility and family planning</strong> — offering more security, quality of life, and flexibility for the future.',
+          bullet1: '<strong>D2 Visa eligibility</strong> with the €280,000 investment package.',
+          bullet2: 'Initial <strong>5-year residence permit</strong>, renewable under current law.',
+          bullet3: '<strong>Visa-free Schengen</strong> travel while the permit is valid.',
+          bullet4: 'Family Reunification possible for relatives.',
+          bullet5: 'Potential pathway to <strong>Portuguese citizenship</strong>.',
+          quote: '"More than an investment: a strategic route to European residency, with income in euros today and the possibility of citizenship tomorrow."'
+        },
+        loc: {
+          eyebrow: 'Location',
+          title: 'Beato: where industrial heritage meets innovation',
+          body1: 'Urban Collection sits in Lisbon’s <strong>Beato district</strong> — a riverside area rapidly transforming into one of the city’s key hubs for innovation, culture, and entrepreneurship. Former industrial buildings are being converted into creative hubs, tech spaces, and new residential projects, driving demand for high-quality housing and long-term rentals.',
+          body2: 'For investors, this transformation creates a favourable environment: an emerging district with strong rental demand, lifestyle appeal for young professionals, and clear potential for capital appreciation as the neighbourhood matures.',
+          bullet1: 'Growing creative and tech ecosystem.',
+          bullet2: 'Close to Lisbon’s historic centre and the riverside.',
+          bullet3: 'Capital appreciation potential linked to public & private investment.'
+        },
+        am: {
+          eyebrow: 'Lifestyle',
+          title: 'A complete residential community under one roof',
+          body: 'A curated mix of wellness, work, leisure, and convenience amenities turns Urban Collection into a modern residential community that stands out in the Lisbon market.',
+          gym_t: 'Gym & fitness',     gym_d: 'State-of-the-art fitness center.',
+          yoga_t: 'Yoga',              yoga_d: 'Dedicated yoga and meditation space.',
+          pool_t: 'Swimming pool',     pool_d: 'Outdoor pool with deck.',
+          cowork_t: 'Coworking',       cowork_d: 'Modern workspace for residents.',
+          grocery_t: 'Grocery store',  grocery_d: 'On-site convenience shop.',
+          pet_t: 'Pet wash',           pet_d: 'Professional pet care services.',
+          laundry_t: 'Laundry',        laundry_d: 'Full-service laundry facilities.',
+          cinema_t: 'Cinema room',     cinema_d: 'Private screening room.',
+          bike_t: 'Bike parking',      bike_d: 'Secure bicycle storage.',
+          sauna_t: 'Sauna',            sauna_d: 'Relaxing sauna facilities.',
+          garden_t: 'Garden',          garden_d: 'Landscaped communal areas.',
+          parking_t: 'Parking',        parking_d: 'Secure underground parking.',
+          cta_title: 'Get the full amenities list, floorplans, and pricing.'
+        },
+        about: {
+          eyebrow: 'About us',
+          title: 'Smith & Adams: your real estate partner in Portugal',
+          body1: 'Smith & Adams develops and manages prime residential real estate in Portugal — offering tailored investment opportunities with secure returns and long-term access to the European market. With over a decade of experience, the group provides integrated solutions, from asset selection and development to property management and support throughout the residency process.',
+          body2: 'For investors, this means <strong>transparency, professional execution, and a clear focus on income generation and capital preservation</strong>.'
+        },
+        next: {
+          eyebrow: 'Next steps',
+          title: 'Schedule a consultation and receive your personalised investment plan',
+          body: 'Our team will review your profile, explain how the D2 Visa works in practice, and build a tailored plan around Urban Collection. Share your details and a specialist will contact you within 24 hours.',
+          bullet1: 'Personalised investment plan based on your goals.',
+          bullet2: 'Step-by-step D2 Visa guidance.',
+          bullet3: 'Local expertise on Lisbon real estate, financing, and residency.',
+          cta: 'Book a free consultation →'
+        },
+        cta: {
+          consultation: 'Schedule consultation →',
+          specialist: 'Talk to a specialist →'
+        },
+        foot: {
+          address: 'Smith & Adams Group — Av. José Malhoa 14, 1070-073 Lisboa, Portugal.',
+          copy: 'Copyright © 2026 Smith & Adams. Investment subject to terms and conditions. D2 Visa eligibility depends on individual circumstances and prevailing legal requirements.'
+        },
+        brochure: {
+          eyebrow: 'Investment brochure',
+          title: 'Get the full brochure',
+          sub: 'Tell us where to send it. The PDF opens automatically after you submit.',
+          submit: 'Send & download →',
+          downloading: 'Downloading…'
+        }
+      },
+      pt: {
+        hero: {
+          eyebrow: 'Urban Collection · Beato, Lisboa',
+          title: 'Invista em Lisboa com <em>4% de retorno garantido</em>',
+          sub: 'Apartamentos modernos a partir de €280.000 num dos bairros mais promissores de Lisboa &mdash; com acesso ao Visto&nbsp;D2 e residência em Portugal.',
+          bullet1: '<strong style="color:#fff;">4% de rentabilidade anual garantida</strong> em euros.',
+          bullet2: 'Co-propriedade num <strong style="color:#fff;">empreendimento de 206 unidades em Lisboa</strong> com infraestrutura completa.',
+          bullet3: '<strong style="color:#fff;">Pacote de €280.000 elegível ao Visto D2</strong> &mdash; 5 anos de residência e livre circulação Schengen.',
+          brochure_link: 'Descarregue a brochura completa →'
+        },
+        form: {
+          title: 'Agende uma consulta gratuita',
+          sub: 'Fale com um especialista da Smith & Adams em até 24h.',
+          first_name: 'Nome',
+          last_name: 'Sobrenome',
+          email: 'E-mail',
+          phone: 'Telefone',
+          message: 'Mensagem <span style="font-weight:400; opacity:.55; text-transform:none; letter-spacing:0;">(opcional)</span>',
+          email_placeholder: 'voce@empresa.com',
+          message_placeholder: 'Conte-nos sobre seus objetivos de investimento.',
+          submit: 'Agendar consulta →',
+          foot_note: 'Ao enviar, você concorda em ser contatado pela Smith & Adams sobre o Urban Collection. Respeitamos sua privacidade.',
+          success_title: 'Obrigado!',
+          success_body: 'Recebemos seu pedido. Um especialista entrará em contato em até 24 horas.',
+          success_brochure: 'Descarregar brochura →'
+        },
+        why: {
+          eyebrow: 'A oportunidade',
+          title: 'Um desenvolvimento residencial num dos hubs de inovação de Lisboa',
+          body1: 'O S&amp;A Urban Collection é um desenvolvimento residencial moderno com <strong>206 unidades cuidadosamente desenhadas</strong>, no distrito do Beato em Lisboa. Combinando arquitetura atual e conveniência urbana, o projeto entrega uma oferta de estilo de vida única num bairro que se afirma como polo de inovação, cultura e criatividade.',
+          body2: 'Para o investidor, o Urban Collection representa o equilíbrio entre <strong>estabilidade de rendimento e potencial de valorização do ativo</strong> num dos mercados imobiliários mais dinâmicos da Europa.',
+          bullet1: '206 unidades residenciais com plantas modernas.',
+          bullet2: 'Conclusão prevista para <strong>dezembro de 2026</strong>.',
+          bullet3: 'Localização nobre no Beato — transformação urbana acelerada.'
+        },
+        ret: {
+          eyebrow: 'Rentabilidade & segurança',
+          title: '4% de retorno anual garantido num ativo real em Lisboa',
+          card_body: 'Rentabilidade anual garantida durante o período contratual — rendimento passivo em euros, sem inquilinos, manutenção ou operação para gerir. <strong style="color:#fff;">Investimento mínimo: €280.000</strong>.',
+          body: 'A gestão é feita pela <strong style="color:#fff;">Smith & Adams Group</strong> — referência confiável no mercado imobiliário português, com mais de uma década de experiência operando ativos residenciais premium.',
+          bullet1: 'Investimento mínimo: <strong style="color:#fff;">€280.000</strong> num apartamento em Lisboa.',
+          bullet2: '<strong style="color:#fff;">4% garantidos</strong> ao ano durante o período contratual.',
+          bullet3: 'Ativo imobiliário físico numa capital europeia de elevada procura.',
+          bullet4: 'Gestão completa pela Smith & Adams — locação, manutenção e operação.',
+          quote: '"Receba rendimento em euros, garantido, num dos mercados imobiliários mais estáveis da Europa — sem precisar gerir um único inquilino."',
+          cta_title: 'Garanta 4% de retorno e sua residência em Portugal.'
+        },
+        d2: {
+          eyebrow: 'Residência & mobilidade',
+          title: 'Um investimento que abre as portas para a residência em Portugal',
+          body1: 'O pacote Urban Collection de €280.000 foi desenhado para qualificar ao <strong>Visto D2</strong> de Portugal — uma das vias mais rápidas e seguras para a residência hoje. Ao investir, você pode requerer um título de residência de 5 anos, com direito a viver em Portugal e circular livremente pelo Espaço Schengen.',
+          body2: 'Além do retorno financeiro, seu investimento se transforma numa <strong>ferramenta estratégica de mobilidade global e planejamento familiar</strong> — oferecendo mais segurança, qualidade de vida e flexibilidade para o futuro.',
+          bullet1: '<strong>Elegibilidade ao Visto D2</strong> com o pacote de €280.000.',
+          bullet2: '<strong>Residência inicial de 5 anos</strong>, renovável conforme a lei vigente.',
+          bullet3: '<strong>Livre circulação no Schengen</strong> enquanto a autorização estiver válida.',
+          bullet4: 'Reagrupamento familiar possível para parentes.',
+          bullet5: 'Caminho potencial para a <strong>cidadania portuguesa</strong>.',
+          quote: '"Mais do que um imóvel: um plano de mobilidade internacional, em família, com rendimento em euros e acesso à Europa."'
+        },
+        loc: {
+          eyebrow: 'Localização',
+          title: 'Beato: tradição industrial, futuro tecnológico',
+          body1: 'O Urban Collection fica no <strong>distrito do Beato</strong>, em Lisboa — uma área ribeirinha que se transforma em um dos novos polos de inovação, cultura e empreendedorismo da cidade. A reabilitação de antigos espaços industriais, aliada à chegada de empresas criativas e startups, impulsiona a procura por habitação de alto padrão e arrendamento de longa duração.',
+          body2: 'Para o investidor, este contexto cria um cenário favorável: um bairro em evolução, com forte procura por aluguel, apelo de estilo de vida para jovens profissionais e claro potencial de valorização à medida que a região amadurece.',
+          bullet1: 'Distrito em rápida transformação, com forte componente criativa e tecnológica.',
+          bullet2: 'Próximo ao centro histórico de Lisboa e à frente ribeirinha.',
+          bullet3: 'Potencial de valorização ligado a investimento público e privado.'
+        },
+        am: {
+          eyebrow: 'Estilo de vida',
+          title: 'Uma comunidade residencial completa sob o mesmo teto',
+          body: 'Uma combinação cuidadosa de bem-estar, trabalho, lazer e conveniência transforma o Urban Collection numa comunidade residencial moderna que se destaca em Lisboa.',
+          gym_t: 'Ginásio & fitness', gym_d: 'Centro fitness totalmente equipado.',
+          yoga_t: 'Yoga',             yoga_d: 'Espaço dedicado a yoga e meditação.',
+          pool_t: 'Piscina',          pool_d: 'Piscina exterior com deck.',
+          cowork_t: 'Coworking',      cowork_d: 'Espaço de trabalho moderno para residentes.',
+          grocery_t: 'Mercearia',     grocery_d: 'Loja de conveniência no edifício.',
+          pet_t: 'Pet wash',          pet_d: 'Serviços profissionais para pets.',
+          laundry_t: 'Lavandaria',    laundry_d: 'Lavandaria completa no condomínio.',
+          cinema_t: 'Cinema',         cinema_d: 'Sala privativa de cinema.',
+          bike_t: 'Bicicletário',     bike_d: 'Bicicletário seguro.',
+          sauna_t: 'Sauna',           sauna_d: 'Sauna para relaxamento.',
+          garden_t: 'Jardim',         garden_d: 'Áreas verdes paisagísticas.',
+          parking_t: 'Estacionamento',parking_d: 'Estacionamento subterrâneo seguro.',
+          cta_title: 'Receba a lista completa de amenidades, plantas e preços.'
+        },
+        about: {
+          eyebrow: 'Sobre nós',
+          title: 'Smith & Adams: especialistas em investimento imobiliário em Portugal',
+          body1: 'A Smith & Adams desenvolve e administra projetos residenciais premium em Portugal — criando oportunidades de investimento com retornos seguros e acesso de longo prazo ao mercado europeu. Com mais de uma década de experiência, o grupo oferece soluções integradas: da seleção do ativo à gestão diária e ao apoio no processo de residência.',
+          body2: 'Para o investidor, isso se traduz em <strong>transparência, execução profissional e foco claro na geração de renda e preservação do capital</strong>.'
+        },
+        next: {
+          eyebrow: 'Próximos passos',
+          title: 'Agende uma consulta e receba o plano completo de investimento',
+          body: 'Nossa equipa analisa o seu perfil, esclarece dúvidas sobre o Visto D2 e apresenta um plano de investimento personalizado no Urban Collection Beato. Preencha o formulário e um consultor entrará em contato em até 24 horas.',
+          bullet1: 'Plano de investimento personalizado para os seus objetivos.',
+          bullet2: 'Orientação passo a passo sobre o Visto D2.',
+          bullet3: 'Expertise local em imobiliário, financiamento e residência em Lisboa.',
+          cta: 'Agendar consulta gratuita →'
+        },
+        cta: {
+          consultation: 'Agendar consulta →',
+          specialist: 'Falar com um especialista →'
+        },
+        foot: {
+          address: 'Smith & Adams Group — Av. José Malhoa 14, 1070-073 Lisboa, Portugal.',
+          copy: 'Copyright © 2026 Smith & Adams. Investimento sujeito a termos e condições. A elegibilidade ao Visto D2 depende de circunstâncias individuais e da legislação vigente.'
+        },
+        brochure: {
+          eyebrow: 'Brochura de investimento',
+          title: 'Receba a brochura completa',
+          sub: 'Diga-nos para onde enviar. O PDF abre automaticamente após o envio.',
+          submit: 'Enviar e descarregar →',
+          downloading: 'A descarregar…'
+        }
+      }
+    };
+
+    function get(obj, path) {
+      return path.split('.').reduce((o, k) => (o && o[k] != null) ? o[k] : null, obj);
+    }
+
+    function applyLocale(locale) {
+      const dict = I18N[locale] || I18N.en;
+      document.documentElement.lang = locale === 'pt' ? 'pt-BR' : 'en';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const v = get(dict, el.dataset.i18n);
+        if (v != null) el.textContent = v;
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const v = get(dict, el.dataset.i18nHtml);
+        if (v != null) el.innerHTML = v;
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const v = get(dict, el.dataset.i18nPlaceholder);
+        if (v != null) el.setAttribute('placeholder', v);
+      });
+      document.querySelectorAll('.lp-lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === locale));
+      try { localStorage.setItem('cmsLocale', locale); } catch (_) {}
+    }
+
+    // Initial locale
+    let initial = 'en';
+    try { const v = localStorage.getItem('cmsLocale'); if (v === 'pt' || v === 'en') initial = v; } catch (_) {}
+    applyLocale(initial);
+
+    document.querySelectorAll('.lp-lang button').forEach(btn => {
+      btn.addEventListener('click', () => applyLocale(btn.dataset.lang));
+    });
+
+    // ─── BROCHURE MODAL ─────────────────────────────────────────────
+    const modal = document.getElementById('brochure-modal');
+    const bForm = document.getElementById('brochure-form');
+    const bSubmit = document.getElementById('b_submit');
+    const bErr = document.getElementById('brochure-error');
+    const bPhone = document.getElementById('b_phoneCode');
+    const bPhoneInput = document.getElementById('b_phoneNumber');
+
+    function updateBPhonePh() {
+      const opt = bPhone.options[bPhone.selectedIndex];
+      const ph = opt && opt.dataset && opt.dataset.placeholder;
+      if (ph) bPhoneInput.placeholder = ph;
+    }
+    bPhone.addEventListener('change', updateBPhonePh);
+    updateBPhonePh();
+
+    function openBrochureModal() {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('b_firstName').focus(), 100);
+    }
+    window.closeBrochureModal = function () {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeBrochureModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeBrochureModal(); });
+
+    document.querySelectorAll('[data-brochure]').forEach(a => {
+      a.addEventListener('click', (e) => { e.preventDefault(); openBrochureModal(); });
+    });
+
+    bForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      bErr.style.display = 'none';
+      const payload = {
+        firstName:   document.getElementById('b_firstName').value.trim(),
+        lastName:    document.getElementById('b_lastName').value.trim(),
+        email:       document.getElementById('b_email').value.trim(),
+        phoneCode:   bPhone.value,
+        phoneNumber: bPhoneInput.value.trim(),
+        interest:    'real-estate',
+        message:     '[Source: /lp-urban-collection — brochure download]'
+      };
+      if (!payload.firstName || !payload.lastName || !payload.email || !payload.phoneNumber) {
+        bErr.textContent = 'Please fill all required fields.'; bErr.style.display = 'block'; return;
+      }
+      const original = bSubmit.textContent;
+      bSubmit.disabled = true;
+      const dict = I18N[localStorage.getItem('cmsLocale') === 'pt' ? 'pt' : 'en'];
+      bSubmit.textContent = dict.brochure.downloading;
+      try {
+        const r = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!r.ok) {
+          const j = await r.json().catch(() => ({}));
+          throw new Error(j.error || 'Could not submit. Please try again.');
+        }
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18073134136/lp-brochure-download',
+            'value': 1.0, 'currency': 'EUR'
+          });
+        }
+        // Open the PDF in a new tab and close modal
+        window.open('Urban%20Collection%20Beato.pdf', '_blank', 'noopener');
+        closeBrochureModal();
+        bForm.reset();
+        bSubmit.textContent = original;
+        bSubmit.disabled = false;
+      } catch (err) {
+        bErr.textContent = err.message || 'Network error. Please try again.';
+        bErr.style.display = 'block';
+        bSubmit.textContent = original;
+        bSubmit.disabled = false;
+      }
     });
   })();
 </script>
