@@ -5,6 +5,21 @@
   const DEFAULT_LOCALE = 'en';
   const SUPPORTED_LOCALES = ['en', 'pt'];
 
+  // ─── Esconder o item "Urban Collection" do menu (nav + mobile + footer) ──
+  // Solicitação do cliente: ocultar sem apagar. Para reativar, basta remover
+  // este bloco de CSS. Os links e a página /urban-collection continuam ativos.
+  (function hideUrbanCollectionNav() {
+    const css = '' +
+      'header div.relative.group:has(> a[href="urban-collection.html"]),' +
+      '#mobile-menu a[href="urban-collection.html"],' +
+      'footer li:has(> a[href="urban-collection.html"])' +
+      '{ display:none !important; }';
+    const style = document.createElement('style');
+    style.id = 'hide-urban-collection-nav';
+    style.textContent = css;
+    (document.head || document.documentElement).appendChild(style);
+  })();
+
   function getLocale() {
     try {
       const v = localStorage.getItem('cmsLocale');
