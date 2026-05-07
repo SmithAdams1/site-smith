@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smith & Adams — Backoffice</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #F4F2EE; }
+  
+  :root {
+    --navy: #0C1E28;
+    --blue: #466DEE;
+    --gold: #C9A84C;
+    --light: #FDFCF9;
+  }
+
+  /* Sidebar */
+  .sidebar { width: 240px; min-height: 100vh; background: var(--navy); position: fixed; top: 0; left: 0; bottom: 0; display: flex; flex-direction: column; z-index: 50; }
+  .main-content { margin-left: 240px; min-height: 100vh; }
+
+  /* Nav items */
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.55); cursor: pointer; transition: all 0.15s; margin: 1px 8px; }
+  .nav-item:hover { background: rgba(255,255,255,0.07); color: white; }
+  .nav-item.active { background: rgba(70,109,238,0.25); color: white; }
+  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .nav-section { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.25); padding: 16px 24px 6px; }
+
+  /* Cards */
+  .card { background: white; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); padding: 24px; }
+  
+  /* Block editor styles */
+  .block-section { border: 1px solid #E8E5E0; border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+  .block-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #FAFAF9; cursor: pointer; user-select: none; border-bottom: 1px solid transparent; transition: all 0.15s; }
+  .block-header:hover { background: #F4F2EE; }
+  .block-header.open { border-bottom-color: #E8E5E0; background: #F9F8F6; }
+  .block-header-left { display: flex; align-items: center; gap: 10px; }
+  .block-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .block-name { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+  .block-desc { font-size: 11px; color: #999; margin-top: 1px; }
+  .block-chevron { width: 16px; height: 16px; color: #ccc; transition: transform 0.2s; }
+  .block-header.open .block-chevron { transform: rotate(180deg); }
+  .block-body { display: none; padding: 16px; background: white; }
+  .block-body.open { display: block; }
+
+  /* Field styles */
+  .field-label { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #666; margin-bottom: 5px; }
+  .field-input { width: 100%; border: 1.5px solid #E8E5E0; border-radius: 8px; padding: 9px 12px; font-size: 13.5px; color: #1a1a1a; font-family: inherit; outline: none; transition: border-color 0.15s; background: #FDFDFC; }
+  .field-input:focus { border-color: var(--blue); background: white; }
+  .field-input.dirty { border-color: #f59e0b; background: #fffbeb; }
+  .field-textarea { min-height: 80px; resize: vertical; }
+  .field-image-wrap { position: relative; }
+  .field-image-preview { width: 100%; max-height: 180px; object-fit: cover; border-radius: 8px; margin-top: 8px; display: none; }
+  .field-image-preview.show { display: block; }
+  .field-image-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--blue); border: 1.5px dashed #b0c0f8; border-radius: 8px; padding: 8px 14px; cursor: pointer; transition: all 0.15s; margin-top: 6px; }
+  .field-image-btn:hover { background: #f0f4ff; border-color: var(--blue); }
+  .field-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .field-group { margin-bottom: 14px; }
+  .field-group:last-child { margin-bottom: 0; }
+
+  /* Item card (for repeater blocks like testimonials, cards) */
+  .item-card { border: 1px solid #E8E5E0; border-radius: 8px; padding: 14px; margin-bottom: 10px; position: relative; background: #FDFCF9; }
+  .item-card-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 10px; }
+
+  /* Save bar */
+  .save-bar { position: fixed; bottom: 0; left: 240px; right: 0; background: white; border-top: 1px solid #E8E5E0; padding: 12px 24px; display: none; align-items: center; justify-content: space-between; z-index: 40; box-shadow: 0 -4px 20px rgba(0,0,0,0.06); }
+  .save-bar.visible { display: flex; }
+
+  /* Buttons */
+  .btn-primary { background: var(--navy); color: white; border: none; border-radius: 50px; padding: 10px 24px; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 8px; transition: opacity 0.15s; }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary { background: white; color: var(--navy); border: 1.5px solid #E8E5E0; border-radius: 50px; padding: 9px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s; }
+  .btn-secondary:hover { border-color: #ccc; }
+  .btn-danger { background: #fee2e2; color: #dc2626; border: none; border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; }
+  .btn-icon { background: transparent; border: 1.5px solid #E8E5E0; border-radius: 8px; padding: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; color: #666; transition: all 0.15s; }
+  .btn-icon:hover { border-color: #ccc; background: #f5f5f5; }
+
+  /* Page tabs */
+  .page-tab { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: 50px; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all 0.15s; border: 1.5px solid transparent; color: #666; }
+  .page-tab:hover { background: white; color: #333; }
+  .page-tab.active { background: white; color: var(--navy); border-color: #E8E5E0; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+
+  /* Blog table */
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; padding: 10px 16px; text-align: left; border-bottom: 1px solid #F0EDE8; }
+  td { padding: 14px 16px; border-bottom: 1px solid #F8F6F3; font-size: 13.5px; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #FAFAF9; }
+
+  /* Status badge */
+  .badge { display: inline-flex; padding: 3px 10px; border-radius: 50px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
+
+  /* Login */
+  .login-bg { min-height: 100vh; background: var(--navy); display: flex; align-items: center; justify-content: center; }
+  
+  /* Quill override */
+  .ql-container { font-family: 'Inter', sans-serif; font-size: 14px; }
+  .ql-toolbar.ql-snow { border-color: #E8E5E0; border-radius: 8px 8px 0 0; background: #FAFAF9; }
+  .ql-container.ql-snow { border-color: #E8E5E0; border-radius: 0 0 8px 8px; min-height: 280px; }
+
+  /* Toast */
+  #toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--navy); color: white; padding: 10px 20px; border-radius: 50px; font-size: 13px; font-weight: 600; opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 200; }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #toast.error { background: #dc2626; }
+
+  /* Loading spinner */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinner { animation: spin 0.7s linear infinite; }
+
+  /* Media Library */
+  .media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .media-item { border-radius: 8px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; aspect-ratio: 1; position: relative; background: #f5f5f5; }
+  .media-item:hover { border-color: var(--blue); }
+  .media-item.selected { border-color: var(--blue); }
+  .media-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Modal */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-box { background: white; border-radius: 16px; padding: 28px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; transform: scale(0.96); transition: transform 0.2s; }
+  .modal-overlay.open .modal-box { transform: scale(1); }
+
+  /* Dirty pulse */
+  .dirty-dot { width: 8px; height: 8px; border-radius: 50%; background: #f59e0b; animation: pulse 1.5s infinite; display: inline-block; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar { width: 200px; }
+    .main-content { margin-left: 200px; }
+    .save-bar { left: 200px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── TOAST ── -->
+<div id="toast">✓ Guardado com sucesso!</div>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div id="login-screen" class="login-bg">
+  <div style="background:white;border-radius:20px;padding:40px;width:100%;max-width:400px;box-shadow:0 24px 80px rgba(0,0,0,0.25);">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#0C1E28;letter-spacing:-0.03em;">S&A Backoffice</div>
+      <div style="font-size:13px;color:#999;margin-top:4px;">Smith & Adams Admin</div>
+    </div>
+    <div style="margin-bottom:18px;">
+      <div class="field-label">Utilizador</div>
+      <input id="login-user" type="text" class="field-input" placeholder="admin" autocomplete="username">
+    </div>
+    <div style="margin-bottom:24px;">
+      <div class="field-label">Palavra-passe</div>
+      <input id="login-pass" type="password" class="field-input" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button id="login-btn" class="btn-primary" style="width:100%;justify-content:center;" onclick="doLogin()">Entrar</button>
+    <div id="login-err" style="color:#dc2626;font-size:12.5px;text-align:center;margin-top:12px;display:none;"></div>
+  </div>
+</div>
+
+<!-- ══════════ APP ══════════ -->
+<div id="app" style="display:none;">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div style="padding:20px 16px 16px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:white;letter-spacing:-0.02em;">S&A Admin</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">Smith & Adams</div>
+    </div>
+
+    <nav style="flex:1;padding:12px 0;overflow-y:auto;">
+      <div class="nav-section">Conteúdo</div>
+
+      <div class="nav-item active" data-view="content" onclick="switchView('content')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Blocos do Site
+      </div>
+
+      <div class="nav-item" data-view="blog" onclick="switchView('blog')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Artigos / Blog
+      </div>
+
+      <div class="nav-item" data-view="media" onclick="switchView('media')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Biblioteca de Imagens
+      </div>
+
+      <div class="nav-section">Configuração</div>
+
+      <div class="nav-item" data-view="global" onclick="switchView('global')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Global / Rodapé
+      </div>
+    </nav>
+
+    <div style="padding:12px 8px;border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="nav-item" onclick="doLogout()" style="color:rgba(255,255,255,0.4);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sair
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content" style="padding:28px 28px 80px;">
+
+    <!-- ── CONTENT VIEW ── -->
+    <div id="view-content">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h1 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#0C1E28;margin:0;">Blocos do Site</h1>
+          <p style="font-size:13px;color:#999;margin:4px 0 0;">Edite textos, imagens e blocos de cada página.</p>
+        </div>
+        <a id="preview-link" href="index.html" target="_blank" class="btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver página
+        </a>
+      </div>
+
+      <!-- Page tabs -->
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;background:#EBE9E4;padding:4px;border-radius:50px;width:fit-content;">
+        <div class="page-tab active" data-page="index" onclick="switchPage('index')">🏠 Homepage</div>
+        <div class="page-tab" data-page="about" onclick="switchPage('about')">🏢 Sobre</div>
+        <div class="page-tab" data-page="contact" onclick="switchPage('contact')">📬 Contacto</div>
+        <div class="page-tab" data-page="propmgmt" onclick="switchPage('propmgmt')">🔑 Gestão</div>
+      </div>
+
+      <!-- Block editor area -->
+      <div id="blocks-container" style="max-width:780px;">
+        <div style="text-align:center;padding:60px;color:#ccc;font-size:14px;">A carregar blocos...</div>
+      </div>
+    </div>
+
+    <!-- ── GLOBAL VIEW ── -->
+    <div id="view-global" style="display:none;">
+      <div style="margin-bottom:20px;">
+        <h1 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#0C1E28;margin:0;">Global / Rodapé / Redes Sociais</h1>
+        <p style="font-size:13px;color:#999;margin:4px 0 0;">Informações partilhadas em todas as páginas.</p>
+      </div>
+      <div id="global-blocks-container" style="max-width:780px;"></div>
+    </div>
+
+    <!-- ── BLOG VIEW ── -->
+    <div id="view-blog" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div>
+          <h1 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#0C1E28;margin:0;">Artigos</h1>
+          <p style="font-size:13px;color:#999;margin:4px 0 0;">Escreva e gira os artigos do blog.</p>
+        </div>
+        <button class="btn-primary" onclick="openPostEditor(null)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Novo Artigo
+        </button>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;">
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Categoria</th>
+              <th>Data</th>
+              <th style="text-align:right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="posts-tbody">
+            <tr><td colspan="4" style="text-align:center;color:#ccc;padding:40px;">A carregar...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── MEDIA VIEW ── -->
+    <div id="view-media" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+        <div>
+          <h1 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#0C1E28;margin:0;">Biblioteca de Imagens</h1>
+          <p style="font-size:13px;color:#999;margin:4px 0 0;">Faça upload e gira imagens do site.</p>
+        </div>
+        <label class="btn-primary" style="cursor:pointer;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+          Fazer Upload
+          <input type="file" id="media-upload-input" accept="image/*" multiple style="display:none;" onchange="handleMediaUpload(this)">
+        </label>
+      </div>
+      <div class="card">
+        <div id="media-grid" class="media-grid">
+          <div style="grid-column:1/-1;text-align:center;color:#ccc;padding:40px;">A carregar imagens...</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SAVE BAR -->
+  <div class="save-bar" id="save-bar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="dirty-dot"></span>
+      <div>
+        <div style="font-size:13.5px;font-weight:700;color:#0C1E28;" id="dirty-count">0 alterações por guardar</div>
+        <button onclick="discardAll()" style="font-size:11px;color:#999;background:none;border:none;cursor:pointer;padding:0;font-family:inherit;">Descartar</button>
+      </div>
+    </div>
+    <button class="btn-primary" id="save-btn" onclick="saveAll()">
+      Guardar Alterações
+    </button>
+  </div>
+</div>
+
+<!-- POST EDITOR MODAL -->
+<div class="modal-overlay" id="post-modal">
+  <div class="modal-box" style="max-width:780px;width:95%;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <h2 style="font-size:18px;font-weight:700;color:#0C1E28;margin:0;" id="post-modal-title">Novo Artigo</h2>
+      <button onclick="closePostModal()" class="btn-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <input type="hidden" id="post-id">
+    <input type="hidden" id="post-slug-orig">
+
+    <div class="field-row" style="margin-bottom:16px;">
+      <div>
+        <div class="field-label">Título (EN)</div>
+        <input id="post-title" class="field-input" placeholder="Article title in English">
+      </div>
+      <div>
+        <div class="field-label">Categoria</div>
+        <input id="post-category" class="field-input" placeholder="Market, Tips, News...">
+      </div>
+    </div>
+
+    <div class="field-row" style="margin-bottom:16px;">
+      <div>
+        <div class="field-label">Tempo de leitura</div>
+        <input id="post-readtime" class="field-input" placeholder="5 min read">
+      </div>
+      <div>
+        <div class="field-label">Imagem de capa</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="post-image-url" class="field-input" placeholder="URL ou faça upload →" style="flex:1;">
+          <label class="btn-icon" style="cursor:pointer;flex-shrink:0;" title="Upload imagem">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            <input type="file" id="post-cover-file" accept="image/*" style="display:none;" onchange="uploadCover(this)">
+          </label>
+        </div>
+      </div>
+    </div>
+    <img id="post-cover-preview" style="width:100%;max-height:160px;object-fit:cover;border-radius:8px;margin-bottom:16px;display:none;">
+
+    <div style="margin-bottom:16px;">
+      <div class="field-label">Resumo (EN)</div>
+      <textarea id="post-excerpt" class="field-input field-textarea" placeholder="Short excerpt..."></textarea>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div class="field-label">Conteúdo (EN)</div>
+      <div id="post-editor-en"></div>
+    </div>
+
+    <details style="margin-bottom:16px;">
+      <summary style="font-size:12px;font-weight:600;color:#666;cursor:pointer;padding:8px 0;">🌍 Versão PT-BR (opcional)</summary>
+      <div style="margin-top:12px;">
+        <div class="field-group">
+          <div class="field-label">Título (PT)</div>
+          <input id="post-title-pt" class="field-input" placeholder="Título em português">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Resumo (PT)</div>
+          <textarea id="post-excerpt-pt" class="field-input field-textarea" placeholder="Resumo..."></textarea>
+        </div>
+        <div class="field-label">Conteúdo (PT)</div>
+        <div id="post-editor-pt"></div>
+      </div>
+    </details>
+
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px;">
+      <button class="btn-secondary" onclick="closePostModal()">Cancelar</button>
+      <button class="btn-primary" id="post-save-btn" onclick="savePost()">Publicar Artigo</button>
+    </div>
+    <div id="post-error" style="color:#dc2626;font-size:12px;margin-top:8px;display:none;"></div>
+  </div>
+</div>
+
+<!-- DELETE CONFIRM MODAL -->
+<div class="modal-overlay" id="delete-modal">
+  <div class="modal-box" style="max-width:380px;text-align:center;">
+    <div style="width:48px;height:48px;border-radius:50%;background:#fee2e2;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+    </div>
+    <h3 style="font-size:17px;font-weight:700;color:#0C1E28;margin:0 0 8px;">Eliminar artigo?</h3>
+    <p style="font-size:13px;color:#999;margin:0 0 20px;">Esta ação não pode ser revertida.</p>
+    <div style="display:flex;gap:10px;justify-content:center;">
+      <button class="btn-secondary" onclick="closeDeleteModal()">Cancelar</button>
+      <button style="background:#dc2626;color:white;border:none;border-radius:50px;padding:10px 24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;" id="confirm-delete-btn" onclick="confirmDelete()">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE PICKER MODAL (for block fields) -->
+<div class="modal-overlay" id="img-picker-modal">
+  <div class="modal-box" style="max-width:640px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <h3 style="font-size:16px;font-weight:700;color:#0C1E28;margin:0;">Escolher imagem</h3>
+      <button onclick="closeImgPicker()" class="btn-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div style="margin-bottom:12px;display:flex;gap:8px;">
+      <label class="btn-primary" style="cursor:pointer;font-size:12px;padding:8px 16px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/></svg>
+        Upload novo
+        <input type="file" accept="image/*" style="display:none;" onchange="uploadAndPick(this)">
+      </label>
+      <input id="img-url-direct" class="field-input" placeholder="Ou cole um URL direto..." style="flex:1;">
+      <button class="btn-secondary" onclick="pickFromUrl()" style="flex-shrink:0;">Usar URL</button>
+    </div>
+    <div id="picker-grid" class="media-grid" style="max-height:380px;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// SUPABASE INIT
+// ═══════════════════════════════════════
+const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ═══════════════════════════════════════
+// QUILL EDITORS
+// ═══════════════════════════════════════
+let quillEN, quillPT;
+function initQuill() {
+  const toolbar = [
+    [{ header: [2, 3, false] }],
+    ['bold', 'italic', 'underline'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    ['link', 'image'], ['clean']
+  ];
+  quillEN = new Quill('#post-editor-en', { theme: 'snow', modules: { toolbar } });
+  quillPT = new Quill('#post-editor-pt', { theme: 'snow', modules: { toolbar } });
+}
+window.addEventListener('DOMContentLoaded', initQuill);
+
+// ═══════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════
+async function checkAuth() {
+  const { data } = await sb.auth.getSession();
+  if (data.session) showApp();
+  else showLogin();
+}
+
+function showLogin() {
+  document.getElementById('login-screen').style.display = '';
+  document.getElementById('app').style.display = 'none';
+}
+
+function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = '';
+  loadView('content');
+}
+
+async function doLogin() {
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-err');
+  err.style.display = 'none';
+  btn.textContent = 'A entrar...';
+  btn.disabled = true;
+
+  const user = document.getElementById('login-user').value + '@smithandadams.com';
+  const pass = document.getElementById('login-pass').value;
+  const { error } = await sb.auth.signInWithPassword({ email: user, password: pass });
+
+  btn.textContent = 'Entrar';
+  btn.disabled = false;
+
+  if (error) {
+    err.textContent = 'Credenciais inválidas. Tente novamente.';
+    err.style.display = '';
+  } else {
+    showApp();
+  }
+}
+
+document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+async function doLogout() {
+  await sb.auth.signOut();
+  showLogin();
+}
+
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+let currentView = 'content';
+
+function switchView(v) {
+  currentView = v;
+  ['content', 'blog', 'media', 'global'].forEach(id => {
+    document.getElementById('view-' + id).style.display = id === v ? '' : 'none';
+  });
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.view === v);
+  });
+  loadView(v);
+}
+
+function loadView(v) {
+  if (v === 'content') loadPageBlocks(currentPage || 'index');
+  if (v === 'blog') loadPosts();
+  if (v === 'media') loadMediaGrid();
+  if (v === 'global') loadGlobalBlocks();
+}
+
+// ═══════════════════════════════════════
+// CMS DATA — SCHEMA
+// ═══════════════════════════════════════
+
+const PAGE_SCHEMAS = {
+  index: {
+    label: '🏠 Homepage',
+    url: 'index.html',
+    sections: [
+      {
+        id: 'hero', label: 'Hero', icon: '🎬', color: '#f0f4ff',
+        fields: [
+          { key: 'index.hero.video_url', label: 'URL do Vídeo', type: 'text' },
+          { key: 'index.hero.quote', label: 'Frase Principal', type: 'richtext' },
+          { key: 'index.hero.cta_label', label: 'Texto do Botão CTA', type: 'text' },
+          { key: 'index.hero.cta_url', label: 'Link do Botão CTA', type: 'text' },
+        ]
+      },
+      {
+        id: 'stats', label: 'Estatísticas', icon: '📊', color: '#f0fff4',
+        fields: [
+          { key: 'index.hero.stat1.value', label: 'Stat 1 — Valor', type: 'text' },
+          { key: 'index.hero.stat1.label', label: 'Stat 1 — Descrição', type: 'richtext' },
+          { key: 'index.hero.stat2.value', label: 'Stat 2 — Valor', type: 'text' },
+          { key: 'index.hero.stat2.label', label: 'Stat 2 — Descrição', type: 'richtext' },
+          { key: 'index.hero.stat3.value', label: 'Stat 3 — Valor', type: 'text' },
+          { key: 'index.hero.stat3.label', label: 'Stat 3 — Descrição', type: 'richtext' },
+        ]
+      },
+      {
+        id: 'why', label: 'Porquê Investir em Portugal?', icon: '🇵🇹', color: '#fff8f0',
+        fields: [
+          { key: 'index.why.title', label: 'Título da Secção', type: 'text' },
+          { key: 'index.why.cta_label', label: 'Texto CTA', type: 'text' },
+          { key: 'index.why.cta_url', label: 'Link CTA', type: 'text' },
+        ]
+      },
+      {
+        id: 'why_cards', label: 'Porquê — Cards', icon: '🃏', color: '#fff8f0',
+        type: 'repeater',
+        items: [
+          { label: 'Card 1', fields: [
+            { key: 'index.why.card1.image', label: 'Imagem', type: 'image' },
+            { key: 'index.why.card1.title', label: 'Título', type: 'text' },
+            { key: 'index.why.card1.body', label: 'Texto', type: 'richtext' },
+          ]},
+          { label: 'Card 2', fields: [
+            { key: 'index.why.card2.image', label: 'Imagem', type: 'image' },
+            { key: 'index.why.card2.title', label: 'Título', type: 'text' },
+            { key: 'index.why.card2.body', label: 'Texto', type: 'richtext' },
+          ]},
+          { label: 'Card 3', fields: [
+            { key: 'index.why.card3.image', label: 'Imagem', type: 'image' },
+            { key: 'index.why.card3.title', label: 'Título', type: 'text' },
+            { key: 'index.why.card3.body', label: 'Texto', type: 'richtext' },
+          ]},
+        ]
+      },
+      {
+        id: 'steps', label: 'Passo a Passo', icon: '🪜', color: '#f5f0ff',
+        fields: [
+          { key: 'index.steps.eyebrow', label: 'Label topo', type: 'text' },
+          { key: 'index.steps.title', label: 'Título', type: 'text' },
+        ]
+      },
+      {
+        id: 'steps_items', label: 'Passos (detalhe)', icon: '📋', color: '#f5f0ff',
+        type: 'repeater',
+        items: [0,1,2,3].map(i => ({
+          label: `Passo ${i+1}`,
+          fields: [
+            { key: `index.steps.${i}.title`, label: 'Título', type: 'text' },
+            { key: `index.steps.${i}.tag`, label: 'Tag', type: 'text' },
+            { key: `index.steps.${i}.body`, label: 'Texto', type: 'richtext' },
+          ]
+        }))
+      },
+      {
+        id: 'testimonials', label: 'Testemunhos', icon: '⭐', color: '#fffbf0',
+        type: 'repeater',
+        items: [0,1,2,3,4].map(i => ({
+          label: `Testemunho ${i+1}`,
+          fields: [
+            { key: `index.testimonials.${i}.image`, label: 'Foto', type: 'image' },
+            { key: `index.testimonials.${i}.author`, label: 'Nome', type: 'text' },
+            { key: `index.testimonials.${i}.quote`, label: 'Citação', type: 'textarea' },
+          ]
+        }))
+      },
+      {
+        id: 'faq', label: 'FAQ', icon: '❓', color: '#f8f9fa',
+        type: 'repeater',
+        items: [0,1,2,3,4].map(i => ({
+          label: `Pergunta ${i+1}`,
+          fields: [
+            { key: `index.faq.${i}.q`, label: 'Pergunta', type: 'text' },
+            { key: `index.faq.${i}.a`, label: 'Resposta', type: 'textarea' },
+          ]
+        }))
+      },
+    ]
+  },
+
+  about: {
+    label: '🏢 Sobre Nós',
+    url: 'about.html',
+    sections: [
+      {
+        id: 'hero', label: 'Hero', icon: '🎬', color: '#f0f4ff',
+        fields: [{ key: 'about.hero.title', label: 'Título', type: 'text' }]
+      },
+      {
+        id: 'group', label: 'O Grupo', icon: '🏛️', color: '#f0fff4',
+        fields: [
+          { key: 'about.group.eyebrow', label: 'Label topo', type: 'text' },
+          { key: 'about.group.title', label: 'Título', type: 'text' },
+          { key: 'about.group.body1', label: 'Parágrafo 1', type: 'textarea' },
+          { key: 'about.group.body2', label: 'Parágrafo 2', type: 'textarea' },
+        ]
+      },
+      {
+        id: 'track', label: 'Track Record', icon: '📈', color: '#fff8f0',
+        fields: [
+          { key: 'about.track.eyebrow', label: 'Label topo', type: 'text' },
+          { key: 'about.track.title', label: 'Título', type: 'text' },
+          { key: 'about.track.body', label: 'Texto', type: 'textarea' },
+          { key: 'about.track.bullets.0', label: 'Bullet 1', type: 'text' },
+          { key: 'about.track.bullets.1', label: 'Bullet 2', type: 'text' },
+          { key: 'about.track.bullets.2', label: 'Bullet 3', type: 'text' },
+          { key: 'about.track.stats.0.value', label: 'Stat 1 — Valor', type: 'text' },
+          { key: 'about.track.stats.0.label', label: 'Stat 1 — Label', type: 'text' },
+          { key: 'about.track.stats.1.value', label: 'Stat 2 — Valor', type: 'text' },
+          { key: 'about.track.stats.1.label', label: 'Stat 2 — Label', type: 'text' },
+          { key: 'about.track.stats.2.value', label: 'Stat 3 — Valor', type: 'text' },
+          { key: 'about.track.stats.2.label', label: 'Stat 3 — Label', type: 'text' },
+        ]
+      },
+      {
+        id: 'portfolio', label: 'Portfólio', icon: '🏗️', color: '#f5f0ff',
+        fields: [
+          { key: 'about.portfolio.eyebrow', label: 'Label topo', type: 'text' },
+          { key: 'about.portfolio.title', label: 'Título', type: 'text' },
+          { key: 'about.portfolio.body', label: 'Texto', type: 'textarea' },
+          { key: 'about.cards.cta', label: 'Texto CTA cards', type: 'text' },
+        ]
+      },
+      {
+        id: 'portfolio_cards', label: 'Portfólio — Projetos', icon: '🃏', color: '#f5f0ff',
+        type: 'repeater',
+        items: [0,1,2,3,4,5,6,7,8].map(i => ({
+          label: `Projeto ${i+1}`,
+          fields: [
+            { key: `about.cards.${i}.image`, label: 'Imagem', type: 'image' },
+            { key: `about.cards.${i}.title`, label: 'Título', type: 'text' },
+            { key: `about.cards.${i}.year`, label: 'Ano', type: 'text' },
+            { key: `about.cards.${i}.units`, label: 'Unidades', type: 'text' },
+            { key: `about.cards.${i}.price`, label: 'Preço', type: 'text' },
+            { key: `about.cards.${i}.url`, label: 'Link', type: 'text' },
+          ]
+        }))
+      },
+      {
+        id: 'solutions', label: 'Soluções', icon: '💡', color: '#f0fff4',
+        type: 'repeater',
+        items: [0,1].map(i => ({
+          label: `Solução ${i+1}`,
+          fields: [
+            { key: `about.solutions.${i}.title`, label: 'Título', type: 'text' },
+            { key: `about.solutions.${i}.body`, label: 'Texto', type: 'textarea' },
+          ]
+        }))
+      },
+      {
+        id: 'timeline', label: 'Timeline', icon: '⏳', color: '#fff8f0',
+        type: 'repeater',
+        items: [0,1,2].map(i => ({
+          label: `Momento ${i+1}`,
+          fields: [
+            { key: `about.timeline.${i}.year`, label: 'Ano', type: 'text' },
+            { key: `about.timeline.${i}.body`, label: 'Texto', type: 'textarea' },
+          ]
+        }))
+      },
+    ]
+  },
+
+  contact: {
+    label: '📬 Contacto',
+    url: 'contact.html',
+    sections: [
+      {
+        id: 'hero', label: 'Hero', icon: '🎬', color: '#f0f4ff',
+        fields: [
+          { key: 'contact.hero.title', label: 'Título', type: 'text' },
+          { key: 'contact.hero.subtitle', label: 'Subtítulo', type: 'textarea' },
+        ]
+      },
+      {
+        id: 'info', label: 'Informações', icon: '📍', color: '#f0fff4',
+        fields: [
+          { key: 'contact.info.address_label', label: 'Label morada', type: 'text' },
+          { key: 'contact.info.address', label: 'Morada', type: 'textarea' },
+        ]
+      },
+      {
+        id: 'form', label: 'Formulário', icon: '📝', color: '#f5f0ff',
+        fields: [
+          { key: 'contact.form.title', label: 'Título', type: 'text' },
+          { key: 'contact.form.success_title', label: 'Sucesso — Título', type: 'text' },
+          { key: 'contact.form.success_body', label: 'Sucesso — Texto', type: 'textarea' },
+        ]
+      },
+    ]
+  },
+
+  propmgmt: {
+    label: '🔑 Gestão Imobiliária',
+    url: 'property-management.html',
+    sections: [
+      {
+        id: 'hero', label: 'Hero', icon: '🎬', color: '#f0f4ff',
+        fields: [
+          { key: 'propmgmt.hero.eyebrow', label: 'Label topo', type: 'text' },
+          { key: 'propmgmt.hero.headline', label: 'Headline', type: 'text' },
+          { key: 'propmgmt.hero.subtitle', label: 'Subtítulo', type: 'textarea' },
+          { key: 'propmgmt.hero.cta_label', label: 'Texto CTA', type: 'text' },
+          { key: 'propmgmt.hero.cta_url', label: 'Link CTA', type: 'text' },
+        ]
+      },
+      {
+        id: 'intro', label: 'Introdução', icon: '📖', color: '#f0fff4',
+        fields: [
+          { key: 'propmgmt.intro.eyebrow', label: 'Label topo', type: 'text' },
+          { key: 'propmgmt.intro.title', label: 'Título', type: 'text' },
+          { key: 'propmgmt.intro.body', label: 'Texto', type: 'richtext' },
+        ]
+      },
+      {
+        id: 'stats', label: 'Estatísticas', icon: '📊', color: '#f5f0ff',
+        type: 'repeater',
+        items: [0,1,2,3].map(i => ({
+          label: `Stat ${i+1}`,
+          fields: [
+            { key: `propmgmt.stats.${i}.value`, label: 'Valor', type: 'text' },
+            { key: `propmgmt.stats.${i}.label`, label: 'Label', type: 'text' },
+          ]
+        }))
+      },
+      {
+        id: 'howitworks', label: 'Como Funciona', icon: '⚙️', color: '#fff8f0',
+        type: 'repeater',
+        items: [0,1,2,3].map(i => ({
+          label: `Passo ${i+1}`,
+          fields: [
+            { key: `propmgmt.howitworks.${i}.title`, label: 'Título', type: 'text' },
+            { key: `propmgmt.howitworks.${i}.body`, label: 'Texto', type: 'textarea' },
+          ]
+        }))
+      },
+      {
+        id: 'why', label: 'Porquê Escolher-nos', icon: '🏆', color: '#f0fff4',
+        fields: [
+          { key: 'propmgmt.why.eyebrow', label: 'Label topo', type: 'text' },
+          { key: 'propmgmt.why.title', label: 'Título', type: 'text' },
+          { key: 'propmgmt.why.body', label: 'Texto', type: 'richtext' },
+          { key: 'propmgmt.why.cta_label', label: 'Texto CTA', type: 'text' },
+          { key: 'propmgmt.why.cta_url', label: 'Link CTA', type: 'text' },
+        ]
+      },
+      {
+        id: 'clients', label: 'Tipos de Clientes', icon: '👥', color: '#f0f4ff',
+        type: 'repeater',
+        items: [0,1].map(i => ({
+          label: `Perfil ${i+1}`,
+          fields: [
+            { key: `propmgmt.clients.${i}.title`, label: 'Título', type: 'text' },
+            { key: `propmgmt.clients.${i}.body`, label: 'Texto', type: 'richtext' },
+          ]
+        }))
+      },
+    ]
+  }
+};
+
+const GLOBAL_SCHEMA = {
+  sections: [
+    {
+      id: 'footer', label: 'Rodapé', icon: '📎', color: '#f0f4ff',
+      fields: [
+        { key: 'global.footer.description', label: 'Descrição', type: 'textarea' },
+        { key: 'global.footer.email', label: 'Email', type: 'text' },
+        { key: 'global.footer.phone', label: 'Telefone', type: 'text' },
+        { key: 'global.footer.copyright', label: 'Copyright', type: 'text' },
+        { key: 'global.footer.office_title', label: 'Escritório — Título', type: 'text' },
+        { key: 'global.footer.office_description', label: 'Escritório — Descrição', type: 'text' },
+        { key: 'global.footer.office_cta_label', label: 'Escritório — CTA texto', type: 'text' },
+        { key: 'global.footer.office_cta_url', label: 'Escritório — CTA link', type: 'text' },
+        { key: 'global.footer.directions_url', label: 'Link Google Maps', type: 'text' },
+      ]
+    },
+    {
+      id: 'social', label: 'Redes Sociais', icon: '📱', color: '#f0fff4',
+      fields: [
+        { key: 'global.social.instagram', label: 'Instagram URL', type: 'text' },
+        { key: 'global.social.instagram_handle', label: 'Instagram Handle', type: 'text' },
+        { key: 'global.social.instagram_count', label: 'Instagram Seguidores', type: 'text' },
+        { key: 'global.social.instagram_description', label: 'Instagram Descrição', type: 'text' },
+        { key: 'global.social.linkedin', label: 'LinkedIn URL', type: 'text' },
+        { key: 'global.social.linkedin_handle', label: 'LinkedIn Handle', type: 'text' },
+        { key: 'global.social.linkedin_count', label: 'LinkedIn Seguidores', type: 'text' },
+        { key: 'global.social.linkedin_description', label: 'LinkedIn Descrição', type: 'text' },
+        { key: 'global.social.youtube', label: 'YouTube URL', type: 'text' },
+        { key: 'global.social.google_handle', label: 'Google Handle', type: 'text' },
+        { key: 'global.social.google_rating', label: 'Google Rating (ex: 4.9)', type: 'text' },
+        { key: 'global.social.google_stars', label: 'Google Stars (1-5)', type: 'text' },
+        { key: 'global.social.google_description', label: 'Google Descrição', type: 'text' },
+        { key: 'global.social.google_review_url', label: 'Google Review URL', type: 'text' },
+      ]
+    },
+  ]
+};
+
+// ═══════════════════════════════════════
+// CMS STATE
+// ═══════════════════════════════════════
+let cmsData = {};  // { 'key': 'value' }
+let dirtyKeys = new Set();
+let currentPage = 'index';
+let imgPickerCallback = null;
+let mediaFiles = [];
+
+// ═══════════════════════════════════════
+// LOAD CMS DATA FROM SUPABASE
+// ═══════════════════════════════════════
+async function fetchCmsData() {
+  const { data, error } = await sb.from('site_content').select('key,value_en');
+  if (error) { console.error(error); return; }
+  cmsData = {};
+  (data || []).forEach(row => { cmsData[row.key] = row.value_en; });
+}
+
+// ═══════════════════════════════════════
+// RENDER BLOCKS
+// ═══════════════════════════════════════
+let currentPage_url = 'index.html';
+
+async function loadPageBlocks(page) {
+  currentPage = page;
+  const schema = PAGE_SCHEMAS[page];
+  if (!schema) return;
+
+  document.getElementById('preview-link').href = schema.url;
+  document.querySelectorAll('.page-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.page === page);
+  });
+
+  const container = document.getElementById('blocks-container');
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:#ccc;">A carregar...</div>';
+
+  await fetchCmsData();
+  container.innerHTML = '';
+  schema.sections.forEach(section => renderSection(section, container, false));
+}
+
+async function loadGlobalBlocks() {
+  const container = document.getElementById('global-blocks-container');
+  container.innerHTML = '<div style="text-align:center;padding:40px;color:#ccc;">A carregar...</div>';
+  await fetchCmsData();
+  container.innerHTML = '';
+  GLOBAL_SCHEMA.sections.forEach(section => renderSection(section, container, false));
+}
+
+function renderSection(section, container, open) {
+  const wrap = document.createElement('div');
+  wrap.className = 'block-section';
+
+  const header = document.createElement('div');
+  header.className = 'block-header' + (open ? ' open' : '');
+  header.innerHTML = `
+    <div class="block-header-left">
+      <div class="block-icon" style="background:${section.color || '#f0f4ff'};">${section.icon || '📄'}</div>
+      <div>
+        <div class="block-name">${section.label}</div>
+      </div>
+    </div>
+    <svg class="block-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  `;
+
+  const body = document.createElement('div');
+  body.className = 'block-body' + (open ? ' open' : '');
+
+  if (section.type === 'repeater') {
+    section.items.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'item-card';
+      card.innerHTML = `<div class="item-card-label">${item.label}</div>`;
+      const grid = document.createElement('div');
+      grid.className = 'field-row';
+      item.fields.forEach(f => {
+        const col = document.createElement('div');
+        col.appendChild(renderField(f));
+        grid.appendChild(col);
+      });
+      card.appendChild(grid);
+      body.appendChild(card);
+    });
+  } else {
+    (section.fields || []).forEach(f => {
+      const g = document.createElement('div');
+      g.className = 'field-group';
+      g.appendChild(renderField(f));
+      body.appendChild(g);
+    });
+  }
+
+  header.addEventListener('click', () => {
+    header.classList.toggle('open');
+    body.classList.toggle('open');
+  });
+
+  wrap.appendChild(header);
+  wrap.appendChild(body);
+  container.appendChild(wrap);
+}
+
+function renderField(field) {
+  const wrap = document.createElement('div');
+  const label = document.createElement('div');
+  label.className = 'field-label';
+  label.textContent = field.label;
+  wrap.appendChild(label);
+
+  const val = cmsData[field.key] || '';
+
+  if (field.type === 'image') {
+    const imgWrap = document.createElement('div');
+    imgWrap.className = 'field-image-wrap';
+
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'field-input';
+    inp.value = val;
+    inp.dataset.key = field.key;
+    inp.placeholder = 'URL da imagem';
+    inp.addEventListener('input', () => markDirty(field.key, inp.value));
+
+    const preview = document.createElement('img');
+    preview.className = 'field-image-preview' + (val ? ' show' : '');
+    preview.src = val || '';
+    preview.onerror = () => { preview.classList.remove('show'); };
+
+    inp.addEventListener('change', () => {
+      preview.src = inp.value;
+      preview.classList.toggle('show', !!inp.value);
+    });
+
+    const btn = document.createElement('div');
+    btn.className = 'field-image-btn';
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Escolher imagem`;
+    btn.addEventListener('click', () => openImgPicker(url => {
+      inp.value = url;
+      preview.src = url;
+      preview.classList.toggle('show', !!url);
+      markDirty(field.key, url);
+    }));
+
+    imgWrap.appendChild(inp);
+    imgWrap.appendChild(btn);
+    imgWrap.appendChild(preview);
+    wrap.appendChild(imgWrap);
+
+  } else if (field.type === 'richtext') {
+    const editorDiv = document.createElement('div');
+    editorDiv.id = 'rte_' + field.key.replace(/\./g, '_');
+    editorDiv.style.cssText = 'border:1.5px solid #E8E5E0;border-radius:8px;overflow:hidden;';
+
+    const toolbar = document.createElement('div');
+    toolbar.id = editorDiv.id + '_tb';
+    const content = document.createElement('div');
+    content.id = editorDiv.id + '_ed';
+    content.style.minHeight = '90px';
+
+    editorDiv.appendChild(toolbar);
+    editorDiv.appendChild(content);
+    wrap.appendChild(editorDiv);
+
+    // Initialize Quill after DOM insertion
+    setTimeout(() => {
+      const q = new Quill('#' + content.id, {
+        theme: 'snow',
+        modules: { toolbar: { container: '#' + toolbar.id } }
+      });
+      q.root.innerHTML = val;
+      q.on('text-change', () => markDirty(field.key, q.root.innerHTML));
+
+      // Custom minimal toolbar
+      const tb = document.querySelector('#' + toolbar.id + ' .ql-toolbar');
+    }, 50);
+
+    return wrap;
+
+  } else if (field.type === 'textarea') {
+    const inp = document.createElement('textarea');
+    inp.className = 'field-input field-textarea';
+    inp.value = val;
+    inp.dataset.key = field.key;
+    inp.addEventListener('input', () => markDirty(field.key, inp.value));
+    wrap.appendChild(inp);
+
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'field-input';
+    inp.value = val;
+    inp.dataset.key = field.key;
+    inp.addEventListener('input', () => markDirty(field.key, inp.value));
+    wrap.appendChild(inp);
+  }
+
+  return wrap;
+}
+
+// ═══════════════════════════════════════
+// DIRTY / SAVE
+// ═══════════════════════════════════════
+const pendingChanges = {};
+
+function markDirty(key, value) {
+  pendingChanges[key] = value;
+  dirtyKeys.add(key);
+  updateSaveBar();
+}
+
+function updateSaveBar() {
+  const bar = document.getElementById('save-bar');
+  const count = Object.keys(pendingChanges).length;
+  document.getElementById('dirty-count').textContent = count + ' alteraç' + (count === 1 ? 'ão' : 'ões') + ' por guardar';
+  bar.classList.toggle('visible', count > 0);
+}
+
+function discardAll() {
+  Object.keys(pendingChanges).forEach(k => delete pendingChanges[k]);
+  dirtyKeys.clear();
+  updateSaveBar();
+  // Reload current view
+  if (currentView === 'content') loadPageBlocks(currentPage);
+  if (currentView === 'global') loadGlobalBlocks();
+}
+
+async function saveAll() {
+  const keys = Object.keys(pendingChanges);
+  if (!keys.length) return;
+
+  const btn = document.getElementById('save-btn');
+  btn.innerHTML = '⏳ A guardar...';
+  btn.disabled = true;
+
+  try {
+    // Upsert each changed key
+    const upserts = keys.map(key => ({ key, value_en: pendingChanges[key] }));
+    const { error } = await sb.from('site_content').upsert(upserts, { onConflict: 'key' });
+    if (error) throw error;
+
+    keys.forEach(k => delete pendingChanges[k]);
+    dirtyKeys.clear();
+    updateSaveBar();
+    showToast('✓ Guardado com sucesso!', false);
+  } catch (err) {
+    showToast('❌ Erro ao guardar: ' + err.message, true);
+  }
+
+  btn.innerHTML = 'Guardar Alterações';
+  btn.disabled = false;
+}
+
+// Keyboard shortcut
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+    e.preventDefault();
+    saveAll();
+  }
+});
+
+// ═══════════════════════════════════════
+// PAGE SWITCHER
+// ═══════════════════════════════════════
+function switchPage(page) {
+  if (Object.keys(pendingChanges).length > 0) {
+    if (!confirm('Tem alterações por guardar. Descartar e mudar de página?')) return;
+    discardAll();
+  }
+  loadPageBlocks(page);
+}
+
+// ═══════════════════════════════════════
+// IMAGE PICKER
+// ═══════════════════════════════════════
+function openImgPicker(callback) {
+  imgPickerCallback = callback;
+  document.getElementById('img-picker-modal').classList.add('open');
+  loadPickerGrid();
+}
+
+function closeImgPicker() {
+  document.getElementById('img-picker-modal').classList.remove('open');
+  imgPickerCallback = null;
+}
+
+async function loadPickerGrid() {
+  const grid = document.getElementById('picker-grid');
+  grid.innerHTML = '<div style="color:#ccc;font-size:13px;padding:20px;">A carregar...</div>';
+
+  const { data } = await sb.storage.from('blog-media').list('', { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
+  mediaFiles = data || [];
+
+  grid.innerHTML = '';
+  mediaFiles.forEach(file => {
+    const { data: urlData } = sb.storage.from('blog-media').getPublicUrl(file.name);
+    const url = urlData.publicUrl;
+    const item = document.createElement('div');
+    item.className = 'media-item';
+    item.innerHTML = `<img src="${url}" loading="lazy">`;
+    item.addEventListener('click', () => {
+      if (imgPickerCallback) imgPickerCallback(url);
+      closeImgPicker();
+    });
+    grid.appendChild(item);
+  });
+
+  if (!mediaFiles.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#ccc;padding:40px;font-size:13px;">Nenhuma imagem ainda. Faça upload acima.</div>';
+  }
+}
+
+async function uploadAndPick(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const compressed = await compressImage(file);
+  const name = 'img_' + Date.now() + '.webp';
+  const { error } = await sb.storage.from('blog-media').upload(name, compressed, { upsert: false });
+  if (error) { showToast('❌ ' + error.message, true); return; }
+  const { data } = sb.storage.from('blog-media').getPublicUrl(name);
+  if (imgPickerCallback) imgPickerCallback(data.publicUrl);
+  closeImgPicker();
+}
+
+function pickFromUrl() {
+  const url = document.getElementById('img-url-direct').value.trim();
+  if (!url) return;
+  if (imgPickerCallback) imgPickerCallback(url);
+  closeImgPicker();
+}
+
+// ═══════════════════════════════════════
+// MEDIA LIBRARY
+// ═══════════════════════════════════════
+async function loadMediaGrid() {
+  const grid = document.getElementById('media-grid');
+  grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#ccc;padding:40px;">A carregar...</div>';
+
+  const { data, error } = await sb.storage.from('blog-media').list('', { limit: 200, sortBy: { column: 'created_at', order: 'desc' } });
+  if (error) { grid.innerHTML = '<div style="color:red;padding:20px;">Erro: ' + error.message + '</div>'; return; }
+
+  grid.innerHTML = '';
+  (data || []).forEach(file => {
+    const { data: urlData } = sb.storage.from('blog-media').getPublicUrl(file.name);
+    const url = urlData.publicUrl;
+    const item = document.createElement('div');
+    item.className = 'media-item';
+    item.title = file.name;
+    item.innerHTML = `
+      <img src="${url}" loading="lazy">
+      <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.6);padding:4px 6px;display:none;" class="media-overlay">
+        <div style="font-size:9px;color:white;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${file.name}</div>
+        <div style="display:flex;gap:4px;margin-top:3px;">
+          <button onclick="copyUrl('${url}')" style="flex:1;font-size:9px;background:rgba(255,255,255,0.2);color:white;border:none;border-radius:3px;padding:2px;cursor:pointer;">Copiar URL</button>
+          <button onclick="deleteMedia('${file.name}', this)" style="font-size:9px;background:rgba(220,38,38,0.6);color:white;border:none;border-radius:3px;padding:2px 4px;cursor:pointer;">✕</button>
+        </div>
+      </div>
+    `;
+    item.addEventListener('mouseenter', () => item.querySelector('.media-overlay').style.display = 'block');
+    item.addEventListener('mouseleave', () => item.querySelector('.media-overlay').style.display = 'none');
+    grid.appendChild(item);
+  });
+
+  if (!data || !data.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#ccc;padding:60px;font-size:14px;">Nenhuma imagem ainda.<br>Faça upload com o botão acima.</div>';
+  }
+}
+
+async function handleMediaUpload(input) {
+  const files = Array.from(input.files);
+  for (const file of files) {
+    const compressed = await compressImage(file);
+    const name = 'img_' + Date.now() + '_' + Math.random().toString(36).slice(2) + '.webp';
+    const { error } = await sb.storage.from('blog-media').upload(name, compressed, { upsert: false });
+    if (error) showToast('❌ ' + error.message, true);
+  }
+  showToast('✓ ' + files.length + ' imagem(ns) enviada(s)!', false);
+  loadMediaGrid();
+}
+
+function copyUrl(url) {
+  navigator.clipboard.writeText(url).then(() => showToast('✓ URL copiado!', false));
+}
+
+async function deleteMedia(name, btn) {
+  if (!confirm('Eliminar esta imagem permanentemente?')) return;
+  btn.textContent = '...';
+  const { error } = await sb.storage.from('blog-media').remove([name]);
+  if (error) { showToast('❌ ' + error.message, true); return; }
+  showToast('✓ Imagem eliminada', false);
+  loadMediaGrid();
+}
+
+// ═══════════════════════════════════════
+// BLOG / POSTS
+// ═══════════════════════════════════════
+async function loadPosts() {
+  const { data, error } = await sb.from('posts').select('*').order('created_at', { ascending: false });
+  const tbody = document.getElementById('posts-tbody');
+  if (error || !data) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#ccc;padding:40px;">Erro ao carregar.</td></tr>'; return; }
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#ccc;padding:40px;">Sem artigos ainda.</td></tr>'; return; }
+
+  tbody.innerHTML = '';
+  data.forEach(post => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span style="font-weight:600;color:#0C1E28;">${post.title || '—'}</span></td>
+      <td><span class="badge" style="background:#f0f4ff;color:#466DEE;">${post.category || '—'}</span></td>
+      <td style="color:#999;font-size:12.5px;">${new Date(post.created_at).toLocaleDateString('pt-PT')}</td>
+      <td style="text-align:right;">
+        <button onclick='openPostEditor(${JSON.stringify(post).replace(/'/g,"&#39;")})' style="color:#466DEE;font-size:12.5px;font-weight:600;background:none;border:none;cursor:pointer;margin-right:12px;font-family:inherit;">Editar</button>
+        <button onclick='triggerDelete("${post.id}")' style="color:#dc2626;font-size:12.5px;font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;">Eliminar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function openPostEditor(post) {
+  document.getElementById('post-modal-title').textContent = post ? 'Editar Artigo' : 'Novo Artigo';
+  document.getElementById('post-id').value = post?.id || '';
+  document.getElementById('post-slug-orig').value = post?.slug || '';
+  document.getElementById('post-title').value = post?.title || '';
+  document.getElementById('post-category').value = post?.category || '';
+  document.getElementById('post-readtime').value = post?.read_time || '';
+  document.getElementById('post-excerpt').value = post?.excerpt || '';
+  document.getElementById('post-image-url').value = post?.image_url || '';
+  document.getElementById('post-error').style.display = 'none';
+
+  const preview = document.getElementById('post-cover-preview');
+  preview.src = post?.image_url || '';
+  preview.style.display = post?.image_url ? '' : 'none';
+
+  quillEN.root.innerHTML = post?.content || '';
+  const pt = post?.translations?.pt || {};
+  document.getElementById('post-title-pt').value = pt.title || '';
+  document.getElementById('post-excerpt-pt').value = pt.excerpt || '';
+  quillPT.root.innerHTML = pt.content || '';
+
+  document.getElementById('post-modal').classList.add('open');
+}
+
+function closePostModal() {
+  document.getElementById('post-modal').classList.remove('open');
+}
+
+async function uploadCover(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const compressed = await compressImage(file);
+  const name = 'cover_' + Date.now() + '.webp';
+  const { error } = await sb.storage.from('blog-media').upload(name, compressed, { upsert: false });
+  if (error) { showToast('❌ ' + error.message, true); return; }
+  const { data } = sb.storage.from('blog-media').getPublicUrl(name);
+  document.getElementById('post-image-url').value = data.publicUrl;
+  const preview = document.getElementById('post-cover-preview');
+  preview.src = data.publicUrl;
+  preview.style.display = '';
+}
+
+async function savePost() {
+  const btn = document.getElementById('post-save-btn');
+  const err = document.getElementById('post-error');
+  err.style.display = 'none';
+  btn.textContent = 'A guardar...';
+  btn.disabled = true;
+
+  try {
+    const id = document.getElementById('post-id').value;
+    const slugOrig = document.getElementById('post-slug-orig').value;
+    const enTitle = document.getElementById('post-title').value.trim();
+    const imageUrl = document.getElementById('post-image-url').value.trim();
+    if (!enTitle) throw new Error('O título é obrigatório.');
+    if (!imageUrl) throw new Error('A imagem de capa é obrigatória.');
+
+    const slug = id && slugOrig ? slugOrig : generateSlug(enTitle);
+
+    const ptTitle = document.getElementById('post-title-pt').value.trim();
+    const ptExcerpt = document.getElementById('post-excerpt-pt').value.trim();
+    const ptContent = quillPT.root.innerHTML !== '<p><br></p>' ? quillPT.root.innerHTML : '';
+    const translations = {};
+    if (ptTitle || ptExcerpt || ptContent) {
+      translations.pt = {};
+      if (ptTitle) translations.pt.title = ptTitle;
+      if (ptExcerpt) translations.pt.excerpt = ptExcerpt;
+      if (ptContent) translations.pt.content = ptContent;
+    }
+
+    const payload = {
+      title: enTitle,
+      slug,
+      category: document.getElementById('post-category').value,
+      read_time: document.getElementById('post-readtime').value,
+      excerpt: document.getElementById('post-excerpt').value,
+      image_url: imageUrl,
+      content: quillEN.root.innerHTML,
+      translations: Object.keys(translations).length ? translations : null,
+    };
+
+    let error;
+    if (id) {
+      ({ error } = await sb.from('posts').update(payload).eq('id', id));
+    } else {
+      ({ error } = await sb.from('posts').insert(payload));
+    }
+    if (error) throw error;
+
+    closePostModal();
+    showToast('✓ Artigo guardado!', false);
+    loadPosts();
+  } catch (e) {
+    err.textContent = e.message;
+    err.style.display = '';
+  }
+
+  btn.textContent = 'Publicar Artigo';
+  btn.disabled = false;
+}
+
+let deletePostId = null;
+function triggerDelete(id) {
+  deletePostId = id;
+  document.getElementById('delete-modal').classList.add('open');
+}
+function closeDeleteModal() {
+  deletePostId = null;
+  document.getElementById('delete-modal').classList.remove('open');
+}
+async function confirmDelete() {
+  if (!deletePostId) return;
+  document.getElementById('confirm-delete-btn').textContent = 'A eliminar...';
+  await sb.from('posts').delete().eq('id', deletePostId);
+  closeDeleteModal();
+  showToast('✓ Artigo eliminado', false);
+  loadPosts();
+}
+
+// ═══════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════
+function generateSlug(text) {
+  return text.toString().toLowerCase().trim()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+function compressImage(file, maxWidth = 1920, quality = 0.8) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = e => {
+      const img = new Image();
+      img.src = e.target.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let w = img.width, h = img.height;
+        if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        canvas.toBlob(blob => {
+          if (!blob) return reject(new Error('Canvas empty'));
+          resolve(new File([blob], file.name.replace(/\.[^/.]+$/, '') + '.webp', { type: 'image/webp' }));
+        }, 'image/webp', quality);
+      };
+      img.onerror = reject;
+    };
+    reader.onerror = reject;
+  });
+}
+
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.toggle('error', isError);
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) {
+      overlay.classList.remove('open');
+    }
+  });
+});
+
+// ═══════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════
+checkAuth();
+</script>
+</body>
+</html>
