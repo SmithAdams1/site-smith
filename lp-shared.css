@@ -31,8 +31,17 @@ body {
 .satoshi  { font-family: 'Satoshi', sans-serif; }
 .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
 a { color: inherit; }
-h1, h2, h3 { margin: 0; overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
-p, li, span, label, button { overflow-wrap: break-word; word-wrap: break-word; }
+/* No auto-hyphenation anywhere; words stay whole (break only at spaces) */
+h1, h2, h3, h4, h5, h6,
+p, li, span, label, button, a, strong, em, div {
+  hyphens: manual;
+  -webkit-hyphens: manual;
+  -ms-hyphens: manual;
+  overflow-wrap: normal;
+  word-wrap: normal;
+  word-break: normal;
+}
+h1, h2, h3 { margin: 0; }
 img, video { max-width: 100%; height: auto; display: block; }
 svg { max-width: 100%; }
 input, select, textarea, button { max-width: 100%; }
