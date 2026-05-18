@@ -1,7 +1,7 @@
 /* ============================================================
-   LP SHARED DESIGN SYSTEM — Urban Collection landing pages
-   Used by: lp-urban-collection.html, lp-urban-collection-citizenship.html,
-            lp-urban-collection-yield.html
+   LP SHARED DESIGN SYSTEM — Hygge House Beato landing pages
+   Used by: lp-hygge-house.html, lp-hygge-house-citizenship.html,
+            lp-hygge-house-yield.html
    Design: dark moody hero (Golden Visa ref) + clean centered card
            (Binghatti ref) + gold accents throughout.
    ============================================================ */
@@ -80,7 +80,7 @@ input, select, textarea, button { max-width: 100%; }
 }
 .hero::before {
   content: ""; position: absolute; inset: 0;
-  background-image: url('lp-urban-collection/drone.jpg');
+  background-image: url('lp-hygge-house/drone.jpg');
   background-size: cover; background-position: center;
   opacity: .28; filter: grayscale(20%) contrast(1.05);
   z-index: 0;
