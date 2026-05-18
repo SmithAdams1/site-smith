@@ -513,10 +513,10 @@ textarea.lp-input { resize: vertical; min-height: 60px; padding-top: 8px; }
   border-color: var(--gold);
 }
 
-/* AMENITIES */
+/* AMENITIES — fixed 3 cols × 2 rows on desktop */
 .am-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-top: 8px;
 }
@@ -713,13 +713,14 @@ textarea.lp-input { resize: vertical; min-height: 60px; padding-top: 8px; }
 
 /* ====================== RESPONSIVE ====================== */
 @media (max-width: 980px) {
-  /* Hero stacks vertical: text on top, form below — both left-aligned */
+  /* Hero stacks vertical: text on top, form below, both left-aligned */
   .hero > .container { grid-template-columns: 1fr; gap: 40px; }
   .hero > .container > div:first-child { max-width: none; }
   .form-card { justify-self: stretch; max-width: 560px; margin: 0 auto 0 0; }
   .lean-why-grid { grid-template-columns: 1fr; gap: 36px; }
   .lean-why-grid > div:first-child { max-width: none; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .am-grid { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(2) { border-right: none; }
   .stat { border-bottom: 1px solid rgba(255,255,255,.08); padding-bottom: 20px; }
   .stat:nth-last-child(-n+2) { border-bottom: none; padding-bottom: 0; }
