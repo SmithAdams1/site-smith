@@ -32,202 +32,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
 
-<style>
-  :root { --dark:#0C1E28; --cream:#FDFCF9; }
-  * { box-sizing:border-box; }
-  html, body { overflow-x:hidden; max-width:100%; }
-  body { font-family:'Satoshi', system-ui, sans-serif; margin:0; padding:0; background:var(--cream); color:var(--dark); -webkit-font-smoothing:antialiased; }
-  .geist { font-family:'Geist', sans-serif; }
-  .satoshi { font-family:'Satoshi', sans-serif; }
-  .container { width:100%; max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px); }
-  a { color:inherit; }
-  h1,h2,h3 { margin:0; overflow-wrap:break-word; word-wrap:break-word; hyphens:auto; }
-  p, li, span, label, button { overflow-wrap:break-word; word-wrap:break-word; }
-  img, video { max-width:100%; height:auto; display:block; }
-  svg { max-width:100%; }
-  input, select, textarea, button { max-width:100%; }
-
-  /* TOP BAR */
-  .lp-top { position:absolute; top:0; left:0; right:0; z-index:30; padding:24px clamp(16px,4vw,40px); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:nowrap; min-width:0; }
-  .lp-top img { height:34px; width:auto; max-width:160px; flex-shrink:1; filter:brightness(0) invert(1); }
-  .lp-top-right { display:flex; align-items:center; gap:18px; flex-shrink:0; }
-  .lp-top .phone { font-size:14px; color:rgba(255,255,255,0.85); text-decoration:none; font-weight:500; letter-spacing:.02em; }
-  .lp-top .phone:hover { color:#fff; }
-  .lp-lang { display:inline-flex; gap:4px; padding:4px; border:1px solid rgba(255,255,255,0.25); border-radius:9999px; background:rgba(255,255,255,0.05); }
-  .lp-lang button { background:transparent; border:none; color:rgba(255,255,255,0.65); font:inherit; font-size:12px; font-weight:700; padding:6px 12px; border-radius:9999px; cursor:pointer; letter-spacing:.05em; transition:background .2s,color .2s; }
-  .lp-lang button.active { background:#fff; color:var(--dark); }
-  .lp-lang button:not(.active):hover { color:#fff; }
-
-  /* HERO */
-  .hero { position:relative; background:#0C1E28; padding:clamp(110px,14vw,150px) 0 clamp(60px,8vw,90px); overflow:hidden; max-width:100%; }
-  .hero::before { content:""; position:absolute; inset:0; background-image:url('lp-urban-collection/drone.jpg'); background-size:cover; background-position:center; opacity:.3; z-index:0; }
-  .hero::after  { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(12,30,40,.55) 0%, rgba(12,30,40,.85) 65%, rgba(12,30,40,.95) 100%); z-index:1; }
-  .hero > .container { position:relative; z-index:2; display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(40px,5vw,72px); align-items:center; }
-
-  .hero-eyebrow { display:inline-block; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.55); font-weight:600; margin-bottom:24px; }
-  .hero-title   { color:#fff; font-family:'Geist',sans-serif; font-size:clamp(32px,4.4vw,60px); font-weight:800; line-height:1.05; letter-spacing:-.025em; margin-bottom:24px; }
-  .hero-title em{ font-style:normal; }
-  .hero-title em::after{ content:""; display:block; height:2px; width:88px; background:#fff; margin-top:8px; opacity:.4; }
-  .hero-sub     { color:rgba(255,255,255,.72); font-size:clamp(15px,1.3vw,17px); line-height:1.65; margin-bottom:30px; max-width:560px; }
-  .hero-bullets { list-style:none; padding:0; margin:0 0 32px; display:flex; flex-direction:column; gap:12px; }
-  .hero-bullets li { position:relative; padding-left:28px; color:rgba(255,255,255,.92); font-size:15px; line-height:1.55; }
-  .hero-bullets li::before { content:""; position:absolute; left:0; top:6px; width:16px; height:16px; background:#fff; opacity:.85; mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/></svg>") center/13px no-repeat; -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/></svg>") center/13px no-repeat; }
-  .hero-secondary { display:inline-flex; align-items:center; gap:10px; color:#fff; font-weight:600; font-size:14px; text-decoration:none; letter-spacing:.02em; border-bottom:1px solid rgba(255,255,255,.4); padding-bottom:4px; transition:border-color .2s,opacity .2s; opacity:.85; }
-  .hero-secondary:hover { opacity:1; border-color:#fff; }
-
-  /* FORM CARD */
-  .form-card { background:#FDFCF9; border-radius:16px; padding:clamp(24px,2.6vw,36px); box-shadow:0 24px 60px rgba(0,0,0,.32); position:relative; }
-  .form-card-title { font-family:'Geist',sans-serif; font-size:22px; font-weight:800; color:var(--dark); letter-spacing:-.01em; line-height:1.2; margin-bottom:6px; }
-  .form-card-sub   { font-size:14px; color:rgba(12,30,40,.6); line-height:1.5; margin-bottom:24px; }
-
-  .lp-form { display:grid; gap:18px; min-width:0; }
-  .lp-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; min-width:0; }
-  .lp-input-group { display:flex; flex-direction:column; min-width:0; }
-  .lp-label { font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:var(--dark); font-weight:700; margin-bottom:6px; }
-  .lp-input { width:100%; background:transparent; border:none; border-bottom:1px solid rgba(12,30,40,.18); padding:12px 0; font-size:15px; font-family:inherit; color:var(--dark); transition:border-color .25s; outline:none; }
-  .lp-input:focus { border-bottom-color:var(--dark); border-bottom-width:2px; }
-  .lp-input::placeholder { color:rgba(12,30,40,.32); }
-  textarea.lp-input { resize:vertical; min-height:60px; padding-top:8px; }
-
-  /* Phone */
-  .lp-phone-wrap { display:flex; align-items:center; border-bottom:1px solid rgba(12,30,40,.18); transition:border-color .25s; min-width:0; width:100%; }
-  .lp-phone-wrap:focus-within { border-bottom-color:var(--dark); border-bottom-width:2px; }
-  .lp-phone-code { max-width:120px; background:transparent; border:none; outline:none; padding:12px 22px 12px 0; font-size:15px; font-family:inherit; color:var(--dark); cursor:pointer; appearance:none; -webkit-appearance:none; width:auto; flex-shrink:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230C1E28' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 4px center; }
-  .lp-phone-code option, .lp-phone-code optgroup { font-size:14px; }
-  .lp-phone-input { width:100%; background:transparent; border:none; outline:none; padding:12px 0 12px 10px; font-size:15px; font-family:inherit; color:var(--dark); flex:1 1 0; min-width:0; }
-
-  /* Submit */
-  .lp-submit { background:var(--dark); color:#fff; border:none; border-radius:9999px; padding:16px 32px; font-size:14px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:background .25s,transform .15s,box-shadow .25s; margin-top:8px; }
-  .lp-submit:hover { background:#153242; transform:translateY(-1px); box-shadow:0 10px 24px rgba(12,30,40,.18); }
-  .lp-submit:disabled { opacity:.6; cursor:wait; transform:none; box-shadow:none; }
-
-  .lp-foot-note { font-size:11px; color:rgba(12,30,40,.45); text-align:center; margin-top:14px; line-height:1.5; }
-  .lp-error { background:#fef2f2; border:1px solid #fecaca; color:#b91c1c; padding:10px 12px; border-radius:8px; font-size:13px; display:none; }
-  .lp-success { display:none; text-align:center; padding:20px 0; }
-  .lp-success.active { display:block; }
-  .form-card.success > form { display:none; }
-  .lp-success-icon { width:60px; height:60px; margin:0 auto 18px; border-radius:9999px; background:rgba(34,197,94,.12); display:flex; align-items:center; justify-content:center; color:#16a34a; }
-  .lp-success h3 { font-family:'Geist',sans-serif; font-size:22px; font-weight:800; margin-bottom:10px; }
-  .lp-success p  { color:rgba(12,30,40,.6); font-size:15px; line-height:1.6; }
-  .lp-success a.brochure { display:inline-block; margin-top:18px; padding:14px 26px; background:var(--dark); color:#fff; border-radius:9999px; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.1em; text-decoration:none; }
-
-  /* SECTIONS */
-  .sec { padding:clamp(60px,8vw,100px) 0; }
-  .sec.dark { background:var(--dark); color:#fff; }
-  .sec-eyebrow { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.28em; text-transform:uppercase; color:rgba(12,30,40,.4); margin-bottom:16px; }
-  .sec-eyebrow.light { color:rgba(255,255,255,.45); }
-  .sec-title { font-family:'Geist',sans-serif; font-size:clamp(28px,3.4vw,48px); font-weight:800; letter-spacing:-.02em; line-height:1.1; margin-bottom:24px; color:var(--dark); }
-  .sec-title.light { color:#fff; }
-  .sec-body { font-size:16px; line-height:1.75; color:rgba(12,30,40,.72); max-width:680px; margin-bottom:24px; }
-  .sec-body.light { color:rgba(255,255,255,.72); }
-
-  .pill-bullets { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; }
-  .pill-bullets li { position:relative; background:rgba(12,30,40,.04); border:1px solid rgba(12,30,40,.08); padding:18px 20px 18px 38px; border-radius:12px; font-size:14.5px; line-height:1.55; color:var(--dark); }
-  .pill-bullets li::before { content:""; position:absolute; left:20px; top:25px; width:6px; height:6px; border-radius:9999px; background:var(--dark); opacity:.5; }
-  .pill-bullets.light li { background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.1); color:rgba(255,255,255,.92); }
-  .pill-bullets.light li::before { background:#fff; opacity:.55; }
-
-  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,60px); align-items:center; }
-  .two-col.two-col-rwider { grid-template-columns:1fr 1.15fr; }
-  .two-col.two-col-lwider { grid-template-columns:1.1fr 1fr; }
-  .two-col img { width:100%; height:100%; object-fit:cover; border-radius:18px; aspect-ratio:4/3; display:block; }
-
-  .img-band { width:100%; height:clamp(320px,48vh,480px); background-size:cover; background-position:center; }
-
-  /* CTA STRIP */
-  .cta-strip { display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:clamp(24px,3vw,40px); background:#fff; border:1px solid rgba(12,30,40,.08); border-radius:18px; margin-top:48px; }
-  .cta-strip h3 { font-family:'Geist',sans-serif; font-size:clamp(20px,1.8vw,26px); font-weight:800; line-height:1.25; letter-spacing:-.01em; max-width:600px; color:var(--dark); }
-  .cta-strip a  { display:inline-flex; align-items:center; gap:10px; background:var(--dark); color:#fff; padding:14px 26px; border-radius:9999px; font-weight:700; font-size:13px; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; transition:background .25s,transform .2s; white-space:nowrap; }
-  .cta-strip a:hover { background:#153242; transform:translateY(-1px); }
-  .sec.dark .cta-strip { background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.1); }
-  .sec.dark .cta-strip h3 { color:#fff; }
-  .sec.dark .cta-strip a  { background:#fff; color:var(--dark); }
-  .sec.dark .cta-strip a:hover { background:var(--cream); }
-
-  /* RETURN BIG NUMBER */
-  .return-card { display:grid; grid-template-columns:auto 1fr; gap:40px; align-items:center; padding:clamp(28px,3.4vw,48px); background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:18px; margin:32px 0; }
-  .return-num  { font-family:'Geist',sans-serif; font-size:clamp(80px,11vw,140px); font-weight:800; color:#fff; letter-spacing:-.04em; line-height:.85; }
-  .return-num span { font-size:.5em; vertical-align:top; margin-left:4px; opacity:.65; font-weight:700; }
-  .return-card p { font-size:16px; line-height:1.7; color:rgba(255,255,255,.78); margin:0; }
-
-  /* MICROCOPY QUOTE */
-  .micro-quote { padding:22px 26px; border-left:3px solid var(--dark); background:rgba(12,30,40,.04); font-style:italic; font-size:16px; line-height:1.6; color:var(--dark); margin-top:24px; border-radius:0 10px 10px 0; }
-  .sec.dark .micro-quote { background:rgba(255,255,255,.06); color:rgba(255,255,255,.92); border-color:#fff; }
-
-  /* AMENITIES */
-  .am-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:8px; }
-  .am-item { padding:24px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:14px; transition:transform .25s, background .25s; }
-  .am-item:hover { transform:translateY(-3px); background:rgba(255,255,255,.07); }
-  .am-icon  { width:32px; height:32px; margin-bottom:14px; }
-  .am-title { display:block; font-family:'Geist',sans-serif; font-size:14px; font-weight:700; color:#fff; margin-bottom:6px; letter-spacing:-.01em; }
-  .am-desc  { display:block; font-size:12.5px; color:rgba(255,255,255,.55); line-height:1.5; }
-
-  /* FOOTER */
-  .lp-foot { background:var(--dark); color:rgba(255,255,255,.5); padding:48px clamp(16px,4vw,40px); text-align:center; font-size:13px; line-height:1.7; }
-  .lp-foot img { height:28px; opacity:.85; margin-bottom:18px; filter:brightness(0) invert(1); }
-  .lp-foot a  { color:#fff; text-decoration:none; }
-  .lp-foot p  { margin:6px 0; }
-
-  /* BROCHURE MODAL */
-  .lp-modal { display:none; position:fixed; inset:0; z-index:100; background:rgba(12,30,40,.7); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:20px; }
-  .lp-modal.active { display:flex; }
-  .lp-modal-card { background:var(--cream); border-radius:18px; padding:clamp(24px,3vw,40px); width:100%; max-width:480px; position:relative; box-shadow:0 30px 80px rgba(0,0,0,.4); max-height:90vh; overflow-y:auto; }
-  .lp-modal-close { position:absolute; top:14px; right:14px; width:36px; height:36px; border-radius:9999px; background:transparent; border:none; cursor:pointer; color:var(--dark); display:flex; align-items:center; justify-content:center; transition:background .2s; }
-  .lp-modal-close:hover { background:rgba(12,30,40,.06); }
-  .lp-modal-eyebrow { display:inline-block; font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:rgba(12,30,40,.5); margin-bottom:10px; }
-  .lp-modal-title { font-family:'Geist',sans-serif; font-size:24px; font-weight:800; color:var(--dark); letter-spacing:-.01em; line-height:1.2; margin-bottom:8px; }
-  .lp-modal-sub { font-size:14px; color:rgba(12,30,40,.6); line-height:1.55; margin-bottom:24px; }
-  .lp-modal .lp-form { gap:14px; }
-
-  /* RESPONSIVE */
-  @media (max-width:980px) {
-    .hero > .container { grid-template-columns:1fr; gap:40px; }
-    .two-col,
-    .two-col.two-col-rwider,
-    .two-col.two-col-lwider { grid-template-columns:1fr; gap:32px; }
-    .two-col img { aspect-ratio:16/10; max-height:420px; }
-    .return-card { grid-template-columns:1fr; gap:20px; text-align:center; }
-    .return-num  { font-size:96px; }
-    .final-grid { grid-template-columns:1fr !important; gap:32px !important; }
-  }
-  @media (max-width:760px) {
-    .lp-top { padding:18px clamp(16px,4vw,40px); }
-    .lp-top img { height:28px; }
-    .lp-top .phone { display:none; }
-    .lp-lang button { padding:5px 9px; font-size:11px; }
-    .hero { padding:clamp(96px,18vw,120px) 0 clamp(48px,8vw,72px); }
-    .form-card { padding:22px; }
-    .cta-strip { flex-direction:column; align-items:stretch; gap:18px; }
-    .cta-strip h3 { max-width:none; }
-    .cta-strip a { width:100%; justify-content:center; padding:14px 22px; }
-  }
-  @media (max-width:520px) {
-    .container { padding:0 16px; }
-    .lp-grid-2 { grid-template-columns:1fr; gap:14px; }
-    .hero-bullets li { font-size:14px; }
-    .hero-eyebrow, .sec-eyebrow { font-size:10px; letter-spacing:.22em; }
-    .return-card { padding:24px; }
-    .return-num { font-size:80px; }
-    .return-card p { font-size:15px; }
-    .micro-quote { padding:18px 20px; font-size:15px; }
-    .am-grid { grid-template-columns:1fr; gap:12px; }
-    .am-item { padding:18px 20px; }
-    .pill-bullets { grid-template-columns:1fr; }
-    .img-band { height:240px; }
-    .lp-modal-card { padding:22px; max-height:88vh; }
-    .lp-modal-title { font-size:20px; }
-    .lp-foot { padding:36px 16px; }
-    .lp-phone-code { max-width:100px; padding-right:18px; font-size:14px; }
-    .lp-phone-input { font-size:14px; padding-left:8px; }
-    .form-card { padding:18px; }
-    .lp-foot-note { font-size:10.5px; }
-  }
-  @media (max-width:380px) {
-    .hero-title { font-size:28px; }
-    .lp-submit { padding:14px 22px; font-size:13px; }
-    .form-card-title { font-size:20px; }
-  }
-</style>
+<link rel="stylesheet" href="lp-shared.css">
 </head>
 <body>
 
@@ -481,67 +286,75 @@
         <a href="Urban%20Collection%20Beato.pdf" class="brochure" target="_blank" rel="noopener" data-i18n="form.success_brochure">Download brochure &rarr;</a>
       </div>
     </div>
+    <p class="hero-credentials" data-i18n="hero.credentials">Smith &amp; Adams Group &middot; Lisbon, Portugal &middot; Est. 2014</p>
   </div>
 </section>
+<!-- STAT STRIP — credibility band -->
+<section class="stat-strip">
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+        <strong>5</strong>
+        <span data-i18n="stats.years">Year residence permit</span>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><circle cx="17" cy="8" r="3"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg>
+        <strong data-i18n="stats.family_val">Family</strong>
+        <span data-i18n="stats.family">Reunification included</span>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+        <strong>27</strong>
+        <span data-i18n="stats.schengen">Schengen countries</span>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 10h5a2 2 0 010 4H9"/></svg>
+        <strong>&euro;280k</strong>
+        <span data-i18n="stats.min">Investment package</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- 2. WHY THIS INVESTMENT -->
 <section class="sec">
   <div class="container">
-    <div class="two-col">
+    <div class="lean-why-grid">
       <div>
         <span class="sec-eyebrow" data-i18n="why.eyebrow">The opportunity</span>
-        <h2 class="sec-title geist" data-i18n="why.title">A modern residential development in Lisbon&rsquo;s innovation hub</h2>
-        <p class="sec-body"><span data-i18n-html="why.body1">S&amp;A Urban Collection is a contemporary residential development offering <strong>206 carefully designed units</strong> in Lisbon&rsquo;s rapidly developing Beato district. Combining modern architecture with urban convenience, the project delivers an exceptional lifestyle proposition in a neighbourhood becoming a hub for innovation, culture, and creativity.</span></p>
-        <p class="sec-body"><span data-i18n-html="why.body2">For investors, Urban Collection represents a compelling balance between <strong>secure income and long-term capital appreciation</strong> in one of Europe&rsquo;s most dynamic real estate markets.</span></p>
-        <ul class="pill-bullets">
-          <li data-i18n="why.bullet1">206 residential units with modern layouts.</li>
-          <li data-i18n-html="why.bullet2">Scheduled completion in <strong>December 2026</strong>.</li>
-          <li data-i18n="why.bullet3">Prime location in Beato — rapid urban transformation.</li>
-        </ul>
+        <h2 class="sec-title geist" data-i18n="why.title">A modern residential development in Lisbon's innovation hub</h2>
+        <p class="sec-body" data-i18n="lean.why_body">A premium 206-unit residence in Beato &mdash; Lisbon's fastest-growing innovation district. Designed for modern living, built for long-term value.</p>
       </div>
-      <img src="lp-urban-collection/cam1.jpg" alt="Urban Collection Beato — exterior rendering" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<!-- 4. GOLDEN VISA -->
-<section class="sec">
-  <div class="container">
-    <span class="sec-eyebrow" data-i18n="d2.eyebrow">Residency &amp; mobility</span>
-    <h2 class="sec-title geist" data-i18n="d2.title">An investment that unlocks Portuguese residency</h2>
-    <p class="sec-body"><span data-i18n-html="d2.body1">The €280,000 Urban Collection package is designed to qualify for Portugal's <strong>Golden Visa</strong> — one of the most established routes to European residency by investment. By investing, you can apply for a 5-year residence permit with the right to live in Portugal and travel visa-free across the Schengen Area.</span></p>
-    <p class="sec-body"><span data-i18n-html="d2.body2">Beyond the financial return, your investment becomes a <strong>strategic tool for global mobility and family planning</strong> — offering more security, quality of life, and flexibility for the future.</span></p>
-
-    <ul class="pill-bullets" style="margin-top:8px;">
-      <li data-i18n-html="d2.bullet1"><strong>Golden Visa eligibility</strong> with the €280,000 investment package.</li>
-      <li data-i18n-html="d2.bullet2">Initial <strong>5-year residence permit</strong>, renewable under current law.</li>
-      <li data-i18n-html="d2.bullet3"><strong>Visa-free Schengen</strong> travel while the permit is valid.</li>
-      <li data-i18n="d2.bullet4">Family Reunification possible for relatives.</li>
-      <li data-i18n-html="d2.bullet5">Potential pathway to <strong>Portuguese citizenship</strong>.</li>
-    </ul>
-
-    <div class="micro-quote">
-      <span data-i18n="d2.quote">"More than an investment: a strategic route to European residency, with income in euros today and the possibility of citizenship tomorrow."</span>
-    </div>
-  </div>
-</section>
-
-<!-- 5. LOCATION -->
-<div class="img-band" style="background-image:url('lp-urban-collection/cam3.jpg');"></div>
-<section class="sec">
-  <div class="container">
-    <div class="two-col two-col-rwider">
-      <img src="lp-urban-collection/drone.jpg" alt="Beato district aerial view" loading="lazy">
-      <div>
-        <span class="sec-eyebrow" data-i18n="loc.eyebrow">Location</span>
-        <h2 class="sec-title geist" data-i18n="loc.title">Beato: where industrial heritage meets innovation</h2>
-        <p class="sec-body"><span data-i18n-html="loc.body1">Urban Collection sits in Lisbon's <strong>Beato district</strong> — a riverside area rapidly transforming into one of the city's key hubs for innovation, culture, and entrepreneurship. Former industrial buildings are being converted into creative hubs, tech spaces, and new residential projects, driving demand for high-quality housing and long-term rentals.</span></p>
-        <p class="sec-body"><span data-i18n="loc.body2">For investors, this transformation creates a favourable environment: an emerging district with strong rental demand, lifestyle appeal for young professionals, and clear potential for capital appreciation as the neighbourhood matures.</span></p>
-        <ul class="pill-bullets" style="grid-template-columns:1fr;">
-          <li data-i18n="loc.bullet1">Growing creative and tech ecosystem.</li>
-          <li data-i18n="loc.bullet2">Close to Lisbon's historic centre and the riverside.</li>
-          <li data-i18n="loc.bullet3">Capital appreciation potential linked to public & private investment.</li>
-        </ul>
+      <div class="feat-list">
+        <div class="feat-item">
+          <div class="feat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l9-6 9 6v11"/><path d="M9 21v-8h6v8"/></svg>
+          </div>
+          <div class="feat-text">
+            <strong data-i18n="lean.feat1_t">206 units</strong>
+            <span data-i18n="lean.feat1_d">Modern layouts and design</span>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+          </div>
+          <div class="feat-text">
+            <strong data-i18n="lean.feat2_t">December 2026</strong>
+            <span data-i18n="lean.feat2_d">Scheduled completion</span>
+          </div>
+        </div>
+        <div class="feat-item">
+          <div class="feat-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-7-7.5-7-13a7 7 0 0114 0c0 5.5-7 13-7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div class="feat-text">
+            <strong data-i18n="lean.feat3_t">Beato, Lisbon</strong>
+            <span data-i18n="lean.feat3_d">Innovation district</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -558,63 +371,28 @@
 
     <div class="am-grid">
       <div class="am-item"><img class="am-icon" src="urban-collections/1.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.gym_t">Gym &amp; fitness</span><span class="am-desc" data-i18n="am.gym_d">State-of-the-art fitness center.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/2.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.yoga_t">Yoga</span><span class="am-desc" data-i18n="am.yoga_d">Dedicated yoga and meditation space.</span></div>
       <div class="am-item"><img class="am-icon" src="urban-collections/3.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.pool_t">Swimming pool</span><span class="am-desc" data-i18n="am.pool_d">Outdoor pool with deck.</span></div>
       <div class="am-item"><img class="am-icon" src="urban-collections/4.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.cowork_t">Coworking</span><span class="am-desc" data-i18n="am.cowork_d">Modern workspace for residents.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/5.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.grocery_t">Grocery store</span><span class="am-desc" data-i18n="am.grocery_d">On-site convenience shop.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/6.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.pet_t">Pet wash</span><span class="am-desc" data-i18n="am.pet_d">Professional pet care services.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/7.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.laundry_t">Laundry</span><span class="am-desc" data-i18n="am.laundry_d">Full-service laundry facilities.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/8.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.cinema_t">Cinema room</span><span class="am-desc" data-i18n="am.cinema_d">Private screening room.</span></div>
-      <div class="am-item"><img class="am-icon" src="urban-collections/9.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.bike_t">Bike parking</span><span class="am-desc" data-i18n="am.bike_d">Secure bicycle storage.</span></div>
       <div class="am-item"><img class="am-icon" src="urban-collections/10.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.sauna_t">Sauna</span><span class="am-desc" data-i18n="am.sauna_d">Relaxing sauna facilities.</span></div>
       <div class="am-item"><img class="am-icon" src="urban-collections/11.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.garden_t">Garden</span><span class="am-desc" data-i18n="am.garden_d">Landscaped communal areas.</span></div>
       <div class="am-item"><img class="am-icon" src="urban-collections/12.svg" style="filter:brightness(0) invert(1);"><span class="am-title" data-i18n-html="am.parking_t">Parking</span><span class="am-desc" data-i18n="am.parking_d">Secure underground parking.</span></div>
     </div>
 
-    <div class="cta-strip" style="margin-top:64px;">
-      <h3 data-i18n="am.cta_title">Get the full amenities list, floorplans, and pricing.</h3>
-      <a href="#lp-form" data-i18n="cta.specialist">Talk to a specialist →</a>
-    </div>
-  </div>
-</section>
-
-<!-- 7. ABOUT S&A -->
-<section class="sec">
-  <div class="container">
-    <div class="two-col two-col-lwider">
-      <div>
-        <span class="sec-eyebrow" data-i18n="about.eyebrow">About us</span>
-        <h2 class="sec-title geist" data-i18n="about.title">Smith &amp; Adams: your real estate partner in Portugal</h2>
-        <p class="sec-body"><span data-i18n="about.body1">Smith & Adams develops and manages prime residential real estate in Portugal — offering tailored investment opportunities with secure returns and long-term access to the European market. With over a decade of experience, the group provides integrated solutions, from asset selection and development to property management and support throughout the residency process.</span></p>
-        <p class="sec-body"><span data-i18n-html="about.body2">For investors, this means <strong>transparency, professional execution, and a clear focus on income generation and capital preservation</strong>.</span></p>
-      </div>
-      <img src="lp-urban-collection/cam7.jpg" alt="Urban Collection — interior amenities" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<!-- 8. NEXT STEPS / FINAL CTA -->
-<section class="sec dark" id="next-steps">
-  <div class="container">
-    <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(32px,5vw,60px); align-items:center;" class="final-grid">
-      <div>
-        <span class="sec-eyebrow light" data-i18n="next.eyebrow">Next steps</span>
-        <h2 class="sec-title light geist" data-i18n="next.title">Schedule a consultation and receive your personalised investment plan</h2>
-        <p class="sec-body light"><span data-i18n="next.body">Our team will review your profile, explain how the Golden Visa works in practice, and build a tailored plan around Urban Collection. Share your details and a specialist will contact you within 24 hours.</span></p>
-        <ul class="pill-bullets light" style="margin-top:8px;">
-          <li data-i18n="next.bullet1">Personalised investment plan based on your goals.</li>
-          <li data-i18n="next.bullet2">Step-by-step Golden Visa guidance.</li>
-          <li data-i18n="next.bullet3">Local expertise on Lisbon real estate, financing, and residency.</li>
-        </ul>
-      </div>
-      <a href="#lp-form" style="display:inline-flex; align-items:center; justify-content:center; gap:12px; background:#fff; color:var(--dark); padding:22px 32px; border-radius:9999px; font-weight:700; font-size:14px; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; box-shadow:0 12px 30px rgba(255,255,255,.08); justify-self:center; align-self:center; transition:transform .2s,background .25s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.background='var(--cream)';" onmouseout="this.style.transform=''; this.style.background='#fff';">
-        <span data-i18n="next.cta">Book a free consultation →</span>
-      </a>
-    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
+
+<!-- LEAN FINAL CTA -->
+<section class="final-cta-section">
+  <div class="container">
+    <span class="sec-eyebrow light" data-i18n="lean.cta_eyebrow">Ready to invest</span>
+    <h2 class="sec-title light geist" data-i18n="lean.cta_title">Schedule your free consultation</h2>
+    <p class="sec-body light" data-i18n="lean.cta_body">A Smith &amp; Adams specialist will contact you within 24 hours with a tailored plan.</p>
+    <a href="#lp-form" class="final-cta" data-i18n="lean.cta_button">Book a free consultation &rarr;</a>
+  </div>
+</section>
+
 <footer class="lp-foot">
   <img src="logo.png" alt="Smith &amp; Adams">
   <p data-i18n="foot.address">Smith & Adams Group — Av. José Malhoa 14, 1070-073 Lisboa, Portugal.</p>
@@ -766,7 +544,28 @@
           bullet1: '<strong style="color:#fff;">Golden Visa eligibility</strong> with a €280,000 investment package.',
           bullet2: '<strong style="color:#fff;">5-year residence permit</strong> with visa-free Schengen travel.',
           bullet3: 'Pathway to <strong style="color:#fff;">Portuguese citizenship</strong>, subject to legal residency criteria.',
-          brochure_link: 'Download the full investment brochure →'
+          brochure_link: 'Download the full investment brochure →',
+          credentials: 'Smith & Adams Group · Lisbon, Portugal · Est. 2014'
+        },
+        stats: {
+          years: 'Year residence permit',
+          family_val: 'Family',
+          family: 'Reunification included',
+          schengen: 'Schengen countries',
+          min: 'Investment package'
+        },
+        lean: {
+          why_body: 'A premium residence in Lisbon\'s Beato district — your real estate investment qualifies for Portugal\'s Golden Visa, opening the door to European residency and citizenship.',
+          feat1_t: '5-year permit',
+          feat1_d: 'Initial residency, renewable',
+          feat2_t: 'Whole family',
+          feat2_d: 'Reunification included',
+          feat3_t: '27 countries',
+          feat3_d: 'Visa-free Schengen travel',
+          cta_eyebrow: 'Ready to invest',
+          cta_title: 'Secure your Portuguese residency',
+          cta_body: 'A Smith & Adams specialist will contact you within 24 hours with a tailored Golden Visa plan.',
+          cta_button: 'Book a free consultation →'
         },
         form: {
           title: 'Schedule a free consultation',
@@ -870,7 +669,28 @@
           bullet1: '<strong style="color:#fff;">Elegibilidade ao Golden Visa</strong> com pacote de €280.000.',
           bullet2: '<strong style="color:#fff;">Residência inicial de 5 anos</strong> com livre circulação no Espaço Schengen.',
           bullet3: 'Caminho para a <strong style="color:#fff;">cidadania portuguesa</strong>, sujeito aos critérios legais de residência.',
-          brochure_link: 'Descarregue a brochura completa →'
+          brochure_link: 'Descarregue a brochura completa →',
+          credentials: 'Smith & Adams Group · Lisboa, Portugal · Desde 2014'
+        },
+        stats: {
+          years: 'Anos de residência',
+          family_val: 'Família',
+          family: 'Reagrupamento incluído',
+          schengen: 'Países Schengen',
+          min: 'Pacote de investimento'
+        },
+        lean: {
+          why_body: 'Uma residência premium no Beato, Lisboa — seu investimento qualifica para o Golden Visa de Portugal, abrindo as portas para residência e cidadania europeia.',
+          feat1_t: 'Residência 5 anos',
+          feat1_d: 'Inicial, renovável',
+          feat2_t: 'Família toda',
+          feat2_d: 'Reagrupamento incluso',
+          feat3_t: '27 países',
+          feat3_d: 'Schengen livre',
+          cta_eyebrow: 'Pronto para investir',
+          cta_title: 'Garanta sua residência em Portugal',
+          cta_body: 'Um especialista Smith & Adams entrará em contato em até 24 horas com um plano personalizado para o Golden Visa.',
+          cta_button: 'Agendar consulta gratuita →'
         },
         form: {
           title: 'Agende uma consulta gratuita',
