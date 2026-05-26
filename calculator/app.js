@@ -49,7 +49,6 @@ const CONFIG = {
     visaFee:          931,     // Taxa visto/dep — Excel D35
     adminFees:        5000,    // Admin 5 anos  — Excel D39
     insuranceBase:    620,     // Seguro s/IVA  — Excel D40
-    additionalDepFee: 2000,    // Dep adicional (>fam.4)
     appreciationRate: 0.07,    // Valorização anual 7%
     rentalYield:      0.1038,  // Yield bruto anual 10.38%
   },
@@ -122,10 +121,8 @@ function calcD2() {
   /* --- Other Fees ---
      Excel: G39 = D39 ; G40 = D40×1.23                                 */
   const adminFees     = c.adminFees;                                // Excel G39
-  const extraDeps     = Math.max(0, deps - 3);
-  const additionalDep = c.additionalDepFee * extraDeps;
   const insurance     = c.insuranceBase * (1 + vat);               // Excel G40
-  const otherTotal    = adminFees + additionalDep + insurance;      // Excel G41
+  const otherTotal    = adminFees + insurance;                      // Excel G41
 
   /* --- Grand Total --- Excel G43 = J16 + G31 + G36 + G41            */
   const grandTotal = property + acqTotal + legalTotal + otherTotal;
@@ -171,7 +168,6 @@ function calcD2() {
   set('d2-is',         fmtEUR(is));
   set('d2-acq-sub',    fmtEUR(acqTotal));
 
-  set('d2-add-dep',    fmtEUR(additionalDep));
   set('d2-other-sub',  fmtEUR(otherTotal));
   set('d2-visa-base',  fmtEUR(c.visaFee));
   set('d2-visa-total', fmtEUR(visaApp));
@@ -508,7 +504,6 @@ const i18n = {
     'd2.b.visa':         'D2 visa application & renewals',
     'd2.b.other':        'Administrative & other costs',
     'd2.b.admin':        'Administrative fees (5 years)',
-    'd2.b.addDep':       'Additional dependent fee (beyond family of 4)',
     'd2.b.ins':          'Insurance coverage',
     'd2.roi.sub':        'Projection over 5 years assuming 7% annual appreciation and 10.38% annual gross rental yield.',
     'd2.roi.rental':     'Total net rental income',
@@ -684,7 +679,6 @@ const i18n = {
     'd2.b.visa':         'Pedido e renovações do visto D2',
     'd2.b.other':        'Custos administrativos e outros',
     'd2.b.admin':        'Honorários administrativos (5 anos)',
-    'd2.b.addDep':       'Taxa por dependente adicional (acima de 4 elementos)',
     'd2.b.ins':          'Seguro de saúde',
     'd2.roi.sub':        'Projeção a 5 anos assumindo valorização anual de 7% e yield bruto anual de 10,38%.',
     'd2.roi.rental':     'Total de rendas líquidas',
