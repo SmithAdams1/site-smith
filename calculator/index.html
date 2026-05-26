@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Smith & Adams · Portugal Residency & Investment Calculators" />
+  <title>Smith &amp; Adams · Investment Calculators</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css?v=20260535" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ========== HEADER ========== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="brand" aria-label="Smith & Adams Group">
+        <span class="brand-name">SMITH &amp; ADAMS</span>
+        <span class="brand-line" aria-hidden="true"></span>
+        <span class="brand-tag">GROUP</span>
+      </a>
+
+      <div class="header-right">
+        <nav class="lang-switch" aria-label="Language">
+          <button class="lang-btn is-active" data-set-lang="en" aria-pressed="true">EN</button>
+          <span aria-hidden="true">·</span>
+          <button class="lang-btn" data-set-lang="pt" aria-pressed="false">PT</button>
+        </nav>
+        <button class="legal-access-btn ai-btn" id="btn-ai" aria-label="AI Analysis">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span data-i18n="common.aiAnalysis">AI Analysis</span>
+        </button>
+        <button class="legal-access-btn" id="btn-legal" aria-label="Legal Documents">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span data-i18n="common.legalDocs">Legal Docs</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow" data-i18n="hero.eyebrow">Investment &amp; Residency Calculators</p>
+      <h1 class="display" data-i18n="hero.title">Invest in <em>Lisbon</em>.</h1>
+      <p class="lede" data-i18n="hero.lede">
+        Estimate the full cost, taxes, fees and projected returns of our three
+        signature programmes. All figures are indicative and updated to current
+        Portuguese law.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== MAIN ========== -->
+  <main id="main" class="container">
+    <!-- Tab navigation -->
+    <nav class="tabs" role="tablist" aria-label="Programmes">
+
+      <button class="tab is-active" role="tab" aria-selected="true" data-tab="d2">
+        <span class="tab-num">01</span>
+        <span class="tab-label" data-i18n="tabs.d2">D2 Visa</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="gv">
+        <span class="tab-num">02</span>
+        <span class="tab-label" data-i18n="tabs.gv">Golden Visa</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="inv">
+        <span class="tab-num">03</span>
+        <span class="tab-label" data-i18n="tabs.inv">Property Investment</span>
+      </button>
+    </nav>
+
+
+    <!-- ============================================================
+         D2 VISA CALCULATOR
+         ============================================================ -->
+    <section class="calc" data-panel="d2" role="tabpanel" aria-labelledby="tab-d2">
+      <header class="calc-head">
+        <p class="calc-kicker" data-i18n="d2.kicker">Programme 01</p>
+        <h2 class="calc-title" data-i18n="d2.title">D2 Visa <em>·</em> Residency through Property</h2>
+        <p class="calc-sub" data-i18n="d2.sub">
+          A 5-year residency programme combining a property acquisition in
+          Portugal with the D2 visa for the main applicant and their family.
+        </p>
+      </header>
+
+      <div class="calc-grid">
+        <!-- INPUTS -->
+        <aside class="inputs-card">
+          <h3 class="inputs-title" data-i18n="common.assumptions">Your assumptions</h3>
+
+          <label class="field">
+            <span class="field-label" data-i18n="d2.input.property">Property investment value</span>
+            <span class="field-input">
+              <span class="field-prefix">€</span>
+              <input type="number" id="d2-property" value="300000" min="0" step="1000" />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-i18n="d2.input.main">Main applicants</span>
+            <span class="field-input">
+              <input type="number" id="d2-main" value="1" min="1" max="2" step="1" />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-i18n="d2.input.deps">Dependents</span>
+            <span class="field-input">
+              <input type="number" id="d2-deps" value="3" min="0" max="10" step="1" />
+            </span>
+          </label>
+
+          <p class="field-note" data-i18n="d2.input.note">
+            Base programme covers a family of 4. Additional fees apply beyond
+            that.
+          </p>
+        </aside>
+
+        <!-- SUMMARY -->
+        <div class="summary-card">
+          <p class="summary-label" data-i18n="d2.summary.label">Total estimated cost · 5-year programme</p>
+          <p class="summary-value" id="d2-total">€338,700</p>
+
+          <ul class="summary-breakdown">
+            <li>
+              <span data-i18n="d2.summary.property">Property</span>
+              <strong id="d2-property-out">€300,000</strong>
+            </li>
+            <li>
+              <span data-i18n="d2.summary.acq">Property acquisition costs</span>
+              <strong id="d2-acq-out">€24,033</strong>
+            </li>
+            <li>
+              <span data-i18n="d2.summary.legal">Legal &amp; immigration fees</span>
+              <strong id="d2-legal-out">€7,905</strong>
+            </li>
+            <li>
+              <span data-i18n="d2.summary.other">Administrative &amp; other</span>
+              <strong id="d2-other-out">€6,763</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DETAILED BREAKDOWN -->
+      <div class="breakdown">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.breakdown">Detailed fees &amp; cost breakdown</h3>
+        </header>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="d2.b.acq">Property acquisition costs</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="d2.b.imt">Property Transfer Tax (IMT)</td>
+                <td id="d2-imt-base"></td><td>6.5%</td><td id="d2-imt"></td>
+              </tr>
+              <tr>
+                <td data-i18n="d2.b.is">Stamp Duty (IS)</td>
+                <td id="d2-is-base"></td><td>0.8%</td><td id="d2-is"></td>
+              </tr>
+              <tr>
+                <td data-i18n="d2.b.notary">Notary &amp; Registration Fees</td>
+                <td>€865</td><td>23%</td><td>€1,064</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="d2-acq-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="d2.b.legal">Legal &amp; immigration fees</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="d2.b.advisory">Legal advisory services (5Y · family of 4)</td>
+                <td>€3,500</td><td>23%</td><td>€4,305</td>
+              </tr>
+              <tr>
+                <td data-i18n="d2.b.visa">D2 visa application &amp; renewals</td>
+                <td id="d2-visa-base"></td><td>0%</td><td id="d2-visa-total"></td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="d2-legal-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="d2.b.other">Administrative &amp; other costs</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="d2.b.admin">Administrative fees (5 years)</td>
+                <td>€5,000</td><td>—</td><td>€5,000</td>
+              </tr>
+              <tr>
+                <td data-i18n="d2.b.addDep">Additional dependent fee (beyond family of 4)</td>
+                <td>€2,000</td><td>—</td><td id="d2-add-dep">€0</td>
+              </tr>
+              <tr>
+                <td data-i18n="d2.b.ins">Insurance coverage</td>
+                <td>€620</td><td>23%</td><td>€763</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="d2-other-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ROI FORECAST -->
+      <div class="roi">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.roi">ROI forecast</h3>
+          <p class="breakdown-sub" data-i18n="d2.roi.sub">
+            Projection over 5 years assuming 7% annual appreciation and 10.38%
+            annual gross rental yield.
+          </p>
+        </header>
+
+        <div class="roi-grid">
+          <div class="roi-table-wrap">
+            <table class="cost-table">
+              <thead>
+                <tr>
+                  <th data-i18n="common.year">Year</th>
+                  <th data-i18n="common.appreciation">Appreciation</th>
+                  <th data-i18n="common.projValue" class="col-split">Projected property value</th>
+                  <th data-i18n="common.roiPct">ROI %</th>
+                  <th data-i18n="common.projROI">Projected ROI</th>
+                  <th data-i18n="common.cumROI">Cumulative ROI</th>
+                </tr>
+              </thead>
+              <tbody id="d2-roi-rows"></tbody>
+            </table>
+          </div>
+
+          <div class="roi-summary">
+            <h4 data-i18n="common.fiveYear">5-year outlook</h4>
+            <dl>
+              <div><dt data-i18n="d2.roi.rental">Total net rental income</dt><dd id="d2-rental"></dd></div>
+              <div><dt data-i18n="d2.roi.cap">Estimated capital appreciation</dt><dd id="d2-cap"></dd></div>
+              <div><dt data-i18n="d2.roi.totalProfit">Total accumulated profit</dt><dd id="d2-totalprofit"></dd></div>
+              <div class="sep"></div>
+              <div><dt data-i18n="d2.roi.projY5">Projected property value (Year 5)</dt><dd id="d2-projy5"></dd></div>
+              <div><dt data-i18n="d2.roi.totalCost">Total cost of investment</dt><dd id="d2-totalcost"></dd></div>
+              <div><dt data-i18n="d2.roi.effective">Effective net investment cost (after yield)</dt><dd id="d2-effective"></dd></div>
+              <div class="sep"></div>
+              <div><dt data-i18n="d2.roi.sale">Projected sale value</dt><dd id="d2-sale"></dd></div>
+              <div><dt data-i18n="d2.roi.comm">Sales commission (5%)</dt><dd id="d2-comm"></dd></div>
+              <div><dt data-i18n="d2.roi.net">Net sale proceeds</dt><dd id="d2-netsale"></dd></div>
+              <div><dt data-i18n="d2.roi.cgt">Capital gains tax (19%)</dt><dd id="d2-cgt"></dd></div>
+              <div class="highlight"><dt data-i18n="d2.roi.profit">Actual net profit</dt><dd id="d2-profit"></dd></div>
+              <div class="highlight"><dt data-i18n="d2.roi.totalROI">Total ROI over 5 years</dt><dd id="d2-roi"></dd></div>
+              <div><dt data-i18n="d2.roi.avgROI">Average annual ROI</dt><dd id="d2-avgroi"></dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         GOLDEN VISA CALCULATOR
+         ============================================================ -->
+    <section class="calc" data-panel="gv" role="tabpanel" aria-labelledby="tab-gv" hidden>
+      <header class="calc-head">
+        <p class="calc-kicker" data-i18n="gv.kicker">Programme 02</p>
+        <h2 class="calc-title" data-i18n="gv.title">Golden Visa <em>·</em> Investment Fund</h2>
+        <p class="calc-sub" data-i18n="gv.sub">
+          Portugal's flagship residency-by-investment programme through a
+          regulated qualifying fund. Each participation unit corresponds to
+          €250,000.
+        </p>
+      </header>
+
+      <div class="calc-grid">
+        <aside class="inputs-card">
+          <h3 class="inputs-title" data-i18n="common.assumptions">Your assumptions</h3>
+
+          <label class="field">
+            <span class="field-label" data-i18n="gv.input.units">Number of participation units (×€250,000)</span>
+            <span class="field-input">
+              <input type="number" id="gv-units" value="2" min="1" max="20" step="1" />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-i18n="gv.input.property">Underlying property acquisition value</span>
+            <span class="field-input">
+              <span class="field-prefix">€</span>
+              <input type="number" id="gv-property" value="171000" min="0" step="1000" />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-i18n="gv.input.main">Main applicants</span>
+            <span class="field-input">
+              <input type="number" id="gv-main" value="1" min="1" max="2" step="1" />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-i18n="gv.input.deps">Dependents</span>
+            <span class="field-input">
+              <input type="number" id="gv-deps" value="0" min="0" max="10" step="1" />
+            </span>
+          </label>
+        </aside>
+
+        <div class="summary-card">
+          <p class="summary-label" data-i18n="gv.summary.label">Total programme cost</p>
+          <p class="summary-value" id="gv-total">€362,492</p>
+
+          <ul class="summary-breakdown">
+            <li>
+              <span data-i18n="gv.summary.unit">Participation unit value</span>
+              <strong id="gv-unit-out">€250,000</strong>
+            </li>
+            <li>
+              <span data-i18n="gv.summary.acq">Property acquisition costs</span>
+              <strong id="gv-acq-out">€12,453</strong>
+            </li>
+            <li>
+              <span data-i18n="gv.summary.fund">Fund &amp; administrative</span>
+              <strong id="gv-fund-out">€62,500</strong>
+            </li>
+            <li>
+              <span data-i18n="gv.summary.legal">Legal &amp; government fees</span>
+              <strong id="gv-legal-out">€37,039</strong>
+            </li>
+          </ul>
+
+          <p class="summary-foot">
+            <span data-i18n="gv.summary.return">Projected return (5% p.a. · 5 years)</span>
+            <strong id="gv-return-out">€62,500</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.breakdown">Detailed fees &amp; cost breakdown</h3>
+        </header>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="gv.b.acq">Property acquisition costs</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="d2.b.imt">Property Transfer Tax (IMT)</td>
+                <td id="gv-transfer-base"></td><td>6.5%</td><td id="gv-transfer"></td>
+              </tr>
+              <tr>
+                <td data-i18n="d2.b.is">Stamp Duty (IS)</td>
+                <td id="gv-stamp-base"></td><td>0.8%</td><td id="gv-stamp"></td>
+              </tr>
+              <tr>
+                <td data-i18n="gv.b.notary">Notary &amp; registration fees</td>
+                <td>€850</td><td>23%</td><td id="gv-notary-total">€1,046</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="gv-acq-sub"></td>
+              </tr>
+              <tr class="row-total row-net">
+                <td colspan="3" data-i18n="gv.b.netPayable">Net amount payable for property acquisition</td>
+                <td id="gv-net-payable"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="gv.b.legal">Legal &amp; government fees</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="gv.b.advisory">Legal advisory services (entire family)</td>
+                <td>€10,000</td><td>23%</td><td>€12,300</td>
+              </tr>
+              <tr>
+                <td data-i18n="gv.b.govMain">Government fees &amp; permit renewals (main applicant)</td>
+                <td>€12,369.64</td><td>—</td><td id="gv-gov-main">€12,370</td>
+              </tr>
+              <tr id="gv-gov-deps-row">
+                <td data-i18n="gv.b.govDeps">Government fees &amp; permit renewals (dependents)</td>
+                <td>€12,369.64</td><td>—</td><td id="gv-gov-deps">€12,370</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="gv-legal-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="gv.b.fund">Fund &amp; administrative costs</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.years">Years</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="gv.b.mgmt">Fund management fees (1.25%)</td>
+                <td id="gv-mgmt-base"></td><td>8</td><td id="gv-mgmt"></td>
+              </tr>
+              <tr>
+                <td data-i18n="gv.b.depo">Depository bank fees</td>
+                <td>€750</td><td>8</td><td>€6,000</td>
+              </tr>
+              <tr>
+                <td data-i18n="gv.b.cmvm">CMVM regulatory fees</td>
+                <td>€100</td><td>8</td><td>€800</td>
+              </tr>
+              <tr>
+                <td data-i18n="gv.b.audit">External audit fees</td>
+                <td>€400</td><td>8</td><td>€3,200</td>
+              </tr>
+              <tr>
+                <td data-i18n="gv.b.sub">Subscription fee</td>
+                <td>€2,500</td><td>—</td><td>€2,500</td>
+              </tr>
+              <tr>
+                <td data-i18n="gv.b.sna">Smith &amp; Adams administrative fees</td>
+                <td>€5,000</td><td>5</td><td>€25,000</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="gv-fund-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      <div class="roi">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.roi">ROI forecast</h3>
+          <p class="breakdown-sub" data-i18n="gv.roi.sub">
+            Projection over 5 years assuming 7% annual appreciation and 5%
+            annual fund yield.
+          </p>
+        </header>
+
+        <div class="roi-grid">
+          <div class="roi-table-wrap">
+            <table class="cost-table">
+              <thead>
+                <tr>
+                  <th data-i18n="common.year">Year</th>
+                  <th data-i18n="common.appreciation">Appreciation</th>
+                  <th data-i18n="common.projValue">Projected value</th>
+                </tr>
+              </thead>
+              <tbody id="gv-roi-rows"></tbody>
+            </table>
+          </div>
+
+          <div class="roi-summary">
+            <h4 data-i18n="common.fiveYear">5-year outlook</h4>
+            <dl>
+              <div><dt data-i18n="gv.roi.rental">Total yield income</dt><dd id="gv-rental"></dd></div>
+              <div><dt data-i18n="gv.roi.cap">Estimated capital appreciation</dt><dd id="gv-cap"></dd></div>
+              <div><dt data-i18n="gv.roi.totalProfit">Total accumulated profit</dt><dd id="gv-totalprofit"></dd></div>
+              <div class="sep"></div>
+              <div><dt data-i18n="gv.roi.projY5">Projected fund value (Year 5)</dt><dd id="gv-projy5"></dd></div>
+              <div><dt data-i18n="gv.roi.totalCost">Total cost of investment</dt><dd id="gv-totalcost"></dd></div>
+              <div><dt data-i18n="gv.roi.effective">Effective net investment cost (after yield)</dt><dd id="gv-effective"></dd></div>
+              <div class="sep"></div>
+              <div><dt data-i18n="gv.roi.sale">Projected exit value</dt><dd id="gv-sale"></dd></div>
+              <div><dt data-i18n="gv.roi.comm">Sales commission (5%)</dt><dd id="gv-comm"></dd></div>
+              <div><dt data-i18n="gv.roi.net">Net sale proceeds</dt><dd id="gv-netsale"></dd></div>
+              <div><dt data-i18n="gv.roi.cgt">Capital gains tax (19%)</dt><dd id="gv-cgt"></dd></div>
+              <div class="highlight"><dt data-i18n="gv.roi.profit">Actual net profit</dt><dd id="gv-profit"></dd></div>
+              <div class="highlight"><dt data-i18n="gv.roi.totalROI">Total ROI over 5 years</dt><dd id="gv-totalroi"></dd></div>
+              <div><dt data-i18n="gv.roi.avgROI">Average annual ROI</dt><dd id="gv-avgroi"></dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <div class="breakdown-section">
+          <h4 data-i18n="gv.b.yield">Projected yield distribution schedule</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.year">Year</th>
+                <th data-i18n="common.event">Event</th>
+                <th data-i18n="common.yieldPct">Yield %</th>
+                <th data-i18n="common.amount">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2026</td><td data-i18n="gv.b.construction">Construction</td><td>—</td><td>—</td></tr>
+              <tr><td>2027</td><td data-i18n="gv.b.construction">Construction</td><td>—</td><td>—</td></tr>
+              <tr><td>2028</td><td data-i18n="gv.b.annualYield">Annual yield distribution</td><td id="gv-y2028-pct"></td><td id="gv-y2028"></td></tr>
+              <tr><td>2029</td><td data-i18n="gv.b.annualYield">Annual yield distribution</td><td id="gv-y2029-pct"></td><td id="gv-y2029"></td></tr>
+              <tr><td>2030</td><td data-i18n="gv.b.annualYield">Annual yield distribution</td><td id="gv-y2030-pct"></td><td id="gv-y2030"></td></tr>
+              <tr><td>2031</td><td data-i18n="gv.b.deferred">Deferred distribution (2026 + 2027)</td><td id="gv-y2031-pct"></td><td id="gv-y2031"></td></tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="gv.b.totalYield">Total yield paid</td>
+                <td id="gv-yield-total"></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="breakdown-note" data-i18n="gv.b.handover">Property handover: December 2027.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         INVESTMENT PROPERTY CALCULATOR
+         ============================================================ -->
+    <section class="calc" data-panel="inv" role="tabpanel" aria-labelledby="tab-inv" hidden>
+      <header class="calc-head">
+        <p class="calc-kicker" data-i18n="inv.kicker">Programme 03</p>
+        <h2 class="calc-title" data-i18n="inv.title">Property Investment <em>·</em> Direct Acquisition</h2>
+        <p class="calc-sub" data-i18n="inv.sub">
+          For investors acquiring property in Portugal outside of a residency
+          programme — held individually or through a company structure.
+        </p>
+      </header>
+
+      <div class="calc-grid">
+        <aside class="inputs-card">
+          <h3 class="inputs-title" data-i18n="common.assumptions">Your assumptions</h3>
+
+          <label class="field">
+            <span class="field-label" data-i18n="inv.input.property">Property value</span>
+            <span class="field-input">
+              <span class="field-prefix">€</span>
+              <input type="number" id="inv-property" value="500000" min="0" step="1000" />
+            </span>
+          </label>
+
+          <div class="field">
+            <span class="field-label" data-i18n="inv.input.type">Acquisition type</span>
+            <div class="seg-control" role="radiogroup" aria-label="Acquisition type">
+              <label class="seg-option">
+                <input type="radio" name="inv-type" value="Individual" checked />
+                <span data-i18n="inv.input.individual">Individual</span>
+              </label>
+              <label class="seg-option">
+                <input type="radio" name="inv-type" value="Company" />
+                <span data-i18n="inv.input.company">Company</span>
+              </label>
+            </div>
+          </div>
+
+          <label class="field">
+            <span class="field-label" data-i18n="inv.input.main">Main applicants</span>
+            <span class="field-input">
+              <input type="number" id="inv-main" value="1" min="1" max="5" step="1" />
+            </span>
+          </label>
+        </aside>
+
+        <div class="summary-card">
+          <p class="summary-label" data-i18n="inv.summary.label">Total programme cost</p>
+          <p class="summary-value" id="inv-total">€541,323</p>
+
+          <ul class="summary-breakdown">
+            <li>
+              <span data-i18n="inv.summary.property">Property</span>
+              <strong id="inv-property-out">€500,000</strong>
+            </li>
+            <li>
+              <span data-i18n="inv.summary.transfer">Property transfer costs</span>
+              <strong id="inv-transfer-out">€39,478</strong>
+            </li>
+            <li>
+              <span data-i18n="inv.summary.legal">Legal fees</span>
+              <strong id="inv-legal-out">€1,845</strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="breakdown">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.breakdown">Detailed fees &amp; cost breakdown</h3>
+        </header>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="inv.b.transfer">Property transfer costs</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>IMT</td>
+                <td id="inv-imt-base"></td><td>6.5%</td><td id="inv-imt"></td>
+              </tr>
+              <tr>
+                <td data-i18n="inv.b.is">Stamp Duty (IS)</td>
+                <td id="inv-is-base"></td><td>0.8%</td><td id="inv-is"></td>
+              </tr>
+              <tr>
+                <td data-i18n="inv.b.notary">Notary &amp; registration</td>
+                <td>€865</td><td>23%</td><td>€1,064</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="inv-transfer-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="inv.b.legal">Legal fees</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="inv.b.advisory">Legal advisory</td>
+                <td>€1,500</td><td>23%</td><td>€1,845</td>
+              </tr>
+              <tr id="inv-incorp-row">
+                <td data-i18n="inv.b.incorp">Company incorporation</td>
+                <td>€1,000</td><td>23%</td><td id="inv-incorp">€1,230</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="inv-legal-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ROI FORECAST — Property Investment -->
+      <div class="roi">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.roi">ROI forecast</h3>
+          <p class="breakdown-sub" data-i18n="inv.roi.sub">
+            Projection over 5 years assuming 7% annual appreciation and 10.38%
+            annual gross rental yield.
+          </p>
+        </header>
+
+        <div class="roi-grid">
+          <div class="roi-table-wrap">
+            <table class="cost-table">
+              <thead>
+                <tr>
+                  <th data-i18n="common.year">Year</th>
+                  <th data-i18n="common.appreciation">Appreciation</th>
+                  <th data-i18n="common.projValue">Projected property value</th>
+                  <th data-i18n="common.yield">Yield</th>
+                  <th data-i18n="common.cumROI">Cumulative ROI</th>
+                </tr>
+              </thead>
+              <tbody id="inv-roi-rows"></tbody>
+            </table>
+          </div>
+
+          <div class="roi-summary">
+            <h4 data-i18n="common.fiveYear">5-year outlook</h4>
+            <dl>
+              <div><dt data-i18n="inv.roi.rental">Total net rental income</dt><dd id="inv-rental"></dd></div>
+              <div><dt data-i18n="inv.roi.cap">Estimated capital appreciation</dt><dd id="inv-cap"></dd></div>
+              <div><dt data-i18n="inv.roi.totalProfit">Total accumulated profit</dt><dd id="inv-totalprofit"></dd></div>
+              <div class="sep"></div>
+              <div><dt data-i18n="inv.roi.projY5">Projected property value (Year 5)</dt><dd id="inv-projy5"></dd></div>
+              <div><dt data-i18n="inv.roi.totalCost">Total cost of investment</dt><dd id="inv-totalcost"></dd></div>
+              <div class="sep"></div>
+              <div><dt data-i18n="inv.roi.sale">Projected sale value</dt><dd id="inv-sale"></dd></div>
+              <div><dt data-i18n="inv.roi.comm">Sales commission (5%)</dt><dd id="inv-comm"></dd></div>
+              <div><dt data-i18n="inv.roi.gross">Gross sale proceeds</dt><dd id="inv-grosssale"></dd></div>
+              <div><dt data-i18n="inv.roi.cgt">Capital gains tax (19%)</dt><dd id="inv-cgt"></dd></div>
+              <div><dt data-i18n="inv.roi.net">Net sale proceeds</dt><dd id="inv-netsale"></dd></div>
+              <div class="highlight"><dt data-i18n="inv.roi.profit">Net profit after exit</dt><dd id="inv-profit"></dd></div>
+              <div class="highlight"><dt data-i18n="inv.roi.totalROI">Total ROI over 5 years</dt><dd id="inv-roi"></dd></div>
+              <div><dt data-i18n="inv.roi.avgROI">Average annual ROI</dt><dd id="inv-avgroi"></dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name">SMITH &amp; ADAMS</span>
+        <span class="brand-line" aria-hidden="true"></span>
+        <span class="brand-tag">GROUP</span>
+      </div>
+
+      <div class="footer-meta">
+        <p class="footer-contact">
+          <a href="tel:+351938227348">+351 938 227 348</a>
+          <span aria-hidden="true">·</span>
+          <a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a>
+        </p>
+        <p class="footer-address">Av. José Malhoa 14, 7<sup>th</sup> floor, 1070-073 Lisbon</p>
+      </div>
+
+      <p class="disclaimer" data-i18n="footer.disclaimer">
+        Figures are indicative estimates based on current Portuguese law and
+        market assumptions. They do not constitute legal, tax or investment
+        advice. Final values may vary depending on individual circumstances.
+        Smith &amp; Adams Group, Lda.
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- Floating action buttons -->
+  <div class="fab-group" id="fab-group">
+    <button class="fab-mou" id="btn-mou" aria-label="Download MOU">
+      <span class="fab-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+      </span>
+      <span class="fab-label" data-i18n="common.downloadMOU">Download MOU</span>
+    </button>
+    <button class="fab-pdf" id="btn-pdf" aria-label="Export Simulation">
+      <span class="fab-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <polyline points="9 15 12 18 15 15"/>
+        </svg>
+      </span>
+      <span class="fab-label" data-i18n="common.exportPDF">Export Simulation</span>
+    </button>
+  </div>
+
+  <!-- ========== LEGAL DOCS OVERLAY ========== -->
+  <div class="legal-overlay" id="legal-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="legal-title">
+
+    <!-- Password Gate -->
+    <div class="legal-gate" id="legal-gate">
+      <button class="legal-close-btn" id="btn-close-gate" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="legal-gate-inner">
+        <div class="gate-lock">
+          <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h2 class="gate-title" id="legal-title" data-i18n="legal.title">Legal Documents</h2>
+        <p class="gate-sub" data-i18n="legal.sub">Enter the access password to view legal documents.</p>
+        <form class="gate-form" id="gate-form" novalidate>
+          <div class="gate-field">
+            <input type="password" id="legal-pw" class="gate-input" data-i18n-placeholder="legal.pwPlaceholder" placeholder="Password" autocomplete="current-password" />
+            <button type="submit" class="gate-submit" data-i18n="legal.enter">Enter</button>
+          </div>
+          <p class="gate-error" id="gate-error" hidden data-i18n="legal.error">Incorrect password. Please try again.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Documents Content -->
+    <div class="legal-content" id="legal-content" hidden>
+      <header class="legal-head">
+        <div class="container legal-head-inner">
+          <div class="legal-head-brand">
+            <span class="brand-name">SMITH &amp; ADAMS</span>
+            <span class="brand-line" aria-hidden="true"></span>
+            <span class="brand-tag">GROUP</span>
+          </div>
+          <h2 class="legal-head-title" data-i18n="legal.title">Legal Documents</h2>
+          <button class="legal-close-btn" id="btn-close-docs" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="container legal-body">
+        <nav class="legal-tabs" role="tablist" aria-label="Legal documents by programme">
+          <button class="legal-tab is-active" role="tab" aria-selected="true" data-legal="d2">
+            <span class="legal-tab-num">01</span>
+            <span data-i18n="tabs.d2">D2 Visa</span>
+          </button>
+          <button class="legal-tab" role="tab" aria-selected="false" data-legal="gv">
+            <span class="legal-tab-num">02</span>
+            <span data-i18n="tabs.gv">Golden Visa</span>
+          </button>
+          <button class="legal-tab" role="tab" aria-selected="false" data-legal="inv">
+            <span class="legal-tab-num">03</span>
+            <span data-i18n="tabs.inv">Property Investment</span>
+          </button>
+        </nav>
+
+        <div class="legal-panels">
+
+          <!-- ── D2 VISA DOCUMENTS ── -->
+          <section class="legal-panel" data-legal-panel="d2" role="tabpanel">
+            <div class="ai-cards">
+
+              <div class="ai-card">
+                <div class="ai-card-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="ai-card-body">
+                  <span class="ai-card-num">01</span>
+                  <h3 class="ai-card-title">Lifecycle Management Agreement - D2 Visa</h3>
+                  <p class="ai-card-desc">Full lifecycle management agreement covering the D2 Visa programme - property acquisition, management obligations, and residency conditions over the programme duration.</p>
+                </div>
+                <a href="01_Lifecycle_Management_Agreement_D2_Visa.pdf" target="_blank" rel="noopener" class="ai-card-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Open Document
+                </a>
+              </div>
+
+              <div class="ai-card">
+                <div class="ai-card-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="ai-card-body">
+                  <span class="ai-card-num">02</span>
+                  <h3 class="ai-card-title">Lease Agreement - Choise2Choise · D2 Visa</h3>
+                  <p class="ai-card-desc">Lease agreement between the client and Choise2Choise within the D2 Visa programme, detailing short-term rental management terms, revenue sharing, and operational responsibilities.</p>
+                </div>
+                <a href="02_Lease_Agreement_Choise2Choise_D2_Visa.pdf" target="_blank" rel="noopener" class="ai-card-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Open Document
+                </a>
+              </div>
+
+              <div class="ai-card">
+                <div class="ai-card-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="ai-card-body">
+                  <span class="ai-card-num">03</span>
+                  <h3 class="ai-card-title">CPCV - Promissory Purchase &amp; Sale Agreement · D2 Visa</h3>
+                  <p class="ai-card-desc">Promissory purchase and sale agreement (CPCV) for the D2 Visa programme, including an AIMA compliance clause - the Seller is obligated to refund all amounts if the D2 entrepreneur visa is not granted due to any fault attributable to the property or the Seller.</p>
+                </div>
+                <a href="05_CPCV_D2_Visa.pdf" target="_blank" rel="noopener" class="ai-card-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Open Document
+                </a>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ── GOLDEN VISA DOCUMENTS ── -->
+          <section class="legal-panel" data-legal-panel="gv" role="tabpanel" hidden>
+            <div class="ai-cards">
+
+              <div class="ai-card">
+                <div class="ai-card-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="ai-card-body">
+                  <span class="ai-card-num">01</span>
+                  <h3 class="ai-card-title">Forward Purchase Agreement - Golden Visa</h3>
+                  <p class="ai-card-desc">Forward purchase agreement for the Golden Visa programme, governing the acquisition of fund participation units, payment schedule, property handover, and investor rights throughout the investment period.</p>
+                </div>
+                <a href="03_Forward_Purchase_Agreement_Golden%20Visa.pdf" target="_blank" rel="noopener" class="ai-card-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Open Document
+                </a>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ── PROPERTY INVESTMENT DOCUMENTS ── -->
+          <section class="legal-panel" data-legal-panel="inv" role="tabpanel" hidden>
+            <div class="ai-cards">
+
+              <div class="ai-card">
+                <div class="ai-card-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="ai-card-body">
+                  <span class="ai-card-num">01</span>
+                  <h3 class="ai-card-title">CPCV - Promissory Purchase &amp; Sale Agreement · Property Investment / USA</h3>
+                  <p class="ai-card-desc">Promissory purchase and sale agreement (CPCV) for the Property Investment programme - covering acquisition of a T1 autonomous fraction at Rua do Sol a Chelas, Beato, Lisbon, price structure, possession transfer, and jurisdiction clauses.</p>
+                </div>
+                <a href="04_CPCV_Investments_USA_Investment.pdf" target="_blank" rel="noopener" class="ai-card-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                  Open Document
+                </a>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== AI ANALYSIS OVERLAY ========== -->
+  <div class="legal-overlay" id="ai-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="ai-title">
+    <div class="legal-content" id="ai-content" style="display:flex;flex-direction:column;height:100%;">
+      <header class="legal-head">
+        <div class="container legal-head-inner">
+          <div class="legal-head-brand">
+            <span class="brand-name">SMITH &amp; ADAMS</span>
+            <span class="brand-line" aria-hidden="true"></span>
+            <span class="brand-tag">GROUP</span>
+          </div>
+          <h2 class="legal-head-title" id="ai-title">AI Analysis</h2>
+          <button class="legal-close-btn" id="btn-close-ai" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Document cards — no iframe embedding -->
+      <div class="container ai-cards-wrap">
+        <p class="ai-section-label">Research Documents</p>
+        <div class="ai-cards">
+
+          <div class="ai-card">
+            <div class="ai-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="ai-card-body">
+              <span class="ai-card-num">01</span>
+              <h3 class="ai-card-title">Beato 5-Year Appreciation &amp; Yield Study</h3>
+              <p class="ai-card-desc">Independent market analysis covering projected capital appreciation and rental yield performance in the Beato parish over a 5-year investment horizon.</p>
+            </div>
+            <a href="Beato_5_Year_Appreciation_Yield_Study.pdf" target="_blank" rel="noopener" class="ai-card-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Open Document
+            </a>
+          </div>
+
+          <div class="ai-card">
+            <div class="ai-card-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="ai-card-body">
+              <span class="ai-card-num">02</span>
+              <h3 class="ai-card-title">Independent STR Yield Analysis</h3>
+              <p class="ai-card-desc">Third-party assessment of short-term rental yields in the Beato area, benchmarked against comparable Lisbon neighbourhoods and current platform data.</p>
+            </div>
+            <a href="Beato_Independent_STR_Yield_Analysis.pdf" target="_blank" rel="noopener" class="ai-card-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Open Document
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MOU FORM OVERLAY ========== -->
+  <div class="mou-overlay" id="mou-overlay" hidden aria-modal="true" role="dialog" aria-labelledby="mou-overlay-title">
+    <div class="mou-modal">
+
+      <header class="mou-modal-head">
+        <div>
+          <h2 class="mou-modal-title" id="mou-overlay-title">Download MOU</h2>
+          <p class="mou-modal-sub">Fill in the buyer details. Price and costs are pre-filled from the calculator.</p>
+        </div>
+        <button class="legal-close-btn" id="btn-close-mou" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+
+      <div class="mou-modal-body">
+
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Document</h3>
+          <div class="mou-fgrid mou-fgrid--1">
+            <label class="field">
+              <span class="field-label">Signing date</span>
+              <span class="field-input"><input type="text" id="mou-date" placeholder="DD/MM/YYYY" /></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Buyer</h3>
+          <div class="mou-fgrid mou-fgrid--3">
+            <label class="field">
+              <span class="field-label">Full name</span>
+              <span class="field-input"><input type="text" id="mou-buyer-name" /></span>
+            </label>
+            <label class="field">
+              <span class="field-label">Passport</span>
+              <span class="field-input"><input type="text" id="mou-passport" /></span>
+            </label>
+            <label class="field">
+              <span class="field-label">Nationality</span>
+              <span class="field-input"><input type="text" id="mou-nationality" /></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Property</h3>
+          <div class="mou-fgrid mou-fgrid--3">
+            <label class="field">
+              <span class="field-label">Purchase price</span>
+              <span class="field-input"><span class="field-prefix">€</span><input type="text" id="mou-price" class="mou-prefilled" readonly /></span>
+            </label>
+            <label class="field">
+              <span class="field-label">Unit number</span>
+              <span class="field-input"><input type="text" id="mou-unit" /></span>
+            </label>
+            <label class="field">
+              <span class="field-label">Project type</span>
+              <span class="field-input"><input type="text" id="mou-project-type" /></span>
+            </label>
+          </div>
+          <div class="mou-fgrid mou-fgrid--2" style="margin-top:0.75rem;">
+            <label class="field">
+              <span class="field-label">Purchase date</span>
+              <span class="field-input"><input type="text" id="mou-purchase-date" placeholder="DD/MM/YYYY" /></span>
+            </label>
+            <label class="field">
+              <span class="field-label">Developer details</span>
+              <span class="field-input"><input type="text" id="mou-developer" /></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Payment plan</h3>
+          <div class="mou-pp-head">
+            <span>Description</span>
+            <span>Date</span>
+            <span>Amount</span>
+          </div>
+          <div class="mou-pp-row">
+            <input type="text" id="mou-pp1-desc" placeholder="e.g. Reservation Fee" />
+            <input type="text" id="mou-pp1-date" placeholder="DD/MM/YYYY" />
+            <input type="text" id="mou-pp1-amount" placeholder="e.g. €20,000" />
+          </div>
+          <div class="mou-pp-row">
+            <input type="text" id="mou-pp2-desc" placeholder="e.g. Intermediate Payment" />
+            <input type="text" id="mou-pp2-date" placeholder="DD/MM/YYYY" />
+            <input type="text" id="mou-pp2-amount" placeholder="" />
+          </div>
+          <div class="mou-pp-row">
+            <input type="text" id="mou-pp3-desc" placeholder="e.g. Final Payment (CPCV)" />
+            <input type="text" id="mou-pp3-date" placeholder="DD/MM/YYYY" />
+            <input type="text" id="mou-pp3-amount" placeholder="" />
+          </div>
+          <div class="mou-pp-row">
+            <input type="text" id="mou-pp4-desc" placeholder="e.g. Final Deed" />
+            <input type="text" id="mou-pp4-date" placeholder="DD/MM/YYYY" />
+            <input type="text" id="mou-pp4-amount" placeholder="" />
+          </div>
+          <div class="mou-pp-row">
+            <input type="text" id="mou-pp5-desc" placeholder="e.g. Additional Phase" />
+            <input type="text" id="mou-pp5-date" placeholder="DD/MM/YYYY" />
+            <input type="text" id="mou-pp5-amount" placeholder="" />
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="mou-modal-foot">
+        <button class="mou-gen-btn" id="btn-generate-mou">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Generate PDF
+        </button>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ========== GV MOU FORM OVERLAY ========== -->
+  <div class="mou-overlay" id="gv-mou-overlay" hidden aria-modal="true" role="dialog">
+    <div class="mou-modal">
+      <header class="mou-modal-head">
+        <div>
+          <h2 class="mou-modal-title">Download MOU - Golden Visa</h2>
+          <p class="mou-modal-sub">Fill in the investor details before generating the document</p>
+        </div>
+        <button class="legal-close-btn" id="btn-close-gv-mou" aria-label="Close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </header>
+      <div class="mou-modal-body">
+        <!-- Document section -->
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Document</h3>
+          <div class="mou-fgrid mou-fgrid--1">
+            <label class="field"><span class="field-label">Date</span>
+              <span class="field-input"><input type="text" id="gv-mou-date" placeholder="DD/MM/YYYY" /></span>
+            </label>
+          </div>
+        </div>
+        <!-- Investor section -->
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Investor</h3>
+          <div class="mou-fgrid mou-fgrid--2">
+            <label class="field"><span class="field-label">Full Name</span>
+              <span class="field-input"><input type="text" id="gv-mou-investor-name" /></span>
+            </label>
+            <label class="field"><span class="field-label">Passport Number</span>
+              <span class="field-input"><input type="text" id="gv-mou-passport" /></span>
+            </label>
+            <label class="field"><span class="field-label">Nationality</span>
+              <span class="field-input"><input type="text" id="gv-mou-nationality" /></span>
+            </label>
+            <label class="field"><span class="field-label">Number of Applicants</span>
+              <span class="field-input"><input type="number" id="gv-mou-applicants" value="1" min="1" /></span>
+            </label>
+          </div>
+        </div>
+        <!-- Investment section -->
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Investment</h3>
+          <div class="mou-fgrid mou-fgrid--2">
+            <label class="field"><span class="field-label">Total Investment Amount</span>
+              <span class="field-input"><span class="field-prefix">€</span><input type="text" id="gv-mou-total" /></span>
+            </label>
+            <label class="field"><span class="field-label">Number of Units</span>
+              <span class="field-input"><input type="number" id="gv-mou-units" value="2" min="1" class="mou-prefilled" readonly /></span>
+            </label>
+          </div>
+        </div>
+        <!-- Payment plan section - 5 rows, 4 editable cols + phase pre-filled -->
+        <div class="mou-fsec">
+          <h3 class="mou-fsec-title">Payment Plan</h3>
+          <div class="gv-pp-head">
+            <span>Phase</span><span>Description</span><span>Amount (€)</span><span>Deadline</span><span>Notes</span>
+          </div>
+          <div class="gv-pp-row"><span class="gv-phase">1</span>
+            <input type="text" id="gv-pp1-desc" placeholder="e.g. Security Deposit" />
+            <input type="text" id="gv-pp1-amount" placeholder="e.g. 20,000" />
+            <input type="text" id="gv-pp1-deadline" placeholder="e.g. Upon signing" />
+            <input type="text" id="gv-pp1-notes" placeholder="" />
+          </div>
+          <div class="gv-pp-row"><span class="gv-phase">2</span>
+            <input type="text" id="gv-pp2-desc" placeholder="e.g. Final Subscription" />
+            <input type="text" id="gv-pp2-amount" placeholder="" />
+            <input type="text" id="gv-pp2-deadline" placeholder="" />
+            <input type="text" id="gv-pp2-notes" placeholder="" />
+          </div>
+          <div class="gv-pp-row"><span class="gv-phase">3</span>
+            <input type="text" id="gv-pp3-desc" />
+            <input type="text" id="gv-pp3-amount" />
+            <input type="text" id="gv-pp3-deadline" />
+            <input type="text" id="gv-pp3-notes" />
+          </div>
+          <div class="gv-pp-row"><span class="gv-phase">4</span>
+            <input type="text" id="gv-pp4-desc" />
+            <input type="text" id="gv-pp4-amount" />
+            <input type="text" id="gv-pp4-deadline" />
+            <input type="text" id="gv-pp4-notes" />
+          </div>
+          <div class="gv-pp-row"><span class="gv-phase">5</span>
+            <input type="text" id="gv-pp5-desc" />
+            <input type="text" id="gv-pp5-amount" />
+            <input type="text" id="gv-pp5-deadline" />
+            <input type="text" id="gv-pp5-notes" />
+          </div>
+        </div>
+      </div>
+      <footer class="mou-modal-foot">
+        <button class="mou-gen-btn" id="btn-generate-gv-mou">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Generate PDF
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="app.js?v=20260535"></script>
+</body>
+</html>
