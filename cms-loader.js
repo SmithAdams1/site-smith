@@ -236,8 +236,69 @@
     }
   }
 
+  // ============================================================
+  // "Invest in Portugal" nav item injection (separador novo).
+  // Injeta no nav desktop, no menu mobile e na lista do footer de
+  // TODAS as páginas, sem precisar editar cada header. Idempotente:
+  // se o link já existir (ex: na própria página invest-in-portugal),
+  // não duplica. Mantém o label em inglês como o resto do menu.
+  // ============================================================
+  function injectInvestNav() {
+    var HREF = 'invest-in-portugal.html';
+    var LABEL = 'Invest in Portugal';
+
+    // Desktop nav
+    var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
+    if (nav && !nav.querySelector('a[href="' + HREF + '"]')) {
+      var wrap = document.createElement('div');
+      wrap.className = 'relative group';
+      wrap.innerHTML =
+        '<a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="' + HREF + '">' + LABEL + '</a>' +
+        '<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>';
+      var pm = nav.querySelector('a[href="property-management.html"]');
+      var pmWrap = pm && pm.closest('.relative.group');
+      if (pmWrap && pmWrap.parentNode === nav) {
+        pmWrap.insertAdjacentElement('afterend', wrap);
+      } else if (nav.lastElementChild) {
+        nav.insertBefore(wrap, nav.lastElementChild);
+      } else {
+        nav.appendChild(wrap);
+      }
+    }
+
+    // Mobile menu
+    var mobileInner = document.querySelector('#mobile-menu .flex.flex-col');
+    if (mobileInner && !mobileInner.querySelector('a[href="' + HREF + '"]')) {
+      var a = document.createElement('a');
+      a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
+      a.href = HREF;
+      a.textContent = LABEL;
+      var pmM = mobileInner.querySelector('a[href="property-management.html"]');
+      if (pmM) {
+        pmM.insertAdjacentElement('afterend', a);
+      } else if (mobileInner.lastElementChild) {
+        mobileInner.insertBefore(a, mobileInner.lastElementChild);
+      } else {
+        mobileInner.appendChild(a);
+      }
+    }
+
+    // Footer "Menu" list (primeira ul.list-none)
+    var footerList = document.querySelector('footer ul.list-none');
+    if (footerList && !footerList.querySelector('a[href="' + HREF + '"]')) {
+      var li = document.createElement('li');
+      li.className = 'font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer';
+      li.innerHTML = '<a href="' + HREF + '">' + LABEL + '</a>';
+      var pmF = footerList.querySelector('a[href="property-management.html"]');
+      var pmLi = pmF && pmF.closest('li');
+      if (pmLi) pmLi.insertAdjacentElement('afterend', li);
+      else footerList.appendChild(li);
+    }
+  }
+
   function init() {
     loadContent();
+    injectInvestNav();
     injectSwitcher();
   }
 

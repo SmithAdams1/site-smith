@@ -104,7 +104,7 @@
 <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-600 satoshi" href="property-management.html">
         Property Management
        </a>
-</div>
+</div><div class="relative group"><a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-600 satoshi" href="invest-in-portugal.html">Invest in Portugal</a></div><div class="relative group"><a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-600 satoshi" href="our-developments.html">Our Developments</a></div>
 <div class="relative group">
 <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-600 satoshi" href="urban-collection.html">
         Urban Collection
@@ -140,7 +140,7 @@
 <a class="text-2xl font-medium transition-colors duration-300 text-white font-semibold satoshi" href="about.html">
        About Us
       </a>
-<a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="property-management.html">Property Management</a>
+<a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="our-developments.html">Our Developments</a>
 <a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="urban-collection.html">
        Urban Collection
       </a>
@@ -163,31 +163,7 @@
                 <div>
                     <h2 data-cms="about.hero.title" class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0C1E28] mb-8 lg:mb-14 satoshi leading-none">About us:</h2>
 
-                    <!-- Timeline -->
-                    <div style="position:relative; padding-left:32px; border-left:2px solid rgba(12,30,40,0.2);">
-
-                        <!-- 2019 -->
-                        <div style="position:relative; margin-bottom:3rem;">
-                            <div style="position:absolute; left:-40px; top:5px; width:16px; height:16px; border-radius:50%; background:#0C1E28;"></div>
-                            <p data-cms="about.timeline.0.year" style="font-size:0.72rem; font-weight:700; color:#0C1E28; letter-spacing:0.2em; font-family:'Satoshi',sans-serif; margin-bottom:8px; opacity:0.45; text-transform:uppercase;">2019</p>
-                            <p data-cms="about.timeline.0.body" data-cms-attr="html" style="font-size:0.9rem; color:#4a4a4a; font-family:'Satoshi',sans-serif; line-height:1.7; max-width:320px;">Foundation of Smith &amp; Adams Group and launch of real estate advisory services in Portugal.</p>
-                        </div>
-
-                        <!-- 2020 -->
-                        <div style="position:relative; margin-bottom:3rem;">
-                            <div style="position:absolute; left:-40px; top:5px; width:16px; height:16px; border-radius:50%; background:#0C1E28;"></div>
-                            <p data-cms="about.timeline.1.year" style="font-size:0.72rem; font-weight:700; color:#0C1E28; letter-spacing:0.2em; font-family:'Satoshi',sans-serif; margin-bottom:8px; opacity:0.45; text-transform:uppercase;">2020</p>
-                            <p data-cms="about.timeline.1.body" data-cms-attr="html" style="font-size:0.9rem; color:#4a4a4a; font-family:'Satoshi',sans-serif; line-height:1.7; max-width:320px;">Expansion into citizenship-by-investment, D2 visa advisory, and full-service property management.</p>
-                        </div>
-
-                        <!-- 2024 -->
-                        <div style="position:relative;">
-                            <div style="position:absolute; left:-40px; top:5px; width:16px; height:16px; border-radius:50%; background:#0C1E28;"></div>
-                            <p data-cms="about.timeline.2.year" style="font-size:0.72rem; font-weight:700; color:#0C1E28; letter-spacing:0.2em; font-family:'Satoshi',sans-serif; margin-bottom:8px; opacity:0.45; text-transform:uppercase;">2024</p>
-                            <p data-cms="about.timeline.2.body" data-cms-attr="html" style="font-size:0.9rem; color:#4a4a4a; font-family:'Satoshi',sans-serif; line-height:1.7; max-width:320px;">Launch of Urban Collection in Lisbon. Consolidation as the leading full-service real estate and residency platform for international investors.</p>
-                        </div>
-
-                    </div>
+                    <p data-cms="about.hero.subtitle" data-cms-attr="html" class="satoshi" style="font-size:1.05rem; color:#4a4a4a; line-height:1.8; max-width:420px; margin:0;">A Portugal-based real estate and hospitality group, crafting soulful spaces and clear pathways to European residency since 2020.</p>
                 </div>
 
                 <!-- COL 2: Portugal Map — outline style -->
@@ -224,8 +200,106 @@
                 </div>
 
             </div>
+
+
         </div>
     </section>
+
+        <!-- ======== ABOUT: BRAND TIMELINE ======== -->
+    <style>
+        #journey-nav{display:flex;gap:30px;overflow-x:auto;border-bottom:1px solid #e2e0da;scrollbar-width:none;}
+        #journey-nav::-webkit-scrollbar{display:none;}
+        .jt{background:none;border:none;cursor:pointer;font-family:'Satoshi',sans-serif;font-size:15px;font-weight:600;color:#9ca3af;padding:0 0 14px;position:relative;white-space:nowrap;transition:color .2s;}
+        .jt:hover{color:#0C1E28;}
+        .jt-active{color:#0C1E28;}
+        .jt-active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:#0C1E28;border-radius:2px;}
+        .journey-panel{display:none;animation:journeyfade .35s ease;}
+        @keyframes journeyfade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+        .journey-year{display:block;font-family:'Satoshi',sans-serif;font-size:clamp(40px,6vw,72px);font-weight:700;color:#0C1E28;opacity:0.10;line-height:1;letter-spacing:-0.03em;margin-bottom:-8px;}
+        .journey-arrow{width:42px;height:42px;border-radius:50%;border:1px solid #d8d5ce;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#0C1E28;transition:all .2s;}
+        .journey-arrow:hover{background:#0C1E28;color:#fff;border-color:#0C1E28;}
+    </style>
+    <section style="width:100%; padding:clamp(56px,8vw,104px) 0; background:#FDFCF9; border-top:1px solid #ececec;">
+        <div style="max-width:1000px; margin:0 auto; padding:0 2.5rem;">
+            <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:30px;">
+                <div>
+                    <p data-cms="about.journey.eyebrow" class="satoshi" style="font-size:12px; letter-spacing:0.26em; text-transform:uppercase; color:#9ca3af; margin:0 0 14px;">Our Journey</p>
+                    <h2 data-cms="about.journey.title" class="satoshi" style="font-size:clamp(28px,4vw,48px); font-weight:700; color:#0C1E28; letter-spacing:-0.02em; line-height:1.1; margin:0;">From foundation to flagship</h2>
+                </div>
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <span id="journey-counter" class="satoshi" style="font-size:13px; color:#9ca3af; letter-spacing:0.1em; min-width:42px; text-align:right;">1 / 6</span>
+                    <button id="journey-prev" class="journey-arrow" type="button" aria-label="Anterior"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+                    <button id="journey-next" class="journey-arrow" type="button" aria-label="Próximo"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+                </div>
+            </div>
+            <div id="journey-nav">
+                <button type="button" class="jt" data-jt="0"><span data-cms="about.journey.0.year">2020</span></button>
+                <button type="button" class="jt" data-jt="1"><span data-cms="about.journey.1.year">2021</span></button>
+                <button type="button" class="jt" data-jt="2"><span data-cms="about.journey.2.year">2022</span></button>
+                <button type="button" class="jt" data-jt="3"><span data-cms="about.journey.4.year">2023</span></button>
+                <button type="button" class="jt" data-jt="4"><span data-cms="about.journey.6.year">2025</span></button>
+                <button type="button" class="jt" data-jt="5"><span data-cms="about.journey.7.year">2026</span></button>
+            </div>
+            <div id="journey-panels" style="padding-top:34px; min-height:230px;">
+                <div class="journey-panel" data-jp="0">
+                    <span class="journey-year" data-cms="about.journey.0.year">2020</span>
+                    <h3 data-cms="about.journey.0.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">The Foundation</h3>
+                    <p data-cms="about.journey.0.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">Smith &amp; Adams entered the market with a focus on the real estate and Golden Visa advisory sector. Furkan Ismail and Suelen Pires worked closely with strategic partners who handled sales and property management. Beyond transactions, the focus was on building lasting trust and laying the groundwork for a different kind of real estate experience.</p>
+                </div>
+                <div class="journey-panel" data-jp="1">
+                    <span class="journey-year" data-cms="about.journey.1.year">2021</span>
+                    <h3 data-cms="about.journey.1.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">The Campolide Project</h3>
+                    <p data-cms="about.journey.1.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">The Campolide Project came to life from a heartfelt desire to share that cozy, authentic &lsquo;Lisboeta&rsquo; soul with our guests. Spanning more than 10 buildings, we are creating a community where modern living breathes through the warmth of tradition. Embracing the continuous process of nurturing and refining urban spaces, we ensure that every corner evokes a true sense of belonging, a sanctuary where you don&rsquo;t just stay, but truly feel at home.</p>
+                </div>
+                <div class="journey-panel" data-jp="2">
+                    <span class="journey-year" data-cms="about.journey.2.year">2022</span>
+                    <h3 data-cms="about.journey.2.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">Strategic Independence</h3>
+                    <p data-cms="about.journey.2.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">Smith &amp; Adams brought every detail closer to home, assuming full responsibility for sales and property management, ensuring that every client is welcomed with care and dedication.</p>
+                    <div style="height:1px; background:#e2e0da; margin:26px 0;"></div>
+                    <h3 data-cms="about.journey.3.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">Hygge Kaffe</h3>
+                    <p data-cms="about.journey.3.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">The acquisition of Hygge Kaffe officially wove the Hygge philosophy into the soul of Smith &amp; Adams.</p>
+                </div>
+                <div class="journey-panel" data-jp="3">
+                    <span class="journey-year" data-cms="about.journey.4.year">2023</span>
+                    <h3 data-cms="about.journey.4.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">Dubai Office</h3>
+                    <p data-cms="about.journey.4.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">Smith &amp; Adams&rsquo; vision travelled across borders with the opening of a new office in Dubai, bringing us closer to our clients on the other side of the world.</p>
+                    <div style="height:1px; background:#e2e0da; margin:26px 0;"></div>
+                    <h3 data-cms="about.journey.5.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">Hygge Baixa Hotel Opening</h3>
+                    <p data-cms="about.journey.5.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">In the heart of Lisbon, the Hygge Baixa Hotel opened its doors as an urban sanctuary, a place where our signature design meets the art of slowing down.</p>
+                </div>
+                <div class="journey-panel" data-jp="4">
+                    <span class="journey-year" data-cms="about.journey.6.year">2025</span>
+                    <h3 data-cms="about.journey.6.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">Hygge Fanqueiros</h3>
+                    <p data-cms="about.journey.6.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">Smith &amp; Adams assumed the Hygge Fanqueiros project, evolving our kaffe soul into a boutique stay. It is a historic retreat where the comfort of a home meets the ritual of a perfect coffee. The acquisition and development of these hotel apartments and our unique coffee concept have redefined the standard of B&amp;Bs in Portugal.<br><br>The project will be concluded and ready to be delivered in 2028.</p>
+                </div>
+                <div class="journey-panel" data-jp="5">
+                    <span class="journey-year" data-cms="about.journey.7.year">2026</span>
+                    <h3 data-cms="about.journey.7.title" class="satoshi" style="font-size:18px; font-weight:700; letter-spacing:0.02em; color:#0C1E28; margin:0 0 12px;">Hygge House Beato</h3>
+                    <p data-cms="about.journey.7.body" data-cms-attr="html" class="satoshi" style="font-size:15.5px; color:#4a4a4a; line-height:1.85; max-width:740px; margin:0;">The Hygge Beato project marks the pinnacle of our vision: creating vibrant, soulful spaces where thoughtful design meets a deep sense of belonging. With 137 curated studios within an apart-hotel structure, this flagship development is a turning point for Smith &amp; Adams, positioning us among the leading hospitality operators in Portugal.<br><br>Our vision is coming to life in stages, with the Phase 1 handover scheduled for March 2027.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+    (function(){
+        var panels=[].slice.call(document.querySelectorAll(".journey-panel"));
+        var tabs=[].slice.call(document.querySelectorAll(".jt"));
+        var counter=document.getElementById("journey-counter");
+        var cur=0, total=panels.length;
+        function show(n){
+            cur=(n+total)%total;
+            panels.forEach(function(p,i){ p.style.display=(i===cur)?"block":"none"; });
+            tabs.forEach(function(t,i){ t.classList.toggle("jt-active", i===cur); });
+            if(counter) counter.textContent=(cur+1)+" / "+total;
+        }
+        var pv=document.getElementById("journey-prev"), nx=document.getElementById("journey-next");
+        if(pv) pv.addEventListener("click",function(){show(cur-1);});
+        if(nx) nx.addEventListener("click",function(){show(cur+1);});
+        tabs.forEach(function(t,i){ t.addEventListener("click",function(){show(i);}); });
+        show(0);
+    })();
+    </script>
+
 
     <!-- ======== ABOUT: INTRO SECTION ======== -->
     <section style="width:100%; padding:6rem 0; background:#0C1E28;">
@@ -336,230 +410,6 @@
         </div>
     </section>
 
-<!-- ======== OUR PORTFOLIO ======== -->
-<section style="background:#FDFCF9; width:100%; padding:0;">
-
-  <!-- Section header -->
-  <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(16px,4vw,48px) clamp(32px,5vw,56px);">
-    <p data-cms="about.portfolio.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(12,30,40,0.4); margin-bottom:20px;">Our Portfolio</p>
-    <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:24px;">
-      <h2 data-cms="about.portfolio.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:600px;">
-        Previous Projects
-      </h2>
-      <p data-cms="about.portfolio.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.55); max-width:420px; line-height:1.7; margin:0;">
-        Explore our successful developments across Portugal. Each project represents our commitment to quality construction, strategic locations, and investment excellence.
-      </p>
-    </div>
-  </div>
-
-  <!-- Cards grid -->
-  <div style="border-top:1px solid rgba(12,30,40,0.1);">
-    <div class="max-w-[1280px] mx-auto px-6 md:px-12 pt-12 pb-20">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-
-        <!-- Card 1 -->
-        <a data-cms="about.cards.0.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.0.image" src="development/projectCardThumbnail1.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.0.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
-            </div>
-            <h3 data-cms="about.cards.0.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.0.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">12</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.0.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 2 -->
-        <a data-cms="about.cards.1.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.1.image" src="development/projectCardThumbnail2.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.1.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
-            </div>
-            <h3 data-cms="about.cards.1.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.1.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">14</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.1.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 3 -->
-        <a data-cms="about.cards.2.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.2.image" src="development/projectCardThumbnail3.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.2.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
-            </div>
-            <h3 data-cms="about.cards.2.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.2.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">8</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.2.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 4 -->
-        <a data-cms="about.cards.3.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.3.image" src="development/projectCardThumbnail4.png" alt="Alcântara Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.3.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
-            </div>
-            <h3 data-cms="about.cards.3.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Alcântara Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.3.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">45</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.3.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€320K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 5 -->
-        <a data-cms="about.cards.4.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.4.image" src="development/projectCardThumbnail5.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.4.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
-            </div>
-            <h3 data-cms="about.cards.4.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.4.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">22</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.4.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 6 -->
-        <a data-cms="about.cards.5.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.5.image" src="development/projectCardThumbnail6.png" alt="São Julião Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential + Commercial</span>
-              <span data-cms="about.cards.5.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
-            </div>
-            <h3 data-cms="about.cards.5.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">São Julião Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.5.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">58</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.5.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€380K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 7 -->
-        <a data-cms="about.cards.6.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.6.image" src="development/projectCardThumbnail7.png" alt="Arroios Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.6.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
-            </div>
-            <h3 data-cms="about.cards.6.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Arroios Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.6.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">42</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.6.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€340K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 8 -->
-        <a data-cms="about.cards.7.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.7.image" src="development/projectCardThumbnail8.png" alt="Penha de França Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.7.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
-            </div>
-            <h3 data-cms="about.cards.7.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Penha de França Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.7.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">30</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.7.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€290K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Card 9 -->
-        <a data-cms="about.cards.8.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
-          <div class="w-full h-[220px] overflow-hidden">
-            <img data-cms="about.cards.8.image" src="development/projectCardThumbnail9.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.8.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
-            </div>
-            <h3 data-cms="about.cards.8.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
-            <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.8.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">38</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.8.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€305K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
-            </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
-              <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
-            </div>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </div>
-
-</section>
 
 <section class="bg-[#FDFCF9] py-16 md:py-20">
             <div class="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -705,7 +555,7 @@
 </li>
 <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
 <a href="property-management.html">Property Management</a>
-</li>
+</li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="invest-in-portugal.html">Invest in Portugal</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="our-developments.html">Our Developments</a></li>
 <li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
 <a href="urban-collection.html">
            Urban Collection

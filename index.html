@@ -103,7 +103,7 @@
                             class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi"
                             href="property-management.html">Property Management</a><span
                             class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
-                    </div>
+                    </div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="our-developments.html">Our Developments</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
                     <div class="relative group"><a
                             class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi"
                             href="urban-collection.html">Urban Collection</a><span
@@ -131,7 +131,7 @@
                         class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
                         href="about.html">About Us</a><a
                         class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
-                        href="property-management.html">Property Management</a><a
+                        href="property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="our-developments.html">Our Developments</a><a
                         class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
                         href="urban-collection.html">Urban Collection</a><a
                         class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
@@ -212,7 +212,7 @@
 
                 <!-- Stat 1 -->
                 <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div data-cms="index.hero.stat1.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+10</div>
+                  <div data-cms="index.hero.stat1.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">+10</div>
                   <p data-cms="index.hero.stat1.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     in real estate investment and management in Portugal
                   </p>
@@ -220,7 +220,7 @@
 
                 <!-- Stat 2 -->
                 <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div data-cms="index.hero.stat2.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+500</div>
+                  <div data-cms="index.hero.stat2.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">+500</div>
                   <p data-cms="index.hero.stat2.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     units delivered in premium residential projects, with integrated management and a focus on stable euro-denominated returns.
                   </p>
@@ -228,7 +228,7 @@
 
                 <!-- Stat 3 -->
                 <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div data-cms="index.hero.stat3.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1;">+€30M</div>
+                  <div data-cms="index.hero.stat3.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">+€30M</div>
                   <p data-cms="index.hero.stat3.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     in real estate investments advised for international investors who chose Portugal to protect and grow their euro-denominated capital.
                   </p>
@@ -418,11 +418,23 @@
         </section>
 
         <!-- New Video Section: Building Your Dreams -->
-        <section class="custom-fade-in" style="background:#0C1E28; width:100%; padding:80px 0; transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4; overflow:hidden;">
-          <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px); display:flex; align-items:center; gap:clamp(24px,6vw,80px); flex-wrap:wrap;">
+        <style>
+          /* Desktop: vídeo preenche a section de topo a base, sem alterar a altura
+             total (o padding vertical sai da section e vai para a coluna de texto,
+             que passa a definir a altura). No mobile mantém o card original. */
+          @media (min-width: 820px) {
+            #dreams-section { padding-top: 0 !important; padding-bottom: 0 !important; }
+            #dreams-text    { padding: 80px 0; }
+            #dreams-row     { align-items: stretch !important; }
+            #dreams-video   { align-self: stretch; border-radius: 0 !important; box-shadow: none !important; }
+            #dreams-video > #yt-embed-wrap { aspect-ratio: auto !important; height: 100%; }
+          }
+        </style>
+        <section id="dreams-section" class="custom-fade-in" style="background:#0C1E28; width:100%; padding:80px 0; transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4; overflow:hidden;">
+          <div id="dreams-row" style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px); display:flex; align-items:center; gap:clamp(24px,6vw,80px); flex-wrap:wrap;">
 
             <!-- Left: Display text -->
-            <div style="flex:1; min-width:320px;">
+            <div id="dreams-text" style="flex:1; min-width:320px;">
               <p data-cms="index.dreams.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:24px;">Smith &amp; Adams · Portugal</p>
               <h2 data-cms="index.dreams.title" data-cms-attr="html" class="geist" style="font-size:clamp(2.5rem,5vw,4.5rem); font-weight:900; color:#ffffff; line-height:0.95; letter-spacing:-0.04em; margin:0 0 12px;">
                 Building<br>
@@ -434,7 +446,7 @@
             </div>
 
             <!-- Right: Portrait video card -->
-            <div style="flex-shrink:0; width:340px; border-radius:24px; overflow:hidden; box-shadow:0 32px 80px rgba(12,30,40,0.18), 0 8px 24px rgba(12,30,40,0.10);">
+            <div id="dreams-video" style="flex-shrink:0; width:340px; border-radius:24px; overflow:hidden; box-shadow:0 32px 80px rgba(12,30,40,0.18), 0 8px 24px rgba(12,30,40,0.10);">
               <div id="yt-embed-wrap" style="position:relative; width:100%; aspect-ratio:4/5; cursor:pointer;" onclick="
                 var w=this;
                 var f=document.createElement('iframe');
@@ -726,75 +738,7 @@
                 </div>
             </div>
         </section>
-        <section class="w-full py-16 md:py-24 bg-[#0C1E28] text-white">
-            <div class="container mx-auto px-4 md:px-6 max-w-7xl">
-                <div class="max-w-4xl mx-auto mb-16 text-center">
-                    <div class="inline-flex items-center justify-center px-4 py-2 bg-white rounded-full mb-4"><span data-cms="index.faq.eyebrow"
-                            class="text-[#0C1E28] text-sm font-medium satoshi tracking-wider">FAQs</span></div>
-                    <h2 data-cms="index.faq.title" class="text-4xl md:text-5xl font-bold leading-tight geist mb-6">Find Answers to Your Questions</h2>
-                    <p data-cms="index.faq.subtitle" class="text-gray-300 satoshi max-w-2xl mx-auto">For hundreds of successful clients, a new chapter began with us. We empower individuals and families to live, invest, and thrive in Portugal and other top global destinations.</p>
-                </div>
-                <div class="transition-all duration-1000 opacity-100">
-                    <div class="space-y-4">
-                        <details class="bg-[#1A2A35] rounded-xl overflow-hidden transition-all duration-300 hover:bg-[#1E303D] border border-white/20 group marker:hidden"  open>
-                            <summary class="flex w-full items-center justify-between p-6 text-left cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                                <h3 data-cms="index.faq.0.q" class="text-xl font-bold satoshi text-white">Do I need to move to Portugal to apply for this program?</h3>
-                                <div class="flex-shrink-0 transition-transform duration-300 group-open:rotate-45">
-                                    <div class="h-6 w-6 rounded-full border border-white flex items-center justify-center">
-                                        <svg class="lucide lucide-plus h-4 w-4 text-white hover:text-[#0C1E28]" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                    </div>
-                                </div>
-                            </summary>
-                            <div data-cms="index.faq.0.a" class="p-6 pt-0 satoshi text-gray-300 leading-relaxed max-w-3xl">No, relocation is not required. You can complete the process remotely and visit only when needed for biometrics or document submission.</div>
-                        </details>
-                        <details class="bg-[#1A2A35] rounded-xl overflow-hidden transition-all duration-300 hover:bg-[#1E303D] border border-white/10 group marker:hidden" >
-                            <summary class="flex w-full items-center justify-between p-6 text-left cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                                <h3 data-cms="index.faq.1.q" class="text-xl font-bold satoshi text-white">What is the minimum investment amount?</h3>
-                                <div class="flex-shrink-0 transition-transform duration-300 group-open:rotate-45">
-                                    <div class="h-6 w-6 rounded-full border border-white flex items-center justify-center">
-                                        <svg class="lucide lucide-plus h-4 w-4 text-white hover:text-[#0C1E28]" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                    </div>
-                                </div>
-                            </summary>
-                            <div data-cms="index.faq.1.a" class="p-6 pt-0 satoshi text-gray-300 leading-relaxed max-w-3xl">The minimum investment required is €280,000 in qualifying real estate in eligible areas, such as the S&A Urban Collection.</div>
-                        </details>
-                        <details class="bg-[#1A2A35] rounded-xl overflow-hidden transition-all duration-300 hover:bg-[#1E303D] border border-white/10 group marker:hidden" >
-                            <summary class="flex w-full items-center justify-between p-6 text-left cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                                <h3 data-cms="index.faq.2.q" class="text-xl font-bold satoshi text-white">How long does the process take?</h3>
-                                <div class="flex-shrink-0 transition-transform duration-300 group-open:rotate-45">
-                                    <div class="h-6 w-6 rounded-full border border-white flex items-center justify-center">
-                                        <svg class="lucide lucide-plus h-4 w-4 text-white hover:text-[#0C1E28]" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                    </div>
-                                </div>
-                            </summary>
-                            <div data-cms="index.faq.2.a" class="p-6 pt-0 satoshi text-gray-300 leading-relaxed max-w-3xl">The process generally takes between 6 to 9 months to obtain the residency card, depending on the volume of applications at SEF/AIMA.</div>
-                        </details>
-                        <details class="bg-[#1A2A35] rounded-xl overflow-hidden transition-all duration-300 hover:bg-[#1E303D] border border-white/10 group marker:hidden" >
-                            <summary class="flex w-full items-center justify-between p-6 text-left cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                                <h3 data-cms="index.faq.3.q" class="text-xl font-bold satoshi text-white">Can I include my family in the application?</h3>
-                                <div class="flex-shrink-0 transition-transform duration-300 group-open:rotate-45">
-                                    <div class="h-6 w-6 rounded-full border border-white flex items-center justify-center">
-                                        <svg class="lucide lucide-plus h-4 w-4 text-white hover:text-[#0C1E28]" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                    </div>
-                                </div>
-                            </summary>
-                            <div data-cms="index.faq.3.a" class="p-6 pt-0 satoshi text-gray-300 leading-relaxed max-w-3xl">Yes, Portugal's family reunification process allows you to include your spouse, dependent children, and dependent parents in the same application.</div>
-                        </details>
-                        <details class="bg-[#1A2A35] rounded-xl overflow-hidden transition-all duration-300 hover:bg-[#1E303D] border border-white/10 group marker:hidden" >
-                            <summary class="flex w-full items-center justify-between p-6 text-left cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-                                <h3 data-cms="index.faq.4.q" class="text-xl font-bold satoshi text-white">Is the rental income guaranteed?</h3>
-                                <div class="flex-shrink-0 transition-transform duration-300 group-open:rotate-45">
-                                    <div class="h-6 w-6 rounded-full border border-white flex items-center justify-center">
-                                        <svg class="lucide lucide-plus h-4 w-4 text-white hover:text-[#0C1E28]" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                                    </div>
-                                </div>
-                            </summary>
-                            <div data-cms="index.faq.4.a" class="p-6 pt-0 satoshi text-gray-300 leading-relaxed max-w-3xl">Yes, properties in the S&A Urban Collection feature a guaranteed annual rental yield of 4% managed by our team.</div>
-                        </details>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-4 md:px-6 max-w-7xl">
                 <div class="text-center mb-12 transition-all duration-1000 opacity-100">
@@ -1079,7 +1023,7 @@
                                     <a href="index.html">Home</a></li>
                                 <li
                                     class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="property-management.html">Property Management</a></li>
+                                    <a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="invest-in-portugal.html">Invest in Portugal</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="our-developments.html">Our Developments</a></li>
                                 <li
                                     class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
                                     <a href="urban-collection.html">Urban Collection</a></li>

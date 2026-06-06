@@ -909,8 +909,6 @@
                         { key: 'propmgmt.stats.1.label', label: 'Stat 2 — label', type: 'text', min: 3, max: 60, default: 'Years Experience' },
                         { key: 'propmgmt.stats.2.value', label: 'Stat 3 — número', type: 'text', min: 1, max: 12, default: '500+' },
                         { key: 'propmgmt.stats.2.label', label: 'Stat 3 — label', type: 'text', min: 3, max: 60, default: 'Units Delivered' },
-                        { key: 'propmgmt.stats.3.value', label: 'Stat 4 — número', type: 'text', min: 1, max: 12, default: '€0' },
-                        { key: 'propmgmt.stats.3.label', label: 'Stat 4 — label', type: 'text', min: 3, max: 60, default: 'Hassle for You' },
                     ]},
                     { title: 'Intro', fields: [
                         { key: 'propmgmt.intro.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Our Service' },
@@ -943,7 +941,7 @@
                     ]},
                     { title: 'Card cliente 1 (dark)', fields: [
                         { key: 'propmgmt.clients.0.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Smith & Adams investors' },
-                        { key: 'propmgmt.clients.0.body', label: 'Descrição', type: 'richtext', min: 20, max: 300, default: 'Owners of units in projects such as the Urban Collection whose daily operations are managed by our specialised team.' },
+                        { key: 'propmgmt.clients.0.body', label: 'Descrição', type: 'richtext', min: 20, max: 300, default: 'Owners of units in our Hygge House Projects, whose daily operations are managed by our specialised team.' },
                     ]},
                     { title: 'Card cliente 2 (light)', fields: [
                         { key: 'propmgmt.clients.1.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Independent property owners' },
@@ -958,8 +956,8 @@
                     ]},
                     { title: 'Urban Collection feature', fields: [
                         { key: 'propmgmt.uc.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 30, default: 'Smith & Adams' },
-                        { key: 'propmgmt.uc.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Urban Collection' },
-                        { key: 'propmgmt.uc.body', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: "Investment with integrated management. At S&A Urban Collection, Smith & Adams handles the daily management of the apartments, ensuring consistent operations aligned with each investor's income strategy." },
+                        { key: 'propmgmt.uc.title', label: 'Título', type: 'text', min: 5, max: 60, default: 'Hygge House Projects' },
+                        { key: 'propmgmt.uc.body', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: "Investment with integrated management. Across our Hygge House Projects, Smith & Adams handles the daily management of the apartments, ensuring consistent operations aligned with each investor's income strategy." },
                     ]},
                     { title: 'CTA pré-portfólio', fields: [
                         { key: 'propmgmt.preportfolio.title', label: 'Título (HTML)', type: 'longtext', min: 10, max: 200, default: 'Would you like your property in Portugal<br>to be fully managed by Smith & Adams?' },
@@ -1100,14 +1098,51 @@
                 sections: [
                     { title: 'Hero', fields: [
                         { key: 'about.hero.title', label: 'Título', type: 'text', min: 3, max: 50, default: 'About us:' },
+                        { key: 'about.hero.subtitle', label: 'Subtítulo', type: 'richtext', min: 10, max: 300, default: `A Portugal-based real estate and hospitality group, crafting soulful spaces and clear pathways to European residency since 2020.` },
                     ]},
-                    { title: 'Timeline', fields: [
-                        { key: 'about.timeline.0.year', label: 'Marco 1 — ano', type: 'text', min: 4, max: 12, default: '2019' },
-                        { key: 'about.timeline.0.body', label: 'Marco 1 — descrição', type: 'richtext', min: 10, max: 300, default: 'Foundation of Smith & Adams Group and launch of real estate advisory services in Portugal.' },
-                        { key: 'about.timeline.1.year', label: 'Marco 2 — ano', type: 'text', min: 4, max: 12, default: '2020' },
-                        { key: 'about.timeline.1.body', label: 'Marco 2 — descrição', type: 'richtext', min: 10, max: 300, default: 'Expansion into citizenship-by-investment, D2 visa advisory, and full-service property management.' },
-                        { key: 'about.timeline.2.year', label: 'Marco 3 — ano', type: 'text', min: 4, max: 12, default: '2024' },
-                        { key: 'about.timeline.2.body', label: 'Marco 3 — descrição', type: 'richtext', min: 10, max: 300, default: 'Launch of Urban Collection in Lisbon. Consolidation as the leading full-service real estate and residency platform for international investors.' },
+                    { title: 'Linha do Tempo — cabeçalho', fields: [
+                        { key: 'about.journey.eyebrow', label: 'Eyebrow', type: 'text', min: 2, max: 40, default: `Our Journey` },
+                        { key: 'about.journey.title', label: 'Título da seção', type: 'text', min: 3, max: 80, default: `From foundation to flagship` },
+                    ]},
+                    { title: 'Linha do Tempo — 2020 A Fundação', fields: [
+                        { key: 'about.journey.0.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2020` },
+                        { key: 'about.journey.0.title', label: 'Título', type: 'text', min: 2, max: 60, default: `The Foundation` },
+                        { key: 'about.journey.0.body', label: 'Descrição', type: 'richtext', min: 10, max: 900, default: `Smith &amp; Adams entered the market with a focus on the real estate and Golden Visa advisory sector. Furkan Ismail and Suelen Pires worked closely with strategic partners who handled sales and property management. Beyond transactions, the focus was on building lasting trust and laying the groundwork for a different kind of real estate experience.` },
+                    ]},
+                    { title: 'Linha do Tempo — 2021 Campolide', fields: [
+                        { key: 'about.journey.1.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2021` },
+                        { key: 'about.journey.1.title', label: 'Título', type: 'text', min: 2, max: 60, default: `The Campolide Project` },
+                        { key: 'about.journey.1.body', label: 'Descrição', type: 'richtext', min: 10, max: 900, default: `The Campolide Project came to life from a heartfelt desire to share that cozy, authentic &lsquo;Lisboeta&rsquo; soul with our guests. Spanning more than 10 buildings, we are creating a community where modern living breathes through the warmth of tradition. Embracing the continuous process of nurturing and refining urban spaces, we ensure that every corner evokes a true sense of belonging, a sanctuary where you don&rsquo;t just stay, but truly feel at home.` },
+                    ]},
+                    { title: 'Linha do Tempo — 2022 Independência', fields: [
+                        { key: 'about.journey.2.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2022` },
+                        { key: 'about.journey.2.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Strategic Independence` },
+                        { key: 'about.journey.2.body', label: 'Descrição', type: 'richtext', min: 10, max: 900, default: `Smith &amp; Adams brought every detail closer to home, assuming full responsibility for sales and property management, ensuring that every client is welcomed with care and dedication.` },
+                    ]},
+                    { title: 'Linha do Tempo — 2022 Hygge Kaffe', fields: [
+                        { key: 'about.journey.3.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2022` },
+                        { key: 'about.journey.3.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Hygge Kaffe` },
+                        { key: 'about.journey.3.body', label: 'Descrição', type: 'richtext', min: 10, max: 900, default: `The acquisition of Hygge Kaffe officially wove the Hygge philosophy into the soul of Smith &amp; Adams.` },
+                    ]},
+                    { title: 'Linha do Tempo — 2023 Dubai', fields: [
+                        { key: 'about.journey.4.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2023` },
+                        { key: 'about.journey.4.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Dubai Office` },
+                        { key: 'about.journey.4.body', label: 'Descrição', type: 'richtext', min: 10, max: 900, default: `Smith &amp; Adams&rsquo; vision travelled across borders with the opening of a new office in Dubai, bringing us closer to our clients on the other side of the world.` },
+                    ]},
+                    { title: 'Linha do Tempo — 2023 Hygge Baixa', fields: [
+                        { key: 'about.journey.5.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2023` },
+                        { key: 'about.journey.5.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Hygge Baixa Hotel Opening` },
+                        { key: 'about.journey.5.body', label: 'Descrição', type: 'richtext', min: 10, max: 900, default: `In the heart of Lisbon, the Hygge Baixa Hotel opened its doors as an urban sanctuary, a place where our signature design meets the art of slowing down.` },
+                    ]},
+                    { title: 'Linha do Tempo — 2025 Fanqueiros', fields: [
+                        { key: 'about.journey.6.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2025` },
+                        { key: 'about.journey.6.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Hygge Fanqueiros` },
+                        { key: 'about.journey.6.body', label: 'Descrição', type: 'richtext', min: 10, max: 1200, default: `Smith &amp; Adams assumed the Hygge Fanqueiros project, evolving our kaffe soul into a boutique stay. It is a historic retreat where the comfort of a home meets the ritual of a perfect coffee. The acquisition and development of these hotel apartments and our unique coffee concept have redefined the standard of B&amp;Bs in Portugal.<br><br>The project will be concluded and ready to be delivered in 2028.` },
+                    ]},
+                    { title: 'Linha do Tempo — 2026 Hygge House Beato', fields: [
+                        { key: 'about.journey.7.year', label: 'Ano', type: 'text', min: 4, max: 12, default: `2026` },
+                        { key: 'about.journey.7.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Hygge House Beato` },
+                        { key: 'about.journey.7.body', label: 'Descrição', type: 'richtext', min: 10, max: 1200, default: `The Hygge Beato project marks the pinnacle of our vision: creating vibrant, soulful spaces where thoughtful design meets a deep sense of belonging. With 137 curated studios within an apart-hotel structure, this flagship development is a turning point for Smith &amp; Adams, positioning us among the leading hospitality operators in Portugal.<br><br>Our vision is coming to life in stages, with the Phase 1 handover scheduled for March 2027.` },
                     ]},
                     { title: 'About the Group', fields: [
                         { key: 'about.group.eyebrow', label: 'Eyebrow', type: 'text', min: 3, max: 40, default: 'About the Group' },
@@ -1253,6 +1288,161 @@
                         { key: 'blog.cta.body', label: 'Descrição', type: 'richtext', min: 20, max: 400, default: 'Discover how a €280,000 investment in Lisbon real estate can elevate your portfolio, with predictable income, strong appreciation potential, and long-term security.' },
                         { key: 'blog.cta.label', label: 'Texto do botão', type: 'text', min: 3, max: 30, default: "LET'S GET STARTED" },
                         { key: 'blog.cta.url', label: 'Link do botão', type: 'url', min: 5, max: 200, default: 'contact.html' },
+                    ]},
+                ]
+            },
+            'invest': {
+                label: 'Invest in Portugal',
+                preview: 'invest-in-portugal.html',
+                sections: [
+                    { title: 'Hero', fields: [
+                        { key: 'invest.hero.eyebrow', label: 'Eyebrow', type: 'text', min: 2, max: 60, default: `Smith & Adams · Portugal` },
+                        { key: 'invest.hero.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Invest in Portugal` },
+                        { key: 'invest.hero.subtitle', label: 'Subtítulo', type: 'richtext', min: 10, max: 400, default: `Two clear, proven pathways to European residency. Choose the route that fits your goals: entrepreneurial drive or passive capital.` },
+                    ]},
+                    { title: 'Assunto 01 — D2 Visa (intro)', fields: [
+                        { key: 'invest.programs.0.tag', label: 'Etiqueta', type: 'text', min: 2, max: 30, default: `Subject 01` },
+                        { key: 'invest.programs.0.title', label: 'Título', type: 'text', min: 2, max: 60, default: `D2 Visa` },
+                        { key: 'invest.programs.0.intro', label: 'Parágrafo de introdução', type: 'richtext', min: 20, max: 900, default: `The D2 Visa is one of the most flexible and dynamic pathways to securing European residency. Tailored specifically for those who wish to establish their presence in Portugal, this programme stands out for its agility, streamlined requirements and clear path to residency in one of Europe's most stable jurisdictions.` },
+                    ]},
+                    { title: 'D2 Visa — Atributos', fields: [
+                        { key: 'invest.programs.0.r0.label', label: '1 — Rótulo', type: 'text', min: 2, max: 40, default: `Purpose` },
+                        { key: 'invest.programs.0.r0.body', label: '1 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">Built for the entrepreneurial mindset.</strong> Designed for individuals looking to become an entrepreneur, establish a business, or expand international operations into Portugal.` },
+                        { key: 'invest.programs.0.r1.label', label: '2 — Rótulo', type: 'text', min: 2, max: 40, default: `Process Timeline` },
+                        { key: 'invest.programs.0.r1.body', label: '2 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">Fast and predictable.</strong> The average processing period ranges from 4 to 6 months.` },
+                        { key: 'invest.programs.0.r2.label', label: '3 — Rótulo', type: 'text', min: 2, max: 40, default: `Minimum Investment` },
+                        { key: 'invest.programs.0.r2.body', label: '3 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">A single commitment.</strong> The programme only requires a single initial investment.` },
+                        { key: 'invest.programs.0.r3.label', label: '4 — Rótulo', type: 'text', min: 2, max: 40, default: `Renewal Period` },
+                        { key: 'invest.programs.0.r3.body', label: '4 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">Effortless and digital.</strong> The D2 Visa renewal process is handled entirely automatically online.` },
+                    ]},
+                    { title: 'Assunto 02 — Golden Visa (intro)', fields: [
+                        { key: 'invest.programs.1.tag', label: 'Etiqueta', type: 'text', min: 2, max: 30, default: `Subject 02` },
+                        { key: 'invest.programs.1.title', label: 'Título', type: 'text', min: 2, max: 60, default: `Golden Visa` },
+                        { key: 'invest.programs.1.intro', label: 'Parágrafo de introdução', type: 'richtext', min: 20, max: 900, default: `The Golden Visa is one of Europe's most established residency-by-investment programmes, recognised globally for its prestige and structural clarity. It offers a passive route to Portuguese residency, ideal for investors seeking access to the EU through a defined capital commitment.` },
+                    ]},
+                    { title: 'Golden Visa — Atributos', fields: [
+                        { key: 'invest.programs.1.r0.label', label: '1 — Rótulo', type: 'text', min: 2, max: 40, default: `Purpose` },
+                        { key: 'invest.programs.1.r0.body', label: '1 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">A passive capital route.</strong> Qualifying options include contributions, donations, and subscriptions to investment funds, among other recognised vehicles.` },
+                        { key: 'invest.programs.1.r1.label', label: '2 — Rótulo', type: 'text', min: 2, max: 40, default: `Process Timeline` },
+                        { key: 'invest.programs.1.r1.body', label: '2 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">Structured and thorough.</strong> Approval typically takes between 12 and 14 months.` },
+                        { key: 'invest.programs.1.r2.label', label: '3 — Rótulo', type: 'text', min: 2, max: 40, default: `Minimum Investment` },
+                        { key: 'invest.programs.1.r2.body', label: '3 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">Investment via qualifying funds.</strong> A minimum capital commitment of €250K is required.` },
+                        { key: 'invest.programs.1.r3.label', label: '4 — Rótulo', type: 'text', min: 2, max: 40, default: `Renewal Period` },
+                        { key: 'invest.programs.1.r3.body', label: '4 — Texto', type: 'richtext', min: 10, max: 500, default: `<strong style="color:#0C1E28; font-weight:700;">Biennial in-person verification.</strong> Renewal requires presence in Portugal every 2 years for biometrics.` },
+                    ]},
+                    { title: 'Assunto 03 — Hygge House Beato (capa)', fields: [
+                        { key: 'invest.hygge.tag', label: 'Etiqueta', type: 'text', min: 2, max: 30, default: `Subject 03` },
+                        { key: 'invest.hygge.eyebrow', label: 'Eyebrow', type: 'text', min: 2, max: 60, default: `Real Estate · Lisbon · Beato` },
+                        { key: 'invest.hygge.title_line1', label: 'Título — linha 1', type: 'text', min: 2, max: 40, default: `Hygge House` },
+                        { key: 'invest.hygge.title_line2', label: 'Título — linha 2 (itálico)', type: 'text', min: 1, max: 40, default: `Beato` },
+                        { key: 'invest.hygge.byline', label: 'Assinatura', type: 'richtext', min: 5, max: 160, default: `By <strong style="color:#0C1E28; font-weight:600;">Smith & Adams</strong> · Residential Project in Lisbon` },
+                        { key: 'invest.hygge.quote', label: 'Frase de destaque', type: 'richtext', min: 10, max: 300, default: `Where the Nordic philosophy of wellbeing meets the riverside energy of Lisbon. A modern refuge rooted in the city's history.` },
+                    ]},
+                    { title: 'Hygge — Estatísticas (3)', fields: [
+                        { key: 'invest.hygge.stat0.value', label: 'Stat 1 — número', type: 'text', min: 1, max: 12, default: `137` },
+                        { key: 'invest.hygge.stat0.label', label: 'Stat 1 — rótulo', type: 'text', min: 2, max: 40, default: `Studio Units` },
+                        { key: 'invest.hygge.stat1.value', label: 'Stat 2 — número', type: 'text', min: 1, max: 12, default: `Beato` },
+                        { key: 'invest.hygge.stat1.label', label: 'Stat 2 — rótulo', type: 'text', min: 2, max: 40, default: `Location` },
+                        { key: 'invest.hygge.stat2.value', label: 'Stat 3 — número', type: 'text', min: 1, max: 12, default: `Hygge` },
+                        { key: 'invest.hygge.stat2.label', label: 'Stat 3 — rótulo', type: 'text', min: 2, max: 40, default: `Core Concept` },
+                    ]},
+                    { title: 'Hygge — Imagens (3)', fields: [
+                        { key: 'invest.hygge.img0', label: 'Imagem 1', type: 'image', min: 0, max: 500, default: `hygge-house-beato/1.jpg` },
+                        { key: 'invest.hygge.img1', label: 'Imagem 2', type: 'image', min: 0, max: 500, default: `hygge-house-beato/2.jpg` },
+                        { key: 'invest.hygge.img2', label: 'Imagem 3', type: 'image', min: 0, max: 500, default: `hygge-house-beato/3.jpg` },
+                    ]},
+                    { title: 'Hygge — O Projeto', fields: [
+                        { key: 'invest.hygge.project.label', label: 'Rótulo da seção', type: 'text', min: 2, max: 40, default: `The Project` },
+                        { key: 'invest.hygge.project.p1', label: 'Parágrafo 1', type: 'richtext', min: 20, max: 900, default: `Hygge House Beato is a residential development that blends contemporary architecture with urban convenience and the welcoming spirit of the Hygge philosophy. Developed by Smith & Adams, the project is a direct response to Portugal's growing hospitality market, offering units that combine functionality with a genuine sense of home.` },
+                        { key: 'invest.hygge.project.p2', label: 'Parágrafo 2', type: 'richtext', min: 20, max: 900, default: `The building comprises 137 studio-typology units, designed with a focus on efficiency, functionality and quality. Every space was conceived to meet the high standards the Portuguese market demands, without giving up the individuality and character that set this project apart.` },
+                        { key: 'invest.hygge.project.quote', label: 'Frase central', type: 'richtext', min: 10, max: 300, default: `A project where long-term investment value meets a community centred on the genuine feeling of home.` },
+                    ]},
+                    { title: 'Hygge — Pilares do Projeto', fields: [
+                        { key: 'invest.hygge.pillars.label', label: 'Rótulo da seção', type: 'text', min: 2, max: 40, default: `Project Pillars` },
+                        { key: 'invest.hygge.pillar0.body', label: 'Pilar 01', type: 'richtext', min: 10, max: 400, default: `<strong style="color:#0C1E28; font-weight:600;">Modern Architecture.</strong> A contemporary language that dialogues with the historic identity of the Beato district and its riverside energy.` },
+                        { key: 'invest.hygge.pillar1.body', label: 'Pilar 02', type: 'richtext', min: 10, max: 400, default: `<strong style="color:#0C1E28; font-weight:600;">Pure Comfort.</strong> Studio units designed for maximum efficiency without compromising quality of life and the sense of home.` },
+                        { key: 'invest.hygge.pillar2.body', label: 'Pilar 03', type: 'richtext', min: 10, max: 400, default: `<strong style="color:#0C1E28; font-weight:600;">Long-Term Investment.</strong> Set within a growing hospitality market, the project offers solid prospects for appreciation and return.` },
+                        { key: 'invest.hygge.pillar3.body', label: 'Pilar 04', type: 'richtext', min: 10, max: 400, default: `<strong style="color:#0C1E28; font-weight:600;">Community.</strong> Generous shared spaces that foster connection between residents and reinforce a sense of belonging.` },
+                        { key: 'invest.hygge.pillar4.body', label: 'Pilar 05', type: 'richtext', min: 10, max: 400, default: `<strong style="color:#0C1E28; font-weight:600;">Historic Roots.</strong> Located in Beato, the project keeps a living connection with the memory and soul of Lisbon.` },
+                        { key: 'invest.hygge.pillars.closing', label: 'Parágrafo de fecho', type: 'richtext', min: 20, max: 600, default: `Hygge House Beato is the ideal choice for those seeking a modern refuge that stays connected to the city's historic roots and its riverside energy. A home that is, at once, a smart investment and a place where life unfolds with ease.` },
+                    ]},
+                    { title: 'CTA final', fields: [
+                        { key: 'invest.cta.title', label: 'Título', type: 'text', min: 3, max: 80, default: `Not sure which route fits you?` },
+                        { key: 'invest.cta.label', label: 'Texto do botão', type: 'text', min: 2, max: 40, default: `Speak with a specialist` },
+                        { key: 'invest.cta.url', label: 'Link do botão', type: 'url', min: 5, max: 200, default: `contact.html` },
+                    ]},
+                ]
+            },
+            'dev': {
+                label: 'Our Developments',
+                preview: 'our-developments.html',
+                sections: [
+                    { title: 'Hero', fields: [
+                        { key: 'dev.hero.eyebrow', label: 'Eyebrow', type: 'text', min: 2, max: 60, default: `Smith & Adams · Portugal` },
+                        { key: 'dev.hero.title', label: 'Título', type: 'text', min: 3, max: 60, default: `Our Developments` },
+                        { key: 'dev.hero.subtitle', label: 'Subtítulo', type: 'richtext', min: 10, max: 400, default: `Every Smith & Adams project in one place: the Hygge concept, our Hygge House hotels and developments in Lisbon, and the projects that built our track record.` },
+                    ]},
+                    { title: 'Barra de Reserva (acima de Fanqueiros)', fields: [
+                        { key: 'dev.booking.eyebrow', label: 'Eyebrow', type: 'text', min: 2, max: 30, default: `Reserve` },
+                        { key: 'dev.booking.title', label: 'Título', type: 'text', min: 3, max: 60, default: `Book your stay` },
+                        { key: 'dev.booking.label_in', label: 'Rótulo — Check-in', type: 'text', min: 2, max: 20, default: `Check-in` },
+                        { key: 'dev.booking.label_out', label: 'Rótulo — Check-out', type: 'text', min: 2, max: 20, default: `Check-out` },
+                        { key: 'dev.booking.label_adults', label: 'Rótulo — Adultos', type: 'text', min: 2, max: 20, default: `Adults` },
+                        { key: 'dev.booking.label_children', label: 'Rótulo — Crianças', type: 'text', min: 2, max: 20, default: `Children` },
+                        { key: 'dev.booking.cta', label: 'Texto do botão', type: 'text', min: 2, max: 30, default: `Check availability` },
+                        { key: 'dev.booking.url', label: 'Link base de reserva (Boom)', type: 'url', min: 5, max: 300, default: `https://smithandadams.bookingsboom.com/listings` },
+                    ]},
+                    { title: 'Hygge Concept — texto', fields: [
+                        { key: 'dev.concept.wordmark', label: 'Wordmark', type: 'text', min: 2, max: 20, default: `HYGGE` },
+                        { key: 'dev.concept.kicker', label: 'Subtítulo (Concept)', type: 'text', min: 2, max: 30, default: `Concept` },
+                        { key: 'dev.concept.p1', label: 'Parágrafo 1', type: 'richtext', min: 10, max: 600, default: `Hygge is an atmosphere and an experience, rather than about things. It is a calm, comfortable time with the people we love, a complete absence of frustrations and a total feeling of home.` },
+                        { key: 'dev.concept.p2', label: 'Parágrafo 2', type: 'richtext', min: 10, max: 600, default: `At Smith & Adams, this philosophy is our guiding light. We design sanctuaries that invite you to slow down and take pleasure in savouring the moment.` },
+                        { key: 'dev.concept.def_title', label: 'Definição — título', type: 'text', min: 3, max: 40, default: `HYGGE [hue-gah]` },
+                        { key: 'dev.concept.def_body', label: 'Definição — texto', type: 'richtext', min: 10, max: 500, default: `(n.) a calm, comfortable time with people you love. a complete absence of frustrations or anything emotionally overwhelming. taking pleasure from the cosy atmosphere and enjoying the simple pleasures in life. often enjoyed with good food, drinks, warm blankets and candlelight.` },
+                    ]},
+                    { title: 'Hygge Concept — imagens', fields: [
+                        { key: 'dev.concept.img0', label: 'Imagem 1', type: 'image', min: 0, max: 500, default: `hygge-house-projects/7.jpg` },
+                        { key: 'dev.concept.img1', label: 'Imagem 2', type: 'image', min: 0, max: 500, default: `hygge-house-projects/5.jpg` },
+                        { key: 'dev.concept.img2', label: 'Imagem 3', type: 'image', min: 0, max: 500, default: `hygge-house-projects/34.jpg` },
+                    ]},
+                    { title: 'S. Julião — texto', fields: [
+                        { key: 'dev.juliao.title', label: 'Título', type: 'richtext', min: 3, max: 80, default: `Hygge House<br>Hotel S. Julião` },
+                        { key: 'dev.juliao.p1', label: 'Parágrafo 1', type: 'richtext', min: 10, max: 500, default: `In the heart of historic Lisbon, the Hygge House Hotel in Rua de S. Julião is an extension of our beloved Kaffe concept into the world of hospitality.` },
+                        { key: 'dev.juliao.p2', label: 'Parágrafo 2', type: 'richtext', min: 10, max: 500, default: `This boutique project blends classic traditional Portuguese architecture with the soulful comfort of Hygge living.` },
+                        { key: 'dev.juliao.p3', label: 'Parágrafo 3', type: 'richtext', min: 5, max: 400, default: `Designed for travelers seeking a quiet refuge amidst the city's energy.` },
+                        { key: 'dev.juliao.quote1', label: 'Destaque 1', type: 'richtext', min: 5, max: 300, default: `It is a destination where you don't just visit, you find a home away from home.` },
+                        { key: 'dev.juliao.quote2', label: 'Destaque 2', type: 'richtext', min: 5, max: 300, default: `The hotel offers an intimate stay where the morning scent of specialty coffee and the cozy atmosphere of our Kaffe are always present.` },
+                        { key: 'dev.juliao.booking_label', label: 'Botão — texto', type: 'text', min: 2, max: 30, default: `Book your stay` },
+                        { key: 'dev.juliao.booking_url', label: 'Botão — link de reserva', type: 'url', min: 5, max: 300, default: `https://smithandadams.bookingsboom.com` },
+                    ]},
+                    { title: 'S. Julião — imagens', fields: [
+                        { key: 'dev.juliao.img0', label: 'Imagem 1', type: 'image', min: 0, max: 500, default: `hygge-house-projects/5.jpg` },
+                        { key: 'dev.juliao.img1', label: 'Imagem 2', type: 'image', min: 0, max: 500, default: `hygge-house-projects/33.jpg` },
+                        { key: 'dev.juliao.img2', label: 'Imagem 3', type: 'image', min: 0, max: 500, default: `hygge-house-projects/4.jpg` },
+                    ]},
+                    { title: 'Fanqueiros — texto', fields: [
+                        { key: 'dev.fanqueiros.title', label: 'Título', type: 'richtext', min: 3, max: 80, default: `Hygge House<br>Fanqueiros` },
+                        { key: 'dev.fanqueiros.subhead', label: 'Subtítulo', type: 'text', min: 3, max: 60, default: `A new way to stay in Lisbon` },
+                        { key: 'dev.fanqueiros.p1', label: 'Parágrafo 1', type: 'richtext', min: 10, max: 500, default: `Nestled in the vibrant streets of downtown Lisbon, the Hygge House Hotel on Rua dos Fanqueiros is the natural extension of our brand into a new corner of the city.` },
+                        { key: 'dev.fanqueiros.p2', label: 'Parágrafo 2', type: 'richtext', min: 10, max: 500, default: `With 30 thoughtfully designed units, this project carries the same mood, the same style and the same quality that define the Hygge experience, now elevated by a more refined architectural language.` },
+                        { key: 'dev.fanqueiros.p3', label: 'Parágrafo 3', type: 'richtext', min: 10, max: 400, default: `It reflects the proven track record of Smith & Adams and our fresh vision for efficient, profitable Real Estate projects in Portugal.` },
+                        { key: 'dev.fanqueiros.booking_label', label: 'Botão — texto', type: 'text', min: 2, max: 30, default: `Book your stay` },
+                        { key: 'dev.fanqueiros.booking_url', label: 'Botão — link de reserva', type: 'url', min: 5, max: 300, default: `https://smithandadams.bookingsboom.com` },
+                    ]},
+                    { title: 'Fanqueiros — imagens', fields: [
+                        { key: 'dev.fanqueiros.img0', label: 'Imagem 1', type: 'image', min: 0, max: 500, default: `hygge-house-projects/34.jpg` },
+                        { key: 'dev.fanqueiros.img1', label: 'Imagem 2', type: 'image', min: 0, max: 500, default: `hygge-house-projects/3.jpg` },
+                    ]},
+                    { title: 'Beato — texto', fields: [
+                        { key: 'dev.beato.title', label: 'Título', type: 'richtext', min: 3, max: 80, default: `Hygge House<br>Beato` },
+                        { key: 'dev.beato.subhead', label: 'Subtítulo', type: 'text', min: 3, max: 60, default: `Pure Comfort` },
+                        { key: 'dev.beato.p1', label: 'Parágrafo 1', type: 'richtext', min: 10, max: 600, default: `Hygge House Beato blends modern architecture with urban convenience and the warm, welcoming spirit of the Hygge philosophy. The building comprises 137 studio units, designed for efficiency, functionality, and quality.` },
+                        { key: 'dev.beato.p2', label: 'Parágrafo 2', type: 'richtext', min: 10, max: 700, default: `These units perfectly meet the high standards of Portugal's growing hospitality market. It is a project where long-term investment value meets a community focused on the genuine feeling of home, and the perfect choice for those seeking a modern refuge that stays connected to the city's historic roots and riverside energy.` },
+                        { key: 'dev.beato.status', label: 'Estado (badge)', type: 'text', min: 2, max: 30, default: `Coming` },
+                    ]},
+                    { title: 'Beato — imagens', fields: [
+                        { key: 'dev.beato.img0', label: 'Imagem 1', type: 'image', min: 0, max: 500, default: `hygge-house-beato/atrium.jpg` },
+                        { key: 'dev.beato.img1', label: 'Imagem 2', type: 'image', min: 0, max: 500, default: `hygge-house-projects/2.jpg` },
                     ]},
                 ]
             },

@@ -6,6 +6,8 @@ export default async function handler(req, res) {
     { loc: `${BASE_URL}/`,                         lastmod: today, changefreq: 'weekly',  priority: '1.0' },
     { loc: `${BASE_URL}/urban-collection`,          lastmod: today, changefreq: 'monthly', priority: '0.9' },
     { loc: `${BASE_URL}/property-management`,       lastmod: today, changefreq: 'monthly', priority: '0.8' },
+    { loc: `${BASE_URL}/invest-in-portugal`,        lastmod: today, changefreq: 'monthly', priority: '0.9' },
+    { loc: `${BASE_URL}/our-developments`,          lastmod: today, changefreq: 'monthly', priority: '0.9' },
     { loc: `${BASE_URL}/blog`,                      lastmod: today, changefreq: 'daily',   priority: '0.8' },
     { loc: `${BASE_URL}/about`,                     lastmod: today, changefreq: 'monthly', priority: '0.7' },
     { loc: `${BASE_URL}/contact`,                   lastmod: today, changefreq: 'monthly', priority: '0.6' },
