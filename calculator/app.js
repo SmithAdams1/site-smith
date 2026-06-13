@@ -238,7 +238,8 @@ function calcGV() {
   const cmvm        = c.cmvmPerYear * c.cmvmYears;                  // Excel G44
   const audit       = c.auditPerYear * c.auditYears;                // Excel G45
   const subscription = c.subscriptionFee;                           // Excel G46
-  const snaAdmin    = c.snaAdminPerYear * c.snaAdminYears;          // Excel G47
+  const snaBase     = c.snaAdminPerYear * units;                   // €5,000 per participation unit (1u→5,000 · 2u→10,000)
+  const snaAdmin    = snaBase * c.snaAdminYears;                   // × 5 years (1u→25,000 · 2u→50,000)
   const fundTotal   = mgmt + depository + cmvm + audit + subscription + snaAdmin; // G48
 
   /* --- Yield Distribution (per Excel) ---
@@ -253,7 +254,9 @@ function calcGV() {
   /* --- Totals ---
      investmentCostBase = custo real excluindo capital PU (para ROI)   */
   const investmentCostBase = underlyingProperty + acqTotal + fundTotal;
-  const grandTotal         = participationUnit + acqTotal + fundTotal + legalTotal;
+  // Fund & administrative costs are already covered within the participation
+  // unit value, so they are NOT added on top of the programme total.
+  const grandTotal         = participationUnit + acqTotal + legalTotal;
 
   /* --- ROI (5 years) --- */
   const apprPerYear = participationUnit * c.appreciationRate;
@@ -302,6 +305,8 @@ function calcGV() {
 
   set('gv-mgmt-base', fmtEUR(mgmtBase));
   set('gv-mgmt',      fmtEUR(mgmt));
+  set('gv-sna-base',  fmtEUR(snaBase));
+  set('gv-sna-total', fmtEUR(snaAdmin));
   set('gv-fund-sub',  fmtEUR(fundTotal));
 
   set('gv-y2028', fmtEUR(annualYield));
@@ -531,7 +536,7 @@ const i18n = {
     'gv.summary.label':  'Total programme cost',
     'gv.summary.unit':   'Participation unit value',
     'gv.summary.acq':    'Property acquisition costs',
-    'gv.summary.fund':   'Fund & administrative',
+    'gv.summary.fund':   'Fund & administrative (included in participation)',
     'gv.summary.legal':  'Legal & government fees',
     'gv.summary.return': 'Projected return (5% p.a. · 5 years)',
     'gv.b.acq':          'Property acquisition costs',
@@ -706,7 +711,7 @@ const i18n = {
     'gv.summary.label':  'Custo total do programa',
     'gv.summary.unit':   'Valor da unidade de participação',
     'gv.summary.acq':    'Custos de aquisição do imóvel',
-    'gv.summary.fund':   'Fundo e administrativos',
+    'gv.summary.fund':   'Fundo e administrativos (incluído na participação)',
     'gv.summary.legal':  'Taxas legais e governamentais',
     'gv.summary.return': 'Retorno projetado (5% a.a. · 5 anos)',
     'gv.b.acq':          'Custos de aquisição do imóvel',
@@ -2110,9 +2115,10 @@ function buildGVMouPdf(data) {
   const cmvm              = c.cmvmPerYear * c.cmvmYears;
   const audit             = c.auditPerYear * c.auditYears;
   const subscription      = c.subscriptionFee;
-  const snaAdmin          = c.snaAdminPerYear * c.snaAdminYears;
+  const snaAdmin          = c.snaAdminPerYear * units * c.snaAdminYears;
   const fundTotal         = mgmt + depository + cmvm + audit + subscription + snaAdmin;
-  const grandTotal        = participationUnit + acqTotal + fundTotal + legalTotal;
+  // Fund & administrative costs are already covered within the participation unit value.
+  const grandTotal        = participationUnit + acqTotal + legalTotal;
 
   /* -- jsPDF -- */
   const JsPDF = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
