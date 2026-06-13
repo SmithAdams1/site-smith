@@ -2572,7 +2572,7 @@ function buildGVMouPdf(data) {
 /* ============================================================
    LEGAL DOCUMENTS — PASSWORD-PROTECTED SECTION
    ============================================================ */
-const LEGAL_PASSWORD = 'Smith&Adams2026';
+const LEGAL_PASSWORD = '20SA06malhoa14';
 
 function isLegalAuthenticated() {
   try { return sessionStorage.getItem('sna_legal_auth') === '1'; } catch (_) { return false; }
