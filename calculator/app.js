@@ -246,10 +246,10 @@ function calcGV() {
      Años 1-2: construction (sem yield)
      Años 3-5: 2.5% × PU / ano
      Año 6: 5% × PU (deferred para 2026+2027)                         */
-  const yieldRate   = c.yieldRate;
-  const annualYield = participationUnit * 0.025;
-  const deferred    = participationUnit * 0.05;
-  const totalYield  = annualYield * 3 + deferred;
+  const yieldRate   = c.yieldRate;                       // 5% p.a.
+  const annualYield = participationUnit * yieldRate;     // 5% × PU (1u→12,500 · 2u→25,000)
+  const deferred    = annualYield * 2;                   // 2026+2027 deferred = two years' yield (10% × PU)
+  const totalYield  = annualYield * 3 + deferred;        // 5 years × 5% = PU × 0.25
 
   /* --- Totals ---
      investmentCostBase = custo real excluindo capital PU (para ROI)   */
