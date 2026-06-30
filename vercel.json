@@ -3,7 +3,8 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
-    { "source": "/blog/:slug", "destination": "/api/seo_blog?slug=$1" }
+    { "source": "/blog/:slug", "destination": "/api/seo_blog?slug=$1" },
+    { "source": "/property/:slug", "destination": "/api/property?slug=$1" }
   ],
   "crons": [
     {

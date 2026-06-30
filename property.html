@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Property | Smith &amp; Adams</title>
+<meta name="description" content="Premium property in Portugal, curated by Smith & Adams."/>
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { corePlugins: { preflight: false } }</script>
+<style>
+  .satoshi{font-family:'Satoshi','General Sans',system-ui,sans-serif;}
+  .geist{font-family:'General Sans','Satoshi',system-ui,sans-serif;}
+  body{font-family:'Satoshi','General Sans',system-ui,sans-serif;}
+  .re-input{appearance:none;background:#fff;border:1px solid #e3e1da;border-radius:10px;padding:12px 14px;font-size:14px;color:#0C1E28;font-family:inherit;outline:none;width:100%;}
+  .re-input:focus{border-color:#0C1E28;}
+  .spin{width:34px;height:34px;border:3px solid #e3e1da;border-top-color:#0C1E28;border-radius:50%;animation:respin .8s linear infinite;}
+  @keyframes respin{to{transform:rotate(360deg);}}
+  .pd-desc p{margin:0 0 14px;}.pd-desc h2,.pd-desc h3{color:#0C1E28;font-weight:700;margin:20px 0 10px;}.pd-desc ul{list-style:disc;padding-left:20px;margin:0 0 14px;}
+  .thumb{cursor:pointer;border:2px solid transparent;border-radius:10px;overflow:hidden;}.thumb.active{border-color:#0C1E28;}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18073134136');</script>
+<script defer src="/cms-loader.js"></script>
+</head>
+<body class="antialiased bg-[#FDFCF9] overflow-x-hidden w-full">
+<main class="min-h-screen">
+
+<!-- HEADER (dark, since detail page has light body) -->
+<header class="w-full z-50 bg-[#0C1E28]">
+  <div class="container mx-auto px-4 md:px-6 py-6 flex justify-between items-center">
+    <a class="relative z-40" href="/index.html"><img alt="Smith &amp; Adams Logo" width="150" height="40" class="h-10 w-auto invert-[1]" style="color:transparent" src="../logo.png" onerror="this.src='./logo.png'"/></a>
+    <nav class="hidden lg:flex items-center space-x-8">
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/index.html">Home</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/about.html">About Us</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/property-management.html">Property Management</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a></div>
+      <div class="relative group"><a class="text-white font-semibold satoshi" href="/real-estate.html">Real Estate</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/our-developments.html">Our Developments</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/blog.html">Blog</a></div>
+      <div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium satoshi" href="/contact.html">Contact Us</a></div>
+    </nav>
+    <button onclick="var m=document.getElementById('mobile-menu');['opacity-0','opacity-100','invisible','pointer-events-none'].forEach(c=>m.classList.toggle(c));" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white w-6"></span><span class="block h-0.5 bg-white my-1 w-4"></span><span class="block h-0.5 bg-white w-5"></span></div></button>
+  </div>
+  <div id="mobile-menu" class="fixed inset-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 opacity-0 invisible pointer-events-none" style="height:100vh">
+    <div class="flex flex-col items-center justify-center h-full space-y-8">
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/index.html">Home</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/real-estate.html">Real Estate</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/our-developments.html">Our Developments</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/invest-in-portugal.html">Invest in Portugal</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/contact.html">Contact</a>
+    </div>
+  </div>
+</header>
+
+<div id="pd-loading" style="display:flex;justify-content:center;padding:120px 0;"><div class="spin"></div></div>
+<div id="pd-error" class="satoshi" style="display:none;text-align:center;padding:120px 24px;color:#6b7280;"></div>
+<div id="pd-root" style="display:none;"></div>
+
+<script>
+(function(){
+  var SUPABASE_URL='https://bcjtkfipcfvvitglgpys.supabase.co';
+  var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
+  function locale(){try{var v=localStorage.getItem('cmsLocale');if(v==='pt'||v==='en')return v;}catch(e){}return 'en';}
+  var L=locale();document.documentElement.lang=L;
+  var T={
+    en:{back:'Back to listings',beds:'Bedrooms',baths:'Bathrooms',area:'Area',plot:'Plot',year:'Year built',energy:'Energy rating',type:'Type',ref:'Reference',
+        overview:'Overview',highlights:'Highlights',location:'Location',brochure:'Download brochure',gv:'Golden Visa eligible',sale:'For sale',rent:'For rent',
+        enquire:'Request information',enq_sub:'Speak to a Smith & Adams advisor about this property.',first:'First name',last:'Last name',email:'Email',phone:'Phone',msg:'Message',send:'Send enquiry',sending:'Sending...',sent:'Thank you. An advisor will contact you shortly.',err:'Something went wrong. Please try again.',notfound:'Property not found.',
+        types:{apartment:'Apartment',villa:'Villa',townhouse:'Townhouse',plot:'Plot',commercial:'Commercial',penthouse:'Penthouse',studio:'Studio'},wa:'WhatsApp'},
+    pt:{back:'Voltar aos imóveis',beds:'Quartos',baths:'Casas de banho',area:'Área',plot:'Terreno',year:'Ano',energy:'Certificado energético',type:'Tipo',ref:'Referência',
+        overview:'Descrição',highlights:'Destaques',location:'Localização',brochure:'Descarregar brochura',gv:'Elegível Golden Visa',sale:'Venda',rent:'Arrendamento',
+        enquire:'Pedir informação',enq_sub:'Fale com um consultor da Smith & Adams sobre este imóvel.',first:'Nome',last:'Apelido',email:'Email',phone:'Telefone',msg:'Mensagem',send:'Enviar pedido',sending:'A enviar...',sent:'Obrigado. Um consultor entrará em contacto em breve.',err:'Ocorreu um erro. Tente novamente.',notfound:'Imóvel não encontrado.',
+        types:{apartment:'Apartamento',villa:'Moradia',townhouse:'Casa em banda',plot:'Terreno',commercial:'Comercial',penthouse:'Penthouse',studio:'Estúdio'},wa:'WhatsApp'}
+  };
+  var t=T[L];
+  function pick(f){if(f==null)return '';if(typeof f==='string')return f;return f[L]||f.en||f.pt||'';}
+  function fmtPrice(p,cur){if(p==null||p==='')return '';var s=cur==='USD'?'$':cur==='GBP'?'£':'€';return s+Number(p).toLocaleString(L==='pt'?'pt-PT':'en-GB');}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function getSlug(){
+    if(window.INJECTED_SLUG)return window.INJECTED_SLUG;
+    var qs=new URLSearchParams(location.search);if(qs.get('slug'))return qs.get('slug');
+    var parts=location.pathname.split('/').filter(Boolean);var last=parts[parts.length-1]||'';
+    return decodeURIComponent(last.replace(/\.html$/,''));
+  }
+  var slug=getSlug();
+
+  function fail(msg){document.getElementById('pd-loading').style.display='none';var e=document.getElementById('pd-error');e.style.display='block';e.innerHTML=esc(msg)+'<br><br><a href="/real-estate.html" style="color:#0C1E28;font-weight:700;">'+t.back+' →</a>';}
+
+  if(!slug){fail(t.notfound);return;}
+
+  fetch(SUPABASE_URL+'/rest/v1/properties?slug=eq.'+encodeURIComponent(slug)+'&status=eq.published&select=*&limit=1',{
+    headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}
+  }).then(function(r){return r.json();}).then(function(rows){
+    if(!Array.isArray(rows)||!rows.length){fail(t.notfound);return;}
+    build(rows[0]);
+  }).catch(function(e){console.warn(e);fail(t.err);});
+
+  function build(p){
+    document.getElementById('pd-loading').style.display='none';
+    var root=document.getElementById('pd-root');root.style.display='block';
+    var imgs=(Array.isArray(p.images)&&p.images.length)?p.images:(p.cover_image?[p.cover_image]:['https://via.placeholder.com/1200x800?text=Smith+%26+Adams']);
+    var hl=[];var rawHl=p.highlights;if(rawHl){if(Array.isArray(rawHl))hl=rawHl;else if(rawHl[L])hl=rawHl[L];else if(rawHl.en)hl=rawHl.en;}
+    var specs=[];
+    if(p.bedrooms)specs.push([t.beds,p.bedrooms]);
+    if(p.bathrooms)specs.push([t.baths,p.bathrooms]);
+    if(p.area_sqm)specs.push([t.area,Math.round(p.area_sqm)+' m²']);
+    if(p.plot_sqm)specs.push([t.plot,Math.round(p.plot_sqm)+' m²']);
+    if(p.year_built)specs.push([t.year,p.year_built]);
+    if(p.energy_rating)specs.push([t.energy,p.energy_rating]);
+    specs.push([t.type,t.types[p.property_type]||p.property_type]);
+    if(p.reference)specs.push([t.ref,p.reference]);
+
+    var mapEmbed='';
+    if(p.latitude&&p.longitude){mapEmbed='https://maps.google.com/maps?q='+p.latitude+','+p.longitude+'&z=14&output=embed';}
+    else if(p.address||p.city||p.region){mapEmbed='https://maps.google.com/maps?q='+encodeURIComponent([p.address,p.city,p.region,'Portugal'].filter(Boolean).join(', '))+'&z=12&output=embed';}
+
+    root.innerHTML=
+      '<section style="background:#0C1E28;padding:28px 24px 0;"><div style="max-width:1200px;margin:0 auto;"><a href="/real-estate.html" class="satoshi" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">← '+esc(t.back)+'</a></div></section>'+
+      // GALLERY
+      '<section style="background:#0C1E28;padding:20px 24px 36px;"><div style="max-width:1200px;margin:0 auto;">'+
+        '<div style="border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#000;"><img id="pd-main" src="'+esc(imgs[0])+'" alt="'+esc(pick(p.title))+'" style="width:100%;height:100%;object-fit:cover;"/></div>'+
+        (imgs.length>1?'<div id="pd-thumbs" style="display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:4px;">'+imgs.map(function(u,i){return '<div class="thumb'+(i===0?' active':'')+'" data-src="'+esc(u)+'" style="flex:0 0 96px;height:64px;"><img src="'+esc(u)+'" style="width:100%;height:100%;object-fit:cover;"/></div>';}).join('')+'</div>':'')+
+      '</div></section>'+
+      // BODY
+      '<section style="background:#FDFCF9;padding:clamp(36px,5vw,64px) 24px;"><div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:40px;" class="lg:grid-cols-[1fr_380px]">'+
+        '<div>'+
+          '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">'+
+            '<span class="satoshi" style="background:#0C1E28;color:#fff;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px;">'+(p.transaction_type==='rent'?esc(t.rent):esc(t.sale))+'</span>'+
+            (p.golden_visa?'<span class="satoshi" style="background:#C9A227;color:#0C1E28;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;">'+esc(t.gv)+'</span>':'')+
+          '</div>'+
+          '<p class="satoshi" style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin:0 0 8px;">'+esc([p.city,p.region].filter(Boolean).join(', '))+'</p>'+
+          '<h1 class="geist" style="font-size:clamp(28px,4vw,46px);font-weight:800;color:#0C1E28;letter-spacing:-.02em;line-height:1.1;margin:0 0 16px;">'+esc(pick(p.title))+'</h1>'+
+          '<p class="geist" style="font-size:30px;font-weight:800;color:#0C1E28;margin:0 0 28px;">'+fmtPrice(p.price,p.currency)+'</p>'+
+          // specs grid
+          '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:#ece9e1;border:1px solid #ece9e1;border-radius:14px;overflow:hidden;margin-bottom:32px;">'+
+            specs.map(function(s){return '<div style="background:#fff;padding:16px 18px;"><p class="satoshi" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin:0 0 6px;">'+esc(s[0])+'</p><p class="geist" style="font-size:17px;font-weight:700;color:#0C1E28;margin:0;">'+esc(s[1])+'</p></div>';}).join('')+
+          '</div>'+
+          (pick(p.description)?'<h2 class="geist" style="font-size:22px;font-weight:700;color:#0C1E28;margin:0 0 14px;">'+esc(t.overview)+'</h2><div class="pd-desc satoshi" style="font-size:16px;color:#4b5563;line-height:1.85;margin-bottom:32px;">'+pick(p.description)+'</div>':'')+
+          (hl.length?'<h2 class="geist" style="font-size:22px;font-weight:700;color:#0C1E28;margin:0 0 14px;">'+esc(t.highlights)+'</h2><ul style="list-style:none;padding:0;margin:0 0 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">'+hl.map(function(h){return '<li class="satoshi" style="display:flex;gap:10px;font-size:15px;color:#374151;"><span style="color:#C9A227;">◆</span>'+esc(pick(h))+'</li>';}).join('')+'</ul>':'')+
+          (mapEmbed?'<h2 class="geist" style="font-size:22px;font-weight:700;color:#0C1E28;margin:0 0 14px;">'+esc(t.location)+'</h2><div style="border-radius:14px;overflow:hidden;border:1px solid #ece9e1;"><iframe src="'+esc(mapEmbed)+'" width="100%" height="340" style="border:0;" loading="lazy"></iframe></div>':'')+
+          (p.brochure_url?'<div style="margin-top:24px;"><a href="'+esc(p.brochure_url)+'" target="_blank" rel="noopener" class="satoshi" style="display:inline-flex;align-items:center;gap:8px;background:#0C1E28;color:#fff;padding:13px 22px;border-radius:10px;font-weight:600;text-decoration:none;">↓ '+esc(t.brochure)+'</a></div>':'')+
+        '</div>'+
+        // SIDEBAR ENQUIRY
+        '<aside><div style="position:sticky;top:24px;background:#fff;border:1px solid #ece9e1;border-radius:18px;box-shadow:0 10px 40px rgba(12,30,40,.08);padding:26px;">'+
+          '<h3 class="geist" style="font-size:21px;font-weight:800;color:#0C1E28;margin:0 0 6px;">'+esc(t.enquire)+'</h3>'+
+          '<p class="satoshi" style="font-size:14px;color:#6b7280;margin:0 0 18px;">'+esc(t.enq_sub)+'</p>'+
+          '<form id="pd-form" style="display:flex;flex-direction:column;gap:12px;">'+
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><input class="re-input" name="firstName" placeholder="'+esc(t.first)+'" required/><input class="re-input" name="lastName" placeholder="'+esc(t.last)+'"/></div>'+
+            '<input class="re-input" type="email" name="email" placeholder="'+esc(t.email)+'" required/>'+
+            '<div style="display:grid;grid-template-columns:90px 1fr;gap:10px;"><input class="re-input" name="phoneCode" placeholder="+351" value="+351"/><input class="re-input" name="phoneNumber" placeholder="'+esc(t.phone)+'" required/></div>'+
+            '<textarea class="re-input" name="message" rows="3" placeholder="'+esc(t.msg)+'"></textarea>'+
+            '<button type="submit" class="satoshi" style="background:#0C1E28;color:#fff;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;">'+esc(t.send)+'</button>'+
+            '<p id="pd-form-msg" class="satoshi" style="font-size:13px;margin:4px 0 0;text-align:center;"></p>'+
+          '</form>'+
+          '<a id="pd-wa" target="_blank" rel="noopener" class="satoshi" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;border:1px solid #25D366;color:#128C3E;border-radius:10px;padding:12px;font-weight:600;text-decoration:none;">'+esc(t.wa)+'</a>'+
+        '</div></aside>'+
+      '</div></section>';
+
+    // gallery thumbs
+    var main=document.getElementById('pd-main');
+    var thumbs=root.querySelectorAll('.thumb');
+    thumbs.forEach(function(th){th.addEventListener('click',function(){main.src=th.getAttribute('data-src');thumbs.forEach(function(x){x.classList.remove('active');});th.classList.add('active');});});
+
+    // whatsapp link
+    var propUrl='https://smithandadams.com/property/'+encodeURIComponent(p.slug);
+    var waText=encodeURIComponent((L==='pt'?'Olá, tenho interesse no imóvel: ':'Hello, I am interested in the property: ')+pick(p.title)+' - '+propUrl);
+    document.getElementById('pd-wa').href='https://wa.me/351938227348?text='+waText;
+
+    // enquiry submit -> /api/property-enquiry (Pipedrive + email)
+    var form=document.getElementById('pd-form');
+    form.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var btn=form.querySelector('button[type=submit]');var msgEl=document.getElementById('pd-form-msg');
+      btn.disabled=true;btn.textContent=t.sending;msgEl.textContent='';msgEl.style.color='#6b7280';
+      var fd=new FormData(form);var body={};fd.forEach(function(v,k){body[k]=v;});
+      body.interest='real-estate';
+      body.property={slug:p.slug,reference:p.reference||'',title:pick(p.title),url:propUrl,price:fmtPrice(p.price,p.currency)};
+      fetch('/api/property-enquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+        .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
+        .then(function(res){
+          if(res.ok&&res.j.success){form.reset();msgEl.style.color='#128C3E';msgEl.textContent=t.sent;btn.textContent=t.send;btn.disabled=false;}
+          else{throw new Error('fail');}
+        }).catch(function(){msgEl.style.color='#b91c1c';msgEl.textContent=t.err;btn.textContent=t.send;btn.disabled=false;});
+    });
+
+    // update document title/meta client-side (fallback when not SSR)
+    document.title=pick(p.title)+' | Smith & Adams';
+  }
+})();
+</script>
+
+<!-- FOOTER -->
+<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8"><div class="md:col-span-4"><a href="/index.html"><img alt="Smith &amp; Adams Logo" width="160" height="32" class="invert h-8 w-auto" src="../logo.png" onerror="this.src='./logo.png'"/></a><p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal.</p></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div><h4 class="font-semibold text-[18px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="satoshi text-[15px] text-gray-300"><a href="/index.html">Home</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/real-estate.html">Real Estate</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/invest-in-portugal.html">Invest in Portugal</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/our-developments.html">Our Developments</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/blog.html">Blog</a></li></ul></div><div><h4 class="font-semibold text-[18px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="satoshi text-[15px] text-gray-300"><a href="/contact.html">Contact Us</a></li><li class="satoshi text-[15px] text-gray-300"><a href="tel:+351938227348">+351938227348</a></li><li class="satoshi text-[15px] text-gray-300"><a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li></ul></div></div></div><div class="w-full pt-6 border-t border-white/10 mt-10"><p class="satoshi text-[14px] text-gray-400">© Smith &amp; Adams Group. All rights reserved.</p></div></div></footer>
+
+</main>
+</body></html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="pt"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Backoffice - Real Estate | Smith &amp; Adams</title>
+<meta name="robots" content="noindex,nofollow"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#f4f5f3;color:#0C1E28;}
+  a{color:inherit;}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px;}
+  .btn{background:#0C1E28;color:#fff;border:none;border-radius:9px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .btn:hover{opacity:.92;}
+  .btn.ghost{background:#fff;color:#0C1E28;border:1px solid #d8d6cd;}
+  .btn.danger{background:#fff;color:#b91c1c;border:1px solid #f0c4c4;}
+  .btn.sm{padding:7px 13px;font-size:13px;}
+  .card{background:#fff;border:1px solid #e8e6df;border-radius:14px;}
+  label{display:block;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8a8a8a;margin:0 0 6px;}
+  input,select,textarea{width:100%;border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;color:#0C1E28;background:#fff;outline:none;}
+  input:focus,select:focus,textarea:focus{border-color:#0C1E28;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+  .field{margin-bottom:14px;}
+  .section{padding:20px 22px;border-bottom:1px solid #efece4;}
+  .section h3{margin:0 0 16px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#0C1E28;}
+  .hidden{display:none!important;}
+  .row{display:flex;align-items:center;gap:12px;}
+  .tabs{display:inline-flex;background:#eceae2;border-radius:9px;padding:3px;margin-bottom:12px;}
+  .tabs button{background:transparent;border:none;padding:7px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;color:#6b7280;font-family:inherit;}
+  .tabs button.active{background:#fff;color:#0C1E28;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+  .drop{border:2px dashed #cfccc1;border-radius:12px;padding:26px;text-align:center;color:#8a8a8a;cursor:pointer;background:#fafaf7;}
+  .drop.over{border-color:#0C1E28;background:#f0efe9;}
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:14px;}
+  .thumb{position:relative;border-radius:10px;overflow:hidden;border:1px solid #e3e0d6;aspect-ratio:4/3;background:#eee;}
+  .thumb img{width:100%;height:100%;object-fit:cover;}
+  .thumb .ctrls{position:absolute;inset:auto 0 0 0;display:flex;justify-content:space-between;gap:4px;padding:5px;background:linear-gradient(transparent,rgba(0,0,0,.6));}
+  .thumb .ctrls button{background:rgba(255,255,255,.92);border:none;border-radius:6px;font-size:11px;padding:3px 7px;cursor:pointer;font-weight:600;}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;}
+  .badge.pub{background:#dcfce7;color:#15803d;}.badge.draft{background:#f3f4f6;color:#6b7280;}
+  .listrow{display:flex;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid #f0eee7;}
+  .listrow img{width:64px;height:48px;object-fit:cover;border-radius:8px;background:#eee;}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#0C1E28;color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.25);opacity:0;transition:opacity .25s;z-index:99;}
+  .toast.show{opacity:1;}
+  .check{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#0C1E28;text-transform:none;letter-spacing:0;}
+  .check input{width:auto;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="hidden" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0C1E28;">
+  <div class="card" style="padding:34px;width:360px;">
+    <div style="font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#0C1E28;">Smith &amp; Adams</div>
+    <h1 style="font-size:20px;margin:6px 0 4px;">Backoffice - Real Estate</h1>
+    <p style="font-size:13px;color:#6b7280;margin:0 0 20px;">Inicie sessão para gerir os imóveis.</p>
+    <div class="field"><label>Email</label><input id="lg-email" type="email" autocomplete="username"/></div>
+    <div class="field"><label>Password</label><input id="lg-pass" type="password" autocomplete="current-password"/></div>
+    <button class="btn" style="width:100%;" id="lg-btn">Entrar</button>
+    <p id="lg-err" style="color:#b91c1c;font-size:13px;margin:12px 0 0;text-align:center;"></p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <div style="background:#0C1E28;color:#fff;">
+    <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px;">
+      <div><div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;">Smith &amp; Adams</div><div style="font-size:18px;font-weight:700;">Real Estate - Backoffice</div></div>
+      <div class="row"><span id="who" style="font-size:13px;opacity:.7;"></span><button class="btn ghost sm" id="logout">Sair</button></div>
+    </div>
+  </div>
+
+  <!-- LIST VIEW -->
+  <div id="view-list" class="wrap">
+    <div class="row" style="justify-content:space-between;margin-bottom:16px;">
+      <h2 style="margin:0;font-size:20px;">Imóveis (<span id="count">0</span>)</h2>
+      <button class="btn" id="new-btn">+ Adicionar imóvel</button>
+    </div>
+    <div class="card" id="list"></div>
+  </div>
+
+  <!-- EDIT VIEW -->
+  <div id="view-edit" class="wrap hidden">
+    <div class="row" style="justify-content:space-between;margin-bottom:16px;">
+      <h2 id="edit-title" style="margin:0;font-size:20px;">Novo imóvel</h2>
+      <button class="btn ghost sm" id="back-btn">← Voltar à lista</button>
+    </div>
+    <div class="card">
+      <!-- BASICO -->
+      <div class="section">
+        <h3>Básico</h3>
+        <div class="field"><label>Título (Inglês) *</label><input id="f-title-en" placeholder="e.g. Modern 2-bed apartment in Chiado"/></div>
+        <div class="field"><label>Título (Português)</label><input id="f-title-pt" placeholder="ex: Apartamento T2 moderno no Chiado"/></div>
+        <div class="grid3">
+          <div class="field"><label>Slug (URL)</label><input id="f-slug" placeholder="auto a partir do título"/></div>
+          <div class="field"><label>Referência</label><input id="f-reference" placeholder="ex: SA-LIS-014"/></div>
+          <div class="field"><label>Estado</label><select id="f-status"><option value="draft">Rascunho</option><option value="published">Publicado</option></select></div>
+        </div>
+        <div class="grid3">
+          <div class="field"><label>Transação</label><select id="f-transaction"><option value="sale">Venda</option><option value="rent">Arrendamento</option></select></div>
+          <div class="field"><label>Tipo</label><select id="f-type"><option value="apartment">Apartamento</option><option value="villa">Moradia</option><option value="townhouse">Casa em banda</option><option value="penthouse">Penthouse</option><option value="studio">Estúdio</option><option value="plot">Terreno</option><option value="commercial">Comercial</option></select></div>
+          <div class="field"><label>Preço (€)</label><input id="f-price" type="number" placeholder="650000"/></div>
+        </div>
+        <div class="row" style="gap:24px;flex-wrap:wrap;">
+          <label class="check"><input id="f-gv" type="checkbox"/> Elegível Golden Visa</label>
+          <label class="check"><input id="f-featured" type="checkbox"/> Destacar (aparece primeiro)</label>
+        </div>
+      </div>
+
+      <!-- LOCALIZACAO -->
+      <div class="section">
+        <h3>Localização</h3>
+        <div class="grid3">
+          <div class="field"><label>Região</label><select id="f-region"><option value="">-</option><option>Lisbon</option><option>Cascais</option><option>Porto</option><option>Algarve</option><option>Silver Coast</option><option>Comporta</option><option>Madeira</option></select></div>
+          <div class="field"><label>Cidade / Zona</label><input id="f-city" placeholder="ex: Chiado"/></div>
+          <div class="field"><label>Morada</label><input id="f-address" placeholder="opcional"/></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>Latitude (mapa)</label><input id="f-lat" type="number" step="any" placeholder="38.7100"/></div>
+          <div class="field"><label>Longitude (mapa)</label><input id="f-lng" type="number" step="any" placeholder="-9.1400"/></div>
+        </div>
+        <p style="font-size:12px;color:#8a8a8a;margin:0;">Dica: no Google Maps, clica com o botão direito no local → copia as coordenadas. Sem coordenadas, o mapa usa a morada/cidade.</p>
+      </div>
+
+      <!-- CARACTERISTICAS -->
+      <div class="section">
+        <h3>Características</h3>
+        <div class="grid3">
+          <div class="field"><label>Quartos</label><input id="f-beds" type="number"/></div>
+          <div class="field"><label>Casas de banho</label><input id="f-baths" type="number"/></div>
+          <div class="field"><label>Área (m²)</label><input id="f-area" type="number"/></div>
+        </div>
+        <div class="grid3">
+          <div class="field"><label>Terreno (m²)</label><input id="f-plot" type="number"/></div>
+          <div class="field"><label>Ano de construção</label><input id="f-year" type="number"/></div>
+          <div class="field"><label>Certificado energético</label><input id="f-energy" placeholder="ex: A+"/></div>
+        </div>
+      </div>
+
+      <!-- CONTEUDO BILINGUE -->
+      <div class="section">
+        <h3>Descrição &amp; Destaques</h3>
+        <div class="tabs" id="lang-tabs"><button data-l="en" class="active">English</button><button data-l="pt">Português</button></div>
+        <div data-lang="en">
+          <div class="field"><label>Resumo curto (EN)</label><input id="f-summary-en" placeholder="One line shown in search results"/></div>
+          <div class="field"><label>Descrição (EN)</label><textarea id="f-desc-en" rows="6" placeholder="Full description. Basic HTML allowed."></textarea></div>
+          <div class="field"><label>Destaques (EN) - um por linha</label><textarea id="f-hl-en" rows="4" placeholder="Sea view&#10;Private pool&#10;Renovated 2024"></textarea></div>
+        </div>
+        <div data-lang="pt" class="hidden">
+          <div class="field"><label>Resumo curto (PT)</label><input id="f-summary-pt" placeholder="Uma linha mostrada nos resultados"/></div>
+          <div class="field"><label>Descrição (PT)</label><textarea id="f-desc-pt" rows="6" placeholder="Descrição completa. HTML básico permitido."></textarea></div>
+          <div class="field"><label>Destaques (PT) - um por linha</label><textarea id="f-hl-pt" rows="4" placeholder="Vista mar&#10;Piscina privada&#10;Renovado 2024"></textarea></div>
+        </div>
+      </div>
+
+      <!-- FOTOS -->
+      <div class="section">
+        <h3>Fotos</h3>
+        <div class="drop" id="drop">Arrasta fotos para aqui, ou clica para escolher<input id="file-input" type="file" accept="image/*" multiple class="hidden"/></div>
+        <div class="thumbs" id="thumbs"></div>
+        <p style="font-size:12px;color:#8a8a8a;margin:10px 0 0;">A primeira foto (marcada como CAPA) é a imagem principal. Usa "Tornar capa" para mudar.</p>
+      </div>
+
+      <!-- BROCHURA -->
+      <div class="section">
+        <h3>Brochura (PDF)</h3>
+        <div class="row"><input id="brochure-input" type="file" accept="application/pdf" style="max-width:340px;"/><span id="brochure-name" style="font-size:13px;color:#6b7280;"></span></div>
+      </div>
+
+      <!-- ACOES -->
+      <div class="section" style="border-bottom:none;display:flex;justify-content:space-between;align-items:center;">
+        <button class="btn danger" id="delete-btn">Apagar</button>
+        <div class="row"><button class="btn ghost" id="cancel-btn">Cancelar</button><button class="btn" id="save-btn">Guardar imóvel</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var SUPABASE_URL='https://bcjtkfipcfvvitglgpys.supabase.co';
+  var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
+  var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+  var $=function(id){return document.getElementById(id);};
+  var current=null;     // property being edited (null = new)
+  var images=[];        // [{url}]
+  var brochureUrl='';
+
+  function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
+  function show(el,on){el.classList[on?'remove':'add']('hidden');}
+  function slugify(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+
+  // ---- AUTH ----
+  async function checkSession(){
+    var {data}=await sb.auth.getSession();
+    if(data.session){onLoggedIn(data.session);}else{show($('login'),true);show($('app'),false);}
+  }
+  function onLoggedIn(session){
+    show($('login'),false);show($('app'),true);
+    $('who').textContent=session.user.email;
+    loadList();
+  }
+  $('lg-btn').addEventListener('click',async function(){
+    $('lg-err').textContent='';
+    var email=$('lg-email').value.trim(),password=$('lg-pass').value;
+    var {data,error}=await sb.auth.signInWithPassword({email:email,password:password});
+    if(error){$('lg-err').textContent='Credenciais inválidas.';return;}
+    onLoggedIn(data.session);
+  });
+  $('lg-pass').addEventListener('keydown',function(e){if(e.key==='Enter')$('lg-btn').click();});
+  $('logout').addEventListener('click',async function(){await sb.auth.signOut();location.reload();});
+
+  // ---- LIST ----
+  async function loadList(){
+    var {data,error}=await sb.from('properties').select('*').order('featured',{ascending:false}).order('created_at',{ascending:false});
+    var list=$('list');list.innerHTML='';
+    if(error){list.innerHTML='<div style="padding:18px;color:#b91c1c;">Erro a carregar: '+error.message+'</div>';return;}
+    $('count').textContent=(data||[]).length;
+    if(!data||!data.length){list.innerHTML='<div style="padding:24px;color:#6b7280;">Ainda não há imóveis. Clica em "Adicionar imóvel".</div>';return;}
+    data.forEach(function(p){
+      var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'';
+      var title=(p.title&&(p.title.en||p.title.pt))||'(sem título)';
+      var row=document.createElement('div');row.className='listrow';
+      row.innerHTML=
+        '<img src="'+(img||'')+'" onerror="this.style.visibility=\'hidden\'"/>'+
+        '<div style="flex:1;min-width:0;"><div style="font-weight:600;">'+title+'</div>'+
+          '<div style="font-size:13px;color:#6b7280;">'+[p.region,p.city,(p.price?('€'+Number(p.price).toLocaleString('pt-PT')):'')].filter(Boolean).join(' · ')+'</div></div>'+
+        '<span class="badge '+(p.status==='published'?'pub':'draft')+'">'+(p.status==='published'?'Publicado':'Rascunho')+'</span>'+
+        '<button class="btn ghost sm">Editar</button>';
+      row.querySelector('button').addEventListener('click',function(){openEdit(p);});
+      list.appendChild(row);
+    });
+  }
+
+  // ---- EDIT ----
+  function openEdit(p){
+    current=p||null;
+    images=p&&Array.isArray(p.images)?p.images.map(function(u){return u;}):[];
+    brochureUrl=p?(p.brochure_url||''):'';
+    $('edit-title').textContent=p?'Editar imóvel':'Novo imóvel';
+    show($('delete-btn'),!!p);
+    var g=function(o,k){return o&&o[k]!=null?o[k]:'';};
+    var T=p&&p.title||{},S=p&&p.summary||{},D=p&&p.description||{},H=p&&p.highlights||{};
+    $('f-title-en').value=g(T,'en');$('f-title-pt').value=g(T,'pt');
+    $('f-slug').value=p?p.slug:'';$('f-reference').value=p?(p.reference||''):'';
+    $('f-status').value=p?p.status:'draft';$('f-transaction').value=p?p.transaction_type:'sale';$('f-type').value=p?p.property_type:'apartment';
+    $('f-price').value=p?(p.price||''):'';$('f-gv').checked=!!(p&&p.golden_visa);$('f-featured').checked=!!(p&&p.featured);
+    $('f-region').value=p?(p.region||''):'';$('f-city').value=p?(p.city||''):'';$('f-address').value=p?(p.address||''):'';
+    $('f-lat').value=p?(p.latitude||''):'';$('f-lng').value=p?(p.longitude||''):'';
+    $('f-beds').value=p?(p.bedrooms||''):'';$('f-baths').value=p?(p.bathrooms||''):'';$('f-area').value=p?(p.area_sqm||''):'';
+    $('f-plot').value=p?(p.plot_sqm||''):'';$('f-year').value=p?(p.year_built||''):'';$('f-energy').value=p?(p.energy_rating||''):'';
+    $('f-summary-en').value=g(S,'en');$('f-summary-pt').value=g(S,'pt');
+    $('f-desc-en').value=g(D,'en');$('f-desc-pt').value=g(D,'pt');
+    $('f-hl-en').value=(Array.isArray(H.en)?H.en:[]).join('\n');$('f-hl-pt').value=(Array.isArray(H.pt)?H.pt:[]).join('\n');
+    $('brochure-name').textContent=brochureUrl?brochureUrl.split('/').pop():'';
+    renderThumbs();
+    show($('view-list'),false);show($('view-edit'),true);window.scrollTo(0,0);
+  }
+  $('new-btn').addEventListener('click',function(){openEdit(null);});
+  $('back-btn').addEventListener('click',backToList);
+  $('cancel-btn').addEventListener('click',backToList);
+  function backToList(){show($('view-edit'),false);show($('view-list'),true);loadList();}
+
+  // lang tabs
+  document.querySelectorAll('#lang-tabs button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('#lang-tabs button').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active');
+      var l=b.getAttribute('data-l');
+      document.querySelectorAll('[data-lang]').forEach(function(d){d.classList.toggle('hidden',d.getAttribute('data-lang')!==l);});
+    });
+  });
+
+  // ---- IMAGES ----
+  function renderThumbs(){
+    var c=$('thumbs');c.innerHTML='';
+    images.forEach(function(url,i){
+      var d=document.createElement('div');d.className='thumb';
+      d.innerHTML='<img src="'+url+'"/>'+
+        '<div class="ctrls">'+(i===0?'<button disabled style="opacity:.6;">CAPA</button>':'<button data-act="cover">Tornar capa</button>')+'<button data-act="del">✕</button></div>';
+      d.querySelector('[data-act="del"]').addEventListener('click',function(){images.splice(i,1);renderThumbs();});
+      var cv=d.querySelector('[data-act="cover"]');if(cv)cv.addEventListener('click',function(){var u=images.splice(i,1)[0];images.unshift(u);renderThumbs();});
+      c.appendChild(d);
+    });
+  }
+  async function uploadFile(file,prefix){
+    var ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+    var rand=Math.random().toString(36).slice(2,9);
+    var pathName=(prefix||'img')+'/'+Date.now()+'-'+rand+'.'+ext;
+    var {error}=await sb.storage.from('properties').upload(pathName,file,{cacheControl:'3600',upsert:false});
+    if(error){toast('Erro no upload: '+error.message);return null;}
+    var {data}=sb.storage.from('properties').getPublicUrl(pathName);
+    return data.publicUrl;
+  }
+  async function handleFiles(files){
+    var arr=Array.prototype.slice.call(files).filter(function(f){return f.type.indexOf('image/')===0;});
+    if(!arr.length)return;
+    toast('A carregar '+arr.length+' foto(s)...');
+    for(var i=0;i<arr.length;i++){var url=await uploadFile(arr[i],'photos');if(url){images.push(url);renderThumbs();}}
+    toast('Fotos carregadas.');
+  }
+  var drop=$('drop'),fi=$('file-input');
+  drop.addEventListener('click',function(){fi.click();});
+  fi.addEventListener('change',function(){handleFiles(fi.files);fi.value='';});
+  ['dragover','dragenter'].forEach(function(e){drop.addEventListener(e,function(ev){ev.preventDefault();drop.classList.add('over');});});
+  ['dragleave','drop'].forEach(function(e){drop.addEventListener(e,function(ev){ev.preventDefault();drop.classList.remove('over');});});
+  drop.addEventListener('drop',function(ev){handleFiles(ev.dataTransfer.files);});
+
+  // brochure
+  $('brochure-input').addEventListener('change',async function(){
+    var f=$('brochure-input').files[0];if(!f)return;toast('A carregar brochura...');
+    var url=await uploadFile(f,'brochures');if(url){brochureUrl=url;$('brochure-name').textContent=f.name;toast('Brochura carregada.');}
+  });
+
+  // ---- SAVE ----
+  function lines(v){return (v||'').split('\n').map(function(s){return s.trim();}).filter(Boolean);}
+  function num(v){return v===''||v==null?null:Number(v);}
+  $('save-btn').addEventListener('click',async function(){
+    var titleEn=$('f-title-en').value.trim();
+    if(!titleEn){toast('O título em inglês é obrigatório.');return;}
+    var slug=$('f-slug').value.trim()||slugify(titleEn);
+    var payload={
+      slug:slug,reference:$('f-reference').value.trim()||null,status:$('f-status').value,
+      transaction_type:$('f-transaction').value,property_type:$('f-type').value,
+      region:$('f-region').value||null,city:$('f-city').value.trim()||null,address:$('f-address').value.trim()||null,
+      price:num($('f-price').value),currency:'EUR',
+      bedrooms:num($('f-beds').value),bathrooms:num($('f-baths').value),area_sqm:num($('f-area').value),
+      plot_sqm:num($('f-plot').value),year_built:num($('f-year').value),energy_rating:$('f-energy').value.trim()||null,
+      latitude:num($('f-lat').value),longitude:num($('f-lng').value),
+      golden_visa:$('f-gv').checked,featured:$('f-featured').checked,
+      title:{en:titleEn,pt:$('f-title-pt').value.trim()},
+      summary:{en:$('f-summary-en').value.trim(),pt:$('f-summary-pt').value.trim()},
+      description:{en:$('f-desc-en').value,pt:$('f-desc-pt').value},
+      highlights:{en:lines($('f-hl-en').value),pt:lines($('f-hl-pt').value)},
+      images:images,cover_image:images[0]||null,brochure_url:brochureUrl||null
+    };
+    var res;
+    if(current){res=await sb.from('properties').update(payload).eq('id',current.id);}
+    else{res=await sb.from('properties').insert(payload);}
+    if(res.error){toast('Erro ao guardar: '+res.error.message);return;}
+    toast('Imóvel guardado.');backToList();
+  });
+
+  $('delete-btn').addEventListener('click',async function(){
+    if(!current)return;
+    if(!confirm('Apagar este imóvel definitivamente?'))return;
+    var {error}=await sb.from('properties').delete().eq('id',current.id);
+    if(error){toast('Erro ao apagar: '+error.message);return;}
+    toast('Imóvel apagado.');backToList();
+  });
+
+  checkSession();
+})();
+</script>
+</body></html>

@@ -296,9 +296,71 @@
     }
   }
 
+  // ============================================================
+  // "Real Estate" nav item injection. Inserido ENTRE "Invest in
+  // Portugal" e "Our Developments", no nav desktop, menu mobile e
+  // footer de todas as páginas. Idempotente (não duplica).
+  // Corre depois de injectInvestNav para se ancorar ao link Invest.
+  // ============================================================
+  function injectRealEstateNav() {
+    var HREF = 'real-estate.html';
+    var LABEL = 'Real Estate';
+
+    // Desktop nav: inserir a seguir ao "Invest in Portugal"
+    var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
+    if (nav && !nav.querySelector('a[href="' + HREF + '"]')) {
+      var wrap = document.createElement('div');
+      wrap.className = 'relative group';
+      wrap.innerHTML =
+        '<a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="' + HREF + '">' + LABEL + '</a>' +
+        '<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>';
+      var inv = nav.querySelector('a[href="invest-in-portugal.html"]');
+      var invWrap = inv && inv.closest('.relative.group');
+      if (invWrap && invWrap.parentNode === nav) {
+        invWrap.insertAdjacentElement('afterend', wrap);
+      } else {
+        var dev = nav.querySelector('a[href="our-developments.html"]');
+        var devWrap = dev && dev.closest('.relative.group');
+        if (devWrap) devWrap.insertAdjacentElement('beforebegin', wrap);
+        else if (nav.lastElementChild) nav.insertBefore(wrap, nav.lastElementChild);
+        else nav.appendChild(wrap);
+      }
+    }
+
+    // Mobile menu
+    var mobileInner = document.querySelector('#mobile-menu .flex.flex-col');
+    if (mobileInner && !mobileInner.querySelector('a[href="' + HREF + '"]')) {
+      var a = document.createElement('a');
+      a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
+      a.href = HREF; a.textContent = LABEL;
+      var invM = mobileInner.querySelector('a[href="invest-in-portugal.html"]');
+      var devM = mobileInner.querySelector('a[href="our-developments.html"]');
+      if (invM) invM.insertAdjacentElement('afterend', a);
+      else if (devM) devM.insertAdjacentElement('beforebegin', a);
+      else if (mobileInner.lastElementChild) mobileInner.insertBefore(a, mobileInner.lastElementChild);
+      else mobileInner.appendChild(a);
+    }
+
+    // Footer "Menu" list
+    var footerList = document.querySelector('footer ul.list-none');
+    if (footerList && !footerList.querySelector('a[href="' + HREF + '"]')) {
+      var li = document.createElement('li');
+      li.className = 'font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer';
+      li.innerHTML = '<a href="' + HREF + '">' + LABEL + '</a>';
+      var invF = footerList.querySelector('a[href="invest-in-portugal.html"]');
+      var invLi = invF && invF.closest('li');
+      var devF = footerList.querySelector('a[href="our-developments.html"]');
+      var devLi = devF && devF.closest('li');
+      if (invLi) invLi.insertAdjacentElement('afterend', li);
+      else if (devLi) devLi.insertAdjacentElement('beforebegin', li);
+      else footerList.appendChild(li);
+    }
+  }
+
   function init() {
     loadContent();
     injectInvestNav();
+    injectRealEstateNav();
     injectSwitcher();
   }
 
