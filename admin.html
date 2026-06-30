@@ -1273,6 +1273,9 @@
                         { key: 'contact.form.success_title', label: 'Mensagem de sucesso — título', type: 'text', min: 3, max: 40, default: 'Thank you!' },
                         { key: 'contact.form.success_body', label: 'Mensagem de sucesso — corpo', type: 'richtext', min: 10, max: 300, default: 'We have received your inquiry and a member of our team will be in touch with you shortly.' },
                     ]},
+                    { title: 'Consentimento (checkbox JustCall)', fields: [
+                        { key: 'contact.consent', label: 'Texto do consentimento', type: 'richtext', min: 20, max: 600, default: `By checking this box, I consent to receiving calls from JustCall, including calls made using an artificial or prerecorded voice or automated technology for marketing purposes, at the phone number provided above. You may revoke this consent at any time during our conversation by saying DISCONNECT.` },
+                    ]},
                 ]
             },
             'blog': {
@@ -1443,6 +1446,26 @@
                     { title: 'Beato — imagens', fields: [
                         { key: 'dev.beato.img0', label: 'Imagem 1', type: 'image', min: 0, max: 500, default: `hygge-house-beato/atrium.jpg` },
                         { key: 'dev.beato.img1', label: 'Imagem 2', type: 'image', min: 0, max: 500, default: `hygge-house-projects/2.jpg` },
+                    ]},
+                ]
+            },
+            'terms': {
+                label: 'Termos e Condições',
+                preview: 'terms.html',
+                sections: [
+                    { title: 'Conteúdo', fields: [
+                        { key: 'terms.title', label: 'Título', type: 'text', min: 3, max: 60, default: `Terms and Conditions` },
+                        { key: 'terms.body', label: 'Corpo (HTML completo)', type: 'richtext', min: 20, max: 8000, default: `<h3>Acceptance</h3><p>Full Terms and Conditions text — edit here. Use &lt;h3&gt; for section titles and &lt;p&gt; for paragraphs.</p>` },
+                    ]},
+                ]
+            },
+            'privacy': {
+                label: 'Política de Privacidade',
+                preview: 'privacy.html',
+                sections: [
+                    { title: 'Conteúdo', fields: [
+                        { key: 'privacy.title', label: 'Título', type: 'text', min: 3, max: 60, default: `Privacy Policy` },
+                        { key: 'privacy.body', label: 'Corpo (HTML completo)', type: 'richtext', min: 20, max: 8000, default: `<p>Full Privacy Policy text — edit here. Use &lt;h3&gt; for section titles and &lt;p&gt; for paragraphs.</p>` },
                     ]},
                 ]
             },
