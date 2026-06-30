@@ -65,12 +65,13 @@
   </div>
 </header>
 
-<!-- HERO -->
-<section style="background:#0C1E28;padding:clamp(140px,18vh,200px) 24px clamp(48px,7vw,80px);">
-  <div style="max-width:1280px;margin:0 auto;">
-    <p data-cms="re.hero.eyebrow" class="satoshi" style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:0 0 22px;">Smith &amp; Adams · Real Estate</p>
-    <h1 data-i18n="hero_title" class="geist" style="font-size:clamp(40px,6vw,78px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1.03;margin:0;">Property in Portugal</h1>
-    <p data-i18n="hero_subtitle" class="satoshi" style="font-size:clamp(16px,1.6vw,20px);color:rgba(255,255,255,.6);line-height:1.7;max-width:640px;margin:24px 0 0;">A curated selection of apartments, villas and investment opportunities across Portugal's most sought-after locations.</p>
+<!-- HERO (editable via backoffice) -->
+<section id="re-hero" style="background:#0C1E28;padding:clamp(140px,18vh,200px) 24px clamp(48px,7vw,80px);position:relative;background-size:cover;background-position:center;">
+  <div id="re-hero-overlay" style="position:absolute;inset:0;background:rgba(12,30,40,0);"></div>
+  <div style="max-width:1280px;margin:0 auto;position:relative;">
+    <p class="satoshi" style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:0 0 22px;">Smith &amp; Adams · Real Estate</p>
+    <h1 id="re-hero-title" data-i18n="hero_title" class="geist" style="font-size:clamp(40px,6vw,78px);font-weight:800;color:#fff;letter-spacing:-.04em;line-height:1.03;margin:0;">Property in Portugal</h1>
+    <p id="re-hero-sub" data-i18n="hero_subtitle" class="satoshi" style="font-size:clamp(16px,1.6vw,20px);color:rgba(255,255,255,.6);line-height:1.7;max-width:640px;margin:24px 0 0;">A curated selection of apartments, villas and investment opportunities across Portugal's most sought-after locations.</p>
   </div>
 </section>
 
@@ -97,6 +98,9 @@
     <div id="re-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;"></div>
   </div>
 </section>
+
+<!-- ORGANIC CONTENT BLOCKS (editable via backoffice) -->
+<section id="re-blocks-wrap" style="background:#FDFCF9;display:none;"><div id="re-blocks" style="max-width:1080px;margin:0 auto;padding:0 24px clamp(48px,8vw,96px);"></div></section>
 
 <div id="re-footer-mount"></div>
 
@@ -212,6 +216,43 @@
     var empty=document.getElementById('re-empty');empty.style.display='block';empty.textContent=t.empty;
     console.warn('[real-estate] load error',e);
   });
+
+  // ---- editable page content (hero + organic blocks) ----
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  fetch(SUPABASE_URL+'/rest/v1/re_page?id=eq.real-estate&select=hero,blocks&limit=1',{
+    headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}
+  }).then(function(r){return r.json();}).then(function(rows){
+    if(!Array.isArray(rows)||!rows.length)return;
+    var pg=rows[0];var hero=pg.hero||{};
+    // hero overrides
+    if(hero.title&&pick(hero.title))document.getElementById('re-hero-title').textContent=pick(hero.title);
+    if(hero.subtitle&&pick(hero.subtitle))document.getElementById('re-hero-sub').textContent=pick(hero.subtitle);
+    var sec=document.getElementById('re-hero');
+    if(hero.bg_color)sec.style.background=hero.bg_color;
+    if(hero.bg_image){sec.style.backgroundImage="linear-gradient(rgba(12,30,40,.55),rgba(12,30,40,.55)),url('"+hero.bg_image+"')";}
+    // blocks
+    var blocks=Array.isArray(pg.blocks)?pg.blocks:[];
+    if(blocks.length){
+      var wrap=document.getElementById('re-blocks-wrap');var c=document.getElementById('re-blocks');
+      wrap.style.display='block';c.style.paddingTop='clamp(40px,7vw,80px)';
+      blocks.forEach(function(b){
+        var heading=pick(b.heading||{}),body=pick(b.body||{}),cap=pick(b.caption||{});
+        var el=document.createElement('div');el.style.marginBottom='40px';
+        if(b.type==='text'){
+          el.innerHTML=(heading?'<h2 class="geist" style="font-size:clamp(24px,3vw,34px);font-weight:800;color:#0C1E28;letter-spacing:-.02em;margin:0 0 16px;">'+esc(heading)+'</h2>':'')+
+            '<div class="satoshi" style="font-size:17px;color:#4b5563;line-height:1.85;">'+(body||'')+'</div>';
+        }else if(b.type==='image'){
+          el.innerHTML='<figure style="margin:0;"><img src="'+esc(b.image||'')+'" alt="'+esc(cap)+'" style="width:100%;border-radius:16px;display:block;"/>'+(cap?'<figcaption class="satoshi" style="font-size:13px;color:#9ca3af;margin-top:8px;text-align:center;">'+esc(cap)+'</figcaption>':'')+'</figure>';
+        }else if(b.type==='text_image'){
+          var imgHtml='<div style="flex:1;min-width:280px;"><img src="'+esc(b.image||'')+'" alt="'+esc(heading)+'" style="width:100%;border-radius:16px;display:block;"/></div>';
+          var txtHtml='<div style="flex:1;min-width:280px;">'+(heading?'<h2 class="geist" style="font-size:clamp(22px,2.6vw,30px);font-weight:800;color:#0C1E28;margin:0 0 14px;">'+esc(heading)+'</h2>':'')+'<div class="satoshi" style="font-size:16px;color:#4b5563;line-height:1.8;">'+(body||'')+'</div></div>';
+          el.style.display='flex';el.style.gap='32px';el.style.alignItems='center';el.style.flexWrap='wrap';
+          el.innerHTML=(b.image_side==='right')?(txtHtml+imgHtml):(imgHtml+txtHtml);
+        }
+        c.appendChild(el);
+      });
+    }
+  }).catch(function(e){console.warn('[real-estate] page content',e);});
 
   // header bg on scroll
   var hdr=document.getElementById('re-header');

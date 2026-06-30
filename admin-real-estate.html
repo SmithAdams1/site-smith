@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="pt"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Backoffice - Real Estate | Smith &amp; Adams</title>
 <meta name="robots" content="noindex,nofollow"/>
 <link rel="icon" href="favicon.ico" type="image/x-icon"/>
@@ -6,7 +6,6 @@
 <style>
   *{box-sizing:border-box;}
   body{margin:0;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;background:#f4f5f3;color:#0C1E28;}
-  a{color:inherit;}
   .wrap{max-width:1100px;margin:0 auto;padding:24px;}
   .btn{background:#0C1E28;color:#fff;border:none;border-radius:9px;padding:11px 18px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
   .btn:hover{opacity:.92;}
@@ -17,6 +16,7 @@
   label{display:block;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8a8a8a;margin:0 0 6px;}
   input,select,textarea{width:100%;border:1px solid #ddd9cf;border-radius:9px;padding:10px 12px;font-size:14px;font-family:inherit;color:#0C1E28;background:#fff;outline:none;}
   input:focus,select:focus,textarea:focus{border-color:#0C1E28;}
+  input[type=color]{padding:4px;height:42px;}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
   .field{margin-bottom:14px;}
@@ -24,9 +24,12 @@
   .section h3{margin:0 0 16px;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#0C1E28;}
   .hidden{display:none!important;}
   .row{display:flex;align-items:center;gap:12px;}
-  .tabs{display:inline-flex;background:#eceae2;border-radius:9px;padding:3px;margin-bottom:12px;}
-  .tabs button{background:transparent;border:none;padding:7px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;color:#6b7280;font-family:inherit;}
+  .tabs{display:inline-flex;background:#eceae2;border-radius:9px;padding:3px;}
+  .tabs button{background:transparent;border:none;padding:8px 18px;border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;color:#6b7280;font-family:inherit;}
   .tabs button.active{background:#fff;color:#0C1E28;box-shadow:0 1px 3px rgba(0,0,0,.08);}
+  .ltabs{display:inline-flex;background:#eceae2;border-radius:8px;padding:3px;margin-bottom:12px;}
+  .ltabs button{background:transparent;border:none;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;color:#6b7280;font-family:inherit;}
+  .ltabs button.active{background:#fff;color:#0C1E28;}
   .drop{border:2px dashed #cfccc1;border-radius:12px;padding:26px;text-align:center;color:#8a8a8a;cursor:pointer;background:#fafaf7;}
   .drop.over{border-color:#0C1E28;background:#f0efe9;}
   .thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:14px;}
@@ -42,6 +45,15 @@
   .toast.show{opacity:1;}
   .check{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:#0C1E28;text-transform:none;letter-spacing:0;}
   .check input{width:auto;}
+  /* blocks builder */
+  .block{border:1px solid #e3e0d6;border-radius:12px;background:#fff;margin-bottom:14px;}
+  .block.dragging{opacity:.45;}
+  .block.dragover{border-color:#0C1E28;border-style:dashed;}
+  .block-head{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid #f0eee7;background:#fbfbf8;border-radius:12px 12px 0 0;}
+  .block-handle{cursor:grab;color:#b6b3a8;font-size:18px;user-select:none;}
+  .block-type{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0C1E28;}
+  .block-body{padding:14px;}
+  .miniimg{width:100%;max-width:260px;border-radius:10px;border:1px solid #e3e0d6;margin-top:8px;display:block;}
 </style>
 </head>
 <body>
@@ -50,11 +62,11 @@
 <div id="login" class="hidden" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0C1E28;">
   <div class="card" style="padding:34px;width:360px;">
     <div style="font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#0C1E28;">Smith &amp; Adams</div>
-    <h1 style="font-size:20px;margin:6px 0 4px;">Backoffice - Real Estate</h1>
-    <p style="font-size:13px;color:#6b7280;margin:0 0 20px;">Inicie sessão para gerir os imóveis.</p>
+    <h1 style="font-size:20px;margin:6px 0 4px;">Real Estate - Backoffice</h1>
+    <p style="font-size:13px;color:#6b7280;margin:0 0 20px;">Sign in to manage properties and page content.</p>
     <div class="field"><label>Email</label><input id="lg-email" type="email" autocomplete="username"/></div>
     <div class="field"><label>Password</label><input id="lg-pass" type="password" autocomplete="current-password"/></div>
-    <button class="btn" style="width:100%;" id="lg-btn">Entrar</button>
+    <button class="btn" style="width:100%;" id="lg-btn">Sign in</button>
     <p id="lg-err" style="color:#b91c1c;font-size:13px;margin:12px 0 0;text-align:center;"></p>
   </div>
 </div>
@@ -64,15 +76,19 @@
   <div style="background:#0C1E28;color:#fff;">
     <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px;">
       <div><div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;">Smith &amp; Adams</div><div style="font-size:18px;font-weight:700;">Real Estate - Backoffice</div></div>
-      <div class="row"><span id="who" style="font-size:13px;opacity:.7;"></span><button class="btn ghost sm" id="logout">Sair</button></div>
+      <div class="row"><span id="who" style="font-size:13px;opacity:.7;"></span><button class="btn ghost sm" id="logout">Sign out</button></div>
     </div>
+  </div>
+
+  <div class="wrap" style="padding-bottom:0;">
+    <div class="tabs" id="main-tabs"><button data-v="list" class="active">Properties</button><button data-v="page">Page content</button></div>
   </div>
 
   <!-- LIST VIEW -->
   <div id="view-list" class="wrap">
     <div class="row" style="justify-content:space-between;margin-bottom:16px;">
-      <h2 style="margin:0;font-size:20px;">Imóveis (<span id="count">0</span>)</h2>
-      <button class="btn" id="new-btn">+ Adicionar imóvel</button>
+      <h2 style="margin:0;font-size:20px;">Properties (<span id="count">0</span>)</h2>
+      <button class="btn" id="new-btn">+ Add property</button>
     </div>
     <div class="card" id="list"></div>
   </div>
@@ -80,95 +96,131 @@
   <!-- EDIT VIEW -->
   <div id="view-edit" class="wrap hidden">
     <div class="row" style="justify-content:space-between;margin-bottom:16px;">
-      <h2 id="edit-title" style="margin:0;font-size:20px;">Novo imóvel</h2>
-      <button class="btn ghost sm" id="back-btn">← Voltar à lista</button>
+      <h2 id="edit-title" style="margin:0;font-size:20px;">New property</h2>
+      <button class="btn ghost sm" id="back-btn">← Back to list</button>
     </div>
     <div class="card">
-      <!-- BASICO -->
       <div class="section">
-        <h3>Básico</h3>
-        <div class="field"><label>Título (Inglês) *</label><input id="f-title-en" placeholder="e.g. Modern 2-bed apartment in Chiado"/></div>
-        <div class="field"><label>Título (Português)</label><input id="f-title-pt" placeholder="ex: Apartamento T2 moderno no Chiado"/></div>
+        <h3>Basics</h3>
+        <div class="field"><label>Title (English) *</label><input id="f-title-en" placeholder="e.g. Modern 2-bed apartment in Chiado"/></div>
+        <div class="field"><label>Title (Portuguese)</label><input id="f-title-pt" placeholder="e.g. Apartamento T2 moderno no Chiado"/></div>
         <div class="grid3">
-          <div class="field"><label>Slug (URL)</label><input id="f-slug" placeholder="auto a partir do título"/></div>
-          <div class="field"><label>Referência</label><input id="f-reference" placeholder="ex: SA-LIS-014"/></div>
-          <div class="field"><label>Estado</label><select id="f-status"><option value="draft">Rascunho</option><option value="published">Publicado</option></select></div>
+          <div class="field"><label>Slug (URL)</label><input id="f-slug" placeholder="auto from title"/></div>
+          <div class="field"><label>Reference</label><input id="f-reference" placeholder="e.g. SA-LIS-014"/></div>
+          <div class="field"><label>Status</label><select id="f-status"><option value="draft">Draft</option><option value="published">Published</option></select></div>
         </div>
         <div class="grid3">
-          <div class="field"><label>Transação</label><select id="f-transaction"><option value="sale">Venda</option><option value="rent">Arrendamento</option></select></div>
-          <div class="field"><label>Tipo</label><select id="f-type"><option value="apartment">Apartamento</option><option value="villa">Moradia</option><option value="townhouse">Casa em banda</option><option value="penthouse">Penthouse</option><option value="studio">Estúdio</option><option value="plot">Terreno</option><option value="commercial">Comercial</option></select></div>
-          <div class="field"><label>Preço (€)</label><input id="f-price" type="number" placeholder="650000"/></div>
+          <div class="field"><label>Transaction</label><select id="f-transaction"><option value="sale">For sale</option><option value="rent">For rent</option></select></div>
+          <div class="field"><label>Type</label><select id="f-type"><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="townhouse">Townhouse</option><option value="penthouse">Penthouse</option><option value="studio">Studio</option><option value="plot">Plot</option><option value="commercial">Commercial</option></select></div>
+          <div class="field"><label>Price (€)</label><input id="f-price" type="number" placeholder="650000"/></div>
         </div>
         <div class="row" style="gap:24px;flex-wrap:wrap;">
-          <label class="check"><input id="f-gv" type="checkbox"/> Elegível Golden Visa</label>
-          <label class="check"><input id="f-featured" type="checkbox"/> Destacar (aparece primeiro)</label>
+          <label class="check"><input id="f-gv" type="checkbox"/> Golden Visa eligible</label>
+          <label class="check"><input id="f-featured" type="checkbox"/> Feature (show first)</label>
         </div>
       </div>
 
-      <!-- LOCALIZACAO -->
       <div class="section">
-        <h3>Localização</h3>
+        <h3>Location</h3>
         <div class="grid3">
-          <div class="field"><label>Região</label><select id="f-region"><option value="">-</option><option>Lisbon</option><option>Cascais</option><option>Porto</option><option>Algarve</option><option>Silver Coast</option><option>Comporta</option><option>Madeira</option></select></div>
-          <div class="field"><label>Cidade / Zona</label><input id="f-city" placeholder="ex: Chiado"/></div>
-          <div class="field"><label>Morada</label><input id="f-address" placeholder="opcional"/></div>
+          <div class="field"><label>Region</label><select id="f-region"><option value="">-</option><option>Lisbon</option><option>Cascais</option><option>Porto</option><option>Algarve</option><option>Silver Coast</option><option>Comporta</option><option>Madeira</option></select></div>
+          <div class="field"><label>City / Area</label><input id="f-city" placeholder="e.g. Chiado"/></div>
+          <div class="field"><label>Address</label><input id="f-address" placeholder="optional"/></div>
         </div>
         <div class="grid2">
-          <div class="field"><label>Latitude (mapa)</label><input id="f-lat" type="number" step="any" placeholder="38.7100"/></div>
-          <div class="field"><label>Longitude (mapa)</label><input id="f-lng" type="number" step="any" placeholder="-9.1400"/></div>
+          <div class="field"><label>Latitude (map)</label><input id="f-lat" type="number" step="any" placeholder="38.7100"/></div>
+          <div class="field"><label>Longitude (map)</label><input id="f-lng" type="number" step="any" placeholder="-9.1400"/></div>
         </div>
-        <p style="font-size:12px;color:#8a8a8a;margin:0;">Dica: no Google Maps, clica com o botão direito no local → copia as coordenadas. Sem coordenadas, o mapa usa a morada/cidade.</p>
+        <p style="font-size:12px;color:#8a8a8a;margin:0;">Tip: in Google Maps, right-click the location and copy the coordinates. Without coordinates the map uses the address/city.</p>
       </div>
 
-      <!-- CARACTERISTICAS -->
       <div class="section">
-        <h3>Características</h3>
+        <h3>Specifications</h3>
         <div class="grid3">
-          <div class="field"><label>Quartos</label><input id="f-beds" type="number"/></div>
-          <div class="field"><label>Casas de banho</label><input id="f-baths" type="number"/></div>
-          <div class="field"><label>Área (m²)</label><input id="f-area" type="number"/></div>
+          <div class="field"><label>Bedrooms</label><input id="f-beds" type="number"/></div>
+          <div class="field"><label>Bathrooms</label><input id="f-baths" type="number"/></div>
+          <div class="field"><label>Area (m²)</label><input id="f-area" type="number"/></div>
         </div>
         <div class="grid3">
-          <div class="field"><label>Terreno (m²)</label><input id="f-plot" type="number"/></div>
-          <div class="field"><label>Ano de construção</label><input id="f-year" type="number"/></div>
-          <div class="field"><label>Certificado energético</label><input id="f-energy" placeholder="ex: A+"/></div>
+          <div class="field"><label>Plot (m²)</label><input id="f-plot" type="number"/></div>
+          <div class="field"><label>Year built</label><input id="f-year" type="number"/></div>
+          <div class="field"><label>Energy rating</label><input id="f-energy" placeholder="e.g. A+"/></div>
         </div>
       </div>
 
-      <!-- CONTEUDO BILINGUE -->
       <div class="section">
-        <h3>Descrição &amp; Destaques</h3>
-        <div class="tabs" id="lang-tabs"><button data-l="en" class="active">English</button><button data-l="pt">Português</button></div>
-        <div data-lang="en">
-          <div class="field"><label>Resumo curto (EN)</label><input id="f-summary-en" placeholder="One line shown in search results"/></div>
-          <div class="field"><label>Descrição (EN)</label><textarea id="f-desc-en" rows="6" placeholder="Full description. Basic HTML allowed."></textarea></div>
-          <div class="field"><label>Destaques (EN) - um por linha</label><textarea id="f-hl-en" rows="4" placeholder="Sea view&#10;Private pool&#10;Renovated 2024"></textarea></div>
+        <h3>Description &amp; Highlights</h3>
+        <div class="ltabs" id="prop-lang"><button data-l="en" class="active">English</button><button data-l="pt">Português</button></div>
+        <div data-plang="en">
+          <div class="field"><label>Short summary (EN)</label><input id="f-summary-en" placeholder="One line shown in search results"/></div>
+          <div class="field"><label>Description (EN)</label><textarea id="f-desc-en" rows="6" placeholder="Full description. Basic HTML allowed."></textarea></div>
+          <div class="field"><label>Highlights (EN) - one per line</label><textarea id="f-hl-en" rows="4" placeholder="Sea view&#10;Private pool&#10;Renovated 2024"></textarea></div>
         </div>
-        <div data-lang="pt" class="hidden">
-          <div class="field"><label>Resumo curto (PT)</label><input id="f-summary-pt" placeholder="Uma linha mostrada nos resultados"/></div>
-          <div class="field"><label>Descrição (PT)</label><textarea id="f-desc-pt" rows="6" placeholder="Descrição completa. HTML básico permitido."></textarea></div>
-          <div class="field"><label>Destaques (PT) - um por linha</label><textarea id="f-hl-pt" rows="4" placeholder="Vista mar&#10;Piscina privada&#10;Renovado 2024"></textarea></div>
+        <div data-plang="pt" class="hidden">
+          <div class="field"><label>Short summary (PT)</label><input id="f-summary-pt" placeholder="One line shown in results"/></div>
+          <div class="field"><label>Description (PT)</label><textarea id="f-desc-pt" rows="6" placeholder="Full description. Basic HTML allowed."></textarea></div>
+          <div class="field"><label>Highlights (PT) - one per line</label><textarea id="f-hl-pt" rows="4" placeholder="Vista mar&#10;Piscina privada&#10;Renovado 2024"></textarea></div>
         </div>
       </div>
 
-      <!-- FOTOS -->
       <div class="section">
-        <h3>Fotos</h3>
-        <div class="drop" id="drop">Arrasta fotos para aqui, ou clica para escolher<input id="file-input" type="file" accept="image/*" multiple class="hidden"/></div>
+        <h3>Photos</h3>
+        <div class="drop" id="drop">Drag photos here, or click to choose<input id="file-input" type="file" accept="image/*" multiple class="hidden"/></div>
         <div class="thumbs" id="thumbs"></div>
-        <p style="font-size:12px;color:#8a8a8a;margin:10px 0 0;">A primeira foto (marcada como CAPA) é a imagem principal. Usa "Tornar capa" para mudar.</p>
+        <p style="font-size:12px;color:#8a8a8a;margin:10px 0 0;">The first photo (marked COVER) is the main image. Use "Make cover" to change it.</p>
       </div>
 
-      <!-- BROCHURA -->
       <div class="section">
-        <h3>Brochura (PDF)</h3>
+        <h3>Brochure (PDF)</h3>
         <div class="row"><input id="brochure-input" type="file" accept="application/pdf" style="max-width:340px;"/><span id="brochure-name" style="font-size:13px;color:#6b7280;"></span></div>
       </div>
 
-      <!-- ACOES -->
       <div class="section" style="border-bottom:none;display:flex;justify-content:space-between;align-items:center;">
-        <button class="btn danger" id="delete-btn">Apagar</button>
-        <div class="row"><button class="btn ghost" id="cancel-btn">Cancelar</button><button class="btn" id="save-btn">Guardar imóvel</button></div>
+        <button class="btn danger" id="delete-btn">Delete</button>
+        <div class="row"><button class="btn ghost" id="cancel-btn">Cancel</button><button class="btn" id="save-btn">Save property</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT VIEW -->
+  <div id="view-page" class="wrap hidden">
+    <div class="row" style="justify-content:space-between;margin-bottom:16px;">
+      <h2 style="margin:0;font-size:20px;">Real Estate page content</h2>
+      <button class="btn" id="page-save">Save page</button>
+    </div>
+
+    <div class="card" style="margin-bottom:18px;">
+      <div class="section" style="border-bottom:none;">
+        <h3>Header (Hero)</h3>
+        <div class="ltabs" id="hero-lang"><button data-l="en" class="active">English</button><button data-l="pt">Português</button></div>
+        <div data-hlang="en">
+          <div class="field"><label>Title (EN)</label><input id="h-title-en" placeholder="Property in Portugal"/></div>
+          <div class="field"><label>Subtitle (EN)</label><textarea id="h-sub-en" rows="2"></textarea></div>
+        </div>
+        <div data-hlang="pt" class="hidden">
+          <div class="field"><label>Title (PT)</label><input id="h-title-pt" placeholder="Imóveis em Portugal"/></div>
+          <div class="field"><label>Subtitle (PT)</label><textarea id="h-sub-pt" rows="2"></textarea></div>
+        </div>
+        <div class="grid2">
+          <div class="field"><label>Background colour</label><input id="h-bgcolor" type="color" value="#0C1E28"/></div>
+          <div class="field"><label>Background image (optional)</label><div class="row"><button class="btn ghost sm" id="h-bg-btn" type="button">Upload image</button><span id="h-bg-name" style="font-size:13px;color:#6b7280;"></span></div><input id="h-bg-input" type="file" accept="image/*" class="hidden"/><img id="h-bg-preview" class="miniimg hidden"/></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section">
+        <h3>Content blocks (drag to reorder)</h3>
+        <div class="row" style="flex-wrap:wrap;">
+          <button class="btn ghost sm" id="add-text">+ Text block</button>
+          <button class="btn ghost sm" id="add-image">+ Image block</button>
+          <button class="btn ghost sm" id="add-textimage">+ Text &amp; Image</button>
+        </div>
+        <p style="font-size:12px;color:#8a8a8a;margin:10px 0 0;">Blocks appear below the property listings on /real-estate. Grab the ⠿ handle to drag and reorder.</p>
+      </div>
+      <div class="section" style="border-bottom:none;">
+        <div id="blocks"></div>
+        <p id="blocks-empty" style="color:#6b7280;font-size:14px;">No content blocks yet. Add one above.</p>
       </div>
     </div>
   </div>
@@ -182,63 +234,68 @@
   var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
   var sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
   var $=function(id){return document.getElementById(id);};
-  var current=null;     // property being edited (null = new)
-  var images=[];        // [{url}]
-  var brochureUrl='';
+  var current=null,images=[],brochureUrl='';
+  var heroBgImage='',pageBlocks=[];
 
-  function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
+  function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
   function show(el,on){el.classList[on?'remove':'add']('hidden');}
   function slugify(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+  function uid(){return 'b'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
 
   // ---- AUTH ----
-  async function checkSession(){
-    var {data}=await sb.auth.getSession();
-    if(data.session){onLoggedIn(data.session);}else{show($('login'),true);show($('app'),false);}
-  }
-  function onLoggedIn(session){
-    show($('login'),false);show($('app'),true);
-    $('who').textContent=session.user.email;
-    loadList();
-  }
+  async function checkSession(){var {data}=await sb.auth.getSession();if(data.session)onLoggedIn(data.session);else{show($('login'),true);show($('app'),false);}}
+  function onLoggedIn(s){show($('login'),false);show($('app'),true);$('who').textContent=s.user.email;loadList();loadPage();}
   $('lg-btn').addEventListener('click',async function(){
     $('lg-err').textContent='';
-    var email=$('lg-email').value.trim(),password=$('lg-pass').value;
-    var {data,error}=await sb.auth.signInWithPassword({email:email,password:password});
-    if(error){$('lg-err').textContent='Credenciais inválidas.';return;}
+    var {data,error}=await sb.auth.signInWithPassword({email:$('lg-email').value.trim(),password:$('lg-pass').value});
+    if(error){$('lg-err').textContent='Invalid credentials.';return;}
     onLoggedIn(data.session);
   });
   $('lg-pass').addEventListener('keydown',function(e){if(e.key==='Enter')$('lg-btn').click();});
   $('logout').addEventListener('click',async function(){await sb.auth.signOut();location.reload();});
 
-  // ---- LIST ----
+  // ---- MAIN TABS ----
+  function showView(v){
+    show($('view-list'),v==='list');show($('view-edit'),false);show($('view-page'),v==='page');
+    document.querySelectorAll('#main-tabs button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-v')===v);});
+  }
+  document.querySelectorAll('#main-tabs button').forEach(function(b){b.addEventListener('click',function(){showView(b.getAttribute('data-v'));});});
+
+  // ---- SHARED UPLOAD ----
+  async function uploadFile(file,prefix){
+    var ext=(file.name.split('.').pop()||'jpg').toLowerCase();
+    var pathName=(prefix||'img')+'/'+Date.now()+'-'+Math.random().toString(36).slice(2,9)+'.'+ext;
+    var {error}=await sb.storage.from('properties').upload(pathName,file,{cacheControl:'3600',upsert:false});
+    if(error){toast('Upload error: '+error.message);return null;}
+    var {data}=sb.storage.from('properties').getPublicUrl(pathName);return data.publicUrl;
+  }
+
+  // ========================================================
+  // PROPERTIES
+  // ========================================================
   async function loadList(){
     var {data,error}=await sb.from('properties').select('*').order('featured',{ascending:false}).order('created_at',{ascending:false});
     var list=$('list');list.innerHTML='';
-    if(error){list.innerHTML='<div style="padding:18px;color:#b91c1c;">Erro a carregar: '+error.message+'</div>';return;}
+    if(error){list.innerHTML='<div style="padding:18px;color:#b91c1c;">Load error: '+error.message+'</div>';return;}
     $('count').textContent=(data||[]).length;
-    if(!data||!data.length){list.innerHTML='<div style="padding:24px;color:#6b7280;">Ainda não há imóveis. Clica em "Adicionar imóvel".</div>';return;}
+    if(!data||!data.length){list.innerHTML='<div style="padding:24px;color:#6b7280;">No properties yet. Click "Add property".</div>';return;}
     data.forEach(function(p){
       var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'';
-      var title=(p.title&&(p.title.en||p.title.pt))||'(sem título)';
+      var title=(p.title&&(p.title.en||p.title.pt))||'(untitled)';
       var row=document.createElement('div');row.className='listrow';
-      row.innerHTML=
-        '<img src="'+(img||'')+'" onerror="this.style.visibility=\'hidden\'"/>'+
+      row.innerHTML='<img src="'+(img||'')+'" onerror="this.style.visibility=\'hidden\'"/>'+
         '<div style="flex:1;min-width:0;"><div style="font-weight:600;">'+title+'</div>'+
-          '<div style="font-size:13px;color:#6b7280;">'+[p.region,p.city,(p.price?('€'+Number(p.price).toLocaleString('pt-PT')):'')].filter(Boolean).join(' · ')+'</div></div>'+
-        '<span class="badge '+(p.status==='published'?'pub':'draft')+'">'+(p.status==='published'?'Publicado':'Rascunho')+'</span>'+
-        '<button class="btn ghost sm">Editar</button>';
+        '<div style="font-size:13px;color:#6b7280;">'+[p.region,p.city,(p.price?('€'+Number(p.price).toLocaleString('en-GB')):'')].filter(Boolean).join(' · ')+'</div></div>'+
+        '<span class="badge '+(p.status==='published'?'pub':'draft')+'">'+(p.status==='published'?'Published':'Draft')+'</span>'+
+        '<button class="btn ghost sm">Edit</button>';
       row.querySelector('button').addEventListener('click',function(){openEdit(p);});
       list.appendChild(row);
     });
   }
 
-  // ---- EDIT ----
   function openEdit(p){
-    current=p||null;
-    images=p&&Array.isArray(p.images)?p.images.map(function(u){return u;}):[];
-    brochureUrl=p?(p.brochure_url||''):'';
-    $('edit-title').textContent=p?'Editar imóvel':'Novo imóvel';
-    show($('delete-btn'),!!p);
+    current=p||null;images=p&&Array.isArray(p.images)?p.images.slice():[];brochureUrl=p?(p.brochure_url||''):'';
+    $('edit-title').textContent=p?'Edit property':'New property';show($('delete-btn'),!!p);
     var g=function(o,k){return o&&o[k]!=null?o[k]:'';};
     var T=p&&p.title||{},S=p&&p.summary||{},D=p&&p.description||{},H=p&&p.highlights||{};
     $('f-title-en').value=g(T,'en');$('f-title-pt').value=g(T,'pt');
@@ -254,50 +311,32 @@
     $('f-hl-en').value=(Array.isArray(H.en)?H.en:[]).join('\n');$('f-hl-pt').value=(Array.isArray(H.pt)?H.pt:[]).join('\n');
     $('brochure-name').textContent=brochureUrl?brochureUrl.split('/').pop():'';
     renderThumbs();
-    show($('view-list'),false);show($('view-edit'),true);window.scrollTo(0,0);
+    show($('view-list'),false);show($('view-page'),false);show($('view-edit'),true);window.scrollTo(0,0);
   }
   $('new-btn').addEventListener('click',function(){openEdit(null);});
-  $('back-btn').addEventListener('click',backToList);
-  $('cancel-btn').addEventListener('click',backToList);
-  function backToList(){show($('view-edit'),false);show($('view-list'),true);loadList();}
+  $('back-btn').addEventListener('click',backToList);$('cancel-btn').addEventListener('click',backToList);
+  function backToList(){showView('list');loadList();}
 
-  // lang tabs
-  document.querySelectorAll('#lang-tabs button').forEach(function(b){
-    b.addEventListener('click',function(){
-      document.querySelectorAll('#lang-tabs button').forEach(function(x){x.classList.remove('active');});
-      b.classList.add('active');
-      var l=b.getAttribute('data-l');
-      document.querySelectorAll('[data-lang]').forEach(function(d){d.classList.toggle('hidden',d.getAttribute('data-lang')!==l);});
-    });
-  });
+  document.querySelectorAll('#prop-lang button').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('#prop-lang button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
+    var l=b.getAttribute('data-l');document.querySelectorAll('[data-plang]').forEach(function(d){d.classList.toggle('hidden',d.getAttribute('data-plang')!==l);});
+  });});
 
-  // ---- IMAGES ----
   function renderThumbs(){
     var c=$('thumbs');c.innerHTML='';
     images.forEach(function(url,i){
       var d=document.createElement('div');d.className='thumb';
-      d.innerHTML='<img src="'+url+'"/>'+
-        '<div class="ctrls">'+(i===0?'<button disabled style="opacity:.6;">CAPA</button>':'<button data-act="cover">Tornar capa</button>')+'<button data-act="del">✕</button></div>';
+      d.innerHTML='<img src="'+url+'"/><div class="ctrls">'+(i===0?'<button disabled style="opacity:.6;">COVER</button>':'<button data-act="cover">Make cover</button>')+'<button data-act="del">✕</button></div>';
       d.querySelector('[data-act="del"]').addEventListener('click',function(){images.splice(i,1);renderThumbs();});
       var cv=d.querySelector('[data-act="cover"]');if(cv)cv.addEventListener('click',function(){var u=images.splice(i,1)[0];images.unshift(u);renderThumbs();});
       c.appendChild(d);
     });
   }
-  async function uploadFile(file,prefix){
-    var ext=(file.name.split('.').pop()||'jpg').toLowerCase();
-    var rand=Math.random().toString(36).slice(2,9);
-    var pathName=(prefix||'img')+'/'+Date.now()+'-'+rand+'.'+ext;
-    var {error}=await sb.storage.from('properties').upload(pathName,file,{cacheControl:'3600',upsert:false});
-    if(error){toast('Erro no upload: '+error.message);return null;}
-    var {data}=sb.storage.from('properties').getPublicUrl(pathName);
-    return data.publicUrl;
-  }
   async function handleFiles(files){
-    var arr=Array.prototype.slice.call(files).filter(function(f){return f.type.indexOf('image/')===0;});
-    if(!arr.length)return;
-    toast('A carregar '+arr.length+' foto(s)...');
-    for(var i=0;i<arr.length;i++){var url=await uploadFile(arr[i],'photos');if(url){images.push(url);renderThumbs();}}
-    toast('Fotos carregadas.');
+    var arr=Array.prototype.slice.call(files).filter(function(f){return f.type.indexOf('image/')===0;});if(!arr.length)return;
+    toast('Uploading '+arr.length+' photo(s)...');
+    for(var i=0;i<arr.length;i++){var u=await uploadFile(arr[i],'photos');if(u){images.push(u);renderThumbs();}}
+    toast('Photos uploaded.');
   }
   var drop=$('drop'),fi=$('file-input');
   drop.addEventListener('click',function(){fi.click();});
@@ -305,22 +344,14 @@
   ['dragover','dragenter'].forEach(function(e){drop.addEventListener(e,function(ev){ev.preventDefault();drop.classList.add('over');});});
   ['dragleave','drop'].forEach(function(e){drop.addEventListener(e,function(ev){ev.preventDefault();drop.classList.remove('over');});});
   drop.addEventListener('drop',function(ev){handleFiles(ev.dataTransfer.files);});
+  $('brochure-input').addEventListener('change',async function(){var f=$('brochure-input').files[0];if(!f)return;toast('Uploading brochure...');var u=await uploadFile(f,'brochures');if(u){brochureUrl=u;$('brochure-name').textContent=f.name;toast('Brochure uploaded.');}});
 
-  // brochure
-  $('brochure-input').addEventListener('change',async function(){
-    var f=$('brochure-input').files[0];if(!f)return;toast('A carregar brochura...');
-    var url=await uploadFile(f,'brochures');if(url){brochureUrl=url;$('brochure-name').textContent=f.name;toast('Brochura carregada.');}
-  });
-
-  // ---- SAVE ----
   function lines(v){return (v||'').split('\n').map(function(s){return s.trim();}).filter(Boolean);}
   function num(v){return v===''||v==null?null:Number(v);}
   $('save-btn').addEventListener('click',async function(){
-    var titleEn=$('f-title-en').value.trim();
-    if(!titleEn){toast('O título em inglês é obrigatório.');return;}
+    var titleEn=$('f-title-en').value.trim();if(!titleEn){toast('English title is required.');return;}
     var slug=$('f-slug').value.trim()||slugify(titleEn);
-    var payload={
-      slug:slug,reference:$('f-reference').value.trim()||null,status:$('f-status').value,
+    var payload={slug:slug,reference:$('f-reference').value.trim()||null,status:$('f-status').value,
       transaction_type:$('f-transaction').value,property_type:$('f-type').value,
       region:$('f-region').value||null,city:$('f-city').value.trim()||null,address:$('f-address').value.trim()||null,
       price:num($('f-price').value),currency:'EUR',
@@ -328,25 +359,127 @@
       plot_sqm:num($('f-plot').value),year_built:num($('f-year').value),energy_rating:$('f-energy').value.trim()||null,
       latitude:num($('f-lat').value),longitude:num($('f-lng').value),
       golden_visa:$('f-gv').checked,featured:$('f-featured').checked,
-      title:{en:titleEn,pt:$('f-title-pt').value.trim()},
-      summary:{en:$('f-summary-en').value.trim(),pt:$('f-summary-pt').value.trim()},
-      description:{en:$('f-desc-en').value,pt:$('f-desc-pt').value},
-      highlights:{en:lines($('f-hl-en').value),pt:lines($('f-hl-pt').value)},
-      images:images,cover_image:images[0]||null,brochure_url:brochureUrl||null
-    };
-    var res;
-    if(current){res=await sb.from('properties').update(payload).eq('id',current.id);}
-    else{res=await sb.from('properties').insert(payload);}
-    if(res.error){toast('Erro ao guardar: '+res.error.message);return;}
-    toast('Imóvel guardado.');backToList();
+      title:{en:titleEn,pt:$('f-title-pt').value.trim()},summary:{en:$('f-summary-en').value.trim(),pt:$('f-summary-pt').value.trim()},
+      description:{en:$('f-desc-en').value,pt:$('f-desc-pt').value},highlights:{en:lines($('f-hl-en').value),pt:lines($('f-hl-pt').value)},
+      images:images,cover_image:images[0]||null,brochure_url:brochureUrl||null};
+    var res=current?await sb.from('properties').update(payload).eq('id',current.id):await sb.from('properties').insert(payload);
+    if(res.error){toast('Save error: '+res.error.message);return;}
+    toast('Property saved.');backToList();
+  });
+  $('delete-btn').addEventListener('click',async function(){
+    if(!current)return;if(!confirm('Delete this property permanently?'))return;
+    var {error}=await sb.from('properties').delete().eq('id',current.id);
+    if(error){toast('Delete error: '+error.message);return;}
+    toast('Property deleted.');backToList();
   });
 
-  $('delete-btn').addEventListener('click',async function(){
-    if(!current)return;
-    if(!confirm('Apagar este imóvel definitivamente?'))return;
-    var {error}=await sb.from('properties').delete().eq('id',current.id);
-    if(error){toast('Erro ao apagar: '+error.message);return;}
-    toast('Imóvel apagado.');backToList();
+  // ========================================================
+  // PAGE CONTENT (hero + blocks)
+  // ========================================================
+  document.querySelectorAll('#hero-lang button').forEach(function(b){b.addEventListener('click',function(){
+    document.querySelectorAll('#hero-lang button').forEach(function(x){x.classList.remove('active');});b.classList.add('active');
+    var l=b.getAttribute('data-l');document.querySelectorAll('[data-hlang]').forEach(function(d){d.classList.toggle('hidden',d.getAttribute('data-hlang')!==l);});
+  });});
+
+  async function loadPage(){
+    var {data}=await sb.from('re_page').select('hero,blocks').eq('id','real-estate').limit(1);
+    var pg=(data&&data[0])||{};var hero=pg.hero||{};
+    $('h-title-en').value=(hero.title&&hero.title.en)||'';$('h-title-pt').value=(hero.title&&hero.title.pt)||'';
+    $('h-sub-en').value=(hero.subtitle&&hero.subtitle.en)||'';$('h-sub-pt').value=(hero.subtitle&&hero.subtitle.pt)||'';
+    $('h-bgcolor').value=hero.bg_color||'#0C1E28';
+    heroBgImage=hero.bg_image||'';
+    if(heroBgImage){$('h-bg-preview').src=heroBgImage;show($('h-bg-preview'),true);$('h-bg-name').textContent='current image';}else{show($('h-bg-preview'),false);}
+    pageBlocks=Array.isArray(pg.blocks)?pg.blocks.map(function(b){b.id=b.id||uid();return b;}):[];
+    renderBlocks();
+  }
+  $('h-bg-btn').addEventListener('click',function(){$('h-bg-input').click();});
+  $('h-bg-input').addEventListener('change',async function(){var f=$('h-bg-input').files[0];if(!f)return;toast('Uploading...');var u=await uploadFile(f,'page');if(u){heroBgImage=u;$('h-bg-preview').src=u;show($('h-bg-preview'),true);$('h-bg-name').textContent='uploaded';toast('Image uploaded.');}});
+
+  $('add-text').addEventListener('click',function(){pageBlocks.push({id:uid(),type:'text',heading:{en:'',pt:''},body:{en:'',pt:''}});renderBlocks();});
+  $('add-image').addEventListener('click',function(){pageBlocks.push({id:uid(),type:'image',image:'',caption:{en:'',pt:''}});renderBlocks();});
+  $('add-textimage').addEventListener('click',function(){pageBlocks.push({id:uid(),type:'text_image',heading:{en:'',pt:''},body:{en:'',pt:''},image:'',image_side:'left'});renderBlocks();});
+
+  function blockById(id){for(var i=0;i<pageBlocks.length;i++)if(pageBlocks[i].id===id)return pageBlocks[i];return null;}
+
+  function biField(labelEn,labelPt,val,onEn,onPt,multiline){
+    // returns a DOM node with EN/PT inputs
+    var wrap=document.createElement('div');wrap.className='grid2';
+    function mk(lbl,v,cb){
+      var d=document.createElement('div');d.className='field';
+      var l=document.createElement('label');l.textContent=lbl;d.appendChild(l);
+      var inp=document.createElement(multiline?'textarea':'input');if(multiline)inp.rows=4;
+      inp.value=v||'';inp.addEventListener('input',function(){cb(inp.value);});d.appendChild(inp);return d;
+    }
+    wrap.appendChild(mk(labelEn,(val&&val.en)||'',onEn));
+    wrap.appendChild(mk(labelPt,(val&&val.pt)||'',onPt));
+    return wrap;
+  }
+
+  function renderBlocks(){
+    var c=$('blocks');c.innerHTML='';
+    show($('blocks-empty'),pageBlocks.length===0);
+    pageBlocks.forEach(function(b){
+      var card=document.createElement('div');card.className='block';card.setAttribute('draggable','true');card.dataset.id=b.id;
+      var typeLabel=b.type==='text'?'Text':b.type==='image'?'Image':'Text & Image';
+      var head=document.createElement('div');head.className='block-head';
+      head.innerHTML='<span class="block-handle">⠿</span><span class="block-type">'+typeLabel+'</span>';
+      var del=document.createElement('button');del.className='btn danger sm';del.textContent='Remove';del.style.marginLeft='auto';
+      del.addEventListener('click',function(){pageBlocks=pageBlocks.filter(function(x){return x.id!==b.id;});renderBlocks();});
+      head.appendChild(del);card.appendChild(head);
+
+      var body=document.createElement('div');body.className='block-body';
+      if(b.type==='text'||b.type==='text_image'){
+        body.appendChild(biField('Heading (EN)','Heading (PT)',b.heading,function(v){b.heading.en=v;},function(v){b.heading.pt=v;},false));
+        body.appendChild(biField('Body (EN) - HTML allowed','Body (PT) - HTML allowed',b.body,function(v){b.body.en=v;},function(v){b.body.pt=v;},true));
+      }
+      if(b.type==='image'||b.type==='text_image'){
+        var imgWrap=document.createElement('div');imgWrap.className='field';
+        var l=document.createElement('label');l.textContent='Image';imgWrap.appendChild(l);
+        var rowd=document.createElement('div');rowd.className='row';
+        var ub=document.createElement('button');ub.className='btn ghost sm';ub.type='button';ub.textContent='Upload image';
+        var fin=document.createElement('input');fin.type='file';fin.accept='image/*';fin.style.display='none';
+        var prev=document.createElement('img');prev.className='miniimg';if(b.image)prev.src=b.image;else prev.style.display='none';
+        ub.addEventListener('click',function(){fin.click();});
+        fin.addEventListener('change',async function(){var f=fin.files[0];if(!f)return;toast('Uploading...');var u=await uploadFile(f,'page');if(u){b.image=u;prev.src=u;prev.style.display='block';toast('Image uploaded.');}});
+        rowd.appendChild(ub);imgWrap.appendChild(rowd);imgWrap.appendChild(fin);imgWrap.appendChild(prev);body.appendChild(imgWrap);
+        if(b.type==='image'){
+          body.appendChild(biField('Caption (EN)','Caption (PT)',b.caption,function(v){b.caption.en=v;},function(v){b.caption.pt=v;},false));
+        }
+        if(b.type==='text_image'){
+          var sd=document.createElement('div');sd.className='field';sd.innerHTML='<label>Image position</label>';
+          var sel=document.createElement('select');sel.innerHTML='<option value="left">Image left</option><option value="right">Image right</option>';
+          sel.value=b.image_side||'left';sel.addEventListener('change',function(){b.image_side=sel.value;});sd.appendChild(sel);body.appendChild(sd);
+        }
+      }
+      card.appendChild(body);
+
+      // drag reorder
+      card.addEventListener('dragstart',function(e){card.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',b.id);});
+      card.addEventListener('dragend',function(){card.classList.remove('dragging');document.querySelectorAll('.block').forEach(function(x){x.classList.remove('dragover');});});
+      card.addEventListener('dragover',function(e){e.preventDefault();card.classList.add('dragover');});
+      card.addEventListener('dragleave',function(){card.classList.remove('dragover');});
+      card.addEventListener('drop',function(e){
+        e.preventDefault();card.classList.remove('dragover');
+        var fromId=e.dataTransfer.getData('text/plain');if(fromId===b.id)return;
+        var fromIdx=pageBlocks.findIndex(function(x){return x.id===fromId;});
+        var toIdx=pageBlocks.findIndex(function(x){return x.id===b.id;});
+        if(fromIdx<0||toIdx<0)return;
+        var moved=pageBlocks.splice(fromIdx,1)[0];pageBlocks.splice(toIdx,0,moved);renderBlocks();
+      });
+      c.appendChild(card);
+    });
+  }
+
+  $('page-save').addEventListener('click',async function(){
+    var hero={title:{en:$('h-title-en').value,pt:$('h-title-pt').value},subtitle:{en:$('h-sub-en').value,pt:$('h-sub-pt').value},bg_color:$('h-bgcolor').value,bg_image:heroBgImage||''};
+    // strip transient nothing; keep block ids
+    var {error}=await sb.from('re_page').update({hero:hero,blocks:pageBlocks,updated_at:new Date().toISOString()}).eq('id','real-estate');
+    if(error){
+      // row may not exist yet -> upsert
+      var up=await sb.from('re_page').upsert({id:'real-estate',hero:hero,blocks:pageBlocks});
+      if(up.error){toast('Save error: '+up.error.message);return;}
+    }
+    toast('Page content saved.');
   });
 
   checkSession();
