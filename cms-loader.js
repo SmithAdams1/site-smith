@@ -249,7 +249,7 @@
 
     // Desktop nav
     var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
-    if (nav && !nav.querySelector('a[href="' + HREF + '"]')) {
+    if (nav && !nav.dataset.saRebuilt && !nav.querySelector('a[href="' + HREF + '"]')) {
       var wrap = document.createElement('div');
       wrap.className = 'relative group';
       wrap.innerHTML =
@@ -308,7 +308,7 @@
 
     // Desktop nav: inserir a seguir ao "Invest in Portugal"
     var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
-    if (nav && !nav.querySelector('a[href="' + HREF + '"]')) {
+    if (nav && !nav.dataset.saRebuilt && !nav.querySelector('a[href="' + HREF + '"]')) {
       var wrap = document.createElement('div');
       wrap.className = 'relative group';
       wrap.innerHTML =
@@ -357,10 +357,78 @@
     }
   }
 
+  // ============================================================
+  // Rebuild the DESKTOP nav into a cleaner, grouped structure to
+  // avoid crowding now that "Real Estate" was added. Runs on every
+  // page. Mobile menu stays flat (no crowding on a full-screen menu).
+  // Structure: Home · About Us · Real Estate · Invest in Portugal ·
+  //            Properties ▾ (Our Developments, Property Management) ·
+  //            Blog · Contact Us (button)
+  // Uses root-relative hrefs so it also works on /property/:slug.
+  // ============================================================
+  function rebuildDesktopNav() {
+    var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
+    if (!nav || nav.dataset.saRebuilt) return;
+    var cur = (location.pathname.split('/').pop() || 'index.html').replace(/\.html$/, '') || 'index';
+    function isActive(href) { return href.replace(/^\//, '').replace(/\.html$/, '') === cur; }
+    var LINK = 'text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi';
+
+    function topLink(label, href) {
+      var w = document.createElement('div'); w.className = 'relative group';
+      var a = document.createElement('a'); a.href = href; a.textContent = label;
+      a.className = LINK + (isActive(href) ? ' font-semibold' : '');
+      w.appendChild(a);
+      var s = document.createElement('span');
+      s.className = 'absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 ' + (isActive(href) ? 'w-full' : 'w-0 group-hover:w-full');
+      w.appendChild(s);
+      return w;
+    }
+
+    var frag = document.createDocumentFragment();
+    [['Home', '/index.html'], ['About Us', '/about.html'], ['Real Estate', '/real-estate.html'], ['Invest in Portugal', '/invest-in-portugal.html']]
+      .forEach(function (it) { frag.appendChild(topLink(it[0], it[1])); });
+
+    // Properties dropdown (hover)
+    var dd = document.createElement('div'); dd.className = 'relative group'; dd.style.position = 'relative';
+    var childActive = isActive('/our-developments.html') || isActive('/property-management.html');
+    var trig = document.createElement('a'); trig.href = '#';
+    trig.className = LINK + (childActive ? ' font-semibold' : '');
+    trig.innerHTML = 'Properties <span style="font-size:.7em;vertical-align:middle;">▾</span>';
+    trig.addEventListener('click', function (e) { e.preventDefault(); });
+    dd.appendChild(trig);
+    var menu = document.createElement('div');
+    menu.style.cssText = 'position:absolute;left:0;top:100%;padding-top:16px;min-width:232px;opacity:0;visibility:hidden;transform:translateY(6px);transition:all .18s ease;z-index:60;';
+    var inner = document.createElement('div');
+    inner.style.cssText = 'background:#0C1E28;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.4);';
+    [['Our Developments', '/our-developments.html'], ['Property Management', '/property-management.html']].forEach(function (c) {
+      var a = document.createElement('a'); a.href = c[1]; a.textContent = c[0]; a.className = 'satoshi';
+      a.style.cssText = 'display:block;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px;font-size:15px;white-space:nowrap;transition:background .15s;';
+      a.addEventListener('mouseenter', function () { a.style.background = 'rgba(255,255,255,.1)'; });
+      a.addEventListener('mouseleave', function () { a.style.background = 'transparent'; });
+      inner.appendChild(a);
+    });
+    menu.appendChild(inner); dd.appendChild(menu);
+    dd.addEventListener('mouseenter', function () { menu.style.opacity = '1'; menu.style.visibility = 'visible'; menu.style.transform = 'translateY(0)'; });
+    dd.addEventListener('mouseleave', function () { menu.style.opacity = '0'; menu.style.visibility = 'hidden'; menu.style.transform = 'translateY(6px)'; });
+    frag.appendChild(dd);
+
+    frag.appendChild(topLink('Blog', '/blog.html'));
+
+    var cbtn = document.createElement('div');
+    var ca = document.createElement('a'); ca.href = '/contact.html'; ca.textContent = 'Contact Us';
+    ca.className = 'bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi';
+    cbtn.appendChild(ca); frag.appendChild(cbtn);
+
+    nav.innerHTML = '';
+    nav.appendChild(frag);
+    nav.dataset.saRebuilt = '1';
+  }
+
   function init() {
     loadContent();
-    injectInvestNav();
-    injectRealEstateNav();
+    rebuildDesktopNav();
+    injectInvestNav();     // mobile + footer (desktop skipped after rebuild)
+    injectRealEstateNav(); // mobile + footer
     injectSwitcher();
   }
 
