@@ -85,13 +85,32 @@
     return decodeURIComponent(last.replace(/\.html$/,''));
   }
   var slug=getSlug();
+  var isPreview=new URLSearchParams(location.search).get('preview')==='1';
+
+  // In preview mode, use the logged-in editor's Supabase session token (stored
+  // in localStorage on this same origin) so RLS lets draft (unpublished) rows
+  // through. Falls back to the anon key (published only) if not logged in.
+  function authToken(){
+    try{
+      for(var i=0;i<localStorage.length;i++){
+        var k=localStorage.key(i);
+        if(/^sb-.*-auth-token$/.test(k)){
+          var v=JSON.parse(localStorage.getItem(k));
+          var tok=(v&&(v.access_token||(v.currentSession&&v.currentSession.access_token)))||'';
+          if(tok)return tok;
+        }
+      }
+    }catch(e){}
+    return SUPABASE_ANON_KEY;
+  }
+  var BEARER=isPreview?authToken():SUPABASE_ANON_KEY;
 
   function fail(msg){document.getElementById('pd-loading').style.display='none';var e=document.getElementById('pd-error');e.style.display='block';e.innerHTML=esc(msg)+'<br><br><a href="/real-estate.html" style="color:#0C1E28;font-weight:700;">'+t.back+' →</a>';}
 
   if(!slug){fail(t.notfound);return;}
 
-  fetch(SUPABASE_URL+'/rest/v1/properties?slug=eq.'+encodeURIComponent(slug)+'&status=eq.published&select=*&limit=1',{
-    headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}
+  fetch(SUPABASE_URL+'/rest/v1/properties?slug=eq.'+encodeURIComponent(slug)+(isPreview?'':'&status=eq.published')+'&select=*&limit=1',{
+    headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+BEARER}
   }).then(function(r){return r.json();}).then(function(rows){
     if(!Array.isArray(rows)||!rows.length){fail(t.notfound);return;}
     build(rows[0]);

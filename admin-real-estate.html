@@ -177,7 +177,7 @@
 
       <div class="section" style="border-bottom:none;display:flex;justify-content:space-between;align-items:center;">
         <button class="btn danger" id="delete-btn">Delete</button>
-        <div class="row"><button class="btn ghost" id="cancel-btn">Cancel</button><button class="btn" id="save-btn">Save property</button></div>
+        <div class="row"><button class="btn ghost" id="cancel-btn">Cancel</button><button class="btn ghost" id="preview-btn">Preview ↗</button><button class="btn" id="save-btn">Save property</button></div>
       </div>
     </div>
   </div>
@@ -186,7 +186,7 @@
   <div id="view-page" class="wrap hidden">
     <div class="row" style="justify-content:space-between;margin-bottom:16px;">
       <h2 style="margin:0;font-size:20px;">Real Estate page content</h2>
-      <button class="btn" id="page-save">Save page</button>
+      <div class="row"><button class="btn ghost" id="page-preview">Preview ↗</button><button class="btn" id="page-save">Save page</button></div>
     </div>
 
     <div class="card" style="margin-bottom:18px;">
@@ -348,8 +348,8 @@
 
   function lines(v){return (v||'').split('\n').map(function(s){return s.trim();}).filter(Boolean);}
   function num(v){return v===''||v==null?null:Number(v);}
-  $('save-btn').addEventListener('click',async function(){
-    var titleEn=$('f-title-en').value.trim();if(!titleEn){toast('English title is required.');return;}
+  async function saveProperty(){
+    var titleEn=$('f-title-en').value.trim();if(!titleEn){toast('English title is required.');return null;}
     var slug=$('f-slug').value.trim()||slugify(titleEn);
     var payload={slug:slug,reference:$('f-reference').value.trim()||null,status:$('f-status').value,
       transaction_type:$('f-transaction').value,property_type:$('f-type').value,
@@ -362,9 +362,15 @@
       title:{en:titleEn,pt:$('f-title-pt').value.trim()},summary:{en:$('f-summary-en').value.trim(),pt:$('f-summary-pt').value.trim()},
       description:{en:$('f-desc-en').value,pt:$('f-desc-pt').value},highlights:{en:lines($('f-hl-en').value),pt:lines($('f-hl-pt').value)},
       images:images,cover_image:images[0]||null,brochure_url:brochureUrl||null};
-    var res=current?await sb.from('properties').update(payload).eq('id',current.id):await sb.from('properties').insert(payload);
-    if(res.error){toast('Save error: '+res.error.message);return;}
-    toast('Property saved.');backToList();
+    var res=current?await sb.from('properties').update(payload).eq('id',current.id):await sb.from('properties').insert(payload).select().single();
+    if(res.error){toast('Save error: '+res.error.message);return null;}
+    if(!current&&res.data)current=res.data; // keep editing the new row
+    return slug;
+  }
+  $('save-btn').addEventListener('click',async function(){var s=await saveProperty();if(s){toast('Property saved.');backToList();}});
+  $('preview-btn').addEventListener('click',async function(){
+    var s=await saveProperty();
+    if(s)window.open('/property/'+encodeURIComponent(s)+'?preview=1','_blank');
   });
   $('delete-btn').addEventListener('click',async function(){
     if(!current)return;if(!confirm('Delete this property permanently?'))return;
@@ -470,17 +476,17 @@
     });
   }
 
-  $('page-save').addEventListener('click',async function(){
+  async function savePageContent(){
     var hero={title:{en:$('h-title-en').value,pt:$('h-title-pt').value},subtitle:{en:$('h-sub-en').value,pt:$('h-sub-pt').value},bg_color:$('h-bgcolor').value,bg_image:heroBgImage||''};
-    // strip transient nothing; keep block ids
     var {error}=await sb.from('re_page').update({hero:hero,blocks:pageBlocks,updated_at:new Date().toISOString()}).eq('id','real-estate');
     if(error){
-      // row may not exist yet -> upsert
       var up=await sb.from('re_page').upsert({id:'real-estate',hero:hero,blocks:pageBlocks});
-      if(up.error){toast('Save error: '+up.error.message);return;}
+      if(up.error){toast('Save error: '+up.error.message);return false;}
     }
-    toast('Page content saved.');
-  });
+    return true;
+  }
+  $('page-save').addEventListener('click',async function(){if(await savePageContent())toast('Page content saved.');});
+  $('page-preview').addEventListener('click',async function(){if(await savePageContent())window.open('/real-estate','_blank');});
 
   checkSession();
 })();
