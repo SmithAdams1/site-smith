@@ -205,6 +205,12 @@
           <div class="field"><label>Background colour</label><input id="h-bgcolor" type="color" value="#0C1E28"/></div>
           <div class="field"><label>Background image (optional)</label><div class="row"><button class="btn ghost sm" id="h-bg-btn" type="button">Upload image</button><span id="h-bg-name" style="font-size:13px;color:#6b7280;"></span></div><input id="h-bg-input" type="file" accept="image/*" class="hidden"/><img id="h-bg-preview" class="miniimg hidden"/></div>
         </div>
+        <div class="field"><label>Background video (mp4) - loops in the header, overrides the image</label>
+          <input id="h-bgvideo" placeholder="Leave empty for the default Smith & Adams brand video"/>
+          <div class="row" style="margin-top:8px;"><button class="btn ghost sm" id="h-vid-btn" type="button">Upload mp4</button><span id="h-vid-name" style="font-size:13px;color:#6b7280;"></span></div>
+          <input id="h-vid-input" type="file" accept="video/mp4" class="hidden"/>
+          <p style="font-size:12px;color:#8a8a8a;margin:8px 0 0;">Tip: use a short (10-25s), muted, compressed clip you own or have licensed. Paste a URL or upload an mp4.</p>
+        </div>
       </div>
     </div>
 
@@ -395,11 +401,14 @@
     $('h-bgcolor').value=hero.bg_color||'#0C1E28';
     heroBgImage=hero.bg_image||'';
     if(heroBgImage){$('h-bg-preview').src=heroBgImage;show($('h-bg-preview'),true);$('h-bg-name').textContent='current image';}else{show($('h-bg-preview'),false);}
+    $('h-bgvideo').value=hero.bg_video||'';$('h-vid-name').textContent=hero.bg_video?'current video':'';
     pageBlocks=Array.isArray(pg.blocks)?pg.blocks.map(function(b){b.id=b.id||uid();return b;}):[];
     renderBlocks();
   }
   $('h-bg-btn').addEventListener('click',function(){$('h-bg-input').click();});
   $('h-bg-input').addEventListener('change',async function(){var f=$('h-bg-input').files[0];if(!f)return;toast('Uploading...');var u=await uploadFile(f,'page');if(u){heroBgImage=u;$('h-bg-preview').src=u;show($('h-bg-preview'),true);$('h-bg-name').textContent='uploaded';toast('Image uploaded.');}});
+  $('h-vid-btn').addEventListener('click',function(){$('h-vid-input').click();});
+  $('h-vid-input').addEventListener('change',async function(){var f=$('h-vid-input').files[0];if(!f)return;toast('Uploading video...');var u=await uploadFile(f,'video');if(u){$('h-bgvideo').value=u;$('h-vid-name').textContent='uploaded';toast('Video uploaded.');}});
 
   $('add-text').addEventListener('click',function(){pageBlocks.push({id:uid(),type:'text',heading:{en:'',pt:''},body:{en:'',pt:''}});renderBlocks();});
   $('add-image').addEventListener('click',function(){pageBlocks.push({id:uid(),type:'image',image:'',caption:{en:'',pt:''}});renderBlocks();});
@@ -477,7 +486,7 @@
   }
 
   async function savePageContent(){
-    var hero={title:{en:$('h-title-en').value,pt:$('h-title-pt').value},subtitle:{en:$('h-sub-en').value,pt:$('h-sub-pt').value},bg_color:$('h-bgcolor').value,bg_image:heroBgImage||''};
+    var hero={title:{en:$('h-title-en').value,pt:$('h-title-pt').value},subtitle:{en:$('h-sub-en').value,pt:$('h-sub-pt').value},bg_color:$('h-bgcolor').value,bg_image:heroBgImage||'',bg_video:$('h-bgvideo').value.trim()};
     var {error}=await sb.from('re_page').update({hero:hero,blocks:pageBlocks,updated_at:new Date().toISOString()}).eq('id','real-estate');
     if(error){
       var up=await sb.from('re_page').upsert({id:'real-estate',hero:hero,blocks:pageBlocks});
