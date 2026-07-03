@@ -177,7 +177,7 @@
 
       <div class="section" style="border-bottom:none;display:flex;justify-content:space-between;align-items:center;">
         <button class="btn danger" id="delete-btn">Delete</button>
-        <div class="row"><button class="btn ghost" id="cancel-btn">Cancel</button><button class="btn ghost" id="preview-btn">Preview ↗</button><button class="btn" id="save-btn">Save property</button></div>
+        <div class="row"><button class="btn ghost" id="cancel-btn">Cancel</button><button class="btn ghost" id="preview-btn">Preview ↗</button><button class="btn" id="publish-btn" style="background:#15803d;">Publish</button><button class="btn" id="save-btn">Save property</button></div>
       </div>
     </div>
   </div>
@@ -293,8 +293,15 @@
         '<div style="flex:1;min-width:0;"><div style="font-weight:600;">'+title+'</div>'+
         '<div style="font-size:13px;color:#6b7280;">'+[p.region,p.city,(p.price?('€'+Number(p.price).toLocaleString('en-GB')):'')].filter(Boolean).join(' · ')+'</div></div>'+
         '<span class="badge '+(p.status==='published'?'pub':'draft')+'">'+(p.status==='published'?'Published':'Draft')+'</span>'+
-        '<button class="btn ghost sm">Edit</button>';
-      row.querySelector('button').addEventListener('click',function(){openEdit(p);});
+        '<button class="btn sm pub-toggle" style="'+(p.status==='published'?'background:#6b7280;':'background:#15803d;')+'">'+(p.status==='published'?'Unpublish':'Publish')+'</button>'+
+        '<button class="btn ghost sm edit-btn">Edit</button>';
+      row.querySelector('.edit-btn').addEventListener('click',function(){openEdit(p);});
+      row.querySelector('.pub-toggle').addEventListener('click',async function(){
+        var ns=p.status==='published'?'draft':'published';
+        var {error}=await sb.from('properties').update({status:ns}).eq('id',p.id);
+        if(error){toast('Error: '+error.message);return;}
+        toast(ns==='published'?'Published.':'Unpublished.');loadList();
+      });
       list.appendChild(row);
     });
   }
@@ -302,6 +309,7 @@
   function openEdit(p){
     current=p||null;images=p&&Array.isArray(p.images)?p.images.slice():[];brochureUrl=p?(p.brochure_url||''):'';
     $('edit-title').textContent=p?'Edit property':'New property';show($('delete-btn'),!!p);
+    var isPub=!!(p&&p.status==='published');$('publish-btn').textContent=isPub?'Unpublish':'Publish';$('publish-btn').style.background=isPub?'#6b7280':'#15803d';
     var g=function(o,k){return o&&o[k]!=null?o[k]:'';};
     var T=p&&p.title||{},S=p&&p.summary||{},D=p&&p.description||{},H=p&&p.highlights||{};
     $('f-title-en').value=g(T,'en');$('f-title-pt').value=g(T,'pt');
@@ -374,6 +382,12 @@
     return slug;
   }
   $('save-btn').addEventListener('click',async function(){var s=await saveProperty();if(s){toast('Property saved.');backToList();}});
+  $('publish-btn').addEventListener('click',async function(){
+    var ns=$('f-status').value==='published'?'draft':'published';
+    $('f-status').value=ns;
+    var s=await saveProperty();
+    if(s){toast(ns==='published'?'Published - now live on /real-estate.':'Unpublished (draft).');backToList();}
+  });
   $('preview-btn').addEventListener('click',async function(){
     var s=await saveProperty();
     if(s)window.open('/property/'+encodeURIComponent(s)+'?preview=1','_blank');
