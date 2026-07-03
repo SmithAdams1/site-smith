@@ -141,6 +141,8 @@
     return field[L]||field.en||field.pt||'';
   }
   function fmtPrice(p,cur){ if(p==null||p==='')return ''; var sym=cur==='USD'?'$':cur==='GBP'?'£':'€'; return sym+Number(p).toLocaleString(L==='pt'?'pt-PT':'en-GB'); }
+  var ICONS={bed:'<path d="M2 9v10"/><path d="M2 13h20v6"/><path d="M22 13V9a2 2 0 0 0-2-2H9v6"/><circle cx="5.5" cy="10" r="1.4"/>',bath:'<path d="M3 12h18"/><path d="M4 12v3a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-3"/><path d="M7 12V6a2 2 0 0 1 4 0"/><path d="M7 19l-1 2M18 19l1 2"/>',area:'<path d="M3 8V3h5"/><path d="M21 8V3h-5"/><path d="M3 16v5h5"/><path d="M21 16v5h-5"/>'};
+  function ic(name,size,color){var d=ICONS[name]||'';return '<svg width="'+(size||16)+'" height="'+(size||16)+'" viewBox="0 0 24 24" fill="none" stroke="'+(color||'currentColor')+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';}
 
   var REGIONS=['Lisbon','Cascais','Porto','Algarve','Silver Coast','Comporta','Madeira'];
   var TYPES=['apartment','villa','townhouse','penthouse','studio','plot','commercial'];
@@ -173,9 +175,10 @@
     rows.forEach(function(p){
       var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'https://via.placeholder.com/600x400?text=Smith+%26+Adams';
       var specs=[];
-      if(p.bedrooms)specs.push(p.bedrooms+(L==='pt'?' quartos':' bd'));
-      if(p.bathrooms)specs.push(p.bathrooms+(L==='pt'?' WC':' ba'));
-      if(p.area_sqm)specs.push(Math.round(p.area_sqm)+' m²');
+      if(p.bedrooms)specs.push(['bed',p.bedrooms]);
+      if(p.bathrooms)specs.push(['bath',p.bathrooms]);
+      if(p.area_sqm)specs.push(['area',Math.round(p.area_sqm)+' m²']);
+      var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#0C1E28')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
       var a=document.createElement('a');
       a.href='property/'+encodeURIComponent(p.slug);
       a.className='re-card';
@@ -189,7 +192,7 @@
         '<div style="padding:18px 20px 22px;">'+
           '<p class="satoshi" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin:0 0 8px;">'+[(t.types[p.property_type]||p.property_type),p.region].filter(Boolean).join(' · ')+'</p>'+
           '<h3 class="geist" style="font-size:19px;font-weight:700;color:#0C1E28;line-height:1.3;margin:0 0 10px;min-height:50px;">'+pick(p.title)+'</h3>'+
-          '<p class="satoshi" style="font-size:13px;color:#6b7280;margin:0 0 14px;">'+specs.join('  ·  ')+'</p>'+
+          '<div class="satoshi" style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#4b5563;margin:0 0 14px;font-weight:500;">'+specsHtml+'</div>'+
           '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f0eee8;padding-top:14px;">'+
             '<span class="geist" style="font-size:20px;font-weight:800;color:#0C1E28;">'+fmtPrice(p.price,p.currency)+'</span>'+
             '<span class="satoshi" style="font-size:13px;font-weight:600;color:#0C1E28;">'+t.view+' →</span>'+

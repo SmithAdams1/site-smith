@@ -76,6 +76,43 @@
   var t=T[L];
   function pick(f){if(f==null)return '';if(typeof f==='string')return f;return f[L]||f.en||f.pt||'';}
   function fmtPrice(p,cur){if(p==null||p==='')return '';var s=cur==='USD'?'$':cur==='GBP'?'£':'€';return s+Number(p).toLocaleString(L==='pt'?'pt-PT':'en-GB');}
+  var ICONS={
+    bed:'<path d="M2 9v10"/><path d="M2 13h20v6"/><path d="M22 13V9a2 2 0 0 0-2-2H9v6"/><circle cx="5.5" cy="10" r="1.4"/>',
+    bath:'<path d="M3 12h18"/><path d="M4 12v3a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-3"/><path d="M7 12V6a2 2 0 0 1 4 0"/><path d="M7 19l-1 2M18 19l1 2"/>',
+    area:'<path d="M3 8V3h5"/><path d="M21 8V3h-5"/><path d="M3 16v5h5"/><path d="M21 16v5h-5"/>',
+    plot:'<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',
+    calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+    energy:'<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>',
+    home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>',
+    hash:'<path d="M4 9h16M4 15h16M10 3 8 21M16 3l-2 18"/>',
+    wifi:'<path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><path d="M12 20h.01"/>',
+    ac:'<path d="M12 2v20M2 12h20M5 5l14 14M19 5 5 19"/>',
+    heat:'<path d="M14 14V5a2 2 0 0 0-4 0v9a4 4 0 1 0 4 0z"/>',
+    parking:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 16V8h3.5a2.5 2.5 0 0 1 0 5H9"/>',
+    elevator:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M10 8 8.5 10h3zM10 16l-1.5-2h3z"/><path d="M14 7v10"/>',
+    balcony:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6 19 19M19 5l-1.4 1.4M6.4 17.6 5 19"/>',
+    washer:'<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M7 6h.01M10 6h.01"/>',
+    dishwasher:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/>',
+    kitchen:'<path d="M3 2v7a2 2 0 0 0 2 2 2 2 0 0 0 2-2V2M5 2v20M17 2c-2 0-3 2-3 5s1 4 3 4v11"/>',
+    tv:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M8 21h8"/>',
+    pool:'<path d="M2 16c2 0 2 1.4 4 1.4S8 16 10 16s2 1.4 4 1.4S16 16 18 16s2 1.4 4 1.4"/><path d="M6 16V6a2 2 0 0 1 4 0M6 11h4"/>',
+    check:'<path d="M20 6 9 17l-5-5"/>'
+  };
+  function ic(name,size,color){size=size||20;var d=ICONS[name]||ICONS.check;return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 24 24" fill="none" stroke="'+(color||'currentColor')+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';}
+  function amenityIcon(label){var s=(label||'').toLowerCase();
+    if(/wifi|wi-fi|internet|wireless/.test(s))return 'wifi';
+    if(/air.?condition|\bac\b|cooling|climat/.test(s))return 'ac';
+    if(/heat|aqueci/.test(s))return 'heat';
+    if(/park|garage|estacion/.test(s))return 'parking';
+    if(/elevator|lift|elevador/.test(s))return 'elevator';
+    if(/balcon|terrace|terra[çc]/.test(s))return 'balcony';
+    if(/wash|laundry|lavar|m[aá]quina de lavar/.test(s))return 'washer';
+    if(/dishwash|lou[çc]a/.test(s))return 'dishwasher';
+    if(/kitchen|cozinha/.test(s))return 'kitchen';
+    if(/\btv\b|televis/.test(s))return 'tv';
+    if(/pool|piscina/.test(s))return 'pool';
+    return 'check';
+  }
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
   function getSlug(){
@@ -122,14 +159,14 @@
     var imgs=(Array.isArray(p.images)&&p.images.length)?p.images:(p.cover_image?[p.cover_image]:['https://via.placeholder.com/1200x800?text=Smith+%26+Adams']);
     var hl=[];var rawHl=p.highlights;if(rawHl){if(Array.isArray(rawHl))hl=rawHl;else if(rawHl[L])hl=rawHl[L];else if(rawHl.en)hl=rawHl.en;}
     var specs=[];
-    if(p.bedrooms)specs.push([t.beds,p.bedrooms]);
-    if(p.bathrooms)specs.push([t.baths,p.bathrooms]);
-    if(p.area_sqm)specs.push([t.area,Math.round(p.area_sqm)+' m²']);
-    if(p.plot_sqm)specs.push([t.plot,Math.round(p.plot_sqm)+' m²']);
-    if(p.year_built)specs.push([t.year,p.year_built]);
-    if(p.energy_rating)specs.push([t.energy,p.energy_rating]);
-    specs.push([t.type,t.types[p.property_type]||p.property_type]);
-    if(p.reference)specs.push([t.ref,p.reference]);
+    if(p.bedrooms)specs.push([t.beds,p.bedrooms,'bed']);
+    if(p.bathrooms)specs.push([t.baths,p.bathrooms,'bath']);
+    if(p.area_sqm)specs.push([t.area,Math.round(p.area_sqm)+' m²','area']);
+    if(p.plot_sqm)specs.push([t.plot,Math.round(p.plot_sqm)+' m²','plot']);
+    if(p.year_built)specs.push([t.year,p.year_built,'calendar']);
+    if(p.energy_rating)specs.push([t.energy,p.energy_rating,'energy']);
+    specs.push([t.type,t.types[p.property_type]||p.property_type,'home']);
+    if(p.reference)specs.push([t.ref,p.reference,'hash']);
 
     var mapEmbed='';
     if(p.latitude&&p.longitude){mapEmbed='https://maps.google.com/maps?q='+p.latitude+','+p.longitude+'&z=14&output=embed';}
@@ -154,10 +191,10 @@
           '<p class="geist" style="font-size:30px;font-weight:800;color:#0C1E28;margin:0 0 28px;">'+fmtPrice(p.price,p.currency)+'</p>'+
           // specs grid
           '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1px;background:#ece9e1;border:1px solid #ece9e1;border-radius:14px;overflow:hidden;margin-bottom:32px;">'+
-            specs.map(function(s){return '<div style="background:#fff;padding:16px 18px;"><p class="satoshi" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin:0 0 6px;">'+esc(s[0])+'</p><p class="geist" style="font-size:17px;font-weight:700;color:#0C1E28;margin:0;">'+esc(s[1])+'</p></div>';}).join('')+
+            specs.map(function(s){return '<div style="background:#fff;padding:18px;display:flex;align-items:center;gap:13px;"><span style="flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:rgba(12,30,40,.06);display:flex;align-items:center;justify-content:center;color:#0C1E28;">'+ic(s[2],20,'#0C1E28')+'</span><span><span class="satoshi" style="display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9ca3af;margin-bottom:3px;">'+esc(s[0])+'</span><span class="geist" style="font-size:17px;font-weight:700;color:#0C1E28;">'+esc(s[1])+'</span></span></div>';}).join('')+
           '</div>'+
           (pick(p.description)?'<h2 class="geist" style="font-size:22px;font-weight:700;color:#0C1E28;margin:0 0 14px;">'+esc(t.overview)+'</h2><div class="pd-desc satoshi" style="font-size:16px;color:#4b5563;line-height:1.85;margin-bottom:32px;">'+pick(p.description)+'</div>':'')+
-          (hl.length?'<h2 class="geist" style="font-size:22px;font-weight:700;color:#0C1E28;margin:0 0 14px;">'+esc(t.highlights)+'</h2><ul style="list-style:none;padding:0;margin:0 0 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">'+hl.map(function(h){return '<li class="satoshi" style="display:flex;gap:10px;font-size:15px;color:#374151;"><span style="color:#C9A227;">◆</span>'+esc(pick(h))+'</li>';}).join('')+'</ul>':'')+
+          (hl.length?'<h2 class="geist" style="font-size:22px;font-weight:700;color:#0C1E28;margin:0 0 16px;">'+esc(t.highlights)+'</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:0 0 34px;">'+hl.map(function(h){var lab=pick(h);return '<div class="satoshi" style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #ece9e1;border-radius:12px;padding:13px 15px;font-size:15px;color:#0C1E28;font-weight:500;"><span style="flex:0 0 auto;color:#C9A227;">'+ic(amenityIcon(lab),20,'#C9A227')+'</span>'+esc(lab)+'</div>';}).join('')+'</div>':'')+
           (mapEmbed?'<h2 class="geist" style="font-size:22px;font-weight:700;color:#0C1E28;margin:0 0 14px;">'+esc(t.location)+'</h2><div style="border-radius:14px;overflow:hidden;border:1px solid #ece9e1;"><iframe src="'+esc(mapEmbed)+'" width="100%" height="340" style="border:0;" loading="lazy"></iframe></div>':'')+
           (p.brochure_url?'<div style="margin-top:24px;"><a href="'+esc(p.brochure_url)+'" target="_blank" rel="noopener" class="satoshi" style="display:inline-flex;align-items:center;gap:8px;background:#0C1E28;color:#fff;padding:13px 22px;border-radius:10px;font-weight:600;text-decoration:none;">↓ '+esc(t.brochure)+'</a></div>':'')+
         '</div>'+
