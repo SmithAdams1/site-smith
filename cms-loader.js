@@ -469,8 +469,18 @@
     header.querySelectorAll('button span.block').forEach(function (s) { s.style.backgroundColor = color; });
   }
 
+  // Point the dead footer legal links (currently index.html#) to the real pages.
+  function fixLegalLinks() {
+    document.querySelectorAll('footer a[href="index.html#"], footer a[href="/index.html#"]').forEach(function (a) {
+      var t = (a.textContent || '').toLowerCase();
+      if (t.indexOf('privacy') >= 0) a.href = '/privacy.html';
+      else if (t.indexOf('terms') >= 0) a.href = '/terms.html';
+    });
+  }
+
   function init() {
     loadContent();
+    fixLegalLinks();
     rebuildDesktopNav();
     injectInvestNav();     // mobile + footer (desktop skipped after rebuild)
     injectRealEstateNav(); // mobile + footer
