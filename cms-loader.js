@@ -434,6 +434,41 @@
     });
   }
 
+  // Make the desktop nav readable on ANY background. Samples the background
+  // directly under the header: dark -> white text, light -> navy text. Also
+  // recolours the hover underlines and the mobile hamburger bars. Re-runs on
+  // scroll/resize (the header turns dark navy once scrolled on most pages).
+  function applyNavContrast() {
+    var header = document.querySelector('header'); if (!header) return;
+    var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
+    function lum(rgb) { var m = rgb && rgb.match(/\d+(\.\d+)?/g); if (!m) return 1; return (0.299 * +m[0] + 0.587 * +m[1] + 0.114 * +m[2]) / 255; }
+    function isTransparent(c) { return !c || c === 'transparent' || /rgba\([^)]*,\s*0\s*\)/.test(c); }
+    // 1) header's own background (dark once scrolled)
+    var hb = getComputedStyle(header).backgroundColor;
+    var dark;
+    if (!isTransparent(hb)) {
+      dark = lum(hb) < 0.6;
+    } else {
+      // 2) transparent header -> sample the hero underneath
+      var prev = header.style.pointerEvents; header.style.pointerEvents = 'none';
+      var el = document.elementFromPoint(Math.round(window.innerWidth / 2), header.offsetHeight + 10);
+      header.style.pointerEvents = prev;
+      var bg = 'rgb(253,252,249)';
+      while (el) { var c = getComputedStyle(el).backgroundColor; if (!isTransparent(c)) { bg = c; break; } el = el.parentElement; }
+      dark = lum(bg) < 0.6;
+    }
+    var color = dark ? '#ffffff' : '#0C1E28';
+    if (nav) {
+      nav.querySelectorAll('a').forEach(function (a) {
+        if (a.className.indexOf('bg-white') >= 0) return; // Contact button keeps its own style
+        a.style.color = color;
+      });
+      nav.querySelectorAll('span.bg-white, span[class*="bg-white"]').forEach(function (s) { s.style.backgroundColor = color; });
+    }
+    // mobile hamburger bars
+    header.querySelectorAll('button span.block').forEach(function (s) { s.style.backgroundColor = color; });
+  }
+
   function init() {
     loadContent();
     rebuildDesktopNav();
@@ -441,6 +476,10 @@
     injectRealEstateNav(); // mobile + footer
     renameDevelopmentsNav();
     injectSwitcher();
+    applyNavContrast();
+    setTimeout(applyNavContrast, 350); // after fonts/layout settle
+    window.addEventListener('scroll', applyNavContrast, { passive: true });
+    window.addEventListener('resize', applyNavContrast);
   }
 
   if (document.readyState === 'loading') {
