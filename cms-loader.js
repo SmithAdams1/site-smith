@@ -5,6 +5,10 @@
   const DEFAULT_LOCALE = 'en';
   const SUPPORTED_LOCALES = ['en', 'pt'];
 
+  // Real Estate section is built and deployed but hidden from the public menu
+  // for now (team can still reach /real-estate directly). Set to true to launch.
+  const SHOW_REAL_ESTATE = false;
+
   // ─── Esconder o item "Urban Collection" do menu (nav + mobile + footer) ──
   // Solicitação do cliente: ocultar sem apagar. Para reativar, basta remover
   // este bloco de CSS. Os links e a página /urban-collection continuam ativos.
@@ -385,8 +389,10 @@
     }
 
     var frag = document.createDocumentFragment();
-    [['Home', '/index.html'], ['About Us', '/about.html'], ['Real Estate', '/real-estate.html'], ['Invest in Portugal', '/invest-in-portugal.html']]
-      .forEach(function (it) { frag.appendChild(topLink(it[0], it[1])); });
+    var topItems = [['Home', '/index.html'], ['About Us', '/about.html']];
+    if (SHOW_REAL_ESTATE) topItems.push(['Real Estate', '/real-estate.html']);
+    topItems.push(['Invest in Portugal', '/invest-in-portugal.html']);
+    topItems.forEach(function (it) { frag.appendChild(topLink(it[0], it[1])); });
 
     // Properties dropdown (hover)
     var dd = document.createElement('div'); dd.className = 'relative group'; dd.style.position = 'relative';
@@ -483,7 +489,7 @@
     fixLegalLinks();
     rebuildDesktopNav();
     injectInvestNav();     // mobile + footer (desktop skipped after rebuild)
-    injectRealEstateNav(); // mobile + footer
+    if (SHOW_REAL_ESTATE) injectRealEstateNav(); // mobile + footer
     renameDevelopmentsNav();
     injectSwitcher();
     applyNavContrast();
