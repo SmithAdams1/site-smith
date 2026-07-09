@@ -400,7 +400,7 @@
     menu.style.cssText = 'position:absolute;left:0;top:100%;padding-top:16px;min-width:232px;opacity:0;visibility:hidden;transform:translateY(6px);transition:all .18s ease;z-index:60;';
     var inner = document.createElement('div');
     inner.style.cssText = 'background:#0C1E28;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.4);';
-    [['Our Developments', '/our-developments.html'], ['Property Management', '/property-management.html']].forEach(function (c) {
+    [['Featured Opportunities', '/our-developments.html'], ['Property Management', '/property-management.html']].forEach(function (c) {
       var a = document.createElement('a'); a.href = c[1]; a.textContent = c[0]; a.className = 'satoshi';
       a.style.cssText = 'display:block;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px;font-size:15px;white-space:nowrap;transition:background .15s;';
       a.addEventListener('mouseenter', function () { a.style.background = 'rgba(255,255,255,.1)'; });
@@ -424,11 +424,22 @@
     nav.dataset.saRebuilt = '1';
   }
 
+  // Rename "Our Developments" -> "Featured Opportunities" wherever the link
+  // text is still hardcoded (mobile menu, footer). Desktop is handled by the
+  // rebuild above. The URL stays /our-developments.html.
+  function renameDevelopmentsNav() {
+    var links = document.querySelectorAll('a[href="our-developments.html"], a[href="/our-developments.html"]');
+    links.forEach(function (a) {
+      if ((a.textContent || '').trim().toLowerCase() === 'our developments') a.textContent = 'Featured Opportunities';
+    });
+  }
+
   function init() {
     loadContent();
     rebuildDesktopNav();
     injectInvestNav();     // mobile + footer (desktop skipped after rebuild)
     injectRealEstateNav(); // mobile + footer
+    renameDevelopmentsNav();
     injectSwitcher();
   }
 
