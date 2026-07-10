@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/>
+<title>Studio | Smith &amp; Adams</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  *{box-sizing:border-box;}
+  :root{
+    --navy:#0C1E28; --paper:#FDFCF9; --line:#e8e6df; --line-strong:#d8d6cd;
+    --muted:#6b7280; --muted-2:#8a8a8a; --accent:#466DEE;
+    --sidebar-w:248px; --sidebar-w-collapsed:64px;
+  }
+  html,body{margin:0;background:var(--paper);color:var(--navy);font-family:'Satoshi','General Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  .hidden{display:none!important;}
+
+  /* ---------- LOGIN ---------- */
+  #login{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0C1E28 0%,#1a3040 100%);padding:24px;}
+  #login .card{background:#fff;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.28);padding:44px 40px;width:100%;max-width:400px;}
+  #login .brand{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);opacity:.6;}
+  #login h1{margin:8px 0 4px;font-size:26px;font-weight:700;}
+  #login .sub{color:var(--muted);font-size:14px;margin:0 0 28px;}
+  #login label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;}
+  #login input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--navy);background:#fff;outline:none;transition:border-color .15s;font-family:inherit;}
+  #login input:focus{border-color:var(--navy);}
+  #login .field{margin-bottom:16px;}
+  #login button.primary{width:100%;margin-top:8px;background:var(--navy);color:#fff;border:none;border-radius:10px;padding:13px 20px;font-weight:700;font-size:14px;transition:opacity .15s;}
+  #login button.primary:hover{opacity:.9;}
+  #login .err{color:#b91c1c;font-size:13px;margin:14px 0 0;text-align:center;min-height:18px;}
+
+  /* ---------- SHELL ---------- */
+  #app{min-height:100vh;display:flex;}
+  aside#sidebar{width:var(--sidebar-w);background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;transition:width .18s ease;}
+  aside#sidebar .brand-row{padding:22px 20px 18px;border-bottom:1px solid var(--line);}
+  aside#sidebar .brand{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:800;}
+  aside#sidebar .title{font-size:17px;font-weight:700;margin-top:2px;}
+  aside#sidebar nav{flex:1;padding:12px 10px;overflow-y:auto;}
+  aside#sidebar .group-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);padding:14px 12px 8px;}
+  aside#sidebar a.nav-item{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;font-size:14px;font-weight:500;color:var(--navy);margin:1px 0;transition:background .12s,color .12s;position:relative;}
+  aside#sidebar a.nav-item:hover{background:#f4f3ee;}
+  aside#sidebar a.nav-item.active{background:var(--navy);color:#fff;font-weight:600;}
+  aside#sidebar a.nav-item.active svg{stroke:#fff;}
+  aside#sidebar a.nav-item svg{width:18px;height:18px;stroke:var(--navy);flex-shrink:0;stroke-width:1.6;}
+  aside#sidebar a.nav-item .ext{margin-left:auto;font-size:10px;color:var(--muted);opacity:.7;font-weight:600;letter-spacing:.06em;}
+  aside#sidebar a.nav-item.active .ext{color:#fff;opacity:.8;}
+  aside#sidebar .foot{border-top:1px solid var(--line);padding:14px 16px;display:flex;align-items:center;gap:10px;font-size:13px;}
+  aside#sidebar .avatar{width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}
+  aside#sidebar .who{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);}
+  aside#sidebar button.signout{background:none;border:none;color:var(--muted);font-size:12px;font-weight:600;padding:4px 8px;border-radius:6px;transition:background .12s,color .12s;}
+  aside#sidebar button.signout:hover{background:#f4f3ee;color:var(--navy);}
+
+  main#content{flex:1;min-width:0;padding:32px 40px 60px;}
+  main#content .section{max-width:1180px;margin:0 auto;}
+  main#content .page-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap;}
+  main#content h2{margin:0;font-size:26px;font-weight:700;letter-spacing:-.01em;}
+  main#content .page-head .sub{color:var(--muted);font-size:14px;margin-top:2px;}
+  main#content .btn{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:11px 20px;font-size:14px;font-weight:600;transition:opacity .15s;display:inline-flex;align-items:center;gap:8px;}
+  main#content .btn:hover{opacity:.9;}
+  main#content .btn.ghost{background:#fff;color:var(--navy);border:1.5px solid var(--line-strong);}
+  main#content .btn.ghost:hover{background:#f4f3ee;}
+  main#content .btn svg{width:16px;height:16px;stroke-width:2;}
+
+  /* Card / list */
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .empty{background:#fff;border:1px dashed var(--line-strong);border-radius:14px;padding:56px 24px;text-align:center;color:var(--muted);}
+  .empty .icon{margin:0 auto 14px;width:44px;height:44px;border-radius:12px;background:#f4f3ee;display:flex;align-items:center;justify-content:center;}
+  .empty h3{margin:0 0 6px;color:var(--navy);font-size:17px;font-weight:600;}
+  .empty p{margin:0 0 20px;font-size:14px;}
+  .row{display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:1px solid #f0eee7;transition:background .12s;}
+  .row:last-child{border-bottom:0;}
+  .row:hover{background:#fafaf5;}
+  .row .title{font-weight:600;font-size:15px;}
+  .row .slug{color:var(--muted);font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  .row .meta{margin-left:auto;display:flex;align-items:center;gap:14px;color:var(--muted);font-size:13px;}
+  .badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.02em;}
+  .badge.pub{background:#dcfce7;color:#15803d;}
+  .badge.draft{background:#f3f4f6;color:#6b7280;}
+  .badge.nav{background:#eef2ff;color:#4338ca;}
+
+  /* Callout when a section links out */
+  .link-out{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;align-items:center;gap:18px;}
+  .link-out .lo-icon{width:44px;height:44px;border-radius:12px;background:#f4f3ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .link-out h3{margin:0 0 4px;font-size:16px;font-weight:600;}
+  .link-out p{margin:0;color:var(--muted);font-size:14px;}
+  .link-out a{margin-left:auto;}
+
+  /* Toast */
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.25);opacity:0;transition:opacity .25s;z-index:99;}
+  .toast.show{opacity:1;}
+
+  /* Modal */
+  .modal-bg{position:fixed;inset:0;background:rgba(12,30,40,.45);display:flex;align-items:center;justify-content:center;z-index:100;padding:24px;}
+  .modal{background:#fff;border-radius:18px;padding:28px 30px;width:100%;max-width:460px;box-shadow:0 30px 80px rgba(0,0,0,.28);}
+  .modal h3{margin:0 0 4px;font-size:19px;font-weight:700;}
+  .modal .sub{color:var(--muted);font-size:14px;margin:0 0 22px;}
+  .modal label{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px;}
+  .modal input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:14px;color:var(--navy);background:#fff;outline:none;font-family:inherit;}
+  .modal input:focus{border-color:var(--navy);}
+  .modal .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;}
+  .modal .err{color:#b91c1c;font-size:13px;margin-top:12px;min-height:18px;}
+
+  /* Narrow screens: sidebar becomes topbar */
+  @media (max-width:900px){
+    #app{flex-direction:column;}
+    aside#sidebar{width:100%;height:auto;position:static;border-right:0;border-bottom:1px solid var(--line);}
+    aside#sidebar nav{display:flex;overflow-x:auto;padding:8px;gap:4px;}
+    aside#sidebar .group-label{display:none;}
+    aside#sidebar a.nav-item{white-space:nowrap;flex-shrink:0;}
+    aside#sidebar .brand-row,aside#sidebar .foot{padding:12px 16px;}
+    main#content{padding:20px 16px 48px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- LOGIN                                                        -->
+<!-- ============================================================ -->
+<div id="login">
+  <div class="card">
+    <div class="brand">Smith &amp; Adams</div>
+    <h1>Studio</h1>
+    <p class="sub">Sign in to manage the website.</p>
+    <form id="login-form" onsubmit="return false;">
+      <div class="field">
+        <label>Email</label>
+        <input id="lg-email" type="email" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input id="lg-pass" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="primary" id="lg-btn" type="submit">Sign in</button>
+      <p class="err" id="lg-err"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- APP SHELL                                                    -->
+<!-- ============================================================ -->
+<div id="app" class="hidden">
+  <aside id="sidebar">
+    <div class="brand-row">
+      <div class="brand">Smith &amp; Adams</div>
+      <div class="title">Studio</div>
+    </div>
+    <nav id="nav">
+      <div class="group-label">Content</div>
+      <a class="nav-item" data-section="pages" href="#pages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h11l5 5v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M14 4v6h6"/></svg>
+        <span>Pages</span>
+      </a>
+      <a class="nav-item" data-section="real-estate" href="#real-estate">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>
+        <span>Real Estate</span>
+        <span class="ext">EXT ↗</span>
+      </a>
+      <a class="nav-item" data-section="blog" href="#blog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h13a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        <span>Blog</span>
+        <span class="ext">EXT ↗</span>
+      </a>
+      <a class="nav-item" data-section="content" href="#content">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1.5"/><circle cx="3" cy="12" r="1.5"/><circle cx="3" cy="18" r="1.5"/></svg>
+        <span>Content</span>
+        <span class="ext">EXT ↗</span>
+      </a>
+
+      <div class="group-label">Assets</div>
+      <a class="nav-item" data-section="media" href="#media">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 18l6-5 4 3 3-2 5 4"/></svg>
+        <span>Media</span>
+      </a>
+
+      <div class="group-label">Site</div>
+      <a class="nav-item" data-section="nav" href="#nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h12M3 18h18"/></svg>
+        <span>Navigation</span>
+      </a>
+      <a class="nav-item" data-section="settings" href="#settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9c.35.71.99 1.24 1.51 1v.09a2 2 0 0 1 0 4H21a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span>Settings</span>
+      </a>
+    </nav>
+    <div class="foot">
+      <div class="avatar" id="avatar">·</div>
+      <div class="who" id="who">…</div>
+      <button class="signout" id="signout">Sign out</button>
+    </div>
+  </aside>
+
+  <main id="content">
+    <!-- ================= PAGES ================= -->
+    <section class="section" id="section-pages">
+      <div class="page-head">
+        <div>
+          <h2>Pages</h2>
+          <div class="sub">Build and manage pages that live at <code>/p/&lt;slug&gt;</code>.</div>
+        </div>
+        <button class="btn" id="btn-new-page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>
+          New page
+        </button>
+      </div>
+      <div id="pages-container"></div>
+    </section>
+
+    <!-- ================= REAL ESTATE (external for now) ============ -->
+    <section class="section hidden" id="section-real-estate">
+      <div class="page-head"><h2>Real Estate</h2></div>
+      <div class="link-out">
+        <div class="lo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg></div>
+        <div>
+          <h3>Real Estate backoffice</h3>
+          <p>Properties, hero video and Real Estate page blocks. Being consolidated into the Studio in a later step — for now it lives at its own URL and continues to work as before.</p>
+        </div>
+        <a class="btn ghost" href="/admin-real-estate.html">Open ↗</a>
+      </div>
+    </section>
+
+    <!-- ================= BLOG (external) ============================ -->
+    <section class="section hidden" id="section-blog">
+      <div class="page-head"><h2>Blog</h2></div>
+      <div class="link-out">
+        <div class="lo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M4 4h13a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <div>
+          <h3>Blog posts</h3>
+          <p>Create and edit posts, categories and translations. Lives at the existing admin.</p>
+        </div>
+        <a class="btn ghost" href="/admin.html">Open ↗</a>
+      </div>
+    </section>
+
+    <!-- ================= CONTENT (external) ========================= -->
+    <section class="section hidden" id="section-content">
+      <div class="page-head"><h2>Content</h2></div>
+      <div class="link-out">
+        <div class="lo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1.5" fill="#0C1E28"/><circle cx="3" cy="12" r="1.5" fill="#0C1E28"/><circle cx="3" cy="18" r="1.5" fill="#0C1E28"/></svg></div>
+        <div>
+          <h3>Static-page content</h3>
+          <p>Key-value editor for the existing static pages (About, Home, Invest in Portugal, etc.). Being consolidated later — for now it lives at the existing admin.</p>
+        </div>
+        <a class="btn ghost" href="/admin.html">Open ↗</a>
+      </div>
+    </section>
+
+    <!-- ================= MEDIA (stub) ================================ -->
+    <section class="section hidden" id="section-media">
+      <div class="page-head"><h2>Media</h2></div>
+      <div class="empty">
+        <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 18l6-5 4 3 3-2 5 4"/></svg></div>
+          <h3>Coming next</h3>
+          <p>A shared media library for the whole site (uploads to <code>site-media</code>).</p>
+      </div>
+    </section>
+
+    <!-- ================= NAV (stub) ================================== -->
+    <section class="section hidden" id="section-nav">
+      <div class="page-head"><h2>Navigation</h2></div>
+      <div class="empty">
+        <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M3 6h18M3 12h12M3 18h18"/></svg></div>
+        <h3>Coming next</h3>
+        <p>Reorder menu items and toggle Studio pages into the header/mobile/footer.</p>
+      </div>
+    </section>
+
+    <!-- ================= SETTINGS (stub) ============================= -->
+    <section class="section hidden" id="section-settings">
+      <div class="page-head"><h2>Settings</h2></div>
+      <div class="empty">
+        <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Coming next</h3>
+        <p>Feature flags (Real Estate on/off), site defaults, editor accounts.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Toast + Modal roots -->
+<div id="toast" class="toast"></div>
+<div id="modal-root"></div>
+
+<script type="module">
+  // ============================================================
+  // Studio v1 shell — login, section routing, Pages list.
+  // Page builder (data → blocks) is in Step 4 (studio-editor.js).
+  // ============================================================
+
+  const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const $  = (id) => document.getElementById(id);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+
+  const SECTIONS = ['pages','real-estate','blog','content','media','nav','settings'];
+
+  function show(el, on=true){ if(!el) return; el.classList.toggle('hidden', !on); }
+  function toast(msg, ms=2200){
+    const t = $('toast'); t.textContent = msg; t.classList.add('show');
+    clearTimeout(toast._t); toast._t = setTimeout(()=>t.classList.remove('show'), ms);
+  }
+  function fmtDate(iso){
+    if(!iso) return '';
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+  }
+  function pick(field, locale='en'){
+    if(!field) return '';
+    if(typeof field === 'string') return field;
+    return field[locale] || field.en || Object.values(field).find(Boolean) || '';
+  }
+  function slugify(s){
+    return String(s || '')
+      .toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9]+/g,'-')
+      .replace(/^-+|-+$/g,'')
+      .slice(0, 60);
+  }
+
+  // ---------- Auth ----------
+  async function boot(){
+    const { data } = await sb.auth.getSession();
+    if(data.session){ onLoggedIn(data.session); }
+    else { show($('login'), true); show($('app'), false); }
+  }
+
+  function onLoggedIn(session){
+    show($('login'), false);
+    show($('app'), true);
+    const email = session.user.email || '';
+    $('who').textContent = email;
+    $('avatar').textContent = (email[0] || '·').toUpperCase();
+    routeFromHash();
+    loadPages();
+  }
+
+  $('login-form').addEventListener('submit', async () => {
+    $('lg-err').textContent = '';
+    const email = $('lg-email').value.trim();
+    const password = $('lg-pass').value;
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if(error){ $('lg-err').textContent = 'Invalid credentials.'; return; }
+    onLoggedIn(data.session);
+  });
+  $('signout').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    location.reload();
+  });
+
+  // ---------- Routing (hash-based) ----------
+  function activateSection(name){
+    if(!SECTIONS.includes(name)) name = 'pages';
+    $$('#nav a.nav-item').forEach(a => a.classList.toggle('active', a.dataset.section === name));
+    $$('main#content .section').forEach(s => s.classList.toggle('hidden', s.id !== `section-${name}`));
+    if(location.hash !== `#${name}`) history.replaceState(null, '', `#${name}`);
+  }
+  function routeFromHash(){
+    const h = (location.hash || '#pages').replace(/^#/, '');
+    activateSection(h);
+  }
+  window.addEventListener('hashchange', routeFromHash);
+
+  // ---------- Pages: list ----------
+  async function loadPages(){
+    const container = $('pages-container');
+    container.innerHTML = '<div style="color:var(--muted);padding:20px;">Loading…</div>';
+    const { data, error } = await sb
+      .from('pages')
+      .select('id,slug,title,published,show_in_nav,updated_at')
+      .order('updated_at', { ascending: false });
+
+    if(error){
+      container.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load pages</h3><p>${escapeHtml(error.message)}</p></div>`;
+      return;
+    }
+    renderPages(data || []);
+  }
+
+  function renderPages(pages){
+    const container = $('pages-container');
+    if(!pages.length){
+      container.innerHTML = `
+        <div class="empty">
+          <div class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M4 4h11l5 5v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M14 4v6h6"/></svg>
+          </div>
+          <h3>No pages yet</h3>
+          <p>Create your first page and start adding blocks.</p>
+          <button class="btn" onclick="document.getElementById('btn-new-page').click()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style="width:16px;height:16px;stroke-width:2;"><path d="M12 5v14M5 12h14"/></svg>
+            New page
+          </button>
+        </div>`;
+      return;
+    }
+    const card = document.createElement('div');
+    card.className = 'card';
+    pages.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      const title = pick(p.title) || '(untitled)';
+      row.innerHTML = `
+        <div style="flex:1;min-width:0;">
+          <div class="title">${escapeHtml(title)}</div>
+          <div class="slug">/p/${escapeHtml(p.slug)}</div>
+        </div>
+        <div class="meta">
+          ${p.show_in_nav ? '<span class="badge nav">In menu</span>' : ''}
+          <span class="badge ${p.published ? 'pub' : 'draft'}">${p.published ? 'Published' : 'Draft'}</span>
+          <span>${fmtDate(p.updated_at)}</span>
+          <button class="btn ghost" data-open="${p.id}" style="padding:7px 14px;font-size:13px;">Edit</button>
+        </div>`;
+      card.appendChild(row);
+    });
+    container.innerHTML = '';
+    container.appendChild(card);
+    // Wire "Edit" buttons — builder comes in Step 4. For now: toast.
+    $$('button[data-open]', card).forEach(b => b.addEventListener('click', () => {
+      toast('Page builder ships in the next step.');
+    }));
+  }
+
+  // ---------- Pages: create modal ----------
+  $('btn-new-page').addEventListener('click', () => openNewPageModal());
+
+  function openNewPageModal(){
+    const root = $('modal-root');
+    root.innerHTML = `
+      <div class="modal-bg" id="mb">
+        <div class="modal" role="dialog" aria-modal="true">
+          <h3>New page</h3>
+          <p class="sub">Creates a draft. You can edit content and publish in the next step.</p>
+          <label>Title (English)</label>
+          <input id="np-title" placeholder="About us" autofocus>
+          <label>URL slug</label>
+          <input id="np-slug" placeholder="about-us">
+          <div class="sub" style="font-size:12px;margin-top:6px;">Will live at <code>/p/&lt;slug&gt;</code>.</div>
+          <div class="err" id="np-err"></div>
+          <div class="actions">
+            <button class="btn ghost" id="np-cancel">Cancel</button>
+            <button class="btn" id="np-create">Create draft</button>
+          </div>
+        </div>
+      </div>`;
+    const close = () => { root.innerHTML = ''; };
+    $('mb').addEventListener('click', (e) => { if(e.target.id === 'mb') close(); });
+    $('np-cancel').addEventListener('click', close);
+
+    const titleEl = $('np-title'), slugEl = $('np-slug'), errEl = $('np-err');
+    // Auto-slug from title unless user has typed a slug manually.
+    let slugTouched = false;
+    slugEl.addEventListener('input', () => { slugTouched = true; });
+    titleEl.addEventListener('input', () => {
+      if(!slugTouched) slugEl.value = slugify(titleEl.value);
+    });
+
+    $('np-create').addEventListener('click', async () => {
+      errEl.textContent = '';
+      const title = titleEl.value.trim();
+      const slug  = slugify(slugEl.value || title);
+      if(!title){ errEl.textContent = 'Please enter a title.'; return; }
+      if(!slug){ errEl.textContent = 'Slug is required.'; return; }
+
+      const { error } = await sb.from('pages').insert({
+        slug,
+        title: { en: title },
+        blocks: [],
+        seo: {},
+        published: false,
+        show_in_nav: false,
+      });
+      if(error){
+        errEl.textContent = /duplicate/i.test(error.message)
+          ? `A page with slug "${slug}" already exists.`
+          : error.message;
+        return;
+      }
+      close();
+      toast(`Draft "${title}" created.`);
+      loadPages();
+    });
+  }
+
+  // ---------- utils ----------
+  function escapeHtml(s){
+    return String(s == null ? '' : s).replace(/[&<>]/g, c => (
+      { '&':'&amp;', '<':'&lt;', '>':'&gt;' }[c]
+    ));
+  }
+
+  boot();
+</script>
+
+</body>
+</html>
