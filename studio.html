@@ -91,6 +91,38 @@
   .link-out p{margin:0;color:var(--muted);font-size:14px;}
   .link-out a{margin-left:auto;}
 
+  /* Embedded backoffice (Blog / Real Estate) */
+  .embed-host{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;height:calc(100vh - 150px);min-height:520px;}
+  .embed-frame{width:100%;height:100%;border:0;display:block;background:#FDFCF9;}
+
+  /* Media library */
+  .media-card{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;position:relative;}
+  .media-card .thumb{width:100%;height:120px;object-fit:cover;display:block;background:#f4f3ee;}
+  .media-card .mc-bar{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line);}
+  .media-card .mc-bar button{flex:1;background:#fff;border:1px solid var(--line-strong);border-radius:7px;font-size:12px;font-weight:600;color:var(--navy);padding:6px 4px;cursor:pointer;font-family:inherit;}
+  .media-card .mc-bar button:hover{background:#f4f3ee;}
+  .media-card .mc-bar button.del{color:#b91c1c;border-color:#f0c4c4;}
+  .media-card .mc-bar button.del:hover{background:#fef2f2;}
+  .media-card .mc-name{font-size:11px;color:var(--muted);padding:0 8px 8px;word-break:break-all;line-height:1.3;}
+
+  /* Nav manager rows */
+  .navrow{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid #f0eee7;}
+  .navrow:last-child{border-bottom:0;}
+  .navrow .nr-title{font-weight:600;font-size:15px;}
+  .navrow .nr-slug{color:var(--muted);font-size:13px;font-family:ui-monospace,Menlo,monospace;}
+  .navrow .nr-controls{margin-left:auto;display:flex;align-items:center;gap:10px;}
+  .navrow select{border:1.5px solid var(--line);border-radius:8px;padding:6px 8px;font-size:13px;font-family:inherit;color:var(--navy);background:#fff;}
+  .navrow .nr-move{display:flex;gap:2px;}
+  .navrow .nr-move button{background:#fff;border:1px solid var(--line-strong);border-radius:7px;width:28px;height:28px;cursor:pointer;color:var(--muted);}
+  .navrow .nr-move button:hover{background:#f4f3ee;color:var(--navy);}
+  .navrow .nr-move button:disabled{opacity:.35;cursor:default;}
+  .switch{position:relative;display:inline-block;width:42px;height:24px;}
+  .switch input{opacity:0;width:0;height:0;}
+  .switch .sl{position:absolute;inset:0;background:#d8d6cd;border-radius:999px;transition:.15s;cursor:pointer;}
+  .switch .sl:before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.15s;}
+  .switch input:checked + .sl{background:#15803d;}
+  .switch input:checked + .sl:before{transform:translateX(18px);}
+
   /* Toast */
   .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 22px;border-radius:10px;font-size:14px;box-shadow:0 8px 30px rgba(0,0,0,.25);opacity:0;transition:opacity .25s;z-index:99;}
   .toast.show{opacity:1;}
@@ -337,12 +369,10 @@
       <a class="nav-item" data-section="real-estate" href="#real-estate">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9v11h14V9"/><path d="M10 20v-6h4v6"/></svg>
         <span>Real Estate</span>
-        <span class="ext">EXT ↗</span>
       </a>
       <a class="nav-item" data-section="blog" href="#blog">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h13a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
         <span>Blog</span>
-        <span class="ext">EXT ↗</span>
       </a>
       <a class="nav-item" data-section="content" href="#content">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1.5"/><circle cx="3" cy="12" r="1.5"/><circle cx="3" cy="18" r="1.5"/></svg>
@@ -390,28 +420,26 @@
 
     <!-- ================= REAL ESTATE (external for now) ============ -->
     <section class="section hidden" id="section-real-estate">
-      <div class="page-head"><h2>Real Estate</h2></div>
-      <div class="link-out">
-        <div class="lo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9v11h14V9"/></svg></div>
+      <div class="page-head">
         <div>
-          <h3>Real Estate backoffice</h3>
-          <p>Properties, hero video and Real Estate page blocks. Being consolidated into the Studio in a later step — for now it lives at its own URL and continues to work as before.</p>
+          <h2>Real Estate</h2>
+          <div class="sub">Properties, hero video and Real Estate page blocks.</div>
         </div>
-        <a class="btn ghost" href="/admin-real-estate.html">Open ↗</a>
+        <a class="btn ghost" id="re-open-tab" href="/admin-real-estate.html" target="_blank" rel="noopener">Open full screen ↗</a>
       </div>
+      <div class="embed-host"><iframe id="re-frame" class="embed-frame" title="Real Estate backoffice" src="about:blank"></iframe></div>
     </section>
 
-    <!-- ================= BLOG (external) ============================ -->
+    <!-- ================= BLOG (embedded) =========================== -->
     <section class="section hidden" id="section-blog">
-      <div class="page-head"><h2>Blog</h2></div>
-      <div class="link-out">
-        <div class="lo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M4 4h13a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+      <div class="page-head">
         <div>
-          <h3>Blog posts</h3>
-          <p>Create and edit posts, categories and translations. Lives at the existing admin.</p>
+          <h2>Blog</h2>
+          <div class="sub">Create and edit posts, categories and translations.</div>
         </div>
-        <a class="btn ghost" href="/admin.html">Open ↗</a>
+        <a class="btn ghost" id="blog-open-tab" href="/admin.html" target="_blank" rel="noopener">Open full screen ↗</a>
       </div>
+      <div class="embed-host"><iframe id="blog-frame" class="embed-frame" title="Blog backoffice" src="about:blank"></iframe></div>
     </section>
 
     <!-- ================= CONTENT (external) ========================= -->
@@ -429,24 +457,32 @@
       </div>
     </section>
 
-    <!-- ================= MEDIA (stub) ================================ -->
+    <!-- ================= MEDIA (native) ============================= -->
     <section class="section hidden" id="section-media">
-      <div class="page-head"><h2>Media</h2></div>
-      <div class="empty">
-        <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 18l6-5 4 3 3-2 5 4"/></svg></div>
-          <h3>Coming next</h3>
-          <p>A shared media library for the whole site (uploads to <code>site-media</code>).</p>
+      <div class="page-head">
+        <div>
+          <h2>Media</h2>
+          <div class="sub">Shared image library (bucket <code>site-media</code>). Upload, copy URL, delete.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <select id="media-folder" class="btn ghost" style="padding:9px 12px;"></select>
+          <button class="btn" id="media-upload">Upload images</button>
+        </div>
+      </div>
+      <div id="media-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;">
+        <div style="color:var(--muted);padding:20px;">Loading…</div>
       </div>
     </section>
 
-    <!-- ================= NAV (stub) ================================== -->
+    <!-- ================= NAV (native) =============================== -->
     <section class="section hidden" id="section-nav">
-      <div class="page-head"><h2>Navigation</h2></div>
-      <div class="empty">
-        <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M3 6h18M3 12h12M3 18h18"/></svg></div>
-        <h3>Coming next</h3>
-        <p>Reorder menu items and toggle Studio pages into the header/mobile/footer.</p>
+      <div class="page-head">
+        <div>
+          <h2>Navigation</h2>
+          <div class="sub">Choose which Studio pages appear in the site menu, and in what order. The site's built-in links (Home, About, Blog…) are unchanged.</div>
+        </div>
       </div>
+      <div id="nav-list" class="card"><div style="padding:20px;color:var(--muted);">Loading…</div></div>
     </section>
 
     <!-- ================= SETTINGS (stub) ============================= -->
@@ -581,6 +617,10 @@
       s.classList.toggle('hidden', s.id !== `section-${name}`);
     });
     if(name === 'content') loadContentEditor();
+    if(name === 'media') loadMedia();
+    if(name === 'nav') loadNavManager();
+    if(name === 'real-estate') loadEmbed('re-frame', '/admin-real-estate.html');
+    if(name === 'blog') loadEmbed('blog-frame', '/admin.html');
   }
   function routeFromHash(){
     const raw = (location.hash || '#pages').replace(/^#/, '');
@@ -609,6 +649,10 @@
     { label: 'Property Management', prefix: 'propmgmt.' },
     { label: 'Invest in Portugal',  prefix: 'invest.' },
     { label: 'Featured Opportunities', prefix: 'dev.' },
+    { label: 'Urban Collection',    prefix: 'urban.' },
+    { label: 'Terms & Conditions',  prefix: 'terms.' },
+    { label: 'Privacy Policy',      prefix: 'privacy.' },
+    { label: 'Contact',             prefix: 'contact.' },
     { label: 'Global / Footer',     prefix: 'global.' },
   ];
   let _contentLoaded = false;
@@ -722,6 +766,189 @@
     updateContentSaveBtn();
     toast(ok ? `Saved ${ok} field${ok>1?'s':''}. Live on the site.` : 'Nothing saved.');
   });
+
+  // ============================================================
+  // Embedded backoffices (Blog / Real Estate)
+  // ============================================================
+  // Loads the existing admin page in an iframe inside the Studio. The
+  // Supabase session is shared (same origin + project), so the embedded
+  // admin auto-authenticates — no second login. Zero logic rewrite.
+  const _embedLoaded = {};
+  function loadEmbed(frameId, src){
+    const f = document.getElementById(frameId);
+    if(!f || _embedLoaded[frameId]) return;
+    _embedLoaded[frameId] = true;
+    f.src = src;
+  }
+
+  // ============================================================
+  // Media library (bucket: site-media)
+  // ============================================================
+  const MEDIA_BUCKET = 'site-media';
+  const MEDIA_FOLDERS = [
+    { label: 'Studio uploads', path: 'studio' },
+    { label: 'Root',           path: '' },
+  ];
+  const IMG_EXT = /\.(jpe?g|png|gif|webp|avif|svg)$/i;
+  let _mediaFolderInit = false;
+  let mediaFolder = 'studio';
+
+  function initMediaControls(){
+    if(_mediaFolderInit) return;
+    _mediaFolderInit = true;
+    const sel = $('media-folder');
+    sel.innerHTML = MEDIA_FOLDERS.map(f => `<option value="${f.path}">${escapeHtml(f.label)}</option>`).join('');
+    sel.value = mediaFolder;
+    sel.addEventListener('change', () => { mediaFolder = sel.value; loadMedia(true); });
+    $('media-upload').addEventListener('click', () => {
+      const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true;
+      inp.addEventListener('change', async () => {
+        if(!inp.files.length) return;
+        const grid = $('media-grid');
+        grid.insertAdjacentHTML('afterbegin', '<div id="media-uploading" style="color:var(--muted);padding:10px;">Uploading…</div>');
+        for(const f of inp.files){
+          const ext = (f.name.split('.').pop() || 'jpg').toLowerCase();
+          const base = (mediaFolder ? mediaFolder + '/' : '') + Date.now() + '-' + Math.random().toString(36).slice(2,7) + '.' + ext;
+          const { error } = await sb.storage.from(MEDIA_BUCKET).upload(base, f, { cacheControl:'3600', upsert:false });
+          if(error) toast('Upload error: ' + error.message);
+        }
+        toast('Upload complete.');
+        loadMedia(true);
+      });
+      inp.click();
+    });
+  }
+
+  async function loadMedia(force){
+    initMediaControls();
+    const grid = $('media-grid');
+    if(force) grid._loaded = false;
+    if(grid._loaded && !force) return;
+    grid.innerHTML = '<div style="color:var(--muted);padding:20px;">Loading…</div>';
+    const { data, error } = await sb.storage.from(MEDIA_BUCKET).list(mediaFolder || '', {
+      limit: 200, sortBy: { column: 'created_at', order: 'desc' },
+    });
+    if(error){ grid.innerHTML = `<div class="empty" style="grid-column:1/-1;border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load media</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
+    const files = (data || []).filter(f => f.id && IMG_EXT.test(f.name)); // skip folders + non-images
+    grid._loaded = true;
+    if(!files.length){ grid.innerHTML = '<div class="empty" style="grid-column:1/-1;"><h3>No images here</h3><p>Upload images to this folder to get started.</p></div>'; return; }
+    grid.innerHTML = '';
+    files.forEach(f => {
+      const path = (mediaFolder ? mediaFolder + '/' : '') + f.name;
+      const url = sb.storage.from(MEDIA_BUCKET).getPublicUrl(path).data.publicUrl;
+      const card = document.createElement('div'); card.className = 'media-card';
+      card.innerHTML =
+        `<img class="thumb" src="${escapeAttrJS(url)}" alt="" loading="lazy" onerror="this.style.opacity=.3">` +
+        `<div class="mc-bar"><button data-a="copy">Copy URL</button><button data-a="del" class="del">Delete</button></div>` +
+        `<div class="mc-name">${escapeHtml(f.name)}</div>`;
+      card.querySelector('[data-a="copy"]').addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(url); toast('URL copied.'); }
+        catch(_){ prompt('Copy the image URL:', url); }
+      });
+      card.querySelector('[data-a="del"]').addEventListener('click', async () => {
+        if(!confirm(`Delete "${f.name}"? If a page uses it, the image will break there.`)) return;
+        const { error: e } = await sb.storage.from(MEDIA_BUCKET).remove([path]);
+        if(e){ toast('Delete failed: ' + e.message); return; }
+        toast('Deleted.'); loadMedia(true);
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  // ============================================================
+  // Navigation manager — Studio pages' menu placement.
+  // Only touches the `pages` table (show_in_nav / nav_group /
+  // nav_position). The site's hardcoded links are never modified.
+  // ============================================================
+  const NAV_GROUPS = [
+    { value: '',           label: 'Top level' },
+    { value: 'properties', label: 'Under “Properties”' },
+  ];
+  async function loadNavManager(){
+    const list = $('nav-list');
+    list.innerHTML = '<div style="padding:20px;color:var(--muted);">Loading…</div>';
+    const { data, error } = await sb.from('pages')
+      .select('id,slug,title,published,show_in_nav,nav_group,nav_position')
+      .order('nav_position', { ascending: true })
+      .order('slug', { ascending: true });
+    if(error){ list.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
+    renderNavManager(data || []);
+  }
+
+  function renderNavManager(pages){
+    const list = $('nav-list');
+    if(!pages.length){
+      list.innerHTML = '<div class="empty" style="border:0;"><h3>No Studio pages yet</h3><p>Create a page under “Pages”, then choose here whether it shows in the site menu.</p></div>';
+      return;
+    }
+    // Show pages that are in-menu first (in order), then the rest.
+    const inMenu = pages.filter(p => p.show_in_nav);
+    const off    = pages.filter(p => !p.show_in_nav);
+    list.innerHTML = '';
+    const section = (label, arr, showMove) => {
+      if(!arr.length) return;
+      const h = document.createElement('div');
+      h.style.cssText = 'padding:10px 18px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);background:#fafaf5;border-bottom:1px solid #f0eee7;';
+      h.textContent = label;
+      list.appendChild(h);
+      arr.forEach((p, i) => list.appendChild(navRow(p, i, arr.length, showMove)));
+    };
+    section('In the menu', inMenu, true);
+    section('Not shown', off, false);
+  }
+
+  function navRow(p, idx, total, showMove){
+    const row = document.createElement('div'); row.className = 'navrow';
+    const title = pick(p.title) || '(untitled)';
+    const grpOpts = NAV_GROUPS.map(g => `<option value="${g.value}" ${(p.nav_group||'')===g.value?'selected':''}>${escapeHtml(g.label)}</option>`).join('');
+    row.innerHTML = `
+      <label class="switch"><input type="checkbox" ${p.show_in_nav?'checked':''} data-a="toggle"><span class="sl"></span></label>
+      <div style="min-width:0;">
+        <div class="nr-title">${escapeHtml(title)}</div>
+        <div class="nr-slug">/p/${escapeHtml(p.slug)}${p.published?'':' · draft'}</div>
+      </div>
+      <div class="nr-controls">
+        ${showMove ? `<select data-a="group" title="Menu placement">${grpOpts}</select>
+        <div class="nr-move"><button data-a="up" ${idx===0?'disabled':''}>↑</button><button data-a="down" ${idx===total-1?'disabled':''}>↓</button></div>` : ''}
+      </div>`;
+
+    row.querySelector('[data-a="toggle"]').addEventListener('change', async (e) => {
+      const on = e.target.checked;
+      const patch = { show_in_nav: on };
+      if(on && (p.nav_position == null)) patch.nav_position = 100;
+      const { error } = await sb.from('pages').update(patch).eq('id', p.id);
+      if(error){ toast('Error: ' + error.message); e.target.checked = !on; return; }
+      if(!p.published && on) toast('Shown in menu once the page is published.');
+      else toast(on ? 'Added to menu.' : 'Removed from menu.');
+      loadNavManager();
+    });
+    const grp = row.querySelector('[data-a="group"]');
+    if(grp) grp.addEventListener('change', async () => {
+      const { error } = await sb.from('pages').update({ nav_group: grp.value || null }).eq('id', p.id);
+      if(error){ toast('Error: ' + error.message); return; }
+      toast('Placement updated.');
+    });
+    row.querySelectorAll('[data-a="up"],[data-a="down"]').forEach(b => b.addEventListener('click', () => moveNavPage(p, b.dataset.a)));
+    return row;
+  }
+
+  // Reorder by swapping nav_position with the neighbour in the in-menu list.
+  async function moveNavPage(p, dir){
+    const { data } = await sb.from('pages')
+      .select('id,nav_position')
+      .eq('show_in_nav', true)
+      .order('nav_position', { ascending: true });
+    const arr = data || [];
+    const i = arr.findIndex(x => x.id === p.id);
+    const j = dir === 'up' ? i - 1 : i + 1;
+    if(i < 0 || j < 0 || j >= arr.length) return;
+    // Normalise positions to their index, then swap the two.
+    const a = arr[i], b = arr[j];
+    const posA = a.nav_position ?? i, posB = b.nav_position ?? j;
+    await sb.from('pages').update({ nav_position: posB }).eq('id', a.id);
+    await sb.from('pages').update({ nav_position: posA }).eq('id', b.id);
+    loadNavManager();
+  }
 
   // ---------- Pages: list ----------
   async function loadPages(){
