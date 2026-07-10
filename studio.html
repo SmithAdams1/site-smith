@@ -122,6 +122,24 @@
   #section-editor .topbar .status.saving{color:#b45309;}
   #section-editor .topbar .status.saved{color:#15803d;}
   #section-editor .topbar .status.err{color:#b91c1c;}
+  #section-editor .topbar .locsel{display:inline-flex;background:#eceae2;border-radius:8px;padding:2px;}
+  #section-editor .topbar .locsel button{background:transparent;border:none;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;}
+  #section-editor .topbar .locsel button.on{background:#fff;color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.06);}
+  /* Show a subtle PT badge next to language-aware inputs when PT is active */
+  #section-editor.locale-pt .inspector label:after,#section-editor.locale-pt .topbar input.title-input:focus + .status:before{content:'';}
+  #section-editor.locale-pt .canvas{box-shadow:inset 0 0 0 2px rgba(70,109,238,.18);}
+
+  /* Preview modal */
+  #preview-modal{position:fixed;inset:0;background:rgba(12,30,40,.6);display:none;flex-direction:column;z-index:200;}
+  #preview-modal.open{display:flex;}
+  #preview-modal .pm-topbar{background:var(--navy);color:#fff;padding:10px 18px;display:flex;align-items:center;gap:14px;font-size:13px;}
+  #preview-modal .pm-topbar .pm-title{flex:1;font-weight:600;letter-spacing:.02em;}
+  #preview-modal .pm-topbar .pm-loc{background:rgba(255,255,255,.12);border-radius:999px;padding:3px 10px;font-size:11px;font-weight:700;letter-spacing:.05em;}
+  #preview-modal .pm-topbar .pm-actions{display:flex;gap:8px;}
+  #preview-modal .pm-topbar button{background:rgba(255,255,255,.14);border:none;color:#fff;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+  #preview-modal .pm-topbar button:hover{background:rgba(255,255,255,.22);}
+  #preview-modal .pm-topbar button.primary{background:#fff;color:var(--navy);}
+  #preview-modal iframe{flex:1;width:100%;border:0;background:#FDFCF9;}
   #section-editor .canvas{max-width:820px;margin:24px auto 100px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:40px 48px;min-height:60vh;}
   #section-editor .canvas.empty-canvas{padding:80px 40px;text-align:center;color:var(--muted);}
   #section-editor .canvas.empty-canvas h3{margin:16px 0 6px;color:var(--navy);font-size:17px;}
@@ -448,6 +466,11 @@
           <button class="back" id="ed-back" title="Back to Pages">← Pages</button>
           <input type="text" id="ed-title" class="title-input" placeholder="Untitled page">
           <span class="status" id="ed-status"></span>
+          <div class="locsel" role="tablist" aria-label="Language">
+            <button id="ed-loc-en" data-loc="en" class="on">EN</button>
+            <button id="ed-loc-pt" data-loc="pt">PT</button>
+          </div>
+          <button class="btn ghost" id="ed-preview" title="Open a preview of this page">Preview</button>
           <button class="btn ghost" id="ed-save">Save</button>
           <button class="btn" id="ed-publish">Publish</button>
         </div>
@@ -462,6 +485,19 @@
 <!-- Toast + Modal roots -->
 <div id="toast" class="toast"></div>
 <div id="modal-root"></div>
+
+<!-- Preview overlay: iframe rendering via the same server-side blocks renderer. -->
+<div id="preview-modal">
+  <div class="pm-topbar">
+    <span class="pm-title" id="pm-title">Preview</span>
+    <span class="pm-loc"   id="pm-loc">EN</span>
+    <div class="pm-actions">
+      <button id="pm-open-live" title="Open the live published URL in a new tab">Open live ↗</button>
+      <button id="pm-close" class="primary">Close</button>
+    </div>
+  </div>
+  <iframe id="pm-frame" title="Preview"></iframe>
+</div>
 
 <script type="module">
   // ============================================================
@@ -691,7 +727,7 @@
   //
   // v1 blocks: heading, richtext, image. Others land in 4b.
 
-  const LOCALE = 'en';       // 4c will add PT toggle
+  let LOCALE = 'en';         // toggled via the top-bar EN/PT switch
   const BLOCK_TYPES = ['heading', 'richtext', 'image', 'image_text', 'gallery', 'video', 'button', 'divider'];
 
   const editor = {
@@ -759,7 +795,12 @@
     editor.nav_group = data.nav_group || null;
     editor.nav_position = data.nav_position ?? 100;
 
-    $('ed-title').value = pick(editor.title) || '';
+    // Fresh page → reset to EN
+    LOCALE = 'en';
+    document.querySelectorAll('#section-editor .locsel button').forEach(b => b.classList.toggle('on', b.dataset.loc === 'en'));
+    document.getElementById('section-editor').classList.remove('locale-pt');
+
+    $('ed-title').value = pick(editor.title, LOCALE) || '';
     $('ed-publish').textContent = editor.published ? 'Unpublish' : 'Publish';
     $('ed-publish').style.background = editor.published ? '#6b7280' : 'var(--navy)';
     setStatus('saved', 'Saved');
@@ -1630,6 +1671,77 @@
     editor.title[LOCALE] = e.target.value;
     markDirty();
   });
+
+  // Locale toggle: swap EN/PT edit mode. Re-renders canvas + inspector
+  // so Quills, contenteditable widgets and inspector inputs pick up the
+  // right locale value. Never destructive — writes stay in their locale.
+  document.querySelectorAll('#section-editor .locsel button').forEach(b => {
+    b.addEventListener('click', () => setLocale(b.dataset.loc));
+  });
+  function setLocale(loc){
+    if(loc !== 'en' && loc !== 'pt') return;
+    if(LOCALE === loc) return;
+    LOCALE = loc;
+    document.querySelectorAll('#section-editor .locsel button').forEach(b => b.classList.toggle('on', b.dataset.loc === loc));
+    document.getElementById('section-editor').classList.toggle('locale-pt', loc === 'pt');
+    $('ed-title').value = pick(editor.title, LOCALE) || '';
+    renderCanvas();
+    renderInspector();
+  }
+
+  $('ed-preview').addEventListener('click', openPreview);
+  $('pm-close').addEventListener('click', closePreview);
+  $('pm-open-live').addEventListener('click', () => {
+    // Only meaningful once the page is published.
+    if(!editor.published){ toast('Publish first to open a shareable live URL.'); return; }
+    window.open(`/p/${encodeURIComponent(editor.slug)}`, '_blank');
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && document.getElementById('preview-modal').classList.contains('open')) closePreview();
+  });
+
+  async function openPreview(){
+    // Reuse the exact same page.html shell + shared server-side renderer
+    // so what you see here is byte-for-byte what /p/:slug will serve.
+    // Rendered in an iframe with srcdoc so unsaved changes are visible.
+    setStatus(editor.dirty ? 'unsaved' : 'saved', editor.dirty ? 'Unsaved (previewing local state)' : 'Saved');
+    const modal = document.getElementById('preview-modal');
+    const frame = document.getElementById('pm-frame');
+    $('pm-title').textContent = (pick(editor.title, LOCALE) || editor.slug || 'Preview') + '  ·  /p/' + editor.slug;
+    $('pm-loc').textContent = LOCALE.toUpperCase();
+    modal.classList.add('open');
+    frame.srcdoc = '<div style="padding:60px;text-align:center;font-family:system-ui;color:#6b7280;">Building preview…</div>';
+
+    try {
+      const [tpl, mod] = await Promise.all([
+        fetch('/page.html').then(r => r.text()),
+        import('/lib/renderBlocks.js'),
+      ]);
+      const bodyHtml = mod.renderBlocks(editor.blocks, LOCALE);
+      const seoTitle = pick(editor.seo && editor.seo.title, LOCALE) || pick(editor.title, LOCALE) || 'Preview';
+      const seoDesc  = pick(editor.seo && editor.seo.description, LOCALE) || '';
+      const title    = pick(editor.title, LOCALE) || 'Untitled';
+
+      const seoTags =
+        `<title>${escapeHtml(seoTitle)} · Preview</title>` +
+        `<meta name="description" content="${escapeAttrJS(seoDesc)}">` +
+        `<meta name="robots" content="noindex,nofollow">`;
+      const shellBody =
+        `<h1 class="satoshi text-4xl md:text-5xl font-bold text-[#0C1E28] text-center mt-16 mb-4">${escapeHtml(title)}</h1>` +
+        `<div id="studio-blocks">${bodyHtml}</div>`;
+
+      const html = tpl
+        .replace(/<!-- STUDIO_SEO -->[\s\S]*?<!-- \/STUDIO_SEO -->/, `<!-- STUDIO_SEO -->${seoTags}<!-- /STUDIO_SEO -->`)
+        .replace(/<!-- STUDIO_BODY -->[\s\S]*?<!-- \/STUDIO_BODY -->/, `<!-- STUDIO_BODY -->${shellBody}<!-- /STUDIO_BODY -->`);
+      frame.srcdoc = html;
+    } catch(e){
+      frame.srcdoc = `<div style="padding:60px;text-align:center;font-family:system-ui;color:#b91c1c;">Preview error: ${escapeHtml(e.message)}</div>`;
+    }
+  }
+  function closePreview(){
+    document.getElementById('preview-modal').classList.remove('open');
+    document.getElementById('pm-frame').srcdoc = '';
+  }
 
   $('ed-save').addEventListener('click', () => savePage(false));
   $('ed-publish').addEventListener('click', () => savePage(true));
