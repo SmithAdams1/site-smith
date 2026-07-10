@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- STUDIO_SEO -->
+<title>Smith &amp; Adams</title>
+<meta name="description" content="Smith &amp; Adams — Portugal real estate."/>
+<!-- /STUDIO_SEO -->
+<link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { corePlugins: { preflight: false } }</script>
+<style>
+  .satoshi{font-family:'Satoshi','General Sans',system-ui,sans-serif;}
+  .geist{font-family:'General Sans','Satoshi',system-ui,sans-serif;}
+  body{font-family:'Satoshi','General Sans',system-ui,sans-serif;}
+  /* Rich-text (Quill output) — mirror property.html's pd-desc rules so
+     that headings, lists and paragraphs read the same across the site. */
+  .rt p{margin:0 0 14px;}
+  .rt h2,.rt h3,.rt h4{color:#0C1E28;font-weight:700;margin:20px 0 10px;}
+  .rt ul{list-style:disc;padding-left:20px;margin:0 0 14px;}
+  .rt ol{list-style:decimal;padding-left:20px;margin:0 0 14px;}
+  .rt a{color:#0C1E28;text-decoration:underline;}
+  .rt strong{font-weight:700;}
+  /* Hide horizontal scrollbar on carousels (still scrollable) */
+  [data-studio-carousel]::-webkit-scrollbar{display:none;}
+  [data-studio-carousel]{scrollbar-width:none;}
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18073134136');</script>
+<script defer src="/cms-loader.js"></script>
+</head>
+<body class="antialiased bg-[#FDFCF9] overflow-x-hidden w-full">
+<main class="min-h-screen">
+
+<!-- HEADER (dark; cms-loader rebuilds nav to standard structure) -->
+<header class="w-full z-50 bg-[#0C1E28]">
+  <div class="container mx-auto px-4 md:px-6 py-6 flex justify-between items-center">
+    <a class="relative z-40" href="/index.html"><img alt="Smith &amp; Adams Logo" width="150" height="40" class="h-10 w-auto invert-[1]" style="color:transparent" src="/logo.png"/></a>
+    <nav class="hidden lg:flex items-center space-x-8">
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/index.html">Home</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/about.html">About Us</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/our-developments.html">Our Developments</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/property-management.html">Property Management</a></div>
+      <div class="relative group"><a class="text-white hover:text-gray-300 satoshi" href="/blog.html">Blog</a></div>
+      <div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium satoshi" href="/contact.html">Contact Us</a></div>
+    </nav>
+    <button onclick="var m=document.getElementById('mobile-menu');['opacity-0','opacity-100','invisible','pointer-events-none'].forEach(c=>m.classList.toggle(c));" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white w-6"></span><span class="block h-0.5 bg-white my-1 w-4"></span><span class="block h-0.5 bg-white w-5"></span></div></button>
+  </div>
+  <div id="mobile-menu" class="fixed inset-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 opacity-0 invisible pointer-events-none" style="height:100vh">
+    <div class="flex flex-col items-center justify-center h-full space-y-8">
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/index.html">Home</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/about.html">About Us</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/invest-in-portugal.html">Invest in Portugal</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/our-developments.html">Our Developments</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/blog.html">Blog</a>
+      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="/contact.html">Contact</a>
+    </div>
+  </div>
+</header>
+
+<article class="container mx-auto px-4 md:px-6 max-w-6xl pb-24">
+<!-- STUDIO_BODY -->
+<div class="max-w-2xl mx-auto text-center py-32 satoshi">
+  <div class="spin" style="width:34px;height:34px;border:3px solid #e3e1da;border-top-color:#0C1E28;border-radius:50%;margin:0 auto;animation:respin .8s linear infinite;"></div>
+  <style>@keyframes respin{to{transform:rotate(360deg);}}</style>
+</div>
+<!-- /STUDIO_BODY -->
+</article>
+
+<!-- FOOTER -->
+<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8"><div class="md:col-span-4"><a href="/index.html"><img alt="Smith &amp; Adams Logo" width="160" height="32" class="invert h-8 w-auto" src="/logo.png"/></a><p class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams develops and manages prime residential real estate in Portugal.</p></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div><h4 class="font-semibold text-[18px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="satoshi text-[15px] text-gray-300"><a href="/index.html">Home</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/invest-in-portugal.html">Invest in Portugal</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/our-developments.html">Our Developments</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/blog.html">Blog</a></li></ul></div><div><h4 class="font-semibold text-[18px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="satoshi text-[15px] text-gray-300"><a href="/contact.html">Contact Us</a></li><li class="satoshi text-[15px] text-gray-300"><a href="tel:+351938227348">+351938227348</a></li><li class="satoshi text-[15px] text-gray-300"><a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li></ul></div><div><h4 class="font-semibold text-[18px] text-white geist">Legal</h4><ul class="list-none mt-4 space-y-3"><li class="satoshi text-[15px] text-gray-300"><a href="/terms.html">Terms &amp; Conditions</a></li><li class="satoshi text-[15px] text-gray-300"><a href="/privacy.html">Privacy Policy</a></li></ul></div></div></div><div class="w-full pt-6 border-t border-white/10 mt-10"><p class="satoshi text-[14px] text-gray-400">© Smith &amp; Adams Group. All rights reserved.</p></div></div></footer>
+
+</main>
+</body></html>
