@@ -406,6 +406,7 @@
     menu.style.cssText = 'position:absolute;left:0;top:100%;padding-top:16px;min-width:232px;opacity:0;visibility:hidden;transform:translateY(6px);transition:all .18s ease;z-index:60;';
     var inner = document.createElement('div');
     inner.style.cssText = 'background:#0C1E28;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.4);';
+    inner.dataset.navGroup = 'properties'; // Studio pages with nav_group='properties' nest here
     [['Featured Opportunities', '/our-developments.html'], ['Property Management', '/property-management.html']].forEach(function (c) {
       var a = document.createElement('a'); a.href = c[1]; a.textContent = c[0]; a.className = 'satoshi';
       a.style.cssText = 'display:block;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px;font-size:15px;white-space:nowrap;transition:background .15s;';
@@ -484,6 +485,72 @@
     });
   }
 
+  // ============================================================
+  // Auto-inject Studio pages (table `pages`, show_in_nav=true &
+  // published=true) into the desktop nav, mobile menu and footer.
+  // No edits to any static page's HTML. nav_group='properties' nests
+  // a page under the Properties dropdown; NULL = top-level.
+  // ============================================================
+  function injectStudioPages() {
+    var locale = getLocale();
+    fetch(SUPABASE_URL + '/rest/v1/pages?select=slug,title,nav_group,nav_position&published=eq.true&show_in_nav=eq.true&order=nav_position.asc', {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SUPABASE_ANON_KEY },
+    })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (rows) {
+        if (!Array.isArray(rows) || !rows.length) return;
+        rows.forEach(function (p) {
+          var t = p.title || {};
+          var label = t[locale] || t.en || t.pt || p.slug;
+          var href = '/p/' + p.slug;
+          var group = p.nav_group || null;
+
+          // ---- Desktop ----
+          var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
+          if (nav && !nav.querySelector('a[href="' + href + '"]')) {
+            var groupMenu = group ? nav.querySelector('[data-nav-group="' + group + '"]') : null;
+            if (groupMenu) {
+              var ga = document.createElement('a');
+              ga.href = href; ga.textContent = label; ga.className = 'satoshi';
+              ga.style.cssText = 'display:block;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px;font-size:15px;white-space:nowrap;transition:background .15s;';
+              ga.addEventListener('mouseenter', function () { ga.style.background = 'rgba(255,255,255,.1)'; });
+              ga.addEventListener('mouseleave', function () { ga.style.background = 'transparent'; });
+              groupMenu.appendChild(ga);
+            } else {
+              var w = document.createElement('div'); w.className = 'relative group';
+              w.innerHTML = '<a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="' + href + '">' + label + '</a>' +
+                '<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>';
+              var contactBtn = nav.querySelector('a[href="/contact.html"]');
+              var contactWrap = contactBtn && contactBtn.closest('div');
+              if (contactWrap && contactWrap.parentNode === nav) nav.insertBefore(w, contactWrap);
+              else nav.appendChild(w);
+            }
+          }
+
+          // ---- Mobile ----
+          var mobileInner = document.querySelector('#mobile-menu .flex.flex-col');
+          if (mobileInner && !mobileInner.querySelector('a[href="' + href + '"]')) {
+            var a = document.createElement('a');
+            a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
+            a.href = href; a.textContent = label;
+            var contactM = mobileInner.querySelector('a[href="/contact.html"], a[href="contact.html"]');
+            if (contactM) mobileInner.insertBefore(a, contactM); else mobileInner.appendChild(a);
+          }
+
+          // ---- Footer ----
+          var footerList = document.querySelector('footer ul.list-none');
+          if (footerList && !footerList.querySelector('a[href="' + href + '"]')) {
+            var li = document.createElement('li');
+            li.className = 'font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer';
+            li.innerHTML = '<a href="' + href + '">' + label + '</a>';
+            footerList.appendChild(li);
+          }
+        });
+        applyNavContrast(); // recolour the newly added desktop links
+      })
+      .catch(function (e) { console.warn('[cms-loader] studio pages nav', e); });
+  }
+
   function init() {
     loadContent();
     fixLegalLinks();
@@ -492,6 +559,7 @@
     if (SHOW_REAL_ESTATE) injectRealEstateNav(); // mobile + footer
     renameDevelopmentsNav();
     injectSwitcher();
+    injectStudioPages();   // async: adds published Studio pages to nav/mobile/footer
     applyNavContrast();
     setTimeout(applyNavContrast, 350); // after fonts/layout settle
     window.addEventListener('scroll', applyNavContrast, { passive: true });
