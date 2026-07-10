@@ -181,6 +181,69 @@
   .b-richtext .ql-toolbar.ql-snow{border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:#fff;display:none;}
   .b-richtext.selected .ql-toolbar.ql-snow{display:block;}
 
+  /* Image+Text */
+  .b-imgtxt{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:center;}
+  .b-imgtxt.side-right{grid-template-columns:1fr 1fr;}
+  .b-imgtxt.side-right .imgtxt-media{order:2;}
+  .b-imgtxt .imgtxt-media img{width:100%;height:auto;border-radius:10px;display:block;}
+  .b-imgtxt .imgtxt-media .drop{border:2px dashed var(--line-strong);border-radius:12px;padding:34px 16px;text-align:center;color:var(--muted);cursor:pointer;font-size:13px;}
+  .b-imgtxt .imgtxt-media .drop:hover{background:#fafaf5;border-color:var(--navy);}
+  .b-imgtxt .imgtxt-text .it-title{font-size:22px;font-weight:700;color:var(--navy);outline:none;margin:0 0 8px;}
+  .b-imgtxt .imgtxt-text .it-title:empty:before{content:attr(data-placeholder);color:#bbb;}
+  .b-imgtxt .imgtxt-text .it-body .ql-editor{font-size:15px;line-height:1.55;padding:0;min-height:40px;}
+  .b-imgtxt .imgtxt-text .it-body .ql-container.ql-snow{border:none;}
+  .b-imgtxt .imgtxt-text .it-body .ql-toolbar.ql-snow{border:1px solid var(--line);border-radius:8px;margin-bottom:6px;display:none;}
+  .b-imgtxt.selected .imgtxt-text .it-body .ql-toolbar.ql-snow{display:block;}
+  .b-imgtxt .it-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 20px;border-radius:999px;background:var(--navy);color:#fff;font-weight:600;font-size:14px;}
+  .b-imgtxt .it-cta[contenteditable]{outline:none;}
+  .b-imgtxt .it-cta:empty:before{content:attr(data-placeholder);color:rgba(255,255,255,.6);}
+  .b-imgtxt.cta-ghost .it-cta{background:#fff;color:var(--navy);border:1.5px solid var(--navy);}
+  @media (max-width:640px){.b-imgtxt{grid-template-columns:1fr;}.b-imgtxt.side-right .imgtxt-media{order:0;}}
+
+  /* Gallery */
+  .b-gallery .gal-empty{border:2px dashed var(--line-strong);border-radius:12px;padding:32px;text-align:center;color:var(--muted);}
+  .b-gallery .gal-strip{display:flex;gap:8px;flex-wrap:wrap;}
+  .b-gallery .gal-thumb{position:relative;width:120px;height:90px;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:#eee;}
+  .b-gallery .gal-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .b-gallery .gal-thumb .rm{position:absolute;top:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;border:none;width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;padding:0;}
+  .b-gallery .gal-thumb .mv{position:absolute;bottom:4px;left:4px;display:flex;gap:2px;}
+  .b-gallery .gal-thumb .mv button{background:rgba(255,255,255,.9);border:none;width:22px;height:22px;border-radius:6px;font-size:11px;cursor:pointer;padding:0;color:var(--navy);}
+  .b-gallery .gal-add{width:120px;height:90px;border-radius:8px;background:transparent;border:2px dashed var(--line-strong);color:var(--muted);font-size:24px;cursor:pointer;font-family:inherit;transition:background .12s,border-color .12s,color .12s;}
+  .b-gallery .gal-add:hover{background:#fafaf5;border-color:var(--navy);color:var(--navy);}
+
+  /* Video */
+  .b-video .v-drop{border:2px dashed var(--line-strong);border-radius:12px;padding:28px;text-align:center;color:var(--muted);}
+  .b-video .v-drop h4{margin:0 0 6px;color:var(--navy);font-size:14px;font-weight:600;}
+  .b-video .v-drop input[type=text]{width:100%;max-width:480px;margin:12px auto 0;padding:9px 12px;border:1.5px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit;color:var(--navy);outline:none;background:#fff;}
+  .b-video .v-drop input[type=text]:focus{border-color:var(--navy);}
+  .b-video .v-drop .v-actions{display:flex;gap:10px;justify-content:center;margin-top:14px;}
+  .b-video .v-drop button{background:#fff;border:1.5px solid var(--line-strong);border-radius:9px;padding:8px 14px;font-size:13px;color:var(--navy);cursor:pointer;font-weight:600;font-family:inherit;}
+  .b-video .v-drop button:hover{border-color:var(--navy);}
+  .b-video .v-drop .v-src{display:inline-flex;background:#eceae2;border-radius:7px;padding:2px;margin-bottom:12px;}
+  .b-video .v-drop .v-src button{background:transparent;border:none;padding:5px 12px;font-size:12px;font-weight:600;color:var(--muted);border-radius:5px;}
+  .b-video .v-drop .v-src button.on{background:#fff;color:var(--navy);}
+  .b-video .v-frame{position:relative;padding-top:56.25%;background:#000;border-radius:10px;overflow:hidden;}
+  .b-video .v-frame iframe,.b-video .v-frame video{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover;}
+
+  /* Button */
+  .b-button{display:flex;justify-content:center;padding:8px 0;}
+  .b-button.align-left{justify-content:flex-start;}
+  .b-button.align-right{justify-content:flex-end;}
+  .b-button .btn-widget{display:inline-flex;align-items:center;padding:12px 26px;border-radius:999px;background:var(--navy);color:#fff;font-weight:600;font-size:15px;min-width:120px;justify-content:center;outline:none;font-family:inherit;}
+  .b-button .btn-widget:empty:before{content:attr(data-placeholder);color:rgba(255,255,255,.6);}
+  .b-button.style-ghost .btn-widget{background:#fff;color:var(--navy);border:1.5px solid var(--navy);}
+  .b-button.style-ghost .btn-widget:empty:before{color:#bbb;}
+  .b-button .btn-href-hint{margin-left:14px;color:var(--muted);font-size:12px;align-self:center;}
+
+  /* Divider */
+  .b-divider{padding:6px 0;}
+  .b-divider.style-line hr{border:none;border-top:1px solid var(--line);margin:12px 0;}
+  .b-divider.style-space.size-sm{height:24px;}
+  .b-divider.style-space.size-md{height:56px;}
+  .b-divider.style-space.size-lg{height:112px;}
+  .b-divider.style-space{background:repeating-linear-gradient(-45deg,rgba(0,0,0,.02),rgba(0,0,0,.02) 8px,transparent 8px,transparent 16px);border-radius:6px;}
+  .block-shell.selected .b-divider.style-space{outline:1px dashed var(--accent);}
+
   /* Add-block affordances */
   .add-slot{position:relative;height:14px;display:flex;align-items:center;justify-content:center;}
   .add-slot .plus{opacity:0;background:#fff;border:1px solid var(--line-strong);border-radius:999px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;transition:opacity .12s,color .12s,border-color .12s;font-size:14px;font-weight:700;}
@@ -629,7 +692,7 @@
   // v1 blocks: heading, richtext, image. Others land in 4b.
 
   const LOCALE = 'en';       // 4c will add PT toggle
-  const BLOCK_TYPES = ['heading', 'richtext', 'image'];  // 4b: image_text, gallery, video, button, divider
+  const BLOCK_TYPES = ['heading', 'richtext', 'image', 'image_text', 'gallery', 'video', 'button', 'divider'];
 
   const editor = {
     open: false,
@@ -787,9 +850,14 @@
   function renderBlockWidget(block){
     const el = document.createElement('div');
     switch(block.type){
-      case 'heading':   return renderHeading(block, el);
-      case 'richtext':  return renderRichText(block, el);
-      case 'image':     return renderImage(block, el);
+      case 'heading':    return renderHeading(block, el);
+      case 'richtext':   return renderRichText(block, el);
+      case 'image':      return renderImage(block, el);
+      case 'image_text': return renderImageText(block, el);
+      case 'gallery':    return renderGallery(block, el);
+      case 'video':      return renderVideo(block, el);
+      case 'button':     return renderButton(block, el);
+      case 'divider':    return renderDivider(block, el);
       default:
         el.textContent = `Unknown block type: ${block.type}`;
         el.style.color = '#b91c1c';
@@ -908,6 +976,249 @@
     return el;
   }
 
+  // ---------- Image+Text widget ----------
+  function renderImageText(block, el){
+    const data = block.data || (block.data = {});
+    data.side = data.side || 'left';
+    data.image = data.image || { alt: {} };
+    data.title = data.title || {};
+    data.body  = data.body  || {};
+    el.className = `b-imgtxt side-${data.side}` + (data.cta ? (data.cta.style === 'ghost' ? ' cta-ghost' : '') : '') + (editor.selectedId === block.id ? ' selected' : '');
+
+    // Media column
+    const media = document.createElement('div'); media.className = 'imgtxt-media';
+    function drawMedia(){
+      media.innerHTML = '';
+      if(data.image.src){
+        const img = document.createElement('img');
+        img.src = data.image.src; img.alt = pick(data.image.alt) || '';
+        media.appendChild(img);
+      } else {
+        const drop = document.createElement('div'); drop.className = 'drop';
+        drop.textContent = 'Click to upload image';
+        drop.addEventListener('click', () => {
+          const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*';
+          inp.addEventListener('change', async () => {
+            const f = inp.files && inp.files[0]; if(!f) return;
+            const url = await uploadFile(f, drop);
+            if(url){ data.image.src = url; markDirty(); drawMedia(); renderInspector(); }
+          });
+          inp.click();
+        });
+        media.appendChild(drop);
+      }
+    }
+    drawMedia();
+
+    // Text column
+    const text = document.createElement('div'); text.className = 'imgtxt-text';
+    const titleEl = document.createElement('div');
+    titleEl.className = 'it-title';
+    titleEl.setAttribute('contenteditable', 'plaintext-only');
+    titleEl.setAttribute('data-placeholder', 'Section title…');
+    titleEl.textContent = pick(data.title) || '';
+    titleEl.addEventListener('input', () => { data.title[LOCALE] = titleEl.textContent; markDirty(); });
+    titleEl.addEventListener('focus', () => selectBlock(block.id));
+    text.appendChild(titleEl);
+
+    const bodyHost = document.createElement('div'); bodyHost.className = 'it-body';
+    const bodyInner = document.createElement('div');
+    bodyInner.innerHTML = pick(data.body) || '';
+    bodyHost.appendChild(bodyInner);
+    text.appendChild(bodyHost);
+    queueMicrotask(() => {
+      const q = new Quill(bodyInner, { theme: 'snow', placeholder: 'Write here…',
+        modules: { toolbar: [['bold','italic','link'],[{list:'ordered'},{list:'bullet'}],['clean']] } });
+      q.on('text-change', () => { data.body[LOCALE] = q.root.innerHTML; markDirty(); });
+      q.root.addEventListener('focus', () => selectBlock(block.id));
+      editor.quills.set(block.id + ':body', q);
+    });
+
+    if(data.cta){
+      const cta = document.createElement('div');
+      cta.className = 'it-cta';
+      cta.setAttribute('contenteditable', 'plaintext-only');
+      cta.setAttribute('data-placeholder', 'Button text');
+      cta.textContent = pick(data.cta.label) || '';
+      cta.addEventListener('input', () => {
+        data.cta.label = data.cta.label || {}; data.cta.label[LOCALE] = cta.textContent; markDirty();
+      });
+      cta.addEventListener('focus', () => selectBlock(block.id));
+      text.appendChild(cta);
+    }
+
+    el.appendChild(media);
+    el.appendChild(text);
+    return el;
+  }
+
+  // ---------- Gallery widget ----------
+  function renderGallery(block, el){
+    const data = block.data || (block.data = {});
+    data.layout = data.layout || 'grid';
+    data.images = Array.isArray(data.images) ? data.images : [];
+    el.className = 'b-gallery';
+
+    function draw(){
+      el.innerHTML = '';
+      const header = document.createElement('div');
+      header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;';
+      header.innerHTML = `<div style="font-size:12px;color:var(--muted);font-weight:600;">Gallery · ${data.layout} · ${data.images.length} image${data.images.length===1?'':'s'}</div>`;
+      el.appendChild(header);
+      if(!data.images.length){
+        const empty = document.createElement('div'); empty.className = 'gal-empty';
+        empty.innerHTML = '<div style="font-weight:600;color:#0C1E28;">No images yet</div><div style="font-size:13px;margin-top:4px;">Click below to add.</div>';
+        el.appendChild(empty);
+      }
+      const strip = document.createElement('div'); strip.className = 'gal-strip';
+      data.images.forEach((im, i) => {
+        const t = document.createElement('div'); t.className = 'gal-thumb';
+        t.innerHTML =
+          `<img src="${escapeAttrJS(im.src)}" alt="">` +
+          `<div class="mv"><button data-a="l" title="Move left">←</button><button data-a="r" title="Move right">→</button></div>` +
+          `<button class="rm" title="Remove">×</button>`;
+        t.querySelector('.rm').addEventListener('click', (e) => { e.stopPropagation(); data.images.splice(i, 1); markDirty(); draw(); renderInspector(); });
+        t.querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const d = b.dataset.a === 'l' ? -1 : +1;
+          const j = i + d; if(j < 0 || j >= data.images.length) return;
+          const [it] = data.images.splice(i, 1); data.images.splice(j, 0, it);
+          markDirty(); draw();
+        }));
+        strip.appendChild(t);
+      });
+      const add = document.createElement('button'); add.className = 'gal-add'; add.textContent = '+';
+      add.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true;
+        inp.addEventListener('change', async () => {
+          for(const f of inp.files){
+            const url = await uploadFile(f, add);
+            if(url) data.images.push({ src: url, alt: {} });
+          }
+          markDirty(); draw(); renderInspector();
+        });
+        inp.click();
+      });
+      strip.appendChild(add);
+      el.appendChild(strip);
+    }
+    draw();
+    return el;
+  }
+
+  // ---------- Video widget ----------
+  function renderVideo(block, el){
+    const data = block.data || (block.data = {});
+    data.source = data.source || 'youtube';
+    el.className = 'b-video';
+
+    function embedUrl(){
+      const raw = (data.url || '').trim();
+      if(!raw) return '';
+      if(data.source === 'upload') return raw;
+      // Accept full URLs OR bare IDs
+      if(/^https?:\/\//.test(raw)){
+        // Try to extract ID for standard youtube/vimeo URLs to force embed form
+        const yt = raw.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]+)/);
+        if(yt && data.source === 'youtube') return `https://www.youtube.com/embed/${yt[1]}`;
+        const vi = raw.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+        if(vi && data.source === 'vimeo') return `https://player.vimeo.com/video/${vi[1]}`;
+        return raw;
+      }
+      if(data.source === 'youtube') return `https://www.youtube.com/embed/${raw}`;
+      if(data.source === 'vimeo') return `https://player.vimeo.com/video/${raw}`;
+      return '';
+    }
+
+    function draw(){
+      el.innerHTML = '';
+      const url = embedUrl();
+      if(url){
+        const frame = document.createElement('div'); frame.className = 'v-frame';
+        if(data.source === 'upload'){
+          const v = document.createElement('video'); v.src = url; v.controls = true; if(data.poster) v.poster = data.poster;
+          frame.appendChild(v);
+        } else {
+          const f = document.createElement('iframe'); f.src = url; f.allowFullscreen = true;
+          f.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+          frame.appendChild(f);
+        }
+        el.appendChild(frame);
+        return;
+      }
+      const drop = document.createElement('div'); drop.className = 'v-drop';
+      drop.innerHTML = `
+        <h4>Video</h4>
+        <div class="v-src">
+          <button data-s="youtube" class="${data.source==='youtube'?'on':''}">YouTube</button>
+          <button data-s="vimeo" class="${data.source==='vimeo'?'on':''}">Vimeo</button>
+          <button data-s="upload" class="${data.source==='upload'?'on':''}">Upload</button>
+        </div>
+        <div class="v-body"></div>`;
+      drop.querySelectorAll('.v-src button').forEach(b => b.addEventListener('click', () => { data.source = b.dataset.s; data.url = ''; markDirty(); draw(); renderInspector(); }));
+      const body = drop.querySelector('.v-body');
+      if(data.source === 'upload'){
+        const btn = document.createElement('button'); btn.textContent = 'Choose video file';
+        btn.addEventListener('click', () => {
+          const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'video/*';
+          inp.addEventListener('change', async () => {
+            const f = inp.files && inp.files[0]; if(!f) return;
+            const url = await uploadFile(f, btn);
+            if(url){ data.url = url; markDirty(); draw(); renderInspector(); }
+          });
+          inp.click();
+        });
+        body.appendChild(btn);
+      } else {
+        const inp = document.createElement('input'); inp.type = 'text';
+        inp.placeholder = data.source === 'youtube' ? 'YouTube URL or video ID' : 'Vimeo URL or ID';
+        inp.value = data.url || '';
+        inp.addEventListener('change', () => { data.url = inp.value.trim(); markDirty(); draw(); renderInspector(); });
+        body.appendChild(inp);
+      }
+      el.appendChild(drop);
+    }
+    draw();
+    return el;
+  }
+
+  // ---------- Button widget ----------
+  function renderButton(block, el){
+    const data = block.data || (block.data = {});
+    data.style = data.style || 'primary';
+    data.align = data.align || 'center';
+    data.label = data.label || {};
+    el.className = `b-button style-${data.style} align-${data.align}`;
+    const btn = document.createElement('div');
+    btn.className = 'btn-widget';
+    btn.setAttribute('contenteditable', 'plaintext-only');
+    btn.setAttribute('data-placeholder', 'Button label');
+    btn.textContent = pick(data.label) || '';
+    btn.addEventListener('input', () => { data.label[LOCALE] = btn.textContent; markDirty(); });
+    btn.addEventListener('focus', () => selectBlock(block.id));
+    btn.addEventListener('keydown', (e) => { if(e.key==='Enter'){ e.preventDefault(); btn.blur(); }});
+    el.appendChild(btn);
+    if(data.href){
+      const hint = document.createElement('span'); hint.className = 'btn-href-hint';
+      hint.textContent = '→ ' + data.href;
+      el.appendChild(hint);
+    }
+    return el;
+  }
+
+  // ---------- Divider widget ----------
+  function renderDivider(block, el){
+    const data = block.data || (block.data = {});
+    data.style = data.style || 'line';
+    data.size  = data.size  || 'md';
+    el.className = `b-divider style-${data.style} size-${data.size}`;
+    if(data.style === 'line'){
+      el.innerHTML = '<hr/>';
+    }
+    return el;
+  }
+
   async function uploadFile(file, dropEl){
     if(dropEl) dropEl.classList.add('uploading');
     try {
@@ -941,9 +1252,14 @@
     if(!BLOCK_TYPES.includes(type)) return;
     const block = { id: newBlockId(), type, data: {} };
     // Sensible defaults
-    if(type === 'heading') block.data = { level: 'h2', align: 'left', text: {} };
-    if(type === 'richtext') block.data = { html: {} };
-    if(type === 'image')   block.data = { align: 'center', width: 'contained', alt: {}, caption: {} };
+    if(type === 'heading')    block.data = { level: 'h2', align: 'left', text: {} };
+    if(type === 'richtext')   block.data = { html: {} };
+    if(type === 'image')      block.data = { align: 'center', width: 'contained', alt: {}, caption: {} };
+    if(type === 'image_text') block.data = { side: 'left', image: { alt: {} }, title: {}, body: {}, cta: null };
+    if(type === 'gallery')    block.data = { layout: 'grid', images: [] };
+    if(type === 'video')      block.data = { source: 'youtube', url: '', muted: true };
+    if(type === 'button')     block.data = { label: {}, href: '', style: 'primary', align: 'center' };
+    if(type === 'divider')    block.data = { style: 'line', size: 'md' };
     const idx = Math.max(0, Math.min(atIndex, editor.blocks.length));
     editor.blocks.splice(idx, 0, block);
     editor.selectedId = block.id;
@@ -992,12 +1308,16 @@
     const p = document.createElement('div');
     p.className = 'picker';
     const items = [
-      { type: 'heading',  label: 'Heading',   icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 4v16M18 4v16M6 12h12"/></svg>' },
-      { type: 'richtext', label: 'Rich text', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h10"/></svg>' },
-      { type: 'image',    label: 'Image',     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 18l6-5 4 3 3-2 5 4"/></svg>' },
+      { type: 'heading',    label: 'Heading',      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 4v16M18 4v16M6 12h12"/></svg>' },
+      { type: 'richtext',   label: 'Rich text',    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h10"/></svg>' },
+      { type: 'image',      label: 'Image',        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M3 18l6-5 4 3 3-2 5 4"/></svg>' },
+      { type: 'image_text', label: 'Image + text', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="9" height="14" rx="1.5"/><path d="M14 7h7M14 12h7M14 17h5"/></svg>' },
+      { type: 'gallery',    label: 'Gallery',      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="13" width="7" height="7" rx="1"/><rect x="14" y="13" width="7" height="7" rx="1"/></svg>' },
+      { type: 'video',      label: 'Video',        icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><polygon points="10 9 15 12 10 15" fill="currentColor" stroke="none"/></svg>' },
+      { type: 'button',     label: 'Button / CTA', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="8" width="18" height="8" rx="4"/></svg>' },
+      { type: 'divider',    label: 'Divider',      icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18"/></svg>' },
     ];
-    p.innerHTML = items.map(i => `<button data-t="${i.type}">${i.icon}<span>${i.label}</span></button>`).join('') +
-      '<div class="disabled">More blocks coming in 4b (Image+Text, Gallery, Video, Button, Divider)</div>';
+    p.innerHTML = items.map(i => `<button data-t="${i.type}">${i.icon}<span>${i.label}</span></button>`).join('');
     p.addEventListener('click', (e) => {
       const btn = e.target.closest('button[data-t]'); if(!btn) return;
       addBlock(btn.dataset.t, insertIndex);
@@ -1147,6 +1467,131 @@
           inp.click();
         });
       }
+    } else if(block.type === 'image_text'){
+      box.innerHTML = `
+        <div class="ins-block">
+          <h4>Image + text</h4>
+          <label>Image side</label>
+          <div class="segmented" data-k="side">
+            <button data-v="left"  class="${data.side==='left'?'on':''}">Left</button>
+            <button data-v="right" class="${data.side==='right'?'on':''}">Right</button>
+          </div>
+          <label>Image alt</label>
+          <input type="text" id="ins-alt" value="${escapeAttrJS(pick(data.image && data.image.alt))}">
+          <label class="toggle" style="margin-top:14px;"><input type="checkbox" id="ins-cta" ${data.cta ? 'checked' : ''}> Show CTA button</label>
+          <div id="cta-panel" ${data.cta ? '' : 'style="display:none;"'}>
+            <label>Link URL</label>
+            <input type="text" id="ins-href" value="${escapeAttrJS(data.cta && data.cta.href || '')}" placeholder="/contact.html">
+            <label>Style</label>
+            <div class="segmented" data-k="cta-style">
+              <button data-v="primary" class="${(data.cta && data.cta.style)==='primary'?'on':''}">Primary</button>
+              <button data-v="ghost"   class="${(data.cta && data.cta.style)==='ghost'?'on':''}">Ghost</button>
+            </div>
+          </div>
+        </div>
+        ${blockActions(block)}`;
+      box.querySelectorAll('.segmented[data-k="side"] button').forEach(b => b.addEventListener('click', () => {
+        data.side = b.dataset.v; markDirty(); renderCanvas(); renderInspector();
+      }));
+      box.querySelector('#ins-alt').addEventListener('input', (e) => {
+        data.image = data.image || { alt: {} }; data.image.alt = data.image.alt || {}; data.image.alt[LOCALE] = e.target.value; markDirty();
+      });
+      box.querySelector('#ins-cta').addEventListener('change', (e) => {
+        data.cta = e.target.checked ? (data.cta || { label: {}, href: '', style: 'primary' }) : null;
+        markDirty(); renderCanvas(); renderInspector();
+      });
+      const href = box.querySelector('#ins-href');
+      if(href){ href.addEventListener('input', (e) => { data.cta.href = e.target.value; markDirty(); }); }
+      box.querySelectorAll('.segmented[data-k="cta-style"] button').forEach(b => b.addEventListener('click', () => {
+        data.cta.style = b.dataset.v; markDirty(); renderCanvas(); renderInspector();
+      }));
+    } else if(block.type === 'gallery'){
+      box.innerHTML = `
+        <div class="ins-block">
+          <h4>Gallery</h4>
+          <label>Layout</label>
+          <div class="segmented" data-k="layout">
+            <button data-v="grid"     class="${data.layout==='grid'?'on':''}">Grid</button>
+            <button data-v="carousel" class="${data.layout==='carousel'?'on':''}">Carousel</button>
+          </div>
+          <div style="color:var(--muted);font-size:13px;margin-top:14px;">${(data.images||[]).length} image${(data.images||[]).length===1?'':'s'}. Add / reorder / remove on the canvas.</div>
+        </div>
+        ${blockActions(block)}`;
+      box.querySelectorAll('.segmented[data-k="layout"] button').forEach(b => b.addEventListener('click', () => {
+        data.layout = b.dataset.v; markDirty(); renderCanvas(); renderInspector();
+      }));
+    } else if(block.type === 'video'){
+      box.innerHTML = `
+        <div class="ins-block">
+          <h4>Video</h4>
+          <label>Source</label>
+          <div class="segmented" data-k="source">
+            <button data-v="youtube" class="${data.source==='youtube'?'on':''}">YouTube</button>
+            <button data-v="vimeo"   class="${data.source==='vimeo'?'on':''}">Vimeo</button>
+            <button data-v="upload"  class="${data.source==='upload'?'on':''}">Upload</button>
+          </div>
+          <label>URL / ID</label>
+          <input type="text" id="ins-vurl" value="${escapeAttrJS(data.url || '')}" placeholder="${data.source==='upload'?'/site-media/…':'https://…'}">
+          <label>Poster image URL (optional)</label>
+          <input type="text" id="ins-poster" value="${escapeAttrJS(data.poster || '')}">
+          ${data.source==='upload' ? `
+          <label class="toggle" style="margin-top:8px;"><input type="checkbox" id="ins-autoplay" ${data.autoplay?'checked':''}> Autoplay</label>
+          <label class="toggle"><input type="checkbox" id="ins-loop" ${data.loop?'checked':''}> Loop</label>
+          <label class="toggle"><input type="checkbox" id="ins-muted" ${data.muted?'checked':''}> Muted</label>
+          ` : ''}
+        </div>
+        ${blockActions(block)}`;
+      box.querySelectorAll('.segmented[data-k="source"] button').forEach(b => b.addEventListener('click', () => {
+        data.source = b.dataset.v; data.url = ''; markDirty(); renderCanvas(); renderInspector();
+      }));
+      box.querySelector('#ins-vurl').addEventListener('change', (e) => { data.url = e.target.value.trim(); markDirty(); renderCanvas(); });
+      box.querySelector('#ins-poster').addEventListener('input', (e) => { data.poster = e.target.value.trim(); markDirty(); });
+      ['autoplay','loop','muted'].forEach(k => {
+        const el2 = box.querySelector('#ins-' + k);
+        if(el2) el2.addEventListener('change', (e) => { data[k] = e.target.checked; markDirty(); });
+      });
+    } else if(block.type === 'button'){
+      box.innerHTML = `
+        <div class="ins-block">
+          <h4>Button / CTA</h4>
+          <label>Link URL</label>
+          <input type="text" id="ins-href" value="${escapeAttrJS(data.href || '')}" placeholder="/contact.html">
+          <label>Style</label>
+          <div class="segmented" data-k="style">
+            <button data-v="primary" class="${data.style==='primary'?'on':''}">Primary</button>
+            <button data-v="ghost"   class="${data.style==='ghost'?'on':''}">Ghost</button>
+          </div>
+          <label>Alignment</label>
+          <div class="segmented" data-k="align">
+            ${[['left','⇦'],['center','⇔'],['right','⇨']].map(([v,t]) => `<button data-v="${v}" class="${data.align===v?'on':''}">${t}</button>`).join('')}
+          </div>
+        </div>
+        ${blockActions(block)}`;
+      box.querySelector('#ins-href').addEventListener('input', (e) => { data.href = e.target.value; markDirty(); renderCanvas(); });
+      box.querySelectorAll('.segmented[data-k] button').forEach(b => b.addEventListener('click', () => {
+        const k = b.parentElement.dataset.k; data[k] = b.dataset.v; markDirty(); renderCanvas(); renderInspector();
+      }));
+    } else if(block.type === 'divider'){
+      box.innerHTML = `
+        <div class="ins-block">
+          <h4>Divider</h4>
+          <label>Style</label>
+          <div class="segmented" data-k="style">
+            <button data-v="line"  class="${data.style==='line'?'on':''}">Line</button>
+            <button data-v="space" class="${data.style==='space'?'on':''}">Space</button>
+          </div>
+          ${data.style === 'space' ? `
+          <label>Size</label>
+          <div class="segmented" data-k="size">
+            <button data-v="sm" class="${data.size==='sm'?'on':''}">Small</button>
+            <button data-v="md" class="${data.size==='md'?'on':''}">Medium</button>
+            <button data-v="lg" class="${data.size==='lg'?'on':''}">Large</button>
+          </div>` : ''}
+        </div>
+        ${blockActions(block)}`;
+      box.querySelectorAll('.segmented[data-k] button').forEach(b => b.addEventListener('click', () => {
+        const k = b.parentElement.dataset.k; data[k] = b.dataset.v; markDirty(); renderCanvas(); renderInspector();
+      }));
     }
     // Wire actions
     box.querySelectorAll('[data-blkact]').forEach(btn => {
