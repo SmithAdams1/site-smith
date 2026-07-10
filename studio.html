@@ -346,8 +346,7 @@
       </a>
       <a class="nav-item" data-section="content" href="#content">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1.5"/><circle cx="3" cy="12" r="1.5"/><circle cx="3" cy="18" r="1.5"/></svg>
-        <span>Content</span>
-        <span class="ext">EXT ↗</span>
+        <span>Site pages</span>
       </a>
 
       <div class="group-label">Assets</div>
@@ -417,14 +416,16 @@
 
     <!-- ================= CONTENT (external) ========================= -->
     <section class="section hidden" id="section-content">
-      <div class="page-head"><h2>Content</h2></div>
-      <div class="link-out">
-        <div class="lo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="1.6"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1.5" fill="#0C1E28"/><circle cx="3" cy="12" r="1.5" fill="#0C1E28"/><circle cx="3" cy="18" r="1.5" fill="#0C1E28"/></svg></div>
+      <div class="page-head">
         <div>
-          <h3>Static-page content</h3>
-          <p>Key-value editor for the existing static pages (About, Home, Invest in Portugal, etc.). Being consolidated later — for now it lives at the existing admin.</p>
+          <h2>Site pages</h2>
+          <div class="sub">Edit the text of the existing pages (design stays intact) — EN / PT.</div>
         </div>
-        <a class="btn ghost" href="/admin.html">Open ↗</a>
+        <button class="btn" id="content-save" style="display:none;">Save changes</button>
+      </div>
+      <div id="content-layout" style="display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start;">
+        <div id="content-pagelist" style="display:flex;flex-direction:column;gap:4px;"></div>
+        <div id="content-fields"><div style="color:var(--muted);padding:20px;">Loading…</div></div>
       </div>
     </section>
 
@@ -579,6 +580,7 @@
       if(s.id === 'section-editor') return;
       s.classList.toggle('hidden', s.id !== `section-${name}`);
     });
+    if(name === 'content') loadContentEditor();
   }
   function routeFromHash(){
     const raw = (location.hash || '#pages').replace(/^#/, '');
@@ -595,6 +597,131 @@
     activateSection(section);
   }
   window.addEventListener('hashchange', routeFromHash);
+
+  // ============================================================
+  // Content: native field editor for the existing static pages.
+  // Reads/writes the site_content(key,value,locale) table that the
+  // live pages already consume via cms-loader. Design stays intact.
+  // ============================================================
+  const CONTENT_PAGES = [
+    { label: 'Home',                prefix: 'index.' },
+    { label: 'About',               prefix: 'about.' },
+    { label: 'Property Management', prefix: 'propmgmt.' },
+    { label: 'Invest in Portugal',  prefix: 'invest.' },
+    { label: 'Featured Opportunities', prefix: 'dev.' },
+    { label: 'Global / Footer',     prefix: 'global.' },
+  ];
+  let _contentLoaded = false;
+  let contentMap = {};   // key -> { en, pt }
+  let contentOrig = {};  // key -> { en, pt } (pristine)
+  let contentDirty = {}; // "key|loc" -> true
+  let contentActivePrefix = null;
+
+  async function loadContentEditor(){
+    if(_contentLoaded) return;
+    _contentLoaded = true;
+    const { data, error } = await sb.from('site_content').select('key,value,locale');
+    if(error){ $('content-fields').innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load content</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
+    contentMap = {}; contentOrig = {};
+    (data || []).forEach(r => {
+      if(!contentMap[r.key]) contentMap[r.key] = { en:'', pt:'' };
+      contentMap[r.key][r.locale] = r.value || '';
+    });
+    contentOrig = JSON.parse(JSON.stringify(contentMap));
+    renderContentPageList();
+    selectContentPage(CONTENT_PAGES[0].prefix);
+  }
+
+  function renderContentPageList(){
+    const el = $('content-pagelist');
+    el.innerHTML = '';
+    CONTENT_PAGES.forEach(p => {
+      const n = Object.keys(contentMap).filter(k => k.indexOf(p.prefix) === 0).length;
+      const b = document.createElement('button');
+      b.textContent = p.label + (n ? '' : '');
+      b.dataset.prefix = p.prefix;
+      b.style.cssText = 'text-align:left;padding:10px 12px;border:1px solid #e8e6df;border-radius:9px;background:#fff;cursor:pointer;font:inherit;font-size:14px;color:#0C1E28;';
+      b.addEventListener('click', () => selectContentPage(p.prefix));
+      el.appendChild(b);
+    });
+  }
+
+  function selectContentPage(prefix){
+    contentActivePrefix = prefix;
+    $$('#content-pagelist button').forEach(b => {
+      const on = b.dataset.prefix === prefix;
+      b.style.background = on ? '#0C1E28' : '#fff';
+      b.style.color = on ? '#fff' : '#0C1E28';
+    });
+    renderContentFields(prefix);
+  }
+
+  function renderContentFields(prefix){
+    const wrap = $('content-fields');
+    const keys = Object.keys(contentMap).filter(k => k.indexOf(prefix) === 0).sort();
+    if(!keys.length){ wrap.innerHTML = '<div style="color:var(--muted);padding:20px;">No editable fields found for this page.</div>'; return; }
+    wrap.innerHTML = '';
+    keys.forEach(key => {
+      const row = document.createElement('div');
+      row.style.cssText = 'border:1px solid #eee9df;border-radius:12px;padding:14px 16px;margin-bottom:12px;background:#fff;';
+      const short = key.replace(prefix, '');
+      row.innerHTML = `<div style="font-size:12px;font-weight:600;letter-spacing:.03em;color:#8a8a8a;margin-bottom:8px;font-family:monospace;">${escapeHtml(short)}</div>`;
+      ['en','pt'].forEach(loc => {
+        const val = (contentMap[key] && contentMap[key][loc]) || '';
+        const multiline = val.length > 60 || /<[a-z]/i.test(val);
+        const field = document.createElement('div');
+        field.style.cssText = 'margin-top:6px;';
+        const lab = document.createElement('div'); lab.textContent = loc.toUpperCase();
+        lab.style.cssText = 'font-size:10px;font-weight:700;color:#b6b3a8;margin-bottom:3px;';
+        field.appendChild(lab);
+        const inp = document.createElement(multiline ? 'textarea' : 'input');
+        if(multiline){ inp.rows = Math.min(6, Math.max(2, Math.ceil(val.length/70))); }
+        inp.value = val;
+        inp.style.cssText = 'width:100%;border:1px solid #ddd9cf;border-radius:8px;padding:9px 11px;font:inherit;font-size:14px;color:#0C1E28;outline:none;box-sizing:border-box;';
+        inp.addEventListener('input', () => {
+          if(!contentMap[key]) contentMap[key] = { en:'', pt:'' };
+          contentMap[key][loc] = inp.value;
+          const orig = (contentOrig[key] && contentOrig[key][loc]) || '';
+          if(inp.value !== orig) contentDirty[key+'|'+loc] = true; else delete contentDirty[key+'|'+loc];
+          updateContentSaveBtn();
+        });
+        field.appendChild(inp);
+        row.appendChild(field);
+      });
+      wrap.appendChild(row);
+    });
+  }
+
+  function updateContentSaveBtn(){
+    const n = Object.keys(contentDirty).length;
+    const btn = $('content-save');
+    btn.style.display = n ? '' : 'none';
+    btn.textContent = n ? `Save ${n} change${n>1?'s':''}` : 'Save changes';
+  }
+
+  $('content-save').addEventListener('click', async () => {
+    const btn = $('content-save'); btn.disabled = true; btn.textContent = 'Saving…';
+    const entries = Object.keys(contentDirty);
+    let ok = 0;
+    for(const dk of entries){
+      const [key, loc] = dk.split('|');
+      const value = (contentMap[key] && contentMap[key][loc]) || '';
+      // update-or-insert (no assumption about unique constraint)
+      const { data: upd, error: e1 } = await sb.from('site_content').update({ value }).eq('key', key).eq('locale', loc).select('key');
+      if(e1){ toast('Error: '+e1.message); continue; }
+      if(!upd || !upd.length){
+        const { error: e2 } = await sb.from('site_content').insert({ key, locale: loc, value });
+        if(e2){ toast('Error: '+e2.message); continue; }
+      }
+      ok++;
+      if(!contentOrig[key]) contentOrig[key] = { en:'', pt:'' };
+      contentOrig[key][loc] = value;
+      delete contentDirty[dk];
+    }
+    btn.disabled = false;
+    updateContentSaveBtn();
+    toast(ok ? `Saved ${ok} field${ok>1?'s':''}. Live on the site.` : 'Nothing saved.');
+  });
 
   // ---------- Pages: list ----------
   async function loadPages(){
