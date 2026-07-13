@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { renderBlocks, pickLocalized, escapeHtml, escapeAttr } from '../lib/renderBlocks.js';
+import { renderBlocks, pickLocalized, escapeHtml, escapeAttr } from './_renderBlocks.js';
 
 // =====================================================================
 // Server-renders /p/:slug pages built in the Studio.
