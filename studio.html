@@ -856,45 +856,116 @@
   }
 
   // ============================================================
-  // Navigation manager — Studio pages' menu placement.
-  // Only touches the `pages` table (show_in_nav / nav_group /
-  // nav_position). The site's hardcoded links are never modified.
+  // Navigation manager — the full site menu picture.
+  //  • Built-in links (hard-coded in cms-loader.js) shown for context.
+  //    Real Estate has a real Hidden/Shown toggle (writes the
+  //    site_content flag `flag.show_real_estate`, read by cms-loader).
+  //    Urban Collection is hidden by client request (read-only note).
+  //  • Studio pages (table `pages`) are fully manageable here
+  //    (show_in_nav / nav_group / nav_position).
   // ============================================================
   const NAV_GROUPS = [
     { value: '',           label: 'Top level' },
     { value: 'properties', label: 'Under “Properties”' },
   ];
+  // Fixed links as built by cms-loader's rebuildDesktopNav().
+  const BUILTIN_NAV = [
+    { label: 'Home',                  state: 'on' },
+    { label: 'About Us',              state: 'on' },
+    { label: 'Invest in Portugal',    state: 'on' },
+    { label: 'Featured Opportunities', state: 'on', note: 'Properties ▾' },
+    { label: 'Property Management',   state: 'on', note: 'Properties ▾' },
+    { label: 'Blog',                  state: 'on' },
+    { label: 'Contact Us',            state: 'on' },
+    { label: 'Real Estate',           state: 'flag' },   // toggle via flag
+    { label: 'Urban Collection',      state: 'hidden' }, // hidden by request
+  ];
+  const FLAG_RE_KEY = 'flag.show_real_estate';
+  let _reFlagOn = false;
+
   async function loadNavManager(){
     const list = $('nav-list');
     list.innerHTML = '<div style="padding:20px;color:var(--muted);">Loading…</div>';
-    const { data, error } = await sb.from('pages')
-      .select('id,slug,title,published,show_in_nav,nav_group,nav_position')
-      .order('nav_position', { ascending: true })
-      .order('slug', { ascending: true });
-    if(error){ list.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
-    renderNavManager(data || []);
+    const [pagesRes, flagRes] = await Promise.all([
+      sb.from('pages')
+        .select('id,slug,title,published,show_in_nav,nav_group,nav_position')
+        .order('nav_position', { ascending: true })
+        .order('slug', { ascending: true }),
+      sb.from('site_content').select('value').eq('key', FLAG_RE_KEY).eq('locale', 'en').maybeSingle(),
+    ]);
+    if(pagesRes.error){ list.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load</h3><p>${escapeHtml(pagesRes.error.message)}</p></div>`; return; }
+    _reFlagOn = !!(flagRes.data && flagRes.data.value === 'true');
+    renderNavManager(pagesRes.data || []);
+  }
+
+  function sectionHeader(list, label){
+    const h = document.createElement('div');
+    h.style.cssText = 'padding:10px 18px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);background:#fafaf5;border-bottom:1px solid #f0eee7;';
+    h.textContent = label;
+    list.appendChild(h);
   }
 
   function renderNavManager(pages){
     const list = $('nav-list');
-    if(!pages.length){
-      list.innerHTML = '<div class="empty" style="border:0;"><h3>No Studio pages yet</h3><p>Create a page under “Pages”, then choose here whether it shows in the site menu.</p></div>';
-      return;
-    }
-    // Show pages that are in-menu first (in order), then the rest.
+    list.innerHTML = '';
+
+    // --- Built-in site links ---
+    sectionHeader(list, 'Site menu (built-in)');
+    BUILTIN_NAV.forEach(item => list.appendChild(builtinRow(item)));
+
+    // --- Studio pages ---
     const inMenu = pages.filter(p => p.show_in_nav);
     const off    = pages.filter(p => !p.show_in_nav);
-    list.innerHTML = '';
-    const section = (label, arr, showMove) => {
+    if(!pages.length){
+      sectionHeader(list, 'Studio pages');
+      const d = document.createElement('div');
+      d.style.cssText = 'padding:18px;color:var(--muted);font-size:14px;';
+      d.textContent = 'No Studio pages yet. Create one under “Pages”, then toggle it into the menu here.';
+      list.appendChild(d);
+      return;
+    }
+    const studioSection = (label, arr, showMove) => {
       if(!arr.length) return;
-      const h = document.createElement('div');
-      h.style.cssText = 'padding:10px 18px;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2);background:#fafaf5;border-bottom:1px solid #f0eee7;';
-      h.textContent = label;
-      list.appendChild(h);
+      sectionHeader(list, label);
       arr.forEach((p, i) => list.appendChild(navRow(p, i, arr.length, showMove)));
     };
-    section('In the menu', inMenu, true);
-    section('Not shown', off, false);
+    studioSection('Studio pages — in the menu', inMenu, true);
+    studioSection('Studio pages — not shown', off, false);
+  }
+
+  function builtinRow(item){
+    const row = document.createElement('div'); row.className = 'navrow';
+    const stateTag = {
+      on:     '<span class="badge pub">Shown</span>',
+      hidden: '<span class="badge draft">Hidden</span>',
+      flag:   `<span class="badge ${_reFlagOn?'pub':'draft'}">${_reFlagOn?'Shown':'Hidden'}</span>`,
+    }[item.state];
+    row.innerHTML = `
+      <div style="width:42px;text-align:center;color:var(--muted-2);">${item.state==='flag' ? '' : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b6b3a8" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>'}</div>
+      <div style="min-width:0;">
+        <div class="nr-title">${escapeHtml(item.label)}</div>
+        <div class="nr-slug">Built-in${item.note ? ' · ' + escapeHtml(item.note) : ''}</div>
+      </div>
+      <div class="nr-controls">${stateTag}${item.state==='flag' ? '<button class="btn ghost" data-a="reflag" style="padding:6px 12px;font-size:13px;">'+(_reFlagOn?'Hide':'Show')+'</button>' : ''}</div>`;
+    if(item.state === 'flag'){
+      // Replace the left chevron with a real switch for Real Estate.
+      row.firstElementChild.innerHTML = `<label class="switch"><input type="checkbox" ${_reFlagOn?'checked':''} data-a="reflag-sw"><span class="sl"></span></label>`;
+      const apply = async (on) => {
+        const { data: upd, error: e1 } = await sb.from('site_content').update({ value: on?'true':'false' }).eq('key', FLAG_RE_KEY).eq('locale','en').select('key');
+        if(e1){ toast('Error: '+e1.message); return false; }
+        if(!upd || !upd.length){
+          const { error: e2 } = await sb.from('site_content').insert({ key: FLAG_RE_KEY, locale:'en', value: on?'true':'false' });
+          if(e2){ toast('Error: '+e2.message); return false; }
+        }
+        _reFlagOn = on;
+        toast(on ? 'Real Estate is now in the site menu.' : 'Real Estate hidden from the menu.');
+        loadNavManager();
+        return true;
+      };
+      row.querySelector('[data-a="reflag-sw"]').addEventListener('change', (e) => apply(e.target.checked));
+      row.querySelector('[data-a="reflag"]').addEventListener('click', () => apply(!_reFlagOn));
+    }
+    return row;
   }
 
   function navRow(p, idx, total, showMove){

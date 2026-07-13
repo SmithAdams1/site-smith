@@ -6,8 +6,12 @@
   const SUPPORTED_LOCALES = ['en', 'pt'];
 
   // Real Estate section is built and deployed but hidden from the public menu
-  // for now (team can still reach /real-estate directly). Set to true to launch.
-  const SHOW_REAL_ESTATE = false;
+  // by default. This can now be flipped WITHOUT a code change from the Studio
+  // (Navigation section) — it writes site_content key `flag.show_real_estate`
+  // = 'true'/'false', which loadContent() reads below and, when true, injects
+  // Real Estate into the (already-built) nav. Default stays false so existing
+  // production behaviour is unchanged until the flag is explicitly set.
+  let SHOW_REAL_ESTATE = false;
 
   // ─── Esconder o item "Urban Collection" do menu (nav + mobile + footer) ──
   // Solicitação do cliente: ocultar sem apagar. Para reativar, basta remover
@@ -141,6 +145,14 @@
         const key = el.dataset.cms;
         if (key in map) applyValue(el, map[key]);
       });
+
+      // Feature flag: show Real Estate in the menu. The nav was already built
+      // synchronously with RE off; if the flag is on, inject it now. Idempotent.
+      if (map['flag.show_real_estate'] === 'true') {
+        SHOW_REAL_ESTATE = true;
+        injectRealEstateEverywhere();
+        applyNavContrast();
+      }
 
       document.dispatchEvent(new CustomEvent('cms-loaded', { detail: { count: rows.length, locale } }));
     } catch (e) {
@@ -549,6 +561,51 @@
         applyNavContrast(); // recolour the newly added desktop links
       })
       .catch(function (e) { console.warn('[cms-loader] studio pages nav', e); });
+  }
+
+  // Inject "Real Estate" into desktop nav (post-rebuild), mobile menu and
+  // footer. Works whether or not the desktop nav was rebuilt (unlike the
+  // older injectRealEstateNav which skips a rebuilt nav). Idempotent.
+  function injectRealEstateEverywhere() {
+    var HREF = '/real-estate.html';
+    var LABEL = 'Real Estate';
+
+    // Desktop: insert after "About Us" for parity with the original order.
+    var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
+    if (nav && !nav.querySelector('a[href="' + HREF + '"]') && !nav.querySelector('a[href="real-estate.html"]')) {
+      var w = document.createElement('div'); w.className = 'relative group';
+      w.innerHTML =
+        '<a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="' + HREF + '">' + LABEL + '</a>' +
+        '<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>';
+      var about = nav.querySelector('a[href="/about.html"], a[href="about.html"]');
+      var aboutWrap = about && about.closest('.relative.group');
+      if (aboutWrap && aboutWrap.parentNode === nav) aboutWrap.insertAdjacentElement('afterend', w);
+      else {
+        var contactBtn = nav.querySelector('a[href="/contact.html"]');
+        var contactWrap = contactBtn && contactBtn.closest('div');
+        if (contactWrap && contactWrap.parentNode === nav) nav.insertBefore(w, contactWrap);
+        else nav.appendChild(w);
+      }
+    }
+
+    // Mobile
+    var mobileInner = document.querySelector('#mobile-menu .flex.flex-col');
+    if (mobileInner && !mobileInner.querySelector('a[href="' + HREF + '"]') && !mobileInner.querySelector('a[href="real-estate.html"]')) {
+      var a = document.createElement('a');
+      a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
+      a.href = HREF; a.textContent = LABEL;
+      var contactM = mobileInner.querySelector('a[href="/contact.html"], a[href="contact.html"]');
+      if (contactM) mobileInner.insertBefore(a, contactM); else mobileInner.appendChild(a);
+    }
+
+    // Footer
+    var footerList = document.querySelector('footer ul.list-none');
+    if (footerList && !footerList.querySelector('a[href="' + HREF + '"]') && !footerList.querySelector('a[href="real-estate.html"]')) {
+      var li = document.createElement('li');
+      li.className = 'font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer';
+      li.innerHTML = '<a href="' + HREF + '">' + LABEL + '</a>';
+      footerList.appendChild(li);
+    }
   }
 
   function init() {
