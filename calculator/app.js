@@ -49,8 +49,15 @@ const CONFIG = {
     visaFee:          931,     // Taxa visto/dep — Excel D35
     adminFees:        5000,    // Admin 5 anos  — Excel D39
     insuranceBase:    620,     // Seguro s/IVA  — Excel D40
-    appreciationRate: 0.07,    // Valorização anual 7%
-    rentalYield:      0.1038,  // Yield bruto anual 10.38%
+    // Fixos no código (a Google Sheet NÃO sobrepõe estes dois — ver fetchConfig)
+    appreciationRate: 0.05,    // Capital growth 5% / ano
+    rentalYield:      0.07,    // Net income 7% / ano
+  },
+  /* D2 with Buy Back — sem custos de aquisição e sem valorização:
+     o imóvel é recomprado pelo preço de compra ao fim de 5 anos.
+     As restantes taxas (legal, visto, admin, seguro) são as do D2. */
+  d2bb: {
+    rentalYield: 0.07,         // Net rental income 7% / ano
   },
   gv: {
     defaultProperty:   171000,   // Imóvel subjacente — Excel J17
@@ -199,6 +206,88 @@ function calcD2() {
   set('d2-profit',      fmtEUR(netProfit));
   set('d2-roi',         fmtPct(totalROI, 1));
   set('d2-avgroi',      fmtPct(avgROI, 2));
+}
+
+/* ============================================================
+   D2 WITH BUY BACK CALCULATOR
+   Diferenças face ao D2 normal:
+     · sem custos de aquisição (IMT / IS / notário)
+     · sem valorização — o imóvel é recomprado pelo preço de compra
+     · retorno = 7% de rendimento líquido por ano (5 anos)
+   ============================================================ */
+function calcD2BB() {
+  const property      = num('d2bb-property');
+  const deps          = num('d2bb-deps');
+  const mainInvestors = 1;
+  const vat           = CONFIG.shared.vatRate;
+  const c             = CONFIG.d2;        // taxas legais/admin partilhadas com o D2
+  const cbb           = CONFIG.d2bb;     // yield próprio (7%)
+
+  /* --- Legal & Immigration Fees (iguais ao D2) --- */
+  const legalAdvisory = c.legalAdvisory * (1 + vat);
+  const visaApp       = c.visaFee * Math.max(0, deps) + mainInvestors;
+  const legalTotal    = legalAdvisory + visaApp;
+
+  /* --- Other Fees (iguais ao D2) --- */
+  const adminFees  = c.adminFees;
+  const insurance  = c.insuranceBase * (1 + vat);
+  const otherTotal = adminFees + insurance;
+
+  /* --- Grand Total — sem custos de aquisição --- */
+  const grandTotal = property + legalTotal + otherTotal;
+
+  /* --- Rental income (7% / ano, sem valorização) --- */
+  const yieldRate    = cbb.rentalYield;
+  const incomePerYear = property * yieldRate;
+
+  const roiRows = [];
+  let cumIncome = 0;
+  for (let y = 1; y <= 5; y++) {
+    cumIncome += incomePerYear;
+    roiRows.push({ y, income: incomePerYear, roiPct: yieldRate, cumROI: cumIncome });
+  }
+
+  /* --- 5-year outlook ---
+     O capital é devolvido na recompra ao preço de compra, por isso os
+     únicos custos afundados são as taxas legais e administrativas.      */
+  const totalIncome   = incomePerYear * 5;
+  const buyBackValue  = property;                         // recompra ao preço de compra
+  const sunkCosts     = legalTotal + otherTotal;
+  const effectiveCost = grandTotal - totalIncome;
+  const netProfit     = totalIncome - sunkCosts;
+  const totalROI      = netProfit / grandTotal;
+  const avgROI        = totalROI / 5;
+
+  /* ---------- RENDER ---------- */
+  set('d2bb-total',        fmtEUR(grandTotal));
+  set('d2bb-property-out', fmtEUR(property));
+  set('d2bb-legal-out',    fmtEUR(legalTotal));
+  set('d2bb-other-out',    fmtEUR(otherTotal));
+
+  set('d2bb-visa-base',  fmtEUR(c.visaFee));
+  set('d2bb-visa-total', fmtEUR(visaApp));
+  set('d2bb-legal-sub',  fmtEUR(legalTotal));
+  set('d2bb-other-sub',  fmtEUR(otherTotal));
+
+  const tbody = document.getElementById('d2bb-roi-rows');
+  if (tbody) {
+    tbody.innerHTML = roiRows.map((r) => `
+      <tr>
+        <td>${getYearLabel(r.y)}</td>
+        <td>${fmtPct(r.roiPct, 2)}</td>
+        <td>${fmtEUR(r.income)}</td>
+        <td>${fmtEUR(r.cumROI)}</td>
+      </tr>`).join('');
+  }
+
+  set('d2bb-income',    fmtEUR(totalIncome));
+  set('d2bb-buyback',   fmtEUR(buyBackValue));
+  set('d2bb-totalcost', fmtEUR(grandTotal));
+  set('d2bb-effective', fmtEUR(effectiveCost));
+  set('d2bb-sunk',      fmtEUR(sunkCosts));
+  set('d2bb-profit',    fmtEUR(netProfit));
+  set('d2bb-roi',       fmtPct(totalROI, 1));
+  set('d2bb-avgroi',    fmtPct(avgROI, 2));
 }
 
 /* ============================================================
@@ -448,11 +537,12 @@ const i18n = {
   en: {
     'hero.eyebrow': 'Investment & Residency Calculators',
     'hero.title':   'Invest in <em>Lisbon</em>.',
-    'hero.lede':    'Estimate the full cost, taxes, fees and projected returns of our three signature programmes. All figures are indicative and updated to current Portuguese law.',
+    'hero.lede':    'Estimate the full cost, taxes, fees and projected returns of our four signature programmes. All figures are indicative and updated to current Portuguese law.',
 
-    'tabs.d2':  'D2 Visa',
-    'tabs.gv':  'Golden Visa',
-    'tabs.inv': 'Property Investment',
+    'tabs.d2':   'D2 Visa',
+    'tabs.d2bb': 'D2 with Buy Back',
+    'tabs.gv':   'Golden Visa',
+    'tabs.inv':  'Property Investment',
 
     'common.assumptions': 'Your assumptions',
     'common.breakdown':   'Detailed fees & cost breakdown',
@@ -510,7 +600,8 @@ const i18n = {
     'd2.b.other':        'Administrative & other costs',
     'd2.b.admin':        'Administrative fees (5 years)',
     'd2.b.ins':          'Insurance coverage',
-    'd2.roi.sub':        'Projection over 5 years assuming 7% annual appreciation and 10.38% annual gross rental yield.',
+    'd2.roi.sub':        '7% net income · 5% capital growth',
+    'd2.roi.sub2':       'Pessimist projection based on Market Projection',
     'd2.roi.rental':     'Total net rental income',
     'd2.roi.cap':        'Estimated appreciation of property',
     'd2.roi.totalProfit':'Total accumulated profit',
@@ -525,8 +616,40 @@ const i18n = {
     'd2.roi.totalROI':   'Total ROI over 5 years',
     'd2.roi.avgROI':     'Average annual ROI',
 
+    /* D2 WITH BUY BACK */
+    'd2bb.kicker': 'Programme 02',
+    'd2bb.title':  'D2 Visa <em>·</em> with Buy Back',
+    'd2bb.sub':    'A 5-year residency programme with a guaranteed buy back of the property at the original purchase price, with no property acquisition costs for the investor.',
+    'd2bb.input.property': 'Property investment value',
+    'd2bb.input.main':     'Main applicants',
+    'd2bb.input.deps':     'Dependents',
+    'd2bb.input.note':     'Base programme covers a family of 4. Additional fees apply beyond that.',
+    'd2bb.summary.label':  'Total estimated cost · 5-year programme',
+    'd2bb.summary.property':'Property',
+    'd2bb.summary.legal':  'Legal & immigration fees',
+    'd2bb.summary.other':  'Administrative & other',
+    'd2bb.summary.note':   'No property acquisition costs (IMT, Stamp Duty or notary) apply under the buy back structure.',
+    'd2bb.b.legal':        'Legal & immigration fees',
+    'd2bb.b.advisory':     'Legal advisory services (5Y · family of 4)',
+    'd2bb.b.visa':         'D2 visa application & renewals',
+    'd2bb.b.other':        'Administrative & other costs',
+    'd2bb.b.admin':        'Administrative fees (5 years)',
+    'd2bb.b.ins':          'Insurance coverage',
+    'd2bb.roi.sub':        '7% rental income per year',
+    'd2bb.roi.sub2':       'Pessimist projection based on Market Projection',
+    'd2bb.roi.income':     'Total net rental income (5 years)',
+    'd2bb.roi.buyback':    'Buy back value (Year 5)',
+    'd2bb.roi.totalCost':  'Total cost of investment',
+    'd2bb.roi.effective':  'Effective net investment cost (after rental income)',
+    'd2bb.roi.sunk':       'Legal & administrative costs',
+    'd2bb.roi.profit':     'Actual net profit',
+    'd2bb.roi.totalROI':   'Total ROI over 5 years',
+    'd2bb.roi.avgROI':     'Average annual ROI',
+    'd2bb.roi.income.col': 'Rental income',
+    'd2bb.roi.cum.col':    'Cumulative rental income',
+
     /* GV */
-    'gv.kicker': 'Programme 02',
+    'gv.kicker': 'Programme 03',
     'gv.title':  'Golden Visa <em>·</em> Investment Fund',
     'gv.sub':    "Portugal's flagship residency-by-investment programme through a regulated qualifying fund. Each participation unit corresponds to €250,000.",
     'gv.input.units':    'Number of participation units (×€250,000)',
@@ -576,7 +699,7 @@ const i18n = {
     'gv.roi.avgROI':     'Average annual ROI',
 
     /* INV */
-    'inv.kicker': 'Programme 03',
+    'inv.kicker': 'Programme 04',
     'inv.title':  'Property Investment <em>·</em> Direct Acquisition',
     'inv.sub':    'For investors acquiring property in Portugal outside of a residency programme — held individually or through a company structure.',
     'inv.input.property':  'Property value',
@@ -623,11 +746,12 @@ const i18n = {
   pt: {
     'hero.eyebrow': 'Calculadoras de Investimento e Residência',
     'hero.title':   'Investir em <em>Lisboa</em>.',
-    'hero.lede':    'Estime o custo total, impostos, taxas e retornos projetados dos nossos três programas. Todos os valores são indicativos e atualizados à legislação portuguesa em vigor.',
+    'hero.lede':    'Estime o custo total, impostos, taxas e retornos projetados dos nossos quatro programas. Todos os valores são indicativos e atualizados à legislação portuguesa em vigor.',
 
-    'tabs.d2':  'Visto D2',
-    'tabs.gv':  'Golden Visa',
-    'tabs.inv': 'Investimento Imobiliário',
+    'tabs.d2':   'Visto D2',
+    'tabs.d2bb': 'Visto D2 com Recompra',
+    'tabs.gv':   'Golden Visa',
+    'tabs.inv':  'Investimento Imobiliário',
 
     'common.assumptions': 'Os seus pressupostos',
     'common.breakdown':   'Detalhe de custos e taxas',
@@ -685,7 +809,8 @@ const i18n = {
     'd2.b.other':        'Custos administrativos e outros',
     'd2.b.admin':        'Honorários administrativos (5 anos)',
     'd2.b.ins':          'Seguro de saúde',
-    'd2.roi.sub':        'Projeção a 5 anos assumindo valorização anual de 7% e yield bruto anual de 10,38%.',
+    'd2.roi.sub':        '7% de rendimento líquido · 5% de valorização do capital',
+    'd2.roi.sub2':       'Projeção pessimista baseada na projeção de mercado',
     'd2.roi.rental':     'Total de rendas líquidas',
     'd2.roi.cap':        'Valorização estimada do imóvel',
     'd2.roi.totalProfit':'Lucro acumulado total',
@@ -700,8 +825,40 @@ const i18n = {
     'd2.roi.totalROI':   'ROI total a 5 anos',
     'd2.roi.avgROI':     'ROI médio anual',
 
+    /* D2 COM RECOMPRA */
+    'd2bb.kicker': 'Programa 02',
+    'd2bb.title':  'Visto D2 <em>·</em> com Recompra',
+    'd2bb.sub':    'Programa de residência a 5 anos com recompra garantida do imóvel pelo preço de compra original, sem custos de aquisição para o investidor.',
+    'd2bb.input.property': 'Valor de investimento no imóvel',
+    'd2bb.input.main':     'Requerentes principais',
+    'd2bb.input.deps':     'Dependentes',
+    'd2bb.input.note':     'O programa base cobre uma família de 4. Acima disso aplicam-se taxas adicionais.',
+    'd2bb.summary.label':  'Custo total estimado · programa de 5 anos',
+    'd2bb.summary.property':'Imóvel',
+    'd2bb.summary.legal':  'Taxas legais e de imigração',
+    'd2bb.summary.other':  'Administrativos e outros',
+    'd2bb.summary.note':   'Na estrutura de recompra não se aplicam custos de aquisição (IMT, Imposto do Selo ou notário).',
+    'd2bb.b.legal':        'Taxas legais e de imigração',
+    'd2bb.b.advisory':     'Serviços de assessoria jurídica (5A · família de 4)',
+    'd2bb.b.visa':         'Pedido de visto D2 e renovações',
+    'd2bb.b.other':        'Custos administrativos e outros',
+    'd2bb.b.admin':        'Taxas administrativas (5 anos)',
+    'd2bb.b.ins':          'Cobertura de seguro',
+    'd2bb.roi.sub':        '7% de rendimento de arrendamento por ano',
+    'd2bb.roi.sub2':       'Projeção pessimista baseada na projeção de mercado',
+    'd2bb.roi.income':     'Rendimento líquido total (5 anos)',
+    'd2bb.roi.buyback':    'Valor de recompra (Ano 5)',
+    'd2bb.roi.totalCost':  'Custo total do investimento',
+    'd2bb.roi.effective':  'Custo líquido efetivo (após rendimento)',
+    'd2bb.roi.sunk':       'Custos legais e administrativos',
+    'd2bb.roi.profit':     'Lucro líquido efetivo',
+    'd2bb.roi.totalROI':   'ROI total a 5 anos',
+    'd2bb.roi.avgROI':     'ROI médio anual',
+    'd2bb.roi.income.col': 'Rendimento',
+    'd2bb.roi.cum.col':    'Rendimento acumulado',
+
     /* GV */
-    'gv.kicker': 'Programa 02',
+    'gv.kicker': 'Programa 03',
     'gv.title':  'Golden Visa <em>·</em> Fundo de Investimento',
     'gv.sub':    'O principal programa de residência por investimento em Portugal através de um fundo qualificado regulado. Cada unidade de participação corresponde a 250.000 €.',
     'gv.input.units':    'Número de unidades de participação (×250.000 €)',
@@ -751,7 +908,7 @@ const i18n = {
     'gv.roi.avgROI':     'ROI médio anual',
 
     /* INV */
-    'inv.kicker': 'Programa 03',
+    'inv.kicker': 'Programa 04',
     'inv.title':  'Investimento Imobiliário <em>·</em> Aquisição Direta',
     'inv.sub':    'Para investidores que adquirem imóveis em Portugal fora de um programa de residência — em nome individual ou através de uma empresa.',
     'inv.input.property':  'Valor do imóvel',
@@ -849,6 +1006,11 @@ function activateTab(name) {
   document.querySelectorAll('.calc').forEach((panel) => {
     panel.hidden = panel.dataset.panel !== name;
   });
+  /* Não existe template de MOU para o D2 with Buy Back — o MOU do D2 inclui
+     custos de aquisição (IMT/IS/notário) que esta estrutura não tem, por isso
+     o botão é escondido em vez de gerar um documento incorrecto. */
+  const mouBtn = document.getElementById('btn-mou');
+  if (mouBtn) mouBtn.style.display = name === 'd2bb' ? 'none' : '';
   try { localStorage.setItem('sna_tab', name); } catch (_) {}
 }
 
@@ -857,6 +1019,7 @@ function activateTab(name) {
    ============================================================ */
 function recalcAll() {
   calcD2();
+  calcD2BB();
   calcGV();
   calcInv();
 }
@@ -874,7 +1037,15 @@ async function fetchConfig(url) {
     const data = await res.json();
 
     if (data.shared) Object.assign(CONFIG.shared, data.shared);
-    if (data.d2)     Object.assign(CONFIG.d2,     data.d2);
+    if (data.d2) {
+      /* appreciationRate e rentalYield do D2 são fixos no código
+         (5% capital growth · 7% net income). A Sheet ainda serve os
+         valores antigos (7% / 10.38%), por isso são descartados aqui. */
+      const d2Live = Object.assign({}, data.d2);
+      delete d2Live.appreciationRate;
+      delete d2Live.rentalYield;
+      Object.assign(CONFIG.d2, d2Live);
+    }
     if (data.gv)     Object.assign(CONFIG.gv,     data.gv);
     if (data.inv)    Object.assign(CONFIG.inv,    data.inv);
 

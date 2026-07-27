@@ -52,7 +52,7 @@
       <p class="eyebrow" data-i18n="hero.eyebrow">Investment &amp; Residency Calculators</p>
       <h1 class="display" data-i18n="hero.title">Invest in <em>Lisbon</em>.</h1>
       <p class="lede" data-i18n="hero.lede">
-        Estimate the full cost, taxes, fees and projected returns of our three
+        Estimate the full cost, taxes, fees and projected returns of our four
         signature programmes. All figures are indicative and updated to current
         Portuguese law.
       </p>
@@ -68,12 +68,16 @@
         <span class="tab-num">01</span>
         <span class="tab-label" data-i18n="tabs.d2">D2 Visa</span>
       </button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="gv">
+      <button class="tab" role="tab" aria-selected="false" data-tab="d2bb">
         <span class="tab-num">02</span>
+        <span class="tab-label" data-i18n="tabs.d2bb">D2 with Buy Back</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="gv">
+        <span class="tab-num">03</span>
         <span class="tab-label" data-i18n="tabs.gv">Golden Visa</span>
       </button>
       <button class="tab" role="tab" aria-selected="false" data-tab="inv">
-        <span class="tab-num">03</span>
+        <span class="tab-num">04</span>
         <span class="tab-label" data-i18n="tabs.inv">Property Investment</span>
       </button>
     </nav>
@@ -250,10 +254,8 @@
       <div class="roi">
         <header class="breakdown-head">
           <h3 data-i18n="common.roi">ROI forecast</h3>
-          <p class="breakdown-sub" data-i18n="d2.roi.sub">
-            Projection over 5 years assuming 7% annual appreciation and 10.38%
-            annual gross rental yield.
-          </p>
+          <p class="breakdown-sub" data-i18n="d2.roi.sub">7% net income · 5% capital growth</p>
+          <p class="breakdown-sub" data-i18n="d2.roi.sub2">Pessimist projection based on Market Projection</p>
         </header>
 
         <div class="roi-grid">
@@ -298,11 +300,189 @@
     </section>
 
     <!-- ============================================================
+         D2 WITH BUY BACK CALCULATOR
+         ============================================================ -->
+    <section class="calc" data-panel="d2bb" role="tabpanel" aria-labelledby="tab-d2bb" hidden>
+      <header class="calc-head">
+        <p class="calc-kicker" data-i18n="d2bb.kicker">Programme 02</p>
+        <h2 class="calc-title" data-i18n="d2bb.title">D2 Visa <em>·</em> with Buy Back</h2>
+        <p class="calc-sub" data-i18n="d2bb.sub">
+          A 5-year residency programme with a guaranteed buy back of the property
+          at the original purchase price, with no property acquisition costs for
+          the investor.
+        </p>
+      </header>
+
+      <div class="calc-grid">
+        <!-- INPUTS -->
+        <aside class="inputs-card">
+          <h3 class="inputs-title" data-i18n="common.assumptions">Your assumptions</h3>
+
+          <label class="field">
+            <span class="field-label" data-i18n="d2bb.input.property">Property investment value</span>
+            <span class="field-input">
+              <span class="field-prefix">€</span>
+              <input type="number" id="d2bb-property" value="300000" min="0" step="1000" />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-i18n="d2bb.input.main">Main applicants</span>
+            <span class="field-input">
+              <input type="number" id="d2bb-main" value="1" min="1" max="2" step="1" />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field-label" data-i18n="d2bb.input.deps">Dependents</span>
+            <span class="field-input">
+              <input type="number" id="d2bb-deps" value="3" min="0" max="10" step="1" />
+            </span>
+          </label>
+
+          <p class="field-note" data-i18n="d2bb.input.note">
+            Base programme covers a family of 4. Additional fees apply beyond
+            that.
+          </p>
+        </aside>
+
+        <!-- SUMMARY -->
+        <div class="summary-card">
+          <p class="summary-label" data-i18n="d2bb.summary.label">Total estimated cost · 5-year programme</p>
+          <p class="summary-value" id="d2bb-total">€312,668</p>
+
+          <ul class="summary-breakdown">
+            <li>
+              <span data-i18n="d2bb.summary.property">Property</span>
+              <strong id="d2bb-property-out">€300,000</strong>
+            </li>
+            <li>
+              <span data-i18n="d2bb.summary.legal">Legal &amp; immigration fees</span>
+              <strong id="d2bb-legal-out">€7,905</strong>
+            </li>
+            <li>
+              <span data-i18n="d2bb.summary.other">Administrative &amp; other</span>
+              <strong id="d2bb-other-out">€5,763</strong>
+            </li>
+          </ul>
+
+          <p class="summary-foot">
+            <span data-i18n="d2bb.summary.note">No property acquisition costs (IMT, Stamp Duty or notary) apply under the buy back structure.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- DETAILED BREAKDOWN -->
+      <div class="breakdown">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.breakdown">Detailed fees &amp; cost breakdown</h3>
+        </header>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="d2bb.b.legal">Legal &amp; immigration fees</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="d2bb.b.advisory">Legal advisory services (5Y · family of 4)</td>
+                <td>€3,500</td><td>23%</td><td>€4,305</td>
+              </tr>
+              <tr>
+                <td data-i18n="d2bb.b.visa">D2 visa application &amp; renewals</td>
+                <td id="d2bb-visa-base"></td><td>0%</td><td id="d2bb-visa-total"></td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="d2bb-legal-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="breakdown-section">
+          <h4 data-i18n="d2bb.b.other">Administrative &amp; other costs</h4>
+          <table class="cost-table">
+            <thead>
+              <tr>
+                <th data-i18n="common.feeCost">Fee / Cost</th>
+                <th data-i18n="common.base">Base</th>
+                <th data-i18n="common.tax">Tax</th>
+                <th data-i18n="common.total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-i18n="d2bb.b.admin">Administrative fees (5 years)</td>
+                <td>€5,000</td><td>—</td><td>€5,000</td>
+              </tr>
+              <tr>
+                <td data-i18n="d2bb.b.ins">Insurance coverage</td>
+                <td>€620</td><td>23%</td><td>€763</td>
+              </tr>
+              <tr class="row-total">
+                <td colspan="3" data-i18n="common.subtotal">Subtotal</td>
+                <td id="d2bb-other-sub"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ROI FORECAST -->
+      <div class="roi">
+        <header class="breakdown-head">
+          <h3 data-i18n="common.roi">ROI forecast</h3>
+          <p class="breakdown-sub" data-i18n="d2bb.roi.sub">7% rental income per year</p>
+          <p class="breakdown-sub" data-i18n="d2bb.roi.sub2">Pessimist projection based on Market Projection</p>
+        </header>
+
+        <div class="roi-grid">
+          <div class="roi-table-wrap">
+            <table class="cost-table">
+              <thead>
+                <tr>
+                  <th data-i18n="common.year">Year</th>
+                  <th data-i18n="common.roiPct">ROI %</th>
+                  <th data-i18n="d2bb.roi.income.col">Rental income</th>
+                  <th data-i18n="d2bb.roi.cum.col">Cumulative rental income</th>
+                </tr>
+              </thead>
+              <tbody id="d2bb-roi-rows"></tbody>
+            </table>
+          </div>
+
+          <div class="roi-summary">
+            <h4 data-i18n="common.fiveYear">5-year outlook</h4>
+            <dl>
+              <div><dt data-i18n="d2bb.roi.income">Total net rental income (5 years)</dt><dd id="d2bb-income"></dd></div>
+              <div><dt data-i18n="d2bb.roi.buyback">Buy back value (Year 5)</dt><dd id="d2bb-buyback"></dd></div>
+              <div class="sep"></div>
+              <div><dt data-i18n="d2bb.roi.totalCost">Total cost of investment</dt><dd id="d2bb-totalcost"></dd></div>
+              <div><dt data-i18n="d2bb.roi.effective">Effective net investment cost (after rental income)</dt><dd id="d2bb-effective"></dd></div>
+              <div><dt data-i18n="d2bb.roi.sunk">Legal &amp; administrative costs</dt><dd id="d2bb-sunk"></dd></div>
+              <div class="sep"></div>
+              <div class="highlight"><dt data-i18n="d2bb.roi.profit">Actual net profit</dt><dd id="d2bb-profit"></dd></div>
+              <div class="highlight"><dt data-i18n="d2bb.roi.totalROI">Total ROI over 5 years</dt><dd id="d2bb-roi"></dd></div>
+              <div><dt data-i18n="d2bb.roi.avgROI">Average annual ROI</dt><dd id="d2bb-avgroi"></dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
          GOLDEN VISA CALCULATOR
          ============================================================ -->
     <section class="calc" data-panel="gv" role="tabpanel" aria-labelledby="tab-gv" hidden>
       <header class="calc-head">
-        <p class="calc-kicker" data-i18n="gv.kicker">Programme 02</p>
+        <p class="calc-kicker" data-i18n="gv.kicker">Programme 03</p>
         <h2 class="calc-title" data-i18n="gv.title">Golden Visa <em>·</em> Investment Fund</h2>
         <p class="calc-sub" data-i18n="gv.sub">
           Portugal's flagship residency-by-investment programme through a
@@ -573,7 +753,7 @@
          ============================================================ -->
     <section class="calc" data-panel="inv" role="tabpanel" aria-labelledby="tab-inv" hidden>
       <header class="calc-head">
-        <p class="calc-kicker" data-i18n="inv.kicker">Programme 03</p>
+        <p class="calc-kicker" data-i18n="inv.kicker">Programme 04</p>
         <h2 class="calc-title" data-i18n="inv.title">Property Investment <em>·</em> Direct Acquisition</h2>
         <p class="calc-sub" data-i18n="inv.sub">
           For investors acquiring property in Portugal outside of a residency
