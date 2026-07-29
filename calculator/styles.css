@@ -327,6 +327,11 @@ table { border-collapse: collapse; width: 100%; }
   flex-direction: column;
 }
 .legal-overlay[hidden] { display: none; }
+/* Guards: [hidden] alone is overridden by the display:flex rules below,
+   so the gate/content stayed visible (and docs became scroll-reachable
+   before the password). These restore the intended hiding. */
+.legal-gate[hidden]    { display: none !important; }
+.legal-content[hidden] { display: none !important; }
 
 /* --- Gate (password screen) --- */
 .legal-gate {
