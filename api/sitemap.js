@@ -11,6 +11,8 @@ export default async function handler(req, res) {
     { loc: `${BASE_URL}/blog`,                      lastmod: today, changefreq: 'daily',   priority: '0.8' },
     { loc: `${BASE_URL}/about`,                     lastmod: today, changefreq: 'monthly', priority: '0.7' },
     { loc: `${BASE_URL}/contact`,                   lastmod: today, changefreq: 'monthly', priority: '0.6' },
+    { loc: `${BASE_URL}/terms`,                     lastmod: today, changefreq: 'yearly',  priority: '0.3' },
+    { loc: `${BASE_URL}/privacy`,                   lastmod: today, changefreq: 'yearly',  priority: '0.3' },
   ];
 
   // Fetch blog posts from Supabase
