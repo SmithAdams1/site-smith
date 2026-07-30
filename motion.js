@@ -112,8 +112,22 @@
         k.style.transform = 'none';
       }
     } else if (el.hasAttribute('data-reveal-mask')) {
+      // The closed clip is installed HERE, not in the CSS pre-state. A
+      // clip-collapsed element has a zero-height visual rect, and Chrome's
+      // IntersectionObserver then reports ratio 0 for it permanently — with
+      // the clip in the pre-state the reveal simply never fires. So: close
+      // the curtain, flush that state, then open it.
+      el.style.transition = 'none';
+      el.style.clipPath = 'inset(0 0 100% 0)';
+      void el.offsetHeight;                    // force the closed state to land
       el.style.transition = 'clip-path ' + (dur * 1.2) + 's ' + EASE + ', opacity ' + (dur * 0.6) + 's ease-out';
       el.style.transitionDelay = delay + 's';
+      // Drop the clip once it has finished opening. `inset(0 0 0 0)` still
+      // clips to the border box, which would silently cut off anything a
+      // child overflows later (hover shadows, dropdowns, focus rings).
+      el.addEventListener('transitionend', function (e) {
+        if (e.propertyName === 'clip-path') e.currentTarget.style.clipPath = 'none';
+      }, { once: true });
       el.style.clipPath = 'inset(0 0 0 0)';
       el.style.opacity = '1';
     } else {

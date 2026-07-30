@@ -174,6 +174,10 @@
                 data-mobile-poster="media/hero-mobile-poster.jpg">
                 <source data-cms="index.hero.video_url" src="media/hero-desktop.mp4" type="video/mp4" />
             </video>
+            <!-- Colour grading, not motion: softens the seam under the fixed
+                 header and blends the frame's bottom edge into the section
+                 below. Sits after the video so it paints over it. -->
+            <div class="sa-hero-grade" aria-hidden="true"></div>
             <script>
               // Hero: vídeo wide no desktop, retrato no mobile. Ambos re-encodados
               // (53MB->3.5MB / 39MB->1.3MB) e servidos de /media.
@@ -226,7 +230,7 @@
 
           <!-- Quote header -->
           <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px); text-align:center;">
-            <div class="custom-fade-in">
+            <div data-reveal-mask>
               <h2 data-cms="index.hero.quote" data-cms-attr="html" class="satoshi" style="font-size:clamp(18px,2vw,24px); font-weight:300; line-height:1.7; color:rgba(255,255,255,0.82); max-width:760px; margin:0 auto;">
                 The world's smartest investors are already turning to Portugal.<br>
                 Smith &amp; Adams ensures the most exclusive opportunities reach you first.
@@ -237,10 +241,13 @@
           <!-- Stats grid — editorial style -->
           <div style="border-top:1px solid rgba(255,255,255,0.08);">
             <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
-              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-3" style="border-left:1px solid rgba(255,255,255,0.08);">
+              <!-- Stats reveal per cell rather than as one block: staggered on
+                   desktop where all three enter together, and individually on
+                   mobile where the grid stacks taller than the viewport. -->
+              <div class="grid grid-cols-1 md:grid-cols-3" style="border-left:1px solid rgba(255,255,255,0.08);">
 
                 <!-- Stat 1 -->
-                <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div data-reveal style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div data-cms="index.hero.stat1.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">+10</div>
                   <p data-cms="index.hero.stat1.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     in real estate investment and management in Portugal
@@ -248,7 +255,7 @@
                 </div>
 
                 <!-- Stat 2 -->
-                <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div data-reveal data-reveal-delay="0.08" style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div data-cms="index.hero.stat2.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">+500</div>
                   <p data-cms="index.hero.stat2.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     units delivered in premium residential projects, with integrated management and a focus on stable euro-denominated returns.
@@ -256,7 +263,7 @@
                 </div>
 
                 <!-- Stat 3 -->
-                <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div data-reveal data-reveal-delay="0.16" style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div data-cms="index.hero.stat3.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">+€30M</div>
                   <p data-cms="index.hero.stat3.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">
                     in real estate investments advised for international investors who chose Portugal to protect and grow their euro-denominated capital.
@@ -281,7 +288,7 @@
         <section style="background:#FDFCF9; padding:0 0 100px; width:100%;">
 
           <!-- Section header -->
-          <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,64px); display:flex; align-items:flex-end; justify-content:space-between; gap:32px; flex-wrap:wrap; border-bottom:1px solid #e5e7eb;">
+          <div data-reveal-mask style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,64px); display:flex; align-items:flex-end; justify-content:space-between; gap:32px; flex-wrap:wrap; border-bottom:1px solid #e5e7eb;">
             <div>
               <div style="display:inline-block; padding:6px 20px; background:#0C1E28; border-radius:9999px; margin-bottom:20px;">
                 <span class="satoshi" style="color:white; font-weight:600; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">Benefits</span>
@@ -301,30 +308,30 @@
             <div class="grid grid-cols-1 md:grid-cols-3" style="gap:0; border-left:1px solid #e5e7eb;">
 
               <!-- Card 1 -->
-              <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
+              <div data-reveal style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
                 <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">01</div>
                 <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img data-cms="index.why.card1.image" src="./_next/static/media/benefitsImage.5a4386fa.png" alt="Portuguese real estate market in 2025 is experiencing dynamic growth" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  <img data-cms="index.why.card1.image" decoding="async" src="./_next/static/media/benefitsImage.5a4386fa.png" alt="Portuguese real estate market in 2025 is experiencing dynamic growth" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <h3 data-cms="index.why.card1.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Portuguese real estate market in 2025 is experiencing dynamic growth</h3>
                 <p data-cms="index.why.card1.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">High standard of living and economic stability — Portugal offers a high quality of life, political stability, and a thriving economy driven by innovation, tourism, and foreign investment. With its location in Western Europe and strong infrastructure, the country is ideal for families and investors. Enjoy a mild climate, top-tier healthcare, excellent education, and a dynamic real estate market.</p>
               </div>
 
               <!-- Card 2 -->
-              <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
+              <div data-reveal data-reveal-delay="0.09" style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
                 <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">02</div>
                 <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img data-cms="index.why.card2.image" src="./_next/static/media/benefitsImage2.1defde2a.jpg" alt="Natural Beauty and Rich Culture" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  <img data-cms="index.why.card2.image" decoding="async" src="./_next/static/media/benefitsImage2.1defde2a.jpg" alt="Natural Beauty and Rich Culture" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <h3 data-cms="index.why.card2.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Natural Beauty and Rich Culture</h3>
                 <p data-cms="index.why.card2.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">Portugal is a land shaped by the Atlantic Ocean, from the sunny Algarve to the wild western cliffs and the green northern coast. Each region offers its own unique climate, golden beaches, charming towns, and breathtaking coastal landscapes.</p>
               </div>
 
               <!-- Card 3 -->
-              <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-bottom:1px solid #e5e7eb;">
+              <div data-reveal data-reveal-delay="0.18" style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-bottom:1px solid #e5e7eb;">
                 <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">03</div>
                 <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img data-cms="index.why.card3.image" src="./_next/static/media/benefitImage3.7ce71e79.jpg" alt="Family Benefits &amp; Lifestyle" style="width:100%; height:100%; object-fit:cover; display:block;">
+                  <img data-cms="index.why.card3.image" decoding="async" src="./_next/static/media/benefitImage3.7ce71e79.jpg" alt="Family Benefits &amp; Lifestyle" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <h3 data-cms="index.why.card3.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Family Benefits &amp; Lifestyle</h3>
                 <p data-cms="index.why.card3.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">Extend your Portuguese residency to your entire family, including spouse, children under 18, and dependent parents over 65. Portugal offers world-class healthcare, excellent education system, and a high quality of life. Enjoy the Mediterranean climate, rich culture, and strategic location that provides easy access to the rest of Europe.</p>
@@ -338,7 +345,7 @@
 
           <!-- Section header -->
           <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px);">
-            <div class="custom-fade-in">
+            <div data-reveal>
               <p data-cms="index.steps.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Step by Step</p>
               <h2 data-cms="index.steps.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:700px;">
                 Discover how Smith &amp; Adams makes your property work for you
@@ -349,10 +356,10 @@
           <!-- 4 cards grid -->
           <div style="border-top:1px solid rgba(255,255,255,0.08);">
             <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
-              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style="border-left:1px solid rgba(255,255,255,0.08);">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style="border-left:1px solid rgba(255,255,255,0.08);">
 
                 <!-- Step 1 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div data-reveal style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">01</div>
                   <h3 data-cms="index.steps.0.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">You invest in selected assets</h3>
                   <p data-cms="index.steps.0.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Purchase in carefully selected developments</p>
@@ -360,7 +367,7 @@
                 </div>
 
                 <!-- Step 2 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div data-reveal data-reveal-delay="0.07" style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">02</div>
                   <h3 data-cms="index.steps.1.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">We handle full management</h3>
                   <p data-cms="index.steps.1.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Professional management of your property and tenants</p>
@@ -368,7 +375,7 @@
                 </div>
 
                 <!-- Step 3 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div data-reveal data-reveal-delay="0.14" style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">03</div>
                   <h3 data-cms="index.steps.2.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">You receive euro&#8209;denominated income</h3>
                   <p data-cms="index.steps.2.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Earn predictable income in euros, hassle&#8209;free</p>
@@ -376,7 +383,7 @@
                 </div>
 
                 <!-- Step 4 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-bottom:1px solid rgba(255,255,255,0.08);">
+                <div data-reveal data-reveal-delay="0.21" style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-bottom:1px solid rgba(255,255,255,0.08);">
                   <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">04</div>
                   <h3 data-cms="index.steps.3.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">Protected and appreciating assets</h3>
                   <p data-cms="index.steps.3.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Capital protection and long&#8209;term growth</p>
@@ -394,8 +401,8 @@
 
         <!-- New: Two Core Pillars Section -->
         <section style="background-color: #FDFCF9; padding: 6rem 1rem; width: 100%;">
-            <div class="custom-fade-in" style="max-width: 1200px; margin: 0 auto; width: 100%;">
-                <div style="text-align: center; margin-bottom: 4rem;">
+            <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+                <div data-reveal-mask style="text-align: center; margin-bottom: 4rem;">
                     <div style="display: inline-block; padding: 0.375rem 1.25rem; background-color: #0C1E28; border-radius: 9999px; margin-bottom: 1rem;">
                         <p data-cms="index.pillars.eyebrow" style="color: white; font-weight: 600; letter-spacing: 0.05em; font-family: 'Satoshi', sans-serif; font-size: 0.875rem; text-transform: uppercase;">Our Foundation</p>
                     </div>
@@ -404,7 +411,11 @@
                     </h2>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;">
+                <!-- Revealed as a pair, not per card: the cards carry their own
+                     inline `transition` for the hover lift, and a per-card
+                     reveal would overwrite it with the much slower reveal
+                     easing. Two cards gain little from a stagger anyway. -->
+                <div data-reveal style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;">
                     <!-- Pillar 1 -->
                     <div style="background-color: white; border-radius: 1.5rem; padding: 3rem; border: 1px solid #F3F4F6; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)';">
                         <div style="width: 4rem; height: 4rem; background-color: #F8FAFC; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; border: 1px solid #E2E8F0;">
@@ -459,11 +470,11 @@
             #dreams-video > #yt-embed-wrap { aspect-ratio: auto !important; height: 100%; }
           }
         </style>
-        <section id="dreams-section" class="custom-fade-in" style="background:#0C1E28; width:100%; padding:80px 0; overflow:hidden;">
+        <section id="dreams-section" style="background:#0C1E28; width:100%; padding:80px 0; overflow:hidden;">
           <div id="dreams-row" style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px); display:flex; align-items:center; gap:clamp(24px,6vw,80px); flex-wrap:wrap;">
 
             <!-- Left: Display text -->
-            <div id="dreams-text" style="flex:1; min-width:320px;">
+            <div id="dreams-text" data-reveal style="flex:1; min-width:320px;">
               <p data-cms="index.dreams.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:24px;">Smith &amp; Adams · Portugal</p>
               <h2 data-cms="index.dreams.title" data-cms-attr="html" class="geist" style="font-size:clamp(2.5rem,5vw,4.5rem); font-weight:900; color:#ffffff; line-height:0.95; letter-spacing:-0.04em; margin:0 0 12px;">
                 Building<br>
@@ -475,7 +486,7 @@
             </div>
 
             <!-- Right: Portrait video card -->
-            <div id="dreams-video" style="flex-shrink:0; width:340px; border-radius:24px; overflow:hidden; box-shadow:0 32px 80px rgba(12,30,40,0.18), 0 8px 24px rgba(12,30,40,0.10);">
+            <div id="dreams-video" data-reveal data-reveal-delay="0.12" style="flex-shrink:0; width:340px; border-radius:24px; overflow:hidden; box-shadow:0 32px 80px rgba(12,30,40,0.18), 0 8px 24px rgba(12,30,40,0.10);">
               <div id="yt-embed-wrap" style="position:relative; width:100%; aspect-ratio:4/5; cursor:pointer;" onclick="
                 var w=this;
                 var f=document.createElement('iframe');
@@ -503,7 +514,7 @@
 
         <section class="bg-[#FDFCF9] py-16 md:py-24" id="testimonials">
             <div class="container mx-auto px-4 md:px-6">
-                <div class="text-center mb-12">
+                <div class="text-center mb-12" data-reveal>
                     <div class="inline-block bg-black rounded-full px-5 py-1.5 mb-4">
                         <p data-cms="index.testimonials.eyebrow" class="text-white font-semibold tracking-wide text-sm">Testimonials</p>
                     </div>
@@ -770,7 +781,10 @@
         
         <section class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-4 md:px-6 max-w-7xl">
-                <div class="text-center mb-12 transition-all duration-1000 opacity-100">
+                <!-- `transition-all duration-1000 opacity-100` were Next.js
+                     build leftovers with nothing to trigger them; dropped in
+                     favour of a real reveal. -->
+                <div class="text-center mb-12" data-reveal>
                     <div class="max-w-[900px] mx-auto mb-12 lg:mb-14">
                         <div class="flex justify-center items-center mb-4">
                             <div class="px-5 py-1.5 bg-[#0C1E28] inline-block rounded-full">
@@ -793,7 +807,7 @@
         </section>
         <section class="py-16 md:py-20" style="background:#0C1E28;">
             <div class="container mx-auto px-4 md:px-6">
-                <div class="text-center mb-12 transition-all duration-1000 opacity-100">
+                <div class="text-center mb-12" data-reveal>
                     <div class="max-w-[900px] mx-auto mb-12 lg:mb-14">
                         <div class="flex justify-center items-center mb-4">
                             <div class="px-5 py-1.5 bg-white/10 inline-block rounded-full">
@@ -804,29 +818,31 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 transition-all duration-1000 opacity-100">
-                    <div class="transition-all duration-1000" style="transition-delay:100ms">
+                    <!-- These five carried transition-delay values with no
+                         observer to trigger them. Now real staggered reveals. -->
+                    <div data-reveal>
                         <div class="relative h-12 md:h-16 w-32 md:w-40"><img alt="The Times" class="object-contain"
                                 decoding="async" loading="lazy" src="./home/unnamed.png"
                                 style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent;filter:brightness(0) invert(1);" /></div>
                     </div>
-                    <div class="transition-all duration-1000" style="transition-delay:200ms">
+                    <div data-reveal data-reveal-delay="0.06">
                         <div class="relative h-12 md:h-16 w-32 md:w-40"><img alt="Financial Times"
                                 class="object-contain" decoding="async" loading="lazy"
                                 src="home/companyIcon1.svg"
                                 style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent;filter:brightness(0) invert(1);" /></div>
                     </div>
-                    <div class="transition-all duration-1000" style="transition-delay:300ms">
+                    <div data-reveal data-reveal-delay="0.12">
                         <div class="relative h-12 md:h-16 w-32 md:w-40"><img alt="The London Economic"
                                 class="object-contain" decoding="async" loading="lazy"
                                 src="home/companyIcon2.svg"
                                 style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent;filter:brightness(0) invert(1);" /></div>
                     </div>
-                    <div class="transition-all duration-1000" style="transition-delay:400ms">
+                    <div data-reveal data-reveal-delay="0.18">
                         <div class="relative h-12 md:h-16 w-32 md:w-40"><img alt="The Guardian" class="object-contain"
                                 decoding="async" loading="lazy" src="urban-collections/the economic lodon.png"
                                 style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent;filter:invert(1);mix-blend-mode:screen;" /></div>
                     </div>
-                    <div class="transition-all duration-1000" style="transition-delay:500ms">
+                    <div data-reveal data-reveal-delay="0.24">
                         <div class="relative h-12 md:h-16 w-32 md:w-40"><img alt="The Financial Times"
                                 class="object-contain" decoding="async" loading="lazy"
                                 src="urban-collections/financial times.png"
@@ -842,7 +858,7 @@
             <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px);">
 
                 <!-- Header row -->
-                <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:clamp(36px,5vw,56px);">
+                <div data-reveal style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:clamp(36px,5vw,56px);">
                     <div>
                         <p data-cms="index.discover.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:16px;">Follow Us · @smithandadamsgroup</p>
                         <h2 data-cms="index.discover.title" data-cms-attr="html" class="geist" style="font-size:clamp(32px,5vw,64px); font-weight:800; color:#ffffff; line-height:1.0; letter-spacing:-0.02em; text-transform:uppercase; margin:0;">Discover Our<br>World of Property<br>Investing</h2>
@@ -1172,22 +1188,12 @@
 
       document.addEventListener('DOMContentLoaded', loadHomeBlogs);
     </script>
-    <script id="scroll-animation-script">
-        document.addEventListener('DOMContentLoaded', function () {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        entry.target.style.filter = 'blur(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
-
-            document.querySelectorAll('.custom-fade-in').forEach(el => observer.observe(el));
-        });
-    </script>
+    <!-- The old #scroll-animation-script observer lived here. Every
+         .custom-fade-in on this page is now a data-reveal driven by
+         motion.js, so it had nothing left to observe. Its threshold of 0.2
+         also never fired for sections taller than ~5x the viewport, which
+         is why the reveals are threshold-0-based now. about.html still has
+         one .custom-fade-in and keeps its own copy. -->
     <script id="carousel-vanilla-script">
         document.addEventListener('DOMContentLoaded', function () {
             const headings = Array.from(document.querySelectorAll('h2'));

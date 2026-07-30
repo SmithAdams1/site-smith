@@ -33,9 +33,14 @@
 }
 
 /* Masked reveal — content emerges from behind an edge.
-   Reads architectural rather than "faded in"; the premium default. */
+   Reads architectural rather than "faded in"; the premium default.
+
+   The pre-state is opacity ONLY, deliberately. A clip-path-collapsed element
+   has a zero-height visual rect, and Chrome's IntersectionObserver then
+   reports an intersection ratio of 0 for it forever — so a reveal gated on
+   that observer could never fire. motion.js installs the closed clip and
+   opens it at reveal time instead. Do not move clip-path back up here. */
 .js [data-reveal-mask] {
-  clip-path: inset(0 0 100% 0);
   opacity: 0;
   will-change: clip-path, opacity;
 }
@@ -96,11 +101,68 @@
 /* ------------------------------------------------------------
    Hero video: poster must be the LCP, video fades in over it
    ------------------------------------------------------------ */
-.sa-hero-video {
+/* Gated behind .js: only JS can ever add .sa-video-ready, so an ungated
+   opacity:0 here leaves the whole hero — poster included — a black box when
+   JS is blocked or fails. That is the site's largest visual element. */
+.js .sa-hero-video {
   opacity: 0;
   transition: opacity 1.2s var(--sa-ease-out-expo);
 }
 .sa-hero-video.sa-video-ready { opacity: 1; }
+
+/* ------------------------------------------------------------
+   Hero grading
+   ------------------------------------------------------------
+   The hero footage used to butt straight against the fixed dark header
+   above it and the #0C1E28 section below it — two hard horizontal seams
+   that made it read as "a video in a box" rather than one continuous
+   frame. This is colour grading, not motion: it stays on under
+   prefers-reduced-motion.
+
+   No parallax on the hero media, deliberately: the footage carries a
+   baked-in SMITH & ADAMS lockup, and parallax needs the media overscanned
+   past the section edges — which crops the lockup out of frame. The
+   drone shot is already moving; a second motion layer on top of it would
+   add cost without adding hierarchy. */
+.sa-hero-grade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    /* Top: continues the header's colour down into the frame so the
+       header stops reading as a bar laid across the footage. */
+    linear-gradient(to bottom,
+      rgba(12, 30, 40, 0.60) 12%,
+      rgba(12, 30, 40, 0.28) 22%,
+      rgba(12, 30, 40, 0)    36%),
+    /* Bottom: blends into the section below. Deliberately short — the
+       lockup sits at roughly 8-14% from the bottom edge of the desktop
+       cut and must stay unmuddied, so the ramp finishes before it. */
+    linear-gradient(to top,
+      #0C1E28               0%,
+      rgba(12, 30, 40, 0.82) 2.5%,
+      rgba(12, 30, 40, 0.32) 5.5%,
+      rgba(12, 30, 40, 0)    8.5%);
+}
+
+/* Mobile gets the portrait cut, which is letterboxed with a lighter navy
+   band across its bottom ~15% — that band, and the seam where it meets
+   the section, are what needs absorbing here. Longer ramp is safe: on
+   this cut the lockup sits at the top, behind the header. */
+@media (max-width: 768px) {
+  .sa-hero-grade {
+    background:
+      linear-gradient(to bottom,
+        rgba(12, 30, 40, 0.55) 12%,
+        rgba(12, 30, 40, 0.24) 24%,
+        rgba(12, 30, 40, 0)    38%),
+      linear-gradient(to top,
+        #0C1E28               0%,
+        rgba(12, 30, 40, 0.94) 9%,
+        rgba(12, 30, 40, 0.55) 14%,
+        rgba(12, 30, 40, 0)    20%);
+  }
+}
 
 /* ------------------------------------------------------------
    Cross-document page transitions (static/MPA)
