@@ -76,6 +76,9 @@
 
   gtag('config', 'AW-18073134136');
 </script>
+<script>document.documentElement.classList.add("js");</script>
+<link rel="stylesheet" href="/motion.css" />
+<script defer src="/motion.js"></script>
 <script defer src="/cms-loader.js"></script>
 </head>
 
@@ -158,38 +161,64 @@
         </style>
         <section class="relative w-full overflow-hidden bg-black" id="hero-video-space"
             style="height: 80vh; min-height: 600px; max-height: 1000px;">
-            <video id="hero-video" autoplay playsinline loop muted class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            <!-- Poster paints first and is the LCP candidate; the video streams in
+                 behind it and cross-fades once it can play. preload="none" keeps the
+                 video off the critical path entirely. -->
+            <video id="hero-video" playsinline loop muted preload="none" aria-hidden="true"
+                class="sa-hero-video absolute inset-0 w-full h-full object-cover pointer-events-none"
                 style="width: 100%; height: 100%; object-fit: cover;"
-                data-desktop-src="urban-collections/Smith_e_Adams_Site_20s_Wide803_h264_03.mp4"
-                data-mobile-src="Smith_e_Adams_Site_20s_1080x1200_h264_03.mp4">
-                <source data-cms="index.hero.video_url" src="urban-collections/Smith_e_Adams_Site_20s_Wide803_h264_03.mp4" type="video/mp4" />
+                poster="media/hero-desktop-poster.jpg"
+                data-desktop-src="media/hero-desktop.mp4"
+                data-mobile-src="media/hero-mobile.mp4"
+                data-desktop-poster="media/hero-desktop-poster.jpg"
+                data-mobile-poster="media/hero-mobile-poster.jpg">
+                <source data-cms="index.hero.video_url" src="media/hero-desktop.mp4" type="video/mp4" />
             </video>
             <script>
-              // Hero usa o vídeo wide no desktop e o 1080x1200 vertical no mobile.
-              // O CMS controla a URL desktop via data-cms="index.hero.video_url"; no
-              // mobile substituímos pelo vídeo retrato hardcoded. Roda após DOMContent
-              // E também depois do cms-loaded para sobrescrever o que o loader injetou.
+              // Hero: vídeo wide no desktop, retrato no mobile. Ambos re-encodados
+              // (53MB->3.5MB / 39MB->1.3MB) e servidos de /media.
+              //
+              // Ordem: o poster é o LCP (pinta imediatamente). O vídeo só carrega
+              // depois de sabermos qual variante serve, e só arranca se o utilizador
+              // não pediu reduced-motion e a ligação não é lenta/saveData.
               (function () {
                 const v = document.getElementById('hero-video');
                 if (!v) return;
-                const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+                const mq = window.matchMedia('(max-width: 768px)');
+                const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                const conn = navigator.connection;
+                const slow = !!(conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '')));
+
+                // Sem motion ou em ligação fraca: fica o poster, não descarrega vídeo.
+                if (reduce || slow) {
+                  v.classList.add('sa-video-ready');
+                  return;
+                }
+
+                let current = null;
                 function applySrc() {
-                  const wantMobile = isMobile();
-                  const src = wantMobile ? v.dataset.mobileSrc : v.dataset.desktopSrc;
+                  const wantMobile = mq.matches;
+                  if (wantMobile === current) return;   // já está na variante certa
+                  current = wantMobile;
+
+                  const src    = wantMobile ? v.dataset.mobileSrc    : v.dataset.desktopSrc;
+                  const poster = wantMobile ? v.dataset.mobilePoster : v.dataset.desktopPoster;
                   const source = v.querySelector('source');
-                  // No desktop, deixe o cms-loader controlar (não sobrescrever o que ele aplicou).
-                  // No mobile, force o vídeo retrato.
-                  if (!wantMobile) return;
+
+                  if (poster) v.setAttribute('poster', poster);
                   if (source.getAttribute('src') !== src) {
                     source.setAttribute('src', src);
                     v.load();
-                    v.play().catch(() => {});
                   }
+                  v.play().catch(function () { /* autoplay pode ser recusado; poster fica */ });
                 }
+
+                // Cross-fade só quando há frames prontos — evita flash de preto.
+                v.addEventListener('canplay', function () { v.classList.add('sa-video-ready'); }, { once: true });
+
                 applySrc();
-                document.addEventListener('cms-loaded', applySrc);
-                // Reagir a mudança de tamanho (rotacionar tablet, etc.)
-                window.matchMedia('(max-width: 768px)').addEventListener('change', applySrc);
+                mq.addEventListener('change', applySrc);
               })();
             </script>
         </section>
@@ -197,7 +226,7 @@
 
           <!-- Quote header -->
           <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px); text-align:center;">
-            <div class="custom-fade-in" style="transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
+            <div class="custom-fade-in">
               <h2 data-cms="index.hero.quote" data-cms-attr="html" class="satoshi" style="font-size:clamp(18px,2vw,24px); font-weight:300; line-height:1.7; color:rgba(255,255,255,0.82); max-width:760px; margin:0 auto;">
                 The world's smartest investors are already turning to Portugal.<br>
                 Smith &amp; Adams ensures the most exclusive opportunities reach you first.
@@ -208,7 +237,7 @@
           <!-- Stats grid — editorial style -->
           <div style="border-top:1px solid rgba(255,255,255,0.08);">
             <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
-              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-3" style="border-left:1px solid rgba(255,255,255,0.08); transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
+              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-3" style="border-left:1px solid rgba(255,255,255,0.08);">
 
                 <!-- Stat 1 -->
                 <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
@@ -309,7 +338,7 @@
 
           <!-- Section header -->
           <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px);">
-            <div class="custom-fade-in" style="transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
+            <div class="custom-fade-in">
               <p data-cms="index.steps.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">Step by Step</p>
               <h2 data-cms="index.steps.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:700px;">
                 Discover how Smith &amp; Adams makes your property work for you
@@ -320,7 +349,7 @@
           <!-- 4 cards grid -->
           <div style="border-top:1px solid rgba(255,255,255,0.08);">
             <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
-              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style="border-left:1px solid rgba(255,255,255,0.08); transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
+              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style="border-left:1px solid rgba(255,255,255,0.08);">
 
                 <!-- Step 1 -->
                 <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
@@ -365,7 +394,7 @@
 
         <!-- New: Two Core Pillars Section -->
         <section style="background-color: #FDFCF9; padding: 6rem 1rem; width: 100%;">
-            <div class="custom-fade-in" style="max-width: 1200px; margin: 0 auto; width: 100%; transition: all 1s ease-out; transform: translateY(20px); filter: blur(4px); opacity: 0.4;">
+            <div class="custom-fade-in" style="max-width: 1200px; margin: 0 auto; width: 100%;">
                 <div style="text-align: center; margin-bottom: 4rem;">
                     <div style="display: inline-block; padding: 0.375rem 1.25rem; background-color: #0C1E28; border-radius: 9999px; margin-bottom: 1rem;">
                         <p data-cms="index.pillars.eyebrow" style="color: white; font-weight: 600; letter-spacing: 0.05em; font-family: 'Satoshi', sans-serif; font-size: 0.875rem; text-transform: uppercase;">Our Foundation</p>
@@ -430,7 +459,7 @@
             #dreams-video > #yt-embed-wrap { aspect-ratio: auto !important; height: 100%; }
           }
         </style>
-        <section id="dreams-section" class="custom-fade-in" style="background:#0C1E28; width:100%; padding:80px 0; transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4; overflow:hidden;">
+        <section id="dreams-section" class="custom-fade-in" style="background:#0C1E28; width:100%; padding:80px 0; overflow:hidden;">
           <div id="dreams-row" style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px); display:flex; align-items:center; gap:clamp(24px,6vw,80px); flex-wrap:wrap;">
 
             <!-- Left: Display text -->

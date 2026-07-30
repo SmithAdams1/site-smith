@@ -46,6 +46,26 @@
   transform: translateY(0.6em);
 }
 
+/* ------------------------------------------------------------
+   Legacy .custom-fade-in sections (index.html, about.html)
+   ------------------------------------------------------------
+   These used inline `transition: all` + `filter: blur(4px)`, which
+   repaint a whole section every frame and are the main scroll-jank
+   source. The inline animation props were removed from the HTML; the
+   pre-state now lives here, gated behind .js.
+
+   Consequence: with JS disabled the content renders fully visible and
+   unblurred, instead of being stuck at 40% opacity behind a blur.
+
+   The page's own IntersectionObserver still reveals them by setting
+   inline opacity/transform, which correctly wins over these rules. */
+.js .custom-fade-in {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.9s var(--sa-ease-out-expo),
+              transform 0.9s var(--sa-ease-out-expo);
+}
+
 /* Once a reveal has played, drop will-change so we stop holding GPU memory */
 [data-reveal].sa-revealed,
 [data-reveal-mask].sa-revealed,
@@ -117,10 +137,12 @@
   /* Force every reveal to its resting state */
   .js [data-reveal],
   .js [data-reveal-mask],
-  .js [data-reveal-lines] > * {
+  .js [data-reveal-lines] > *,
+  .js .custom-fade-in {
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    filter: none !important;
   }
 
   .sa-kenburns { animation: none !important; }
