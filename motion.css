@@ -1,0 +1,131 @@
+/* ============================================================
+   Smith & Adams — motion layer
+   ------------------------------------------------------------
+   Luxury-property motion vocabulary: slow, weighted, no overshoot.
+   Reveals settle with a long easing tail; nothing bounces.
+
+   Pre-animation states are gated behind .js (set by an inline script
+   in <head>) so content is NEVER invisible when JS fails or is blocked.
+   ============================================================ */
+
+:root {
+  /* Confident, weighty reveal — fast start, unhurried settle */
+  --sa-ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --sa-ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  /* Overlays, wipes, page transitions */
+  --sa-ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --sa-dur-fast:   0.2s;   /* exits, hover feedback */
+  --sa-dur-mid:    0.45s;  /* small elements */
+  --sa-dur-slow:   0.8s;   /* section reveals */
+  --sa-dur-slower: 1.1s;   /* hero, large masked reveals */
+}
+
+/* ------------------------------------------------------------
+   Pre-animation states (JS present only)
+   ------------------------------------------------------------ */
+
+/* Simple fade-up reveal */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  will-change: opacity, transform;
+}
+
+/* Masked reveal — content emerges from behind an edge.
+   Reads architectural rather than "faded in"; the premium default. */
+.js [data-reveal-mask] {
+  clip-path: inset(0 0 100% 0);
+  opacity: 0;
+  will-change: clip-path, opacity;
+}
+
+/* Per-character/word/line reveal target set up by motion.js */
+.js [data-reveal-lines] > * {
+  opacity: 0;
+  transform: translateY(0.6em);
+}
+
+/* Once a reveal has played, drop will-change so we stop holding GPU memory */
+[data-reveal].sa-revealed,
+[data-reveal-mask].sa-revealed,
+[data-reveal-lines].sa-revealed > * {
+  will-change: auto;
+}
+
+/* ------------------------------------------------------------
+   Parallax
+   ------------------------------------------------------------
+   Decorative layers only — never body copy, never controls.
+   The wrapper must clip so layers don't bleed outside the section. */
+[data-parallax-wrap] { overflow: hidden; }
+.js [data-parallax] { will-change: transform; }
+
+/* ------------------------------------------------------------
+   Ken Burns — motion on a still, at ~1/20th the weight of video
+   ------------------------------------------------------------ */
+.sa-kenburns {
+  animation: sa-kb 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes sa-kb {
+  from { transform: scale(1.0)  translate3d(0, 0, 0); }
+  to   { transform: scale(1.07) translate3d(-1.4%, -1%, 0); }
+}
+
+/* ------------------------------------------------------------
+   Hero video: poster must be the LCP, video fades in over it
+   ------------------------------------------------------------ */
+.sa-hero-video {
+  opacity: 0;
+  transition: opacity 1.2s var(--sa-ease-out-expo);
+}
+.sa-hero-video.sa-video-ready { opacity: 1; }
+
+/* ------------------------------------------------------------
+   Cross-document page transitions (static/MPA)
+   ------------------------------------------------------------
+   Native continuity between pages, no framework. Exits are fast,
+   entrances breathe — asymmetric timing so back/forward feels snappy. */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root) {
+  animation: sa-vt-out 180ms var(--sa-ease-in-out-quart) both;
+}
+::view-transition-new(root) {
+  animation: sa-vt-in 340ms var(--sa-ease-out-expo) both;
+}
+@keyframes sa-vt-out { to   { opacity: 0; } }
+@keyframes sa-vt-in  { from { opacity: 0; } }
+
+/* Shared element: property card -> property detail hero.
+   motion.js assigns the name at click time so it is unique per page. */
+[data-vt-hero] { view-transition-name: sa-hero-media; }
+
+/* ------------------------------------------------------------
+   Reduced motion — mandatory
+   ------------------------------------------------------------
+   Users land in the FINAL visual state, never a half-animated one. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Force every reveal to its resting state */
+  .js [data-reveal],
+  .js [data-reveal-mask],
+  .js [data-reveal-lines] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .sa-kenburns { animation: none !important; }
+  .sa-hero-video { opacity: 1 !important; }
+
+  /* Disable page transitions entirely */
+  @view-transition { navigation: none; }
+}
