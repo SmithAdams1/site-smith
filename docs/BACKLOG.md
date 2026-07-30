@@ -41,7 +41,7 @@
 | 2026-07-29 | 4 pending copy SQL from `smith-adams-copy-changes-log.md` | abilio.diz | Applied to `site_content` (12 rows EN+PT) |
 | 2026-07-29 | Full master-doc copy audit — 4 remaining "developer" framing fixes | abilio.diz | Applied (8 rows EN+PT) |
 | 2026-07-29 | Health & Physical Information A4 PDF (branded, bilingual) | abilio.diz / Opus 4.7 | Delivered as file |
-| **2026-07-30 (11:00→)** | **Motion layer — in progress** | abilio.diz / Opus 4.7 | Branch `motion-layer`, commit `1be5cca` |
+| **2026-07-30 (11:00→12:xx)** | **Motion layer — in progress** | abilio.diz / Opus 4.7 | Branch `motion-layer`: `1be5cca` (video+CSS), `2769366` (this doc), `43ba2f7` (foundation+hero wiring) |
 
 > Hours are not tracked precisely; use commit timestamps (`git log --format='%h %ad %s' --date=iso`) as the source of truth for elapsed work.
 
@@ -76,44 +76,43 @@ The homepage was serving **53MB on desktop** and **39MB on mobile**, both encode
 - Ken Burns utility, hero-video fade-in, cross-document view transitions
 - **Mandatory `prefers-reduced-motion` block** landing users in the final visual state
 
+### ✅ Also done — commit `43ba2f7`
+
+**Hero video wired in.** `index.html` now serves `/media/hero-{desktop,mobile}.mp4` with per-variant posters, `preload="none"`, cross-fade on `canplay`, and no video fetched at all under reduced-motion or saveData/2G. *(The CMS key `index.hero.video_url` turned out to have **no row** in `site_content`, so no SQL was needed — the hardcoded src is authoritative.)*
+
+**`motion.js`** — zero dependencies, ~1kb of behaviour:
+- **Deliberately not GSAP.** Reveals are IntersectionObserver + CSS transitions on transform/opacity — ~35kb lighter. GSAP only becomes worthwhile for the pinned scrollytelling section, and then only on that page.
+- Reveal system for `[data-reveal]` / `[data-reveal-mask]` / `[data-reveal-lines]`
+- Layered parallax (rAF-throttled, transform only, capped 18%)
+- Pauses off-screen video; rebuilds on `cms-loaded`; shared-element VT name assigned at click time
+
+**Legacy `.custom-fade-in` rebuilt** (6 instances in `index.html`, 1 in `about.html`):
+- Removed inline `transition: all` + `filter: blur(4px)` — blur repainted whole sections every frame (main jank source)
+- Pre-state moved to `motion.css` under `.js` → **with JS disabled content is now fully visible** instead of 40% opacity behind a blur (verified)
+- Reveal now uses `threshold: 0` + bottom rootMargin. The page's own observer used `threshold: 0.2`, which **never fires for sections taller than ~5× the viewport**
+
+**Injected** into all 15 public pages. `admin.html`, `admin-real-estate.html`, `studio.html` excluded.
+
+> ⚠️ **Tooling caveat for future sessions:** `getComputedStyle` in the automation browser returns **stale values** on this site — inline styles read back as unapplied while rendering correctly. This caused a false-alarm bug hunt. **Trust screenshots over computed styles** when verifying motion here.
+
 ### 🔜 Next — pick up here
 
-**1. Wire the optimised video into markup** *(not done — markup still points at the 53MB/39MB files)*
-- `index.html` line ~161: hero `<video id="hero-video">` uses `data-desktop-src` / `data-mobile-src` and a `data-cms="index.hero.video_url"` source. An inline script swaps src by viewport.
-- Point desktop → `/media/hero-desktop.mp4`, mobile → `/media/hero-mobile.mp4`
-- Add `poster="/media/hero-desktop-poster.jpg"` + `preload="none"` so the **poster becomes LCP**
-- ⚠️ The CMS key `index.hero.video_url` overrides the desktop src — **update that `site_content` row too**, or the loader will re-inject the 53MB file at runtime
-- `real-estate.html` → `/media/real-estate-hero.mp4` (already lean; add poster + preload)
-
-**2. `motion.js` — the JS half of the foundation** *(not written yet)*
-Spec is in the skill at `~/.claude/skills/premium-web-motion/references/gsap-static-setup.md` — follow it. Must include:
-- Inline `<head>` script adding `.js` class (before paint, so no flash)
-- GSAP + ScrollTrigger from CDN, `defer`, pinned to `gsap@3`
-- `ScrollTrigger.batch()` reveal system (never one trigger per element)
-- Layered parallax at small deltas (5–15 yPercent), decorative layers only
-- `ScrollTrigger.refresh()` on `load` **and** `document.fonts.ready`
-- **Rebuild on the `cms-loaded` event, killing triggers first** — this site injects content via `cms-loader.js` after load, so triggers built too early target detached nodes
-- Reduced-motion: `gsap.globalTimeline.timeScale(200)` + pause/strip autoplay on videos
-- IntersectionObserver to pause off-screen video
-
-**3. Inject `motion.css` + `motion.js` into pages**
-- 21 HTML files in root; **exclude** `admin.html`, `admin-real-estate.html`, `studio.html`
-- Every page already loads `<script defer src="/cms-loader.js">` — inject next to that line (scriptable)
-- `page.html` (Studio template) needs it too, so Studio-built pages get motion
-
-**4. Cinematic homepage hero** (task #10)
-- Masked reveal on headline, staggered entry, subtle depth parallax, gradient grading
+**1. Cinematic homepage hero polish** (task #10)
+- Masked reveal on the headline with staggered entry (use `data-reveal-mask` / `data-reveal-lines`, already implemented)
+- Subtle depth parallax on the hero media (`data-parallax="8"` inside a `[data-parallax-wrap]`)
+- Gradient grading over the video so the copy reads at any frame
 - **The LCP element must never be animated** — reveal *around* the headline/poster
 
-**5. Sitewide reveals + one pinned narrative** (task #11)
+**2. Sitewide reveals + one pinned narrative** (task #11)
+- Add `data-reveal` / `data-reveal-mask` attributes to section content across pages — the system is built, nothing consumes it yet beyond the legacy fades
 - Luxury timing: 600–1000ms, `expo.out`, max 2 focal motions per viewport
-- At most one pinned/scrubbed section on the whole site
+- At most one pinned/scrubbed section on the whole site — **this is the only place GSAP + ScrollTrigger should be introduced**, loaded on that page alone
 
-**6. Page transitions** (task #12)
-- `@view-transition` CSS is already written in `motion.css`
-- Still to do: shared-element `view-transition-name` for property card → property detail hero (assign at click time so names stay unique per page)
+**3. Page transitions** (task #12)
+- `@view-transition` CSS is already in `motion.css` and the shared-element wiring is in `motion.js`
+- Still to verify end-to-end: property card → property detail hero morph, and that names never duplicate
 
-**7. Verify before merging**
+**4. Verify before merging**
 - Throttle CPU 4× — must hold 60fps
 - Reduced motion on — page complete and usable
 - JS disabled — all content present
