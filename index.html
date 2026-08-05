@@ -10,14 +10,8 @@
         type="font/woff2" />
     <link as="font" crossorigin="" href="_next/static/media/e4af272ccee01ff0-s.p.woff2" rel="preload"
         type="font/woff2" />
-    <!-- Removed eager image preloads (heroImage was orphaned by the video hero;
-         benefitsImage/urbanCollections are below-fold and now load on demand). -->
-    <link as="image" href="home/socialThumbnail1.svg" rel="preload" />
-    <link as="image" href="home/socialThumbnail2.svg" rel="preload" />
-    <link as="image" href="home/socialThumbnail3.svg" rel="preload" />
     <link data-precedence="next" href="_next/static/css/8414200374d39713.css?v=4" rel="stylesheet" />
     <link data-precedence="next" href="_next/static/css/85eae1a6394818bc.css?v=4" rel="stylesheet" />
-    <link as="script" fetchpriority="low" href="_next/static/chunks/webpack-fd1cfac03d75a0d2.js?v=4" rel="preload" />
     <meta content="" name="next-size-adjust" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -46,6 +40,8 @@
         rel="stylesheet" />
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet" />
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&amp;display=swap" rel="stylesheet" />
+    <!-- Redesign: Playfair Display for statements (Direction A), Helvetica Neue for working text -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&amp;display=swap" rel="stylesheet" />
 
   <script defer src="/_vercel/insights/script.js"></script>
 
@@ -95,10 +91,138 @@
   gtag('config', 'AW-18073134136');
 </script>
 <script defer src="/cms-loader.js"></script>
+
+<!-- ══════════════════════════════════════════════════════════════
+     REDESIGN 2026 · editorial-institutional system (Brand Book Ed. 03)
+     Palette: navy / white / stone / slate / ink (no gold, per Ed. 03)
+     Type: Playfair Display (statements) + Helvetica Neue (working text)
+════════════════════════════════════════════════════════════════ -->
+<style>
+  :root {
+    --navy:#11222D; --white:#FFFFFF; --stone:#C3CBD1; --slate:#6A7883;
+    --ink:#26333C; --paper:#FDFCF9; --line:#E4E1DA;
+    --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+    --sans:'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --ease-quint:cubic-bezier(0.22,1,0.36,1);
+    --ease-expo:cubic-bezier(0.16,1,0.3,1);
+    --mx:clamp(20px,5vw,64px);
+  }
+  .rd { font-family:var(--sans); color:var(--ink); background:var(--paper); }
+  .rd ::selection { background:var(--navy); color:#fff; }
+  .serif { font-family:var(--serif); }
+  .sans  { font-family:var(--sans); }
+  .rd-wrap { max-width:1360px; margin:0 auto; padding-left:var(--mx); padding-right:var(--mx); }
+
+  /* tracked label + hairline (brandbook idiom) */
+  .rd-label { font-family:var(--sans); font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:var(--slate); font-weight:500; }
+  .rd-hair { height:1px; background:var(--line); border:0; }
+  .rd-hair-d { height:1px; background:rgba(255,255,255,0.14); border:0; }
+
+  .rd-statement { font-family:var(--serif); font-weight:500; letter-spacing:-0.01em; line-height:1.06; color:var(--navy); }
+  .rd-body { font-family:var(--sans); font-size:clamp(15px,1.15vw,17px); line-height:1.75; color:var(--ink); }
+
+  /* ---------- HERO ---------- */
+  .rd-hero { position:relative; min-height:100svh; display:flex; align-items:flex-end; overflow:hidden; background:var(--navy); }
+  .rd-hero__media { position:absolute; inset:-16% 0 -16% 0; z-index:0; }
+  .rd-hero__media img { width:100%; height:100%; object-fit:cover; display:block; }
+  .rd-hero__scrim { position:absolute; inset:0; z-index:1;
+    background:linear-gradient(90deg, rgba(17,34,45,0.58) 0%, rgba(17,34,45,0) 56%),
+               linear-gradient(180deg, rgba(17,34,45,0.30) 0%, rgba(17,34,45,0.08) 42%, rgba(17,34,45,0.80) 100%); }
+  .rd-hero__inner { position:relative; z-index:2; width:100%; padding-bottom:clamp(40px,7vh,88px); padding-top:26vh; }
+  .rd-hero h1 { color:#fff; font-family:var(--serif); font-weight:500; letter-spacing:-0.015em;
+    font-size:clamp(40px,7vw,104px); line-height:1.02; max-width:16ch; margin:0; }
+  .rd-hero__sub { color:var(--stone); font-family:var(--sans); font-weight:300;
+    font-size:clamp(15px,1.5vw,20px); line-height:1.6; max-width:52ch; margin:22px 0 0; }
+  .rd-hero__row { display:flex; flex-wrap:wrap; align-items:center; gap:16px 28px; margin-top:34px; }
+  .rd-cta { display:inline-flex; align-items:center; gap:10px; background:#fff; color:var(--navy);
+    font-family:var(--sans); font-weight:600; font-size:15px; letter-spacing:0.01em; padding:16px 32px;
+    border-radius:2px; text-decoration:none; transition:transform .5s var(--ease-expo), background .3s ease; }
+  .rd-cta:hover { transform:translateY(-2px); background:#f0ede8; }
+  .rd-cta--ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.4); }
+  .rd-cta--ghost:hover { background:rgba(255,255,255,0.08); border-color:#fff; }
+  .rd-hero__caption { position:absolute; right:var(--mx); bottom:clamp(40px,7vh,88px); z-index:2;
+    text-align:right; color:#fff; display:flex; flex-direction:column; gap:4px; }
+  .rd-hero__caption .k { color:rgba(255,255,255,0.7); }
+  .rd-hero__caption .v { font-family:var(--serif); font-size:clamp(18px,1.5vw,22px); }
+  @media (max-width:820px){ .rd-hero__caption{ display:none; } }
+
+  /* ---------- generic section ---------- */
+  .rd-sec { padding:clamp(72px,11vw,168px) 0; }
+  .rd-sec--navy { background:var(--navy); color:#fff; }
+  .rd-sec--navy .rd-statement { color:#fff; }
+  .rd-sec--navy .rd-body { color:var(--stone); }
+
+  /* ---------- proof numbers ---------- */
+  .rd-proof { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid rgba(255,255,255,0.14); }
+  .rd-proof > div { padding:clamp(28px,4vw,56px) clamp(16px,2.4vw,40px) 0; border-right:1px solid rgba(255,255,255,0.14); }
+  .rd-proof > div:last-child { border-right:0; }
+  .rd-proof .n { font-family:var(--serif); font-weight:500; color:#fff; letter-spacing:-0.03em; line-height:1;
+    font-size:clamp(48px,7vw,104px); }
+  .rd-proof .l { color:var(--stone); font-family:var(--sans); font-size:13px; letter-spacing:0.04em; margin-top:18px; line-height:1.5; }
+  @media (max-width:760px){ .rd-proof{ grid-template-columns:1fr; } .rd-proof > div{ border-right:0; border-bottom:1px solid rgba(255,255,255,0.14); padding-bottom:28px; } }
+
+  /* ---------- pillars ---------- */
+  .rd-pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:0; margin-top:clamp(40px,6vw,72px); border-top:1px solid var(--line); }
+  .rd-pillars > div { padding:clamp(28px,3vw,44px) clamp(16px,2vw,36px) 0; border-right:1px solid var(--line); }
+  .rd-pillars > div:last-child { border-right:0; }
+  .rd-pillars h3 { font-family:var(--serif); font-weight:600; font-size:clamp(20px,1.7vw,26px); color:var(--navy); margin:16px 0 12px; line-height:1.2; }
+  .rd-pillars p { font-family:var(--sans); font-size:15px; line-height:1.7; color:var(--ink); margin:0; }
+  .rd-pillars .pf { font-family:var(--sans); font-size:12.5px; color:var(--slate); margin-top:16px; line-height:1.55; }
+  @media (max-width:820px){ .rd-pillars{ grid-template-columns:1fr; } .rd-pillars > div{ border-right:0; border-bottom:1px solid var(--line); padding-bottom:28px; } }
+
+  /* ---------- pinned "six functions" ---------- */
+  .rd-pin { background:var(--navy); color:#fff; }
+  .rd-pin__stage { min-height:100svh; display:flex; align-items:center; }
+  .rd-pin__grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,6vw,96px); align-items:center; width:100%; }
+  .rd-pin__lead { font-family:var(--serif); font-weight:500; font-size:clamp(28px,3.6vw,52px); line-height:1.1; letter-spacing:-0.01em; }
+  .rd-funcs { list-style:none; margin:0; padding:0; }
+  .rd-funcs li { display:flex; gap:20px; padding:18px 0; border-bottom:1px solid rgba(255,255,255,0.14); }
+  .rd-funcs li .fi { font-family:var(--serif); font-size:15px; color:var(--stone); width:2ch; flex-shrink:0; padding-top:3px; }
+  .rd-funcs li .ft { font-family:var(--sans); font-size:clamp(16px,1.4vw,19px); color:#fff; }
+  .rd-funcs li .fd { font-family:var(--sans); font-size:13.5px; color:var(--stone); margin-top:4px; }
+  @media (max-width:900px){ .rd-pin__grid{ grid-template-columns:1fr; gap:32px; } .rd-pin__stage{ min-height:auto; padding:clamp(64px,12vw,120px) 0; } }
+
+  /* ---------- two ways ---------- */
+  .rd-two { display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,2.5vw,32px); margin-top:clamp(40px,5vw,64px); }
+  .rd-card { background:#fff; border:1px solid var(--line); padding:clamp(28px,3.2vw,48px); display:flex; flex-direction:column; min-height:100%; }
+  .rd-card h3 { font-family:var(--serif); font-weight:600; font-size:clamp(22px,2vw,30px); color:var(--navy); margin:0 0 16px; line-height:1.15; }
+  .rd-card p { font-family:var(--sans); font-size:15.5px; line-height:1.75; color:var(--ink); margin:0 0 14px; }
+  .rd-card a.more { margin-top:auto; padding-top:24px; font-family:var(--sans); font-weight:600; font-size:14px; color:var(--navy); text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+  .rd-card a.more svg { transition:transform .4s var(--ease-expo); }
+  .rd-card:hover a.more svg { transform:translateX(5px); }
+  @media (max-width:820px){ .rd-two{ grid-template-columns:1fr; } }
+
+  /* ---------- asset (one asset, location + two figures) ---------- */
+  .rd-asset { position:relative; min-height:92svh; display:flex; align-items:flex-end; overflow:hidden; background:var(--navy); }
+  .rd-asset__media { position:absolute; inset:-16% 0 -16% 0; z-index:0; }
+  .rd-asset__media img { width:100%; height:100%; object-fit:cover; display:block; }
+  .rd-asset__scrim { position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(17,34,45,0.15) 30%, rgba(17,34,45,0.8) 100%); }
+  .rd-asset__plate { position:relative; z-index:2; width:100%; padding-bottom:clamp(40px,7vh,88px); }
+  .rd-asset__plate h2 { font-family:var(--serif); font-weight:500; color:#fff; font-size:clamp(30px,4.4vw,64px); line-height:1.05; margin:0; max-width:16ch; }
+  .rd-figs { display:flex; gap:clamp(28px,4vw,64px); margin-top:28px; flex-wrap:wrap; }
+  .rd-figs .f .n { font-family:var(--serif); font-size:clamp(28px,3vw,44px); color:#fff; line-height:1; }
+  .rd-figs .f .l { color:var(--stone); font-size:12px; letter-spacing:0.06em; text-transform:uppercase; margin-top:8px; }
+
+  /* ---------- closing ---------- */
+  .rd-close { text-align:center; }
+  .rd-close h2 { font-family:var(--serif); font-weight:500; color:var(--navy); font-size:clamp(30px,4.6vw,66px); line-height:1.05; letter-spacing:-0.01em; max-width:18ch; margin:0 auto; }
+  .rd-close p { font-family:var(--sans); font-size:clamp(15px,1.3vw,18px); color:var(--ink); max-width:52ch; margin:24px auto 0; line-height:1.7; }
+
+  /* ---------- MOTION (content visible by default; gated behind .motion-ready) ---------- */
+  html.motion-ready .reveal { opacity:0; transform:translateY(26px); }
+  html.motion-ready .reveal-line { opacity:0; transform:translateY(40px); }
+  @media (prefers-reduced-motion: reduce){
+    html.motion-ready .reveal, html.motion-ready .reveal-line { opacity:1 !important; transform:none !important; }
+    * , *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+  .rd-scrollcue { position:absolute; left:var(--mx); bottom:clamp(24px,4vh,40px); z-index:2; color:rgba(255,255,255,0.7); font-size:11px; letter-spacing:0.24em; text-transform:uppercase; display:flex; align-items:center; gap:10px; }
+  .rd-scrollcue .bar { width:1px; height:40px; background:rgba(255,255,255,0.4); position:relative; overflow:hidden; }
+  .rd-scrollcue .bar::after { content:""; position:absolute; top:-100%; left:0; width:100%; height:100%; background:#fff; animation:cue 2.4s var(--ease-expo) infinite; }
+  @keyframes cue { 0%{transform:translateY(0)} 60%{transform:translateY(200%)} 100%{transform:translateY(200%)} }
+</style>
 </head>
 
-<body class="antialiased bg-[#FDFCF9] __variable_f367f3 __variable_646807 overflow-x-hidden w-full">
-    <div hidden=""><!--$--><!--/$--></div>
+<body class="antialiased bg-[#FDFCF9] __variable_f367f3 __variable_646807 overflow-x-hidden w-full rd">
     <main>
         <header class="fixed w-full z-50 transition-all duration-300 bg-[#0C1E28]">
             <div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center"><a
@@ -158,749 +282,153 @@
                         href="contact.html">Contact Us</a></div>
             </div>
         </header>
-        <style>
-          /* Mobile: a section adota a proporção do vídeo retrato (1080×1200)
-             para que o vídeo apareça inteiro, sem corte nas laterais nem no topo. */
-          @media (max-width: 768px) {
-            #hero-video-space {
-              height: auto !important;
-              min-height: 0 !important;
-              max-height: none !important;
-              aspect-ratio: 1080 / 1200;
-            }
-            #hero-video {
-              object-fit: cover; /* aspect-ratio bate, então não há corte */
-              object-position: center;
-            }
-          }
-        </style>
-        <section class="relative w-full overflow-hidden bg-black" id="hero-video-space"
-            style="height: 80vh; min-height: 600px; max-height: 1000px;">
-            <video id="hero-video" autoplay playsinline loop muted class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                style="width: 100%; height: 100%; object-fit: cover;"
-                data-desktop-src="urban-collections/Smith_e_Adams_Site_20s_Wide803_h264_03.mp4"
-                data-mobile-src="Smith_e_Adams_Site_20s_1080x1200_h264_03.mp4">
-                <source data-cms="index.hero.video_url" src="urban-collections/Smith_e_Adams_Site_20s_Wide803_h264_03.mp4" type="video/mp4" />
-            </video>
-            <script>
-              // Hero usa o vídeo wide no desktop e o 1080x1200 vertical no mobile.
-              // O CMS controla a URL desktop via data-cms="index.hero.video_url"; no
-              // mobile substituímos pelo vídeo retrato hardcoded. Roda após DOMContent
-              // E também depois do cms-loaded para sobrescrever o que o loader injetou.
-              (function () {
-                const v = document.getElementById('hero-video');
-                if (!v) return;
-                const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
-                function applySrc() {
-                  const wantMobile = isMobile();
-                  const src = wantMobile ? v.dataset.mobileSrc : v.dataset.desktopSrc;
-                  const source = v.querySelector('source');
-                  // No desktop, deixe o cms-loader controlar (não sobrescrever o que ele aplicou).
-                  // No mobile, force o vídeo retrato.
-                  if (!wantMobile) return;
-                  if (source.getAttribute('src') !== src) {
-                    source.setAttribute('src', src);
-                    v.load();
-                    v.play().catch(() => {});
-                  }
-                }
-                applySrc();
-                document.addEventListener('cms-loaded', applySrc);
-                // Reagir a mudança de tamanho (rotacionar tablet, etc.)
-                window.matchMedia('(max-width: 768px)').addEventListener('change', applySrc);
-              })();
-            </script>
-        </section>
-        <section id="custom-stats-section" style="background-color:#0C1E28; color:white; width:100%;">
-
-          <!-- Quote header -->
-          <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px); text-align:center;">
-            <div class="custom-fade-in" style="transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
-              <h1 data-cms="index.hero.quote" data-cms-attr="html" class="satoshi" style="font-size:clamp(18px,2vw,24px); font-weight:300; line-height:1.7; color:rgba(255,255,255,0.82); max-width:760px; margin:0 auto;">Independent real estate investment advisory, for objective buyers and Residency Investors who want to mitigate risk and minimise involvement.</h1>
+        <!-- ══════════════════ HERO ══════════════════ -->
+        <section class="rd-hero" id="hero">
+            <div class="rd-hero__media" data-parallax="0.12">
+                <img src="hygge-house-beato/exterior.jpg" alt="Smith &amp; Adams asset in Beato, Lisbon" fetchpriority="high" decoding="async" />
             </div>
-          </div>
-
-          <!-- Stats grid — editorial style -->
-          <div style="border-top:1px solid rgba(255,255,255,0.08);">
-            <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
-              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-3" style="border-left:1px solid rgba(255,255,255,0.08); transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
-
-                <!-- Stat 1 -->
-                <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div data-cms="index.hero.stat1.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">1,000+</div>
-                  <p data-cms="index.hero.stat1.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.72); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">Investors advised</p>
+            <div class="rd-hero__scrim"></div>
+            <div class="rd-hero__inner rd-wrap">
+                <p class="rd-label reveal" style="color:rgba(255,255,255,0.75); margin-bottom:26px;">Smith &amp; Adams Group &middot; Lisboa</p>
+                <h1>The whole asset, held to one standard.</h1>
+                <p class="rd-hero__sub reveal">Independent real estate investment and residency advisory in Portugal. We build, buy, renovate, let, operate and sell the asset itself, and report on all six.</p>
+                <div class="rd-hero__row reveal">
+                    <a class="rd-cta" href="contact.html">Book a consultation
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </a>
+                    <a class="rd-cta rd-cta--ghost" href="#proof">See the numbers</a>
                 </div>
-
-                <!-- Stat 2 -->
-                <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div data-cms="index.hero.stat2.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">€300M+</div>
-                  <p data-cms="index.hero.stat2.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.72); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">In advised investment value</p>
-                </div>
-
-                <!-- Stat 3 -->
-                <div style="padding:clamp(24px,4.5vw,56px) clamp(16px,4vw,48px); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div data-cms="index.hero.stat3.value" class="geist" style="font-size:clamp(52px,6vw,88px); font-weight:800; color:#ffffff; letter-spacing:-0.04em; line-height:1; white-space:nowrap;">300+</div>
-                  <p data-cms="index.hero.stat3.label" data-cms-attr="html" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.72); margin-top:16px; letter-spacing:0.06em; text-transform:uppercase; line-height:1.6; max-width:260px;">Assets under management</p>
-                </div>
-
-              </div>
             </div>
-          </div>
-
-          <!-- CTA -->
-          <div style="max-width:1280px; margin:0 auto; padding:clamp(24px,4vw,48px) 24px clamp(40px,6vw,80px); display:flex; justify-content:center;">
-            <a data-cms="index.hero.cta_url" href="contact.html" style="text-decoration:none;">
-              <button class="satoshi" style="background-color:white; color:#0C1E28; border:none; font-weight:700; font-size:1.1rem; padding:17px 40px; border-radius:100px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; transition:opacity .2s;">
-                <span data-cms="index.hero.cta_label">Book a Consultation</span>
-                <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="18"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-              </button>
-            </a>
-          </div>
-
-        </section>
-        <section style="background:#FDFCF9; padding:0 0 100px; width:100%;">
-
-          <!-- Section header -->
-          <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,64px); display:flex; align-items:flex-end; justify-content:space-between; gap:32px; flex-wrap:wrap; border-bottom:1px solid #e5e7eb;">
-            <div>
-              <div style="display:inline-block; padding:6px 20px; background:#0C1E28; border-radius:9999px; margin-bottom:20px;">
-                <span class="satoshi" style="color:white; font-weight:600; font-size:13px; letter-spacing:0.06em; text-transform:uppercase;">Benefits</span>
-              </div>
-              <h2 data-cms="index.why.title" class="geist" style="font-size:clamp(32px,4.5vw,56px); font-weight:800; color:#0C1E28; letter-spacing:-0.03em; line-height:1.05; margin:0;">Why Smith &amp; Adams</h2>
+            <div class="rd-hero__caption">
+                <span class="rd-label k">Beato &middot; Lisboa</span>
+                <span class="v">137 units &middot; 94% occupancy</span>
             </div>
-            <a data-cms="index.why.cta_url" href="blog.html" style="text-decoration:none; flex-shrink:0;">
-              <button class="satoshi" style="background:#0C1E28; color:white; border:none; font-weight:700; font-size:15px; padding:15px 36px; border-radius:100px; cursor:pointer; display:inline-flex; align-items:center; gap:10px; transition:opacity .2s;">
-                <span data-cms="index.why.cta_label">View Featured Opportunities</span>
-                <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-              </button>
-            </a>
-          </div>
-
-          <!-- 3 cards -->
-          <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
-            <div class="grid grid-cols-1 md:grid-cols-3" style="gap:0; border-left:1px solid #e5e7eb;">
-
-              <!-- Card 1 -->
-              <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
-                <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">01</div>
-                <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img data-cms="index.why.card1.image" src="./_next/static/media/benefitsImage.5a4386fa.png" alt="Portuguese real estate market in 2025 is experiencing dynamic growth" style="width:100%; height:100%; object-fit:cover; display:block;">
-                </div>
-                <h3 data-cms="index.why.card1.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Independent</h3>
-                <p data-cms="index.why.card1.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">We only present opportunities that genuinely represent the best interests of our buyers.</p>
-              </div>
-
-              <!-- Card 2 -->
-              <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-right:1px solid #e5e7eb; border-bottom:1px solid #e5e7eb;">
-                <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">02</div>
-                <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img data-cms="index.why.card2.image" src="./_next/static/media/benefitsImage2.1defde2a.jpg" alt="Natural Beauty and Rich Culture" style="width:100%; height:100%; object-fit:cover; display:block;">
-                </div>
-                <h3 data-cms="index.why.card2.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Hands-off, by design</h3>
-                <p data-cms="index.why.card2.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">From first viewing to keys in hand, and property management after, distance from Portugal is never a barrier.</p>
-              </div>
-
-              <!-- Card 3 -->
-              <div style="padding:clamp(24px,4vw,48px) clamp(16px,3.5vw,40px); border-bottom:1px solid #e5e7eb;">
-                <div class="geist" style="font-size:13px; font-weight:700; color:#9ca3af; letter-spacing:0.1em; margin-bottom:28px;">03</div>
-                <div style="width:100%; aspect-ratio:16/10; border-radius:16px; overflow:hidden; margin-bottom:32px;">
-                  <img data-cms="index.why.card3.image" src="./_next/static/media/benefitImage3.7ce71e79.jpg" alt="Family Benefits &amp; Lifestyle" style="width:100%; height:100%; object-fit:cover; display:block;">
-                </div>
-                <h3 data-cms="index.why.card3.title" class="geist" style="font-size:20px; font-weight:700; color:#0C1E28; margin:0 0 14px; line-height:1.25;">Dual expertise</h3>
-                <p data-cms="index.why.card3.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:#6b7280; line-height:1.8; margin:0;">Investment analysis and residency law under one roof, so you're not managing two separate advisors who don't talk to each other.</p>
-              </div>
-
-            </div>
-          </div>
-
-        </section>
-        <section id="step-by-step-section" style="background:#0C1E28; width:100%;">
-
-          <!-- Section header -->
-          <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) 24px clamp(32px,5vw,56px);">
-            <div class="custom-fade-in" style="transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
-              <p data-cms="index.steps.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:20px;">How it works</p>
-              <h2 data-cms="index.steps.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#ffffff; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:700px;">From first call to keys in hand</h2>
-            </div>
-          </div>
-
-          <!-- 4 cards grid -->
-          <div style="border-top:1px solid rgba(255,255,255,0.08);">
-            <div style="max-width:1280px; margin:0 auto; padding:0 24px;">
-              <div class="custom-fade-in grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style="border-left:1px solid rgba(255,255,255,0.08); transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4;">
-
-                <!-- Step 1 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">01</div>
-                  <h3 data-cms="index.steps.0.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">Consultation</h3>
-                  <p data-cms="index.steps.0.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Tell us your goals</p>
-                  <p data-cms="index.steps.0.body" data-cms-attr="html" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">Tell us your budget, goals, and whether residency is part of the plan.</p>
-                </div>
-
-                <!-- Step 2 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">02</div>
-                  <h3 data-cms="index.steps.1.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">Shortlist</h3>
-                  <p data-cms="index.steps.1.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">A curated few, not a database</p>
-                  <p data-cms="index.steps.1.body" data-cms-attr="html" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">We return a small number of vetted opportunities that actually fit, not a database dump.</p>
-                </div>
-
-                <!-- Step 3 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">03</div>
-                  <h3 data-cms="index.steps.2.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">Structure</h3>
-                  <p data-cms="index.steps.2.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Legal, financial and visa</p>
-                  <p data-cms="index.steps.2.body" data-cms-attr="html" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">We assist your lawyer with due diligence, financial structuring, and, where necessary, visa administration.</p>
-                </div>
-
-                <!-- Step 4 -->
-                <div style="padding:clamp(20px,3.5vw,40px) clamp(16px,3vw,32px); border-bottom:1px solid rgba(255,255,255,0.08);">
-                  <div class="geist" style="font-size:13px; font-weight:700; color:rgba(255,255,255,0.25); letter-spacing:0.1em; margin-bottom:28px;">04</div>
-                  <h3 data-cms="index.steps.3.title" class="geist" style="font-size:18px; font-weight:700; color:#ffffff; margin:0 0 12px; line-height:1.25;">Manage</h3>
-                  <p data-cms="index.steps.3.tag" class="satoshi" style="font-size:13px; color:rgba(255,255,255,0.4); margin:0 0 12px; letter-spacing:0.04em; text-transform:uppercase; line-height:1.5;">Hands-off ownership</p>
-                  <p data-cms="index.steps.3.body" data-cms-attr="html" class="satoshi" style="font-size:14.5px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0;">Ongoing property management for investors who aren't based in Portugal.</p>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <!-- bottom padding -->
-          <div style="height:80px;"></div>
-
+            <div class="rd-scrollcue reveal"><span>Scroll</span><span class="bar"></span></div>
         </section>
 
-        <!-- New: Two Core Pillars Section -->
-        <section style="background-color: #FDFCF9; padding: 6rem 1rem; width: 100%;">
-            <div class="custom-fade-in" style="max-width: 1200px; margin: 0 auto; width: 100%; transition: all 1s ease-out; transform: translateY(20px); filter: blur(4px); opacity: 0.4;">
-                <div style="text-align: center; margin-bottom: 4rem;">
-                    <div style="display: inline-block; padding: 0.375rem 1.25rem; background-color: #0C1E28; border-radius: 9999px; margin-bottom: 1rem;">
-                        <p data-cms="index.pillars.eyebrow" style="color: white; font-weight: 600; letter-spacing: 0.05em; font-family: 'Satoshi', sans-serif; font-size: 0.875rem; text-transform: uppercase;">Our approach</p>
+        <!-- ══════════════════ PROOF ══════════════════ -->
+        <section class="rd-sec rd-sec--navy" id="proof">
+            <div class="rd-wrap">
+                <div class="reveal" style="max-width:820px;">
+                    <p class="rd-label" style="color:var(--stone); margin-bottom:22px;">The evidence</p>
+                    <p class="rd-statement" style="font-size:clamp(26px,3.4vw,50px);">Nobody publishes trustworthy, net-of-cost performance on Portuguese property. We do.</p>
+                </div>
+                <div class="rd-proof" style="margin-top:clamp(44px,6vw,80px);">
+                    <div class="reveal"><div class="n" data-count="1000" data-suffix="+">1,000+</div><div class="l">Investors advised</div></div>
+                    <div class="reveal"><div class="n">&euro;300M+</div><div class="l">In advised investment value</div></div>
+                    <div class="reveal"><div class="n" data-count="300" data-suffix="+">300+</div><div class="l">Assets under management</div></div>
+                </div>
+                <p class="rd-label reveal" style="color:var(--slate); margin-top:36px;">Figures reviewed quarterly by Brand &amp; Communications &middot; 2026</p>
+            </div>
+        </section>
+
+        <!-- ══════════════════ POSITIONING + PILLARS ══════════════════ -->
+        <section class="rd-sec" style="background:var(--paper);">
+            <div class="rd-wrap">
+                <div style="max-width:960px;">
+                    <p class="rd-label reveal" style="margin-bottom:26px;">Positioning</p>
+                    <h2 class="rd-statement reveal" style="font-size:clamp(30px,4.6vw,68px);">An authority on the whole of the business, not one end of it.</h2>
+                    <p class="rd-body reveal" style="margin-top:28px; max-width:60ch;">We are an owner-operator group with an advisory practice inside it, not a brokerage, a lifestyle brand or a residency shopfront. Restraint is the strategy: quiet type, generous space, and numbers you can verify.</p>
+                </div>
+                <div class="rd-pillars">
+                    <div class="reveal">
+                        <p class="rd-label">01</p>
+                        <h3>End to end, by design</h3>
+                        <p>Six functions under one roof means no gap between the advice given and the work delivered.</p>
+                        <p class="pf">Proof: developments delivered, units under management, in-house trades.</p>
                     </div>
-                    <h2 data-cms="index.pillars.title" style="font-family: 'Geist', sans-serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; color: #222222; line-height: 1.1; letter-spacing: -0.03em;">Two ways in, same advisory core</h2>
-                </div>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem;">
-                    <!-- Pillar 1 -->
-                    <div style="background-color: white; border-radius: 1.5rem; padding: 3rem; border: 1px solid #F3F4F6; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)';">
-                        <div style="width: 4rem; height: 4rem; background-color: #F8FAFC; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; border: 1px solid #E2E8F0;">
-                            <svg fill="none" height="32" stroke="#0C1E28" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-3"/><path d="M9 11v2"/><path d="M9 15v2"/></svg>
-                        </div>
-                        <h3 data-cms="index.pillars.0.title" style="font-family: 'Geist', sans-serif; font-size: 1.5rem; font-weight: 700; color: #0C1E28; line-height: 1.3; margin-bottom: 0.5rem;">Investment Advisory</h3>
-                        <p data-cms="index.pillars.0.subtitle" style="font-family: 'Geist', sans-serif; font-size: 1rem; font-weight: 600; color: #6B7280; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;"></p>
-                        <p data-cms="index.pillars.0.body1" style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #4B5563; line-height: 1.6; margin-bottom: 1rem;">For buyers focused on yield and capital growth. We identify, vet, and structure property investments across Lisbon, Porto, the Algarve, Cascais and the Silver Coast.</p>
-                        <p data-cms="index.pillars.0.body2" style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #4B5563; line-height: 1.6; margin-bottom: 0;">Net returns and risk are clearly laid out before you commit.</p>
-                        <a data-cms="index.pillars.0.cta_url" href="invest-in-portugal.html" style="margin-top:auto; padding-top:2rem; align-self:flex-start; text-decoration:none; display:inline-flex; align-items:center; gap:8px; color:#0C1E28; font-weight:700; font-family:'Satoshi',sans-serif; font-size:0.95rem;">
-                            <span data-cms="index.pillars.0.cta_label">Explore investment advisory</span>
-                            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                        </a>
+                    <div class="reveal">
+                        <p class="rd-label">02</p>
+                        <h3>Independent advice</h3>
+                        <p>We are paid to be right about the asset, not to move it. That includes saying no.</p>
+                        <p class="pf">Proof: fee structure, deals declined, written recommendations.</p>
                     </div>
-
-                    <!-- Pillar 2 -->
-                    <div style="background-color: white; border-radius: 1.5rem; padding: 3rem; border: 1px solid #F3F4F6; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)';">
-                        <div style="width: 4rem; height: 4rem; background-color: #F8FAFC; border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; border: 1px solid #E2E8F0;">
-                            <svg fill="none" height="32" stroke="#0C1E28" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <h3 data-cms="index.pillars.1.title" style="font-family: 'Geist', sans-serif; font-size: 1.5rem; font-weight: 700; color: #0C1E28; line-height: 1.3; margin-bottom: 0.5rem;">Residency &amp; Citizenship Advisory</h3>
-                        <p data-cms="index.pillars.1.subtitle" style="font-family: 'Geist', sans-serif; font-size: 1rem; font-weight: 600; color: #6B7280; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;"></p>
-                        <p data-cms="index.pillars.1.body1" style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #4B5563; line-height: 1.6; margin-bottom: 1rem;">For buyers where property is the route to residency. We guide Golden Visa and D2 applicants through eligible investments end to end.</p>
-                        <p data-cms="index.pillars.1.body2" style="font-family: 'Satoshi', sans-serif; font-size: 1.05rem; color: #4B5563; line-height: 1.6; margin-bottom: 0;">Property selection, legal structuring, and the visa process, so one decision does two jobs.</p>
-                        <a data-cms="index.pillars.1.cta_url" href="invest-in-portugal.html" style="margin-top:auto; padding-top:2rem; align-self:flex-start; text-decoration:none; display:inline-flex; align-items:center; gap:8px; color:#0C1E28; font-weight:700; font-family:'Satoshi',sans-serif; font-size:0.95rem;">
-                            <span data-cms="index.pillars.1.cta_label">Explore residency & citizenship</span>
-                            <svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" width="16"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                        </a>
+                    <div class="reveal">
+                        <p class="rd-label">03</p>
+                        <h3>Reported, not promised</h3>
+                        <p>Yield, occupancy, cost and cash flow, quarterly, in the same format every time.</p>
+                        <p class="pf">Proof: the quarterly report, occupancy history, owner references.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- New Video Section: Building Your Dreams -->
-        <style>
-          /* Desktop: vídeo preenche a section de topo a base, sem alterar a altura
-             total (o padding vertical sai da section e vai para a coluna de texto,
-             que passa a definir a altura). No mobile mantém o card original. */
-          @media (min-width: 820px) {
-            #dreams-section { padding-top: 0 !important; padding-bottom: 0 !important; }
-            #dreams-text    { padding: 80px 0; }
-            #dreams-row     { align-items: stretch !important; }
-            #dreams-video   { align-self: stretch; border-radius: 0 !important; box-shadow: none !important; }
-            #dreams-video > #yt-embed-wrap { aspect-ratio: auto !important; height: 100%; }
-          }
-        </style>
-        <section id="dreams-section" class="custom-fade-in" style="background:#0C1E28; width:100%; padding:80px 0; transition:all 1s ease-out; transform:translateY(20px); filter:blur(4px); opacity:0.4; overflow:hidden;">
-          <div id="dreams-row" style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px); display:flex; align-items:center; gap:clamp(24px,6vw,80px); flex-wrap:wrap;">
-
-            <!-- Left: Display text -->
-            <div id="dreams-text" style="flex:1; min-width:320px;">
-              <p data-cms="index.dreams.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:24px;">Smith &amp; Adams · Portugal</p>
-              <h2 data-cms="index.dreams.title" data-cms-attr="html" class="geist" style="font-size:clamp(2.5rem,5vw,4.5rem); font-weight:900; color:#ffffff; line-height:0.95; letter-spacing:-0.04em; margin:0 0 12px;">Objective advice starts with a conversation</h2>
-              <div style="width:48px; height:3px; background:rgba(255,255,255,0.3); margin:28px 0;"></div>
-              <p data-cms="index.dreams.subtitle" class="satoshi" style="font-size:17px; color:rgba(255,255,255,0.55); line-height:1.8; max-width:400px; margin:0 0 36px;">No obligation, no pressure to buy anything specific - just a clear view of what's possible, and whether residency belongs in the plan.</p>
-            </div>
-
-            <!-- Right: Portrait video card -->
-            <div id="dreams-video" style="flex-shrink:0; width:340px; border-radius:24px; overflow:hidden; box-shadow:0 32px 80px rgba(12,30,40,0.18), 0 8px 24px rgba(12,30,40,0.10);">
-              <div id="yt-embed-wrap" style="position:relative; width:100%; aspect-ratio:4/5; cursor:pointer;" onclick="
-                var w=this;
-                var f=document.createElement('iframe');
-                f.src='https://www.youtube.com/embed/SMolfVoFXDg?autoplay=1&rel=0&playsinline=1&modestbranding=1';
-                f.allow='autoplay; encrypted-media';
-                f.allowFullscreen=true;
-                f.style.cssText='position:absolute;top:-62px;left:0;width:100%;height:calc(100% + 124px);border:0;display:block;';
-                w.innerHTML='';
-                w.appendChild(f);
-                w.style.cursor='default';
-              ">
-                <!-- Poster -->
-                <img src="capa-video.jpg" alt="Smith &amp; Adams video" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; object-position:center top; display:block;" />
-                <!-- Play button -->
-                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(12,30,40,0.18); transition:background .2s;" onmouseover="this.style.background='rgba(12,30,40,0.32)'" onmouseout="this.style.background='rgba(12,30,40,0.18)'">
-                  <div style="width:64px; height:64px; border-radius:50%; background:rgba(255,255,255,0.92); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 24px rgba(12,30,40,0.3);">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#0C1E28"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        <section class="bg-[#FDFCF9] py-16 md:py-24" id="testimonials">
-            <div class="container mx-auto px-4 md:px-6">
-                <div class="text-center mb-12">
-                    <div class="inline-block bg-black rounded-full px-5 py-1.5 mb-4">
-                        <p data-cms="index.testimonials.eyebrow" class="text-white font-semibold tracking-wide text-sm">Testimonials</p>
-                    </div>
-                    <h2 data-cms="index.testimonials.title" class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 geist text-[#0C1E28] tracking-tight">Real Stories, Real Success</h2>
-                    <p data-cms="index.testimonials.subtitle" class="text-base max-w-xl mx-auto satoshi text-gray-600">Hear from international investors we've advised across Portugal.</p>
-                </div>
-                <div class="rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden">
-                    <div
-                        class="scroller relative z-20 max-w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]">
-                        <ul
-                            class="flex w-max min-w-full shrink-0 flex-nowrap gap-10 py-8 hover:[animation-play-state:paused]">
-                            <li
-                                class="relative w-[600px] max-w-full shrink-0 rounded-xl wcuCard bg-white border-[6px] border-white md:w-[650px] duration-300 transition-all ease-in-out hover:scale-105 overflow-hidden p-4">
-                                <div class="flex flex-row h-full">
-                                    <div class="w-[300px] h-full relative"><img alt="Testimonial from Emre Y., Istanbul"
-                                            class="object-cover rounded-xl" data-nimg="fill" decoding="async"
-                                            loading="lazy" sizes="100vw"  data-cms="index.testimonials.0.image" src="./home/testimonials/1.png"
-                                            srcset="./home/testimonials/1.png 3840w"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" />
-                                    </div>
-                                    <div class="p-8 flex-1 flex flex-col justify-center">
-                                        <div class="flex items-center mb-3">
-                                            <div class="flex space-x-1"><svg class="w-6 h-6 text-yellow-400"
-                                                    fill="currentColor" viewbox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg></div>
-                                        </div>
-                                        <blockquote>
-                                            <p data-cms="index.testimonials.0.quote" data-cms-attr="html" class="text-base leading-relaxed text-gray-800 mb-6">Smith &amp; Adams gave me an honest, independent read on the market and showed me only a handful of options that genuinely fit. Buying from abroad was completely hands-off.</p>
-                                            <footer class="text-lg font-bold text-gray-900">— <span data-cms="index.testimonials.0.author">Emre Y., Istanbul</span></footer>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="relative w-[600px] max-w-full shrink-0 rounded-xl wcuCard bg-white border-[6px] border-white md:w-[650px] duration-300 transition-all ease-in-out hover:scale-105 overflow-hidden p-4">
-                                <div class="flex flex-row h-full">
-                                    <div class="w-[300px] h-full relative"><img alt="Testimonial from Selin A., Ankara"
-                                            class="object-cover rounded-xl" data-nimg="fill" decoding="async"
-                                            loading="lazy" sizes="100vw"  data-cms="index.testimonials.1.image" src="./home/testimonials/2.png"
-                                            srcset="./home/testimonials/2.png 3840w"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" />
-                                    </div>
-                                    <div class="p-8 flex-1 flex flex-col justify-center">
-                                        <div class="flex items-center mb-3">
-                                            <div class="flex space-x-1"><svg class="w-6 h-6 text-yellow-400"
-                                                    fill="currentColor" viewbox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg></div>
-                                        </div>
-                                        <blockquote>
-                                            <p data-cms="index.testimonials.1.quote" data-cms-attr="html" class="text-base leading-relaxed text-gray-800 mb-6">What stood out was the objectivity - no pressure to buy anything specific. The returns and the risks were laid out clearly before I committed.</p>
-                                            <footer class="text-lg font-bold text-gray-900">— <span data-cms="index.testimonials.1.author">Selin A., Ankara</span></footer>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="relative w-[600px] max-w-full shrink-0 rounded-xl wcuCard bg-white border-[6px] border-white md:w-[650px] duration-300 transition-all ease-in-out hover:scale-105 overflow-hidden p-4">
-                                <div class="flex flex-row h-full">
-                                    <div class="w-[300px] h-full relative"><img
-                                            alt="Testimonial from Mehmet K., Istanbul" class="object-cover rounded-xl"
-                                            data-nimg="fill" decoding="async" loading="lazy" sizes="100vw"
-                                             data-cms="index.testimonials.2.image" src="./home/testimonials/3.png" srcset="./home/testimonials/3.png 3840w"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" />
-                                    </div>
-                                    <div class="p-8 flex-1 flex flex-col justify-center">
-                                        <div class="flex items-center mb-3">
-                                            <div class="flex space-x-1"><svg class="w-6 h-6 text-yellow-400"
-                                                    fill="currentColor" viewbox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg></div>
-                                        </div>
-                                        <blockquote>
-                                            <p data-cms="index.testimonials.2.quote" data-cms-attr="html" class="text-base leading-relaxed text-gray-800 mb-6">The entire purchase was handled end to end while I stayed in Istanbul: legal, financing, and property management afterwards. I never had to fly over.</p>
-                                            <footer class="text-lg font-bold text-gray-900">— <span data-cms="index.testimonials.2.author">Mehmet K., Istanbul</span></footer>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="relative w-[600px] max-w-full shrink-0 rounded-xl wcuCard bg-white border-[6px] border-white md:w-[650px] duration-300 transition-all ease-in-out hover:scale-105 overflow-hidden p-4">
-                                <div class="flex flex-row h-full">
-                                    <div class="w-[300px] h-full relative"><img alt="Testimonial from Burcu T., Ankara"
-                                            class="object-cover rounded-xl" data-nimg="fill" decoding="async"
-                                            loading="lazy" sizes="100vw"  data-cms="index.testimonials.3.image" src="./home/testimonials/4.png"
-                                            srcset="./home/testimonials/4.png 3840w"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" />
-                                    </div>
-                                    <div class="p-8 flex-1 flex flex-col justify-center">
-                                        <div class="flex items-center mb-3">
-                                            <div class="flex space-x-1"><svg class="w-6 h-6 text-yellow-400"
-                                                    fill="currentColor" viewbox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg></div>
-                                        </div>
-                                        <blockquote>
-                                            <p data-cms="index.testimonials.3.quote" data-cms-attr="html" class="text-base leading-relaxed text-gray-800 mb-6">I wanted steady euro income without the hassle. They structured everything and now manage the property on my behalf.</p>
-                                            <footer class="text-lg font-bold text-gray-900">— <span data-cms="index.testimonials.3.author">Burcu T., Ankara</span></footer>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </li>
-                            <li
-                                class="relative w-[600px] max-w-full shrink-0 rounded-xl wcuCard bg-white border-[6px] border-white md:w-[650px] duration-300 transition-all ease-in-out hover:scale-105 overflow-hidden p-4">
-                                <div class="flex flex-row h-full">
-                                    <div class="w-[300px] h-full relative"><img
-                                            alt="Testimonial from Ahmet D., Istanbul" class="object-cover rounded-xl"
-                                            data-nimg="fill" decoding="async" loading="lazy" sizes="100vw"
-                                             data-cms="index.testimonials.4.image" src="./home/testimonials/5.png" srcset="./home/testimonials/5.png 3840w"
-                                            style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent" />
-                                    </div>
-                                    <div class="p-8 flex-1 flex flex-col justify-center">
-                                        <div class="flex items-center mb-3">
-                                            <div class="flex space-x-1"><svg class="w-6 h-6 text-yellow-400"
-                                                    fill="currentColor" viewbox="0 0 20 20"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg><svg class="w-6 h-6 text-yellow-400" fill="currentColor"
-                                                    viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                                    </path>
-                                                </svg></div>
-                                        </div>
-                                        <blockquote>
-                                            <p data-cms="index.testimonials.4.quote" data-cms-attr="html" class="text-base leading-relaxed text-gray-800 mb-6">Investment advice and the residency side were coordinated by one team, which made a complex process feel simple and transparent.</p>
-                                            <footer class="text-lg font-bold text-gray-900">— <span data-cms="index.testimonials.4.author">Ahmet D., Istanbul</span></footer>
-                                        </blockquote>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="bg-white py-16 md:py-24">
-            <div class="container mx-auto px-4 md:px-6 max-w-7xl">
-                <div class="text-center mb-12 transition-all duration-1000 opacity-100">
-                    <div class="max-w-[900px] mx-auto mb-12 lg:mb-14">
-                        <div class="flex justify-center items-center mb-4">
-                            <div class="px-5 py-1.5 bg-[#0C1E28] inline-block rounded-full">
-                                <p data-cms="index.blogs.eyebrow" class="text-white font-semibold tracking-wide satoshi text-[14px] text-center">Blogs</p>
-                            </div>
-                        </div>
-                        <h2 data-cms="index.blogs.title"
-                            class="text-4xl text-center xl:text-5xl font-bold lg:leading-[46px] mx-auto geist text-[#222222] tracking-tight">
-                            Useful materials</h2>
-                    </div>
-                </div>
-                <div class="relative transition-all duration-1000 delay-300 opacity-100 w-full pb-10">
-                    <div id="home-blog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 px-2 md:px-0 opacity-0 transition-opacity duration-500">
-                        <div class="col-span-1 md:col-span-2 lg:col-span-3 flex justify-center py-20">
-                            <div class="w-10 h-10 border-4 border-[#0C1E28] border-t-transparent rounded-full animate-spin"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ══════════════════════════════════════
-             SOCIAL — Instagram feed + LinkedIn + Google
-        ══════════════════════════════════════ -->
-        <section id="sa-social" style="background:#0C1E28; padding:clamp(60px,8vw,96px) 0 0;">
-            <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,48px);">
-
-                <!-- Header row -->
-                <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:clamp(36px,5vw,56px);">
+        <!-- ══════════════════ PINNED · SIX FUNCTIONS ══════════════════ -->
+        <section class="rd-pin" id="scope">
+            <div class="rd-pin__stage rd-wrap">
+                <div class="rd-pin__grid">
                     <div>
-                        <p data-cms="index.discover.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:16px;">Follow Us · @smithandadamsgroup</p>
-                        <h2 data-cms="index.discover.title" data-cms-attr="html" class="geist" style="font-size:clamp(32px,5vw,64px); font-weight:800; color:#ffffff; line-height:1.0; letter-spacing:-0.02em; text-transform:uppercase; margin:0;">Discover Our<br>World of Property<br>Investing</h2>
+                        <p class="rd-label" style="color:var(--stone); margin-bottom:24px;">One standard, six functions</p>
+                        <p class="rd-pin__lead reveal">From first call to keys in hand, and every stage in between, held to the same standard.</p>
                     </div>
-                    <a href="https://www.instagram.com/smithandadamsgroup/" target="_blank" rel="noopener noreferrer"
-                        class="satoshi"
-                        style="display:inline-flex; align-items:center; gap:10px; background:#ffffff; color:#0C1E28; font-size:13px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:15px 30px; border-radius:100px; text-decoration:none; white-space:nowrap; flex-shrink:0; transition:opacity .2s;"
-                        onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                        Open our feed
+                    <ul class="rd-funcs">
+                        <li class="reveal-line"><span class="fi">01</span><span><span class="ft">Advise</span><span class="fd">Independent analysis before a single euro moves.</span></span></li>
+                        <li class="reveal-line"><span class="fi">02</span><span><span class="ft">Acquire</span><span class="fd">Sourcing and due diligence on assets that fit.</span></span></li>
+                        <li class="reveal-line"><span class="fi">03</span><span><span class="ft">Renovate</span><span class="fd">In-house delivery, built to an operator's standard.</span></span></li>
+                        <li class="reveal-line"><span class="fi">04</span><span><span class="ft">Let</span><span class="fd">Occupancy and yield on owned and client stock.</span></span></li>
+                        <li class="reveal-line"><span class="fi">05</span><span><span class="ft">Operate</span><span class="fd">Hands-off management for owners based abroad.</span></span></li>
+                        <li class="reveal-line"><span class="fi">06</span><span><span class="ft">Report</span><span class="fd">Net-of-cost performance, quarterly, unedited.</span></span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════ TWO WAYS IN ══════════════════ -->
+        <section class="rd-sec" style="background:var(--paper);">
+            <div class="rd-wrap">
+                <div style="max-width:820px;">
+                    <p class="rd-label reveal" style="margin-bottom:24px;">Our approach</p>
+                    <h2 class="rd-statement reveal" style="font-size:clamp(28px,4vw,58px);">Two ways in, one advisory core.</h2>
+                </div>
+                <div class="rd-two">
+                    <div class="rd-card reveal">
+                        <h3>Investment Advisory</h3>
+                        <p>For buyers focused on yield and capital growth. We identify, vet and structure property investments across Lisbon, Porto, the Algarve, Cascais and the Silver Coast.</p>
+                        <p>Net returns and risk are laid out clearly before you commit.</p>
+                        <a class="more" href="invest-in-portugal.html">Explore investment advisory
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                    </div>
+                    <div class="rd-card reveal">
+                        <h3>Residency &amp; Citizenship Advisory</h3>
+                        <p>For buyers where property is the route to residency. We guide Golden Visa and D2 applicants through eligible investments, end to end.</p>
+                        <p>Property selection, legal structuring and the visa process, so one decision does two jobs.</p>
+                        <a class="more" href="invest-in-portugal.html">Explore residency &amp; citizenship
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════ ONE ASSET ══════════════════ -->
+        <section class="rd-asset" id="asset">
+            <div class="rd-asset__media" data-parallax="0.10">
+                <img src="hygge-house-beato/atrium.jpg" alt="Interior of a Smith &amp; Adams asset in Beato, Lisbon" loading="lazy" decoding="async" />
+            </div>
+            <div class="rd-asset__scrim"></div>
+            <div class="rd-asset__plate rd-wrap">
+                <p class="rd-label reveal" style="color:rgba(255,255,255,0.75); margin-bottom:22px;">One asset, in the open</p>
+                <h2 class="reveal">Hygge House, Beato. Nine units, delivered, held to the standard.</h2>
+                <div class="rd-figs reveal">
+                    <div class="f"><div class="n">94%</div><div class="l">Occupancy since handover</div></div>
+                    <div class="f"><div class="n">137</div><div class="l">Studio units</div></div>
+                    <div class="f"><div class="n">2025</div><div class="l">Delivered</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════ CLOSING ══════════════════ -->
+        <section class="rd-sec rd-close" style="background:var(--paper);">
+            <div class="rd-wrap">
+                <p class="rd-label reveal" style="margin-bottom:28px;">Smith &amp; Adams &middot; Portugal</p>
+                <h2 class="reveal">Objective advice starts with a conversation.</h2>
+                <p class="reveal">No obligation, no pressure to buy anything specific. Just a clear view of what is possible, and whether residency belongs in the plan.</p>
+                <div class="reveal" style="margin-top:40px; display:flex; justify-content:center;">
+                    <a class="rd-cta" href="contact.html" style="background:var(--navy); color:#fff;">Book a consultation
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
                 </div>
-
-                <!-- Instagram 6-col grid -->
-                <div id="sa-ig-grid" style="display:grid; grid-template-columns:repeat(6,1fr); gap:clamp(4px,0.7vw,10px);">
-                    <!-- Posts inserted by JS -->
-                </div>
-
-            </div>
-
-            <!-- LinkedIn + Google strip -->
-            <div style="background:#FDFCF9; margin-top:clamp(48px,7vw,80px);">
-                <div style="max-width:1280px; margin:0 auto;">
-                    <div id="sa-social-strip" style="display:grid; grid-template-columns:repeat(3,1fr); border-left:1px solid rgba(12,30,40,0.08); border-top:1px solid rgba(12,30,40,0.08);">
-
-                        <!-- Instagram -->
-                        <div style="padding:clamp(36px,5vw,64px) clamp(24px,4vw,56px); border-right:1px solid rgba(12,30,40,0.08); border-bottom:1px solid rgba(12,30,40,0.08);">
-                            <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                                </svg>
-                                <div>
-                                    <p class="geist" style="font-size:clamp(20px,2.5vw,28px); font-weight:800; color:#0C1E28; letter-spacing:-0.01em; line-height:1; margin:0;">Instagram</p>
-                                    <p class="satoshi" style="font-size:12px; color:rgba(12,30,40,0.45); margin-top:4px; letter-spacing:0.04em;"><span data-cms="global.social.instagram_handle">@smithandadamsgroup</span> · <span data-cms="global.social.instagram_count">+150 Posts</span></p>
-                                </div>
-                            </div>
-                            <p data-cms="global.social.instagram_description" class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.6); line-height:1.7; margin-bottom:28px; max-width:420px;">
-                                Gain privileged access to our select real estate portfolios, high-yield investment data, and key market updates from Portugal.
-                            </p>
-                            <a data-cms="global.social.instagram" href="https://www.instagram.com/smithandadamsgroup/" target="_blank" rel="noopener noreferrer"
-                                class="satoshi"
-                                style="display:inline-flex; align-items:center; gap:8px; background:#0C1E28; color:#ffffff; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:12px 24px; border-radius:8px; text-decoration:none; transition:opacity .2s;"
-                                onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                                Follow Instagram →
-                            </a>
-                        </div>
-
-                        <!-- LinkedIn -->
-                        <div style="padding:clamp(36px,5vw,64px) clamp(24px,4vw,56px); border-right:1px solid rgba(12,30,40,0.08);">
-                            <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="#0A66C2" stroke="#0A66C2" stroke-width="0.5">
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                    <rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/>
-                                </svg>
-                                <div>
-                                    <p class="geist" style="font-size:clamp(20px,2.5vw,28px); font-weight:800; color:#0C1E28; letter-spacing:-0.01em; line-height:1; margin:0;">LinkedIn</p>
-                                    <p class="satoshi" style="font-size:12px; color:rgba(12,30,40,0.45); margin-top:4px; letter-spacing:0.04em;"><span data-cms="global.social.linkedin_handle">Smith &amp; Adams</span> · <span data-cms="global.social.linkedin_count">+3 mil seguidores</span></p>
-                                </div>
-                            </div>
-                            <p data-cms="global.social.linkedin_description" class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.6); line-height:1.7; margin-bottom:28px; max-width:420px;">
-                                Trusted market intelligence, structural analysis, and professional advisory on strategic international real estate holdings.
-                            </p>
-                            <a data-cms="global.social.linkedin" href="https://www.linkedin.com/company/smith-and-adams/" target="_blank" rel="noopener noreferrer"
-                                class="satoshi"
-                                style="display:inline-flex; align-items:center; gap:8px; background:#0C1E28; color:#ffffff; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:12px 24px; border-radius:8px; text-decoration:none; transition:opacity .2s;"
-                                onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                                Follow LinkedIn →
-                            </a>
-                        </div>
-
-                        <!-- Google -->
-                        <div style="padding:clamp(36px,5vw,64px) clamp(24px,4vw,56px); border-right:1px solid rgba(12,30,40,0.08);">
-                            <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
-                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                                </svg>
-                                <div>
-                                    <p class="geist" style="font-size:clamp(20px,2.5vw,28px); font-weight:800; color:#0C1E28; letter-spacing:-0.01em; line-height:1; margin:0;">Google</p>
-                                    <p class="satoshi" style="font-size:12px; color:rgba(12,30,40,0.45); margin-top:4px; letter-spacing:0.04em; display:flex; align-items:center; gap:5px;">
-                                        <span data-cms="global.social.google_handle">Smith &amp; Adams</span> · <span data-cms="global.social.google_rating">4.7</span>
-                                        <span data-cms="global.social.google_stars" data-cms-type="stars" data-star-size="11" style="display:inline-flex; gap:2px; color:#FBBC05;">
-                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                            <p data-cms="global.social.google_description" class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.6); line-height:1.7; margin-bottom:28px; max-width:420px;">
-                                Consult verified reviews and locate our headquarters. Confirmed expertise in residency and wealth management.
-                            </p>
-                            <a data-cms="global.social.google_review_url" href="https://share.google/RUwoPr3ByPmDXdcBC" target="_blank" rel="noopener noreferrer"
-                                class="satoshi"
-                                style="display:inline-flex; align-items:center; gap:8px; background:#0C1E28; color:#ffffff; font-size:12px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; padding:12px 24px; border-radius:8px; text-decoration:none; transition:opacity .2s;"
-                                onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
-                                Review Us →
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </section>
-
-        <style>
-            @media(max-width:900px){#sa-ig-grid{grid-template-columns:repeat(3,1fr) !important;}}
-            @media(max-width:540px){#sa-ig-grid{grid-template-columns:repeat(2,1fr) !important;}}
-            @media(max-width:640px){#sa-social-strip{grid-template-columns:1fr !important;}}
-            .sa-ig-item{position:relative;overflow:hidden;border-radius:0;aspect-ratio:1/1;display:block;background:#1a2e3a;}
-            .sa-ig-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
-            .sa-ig-item:hover img{transform:scale(1.07);}
-            .sa-ig-overlay{position:absolute;inset:0;background:rgba(12,30,40,0);transition:background .3s;}
-            .sa-ig-item:hover .sa-ig-overlay{background:rgba(12,30,40,0.3);}
-            .sa-ig-badge{position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.88);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;}
-        </style>
-        <script>
-        (function(){
-            fetch('https://feeds.behold.so/M11QO4EktnuznZ4yL35u')
-                .then(function(r){return r.json();})
-                .then(function(data){
-                    var posts = (data.posts || data).slice(0,6);
-                    var grid = document.getElementById('sa-ig-grid');
-                    if(!grid) return;
-                    grid.innerHTML = '';
-                    posts.forEach(function(p){
-                        var imgSrc = (p.mediaType === 'VIDEO' && p.thumbnailUrl) ? p.thumbnailUrl
-                            : (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) ? p.sizes.medium.mediaUrl
-                            : (p.mediaUrl || '');
-                        var isVideo = p.mediaType === 'VIDEO';
-                        var isCarousel = p.mediaType === 'CAROUSEL_ALBUM';
-                        var badge = '';
-                        if(isVideo){
-                            badge = '<div class="sa-ig-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="#0C1E28"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>';
-                        } else if(isCarousel){
-                            badge = '<div class="sa-ig-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0C1E28" stroke-width="2.5"><rect x="2" y="7" width="15" height="15" rx="2"/><path d="M17 2h3a2 2 0 0 1 2 2v13"/></svg></div>';
-                        }
-                        grid.insertAdjacentHTML('beforeend',
-                            '<a href="'+p.permalink+'" target="_blank" rel="noopener noreferrer" class="sa-ig-item">'
-                            +'<img src="'+imgSrc+'" alt="'+(p.prunedCaption||'Instagram post').replace(/"/g,'&quot;').slice(0,80)+'" loading="lazy" />'
-                            +'<div class="sa-ig-overlay"></div>'
-                            +badge
-                            +'</a>'
-                        );
-                    });
-                })
-                .catch(function(){/* silently fail */});
-        })();
-        </script>
 
         <footer class="w-full py-12 md:py-16 bg-[#0C1E28]">
             <div class="container mx-auto px-4 md:px-6 max-w-7xl">
@@ -1008,207 +536,73 @@
                 </div>
             </div>
         </footer>
-    </main><!--$--><!--/$--><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template><!--/$-->
-    <!-- Supabase Dynamic Data Fetcher -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    </main>
+
+    <!-- ══════════════════ MOTION ══════════════════ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
     <script>
-      const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
-      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
-      const supabaseHomeClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasGsap = window.gsap && window.ScrollTrigger;
+      if (reduce || !hasGsap) return; // content stays in its visible baseline state
 
-      // i18n: pega title/excerpt traduzidos quando disponíveis. Fallback EN.
-      function pickPostText(post, field) {
-          const locale = (localStorage.getItem('cmsLocale') || 'en');
-          if (locale === 'en') return post[field];
-          return (post.translations && post.translations[locale] && post.translations[locale][field]) || post[field];
+      document.documentElement.classList.add('motion-ready');
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ---- Lenis smooth scroll (the "single continuous surface") ----
+      var lenis = null;
+      if (window.Lenis) {
+        lenis = new Lenis({ duration: 1.05, easing: function (t) { return 1 - Math.pow(1 - t, 3); } });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
       }
-      function readArticleLabel() {
-          return (localStorage.getItem('cmsLocale') || 'en') === 'pt' ? 'Ler o artigo' : 'Read the Article';
-      }
 
-      async function loadHomeBlogs() {
-          const container = document.getElementById('home-blog-container');
-          if(!container) return;
+      var EASE = 'power3.out';
 
-          const { data, error } = await supabaseHomeClient
-              .from('posts')
-              .select('*')
-              .order('created_at', { ascending: false })
-              .limit(3);
-
-          if (error || !data || data.length === 0) {
-              container.innerHTML = '<p class="text-center w-full col-span-3 text-gray-500">No articles available.</p>';
-              container.classList.remove('opacity-0');
-              return;
+      // ---- Reveals (batched) ----
+      ScrollTrigger.batch('.reveal', {
+        start: 'top 88%',
+        onEnter: function (els) {
+          gsap.to(els, { opacity: 1, y: 0, duration: 0.9, ease: EASE, stagger: 0.08, overwrite: true });
+        }
+      });
+      // staggered list lines
+      gsap.utils.toArray('.rd-funcs').forEach(function (list) {
+        ScrollTrigger.create({
+          trigger: list, start: 'top 80%', once: true,
+          onEnter: function () {
+            gsap.to(list.querySelectorAll('.reveal-line'), { opacity: 1, y: 0, duration: 0.8, ease: EASE, stagger: 0.09 });
           }
-
-          let html = '';
-          data.forEach(post => {
-              let coverImg = post.image_url;
-              if (coverImg && !coverImg.startsWith('http')) {
-                  if (coverImg.startsWith('.')) coverImg = coverImg.substring(1);
-                  if (coverImg.startsWith('/')) coverImg = '.' + coverImg;
-              }
-
-              const tTitle   = pickPostText(post, 'title');
-              const tExcerpt = pickPostText(post, 'excerpt');
-              html += `
-              <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full transition-all duration-300 hover:shadow-md flex flex-col">
-                  <div class="relative aspect-[16/9] w-full">
-                      <img alt="${tTitle}" class="object-cover w-full h-full absolute inset-0" src="${coverImg}" />
-                  </div>
-                  <div class="p-6 flex flex-col flex-grow">
-                      <h3 class="text-xl font-bold mb-3 geist text-[#0C1E28] leading-tight">${tTitle}</h3>
-                      <p class="text-gray-600 satoshi mb-6 line-clamp-3 text-sm">${tExcerpt || 'Discover the latest insights from our editorial team in this exclusive article.'}</p>
-                      <div class="mt-auto">
-                        <a class="inline-block bg-[#0C1E28] text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-300 satoshi font-medium w-full text-center"
-                           href="/blog/${post.slug}">${readArticleLabel()}</a>
-                      </div>
-                  </div>
-              </div>
-              `;
-          });
-
-          container.innerHTML = html;
-          container.classList.remove('opacity-0');
-      }
-
-      document.addEventListener('DOMContentLoaded', loadHomeBlogs);
-    </script>
-    <script id="scroll-animation-script">
-        document.addEventListener('DOMContentLoaded', function () {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        entry.target.style.filter = 'blur(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2, rootMargin: "0px 0px -50px 0px" });
-
-            document.querySelectorAll('.custom-fade-in').forEach(el => observer.observe(el));
         });
-    </script>
-    <script id="carousel-vanilla-script">
-        document.addEventListener('DOMContentLoaded', function () {
-            const headings = Array.from(document.querySelectorAll('h2'));
-            const sectionHeading = headings.find(h => h.textContent && h.textContent.includes('Why Invest In Portugal'));
-            if (!sectionHeading) return;
+      });
 
-            const section = sectionHeading.closest('section');
-            if (!section) return;
-
-            const track = section.querySelector('.flex.transition-transform');
-            if (!track) return;
-
-            const slides = Array.from(track.children);
-            const numSlides = slides.length;
-            if (numSlides === 0) return;
-
-            let currentIndex = 0;
-
-            const prevBtn = section.querySelector('button[aria-label="Previous slide"]');
-            const nextBtn = section.querySelector('button[aria-label="Next slide"]');
-            const dotBtns = section.querySelectorAll('button[aria-label^="Go to slide"]');
-
-            function updateCarousel() {
-                track.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-                dotBtns.forEach((dot, index) => {
-                    if (index === currentIndex) {
-                        dot.classList.remove('bg-gray-300', 'hover:bg-gray-400');
-                        dot.classList.add('bg-[#0C1E28]', 'scale-125');
-                    } else {
-                        dot.classList.remove('bg-[#0C1E28]', 'scale-125');
-                        dot.classList.add('bg-gray-300', 'hover:bg-gray-400');
-                    }
-                });
-            }
-
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : numSlides - 1;
-                    updateCarousel();
-                });
-            }
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    currentIndex = (currentIndex < numSlides - 1) ? currentIndex + 1 : 0;
-                    updateCarousel();
-                });
-            }
-
-            dotBtns.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentIndex = index;
-                    updateCarousel();
-                });
-            });
+      // ---- Parallax on asset media ----
+      gsap.utils.toArray('[data-parallax]').forEach(function (el) {
+        var amt = parseFloat(el.getAttribute('data-parallax')) || 0.15;
+        gsap.fromTo(el, { yPercent: -amt * 100 }, {
+          yPercent: amt * 100, ease: 'none',
+          scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 }
         });
-    </script>
-    <script id="testimonials-marquee-script">
-        document.addEventListener('DOMContentLoaded', function () {
-            const scroller = document.querySelector('.scroller');
-            if (!scroller) return;
+      });
 
-            const originalUl = scroller.querySelector('ul');
-            if (!originalUl) return;
+      // ---- Refresh after fonts/images settle (prevents mis-fired triggers) ----
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { ScrollTrigger.refresh(); }); }
+      window.addEventListener('load', function () { ScrollTrigger.refresh(); });
 
-            // Grab all original cards to rebuild into double tracks
-            const originalItems = Array.from(originalUl.children);
-            if(originalItems.length === 0) return;
-            
-            // To be perfectly smooth, we need copies
-            const half1 = originalItems.map(i => i.cloneNode(true));
-            const half2 = originalItems.map(i => i.cloneNode(true));
-
-            // Top Row (Scrolls Right)
-            const topRow = document.createElement('ul');
-            topRow.className = 'flex w-max shrink-0 flex-nowrap gap-10 py-4 top-track';
-            half1.forEach(i => topRow.appendChild(i));
-            half2.forEach(i => topRow.appendChild(i.cloneNode(true)));
-
-            // Bottom Row (Scrolls Left)
-            const bottomRow = topRow.cloneNode(true);
-            bottomRow.className = 'flex w-max shrink-0 flex-nowrap gap-10 py-4 bottom-track mt-4';
-            
-            // Re-mount the scroller with the dual marquee layout
-            scroller.innerHTML = '';
-            scroller.appendChild(topRow);
-            scroller.appendChild(bottomRow);
-
-            // Inject CSS Keyframes and styling
-            const style = document.createElement('style');
-            style.innerHTML = `
-                .top-track {
-                    /* duration is long for smooth sliding. Adjust if it's too fast/slow */
-                    animation: scrollRight 120s linear infinite; 
-                }
-                .bottom-track {
-                    animation: scrollLeft 120s linear infinite;
-                }
-                .scroller:hover .top-track,
-                .scroller:hover .bottom-track {
-                    animation-play-state: paused;
-                }
-                @keyframes scrollRight {
-                    /* Starts shifted halfway to the left, moves to 0 */
-                    0% { transform: translateX(calc(-50% - 1.25rem)); }
-                    100% { transform: translateX(0%); }
-                }
-                @keyframes scrollLeft {
-                    /* Starts at 0, moves halfway to the left */
-                    0% { transform: translateX(0%); }
-                    100% { transform: translateX(calc(-50% - 1.25rem)); }
-                }
-            `;
-            document.head.appendChild(style);
+      // ---- Smooth in-page anchor via Lenis ----
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href'); if (id.length < 2) return;
+          var t = document.querySelector(id); if (!t) return;
+          e.preventDefault();
+          if (lenis) lenis.scrollTo(t, { offset: 0 }); else t.scrollIntoView({ behavior: 'smooth' });
         });
+      });
+    })();
     </script>
-<script src="/chat.js"></script>
+    <script src="/chat.js"></script>
 </body>
-
 </html>
