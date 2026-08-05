@@ -42,6 +42,7 @@
 | 2026-07-29 | Full master-doc copy audit — 4 remaining "developer" framing fixes | abilio.diz | Applied (8 rows EN+PT) |
 | 2026-07-29 | Health & Physical Information A4 PDF (branded, bilingual) | abilio.diz / Opus 4.7 | Delivered as file |
 | **2026-07-30 (11:00→12:xx)** | **Motion layer — in progress** | abilio.diz / Opus 4.7 | Branch `motion-layer`: `1be5cca` (video+CSS), `2769366` (this doc), `43ba2f7` (foundation+hero wiring) |
+| 2026-08-05 (~afternoon) | Homepage: removed Press/Media block (EN+PT) | abilio.diz / Opus 4.8 | Branch `main` → prod: `6813242` (upstream + mirror pushed, auto-deployed, verified live). motion-layer WIP untouched (stash-popped back). |
 
 > Hours are not tracked precisely; use commit timestamps (`git log --format='%h %ad %s' --date=iso`) as the source of truth for elapsed work.
 
