@@ -94,12 +94,12 @@
     tooltip.innerHTML =
       '<button id="sa-tt-close" aria-label="Close">&times;</button>' +
       '<strong>&#128197; Schedule a Consultant</strong>' +
-      'Speak with one of our consultants \u2014 we\u2019ll get back to you within 24 hours.';
+      'Speak with one of our consultants - we\u2019ll get back to you within 24 hours.';
 
     // Main FAB button
     var btn = document.createElement('button');
     btn.id = 'sa-btn';
-    btn.setAttribute('aria-label', 'Abrir chat — agendar consulta');
+    btn.setAttribute('aria-label', 'Abrir chat - agendar consulta');
     btn.innerHTML = iconChat();
 
     wrap.appendChild(tooltip);
@@ -119,7 +119,7 @@
       '</div>' +
       '<div id="sa-notice">' +
         '<div id="sa-notice-icon">' + iconCalendar() + '</div>' +
-        '<div id="sa-notice-text"><strong>Book a free consultation</strong> — chat with our AI assistant and a specialist will contact you within 24 hours.</div>' +
+        '<div id="sa-notice-text"><strong>Book a free consultation</strong> - chat with our AI assistant and a specialist will contact you within 24 hours.</div>' +
       '</div>' +
       '<div id="sa-msgs"></div>' +
       '<div id="sa-footer">' +
@@ -131,11 +131,11 @@
     document.body.appendChild(wrap);
     document.body.appendChild(win);
 
-    // Auto-show tooltip after 1.5s, auto-hide after 7s
+    // Auto-show tooltip after 4s (let the hero breathe), auto-hide after 7s
     setTimeout(function () {
       tooltip.classList.add('sa-tt-show');
       setTimeout(function () { tooltip.classList.remove('sa-tt-show'); }, 7000);
-    }, 1500);
+    }, 4000);
 
     document.getElementById('sa-tt-close').addEventListener('click', function (e) {
       e.stopPropagation();
