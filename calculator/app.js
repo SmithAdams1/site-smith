@@ -51,13 +51,13 @@ const CONFIG = {
     insuranceBase:    620,     // Seguro s/IVA  — Excel D40
     // Fixos no código (a Google Sheet NÃO sobrepõe estes dois — ver fetchConfig)
     appreciationRate: 0.05,    // Capital growth 5% / ano
-    rentalYield:      0.07,    // Net income 7% / ano
+    rentalYield:      0.07,    // Rendimento de arrendamento após comissão de gestão, 7% / ano
   },
   /* D2 with Buy Back — sem custos de aquisição e sem valorização:
      o imóvel é recomprado pelo preço de compra ao fim de 5 anos.
      As restantes taxas (legal, visto, admin, seguro) são as do D2. */
   d2bb: {
-    rentalYield: 0.07,         // Net rental income 7% / ano
+    rentalYield: 0.07,         // Rendimento de arrendamento após comissão de gestão, 7% / ano
   },
   gv: {
     defaultProperty:   171000,   // Imóvel subjacente — Excel J17
@@ -87,7 +87,7 @@ const CONFIG = {
     legalAdvisory:    1500,    // Excel D33
     companyIncorp:    1000,    // Excel D34
     appreciationRate: 0.07,    // 7% valorização anual
-    rentalYield:      0.1038,  // 10.38% yield bruto anual
+    rentalYield:      0.1038,  // 10.38% do preço, após comissão de gestão (21%) e antes de impostos e custos operacionais
   },
 };
 
@@ -213,7 +213,7 @@ function calcD2() {
    Diferenças face ao D2 normal:
      · sem custos de aquisição (IMT / IS / notário)
      · sem valorização — o imóvel é recomprado pelo preço de compra
-     · retorno = 7% de rendimento líquido por ano (5 anos)
+     · retorno = 7% de rendimento de arrendamento após comissão de gestão, por ano (5 anos)
    ============================================================ */
 function calcD2BB() {
   const property      = num('d2bb-property');
@@ -459,7 +459,7 @@ function calcInv() {
   const grandTotal = property + transferTotal + legalTotal;
 
   /* --- ROI Forecast (5 years) ---
-     Valorização linear 7% · Yield bruto 10.38% sobre valor original
+     Valorização LINEAR 7% (nota: o PDF do estudo capitaliza 7% — valores a 5 anos divergem) · rendimento 10.38% do valor original, após comissão de gestão
      CGT sobre produto líquido de venda (igual ao separador Investments da sheet) */
   const apprPerYear  = property * c.appreciationRate;
   const yieldPerYear = property * c.rentalYield;
@@ -600,9 +600,9 @@ const i18n = {
     'd2.b.other':        'Administrative & other costs',
     'd2.b.admin':        'Administrative fees (5 years)',
     'd2.b.ins':          'Insurance coverage',
-    'd2.roi.sub':        '7% net income · 5% capital growth',
+    'd2.roi.sub':        '7% rental income after management fee · 5% capital growth',
     'd2.roi.sub2':       'Pessimist projection based on Market Projection',
-    'd2.roi.rental':     'Total net rental income',
+    'd2.roi.rental':     'Total rental income after management fee',
     'd2.roi.cap':        'Estimated appreciation of property',
     'd2.roi.totalProfit':'Total accumulated profit',
     'd2.roi.projY5':     'Projected property value (Year 5)',
@@ -637,7 +637,7 @@ const i18n = {
     'd2bb.b.ins':          'Insurance coverage',
     'd2bb.roi.sub':        '7% rental income per year',
     'd2bb.roi.sub2':       'Pessimist projection based on Market Projection',
-    'd2bb.roi.income':     'Total net rental income (5 years)',
+    'd2bb.roi.income':     'Total rental income after management fee (5 years)',
     'd2bb.roi.buyback':    'Buy back value (Year 5)',
     'd2bb.roi.totalCost':  'Total cost of investment',
     'd2bb.roi.effective':  'Effective net investment cost (after rental income)',
@@ -717,8 +717,8 @@ const i18n = {
     'inv.b.legal':         'Legal fees',
     'inv.b.advisory':      'Legal advisory',
     'inv.b.incorp':        'Company incorporation',
-    'inv.roi.sub':         'Projection over 5 years assuming 7% annual appreciation and 10.38% annual gross rental yield.',
-    'inv.roi.rental':      'Total net rental income',
+    'inv.roi.sub':         'Projection over 5 years assuming 7% annual appreciation and short-term rental income of 10.38% of the purchase price, after management fee and before taxes and operating costs.',
+    'inv.roi.rental':      'Total rental income after management fee',
     'inv.roi.cap':         'Estimated capital appreciation',
     'inv.roi.totalProfit': 'Total accumulated profit',
     'inv.roi.projY5':      'Projected property value (Year 5)',
@@ -733,7 +733,7 @@ const i18n = {
     'inv.roi.avgROI':      'Average annual ROI',
 
     /* Footer */
-    'footer.disclaimer': 'Figures are indicative estimates based on current Portuguese law and market assumptions. They do not constitute legal, tax or investment advice. Final values may vary depending on individual circumstances. Smith & Adams Group, Lda.',
+    'footer.disclaimer': 'Figures are indicative estimates based on current Portuguese law and market assumptions. They do not constitute legal, tax or investment advice. Final values may vary depending on individual circumstances. Market assumptions are built on AirDNA, Airbtics, INE and Turismo de Portugal data. Smith & Adams Group, Lda.',
 
     /* Year labels */
     'year.1': 'Year 1',
@@ -809,9 +809,9 @@ const i18n = {
     'd2.b.other':        'Custos administrativos e outros',
     'd2.b.admin':        'Honorários administrativos (5 anos)',
     'd2.b.ins':          'Seguro de saúde',
-    'd2.roi.sub':        '7% de rendimento líquido · 5% de valorização do capital',
+    'd2.roi.sub':        '7% de rendimento de arrendamento após comissão de gestão · 5% de valorização do capital',
     'd2.roi.sub2':       'Projeção pessimista baseada na projeção de mercado',
-    'd2.roi.rental':     'Total de rendas líquidas',
+    'd2.roi.rental':     'Total de rendas após comissão de gestão',
     'd2.roi.cap':        'Valorização estimada do imóvel',
     'd2.roi.totalProfit':'Lucro acumulado total',
     'd2.roi.projY5':     'Valor projetado do imóvel (Ano 5)',
@@ -846,7 +846,7 @@ const i18n = {
     'd2bb.b.ins':          'Cobertura de seguro',
     'd2bb.roi.sub':        '7% de rendimento de arrendamento por ano',
     'd2bb.roi.sub2':       'Projeção pessimista baseada na projeção de mercado',
-    'd2bb.roi.income':     'Rendimento líquido total (5 anos)',
+    'd2bb.roi.income':     'Total de rendas após comissão de gestão (5 anos)',
     'd2bb.roi.buyback':    'Valor de recompra (Ano 5)',
     'd2bb.roi.totalCost':  'Custo total do investimento',
     'd2bb.roi.effective':  'Custo líquido efetivo (após rendimento)',
@@ -926,8 +926,8 @@ const i18n = {
     'inv.b.legal':         'Honorários legais',
     'inv.b.advisory':      'Acompanhamento legal',
     'inv.b.incorp':        'Constituição de empresa',
-    'inv.roi.sub':         'Projeção a 5 anos com valorização anual de 7% e yield bruto anual de 10,38%.',
-    'inv.roi.rental':      'Rendimento líquido total de arrendamento',
+    'inv.roi.sub':         'Projeção a 5 anos com valorização anual de 7% e rendimento de arrendamento de curta duração de 10,38% do preço de compra, após comissão de gestão e antes de impostos e custos operacionais.',
+    'inv.roi.rental':      'Total de rendas após comissão de gestão',
     'inv.roi.cap':         'Valorização estimada do imóvel',
     'inv.roi.totalProfit': 'Lucro acumulado total',
     'inv.roi.projY5':      'Valor projetado do imóvel (Ano 5)',
@@ -942,7 +942,7 @@ const i18n = {
     'inv.roi.avgROI':      'ROI médio anual',
 
     /* Footer */
-    'footer.disclaimer': 'Os valores apresentados são estimativas indicativas baseadas na legislação portuguesa em vigor e em pressupostos de mercado. Não constituem aconselhamento legal, fiscal ou de investimento. Os valores finais podem variar consoante as circunstâncias individuais. Smith & Adams Group, Lda.',
+    'footer.disclaimer': 'Os valores apresentados são estimativas indicativas baseadas na legislação portuguesa em vigor e em pressupostos de mercado. Não constituem aconselhamento legal, fiscal ou de investimento. Os valores finais podem variar consoante as circunstâncias individuais. Os pressupostos de mercado baseiam-se em dados da AirDNA, Airbtics, INE e Turismo de Portugal. Smith & Adams Group, Lda.',
 
     /* Year labels */
     'year.1': 'Ano 1',
@@ -1039,7 +1039,7 @@ async function fetchConfig(url) {
     if (data.shared) Object.assign(CONFIG.shared, data.shared);
     if (data.d2) {
       /* appreciationRate e rentalYield do D2 são fixos no código
-         (5% capital growth · 7% net income). A Sheet ainda serve os
+         (5% capital growth · 7% rental income after management fee). A Sheet ainda serve os
          valores antigos (7% / 10.38%), por isso são descartados aqui. */
       const d2Live = Object.assign({}, data.d2);
       delete d2Live.appreciationRate;
