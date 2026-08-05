@@ -146,6 +146,22 @@
   .rd-hero__caption .v { font-family:var(--serif); font-size:clamp(18px,1.5vw,22px); }
   @media (max-width:820px){ .rd-hero__caption{ display:none; } }
 
+  /* ---------- HERO · scroll-scrubbed flythrough ---------- */
+  .rd-fly { position:relative; height:100svh; overflow:hidden; background:var(--navy); }
+  .rd-fly__video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .rd-fly__scrim { position:absolute; inset:0; z-index:1;
+    background:linear-gradient(90deg, rgba(17,34,45,0.62) 0%, rgba(17,34,45,0) 58%),
+               linear-gradient(180deg, rgba(17,34,45,0.28) 0%, rgba(17,34,45,0.05) 45%, rgba(17,34,45,0.82) 100%); }
+  .rd-fly__panel { position:absolute; left:var(--mx); right:var(--mx); bottom:clamp(48px,9vh,112px); z-index:2; }
+  .rd-fly__panel.p1 { opacity:1; }
+  .rd-fly__panel.p2, .rd-fly__panel.p3 { opacity:0; }
+  .rd-fly h1 { color:#fff; font-family:var(--serif); font-weight:500; letter-spacing:-0.015em;
+    font-size:clamp(40px,7vw,104px); line-height:1.02; max-width:16ch; margin:0; }
+  .rd-fly__sub { color:var(--stone); font-family:var(--sans); font-weight:300;
+    font-size:clamp(15px,1.5vw,20px); line-height:1.6; max-width:48ch; margin:22px 0 0; }
+  .rd-fly__line { color:#fff; font-family:var(--serif); font-weight:500;
+    font-size:clamp(26px,3.6vw,54px); line-height:1.12; letter-spacing:-0.01em; max-width:22ch; margin:0; }
+
   /* ---------- generic section ---------- */
   .rd-sec { padding:clamp(72px,11vw,168px) 0; }
   .rd-sec--navy { background:var(--navy); color:#fff; }
@@ -282,28 +298,37 @@
                         href="contact.html">Contact Us</a></div>
             </div>
         </header>
-        <!-- ══════════════════ HERO ══════════════════ -->
-        <section class="rd-hero" id="hero">
-            <div class="rd-hero__media" data-parallax="0.12">
-                <img src="hygge-house-beato/exterior.jpg" alt="Smith &amp; Adams asset in Beato, Lisbon" fetchpriority="high" decoding="async" />
-            </div>
-            <div class="rd-hero__scrim"></div>
-            <div class="rd-hero__inner rd-wrap">
-                <p class="rd-label reveal" style="color:rgba(255,255,255,0.75); margin-bottom:26px;">Smith &amp; Adams Group &middot; Lisboa</p>
+        <!-- ══════════════════ HERO · scroll-scrubbed flythrough ══════════════════ -->
+        <section class="rd-fly" id="hero">
+            <video class="rd-fly__video" muted playsinline preload="none" poster="hero-flythrough-poster.jpg" aria-hidden="true">
+                <source src="hero-flythrough.mp4" type="video/mp4" />
+            </video>
+            <div class="rd-fly__scrim"></div>
+            <div class="rd-fly__panel p1">
+                <p class="rd-label" style="color:rgba(255,255,255,0.75); margin-bottom:24px;">Smith &amp; Adams Group &middot; Lisboa</p>
                 <h1>The whole asset, held to one standard.</h1>
-                <p class="rd-hero__sub reveal">Independent real estate investment and residency advisory in Portugal. We build, buy, renovate, let, operate and sell the asset itself, and report on all six.</p>
-                <div class="rd-hero__row reveal">
+                <p class="rd-fly__sub">Independent real estate investment and residency advisory in Portugal. Scroll to step inside.</p>
+                <div class="rd-hero__row" style="margin-top:30px;">
+                    <a class="rd-cta" href="contact.html">Book a consultation
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="rd-fly__panel p2">
+                <p class="rd-label" style="color:rgba(255,255,255,0.75); margin-bottom:18px;">From the plaza to the keys</p>
+                <p class="rd-fly__line">Advice at one end, hands-on management at the other. One standard, the whole way in.</p>
+            </div>
+            <div class="rd-fly__panel p3">
+                <p class="rd-label" style="color:rgba(255,255,255,0.75); margin-bottom:18px;">Now you are inside</p>
+                <p class="rd-fly__line">Everything reported, not promised.</p>
+                <div class="rd-hero__row" style="margin-top:26px;">
                     <a class="rd-cta" href="contact.html">Book a consultation
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
                     <a class="rd-cta rd-cta--ghost" href="#proof">See the numbers</a>
                 </div>
             </div>
-            <div class="rd-hero__caption">
-                <span class="rd-label k">Beato &middot; Lisboa</span>
-                <span class="v">137 units &middot; 94% occupancy</span>
-            </div>
-            <div class="rd-scrollcue reveal"><span>Scroll</span><span class="bar"></span></div>
+            <div class="rd-scrollcue"><span>Scroll to enter</span><span class="bar"></span></div>
         </section>
 
         <!-- ══════════════════ PROOF ══════════════════ -->
@@ -561,6 +586,39 @@
       }
 
       var EASE = 'power3.out';
+
+      // ---- Scroll-scrubbed flythrough hero (desktop/tablet only) ----
+      (function () {
+        var fly = document.querySelector('.rd-fly');
+        if (!fly) return;
+        var vid = fly.querySelector('.rd-fly__video');
+        if (!window.matchMedia('(min-width:768px)').matches) return; // mobile: static poster + p1
+        vid.preload = 'auto'; vid.load();
+        var dur = 10;
+        vid.addEventListener('loadedmetadata', function () { dur = vid.duration || 10; ScrollTrigger.refresh(); });
+        // prime frame rendering so currentTime seeks paint
+        vid.addEventListener('canplay', function prime() {
+          vid.play().then(function () { vid.pause(); }).catch(function () {});
+          vid.removeEventListener('canplay', prime);
+        });
+        var p1 = fly.querySelector('.p1'), p2 = fly.querySelector('.p2'), p3 = fly.querySelector('.p3');
+        var cue = fly.querySelector('.rd-scrollcue');
+        function c01(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+        function fin(p,a,b){ return c01((p - a) / (b - a)); }      // 0 before a, ramps to 1 by b
+        function fout(p,a,b){ return 1 - c01((p - a) / (b - a)); } // 1 before a, ramps to 0 by b
+        function setPanel(el, op, dir){ el.style.opacity = op; el.style.transform = 'translateY(' + ((1 - op) * dir) + 'px)'; }
+        ScrollTrigger.create({
+          trigger: fly, start: 'top top', end: '+=2600', pin: true, scrub: 0.5, anticipatePin: 1,
+          onUpdate: function (self) {
+            var p = self.progress;
+            if (vid.readyState >= 1) { try { vid.currentTime = Math.min((dur || 10) - 0.05, p * (dur || 10)); } catch (e) {} }
+            setPanel(p1, fout(p, 0.20, 0.30), -20);
+            setPanel(p2, Math.min(fin(p, 0.36, 0.44), fout(p, 0.60, 0.68)), 20);
+            setPanel(p3, fin(p, 0.74, 0.82), 20);
+            if (cue) cue.style.opacity = String(fout(p, 0.0, 0.05));
+          }
+        });
+      })();
 
       // ---- Reveals (batched) ----
       ScrollTrigger.batch('.reveal', {
