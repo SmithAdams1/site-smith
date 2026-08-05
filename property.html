@@ -220,7 +220,7 @@
     thumbs.forEach(function(th){th.addEventListener('click',function(){main.src=th.getAttribute('data-src');thumbs.forEach(function(x){x.classList.remove('active');});th.classList.add('active');});});
 
     // whatsapp link
-    var propUrl='https://smithandadams.com/property/'+encodeURIComponent(p.slug);
+    var propUrl='https://www.smithandadams.com/property/'+encodeURIComponent(p.slug);
     var waText=encodeURIComponent((L==='pt'?'Olá, tenho interesse no imóvel: ':'Hello, I am interested in the property: ')+pick(p.title)+' - '+propUrl);
     document.getElementById('pd-wa').href='https://wa.me/351938227348?text='+waText;
 

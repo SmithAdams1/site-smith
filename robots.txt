@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://smithandadams.com/sitemap.xml
+Sitemap: https://www.smithandadams.com/sitemap.xml
