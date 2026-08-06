@@ -52,6 +52,18 @@ STYLE = '''<style id="rd-nav-dd">
 </style>'''
 
 
+BTN = ('background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;'
+       'font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;')
+SWITCHER = (
+    '<div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;'
+    'gap:7px;margin-left:16px;font-family:inherit;color:#fff;">'
+    f'<button type="button" data-locale="en" aria-label="English" style="{BTN}opacity:1;font-weight:600;">EN</button>'
+    '<span style="opacity:.32;font-size:12px;">|</span>'
+    f'<button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="{BTN}opacity:.55;font-weight:500;">PT</button>'
+    '</div>')
+MOB_SWITCHER = SWITCHER.replace('margin-left:16px;', 'margin-left:0;margin-top:24px;')
+
+
 MOB_LINK = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi'
 MOB_ACTIVE = 'text-2xl font-medium transition-colors duration-300 text-white font-semibold satoshi'
 MOB_CTA = ('bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium '
@@ -71,6 +83,7 @@ def build_mobile(cur):
         active = href.strip('/').replace('.html', '') == cur
         out.append(f'<a class="{MOB_ACTIVE if active else MOB_LINK}" href="{href}">{label}</a>')
     out.append(f'<a class="{MOB_CTA}" href="/contact.html">Contact Us</a>')
+    out.append(MOB_SWITCHER)
     return ''.join(out)
 
 
@@ -98,6 +111,10 @@ def build_nav(cur):
     parts.append('<div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium '
                  'transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">'
                  'Contact Us</a></div>')
+    # Baked so the switcher is present at first paint. It used to be appended by
+    # cms-loader after its fetch, which widened the nav by ~75px mid-load - the
+    # "bump" on every page transition.
+    parts.append(SWITCHER)
     return ''.join(parts)
 
 

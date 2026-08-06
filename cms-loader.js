@@ -218,8 +218,31 @@
     return lum > 0.6 ? 'dark' : 'light'; // se texto é claro, fundo é dark → switcher claro
   }
 
+  // The switcher is baked into the HTML by scripts/bake-nav.py so it is present
+  // at first paint - appending it after the fetch widened the nav by ~75px and
+  // shifted the whole menu, which read as a bump on every page transition.
+  // Baked markup carries no behaviour, so adopt it here instead of creating one.
+  function adoptBakedSwitchers(currentLocale) {
+    var found = 0;
+    document.querySelectorAll('.cms-lang-switcher[data-baked]').forEach(function (wrap) {
+      found++;
+      wrap.removeAttribute('data-baked');
+      wrap.querySelectorAll('button[data-locale]').forEach(function (b) {
+        var loc = b.dataset.locale;
+        var active = loc === currentLocale;
+        b.style.opacity = active ? '1' : '.55';
+        b.style.fontWeight = active ? '600' : '500';
+        b.addEventListener('mouseenter', function () { if (!active) b.style.opacity = '0.85'; });
+        b.addEventListener('mouseleave', function () { if (!active) b.style.opacity = '0.55'; });
+        b.addEventListener('click', function () { if (!active) setLocale(loc); });
+      });
+    });
+    return found;
+  }
+
   function injectSwitcher() {
     const currentLocale = getLocale();
+    if (adoptBakedSwitchers(currentLocale)) return;
 
     // Desktop nav: <nav class="hidden lg:flex ...">
     const desktopNav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
