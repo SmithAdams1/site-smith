@@ -314,20 +314,28 @@
 <body class="overflow-x-hidden w-full">
 
   <!-- Header -->
-  <header class="fixed w-full z-50 transition-all duration-300 bg-white border-b border-gray-100 shadow-sm">
+  <style id="rd-nav-dd">
+/* The Properties dropdown used to be opened by JS listeners attached during the
+   client-side nav rebuild. The nav is now baked into the HTML, so the rebuild is
+   skipped and the dropdown is driven by CSS instead. :focus-within is deliberate
+   - it makes the menu reachable by keyboard, which the JS version was not. */
+.rd-dd{position:relative}
+.rd-dd__menu{position:absolute;left:0;top:100%;padding-top:16px;min-width:232px;
+  opacity:0;visibility:hidden;transform:translateY(6px);
+  transition:opacity .18s ease,visibility .18s ease,transform .18s ease;z-index:60}
+.rd-dd:hover .rd-dd__menu,.rd-dd:focus-within .rd-dd__menu{opacity:1;visibility:visible;transform:none}
+.rd-dd__inner{background:#0C1E28;border:1px solid rgba(255,255,255,.12);border-radius:12px;
+  padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.rd-dd__item{display:block;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px;
+  font-size:15px;white-space:nowrap;transition:background .15s}
+.rd-dd__item:hover,.rd-dd__item:focus-visible{background:rgba(255,255,255,.1)}
+</style>
+<header class="fixed w-full z-50 transition-all duration-300 bg-white border-b border-gray-100 shadow-sm">
     <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
       <a class="relative z-40" href="index.html">
         <img alt="Smith & Adams Logo" loading="lazy" width="150" height="40" class="h-10 w-auto" src="./logo.png"/>
       </a>
-      <nav class="hidden lg:flex items-center space-x-8">
-        <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-500 font-medium" href="index.html">Home</a>
-        <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-500 font-medium" href="about.html">About Us</a>
-        <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-500 font-medium" href="property-management.html">Property Management</a>
-        <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-500 font-medium" href="invest-in-portugal.html">Invest in Portugal</a><a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-500 font-medium" href="our-developments.html">Our Developments</a>
-        <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-500 font-medium" href="urban-collection.html">Urban Collection</a>
-        <a class="text-[#0C1E28] transition-colors duration-300 font-satoshi hover:text-gray-500 font-medium" href="blog.html">Blog</a>
-        <a class="bg-[#0C1E28] text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 satoshi font-medium" href="contact.html">Contact Us</a>
-      </nav>
+      <nav class="hidden lg:flex items-center space-x-8" data-sa-rebuilt="1"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/index.html">Home</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/about.html">About Us</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/real-estate.html">Real Estate</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group rd-dd"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="#" onclick="return false;" aria-haspopup="true">Properties <span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a><div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="properties"><a class="satoshi rd-dd__item" href="/our-developments.html">Featured Opportunities</a><a class="satoshi rd-dd__item" href="/property-management.html">Property Management</a></div></div></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/blog.html">Blog</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">Contact Us</a></div></nav>
       <button class="lg:hidden relative z-50 focus:outline-none" aria-label="Toggle menu">
         <div class="w-6 flex flex-col justify-between items-end">
           <span class="block h-0.5 bg-[#0C1E28] transition-all duration-300 ease-out w-6"></span>

@@ -16,11 +16,15 @@
   // ─── Esconder o item "Urban Collection" do menu (nav + mobile + footer) ──
   // Solicitação do cliente: ocultar sem apagar. Para reativar, basta remover
   // este bloco de CSS. Os links e a página /urban-collection continuam ativos.
+  // NB: href selectors below use $= rather than = so they match whether the
+  // markup writes "about.html" or "/about.html". The nav is baked into the HTML
+  // by scripts/bake-nav.py with absolute paths; exact matches silently missed
+  // them and re-injected duplicates.
   (function hideUrbanCollectionNav() {
     const css = '' +
-      'header div.relative.group:has(> a[href="urban-collection.html"]),' +
-      '#mobile-menu a[href="urban-collection.html"],' +
-      'footer li:has(> a[href="urban-collection.html"])' +
+      'header div.relative.group:has(> a[href$="urban-collection.html"]),' +
+      '#mobile-menu a[href$="urban-collection.html"],' +
+      'footer li:has(> a[href$="urban-collection.html"])' +
       '{ display:none !important; }';
     const style = document.createElement('style');
     style.id = 'hide-urban-collection-nav';
@@ -152,6 +156,10 @@
         SHOW_REAL_ESTATE = true;
         injectRealEstateEverywhere();
         applyNavContrast();
+      } else {
+        // The link ships in the HTML, so switching the flag off has to remove it.
+        removeRealEstateNav();
+        applyNavContrast();
       }
 
       document.dispatchEvent(new CustomEvent('cms-loaded', { detail: { count: rows.length, locale } }));
@@ -254,13 +262,13 @@
 
     // Desktop nav
     var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
-    if (nav && !nav.dataset.saRebuilt && !nav.querySelector('a[href="' + HREF + '"]')) {
+    if (nav && !nav.dataset.saRebuilt && !nav.querySelector('a[href$="' + HREF + '"]')) {
       var wrap = document.createElement('div');
       wrap.className = 'relative group';
       wrap.innerHTML =
         '<a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="' + HREF + '">' + LABEL + '</a>' +
         '<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>';
-      var pm = nav.querySelector('a[href="property-management.html"]');
+      var pm = nav.querySelector('a[href$="property-management.html"]');
       var pmWrap = pm && pm.closest('.relative.group');
       if (pmWrap && pmWrap.parentNode === nav) {
         pmWrap.insertAdjacentElement('afterend', wrap);
@@ -273,12 +281,12 @@
 
     // Mobile menu
     var mobileInner = document.querySelector('#mobile-menu .flex.flex-col');
-    if (mobileInner && !mobileInner.querySelector('a[href="' + HREF + '"]')) {
+    if (mobileInner && !mobileInner.querySelector('a[href$="' + HREF + '"]')) {
       var a = document.createElement('a');
       a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
       a.href = HREF;
       a.textContent = LABEL;
-      var pmM = mobileInner.querySelector('a[href="property-management.html"]');
+      var pmM = mobileInner.querySelector('a[href$="property-management.html"]');
       if (pmM) {
         pmM.insertAdjacentElement('afterend', a);
       } else if (mobileInner.lastElementChild) {
@@ -290,11 +298,11 @@
 
     // Footer "Menu" list (primeira ul.list-none)
     var footerList = document.querySelector('footer ul.list-none');
-    if (footerList && !footerList.querySelector('a[href="' + HREF + '"]')) {
+    if (footerList && !footerList.querySelector('a[href$="' + HREF + '"]')) {
       var li = document.createElement('li');
       li.className = 'font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer';
       li.innerHTML = '<a href="' + HREF + '">' + LABEL + '</a>';
-      var pmF = footerList.querySelector('a[href="property-management.html"]');
+      var pmF = footerList.querySelector('a[href$="property-management.html"]');
       var pmLi = pmF && pmF.closest('li');
       if (pmLi) pmLi.insertAdjacentElement('afterend', li);
       else footerList.appendChild(li);
@@ -313,18 +321,18 @@
 
     // Desktop nav: inserir a seguir ao "Invest in Portugal"
     var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
-    if (nav && !nav.dataset.saRebuilt && !nav.querySelector('a[href="' + HREF + '"]')) {
+    if (nav && !nav.dataset.saRebuilt && !nav.querySelector('a[href$="' + HREF + '"]')) {
       var wrap = document.createElement('div');
       wrap.className = 'relative group';
       wrap.innerHTML =
         '<a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="' + HREF + '">' + LABEL + '</a>' +
         '<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>';
-      var inv = nav.querySelector('a[href="invest-in-portugal.html"]');
+      var inv = nav.querySelector('a[href$="invest-in-portugal.html"]');
       var invWrap = inv && inv.closest('.relative.group');
       if (invWrap && invWrap.parentNode === nav) {
         invWrap.insertAdjacentElement('afterend', wrap);
       } else {
-        var dev = nav.querySelector('a[href="our-developments.html"]');
+        var dev = nav.querySelector('a[href$="our-developments.html"]');
         var devWrap = dev && dev.closest('.relative.group');
         if (devWrap) devWrap.insertAdjacentElement('beforebegin', wrap);
         else if (nav.lastElementChild) nav.insertBefore(wrap, nav.lastElementChild);
@@ -334,12 +342,12 @@
 
     // Mobile menu
     var mobileInner = document.querySelector('#mobile-menu .flex.flex-col');
-    if (mobileInner && !mobileInner.querySelector('a[href="' + HREF + '"]')) {
+    if (mobileInner && !mobileInner.querySelector('a[href$="' + HREF + '"]')) {
       var a = document.createElement('a');
       a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
       a.href = HREF; a.textContent = LABEL;
-      var invM = mobileInner.querySelector('a[href="invest-in-portugal.html"]');
-      var devM = mobileInner.querySelector('a[href="our-developments.html"]');
+      var invM = mobileInner.querySelector('a[href$="invest-in-portugal.html"]');
+      var devM = mobileInner.querySelector('a[href$="our-developments.html"]');
       if (invM) invM.insertAdjacentElement('afterend', a);
       else if (devM) devM.insertAdjacentElement('beforebegin', a);
       else if (mobileInner.lastElementChild) mobileInner.insertBefore(a, mobileInner.lastElementChild);
@@ -348,13 +356,13 @@
 
     // Footer "Menu" list
     var footerList = document.querySelector('footer ul.list-none');
-    if (footerList && !footerList.querySelector('a[href="' + HREF + '"]')) {
+    if (footerList && !footerList.querySelector('a[href$="' + HREF + '"]')) {
       var li = document.createElement('li');
       li.className = 'font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer';
       li.innerHTML = '<a href="' + HREF + '">' + LABEL + '</a>';
-      var invF = footerList.querySelector('a[href="invest-in-portugal.html"]');
+      var invF = footerList.querySelector('a[href$="invest-in-portugal.html"]');
       var invLi = invF && invF.closest('li');
-      var devF = footerList.querySelector('a[href="our-developments.html"]');
+      var devF = footerList.querySelector('a[href$="our-developments.html"]');
       var devLi = devF && devF.closest('li');
       if (invLi) invLi.insertAdjacentElement('afterend', li);
       else if (devLi) devLi.insertAdjacentElement('beforebegin', li);
@@ -371,6 +379,18 @@
   //            Blog · Contact Us (button)
   // Uses root-relative hrefs so it also works on /property/:slug.
   // ============================================================
+  // The desktop nav is baked into the served HTML (scripts/bake-nav.py) to stop
+  // the old menu flashing on every page transition. That means the Real Estate
+  // link is present before this file runs, so when the Studio flag is off we
+  // have to remove it rather than simply not adding it.
+  function removeRealEstateNav() {
+    var sels = 'header nav a[href$="real-estate.html"], #mobile-menu a[href$="real-estate.html"], footer a[href$="real-estate.html"]';
+    document.querySelectorAll(sels).forEach(function (a) {
+      var wrap = a.closest('div.relative.group') || a.closest('li') || a;
+      wrap.remove();
+    });
+  }
+
   function rebuildDesktopNav() {
     var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
     if (!nav || nav.dataset.saRebuilt) return;
@@ -436,7 +456,7 @@
   // text is still hardcoded (mobile menu, footer). Desktop is handled by the
   // rebuild above. The URL stays /our-developments.html.
   function renameDevelopmentsNav() {
-    var links = document.querySelectorAll('a[href="our-developments.html"], a[href="/our-developments.html"]');
+    var links = document.querySelectorAll('a[href$="our-developments.html"], a[href="/our-developments.html"]');
     links.forEach(function (a) {
       if ((a.textContent || '').trim().toLowerCase() === 'our developments') a.textContent = 'Featured Opportunities';
     });
@@ -538,7 +558,7 @@
             var a = document.createElement('a');
             a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
             a.href = href; a.textContent = label;
-            var contactM = mobileInner.querySelector('a[href="/contact.html"], a[href="contact.html"]');
+            var contactM = mobileInner.querySelector('a[href="/contact.html"], a[href$="contact.html"]');
             if (contactM) mobileInner.insertBefore(a, contactM); else mobileInner.appendChild(a);
           }
 
@@ -565,12 +585,12 @@
 
     // Desktop: insert after "About Us" for parity with the original order.
     var nav = document.querySelector('header nav.hidden.lg\\:flex, header nav.lg\\:flex');
-    if (nav && !nav.querySelector('a[href="' + HREF + '"]') && !nav.querySelector('a[href="real-estate.html"]')) {
+    if (nav && !nav.querySelector('a[href$="' + HREF + '"]') && !nav.querySelector('a[href$="real-estate.html"]')) {
       var w = document.createElement('div'); w.className = 'relative group';
       w.innerHTML =
         '<a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="' + HREF + '">' + LABEL + '</a>' +
         '<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>';
-      var about = nav.querySelector('a[href="/about.html"], a[href="about.html"]');
+      var about = nav.querySelector('a[href="/about.html"], a[href$="about.html"]');
       var aboutWrap = about && about.closest('.relative.group');
       if (aboutWrap && aboutWrap.parentNode === nav) aboutWrap.insertAdjacentElement('afterend', w);
       else {
@@ -583,17 +603,17 @@
 
     // Mobile
     var mobileInner = document.querySelector('#mobile-menu .flex.flex-col');
-    if (mobileInner && !mobileInner.querySelector('a[href="' + HREF + '"]') && !mobileInner.querySelector('a[href="real-estate.html"]')) {
+    if (mobileInner && !mobileInner.querySelector('a[href$="' + HREF + '"]') && !mobileInner.querySelector('a[href$="real-estate.html"]')) {
       var a = document.createElement('a');
       a.className = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi';
       a.href = HREF; a.textContent = LABEL;
-      var contactM = mobileInner.querySelector('a[href="/contact.html"], a[href="contact.html"]');
+      var contactM = mobileInner.querySelector('a[href="/contact.html"], a[href$="contact.html"]');
       if (contactM) mobileInner.insertBefore(a, contactM); else mobileInner.appendChild(a);
     }
 
     // Footer
     var footerList = document.querySelector('footer ul.list-none');
-    if (footerList && !footerList.querySelector('a[href="' + HREF + '"]') && !footerList.querySelector('a[href="real-estate.html"]')) {
+    if (footerList && !footerList.querySelector('a[href$="' + HREF + '"]') && !footerList.querySelector('a[href$="real-estate.html"]')) {
       var li = document.createElement('li');
       li.className = 'font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer';
       li.innerHTML = '<a href="' + HREF + '">' + LABEL + '</a>';
@@ -607,6 +627,9 @@
     rebuildDesktopNav();
     injectInvestNav();     // mobile + footer (desktop skipped after rebuild)
     if (SHOW_REAL_ESTATE) injectRealEstateNav(); // mobile + footer
+    // Real Estate is baked into the HTML now, so the OFF case is handled inside
+    // loadContent(), once the flag is actually known. Calling it here would run
+    // before the fetch resolves and strip the link only to re-add it - a flash.
     renameDevelopmentsNav();
     injectSwitcher();
     injectStudioPages();   // async: adds published Studio pages to nav/mobile/footer
