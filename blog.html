@@ -1,509 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charSet="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>The Journal | Smith & Adams</title>
-  <meta name="description" content="Stay updated with the latest insights on Portugal Golden Visa, real estate investment, lifestyle, and market trends."/>
-  <link rel="canonical" href="https://www.smithandadams.com/blog"/>
-  <meta property="og:title" content="The Journal | Smith & Adams"/>
-  <meta property="og:description" content="Stay updated with the latest insights on Portugal Golden Visa, real estate investment, lifestyle, and market trends."/>
-  <meta property="og:url" content="https://www.smithandadams.com/blog"/>
-  <meta property="og:type" content="website"/>
-  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "The Journal | Smith & Adams",
-    "description": "Insights on Portugal Golden Visa, real estate investment, lifestyle, and market trends.",
-    "url": "https://www.smithandadams.com/blog",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Smith & Adams Group",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.smithandadams.com/logo.png"
-      }
-    }
-  }
-  </script>
-  
-  <link rel="stylesheet" href="_next/static/css/8414200374d39713.css?v=4"/>
-  <link rel="stylesheet" href="_next/static/css/85eae1a6394818bc.css?v=4"/>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = { corePlugins: { preflight: false } }</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Satoshi:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet"/>
-  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&display=swap" rel="stylesheet"/>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The Journal | Portugal Real Estate &amp; Golden Visa Insights | Smith &amp; Adams</title>
+<meta name="description" content="Insights on Portugal Golden Visa, prime real estate investment, lifestyle and market trends, from the Smith & Adams team."/>
+<meta name="keywords" content="Portugal real estate blog, Golden Visa insights, Lisbon property investment, Portugal market trends, Smith & Adams journal"/>
+<link rel="canonical" href="https://www.smithandadams.com/blog"/>
+<meta property="og:title" content="The Journal | Smith &amp; Adams"/>
+<meta property="og:description" content="Insights on Portugal Golden Visa, prime real estate investment, lifestyle and market trends."/>
+<meta property="og:url" content="https://www.smithandadams.com/blog"/>
+<meta property="og:type" content="website"/>
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { corePlugins: { preflight: false } }</script>
+<link rel="stylesheet" href="/redesign.css">
+<style>
+  .geist{font-family:var(--sans);}
+  .satoshi{font-family:var(--sans);}
+  .playfair{font-family:var(--serif);}
 
-  <style>
-    body { font-family: 'Satoshi', sans-serif; margin: 0; padding: 0; overflow-x: hidden; background-color: #FDFCF9;}
-    .geist { font-family: 'Geist', sans-serif; }
-    .satoshi { font-family: 'Satoshi', sans-serif; }
+  /* Hero — dark band so the shared nav sits transparent/white over it,
+     matching every other page. */
+  .journal-hero{ background:var(--navy); color:#fff; text-align:center; padding:clamp(128px,22vh,232px) var(--mx) clamp(56px,9vw,104px); }
+  .journal-title{ font-family:var(--serif); font-weight:500; color:#fff; font-size:clamp(44px,7vw,96px); letter-spacing:-0.02em; line-height:1.02; margin:0; }
+  .journal-subtitle{ font-family:var(--sans); color:var(--stone); font-weight:300; font-size:clamp(15px,1.5vw,20px); line-height:1.6; max-width:62ch; margin:22px auto 0; }
 
-    /* Editorial Theme Variables */
-    :root {
-      --dark: #0C1E28;
-      --light: #FDFCF9;
-      --accent: #466DEE;
-      --grey: #484848;
-    }
+  .blog-body{ max-width:1360px; margin:0 auto; padding:clamp(56px,8vw,110px) var(--mx); }
 
-    /* Hero Section */
-    .journal-hero {
-      background-color: var(--dark);
-      color: white;
-      padding: 180px 4% 180px;
-      position: relative;
-    }
-    .journal-title {
-      font-size: clamp(48px, 8vw, 110px);
-      font-weight: 700;
-      line-height: 1;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      text-align: center;
-    }
-    .journal-subtitle {
-      font-size: 18px;
-      line-height: 1.6;
-      color: #9ab4c2;
-      max-width: 600px;
-      margin: 0 auto;
-      text-align: center;
-    }
+  .spinner{ width:34px; height:34px; border:3px solid var(--line); border-top-color:var(--navy); border-radius:50%; animation:blogspin .8s linear infinite; display:inline-block; }
+  @keyframes blogspin{ to{ transform:rotate(360deg); } }
 
-    /* Featured Article Split */
-    .featured-article {
-      max-width: 1400px;
-      margin: -100px auto 100px;
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      display: flex;
-      flex-wrap: wrap;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.06);
-      position: relative;
-      z-index: 10;
-    }
-    .featured-img-wrap {
-      flex: 1.2;
-      min-width: 320px;
-      position: relative;
-      overflow: hidden;
-    }
-    .featured-img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      min-height: 480px;
-      object-fit: cover;
-      object-position: center;
-      transition: transform 0.7s ease;
-      margin: 0;
-      padding: 0;
-    }
-    .featured-article:hover .featured-img {
-      transform: scale(1.05);
-    }
-    .featured-content {
-      flex: 1;
-      min-width: 320px;
-      padding: 80px 8%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: #FDFCF9;
-    }
-    .c-pill {
-      display: inline-block;
-      padding: 6px 16px;
-      border: 1px solid var(--dark);
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--dark);
-      margin-bottom: 24px;
-      width: fit-content;
-    }
-    .featured-title {
-      font-size: clamp(28px, 3vw, 42px);
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.1;
-      margin-bottom: 20px;
-      text-decoration: none;
-    }
-    .featured-title a { color: inherit; text-decoration: none; transition: color 0.3s; }
-    .featured-title a:hover { color: #5a7485; }
-    .featured-excerpt {
-      font-size: 16px;
-      color: var(--grey);
-      line-height: 1.6;
-      margin-bottom: 40px;
-    }
-    .read-more {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--dark);
-      text-decoration: none;
-      transition: gap 0.3s ease;
-    }
-    .featured-article:hover .read-more { gap: 16px; }
+  /* Featured */
+  .featured-article{ display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(28px,4vw,56px); align-items:center; margin-bottom:clamp(20px,3vw,32px); }
+  .featured-img-wrap{ overflow:hidden; border-radius:3px; }
+  .featured-img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+  .featured-content{ min-width:0; }
+  .c-pill{ display:inline-block; font-family:var(--sans); font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--slate); font-weight:600; margin-bottom:14px; }
+  .article-meta{ font-family:var(--sans); font-size:12.5px; color:var(--slate); letter-spacing:0.04em; display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .article-meta .text-gray-400{ color:var(--stone); }
+  .featured-title{ font-family:var(--serif); font-weight:500; color:var(--navy); font-size:clamp(26px,3.2vw,46px); line-height:1.1; letter-spacing:-0.01em; margin:14px 0 16px; }
+  .featured-title a{ color:inherit; text-decoration:none; }
+  .featured-title a:hover{ color:var(--slate); }
+  .featured-excerpt{ font-family:var(--sans); font-size:16px; line-height:1.75; color:var(--ink); margin:0 0 24px; max-width:54ch; }
+  .read-more{ display:inline-flex; align-items:center; gap:8px; font-family:var(--sans); font-weight:600; font-size:14px; color:var(--navy); text-decoration:none; }
+  .read-more svg{ transition:transform .4s var(--ease-expo); }
+  .read-more:hover svg{ transform:translateX(5px); }
 
-    /* Category Filters */
-    .filters-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 80px;
-      padding: 0 4%;
-    }
-    .filter-btn {
-      padding: 12px 28px;
-      border-radius: 100px;
-      border: 1px solid rgba(12,30,40,0.15);
-      background: transparent;
-      color: var(--dark);
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--dark);
-      color: white;
-      border-color: var(--dark);
-      box-shadow: 0 10px 20px rgba(12,30,40,0.1);
-      transform: translateY(-2px);
-    }
+  /* Filters */
+  .filters-wrap{ display:flex; gap:10px; flex-wrap:wrap; margin:clamp(36px,5vw,64px) 0 clamp(28px,4vw,44px); border-top:1px solid var(--line); padding-top:clamp(28px,4vw,44px); }
+  .filter-btn{ font-family:var(--sans); font-size:13px; font-weight:500; color:var(--slate); background:transparent; border:1px solid var(--line); border-radius:999px; padding:9px 18px; cursor:pointer; transition:all .2s ease; }
+  .filter-btn:hover{ border-color:var(--navy); color:var(--navy); }
+  .filter-btn.active{ background:var(--navy); color:#fff; border-color:var(--navy); }
 
-    /* Standard Article Grid */
-    .articles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 80px 40px;
-      max-width: 1400px;
-      margin: 0 auto 120px;
-      padding: 0 4%;
-    }
-    .article-card {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-    }
-    .article-img-wrap {
-      width: 100%;
-      aspect-ratio: 4/3;
-      overflow: hidden;
-      border-radius: 12px;
-      margin-bottom: 24px;
-    }
-    .article-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease;
-    }
-    .article-card:hover .article-img {
-      transform: scale(1.05);
-    }
-    .article-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #9ab4c2;
-      margin-bottom: 16px;
-    }
-    .article-category { color: var(--dark); }
-    .article-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.3;
-      margin-bottom: 16px;
-      transition: color 0.3s;
-    }
-    .article-card:hover .article-title { color: #5a7485; }
-    .article-excerpt {
-      font-size: 15px;
-      color: var(--grey);
-      line-height: 1.6;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    
-    /* Loader & CTA Banner */
-    .cta-banner { max-width: 1400px; margin: 0 auto 120px; padding: 0 4%; }
-    .cta-inner { background: var(--dark); border-radius: 24px; padding: 100px 8%; text-align: center; color: white; }
-    .btn-white { display: inline-block; background: white; color: var(--dark); font-weight: 700; padding: 18px 40px; border-radius: 40px; margin-top: 40px; text-decoration: none; transition: all 0.3s; }
-    .btn-white:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    
-    .spinner { border: 4px solid rgba(12, 30, 40, 0.1); width: 40px; height: 40px; border-radius: 50%; border-left-color: #0C1E28; animation: spin 1s linear infinite; margin: 0 auto; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  /* Grid */
+  .articles-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:clamp(28px,3vw,48px); }
+  .article-card{ display:block; text-decoration:none; color:inherit; }
+  .article-img-wrap{ overflow:hidden; border-radius:3px; margin-bottom:16px; }
+  .article-img{ width:100%; aspect-ratio:3/2; object-fit:cover; display:block; transition:transform .5s var(--ease-expo); }
+  .article-card:hover .article-img{ transform:scale(1.04); }
+  .article-card .article-category{ color:var(--navy); font-weight:600; }
+  .article-title{ font-family:var(--serif); font-weight:500; color:var(--navy); font-size:clamp(19px,1.6vw,24px); line-height:1.25; letter-spacing:-0.01em; margin:12px 0 10px; }
+  .article-excerpt{ font-family:var(--sans); font-size:14.5px; line-height:1.7; color:var(--ink); margin:0; }
 
-    @media (max-width: 768px) {
-      .journal-title { font-size: 48px; }
-      .featured-article { margin-top: 40px; box-shadow: none; border-radius: 0;}
-      .featured-img { min-height: 300px; }
-      .c-pill, .read-more { font-size: 10px; }
-      .articles-grid { gap: 60px 20px; grid-template-columns: 1fr; }
-    }
-  </style>
+  /* Hidden state (Tailwind provides .hidden; make sure it beats the grid displays) */
+  .featured-article.hidden, .articles-grid.hidden{ display:none; }
 
-  <script defer src="/_vercel/insights/script.js"></script>
-<!-- Google tag (gtag.js) -->
+  /* CTA */
+  .cta-banner{ background:var(--navy); }
+  .cta-inner{ max-width:900px; margin:0 auto; text-align:center; padding:clamp(72px,11vw,160px) var(--mx); }
+  .cta-inner h2{ font-family:var(--serif); font-weight:500; color:#fff; font-size:clamp(30px,4.6vw,60px); line-height:1.05; letter-spacing:-0.01em; margin:0 0 20px; }
+  .cta-inner p{ font-family:var(--sans); color:var(--stone); }
+  .btn-white{ display:inline-block; background:#fff; color:var(--navy); font-family:var(--sans); font-weight:600; font-size:14px; letter-spacing:0.02em; padding:16px 32px; border-radius:2px; text-decoration:none; transition:transform .5s var(--ease-expo), background .3s ease; }
+  .btn-white:hover{ transform:translateY(-2px); background:#f0ede8; }
+
+  @media (max-width:820px){ .featured-article{ grid-template-columns:1fr; } }
+</style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-18073134136');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18073134136');</script>
 <script defer src="/cms-loader.js"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.smithandadams.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.smithandadams.com/blog"}]}</script></head>
-<body class="overflow-x-hidden w-full">
-  <!-- Header -->
-  <header class="fixed w-full z-50 transition-all duration-300 bg-[#0C1E28]">
-            <div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center"><a
-                    class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" class="h-10 w-auto invert"
-                        data-nimg="1" decoding="async" height="40" loading="lazy" src="./logo.png"
-                        srcset="./logo.png 2x" style="color:transparent" width="150" /></a>
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <div class="relative group"><a
-                            class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi"
-                            href="index.html">Home</a><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
-                    </div>
-                    <div class="relative group"><a
-                            class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi"
-                            href="about.html">About Us</a><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
-                    </div>
-                    <div class="relative group"><a
-                            class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi"
-                            href="property-management.html">Property Management</a><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
-                    </div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="our-developments.html">Our Developments</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
-                    <div class="relative group"><a
-                            class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi"
-                            href="urban-collection.html">Urban Collection</a><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
-                    </div>
-                    <div class="relative group"><a
-                            class="text-white transition-colors duration-300 font-satoshi font-medium satoshi"
-                            href="blog.html">Blog<span
-                                class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></span></a><span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
-                    </div>
-                    <div><a class="bg-white text-[#0C1E28] px-6 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300 satoshi font-medium"
-                            href="contact.html">Contact Us</a></div>
-                </nav><button onclick="document.getElementById('mobile-menu').classList.toggle('opacity-0'); document.getElementById('mobile-menu').classList.toggle('opacity-100'); document.getElementById('mobile-menu').classList.toggle('invisible'); document.getElementById('mobile-menu').classList.toggle('pointer-events-none');" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none">
-                    <div class="w-6 flex flex-col justify-between items-end"><span
-                            class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span><span
-                            class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span><span
-                            class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span></div>
-                </button>
-            </div>
-            <div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none"
-                style="height:100vh">
-                <div class="flex flex-col items-center justify-center h-full space-y-8"><a
-                        class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
-                        href="index.html">Home</a><a
-                        class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
-                        href="about.html">About Us</a><a
-                        class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
-                        href="property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="our-developments.html">Our Developments</a><a
-                        class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi"
-                        href="urban-collection.html">Urban Collection</a><a
-                        class="text-2xl font-medium transition-colors duration-300 text-white font-semibold satoshi"
-                        href="blog.html">Blog</a><a
-                        class="bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi"
-                        href="contact.html">Contact Us</a></div>
-            </div>
-        </header>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.smithandadams.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.smithandadams.com/blog"}]}</script>
+</head>
+<body class="antialiased bg-[#FDFCF9] overflow-x-hidden w-full rd rd-dark-hero">
+<main class="min-h-screen">
 
-  <!-- Hero Section -->
-  <section class="journal-hero">
-    <h1 data-cms="blog.hero.title" class="geist journal-title">The Journal</h1>
-    <p data-cms="blog.hero.subtitle" data-cms-attr="html" class="satoshi journal-subtitle">Stay updated with the latest insights on Portugal Golden Visa, prime real estate investment, lifestyle, and market trends.</p>
-  </section>
+<header class="rd-nav fixed w-full z-50 transition-all duration-300"><div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center"><a class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" loading="lazy" width="150" height="40" decoding="async" data-nimg="1" class="h-10 w-auto invert-[1]" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></a><nav class="hidden lg:flex items-center space-x-8"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="index.html">Home</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="about.html">About Us</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="property-management.html">Property Management</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="real-estate.html">Real Estate</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="our-developments.html">Our Developments</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi font-semibold text-white satoshi" href="blog.html">Blog</a><div class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></div><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 transform hover:-translate-y-0.5 satoshi" href="contact.html">Contact Us</a></div></nav><button onclick="var m=document.getElementById('mobile-menu');['opacity-0','opacity-100','invisible','pointer-events-none'].forEach(function(c){m.classList.toggle(c);});" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span></div></button></div><div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none" style="height:100vh"><div class="flex flex-col items-center justify-center h-full space-y-8"><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="index.html">Home</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="about.html">About Us</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="real-estate.html">Real Estate</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="our-developments.html">Our Developments</a><a class="text-2xl font-medium transition-colors duration-300 text-white font-semibold satoshi" href="blog.html">Blog</a><a class="bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi" href="contact.html">Contact Us</a></div></div></header>
 
-  <main>
-    <div id="blog-loader" class="text-center py-32"><div class="spinner"></div></div>
+<!-- Hero -->
+<section class="journal-hero">
+  <p class="rd-label" style="color:rgba(255,255,255,0.55); margin:0 0 20px;">Smith &amp; Adams · Journal</p>
+  <h1 data-cms="blog.hero.title" class="journal-title">The Journal</h1>
+  <p data-cms="blog.hero.subtitle" data-cms-attr="html" class="journal-subtitle">Stay updated with the latest insights on Portugal Golden Visa, prime real estate investment, lifestyle, and market trends.</p>
+</section>
 
-    <!-- Featured Article Split -->
-    <article id="featured-article" class="featured-article hidden">
-      <div class="featured-img-wrap"><img id="feat-img" src="" alt="Featured" class="featured-img"></div>
-      <div class="featured-content">
-        <span id="feat-category" class="c-pill satoshi">Category</span>
-        <div class="article-meta mb-4" style="margin-top:-10px;">
-          <span id="feat-date">Date</span> <span class="text-gray-400">•</span> <span id="feat-read">Read Time</span>
-        </div>
-        <h2 id="feat-title" class="geist featured-title"><a id="feat-link" href="#">Title</a></h2>
-        <p id="feat-excerpt" class="satoshi featured-excerpt">Excerpt</p>
-        <a id="feat-link-btn" href="#" class="read-more">Read Full Article <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
+<div class="blog-body">
+  <div id="blog-loader" class="text-center py-32"><div class="spinner"></div></div>
+
+  <!-- Featured Article Split -->
+  <article id="featured-article" class="featured-article hidden">
+    <div class="featured-img-wrap"><img id="feat-img" src="" alt="Featured" class="featured-img"></div>
+    <div class="featured-content">
+      <span id="feat-category" class="c-pill satoshi">Category</span>
+      <div class="article-meta mb-4" style="margin-top:-6px;">
+        <span id="feat-date">Date</span> <span class="text-gray-400">•</span> <span id="feat-read">Read Time</span>
       </div>
-    </article>
-
-    <!-- Filters -->
-    <div class="filters-wrap" id="filters-wrap">
-      <button class="filter-btn active" onclick="filterPosts('All Topics', this)">All Topics</button>
-      <button class="filter-btn" onclick="filterPosts('Marketing', this)">Marketing</button>
-      <button class="filter-btn" onclick="filterPosts('Real Estate', this)">Real Estate</button>
-      <button class="filter-btn" onclick="filterPosts('Investment', this)">Investment</button>
-      <button class="filter-btn" onclick="filterPosts('Lifestyle', this)">Lifestyle</button>
-      <button class="filter-btn" onclick="filterPosts('Portugal', this)">Portugal</button>
+      <h2 id="feat-title" class="geist featured-title"><a id="feat-link" href="#">Title</a></h2>
+      <p id="feat-excerpt" class="satoshi featured-excerpt">Excerpt</p>
+      <a id="feat-link-btn" href="#" class="read-more">Read Full Article <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg></a>
     </div>
+  </article>
 
-    <!-- Editorial Grid -->
-    <section id="articles-grid" class="articles-grid hidden"></section>
+  <!-- Filters -->
+  <div class="filters-wrap" id="filters-wrap">
+    <button class="filter-btn active" onclick="filterPosts('All Topics', this)">All Topics</button>
+    <button class="filter-btn" onclick="filterPosts('Marketing', this)">Marketing</button>
+    <button class="filter-btn" onclick="filterPosts('Real Estate', this)">Real Estate</button>
+    <button class="filter-btn" onclick="filterPosts('Investment', this)">Investment</button>
+    <button class="filter-btn" onclick="filterPosts('Lifestyle', this)">Lifestyle</button>
+    <button class="filter-btn" onclick="filterPosts('Portugal', this)">Portugal</button>
+  </div>
 
-    <!-- CTA Module -->
-    <section class="cta-banner">
-      <div class="cta-inner">
-        <h2 data-cms="blog.cta.title" class="geist text-4xl md:text-5xl font-bold mb-6">Ready to grow your capital?</h2>
-        <p data-cms="blog.cta.body" data-cms-attr="html" class="satoshi text-lg text-gray-300 max-w-2xl mx-auto mb-8">Discover how a €280,000 investment in Lisbon real estate can elevate your portfolio, with predictable income, strong appreciation potential, and long-term security.</p>
-        <a data-cms="blog.cta.url" href="contact.html" class="satoshi btn-white"><span data-cms="blog.cta.label">LET'S GET STARTED</span></a>
-      </div>
-    </section>
-  </main>
+  <!-- Editorial Grid -->
+  <section id="articles-grid" class="articles-grid hidden"></section>
+</div>
 
-  <footer class="w-full py-12 md:py-16 bg-[#0C1E28]">
-            <div class="container mx-auto px-4 md:px-6 max-w-7xl">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
-                    <div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html">
-                            <div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" class="invert"
-                                    data-nimg="1" decoding="async" height="32" loading="lazy" src="./logo.png"
-                                    srcset="./logo.png 2x" style="color:transparent" width="160" /></div>
-                        </a>
-                        <p data-cms="global.footer.description" data-cms-attr="html" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams is an independent real estate investment advisory firm in Portugal, helping international investors and Residency Investors build euro-denominated portfolios with secure, transparent returns.</p>
-                        <div class="flex gap-4 mt-6"><a
-                                data-cms="global.social.instagram" class="w-8 h-8 flex items-center justify-center transition-all duration-300"
-                                href="https://www.instagram.com/smithandadamsgroup/" target="_blank"><svg
-                                    aria-hidden="true" class="lucide lucide-instagram text-white hover:text-gray-300"
-                                    fill="none" height="18" stroke="currentColor" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
-                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                                </svg></a><a
-                                data-cms="global.social.linkedin" class="w-8 h-8 flex items-center justify-center transition-all duration-300"
-                                href="https://www.linkedin.com/company/smith-and-adams/" target="_blank"><svg
-                                    aria-hidden="true" class="lucide lucide-linkedin text-white hover:text-gray-300"
-                                    fill="none" height="18" stroke="currentColor" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
-                                    </path>
-                                    <rect height="12" width="4" x="2" y="9"></rect>
-                                    <circle cx="4" cy="4" r="2"></circle>
-                                </svg></a><a
-                                data-cms="global.social.youtube" class="w-8 h-8 flex items-center justify-center transition-all duration-300"
-                                href="https://www.youtube.com/@smithandadamsgroup" target="_blank"><svg
-                                    aria-hidden="true" class="lucide lucide-youtube text-white hover:text-gray-300"
-                                    fill="none" height="18" stroke="currentColor" stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17">
-                                    </path>
-                                    <path d="m10 15 5-3-5-3z"></path>
-                                </svg></a></div>
-                    </div>
-                    <div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0">
-                        <div class="flex flex-col">
-                            <h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4>
-                            <ul class="list-none mt-4 space-y-3">
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="index.html">Home</a></li>
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="invest-in-portugal.html">Invest in Portugal</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="our-developments.html">Our Developments</a></li>
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="urban-collection.html">Urban Collection</a></li>
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="blog.html">Blogs</a></li>
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="about.html">About</a></li>
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="terms.html">Terms &amp; Conditions</a></li>
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="privacy.html">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                        <div class="flex flex-col">
-                            <h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4>
-                            <ul class="list-none mt-4 space-y-3">
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="contact.html">Contact Us</a></li>
-                                <li class="font-normal satoshi text-[15px] text-gray-300"><a
-                                        data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li>
-                                <li class="font-normal satoshi text-[15px] text-gray-300"><a
-                                        data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li>
-                                <li
-                                    class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer">
-                                    <a href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer"
-                                        target="_blank">Get Directions</a></li>
-                            </ul>
-                        </div>
-                        <div class="flex flex-col col-span-2">
-                            <div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center">
-                                <h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4" data-cms="global.footer.office_title" data-cms-attr="html">Visit Our
-                                    Office</h4>
-                                <p class="font-normal satoshi text-[15px] text-gray-300 mb-4" data-cms="global.footer.office_description" data-cms-attr="html">Located in the heart of
-                                    Lisbon, our office is easily accessible and ready to welcome you.</p><a data-cms="global.footer.office_cta_url" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center" href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer" target="_blank"><span data-cms="global.footer.office_cta_label">Get Directions</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12">
-                    <p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith
-                        &amp; Adams</p>
-                    <p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a
-                            class="text-gray-300 hover:text-white ml-1" href="terms.html">Terms and Conditions</a> |<a
-                            class="text-gray-300 hover:text-white ml-1" href="privacy.html">Privacy Policy</a></p>
-                </div>
-            </div>
-        </footer>
+<!-- CTA Module -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <h2 data-cms="blog.cta.title" class="geist">Ready to grow your capital?</h2>
+    <p data-cms="blog.cta.body" data-cms-attr="html" class="satoshi" style="font-size:clamp(15px,1.3vw,18px); line-height:1.7; max-width:52ch; margin:0 auto 28px;">Discover how a €280,000 investment in Lisbon real estate can elevate your portfolio, with predictable income, strong appreciation potential, and long-term security.</p>
+    <a data-cms="blog.cta.url" href="contact.html" class="satoshi btn-white"><span data-cms="blog.cta.label">Let's get started</span></a>
+  </div>
+</section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
+<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p data-cms="global.footer.description" data-cms-attr="html" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams is an independent real estate investment advisory firm in Portugal, helping international investors and Residency Investors build euro-denominated portfolios with secure, transparent returns.</p><div class="flex gap-4 mt-6"><a data-cms="global.social.instagram" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a data-cms="global.social.linkedin" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a data-cms="global.social.youtube" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="invest-in-portugal.html">Invest in Portugal</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="our-developments.html">Our Developments</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="urban-collection.html">Urban Collection</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4" data-cms="global.footer.office_title" data-cms-attr="html">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4" data-cms="global.footer.office_description" data-cms-attr="html">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a data-cms="global.footer.office_cta_url" href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer" target="_blank" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center"><span data-cms="global.footer.office_cta_label">Get Directions</span></a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="terms.html">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="privacy.html">Privacy Policy</a></p></div></div></footer>
+
+</main>
+    <script id="header-scroll-script">
+        document.addEventListener('DOMContentLoaded', function () {
+            const header = document.querySelector('header');
+            if (!header) return;
+            const container = header.querySelector('.container');
+            function apply(){
+                if (window.scrollY > 50) { header.classList.add('shadow-sm'); if (container){ container.classList.remove('py-6','md:py-6'); container.classList.add('py-4','md:py-4'); } }
+                else { header.classList.remove('shadow-sm'); if (container){ container.classList.remove('py-4','md:py-4'); container.classList.add('py-6','md:py-6'); } }
+            }
+            apply(); window.addEventListener('scroll', apply);
+        });
+    </script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+<script defer src="/redesign.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
     const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
-    
+
     // i18n: pega title/excerpt/content traduzidos quando disponíveis. Fallback EN.
     function pickPostText(post, field) {
         const locale = (localStorage.getItem('cmsLocale') || 'en');
@@ -520,15 +173,15 @@
             const { data, error } = await supabaseClient.from('posts').select('*').order('created_at', { ascending: false });
             if (error) return console.error(error);
             allPosts = data;
-            
+
             document.getElementById('blog-loader').classList.add('hidden');
             renderPosts(allPosts);
         }
-        
+
         window.filterPosts = function(category, element) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             if(element) element.classList.add('active');
-            
+
             if (category === 'All Topics') renderPosts(allPosts);
             else renderPosts(allPosts.filter(p => (p.category || '').toLowerCase() === category.toLowerCase()));
         }
@@ -558,11 +211,11 @@
             const grid = document.getElementById('articles-grid');
             grid.innerHTML = '';
             grid.classList.remove('hidden');
-            
+
             posts.slice(1).forEach(post => {
                 let img = post.image_url;
                 if(img && !img.startsWith('http') && img.startsWith('.')) img = img.substring(1);
-                
+
                 const a = document.createElement('a');
                 a.href = `/blog/${post.slug}`;
                 a.className = "article-card";
@@ -578,7 +231,6 @@
 
         fetchPosts();
     });
-  </script>
+</script>
 <script src="/chat.js"></script>
-</body>
-</html>
+</body></html>
