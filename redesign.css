@@ -43,8 +43,16 @@
 
   /* ---------- HERO ---------- */
   .rd-hero { position:relative; min-height:100svh; display:flex; align-items:flex-end; overflow:hidden; background:var(--navy); }
-  .rd-hero__media { position:absolute; inset:-16% 0 -16% 0; z-index:0; }
-  .rd-hero__media img { width:100%; height:100%; object-fit:cover; display:block; }
+  /* Full bleed by default. The -16% overscan only exists to give the parallax
+     room to travel, and no hero currently uses it - so every hero was cropping
+     32% of its image or video for a movement that never runs. Opt in with
+     data-parallax on the media element. */
+  .rd-hero__media { position:absolute; inset:0; z-index:0; }
+  .rd-hero__media[data-parallax] { inset:-16% 0; }
+  /* video as well as img: the Real Estate hero is a <video>, and with only the
+     img selector it fell back to its intrinsic 1280x720 inside a 1440-wide
+     container - filling part of the header and letterboxing the rest. */
+  .rd-hero__media img, .rd-hero__media video { width:100%; height:100%; object-fit:cover; display:block; }
   .rd-hero__scrim { position:absolute; inset:0; z-index:1;
     background:linear-gradient(90deg, rgba(17,34,45,0.58) 0%, rgba(17,34,45,0) 56%),
                linear-gradient(180deg, rgba(17,34,45,0.30) 0%, rgba(17,34,45,0.08) 42%, rgba(17,34,45,0.80) 100%); }
@@ -133,7 +141,7 @@
   /* ---------- asset (one asset, location + two figures) ---------- */
   .rd-asset { position:relative; min-height:92svh; display:flex; align-items:flex-end; overflow:hidden; background:var(--navy); }
   .rd-asset__media { position:absolute; inset:-16% 0 -16% 0; z-index:0; }
-  .rd-asset__media img { width:100%; height:100%; object-fit:cover; display:block; }
+  .rd-asset__media img, .rd-asset__media video { width:100%; height:100%; object-fit:cover; display:block; }
   .rd-asset__scrim { position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(17,34,45,0.15) 30%, rgba(17,34,45,0.8) 100%); }
   .rd-asset__plate { position:relative; z-index:2; width:100%; padding-bottom:clamp(40px,7vh,88px); }
   .rd-asset__plate h2 { font-family:var(--serif); font-weight:500; color:#fff; font-size:clamp(30px,4.4vw,64px); line-height:1.05; margin:0; max-width:16ch; }
@@ -262,7 +270,7 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 .rd-slide { position:relative; flex:0 0 100%; scroll-snap-align:start;
   min-height:92svh; display:flex; align-items:flex-end; overflow:hidden; background:var(--navy); }
 .rd-slide__media { position:absolute; inset:0; z-index:0; }
-.rd-slide__media img { width:100%; height:100%; object-fit:cover; display:block; }
+.rd-slide__media img, .rd-slide__media video { width:100%; height:100%; object-fit:cover; display:block; }
 /* Brand Book p24: type on an image goes on a navy scrim or a white plate,
    never directly on texture. These are bright interiors, so a gradient over
    the whole frame neither reads nor complies — the type sits on a plate and
