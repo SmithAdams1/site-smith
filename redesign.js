@@ -1,4 +1,16 @@
 (function () {
+      // ---- Nav: transparent over a dark hero, solid on scroll (runs always, even under reduced motion) ----
+      (function () {
+        var nav = document.querySelector('.rd-nav');
+        if (!nav) return;
+        var onScroll = function () {
+          if ((window.scrollY || window.pageYOffset) > 40) nav.classList.add('rd-nav--solid');
+          else nav.classList.remove('rd-nav--solid');
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      })();
+
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasGsap = window.gsap && window.ScrollTrigger;
       if (reduce || !hasGsap) return; // content stays in its visible baseline state
