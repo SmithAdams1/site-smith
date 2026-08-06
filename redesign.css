@@ -14,14 +14,18 @@
      indents, underlined links, 13px buttons - so those two pages diverged from
      the four that still load it. Scoped to .rd so admin/ and studio/ are
      untouched. On pages that DO load the legacy sheet this is a no-op, because
-     it resets the same properties to the same values. */
-  body.rd { margin:0; }
-  .rd *, .rd *::before, .rd *::after { box-sizing:border-box; }
-  .rd h1, .rd h2, .rd h3, .rd h4, .rd h5, .rd h6,
-  .rd p, .rd figure, .rd blockquote, .rd dl, .rd dd { margin:0; }
-  .rd ul, .rd ol { margin:0; padding:0; list-style:none; }
-  .rd a { text-decoration:none; }
-  .rd button { font:inherit; }
+     it resets the same properties to the same values.
+     Written with :where(), which has zero specificity, so ANY component rule
+     wins over it. Without that, `.rd h2` (0,1,1) outranks a single-class rule
+     like `.form-title` (0,1,0) and silently flattens its margins - which is
+     exactly what happened on the contact page.
+  */
+  :where(body.rd) { margin:0; }
+  :where(.rd) :where(*, *::before, *::after) { box-sizing:border-box; }
+  :where(.rd) :where(h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) { margin:0; }
+  :where(.rd) :where(ul, ol) { margin:0; padding:0; list-style:none; }
+  :where(.rd) :where(a) { text-decoration:none; }
+  :where(.rd) :where(button) { font:inherit; }
 
   .rd { font-family:var(--sans); color:var(--ink); background:var(--paper); }
   .rd ::selection { background:var(--navy); color:#fff; }

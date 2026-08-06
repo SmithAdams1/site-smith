@@ -54,247 +54,74 @@
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&display=swap" rel="stylesheet"/>
 
   <style>
-    body { font-family: 'Satoshi', sans-serif; margin: 0; padding: 0; overflow-x: hidden; background-color: #FDFCF9; }
-    .geist { font-family: 'Geist', sans-serif; }
-    .satoshi { font-family: 'Satoshi', sans-serif; }
-    
-    /* Split Layout */
-    .split-layout {
-      display: flex;
-      flex-wrap: wrap;
-      min-height: 100vh;
-      width: 100%;
-    }
-    
-    .panel-dark {
-      background-color: #0C1E28;
-      color: white;
-      flex: 1;
-      min-width: 320px;
-      padding: 180px 8% 100px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    
-    .panel-light {
-      background-color: #FDFCF9;
-      flex: 1.2;
-      min-width: 360px;
-      padding: 180px 8% 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+  /* Contact, in the redesign system. The structure is untouched: the form is
+     20KB of markup whose ids the submit handler depends on, so this restyles it
+     rather than rebuilding it. Tokens come from redesign.css. */
+  .geist   { font-family: var(--serif); }
+  .satoshi { font-family: var(--sans); }
 
-    /* Dark Panel Aesthetics */
-    .circle-deco {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 70%);
-      top: -100px;
-      right: -200px;
-      z-index: 0;
-    }
-    .panel-dark-content { position: relative; z-index: 10; }
-    
-    .contact-title {
-      font-size: clamp(40px, 6vw, 76px);
-      font-weight: 700;
-      line-height: 1.05;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-      letter-spacing: -0.02em;
-    }
-    .contact-subtitle {
-      color: #9ab4c2;
-      font-size: 18px;
-      line-height: 1.6;
-      margin-bottom: 60px;
-      max-width: 440px;
-    }
-    
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 40px;
-      transition: transform 0.3s ease;
-    }
-    .info-icon {
-      width: 54px;
-      height: 54px;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 20px;
-      flex-shrink: 0;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .info-item:hover .info-icon {
-      background: white;
-      transform: scale(1.05);
-    }
-    .info-item:hover .info-icon svg { stroke: #0C1E28; }
-    
-    .info-label {
-      font-size: 12px;
-      color: #9ab4c2;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-    .info-val {
-      font-size: 20px;
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    .info-val:hover { color: #e5e5e5; }
-    
-    /* Form Aesthetics */
-    .form-title {
-      font-size: 32px; 
-      font-weight: 700; 
-      color: #0C1E28; 
-      margin-top: 0; 
-      margin-bottom: 40px; 
-      text-transform: uppercase;
-      letter-spacing: -0.01em;
-    }
-    .c-form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-    .c-input-group { display: flex; flex-direction: column; }
-    .c-input-group.full { grid-column: 1 / -1; margin-bottom: 30px; }
-    
-    .c-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #0C1E28;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .c-input {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid rgba(12,30,40,0.15);
-      padding: 16px 0;
-      font-size: 16px;
-      font-family: inherit;
-      color: #0C1E28;
-      transition: border-color 0.3s, padding-left 0.3s;
-    }
-    .c-input:focus {
-      outline: none;
-      border-bottom-color: #0C1E28;
-      border-bottom-width: 2px;
-    }
-    .c-input::placeholder { color: rgba(12,30,40,0.3); }
-    
-    .c-btn {
-      background: #0C1E28;
-      color: white;
-      border: none;
-      border-radius: 40px;
-      padding: 18px 40px;
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: all 0.3s ease;
-      width: fit-content;
-    }
-    .c-btn:hover {
-      background: #153242;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(12,30,40,0.15);
-    }
+  .split-layout { display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);
+    min-height:100svh; }
+  .panel-dark  { background:var(--navy); color:#fff; display:flex; align-items:center;
+    padding:clamp(104px,14vh,168px) clamp(24px,5vw,72px) clamp(56px,8vh,96px); }
+  .panel-light { background:var(--paper);
+    padding:clamp(104px,14vh,168px) clamp(24px,5vw,72px) clamp(56px,8vh,96px); }
+  .circle-deco { display:none; }          /* decorative blob; not in the brand idiom */
+  .panel-dark-content { width:100%; max-width:520px; }
 
-    /* Phone field */
-    .phone-wrapper {
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid rgba(12,30,40,0.15);
-      transition: border-color 0.3s;
-    }
-    .phone-wrapper:focus-within {
-      border-bottom-color: #0C1E28;
-      border-bottom-width: 2px;
-    }
-    .phone-code-select {
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 16px 10px 16px 0;
-      font-size: 16px;
-      font-family: inherit;
-      color: #0C1E28;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-      width: auto;
-      flex-shrink: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230C1E28' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 6px center;
-      padding-right: 24px;
-    }
-    .phone-code-select option, .phone-code-select optgroup {
-      font-size: 14px;
-    }
-    .phone-number-input {
-      background: transparent;
-      border: none;
-      outline: none;
-      padding: 16px 0 16px 10px;
-      font-size: 16px;
-      font-family: inherit;
-      color: #0C1E28;
-      flex: 1;
-      min-width: 0;
-    }
-    .phone-number-input::placeholder { color: rgba(12,30,40,0.3); }
-    .phone-divider {
-      width: 1px;
-      height: 20px;
-      background: rgba(12,30,40,0.15);
-      flex-shrink: 0;
-    }
+  .contact-title { font-family:var(--serif); font-weight:500; color:#fff;
+    font-size:clamp(40px,5.4vw,76px); line-height:1.02; letter-spacing:-0.015em; margin:0; }
+  .contact-subtitle { font-family:var(--sans); font-weight:300; color:var(--stone);
+    font-size:clamp(15px,1.4vw,18px); line-height:1.7; max-width:44ch; margin:22px 0 0; }
 
-    .map-wrapper {
-      width: 100%;
-      height: 400px;
-      margin-top: 60px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-      filter: grayscale(100%) sepia(20%) hue-rotate(180deg) brightness(95%) contrast(90%);
-      transition: filter 0.5s ease, box-shadow 0.3s ease;
-    }
-    .map-wrapper:hover {
-      filter: grayscale(0%) sepia(0%) brightness(100%) contrast(100%);
-      box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-    }
+  /* contact rows: hairline-separated, no cards, no icon chips */
+  .info-item { display:flex; gap:18px; align-items:flex-start;
+    padding:22px 0 0; margin-top:22px; border-top:1px solid rgba(255,255,255,0.16); }
+  .info-item.mt-8 { margin-top:clamp(36px,5vh,56px); }
+  .info-icon { flex-shrink:0; width:22px; opacity:.62; }
+  .info-label { font-size:11px; letter-spacing:0.24em; text-transform:uppercase;
+    color:rgba(255,255,255,0.55); margin-bottom:7px; }
+  .info-val { font-family:var(--sans); font-size:16px; color:#fff; text-decoration:none;
+    line-height:1.5; transition:opacity .2s ease; display:inline-block; }
+  .info-val:hover { opacity:.72; }
 
-    @media (max-width: 768px) {
-      .c-form-grid { grid-template-columns: 1fr; gap: 20px; }
-      .panel-dark, .panel-light { padding: 120px 20px 60px; }
-      .circle-deco { display: none; }
-    }
-  </style>
+  .form-title { font-family:var(--serif); font-weight:500; color:var(--navy);
+    font-size:clamp(26px,3vw,40px); line-height:1.1; letter-spacing:-0.01em;
+    margin:0 0 clamp(28px,4vh,44px); }
+
+  .c-form-grid { display:grid; grid-template-columns:1fr 1fr;
+    column-gap:clamp(20px,2.4vw,36px); row-gap:clamp(26px,3.2vh,38px); }
+  .c-input-group { display:flex; flex-direction:column; }
+  .c-input-group.full { grid-column:1 / -1; }
+  .c-label { font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--slate); margin-bottom:10px; font-family:var(--sans); }
+  .c-input { font-family:var(--sans); font-size:15.5px; color:var(--ink);
+    background:transparent; border:0; border-bottom:1px solid var(--line);
+    border-radius:0; padding:12px 2px; width:100%; transition:border-color .25s ease; }
+  .c-input:focus { outline:none; border-bottom-color:var(--navy); }
+  .c-input::placeholder { color:#a9b0b6; }
+  select.c-input { appearance:none; -webkit-appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236A7883' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat:no-repeat; background-position:right 2px center; background-size:10px; }
+  textarea.c-input { resize:vertical; min-height:120px; }
+
+  .c-btn { font-family:var(--sans); font-weight:600; font-size:15px; letter-spacing:0.01em;
+    background:var(--navy); color:#fff; border:0; border-radius:2px; padding:17px 36px;
+    cursor:pointer; transition:background .3s ease, transform .5s var(--ease-expo); }
+  .c-btn:hover:not(:disabled) { background:#1c3646; transform:translateY(-2px); }
+  .c-btn:disabled { opacity:.55; cursor:default; }
+  .c-btn:focus-visible { outline:2px solid var(--navy); outline-offset:3px; }
+
+  .map-wrapper { margin-top:clamp(40px,6vh,72px); height:clamp(240px,32vh,340px);
+    border:1px solid var(--line); overflow:hidden; }
+  .map-wrapper iframe { display:block; filter:grayscale(1) contrast(1.05); }
+
+  @media (max-width:900px){
+    .split-layout { grid-template-columns:1fr; min-height:0; }
+    .panel-dark { padding-top:clamp(120px,18vh,168px); }
+    .c-form-grid { grid-template-columns:1fr; }
+  }
+</style>
 
   <script defer src="/_vercel/insights/script.js"></script>
 
@@ -309,9 +136,10 @@
 
   gtag('config', 'AW-18073134136');
 </script>
+<link rel="stylesheet" href="/redesign.css">
 <script defer src="/cms-loader.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.smithandadams.com/"}, {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.smithandadams.com/contact"}]}</script></head>
-<body class="overflow-x-hidden w-full">
+<body class="overflow-x-hidden w-full rd">
 
   <!-- Header -->
   <style id="rd-nav-dd">
@@ -330,12 +158,12 @@
   font-size:15px;white-space:nowrap;transition:background .15s}
 .rd-dd__item:hover,.rd-dd__item:focus-visible{background:rgba(255,255,255,.1)}
 </style>
-<header class="fixed w-full z-50 transition-all duration-300 bg-white border-b border-gray-100 shadow-sm">
+<header class="rd-nav fixed w-full z-50 transition-all duration-300 bg-white border-b border-gray-100 shadow-sm">
     <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
       <a class="relative z-40" href="index.html">
         <img alt="Smith & Adams Logo" loading="eager" fetchpriority="high" width="150" height="40" class="h-10 w-auto" src="./logo.png"/>
       </a>
-      <nav class="hidden lg:flex items-center space-x-8" data-sa-rebuilt="1"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/index.html">Home</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/about.html">About Us</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/real-estate.html">Real Estate</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group rd-dd"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="#" onclick="return false;" aria-haspopup="true">Properties <span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a><div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="properties"><a class="satoshi rd-dd__item" href="/our-developments.html">Featured Opportunities</a><a class="satoshi rd-dd__item" href="/property-management.html">Property Management</a></div></div></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/blog.html">Blog</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">Contact Us</a></div><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:16px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></nav>
+      <nav class="hidden lg:flex items-center space-x-8" data-sa-rebuilt="1"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/index.html">Home</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/about.html">About Us</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/real-estate.html">Real Estate</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group rd-dd"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="#" onclick="return false;" aria-haspopup="true">Properties <span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a><div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="properties"><a class="satoshi rd-dd__item" href="/our-developments.html">Featured Opportunities</a><a class="satoshi rd-dd__item" href="/property-management.html">Property Management</a></div></div></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/blog.html">Blog</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">Contact Us</a></div><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:16px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></nav><button onclick="document.getElementById('mobile-menu').classList.toggle('opacity-0'); document.getElementById('mobile-menu').classList.toggle('opacity-100'); document.getElementById('mobile-menu').classList.toggle('invisible'); document.getElementById('mobile-menu').classList.toggle('pointer-events-none');" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span></div></button>
       <button class="lg:hidden relative z-50 focus:outline-none" aria-label="Toggle menu">
         <div class="w-6 flex flex-col justify-between items-end">
           <span class="block h-0.5 bg-[#0C1E28] transition-all duration-300 ease-out w-6"></span>
@@ -344,7 +172,7 @@
         </div>
       </button>
     </div>
-  </header>
+  <div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none" style="height:100vh"><div class="flex flex-col items-center justify-center h-full space-y-8"><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/index.html">Home</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/about.html">About Us</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/real-estate.html">Real Estate</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/our-developments.html">Featured Opportunities</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/blog.html">Blog</a><a class="bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi" href="/contact.html">Contact Us</a><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:0;margin-top:24px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></div></div></header>
 
   <main class="split-layout">
     <!-- Left Dark Panel -->
