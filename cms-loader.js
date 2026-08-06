@@ -165,45 +165,34 @@
   // ============================================================
 
   function makeSwitcher(currentLocale, theme) {
+    // Minimal text toggle: EN | PT. Colour inherits from the nav state
+    // (redesign.css overrides it for the scroll-aware header); a theme-based
+    // fallback colour keeps it visible on legacy pages too.
     const wrap = document.createElement('div');
     wrap.className = 'cms-lang-switcher';
-    wrap.style.cssText = 'display:inline-flex; align-items:center; margin-left:8px;';
+    const col = theme === 'dark' ? '#ffffff' : '#0C1E28';
+    wrap.style.cssText = 'display:inline-flex; align-items:center; gap:7px; margin-left:16px; font-family:inherit; color:' + col + ';';
 
-    const sel = document.createElement('select');
-    sel.setAttribute('aria-label', 'Language');
-    // theme === 'dark'  → header com fundo escuro (texto branco). Switcher fica BRANCO.
-    // theme === 'light' → header com fundo branco (texto escuro). Switcher fica AZUL.
-    const isDarkBg = theme === 'dark';
-    const bg     = isDarkBg ? '#ffffff' : '#0C1E28';
-    const fg     = isDarkBg ? '#0C1E28' : '#ffffff';
-    const stroke = isDarkBg ? '%230C1E28' : '%23ffffff';
-    sel.style.cssText = [
-      'appearance:none',
-      '-webkit-appearance:none',
-      `background-color:${bg}`,
-      `color:${fg}`,
-      'border:none',
-      'padding:6px 28px 6px 12px',
-      'border-radius:9999px',
-      'font-size:13px',
-      'font-weight:600',
-      'cursor:pointer',
-      'font-family:inherit',
-      "background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='" + stroke + "' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>\")",
-      'background-repeat:no-repeat',
-      'background-position:right 8px center',
-      'background-size:10px',
-    ].join(';');
-
-    sel.innerHTML = `
-      <option value="en" ${currentLocale==='en'?'selected':''}>🇬🇧 EN</option>
-      <option value="pt" ${currentLocale==='pt'?'selected':''}>🇧🇷 pt-BR</option>
-    `;
-    // Forçar a cor das options no mobile/desktop (background dropdown branco)
-    sel.querySelectorAll('option').forEach(o => { o.style.color = '#0C1E28'; o.style.background = '#ffffff'; });
-
-    sel.addEventListener('change', (e) => setLocale(e.target.value));
-    wrap.appendChild(sel);
+    const locs = [['en', 'EN'], ['pt', 'PT']];
+    locs.forEach(function (l, i) {
+      if (i) {
+        const sep = document.createElement('span');
+        sep.textContent = '|';
+        sep.style.cssText = 'opacity:.32; font-size:12px;';
+        wrap.appendChild(sep);
+      }
+      const active = currentLocale === l[0];
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = l[1];
+      b.setAttribute('aria-label', l[0] === 'en' ? 'English' : 'Português');
+      b.style.cssText = 'background:none; border:none; padding:2px 1px; cursor:pointer; font-family:inherit; font-size:13px; letter-spacing:.06em; color:inherit; transition:opacity .2s ease; ' +
+        (active ? 'opacity:1; font-weight:600;' : 'opacity:.55; font-weight:500;');
+      b.addEventListener('mouseenter', function () { if (!active) b.style.opacity = '0.85'; });
+      b.addEventListener('mouseleave', function () { if (!active) b.style.opacity = '0.55'; });
+      b.addEventListener('click', function () { if (!active) setLocale(l[0]); });
+      wrap.appendChild(b);
+    });
     return wrap;
   }
 

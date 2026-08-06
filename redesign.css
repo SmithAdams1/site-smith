@@ -149,8 +149,7 @@
 .rd-nav nav a.bg-white { background: var(--navy) !important; color: #fff !important; opacity: 1;
   border-radius: 2px !important; padding: 10px 24px !important; font-weight: 600 !important; }
 .rd-nav nav a.bg-white:hover { background: #1c3646 !important; }
-.rd-nav .cms-lang-switcher select { background: transparent; border: 1px solid rgba(17,34,45,.22) !important;
-  color: var(--navy) !important; border-radius: 2px; padding: 5px 8px; font-family: var(--sans); font-size: 13px; }
+.rd-nav .cms-lang-switcher { color: var(--navy) !important; }
 
 /* dark-hero pages: nav is transparent + white until the user scrolls */
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) { background: transparent !important; box-shadow: none;
@@ -160,4 +159,4 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) nav a:hover { opacity: 1; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) img.invert { filter: invert(1) !important; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) nav a.bg-white { background: #fff !important; color: var(--navy) !important; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) nav a.bg-white:hover { background: #f0ede8 !important; }
-body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher select { border-color: rgba(255,255,255,.35) !important; color: #fff !important; }
+body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !important; }
