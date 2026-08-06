@@ -469,6 +469,10 @@
     if (nav) {
       nav.querySelectorAll('a').forEach(function (a) {
         if (a.className.indexOf('bg-white') >= 0) return; // Contact button keeps its own style
+        // The Properties dropdown panel is a fixed dark-navy surface, so its
+        // links must stay white. Without this, on a light header the contrast
+        // pass paints them #0C1E28 — navy text on the navy panel, invisible.
+        if (a.closest('[data-nav-group="properties"]')) return;
         a.style.color = color;
       });
       nav.querySelectorAll('span.bg-white, span[class*="bg-white"]').forEach(function (s) { s.style.backgroundColor = color; });
