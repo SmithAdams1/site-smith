@@ -12,27 +12,53 @@
 </script>
 <script defer src="/cms-loader.js"></script>
 <style>
-  :root{ --cream:#FDFCF9; --cream2:#F4F3F0; --ink:#0C1E28; --navy:#0C1E28; --muted:#6b7280; --line:#e5e7eb; }
-  .dev-serif{ font-family:'Playfair Display', Georgia, 'Times New Roman', serif; }
-  .dev-sans{ font-family:'Satoshi', sans-serif; }
+  /* --ink, --navy and --line are owned by redesign.css; only the names it does
+     not define are declared here, so the page inherits the brand palette
+     instead of shadowing it with the old one. */
+  :root{ --cream:var(--paper); --cream2:#F4F2ED; --muted:var(--slate); }
+  .dev-serif{ font-family:var(--serif); }
+  .dev-sans{ font-family:var(--sans); }
   .dev-mark{ font-family:'Poppins', sans-serif; font-weight:600; letter-spacing:0.06em; }
-  .dev-wrap{ max-width:1180px; margin:0 auto; padding:0 clamp(20px,4vw,48px); }
-  .dev-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,64px); align-items:center; }
+  .dev-wrap{ max-width:1360px; margin:0 auto; padding:0 var(--mx); }
+  .dev-grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,72px); align-items:center; }
   .dev-grid.top{ align-items:start; }
-  @media (max-width:860px){ .dev-grid{ grid-template-columns:1fr; gap:28px; } }
-  .dev-eyebrow{ font-size:12px; letter-spacing:0.26em; text-transform:uppercase; color:var(--muted); margin:0 0 18px; }
-  .dev-p{ font-size:16px; line-height:1.85; color:#4b5563; margin:0 0 18px; }
+  /* These inner pairs were left in two columns on a phone, giving ~160px of
+     measure per paragraph. They collapse with everything else now. */
+  @media (max-width:860px){ .dev-grid{ grid-template-columns:1fr; gap:28px; }
+    .dev-cols{ grid-template-columns:1fr !important; gap:18px !important; } }
+  .dev-eyebrow{ font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:var(--slate); font-weight:500; margin:0 0 20px; }
+  .dev-h2{ font-family:var(--serif); font-weight:500; color:var(--navy); letter-spacing:-0.015em; line-height:1.08; }
+  .dev-p{ font-size:clamp(15px,1.15vw,17px); line-height:1.75; color:var(--ink); margin:0 0 18px; }
   .dev-img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .dev-imgwrap{ position:relative; overflow:hidden; border-radius:4px; }
+  .dev-imgwrap{ position:relative; overflow:hidden; border-radius:2px; }
   .dev-overlay-mark{ position:absolute; top:18px; left:20px; color:#fff; font-size:clamp(20px,2.4vw,30px); letter-spacing:0.18em; text-shadow:0 2px 16px rgba(0,0,0,0.35); }
-  .dev-btn{ display:inline-flex; align-items:center; gap:10px; background:var(--navy); color:#fff; font-family:'Satoshi',sans-serif; font-weight:700; font-size:14px; letter-spacing:0.02em; padding:15px 30px; border-radius:100px; text-decoration:none; transition:opacity .2s, transform .2s; }
-  .dev-btn:hover{ transform:translateY(-2px); opacity:.92; }
-  .dev-coming{ display:inline-flex; align-items:center; gap:9px; border:1px solid var(--navy); color:var(--navy); font-family:'Satoshi',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; padding:12px 26px; border-radius:100px; }
-  .dev-coming::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--navy); }
+  /* Matches .rd-cta so the buttons here and on every other page are one control. */
+  .dev-btn{ display:inline-flex; align-items:center; gap:10px; background:var(--navy); color:#fff; font-family:var(--sans); font-weight:600; font-size:15px; letter-spacing:0.01em; padding:16px 32px; border-radius:2px; text-decoration:none; transition:transform .5s var(--ease-expo), background .3s ease; }
+  .dev-btn:hover{ transform:translateY(-2px); background:#1c3646; }
+  .dev-coming{ display:inline-flex; align-items:center; gap:9px; border:1px solid var(--stone); color:var(--slate); font-family:var(--sans); font-weight:500; font-size:11px; letter-spacing:0.24em; text-transform:uppercase; padding:14px 26px; border-radius:2px; }
+  .dev-coming::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--slate); }
   .dev-def{ border-top:1px solid var(--line); margin-top:30px; padding-top:24px; }
   .dev-collage{ display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:1fr; gap:10px; }
+  /* The project cards were built with Tailwind utilities carrying the old
+     pill radius and heavy sans headings. Scoped overrides pull them onto the
+     brand without touching the 54 data-cms hooks in the markup. */
+  .dev-projects .geist{ font-family:var(--serif); font-weight:500; letter-spacing:-0.01em; color:var(--navy); }
+  .dev-projects .rounded-2xl{ border-radius:2px; }
+  .dev-projects .rounded-full{ border-radius:2px; }
+  .dev-projects .satoshi{ font-family:var(--sans); }
+  .dev-projects a[class*="border"]{ border-color:var(--line); }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.smithandadams.com/"}, {"@type": "ListItem", "position": 2, "name": "Our Developments", "item": "https://www.smithandadams.com/our-developments"}]}</script></head><body class="antialiased" style="background:#FDFCF9; overflow-x:hidden; width:100%;"><main class="min-h-screen" style="background:#FDFCF9;">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.smithandadams.com/"}, {"@type": "ListItem", "position": 2, "name": "Our Developments", "item": "https://www.smithandadams.com/our-developments"}]}</script><link rel="stylesheet" href="/redesign.css">
+<style id="dev-hero-scrim">
+  /* The Beato atrium is a bright render and the shared scrim is tuned for
+     darker photography, so the subtitle was sitting on a sunlit floor. This
+     carries the navy at the brand's 80% on the type side and lets the image
+     open up to the right, instead of swapping in a darker photograph. */
+  .rd-hero__scrim{ background:
+    linear-gradient(90deg, rgba(17,34,45,0.88) 0%, rgba(17,34,45,0.60) 40%, rgba(17,34,45,0.14) 76%),
+    linear-gradient(180deg, rgba(17,34,45,0.42) 0%, rgba(17,34,45,0.18) 38%, rgba(17,34,45,0.74) 100%); }
+</style>
+</head><body class="rd antialiased" style="background:var(--paper); overflow-x:hidden; width:100%;"><main class="min-h-screen" style="background:var(--paper);">
 
 <!-- ════════ HEADER (light, cream) ════════ -->
 <style id="rd-nav-dd">
@@ -45,13 +71,19 @@
   opacity:0;visibility:hidden;transform:translateY(6px);
   transition:opacity .18s ease,visibility .18s ease,transform .18s ease;z-index:60}
 .rd-dd:hover .rd-dd__menu,.rd-dd:focus-within .rd-dd__menu{opacity:1;visibility:visible;transform:none}
-.rd-dd__inner{background:#0C1E28;border:1px solid rgba(255,255,255,.12);border-radius:12px;
-  padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.rd-dd__item{display:block;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px;
-  font-size:15px;white-space:nowrap;transition:background .15s}
+.rd-dd__inner{background:#11222D;border:1px solid rgba(255,255,255,.12);border-radius:2px;
+  padding:6px;box-shadow:0 18px 44px rgba(17,34,45,.28)}
+.rd-dd__item{display:block;padding:11px 16px;color:#fff;text-decoration:none;border-radius:2px;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;font-weight:500;
+  white-space:nowrap;transition:background .15s}
 .rd-dd__item:hover,.rd-dd__item:focus-visible{background:rgba(255,255,255,.1)}
+/* redesign.css paints every nav link navy with !important, which also hit the
+   items inside this navy panel - the dropdown opened as an empty dark box on
+   every page carrying the new header. These win it back. */
+.rd-nav nav .rd-dd__item{color:#fff !important;opacity:1 !important;font-size:14px !important}
+.rd-nav nav .rd-dd__item:hover{opacity:1 !important}
 </style>
-<header class="fixed w-full z-50 transition-all duration-300 bg-transparent">
+<header class="rd-nav fixed w-full z-50 transition-all duration-300">
 <div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center">
 <a class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" class="h-10 w-auto" decoding="async" height="40" loading="eager" fetchpriority="high" src="./logo.png" srcset="./logo.png 2x" style="color:transparent" width="150"/></a>
 <nav class="hidden lg:flex items-center space-x-8" data-sa-rebuilt="1"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/index.html">Home</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/about.html">About Us</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/real-estate.html">Real Estate</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group rd-dd"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi font-semibold" href="#" onclick="return false;" aria-haspopup="true">Properties <span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a><div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="properties"><a class="satoshi rd-dd__item" href="/our-developments.html">Featured Opportunities</a><a class="satoshi rd-dd__item" href="/property-management.html">Property Management</a></div></div></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/blog.html">Blog</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">Contact Us</a></div><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:16px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></nav>
@@ -63,16 +95,28 @@
 </header>
 
 <!-- ════════ PAGE HERO ════════ -->
-<section style="padding:clamp(130px,16vh,180px) 0 clamp(40px,5vw,64px);">
-  <div class="dev-wrap">
-    <p data-cms="dev.hero.eyebrow" class="dev-sans dev-eyebrow">Smith &amp; Adams · Portugal</p>
-    <h1 data-cms="dev.hero.title" class="dev-serif" style="font-size:clamp(44px,7vw,92px); font-weight:500; color:var(--ink); line-height:1.0; letter-spacing:-0.01em; margin:0;">Featured Opportunities</h1>
-    <p data-cms="dev.hero.subtitle" data-cms-attr="html" class="dev-sans" style="font-size:clamp(16px,1.7vw,19px); color:var(--muted); line-height:1.7; max-width:620px; margin:26px 0 0;">A closer look at the properties we've advised on and now manage across Lisbon, including the Hygge House collection.</p>
+<section class="rd-hero">
+  <div class="rd-hero__media">
+    <img src="hygge-house-beato/exterior.jpg" alt="Hygge House Beato, Lisbon" loading="eager" fetchpriority="high" decoding="async">
+  </div>
+  <div class="rd-hero__scrim"></div>
+  <div class="rd-wrap rd-hero__inner">
+    <p data-cms="dev.hero.eyebrow" class="rd-label" style="color:rgba(255,255,255,0.62); margin:0 0 26px;">Smith &amp; Adams · Portugal</p>
+    <h1 data-cms="dev.hero.title">Featured Opportunities</h1>
+    <p data-cms="dev.hero.subtitle" data-cms-attr="html" class="rd-hero__sub">A closer look at the properties we've advised on and now manage across Lisbon, including the Hygge House collection.</p>
+    <div class="rd-hero__row">
+      <a class="rd-cta" href="#juliao">See the collection <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="rd-cta rd-cta--ghost" href="contact.html">Speak to an adviser</a>
+    </div>
+  </div>
+  <div class="rd-hero__caption">
+    <span class="rd-label k">Lisboa &middot; Portugal</span>
+    <span class="v">Hygge House collection</span>
   </div>
 </section>
 
 <!-- ════════ HYGGE CONCEPT ════════ -->
-<section style="padding:clamp(40px,6vw,80px) 0; border-top:1px solid var(--line);">
+<section style="padding:clamp(56px,8vw,128px) 0; border-top:1px solid var(--line);">
   <div class="dev-wrap">
     <div class="dev-grid">
       <!-- collage -->
@@ -83,12 +127,12 @@
       </div>
       <!-- text -->
       <div>
-        <div class="dev-mark" style="font-size:clamp(40px,5.5vw,68px); color:var(--ink); line-height:0.95;" data-cms="dev.concept.wordmark">HYGGE</div>
-        <div class="dev-sans" data-cms="dev.concept.kicker" style="font-size:clamp(16px,2vw,22px); letter-spacing:0.34em; text-transform:uppercase; color:var(--ink); margin:6px 0 30px;">Concept</div>
+        <div class="dev-mark" style="font-size:clamp(40px,5.5vw,68px); color:var(--navy); line-height:0.95;" data-cms="dev.concept.wordmark">HYGGE</div>
+        <div class="dev-sans" data-cms="dev.concept.kicker" style="font-size:clamp(16px,2vw,22px); letter-spacing:0.34em; text-transform:uppercase; color:var(--navy); margin:6px 0 30px;">Concept</div>
         <p data-cms="dev.concept.p1" data-cms-attr="html" class="dev-sans dev-p">Hygge is an atmosphere and an experience, rather than about things. It is a calm, comfortable time with the people we love, a complete absence of frustrations and a total feeling of home.</p>
         <p data-cms="dev.concept.p2" data-cms-attr="html" class="dev-sans dev-p" style="margin-bottom:0;">At Smith & Adams, this philosophy is our guiding light. We design sanctuaries that invite you to slow down and take pleasure in savouring the moment.</p>
         <div class="dev-def">
-          <p data-cms="dev.concept.def_title" class="dev-sans" style="font-size:17px; font-weight:700; color:var(--ink); margin:0 0 12px;">HYGGE [hue-gah]</p>
+          <p data-cms="dev.concept.def_title" class="dev-sans" style="font-size:17px; font-weight:600; color:var(--navy); margin:0 0 12px;">HYGGE [hue-gah]</p>
           <p data-cms="dev.concept.def_body" data-cms-attr="html" class="dev-sans" style="font-size:14.5px; line-height:1.8; color:var(--muted); margin:0;">(n.) a calm, comfortable time with people you love. a complete absence of frustrations or anything emotionally overwhelming. taking pleasure from the cosy atmosphere and enjoying the simple pleasures in life. often enjoyed with good food, drinks, warm blankets and candlelight.</p>
         </div>
       </div>
@@ -97,7 +141,7 @@
 </section>
 
 <!-- ════════ HYGGE HOUSE HOTEL S. JULIÃO ════════ -->
-<section style="padding:clamp(40px,6vw,80px) 0; background:var(--cream2);">
+<section id="juliao" style="padding:clamp(56px,8vw,128px) 0; background:var(--cream2);">
   <div class="dev-wrap">
     <div class="dev-grid top">
       <!-- images -->
@@ -110,8 +154,8 @@
       </div>
       <!-- text -->
       <div>
-        <h2 data-cms="dev.juliao.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.6vw,58px); font-weight:500; color:var(--ink); line-height:1.04; margin:0 0 26px;">Hygge House<br>Hotel S. Julião</h2>
-        <div style="display:grid; grid-template-columns:1.4fr 1fr; gap:24px; align-items:start;">
+        <h2 data-cms="dev.juliao.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.6vw,58px); font-weight:500; color:var(--navy); line-height:1.04; margin:0 0 26px;">Hygge House<br>Hotel S. Julião</h2>
+        <div class="dev-cols" style="display:grid; grid-template-columns:1.4fr 1fr; gap:24px; align-items:start;">
           <div>
             <p data-cms="dev.juliao.p1" data-cms-attr="html" class="dev-sans dev-p" style="font-size:15px;">In the heart of historic Lisbon, the Hygge House Hotel in Rua de S. Julião is an extension of our beloved Kaffe concept into the world of hospitality.</p>
             <p data-cms="dev.juliao.p2" data-cms-attr="html" class="dev-sans dev-p" style="font-size:15px;">This boutique project blends classic traditional Portuguese architecture with the soulful comfort of Hygge living.</p>
@@ -119,9 +163,9 @@
           </div>
           <div class="dev-imgwrap" style="aspect-ratio:3/4;"><img data-cms="dev.juliao.img2" class="dev-img" src="hygge-house-projects/4.jpg" alt=""></div>
         </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px; border-top:1px solid var(--line); padding-top:24px;">
-          <p data-cms="dev.juliao.quote1" data-cms-attr="html" class="dev-sans" style="font-size:14.5px; line-height:1.8; color:#4b5563; margin:0;">It is a destination where you don't just visit, you find a home away from home.</p>
-          <p data-cms="dev.juliao.quote2" data-cms-attr="html" class="dev-sans" style="font-size:14.5px; line-height:1.8; color:#4b5563; margin:0;">The hotel offers an intimate stay where the morning scent of specialty coffee and the cozy atmosphere of our Kaffe are always present.</p>
+        <div class="dev-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px; border-top:1px solid var(--line); padding-top:24px;">
+          <p data-cms="dev.juliao.quote1" data-cms-attr="html" class="dev-sans" style="font-size:14.5px; line-height:1.8; color:var(--ink); margin:0;">It is a destination where you don't just visit, you find a home away from home.</p>
+          <p data-cms="dev.juliao.quote2" data-cms-attr="html" class="dev-sans" style="font-size:14.5px; line-height:1.8; color:var(--ink); margin:0;">The hotel offers an intimate stay where the morning scent of specialty coffee and the cozy atmosphere of our Kaffe are always present.</p>
         </div>
         <div style="margin-top:30px;">
           <a class="dev-btn" data-cms="dev.juliao.booking_url" href="https://smithandadams.bookingsboom.com" target="_blank" rel="noopener noreferrer"><span data-cms="dev.juliao.booking_label">Book your stay</span>
@@ -134,13 +178,14 @@
 
 <!-- ════════ BOOKING SEARCH (above Fanqueiros) ════════ -->
 <style>
-  .bk-card{ background:#0C1E28; border-radius:22px; padding:clamp(26px,3.5vw,44px); box-shadow:0 18px 50px rgba(12,30,40,0.16); }
+  .bk-card{ background:var(--navy); border-radius:2px; padding:clamp(26px,3.5vw,44px); }
   #bk-form{ display:grid; grid-template-columns:1fr 1fr 0.75fr 0.75fr auto; gap:14px; align-items:end; }
-  .bk-field{ display:flex; flex-direction:column; gap:7px; min-width:0; }
-  .bk-field label{ font-family:'Satoshi',sans-serif; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
-  .bk-field input, .bk-field select{ font-family:'Satoshi',sans-serif; font-size:15px; color:#0C1E28; background:#fff; border:none; border-radius:10px; padding:13px 14px; outline:none; width:100%; -webkit-appearance:none; appearance:none; }
-  .bk-btn{ background:#fff; color:#0C1E28; font-family:'Satoshi',sans-serif; font-weight:700; font-size:14.5px; border:none; border-radius:10px; padding:0 30px; height:46px; cursor:pointer; white-space:nowrap; transition:opacity .2s; }
-  .bk-btn:hover{ opacity:.88; }
+  .bk-field{ display:flex; flex-direction:column; gap:8px; min-width:0; }
+  .bk-field label{ font-family:var(--sans); font-size:11px; letter-spacing:0.24em; text-transform:uppercase; color:rgba(255,255,255,0.62); font-weight:500; }
+  .bk-field input, .bk-field select{ font-family:var(--sans); font-size:15px; color:var(--navy); background:#fff; border:none; border-radius:2px; padding:13px 14px; outline:none; width:100%; -webkit-appearance:none; appearance:none; }
+  .bk-field input:focus-visible, .bk-field select:focus-visible{ box-shadow:0 0 0 2px rgba(255,255,255,0.55); }
+  .bk-btn{ background:#fff; color:var(--navy); font-family:var(--sans); font-weight:600; font-size:15px; border:none; border-radius:2px; padding:0 30px; height:46px; cursor:pointer; white-space:nowrap; transition:transform .5s var(--ease-expo), background .3s ease; }
+  .bk-btn:hover{ background:#f0ede8; transform:translateY(-2px); }
   @media (max-width:780px){ #bk-form{ grid-template-columns:1fr 1fr; } #bk-form .bk-btn{ grid-column:1 / -1; height:48px; } }
 </style>
 <section style="padding:clamp(28px,4vw,52px) 0;">
@@ -175,12 +220,12 @@
 </script>
 
 <!-- ════════ HYGGE HOUSE FANQUEIROS ════════ -->
-<section style="padding:clamp(40px,6vw,80px) 0;">
+<section style="padding:clamp(56px,8vw,128px) 0;">
   <div class="dev-wrap">
     <div class="dev-grid top">
       <!-- left: title + dining image -->
       <div>
-        <h2 data-cms="dev.fanqueiros.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.8vw,60px); font-weight:500; color:var(--ink); line-height:1.04; margin:0 0 28px;">Hygge House<br>Fanqueiros</h2>
+        <h2 data-cms="dev.fanqueiros.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.8vw,60px); font-weight:500; color:var(--navy); line-height:1.04; margin:0 0 28px;">Hygge House<br>Fanqueiros</h2>
         <div class="dev-imgwrap" style="aspect-ratio:4/3;">
           <img data-cms="dev.fanqueiros.img0" class="dev-img" src="hygge-house-projects/34.jpg" alt="Hygge House Fanqueiros">
           <span class="dev-mark dev-overlay-mark">HYGGE</span>
@@ -189,8 +234,8 @@
       <!-- right: bedroom image + subhead + text -->
       <div>
         <div class="dev-imgwrap" style="aspect-ratio:16/10; margin-bottom:28px;"><img data-cms="dev.fanqueiros.img1" class="dev-img" src="hygge-house-projects/3.jpg" alt=""></div>
-        <h3 data-cms="dev.fanqueiros.subhead" class="dev-sans" style="font-size:clamp(20px,2.4vw,26px); font-weight:900; font-style:italic; color:var(--ink); letter-spacing:0.01em; line-height:1.1; margin:0 0 22px; text-transform:uppercase;">A new way to stay in Lisbon</h3>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+        <h3 data-cms="dev.fanqueiros.subhead" class="dev-serif" style="font-size:clamp(20px,2.2vw,26px); font-weight:500; font-style:normal; font-family:var(--serif); color:var(--navy); letter-spacing:-0.01em; line-height:1.2; margin:0 0 22px; text-transform:none;">A new way to stay in Lisbon</h3>
+        <div class="dev-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
           <div>
             <p data-cms="dev.fanqueiros.p1" data-cms-attr="html" class="dev-sans dev-p" style="font-size:14.5px;">Nestled in the vibrant streets of downtown Lisbon, the Hygge House Hotel on Rua dos Fanqueiros is the natural extension of our brand into a new corner of the city.</p>
             <p data-cms="dev.fanqueiros.p2" data-cms-attr="html" class="dev-sans dev-p" style="font-size:14.5px; margin-bottom:0;">With 30 thoughtfully designed units, this project carries the same mood, the same style and the same quality that define the Hygge experience, now elevated by a more refined architectural language.</p>
@@ -207,14 +252,14 @@
 </section>
 
 <!-- ════════ HYGGE HOUSE BEATO ════════ -->
-<section style="padding:clamp(40px,6vw,80px) 0; background:var(--cream2);">
+<section style="padding:clamp(56px,8vw,128px) 0; background:var(--cream2);">
   <div class="dev-wrap">
     <div class="dev-grid top">
       <!-- left: atrium image + subhead + text + coming -->
       <div>
         <div class="dev-imgwrap" style="aspect-ratio:4/3; margin-bottom:28px;"><img data-cms="dev.beato.img0" class="dev-img" src="hygge-house-beato/atrium.jpg" alt="Hygge House Beato"></div>
-        <h3 data-cms="dev.beato.subhead" class="dev-sans" style="font-size:clamp(20px,2.4vw,26px); font-weight:900; font-style:italic; color:var(--ink); line-height:1.1; margin:0 0 22px; text-transform:uppercase;">Pure Comfort</h3>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+        <h3 data-cms="dev.beato.subhead" class="dev-serif" style="font-size:clamp(20px,2.2vw,26px); font-weight:500; font-style:normal; font-family:var(--serif); color:var(--navy); letter-spacing:-0.01em; line-height:1.2; margin:0 0 22px; text-transform:none;">Pure Comfort</h3>
+        <div class="dev-cols" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
           <p data-cms="dev.beato.p1" data-cms-attr="html" class="dev-sans dev-p" style="font-size:14.5px; margin-bottom:0;">Hygge House Beato blends modern architecture with urban convenience and the warm, welcoming spirit of the Hygge philosophy. The building comprises 137 studio units, designed for efficiency, functionality, and quality.</p>
           <p data-cms="dev.beato.p2" data-cms-attr="html" class="dev-sans dev-p" style="font-size:14.5px; margin-bottom:0;">These units perfectly meet the high standards of Portugal's growing hospitality market. It is a project where long-term investment value meets a community focused on the genuine feeling of home, and the perfect choice for those seeking a modern refuge that stays connected to the city's historic roots and riverside energy.</p>
         </div>
@@ -222,7 +267,7 @@
       </div>
       <!-- right: title + kitchen image -->
       <div>
-        <h2 data-cms="dev.beato.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.8vw,60px); font-weight:500; color:var(--ink); line-height:1.04; margin:0 0 28px;">Hygge House<br>Beato</h2>
+        <h2 data-cms="dev.beato.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.8vw,60px); font-weight:500; color:var(--navy); line-height:1.04; margin:0 0 28px;">Hygge House<br>Beato</h2>
         <div class="dev-imgwrap" style="aspect-ratio:4/3;"><img data-cms="dev.beato.img1" class="dev-img" src="hygge-house-projects/2.jpg" alt=""></div>
       </div>
     </div>
@@ -231,219 +276,219 @@
 
 <!-- ════════ PREVIOUS PROJECTS (moved from About) ════════ -->
 <!-- ======== OUR PORTFOLIO ======== -->
-<section style="background:#FDFCF9; width:100%; padding:0;">
+<section class="dev-projects" style="background:var(--paper); width:100%; padding:0;">
 
   <!-- Section header -->
   <div style="max-width:1280px; margin:0 auto; padding:clamp(40px,6vw,80px) clamp(16px,4vw,48px) clamp(32px,5vw,56px);">
-    <p data-cms="about.portfolio.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(12,30,40,0.4); margin-bottom:20px;">Our Portfolio</p>
+    <p data-cms="about.portfolio.eyebrow" class="satoshi" style="font-size:11px; letter-spacing:0.28em; text-transform:uppercase; color:rgba(17,34,45,0.4); margin-bottom:20px;">Our Portfolio</p>
     <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:24px;">
-      <h2 data-cms="about.portfolio.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:800; color:#0C1E28; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:600px;">
+      <h2 data-cms="about.portfolio.title" class="geist" style="font-size:clamp(28px,4vw,52px); font-weight:500; color:#11222D; letter-spacing:-0.03em; line-height:1.05; margin:0; max-width:600px;">
         Previous Projects
       </h2>
-      <p data-cms="about.portfolio.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:rgba(12,30,40,0.55); max-width:420px; line-height:1.7; margin:0;">
+      <p data-cms="about.portfolio.body" data-cms-attr="html" class="satoshi" style="font-size:15px; color:rgba(17,34,45,0.55); max-width:420px; line-height:1.7; margin:0;">
         Explore our successful developments across Portugal. Each project represents our commitment to quality construction, strategic locations, and investment excellence.
       </p>
     </div>
   </div>
 
   <!-- Cards grid -->
-  <div style="border-top:1px solid rgba(12,30,40,0.1);">
+  <div style="border-top:1px solid rgba(17,34,45,0.1);">
     <div class="max-w-[1280px] mx-auto px-6 md:px-12 pt-12 pb-20">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
         <!-- Card 1 -->
-        <a data-cms="about.cards.0.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.0.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.0.image" src="development/projectCardThumbnail1.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.0.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.0.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
             </div>
-            <h3 data-cms="about.cards.0.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.0.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.0.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">12</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.0.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.0.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">12</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.0.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 2 -->
-        <a data-cms="about.cards.1.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.1.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.1.image" src="development/projectCardThumbnail2.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.1.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.1.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2025</span>
             </div>
-            <h3 data-cms="about.cards.1.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.1.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.1.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">14</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.1.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.1.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">14</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.1.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 3 -->
-        <a data-cms="about.cards.2.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.2.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.2.image" src="development/projectCardThumbnail3.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.2.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.2.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
             </div>
-            <h3 data-cms="about.cards.2.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.2.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.2.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">8</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.2.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.2.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">8</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.2.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 4 -->
-        <a data-cms="about.cards.3.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.3.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.3.image" src="development/projectCardThumbnail4.png" alt="Alcântara Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.3.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.3.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2024</span>
             </div>
-            <h3 data-cms="about.cards.3.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Alcântara Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.3.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Alcântara Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.3.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">45</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.3.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€320K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.3.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">45</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.3.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€320K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 5 -->
-        <a data-cms="about.cards.4.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.4.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.4.image" src="development/projectCardThumbnail5.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.4.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.4.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 data-cms="about.cards.4.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.4.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.4.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">22</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.4.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.4.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">22</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.4.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€250K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 6 -->
-        <a data-cms="about.cards.5.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.5.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.5.image" src="development/projectCardThumbnail6.png" alt="São Julião Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential + Commercial</span>
-              <span data-cms="about.cards.5.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential + Commercial</span>
+              <span data-cms="about.cards.5.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 data-cms="about.cards.5.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">São Julião Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.5.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">São Julião Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.5.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">58</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.5.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€380K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.5.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">58</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.5.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€380K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 7 -->
-        <a data-cms="about.cards.6.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.6.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.6.image" src="development/projectCardThumbnail7.png" alt="Arroios Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.6.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.6.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2023</span>
             </div>
-            <h3 data-cms="about.cards.6.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Arroios Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.6.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Arroios Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.6.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">42</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.6.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€340K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.6.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">42</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.6.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€340K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 8 -->
-        <a data-cms="about.cards.7.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.7.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.7.image" src="development/projectCardThumbnail8.png" alt="Penha de França Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.7.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.7.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
             </div>
-            <h3 data-cms="about.cards.7.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Penha de França Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.7.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Penha de França Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.7.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">30</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.7.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€290K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.7.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">30</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.7.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€290K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
         </a>
 
         <!-- Card 9 -->
-        <a data-cms="about.cards.8.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(12,30,40,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(12,30,40,0.06)] group">
+        <a data-cms="about.cards.8.url" href="https://www.booking.com" target="_blank" rel="noopener noreferrer" class="flex flex-col bg-white rounded-2xl overflow-hidden border border-[rgba(17,34,45,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(17,34,45,0.06)] group">
           <div class="w-full h-[220px] overflow-hidden">
             <img data-cms="about.cards.8.image" src="development/projectCardThumbnail9.png" alt="Campolide Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
           <div class="p-8 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-4">
-              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(12,30,40,0.4)] uppercase">Residential Development</span>
-              <span data-cms="about.cards.8.year" class="text-[12px] font-semibold text-[#0C1E28] bg-[rgba(12,30,40,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
+              <span class="satoshi text-[11px] font-bold tracking-widest text-[rgba(17,34,45,0.4)] uppercase">Residential Development</span>
+              <span data-cms="about.cards.8.year" class="text-[12px] font-semibold text-[#11222D] bg-[rgba(17,34,45,0.08)] px-3 py-1 rounded-full tracking-wide">2022</span>
             </div>
-            <h3 data-cms="about.cards.8.title" class="geist text-[20px] font-bold text-[#0C1E28] mb-2 leading-snug">Campolide Project</h3>
-            <p class="satoshi text-[13px] text-[rgba(12,30,40,0.5)] mb-6">📍 Lisbon, Portugal</p>
+            <h3 data-cms="about.cards.8.title" class="geist text-[20px] font-bold text-[#11222D] mb-2 leading-snug">Campolide Project</h3>
+            <p class="satoshi rd-label mb-6" style="display:block;">Lisbon, Portugal</p>
             <div class="flex gap-6 mb-8 mt-auto">
-              <div><p data-cms="about.cards.8.units" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">38</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
-              <div><p data-cms="about.cards.8.price" class="geist text-[22px] font-extrabold text-[#0C1E28] m-0">€305K</p><p class="satoshi text-[11px] text-[rgba(12,30,40,0.45)] mt-1 uppercase tracking-widest">From</p></div>
+              <div><p data-cms="about.cards.8.units" class="geist text-[22px] font-extrabold text-[#11222D] m-0">38</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">Units</p></div>
+              <div><p data-cms="about.cards.8.price" class="geist text-[22px] font-extrabold text-[#11222D] m-0">€305K</p><p class="satoshi text-[11px] text-[rgba(17,34,45,0.45)] mt-1 uppercase tracking-widest">From</p></div>
             </div>
-            <div class="w-full text-center bg-[#0C1E28] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
+            <div class="w-full text-center bg-[#11222D] text-white py-3.5 rounded-xl satoshi font-bold text-sm tracking-widest uppercase transition-colors duration-300 group-hover:bg-[#1a3240]">
               <span data-cms="about.cards.cta">Reserve</span> <span class="ml-1">→</span>
             </div>
           </div>
