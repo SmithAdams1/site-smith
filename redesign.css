@@ -230,3 +230,56 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 .rd-faq summary:hover .rd-faq__mark::before, .rd-faq summary:hover .rd-faq__mark::after { background:var(--navy); }
 .rd-faq__a { padding:0 2px 30px; max-width:66ch; font-family:var(--sans);
   font-size:clamp(15px,1.1vw,16.5px); line-height:1.8; color:var(--ink); }
+
+/* ---------- Portfolio carousel · one asset per slide, tracked ----------
+   Built on CSS scroll-snap: every slide is in the DOM and reachable by
+   scrolling, so with JS blocked this degrades to a horizontal scroller
+   rather than hiding the properties from readers and crawlers alike. */
+.rd-carousel { position:relative; background:var(--navy); }
+.rd-track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory;
+  scrollbar-width:none; -ms-overflow-style:none; scroll-behavior:smooth; }
+.rd-track::-webkit-scrollbar { display:none; }
+.rd-slide { position:relative; flex:0 0 100%; scroll-snap-align:start;
+  min-height:92svh; display:flex; align-items:flex-end; overflow:hidden; background:var(--navy); }
+.rd-slide__media { position:absolute; inset:0; z-index:0; }
+.rd-slide__media img { width:100%; height:100%; object-fit:cover; display:block; }
+/* Brand Book p24: type on an image goes on a navy scrim or a white plate,
+   never directly on texture. These are bright interiors, so a gradient over
+   the whole frame neither reads nor complies — the type sits on a plate and
+   the photograph stays a photograph. p16 calls this "full bleed + plate". */
+.rd-slide__scrim { position:absolute; inset:0; z-index:1;
+  /* Darkens only the bottom strip, where the counter and the arrows sit;
+     the middle of the frame stays a photograph. */
+  background:linear-gradient(180deg, rgba(17,34,45,0) 52%, rgba(17,34,45,0.68) 100%); }
+.rd-slide__plate { position:relative; z-index:2; width:100%;
+  padding-bottom:clamp(104px,15vh,150px); padding-top:clamp(48px,8vh,88px); }
+.rd-slide__card { background:rgba(17,34,45,0.94); -webkit-backdrop-filter:blur(3px);
+  backdrop-filter:blur(3px); padding:clamp(28px,3.4vw,48px); max-width:min(640px,100%); }
+.rd-slide__card h3 { font-family:var(--serif); font-weight:500; color:#fff;
+  font-size:clamp(28px,3.4vw,46px); line-height:1.06; letter-spacing:-0.01em; margin:0; }
+.rd-slide__card .rd-figs { margin-top:26px; padding-top:22px;
+  border-top:1px solid rgba(255,255,255,0.18); }
+.rd-slide__src { font-family:var(--sans); font-size:12px; color:rgba(255,255,255,0.62);
+  margin:18px 0 0; letter-spacing:0.02em; line-height:1.5; }
+
+/* controls sit on the hairline that closes the slide */
+.rd-carousel__bar { position:absolute; left:var(--mx); right:var(--mx);
+  bottom:clamp(38px,6vh,60px); z-index:3; display:flex; align-items:center;
+  /* Counter and arrows both sit on the left margin: the floating chat widget is
+     anchored bottom-right on every page and was covering the next button. */
+  justify-content:flex-start; gap:clamp(18px,2.5vw,34px);
+  border-top:1px solid rgba(255,255,255,0.22); padding-top:18px; }
+.rd-carousel__count { font-family:var(--serif); font-size:15px; color:rgba(255,255,255,0.8);
+  font-variant-numeric:tabular-nums; }
+.rd-carousel__btns { display:flex; gap:10px; }
+.rd-carousel__btn { width:42px; height:42px; border:1px solid rgba(255,255,255,0.34);
+  background:transparent; color:#fff; cursor:pointer; display:inline-flex;
+  align-items:center; justify-content:center; border-radius:2px;
+  transition:background .3s ease, border-color .3s ease, opacity .3s ease; }
+.rd-carousel__btn:hover:not(:disabled) { background:rgba(255,255,255,0.12); border-color:#fff; }
+.rd-carousel__btn:disabled { opacity:.3; cursor:default; }
+.rd-carousel__btn:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+@media (max-width:760px){
+  .rd-slide__plate { padding-bottom:clamp(104px,16vh,150px); }
+  .rd-carousel__bar { flex-direction:column; align-items:flex-start; gap:14px; }
+}

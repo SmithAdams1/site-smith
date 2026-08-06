@@ -11,6 +11,47 @@
         window.addEventListener('scroll', onScroll, { passive: true });
       })();
 
+      // ---- Portfolio carousel (runs always: this is navigation, not decoration,
+      //      so it must work under reduced motion and without GSAP) ----
+      (function () {
+        var track = document.getElementById('assetTrack');
+        if (!track) return;
+        var prev = document.getElementById('assetPrev');
+        var next = document.getElementById('assetNext');
+        var idxEl = document.getElementById('assetIdx');
+        var slides = track.querySelectorAll('.rd-slide');
+        var total = slides.length;
+        var totalEl = document.getElementById('assetTotal');
+        if (totalEl) totalEl.textContent = total;
+
+        function current() {
+          return Math.round(track.scrollLeft / track.clientWidth);
+        }
+        function sync() {
+          var i = Math.max(0, Math.min(total - 1, current()));
+          if (idxEl) idxEl.textContent = i + 1;
+          if (prev) prev.disabled = i === 0;
+          if (next) next.disabled = i === total - 1;
+        }
+        function go(dir) {
+          // Honour reduced motion here too: jump rather than glide.
+          var smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          track.scrollTo({ left: (current() + dir) * track.clientWidth, behavior: smooth ? 'smooth' : 'auto' });
+        }
+        if (prev) prev.addEventListener('click', function () { go(-1); });
+        if (next) next.addEventListener('click', function () { go(1); });
+        track.addEventListener('scroll', function () {
+          window.clearTimeout(track._t);
+          track._t = window.setTimeout(sync, 90);
+        }, { passive: true });
+        track.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+          if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+        });
+        window.addEventListener('resize', sync);
+        sync();
+      })();
+
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasGsap = window.gsap && window.ScrollTrigger;
       if (reduce || !hasGsap) return; // content stays in its visible baseline state

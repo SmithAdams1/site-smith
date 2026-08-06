@@ -284,19 +284,65 @@
             </div>
         </section>
 
-        <!-- ══════════════════ ONE ASSET ══════════════════ -->
-        <section class="rd-asset" id="asset">
-            <div class="rd-asset__media" data-parallax="0.10">
-                <img src="hygge-house-beato/atrium.jpg" alt="Interior of a Smith &amp; Adams asset in Beato, Lisbon" loading="lazy" decoding="async" />
+        <!-- ══════════════════ TRACKED PERFORMANCE ══════════════════
+             One asset per slide, each with the figure and where the figure
+             comes from. Every slide is in the DOM: with JS blocked the track
+             is still a horizontal scroller, so nothing here is hidden from a
+             reader or a crawler. -->
+        <section class="rd-carousel" id="asset" aria-roledescription="carousel" aria-label="Portfolio performance">
+            <div class="rd-track" id="assetTrack" tabindex="0">
+
+                <article class="rd-slide" aria-label="Hygge House S. Julião, 1 of 2">
+                    <div class="rd-slide__media">
+                        <img src="portfolio/s-juliao.webp" alt="Living room of an apartment at Hygge House S. Julião, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
+                    </div>
+                    <div class="rd-slide__scrim"></div>
+                    <div class="rd-wrap rd-slide__plate">
+                        <div class="rd-slide__card">
+                            <p class="rd-label" style="color:rgba(255,255,255,0.7); margin:0 0 18px;">Tracked performance</p>
+                            <h3>Hygge House S. Julião</h3>
+                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">Nineteen apartments in Baixa that we specified, delivered and still run. The standard holds after handover, not only at it, and the occupancy is ours to answer for.</p>
+                            <div class="rd-figs">
+                                <div class="f"><div class="n">98.6%</div><div class="l">Occupancy</div></div>
+                                <div class="f"><div class="n">19</div><div class="l">Units</div></div>
+                                <div class="f"><div class="n">2022</div><div class="l">Handover</div></div>
+                            </div>
+                            <p class="rd-slide__src">Occupancy source: Boom, the platform the building is booked through.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="rd-slide" aria-label="Anjos 40, 2 of 2">
+                    <div class="rd-slide__media">
+                        <img src="portfolio/anjos-40.webp" alt="Dining room of an apartment at Anjos 40, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
+                    </div>
+                    <div class="rd-slide__scrim"></div>
+                    <div class="rd-wrap rd-slide__plate">
+                        <div class="rd-slide__card">
+                            <p class="rd-label" style="color:rgba(255,255,255,0.7); margin:0 0 18px;">Tracked performance</p>
+                            <h3>Anjos 40</h3>
+                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">Eight apartments held since 2021. A smaller building costs less to run per unit, and steady occupancy is what makes that arithmetic work: a shorter cost line, and a net figure we publish rather than describe.</p>
+                            <div class="rd-figs">
+                                <div class="f"><div class="n">86.3%</div><div class="l">Occupancy</div></div>
+                                <div class="f"><div class="n">8</div><div class="l">Units</div></div>
+                                <div class="f"><div class="n">2021</div><div class="l">Handover</div></div>
+                            </div>
+                            <p class="rd-slide__src">Occupancy source: Boom, the platform the building is booked through.</p>
+                        </div>
+                    </div>
+                </article>
+
             </div>
-            <div class="rd-asset__scrim"></div>
-            <div class="rd-asset__plate rd-wrap">
-                <p class="rd-label reveal" style="color:rgba(255,255,255,0.75); margin-bottom:22px;">One asset, in the open</p>
-                <h2 class="reveal">Hygge House, Beato. Nine units, delivered, held to the standard.</h2>
-                <div class="rd-figs reveal">
-                    <div class="f"><div class="n">94%</div><div class="l">Occupancy since handover</div></div>
-                    <div class="f"><div class="n">137</div><div class="l">Studio units</div></div>
-                    <div class="f"><div class="n">2025</div><div class="l">Delivered</div></div>
+
+            <div class="rd-carousel__bar">
+                <span class="rd-carousel__count"><span id="assetIdx">1</span> / <span id="assetTotal">2</span></span>
+                <div class="rd-carousel__btns">
+                    <button class="rd-carousel__btn" id="assetPrev" type="button" aria-label="Previous property" aria-controls="assetTrack" disabled>
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="rd-carousel__btn" id="assetNext" type="button" aria-label="Next property" aria-controls="assetTrack">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </button>
                 </div>
             </div>
         </section>
