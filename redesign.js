@@ -1,0 +1,118 @@
+(function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasGsap = window.gsap && window.ScrollTrigger;
+      if (reduce || !hasGsap) return; // content stays in its visible baseline state
+
+      document.documentElement.classList.add('motion-ready');
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ---- Lenis smooth scroll (the "single continuous surface") ----
+      var lenis = null;
+      if (window.Lenis) {
+        lenis = new Lenis({ duration: 1.05, easing: function (t) { return 1 - Math.pow(1 - t, 3); } });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      var EASE = 'power3.out';
+
+      // ---- Scroll-scrubbed flythrough hero (canvas frame-sequence: smooth on all browsers + mobile) ----
+      (function () {
+        var fly = document.querySelector('.rd-fly');
+        if (!fly) return;
+        var canvas = fly.querySelector('.rd-fly__canvas');
+        var ctx = canvas.getContext('2d');
+        var N = 120, current = 0, firstReady = false;
+        var frames = new Array(N);
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        function pad(n){ n = String(n); while (n.length < 3) n = '0' + n; return n; }
+        function sizeCanvas(){ canvas.width = Math.round(fly.clientWidth * dpr); canvas.height = Math.round(fly.clientHeight * dpr); }
+        function paint(img){
+          if (!img || !img.complete || !img.naturalWidth) return;
+          var cw = canvas.width, ch = canvas.height;
+          var ir = img.naturalWidth / img.naturalHeight, cr = cw / ch, dw, dh, dx, dy;
+          if (ir > cr) { dh = ch; dw = ch * ir; dx = (cw - dw) / 2; dy = 0; }
+          else { dw = cw; dh = cw / ir; dx = 0; dy = (ch - dh) / 2; }
+          ctx.drawImage(img, dx, dy, dw, dh);
+        }
+        function drawIndex(i){
+          i = i < 0 ? 0 : i > N - 1 ? N - 1 : i;
+          var img = frames[i];
+          if (img && img.complete && img.naturalWidth) { current = i; paint(img); return; }
+          for (var d = 1; d < N; d++) {
+            if (frames[i-d] && frames[i-d].complete && frames[i-d].naturalWidth) { paint(frames[i-d]); return; }
+            if (frames[i+d] && frames[i+d].complete && frames[i+d].naturalWidth) { paint(frames[i+d]); return; }
+          }
+        }
+        for (var k = 0; k < N; k++) {
+          (function (idx) {
+            var img = new Image();
+            img.onload = function () { if (!firstReady) { firstReady = true; sizeCanvas(); drawIndex(0); } };
+            img.src = '/hero-frames/f_' + pad(idx + 1) + '.jpg';
+            frames[idx] = img;
+          })(k);
+        }
+        window.addEventListener('resize', function () { sizeCanvas(); drawIndex(current); });
+
+        var p1 = fly.querySelector('.p1'), p2 = fly.querySelector('.p2'), p3 = fly.querySelector('.p3');
+        var cue = fly.querySelector('.rd-scrollcue');
+        function c01(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+        function fin(p,a,b){ return c01((p - a) / (b - a)); }
+        function fout(p,a,b){ return 1 - c01((p - a) / (b - a)); }
+        function setPanel(el, op, dir){ el.style.opacity = op; el.style.transform = 'translateY(' + ((1 - op) * dir) + 'px)'; }
+
+        ScrollTrigger.create({
+          trigger: fly, start: 'top top', end: '+=2600', pin: true, scrub: 0.5, anticipatePin: 1,
+          onUpdate: function (self) {
+            var p = self.progress;
+            drawIndex(Math.round(p * (N - 1)));
+            setPanel(p1, fout(p, 0.20, 0.30), -20);
+            setPanel(p2, Math.min(fin(p, 0.36, 0.44), fout(p, 0.60, 0.68)), 20);
+            setPanel(p3, fin(p, 0.74, 0.82), 20);
+            if (cue) cue.style.opacity = String(fout(p, 0.0, 0.05));
+          }
+        });
+      })();
+
+      // ---- Reveals (batched) ----
+      ScrollTrigger.batch('.reveal', {
+        start: 'top 88%',
+        onEnter: function (els) {
+          gsap.to(els, { opacity: 1, y: 0, duration: 0.9, ease: EASE, stagger: 0.08, overwrite: true });
+        }
+      });
+      // staggered list lines
+      gsap.utils.toArray('.rd-funcs').forEach(function (list) {
+        ScrollTrigger.create({
+          trigger: list, start: 'top 80%', once: true,
+          onEnter: function () {
+            gsap.to(list.querySelectorAll('.reveal-line'), { opacity: 1, y: 0, duration: 0.8, ease: EASE, stagger: 0.09 });
+          }
+        });
+      });
+
+      // ---- Parallax on asset media ----
+      gsap.utils.toArray('[data-parallax]').forEach(function (el) {
+        var amt = parseFloat(el.getAttribute('data-parallax')) || 0.15;
+        gsap.fromTo(el, { yPercent: -amt * 100 }, {
+          yPercent: amt * 100, ease: 'none',
+          scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 }
+        });
+      });
+
+      // ---- Refresh after fonts/images settle (prevents mis-fired triggers) ----
+      if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { ScrollTrigger.refresh(); }); }
+      window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+
+      // ---- Smooth in-page anchor via Lenis ----
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href'); if (id.length < 2) return;
+          var t = document.querySelector(id); if (!t) return;
+          e.preventDefault();
+          if (lenis) lenis.scrollTo(t, { offset: 0 }); else t.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    })();
