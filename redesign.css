@@ -94,8 +94,8 @@
   .rd-funcs { list-style:none; margin:0; padding:0; }
   .rd-funcs li { display:flex; gap:20px; padding:18px 0; border-bottom:1px solid rgba(255,255,255,0.14); }
   .rd-funcs li .fi { font-family:var(--serif); font-size:15px; color:var(--stone); width:2ch; flex-shrink:0; padding-top:3px; }
-  .rd-funcs li .ft { font-family:var(--sans); font-size:clamp(16px,1.4vw,19px); color:#fff; }
-  .rd-funcs li .fd { font-family:var(--sans); font-size:13.5px; color:var(--stone); margin-top:4px; }
+  .rd-funcs li .ft { display:block; font-family:var(--sans); font-weight:500; font-size:clamp(16px,1.4vw,19px); color:#fff; }
+  .rd-funcs li .fd { display:block; font-family:var(--sans); font-size:13.5px; color:var(--stone); margin-top:5px; line-height:1.5; }
   @media (max-width:900px){ .rd-pin__grid{ grid-template-columns:1fr; gap:32px; } .rd-pin__stage{ min-height:auto; padding:clamp(64px,12vw,120px) 0; } }
 
   /* ---------- two ways ---------- */
@@ -180,3 +180,24 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 .rd-post a.more svg { transition:transform .4s var(--ease-expo); }
 .rd-post:hover a.more svg { transform:translateX(5px); }
 @media (max-width:820px){ .rd-quotes, .rd-journal { grid-template-columns:1fr; } }
+
+/* ---------- mobile menu · premium editorial ---------- */
+#mobile-menu { background: var(--navy) !important; }
+#mobile-menu > .flex.flex-col { align-items: stretch !important; justify-content: flex-start !important;
+  height: 100% !important; padding: clamp(88px,16vh,120px) clamp(28px,8vw,52px) 40px !important;
+  gap: 0 !important; overflow-y: auto; }
+#mobile-menu a { font-family: var(--serif) !important; font-weight: 500 !important;
+  font-size: clamp(26px,7.5vw,38px) !important; line-height: 1.1 !important; letter-spacing: -0.01em;
+  color: #fff !important; text-align: left !important; padding: 16px 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.12) !important; transition: opacity .2s ease; }
+#mobile-menu a:hover, #mobile-menu a:active { opacity: .65; }
+/* the Contact CTA is a button, not a list row */
+#mobile-menu a[href="contact.html"] { font-family: var(--sans) !important; font-weight: 600 !important;
+  font-size: 15px !important; letter-spacing: 0.02em; background: #fff !important; color: var(--navy) !important;
+  text-align: center !important; border: 0 !important; border-radius: 2px !important;
+  padding: 17px 24px !important; margin-top: 32px !important; }
+#mobile-menu a[href="contact.html"]:hover { opacity: 1; background: #f0ede8 !important; }
+/* language toggle: white on the navy sheet, pushed to the bottom */
+#mobile-menu .cms-lang-switcher { color: #fff !important; margin-top: 28px !important; margin-left: 0 !important;
+  justify-content: flex-start; font-size: 15px; }
+#mobile-menu .cms-lang-switcher button { font-size: 15px !important; }
