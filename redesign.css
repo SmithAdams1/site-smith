@@ -40,7 +40,9 @@
   .rd-cta:hover { transform:translateY(-2px); background:#f0ede8; }
   .rd-cta--ghost { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.4); }
   .rd-cta--ghost:hover { background:rgba(255,255,255,0.08); border-color:#fff; }
-  .rd-hero__caption { position:absolute; right:var(--mx); bottom:clamp(40px,7vh,88px); z-index:2;
+  /* Sits clear of the floating chat widget, which is anchored bottom-right on
+   every page and would otherwise cover the second figure. */
+.rd-hero__caption { position:absolute; right:var(--mx); bottom:clamp(104px,15vh,150px); z-index:2;
     text-align:right; color:#fff; display:flex; flex-direction:column; gap:4px; }
   .rd-hero__caption .k { color:rgba(255,255,255,0.7); }
   .rd-hero__caption .v { font-family:var(--serif); font-size:clamp(18px,1.5vw,22px); }
@@ -145,7 +147,10 @@
   letter-spacing: 0.005em; color: var(--navy) !important; opacity: .78; transition: opacity .25s ease, color .3s ease, background .3s ease; }
 .rd-nav nav a:hover { opacity: 1; }
 .rd-nav nav span.absolute { display: none !important; }            /* kill the underline-grow decoration */
-.rd-nav img.invert { filter: none !important; }                    /* navy logo on the light bar */
+/* Match both logo classes in use: index.html carries `invert`, the older pages
+   carry Tailwind's arbitrary `invert-[1]`. Missing one leaves a white wordmark
+   on the light bar, effectively invisible. */
+.rd-nav img[class*="invert"] { filter: none !important; }          /* navy logo on the light bar */
 .rd-nav nav a.bg-white { background: var(--navy) !important; color: #fff !important; opacity: 1;
   border-radius: 2px !important; padding: 10px 24px !important; font-weight: 600 !important; }
 .rd-nav nav a.bg-white:hover { background: #1c3646 !important; }
@@ -156,7 +161,7 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) { background: transparent !importa
   -webkit-backdrop-filter: none; backdrop-filter: none; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) nav a { color: #fff !important; opacity: .85; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) nav a:hover { opacity: 1; }
-body.rd-dark-hero .rd-nav:not(.rd-nav--solid) img.invert { filter: invert(1) !important; }
+body.rd-dark-hero .rd-nav:not(.rd-nav--solid) img[class*="invert"] { filter: invert(1) !important; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) nav a.bg-white { background: #fff !important; color: var(--navy) !important; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) nav a.bg-white:hover { background: #f0ede8 !important; }
 body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !important; }
@@ -201,3 +206,27 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 #mobile-menu .cms-lang-switcher { color: #fff !important; margin-top: 28px !important; margin-left: 0 !important;
   justify-content: flex-start; font-size: 15px; }
 #mobile-menu .cms-lang-switcher button { font-size: 15px !important; }
+
+/* ---------- FAQ · native <details> so answers stay in the DOM for AEO ---------- */
+.rd-faq { max-width:900px; }
+.rd-faq details { border-bottom:1px solid var(--line); }
+.rd-faq details:first-of-type { border-top:1px solid var(--line); }
+.rd-faq summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between;
+  align-items:baseline; gap:28px; padding:26px 2px;
+  font-family:var(--serif); font-weight:500; font-size:clamp(17px,1.6vw,21px);
+  line-height:1.35; color:var(--navy); transition:color .3s ease; }
+.rd-faq summary::-webkit-details-marker { display:none; }
+.rd-faq summary:hover { color:var(--slate); }
+.rd-faq summary:focus-visible { outline:2px solid var(--navy); outline-offset:3px; }
+/* The mark is slate, not the gold the old page used: gold is not in the brand
+   palette, and the Brand Book reserves colour for the ground, never for signalling. */
+.rd-faq .rd-faq__mark { flex-shrink:0; position:relative; width:14px; height:14px;
+  align-self:center; transition:transform .35s var(--ease-expo); }
+.rd-faq .rd-faq__mark::before, .rd-faq .rd-faq__mark::after { content:""; position:absolute;
+  background:var(--slate); transition:background .3s ease; }
+.rd-faq .rd-faq__mark::before { left:0; top:6px; width:14px; height:1.5px; }
+.rd-faq .rd-faq__mark::after { top:0; left:6px; width:1.5px; height:14px; }
+.rd-faq details[open] .rd-faq__mark { transform:rotate(45deg); }
+.rd-faq summary:hover .rd-faq__mark::before, .rd-faq summary:hover .rd-faq__mark::after { background:var(--navy); }
+.rd-faq__a { padding:0 2px 30px; max-width:66ch; font-family:var(--sans);
+  font-size:clamp(15px,1.1vw,16.5px); line-height:1.8; color:var(--ink); }
