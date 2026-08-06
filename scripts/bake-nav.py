@@ -44,11 +44,17 @@ STYLE = '''<style id="rd-nav-dd">
   opacity:0;visibility:hidden;transform:translateY(6px);
   transition:opacity .18s ease,visibility .18s ease,transform .18s ease;z-index:60}
 .rd-dd:hover .rd-dd__menu,.rd-dd:focus-within .rd-dd__menu{opacity:1;visibility:visible;transform:none}
-.rd-dd__inner{background:#0C1E28;border:1px solid rgba(255,255,255,.12);border-radius:12px;
-  padding:8px;box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.rd-dd__item{display:block;padding:10px 14px;color:#fff;text-decoration:none;border-radius:8px;
-  font-size:15px;white-space:nowrap;transition:background .15s}
+.rd-dd__inner{background:#11222D;border:1px solid rgba(255,255,255,.12);border-radius:2px;
+  padding:6px;box-shadow:0 18px 44px rgba(17,34,45,.28)}
+.rd-dd__item{display:block;padding:11px 16px;color:#fff;text-decoration:none;border-radius:2px;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;font-weight:500;
+  white-space:nowrap;transition:background .15s}
 .rd-dd__item:hover,.rd-dd__item:focus-visible{background:rgba(255,255,255,.1)}
+/* redesign.css paints every nav link navy with !important, which also hit the
+   items inside this navy panel - the dropdown opened as an empty dark box on
+   every page carrying the new header. These win it back. */
+.rd-nav nav .rd-dd__item{color:#fff !important;opacity:1 !important;font-size:14px !important}
+.rd-nav nav .rd-dd__item:hover{opacity:1 !important}
 </style>'''
 
 
