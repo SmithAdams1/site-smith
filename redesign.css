@@ -303,3 +303,34 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
   .rd-slide__plate { padding-bottom:clamp(104px,16vh,150px); }
   .rd-carousel__bar { flex-direction:column; align-items:flex-start; gap:14px; }
 }
+
+/* ---------- header layout, independent of the Tailwind CDN ----------
+   The header's geometry came entirely from cdn.tailwindcss.com - h-10, container
+   mx-auto, hidden lg:flex, space-x-8, the CTA's padding. That is the JIT browser
+   build: it generates CSS in JavaScript AFTER first paint, so every page painted
+   with an unstyled header first - giant logo, nav links wrapping onto two lines -
+   and then snapped into place. That is the flicker, and the reason the menu
+   appeared to shift on arrival.
+
+   These rules live in a real render-blocking stylesheet, so the header is correct
+   in the first frame. Values are measured from what Tailwind ends up computing,
+   so nothing moves when it finally loads. */
+.rd-nav { position:fixed; top:0; left:0; width:100%; z-index:50; }
+.rd-nav .container { max-width:1280px; margin-left:auto; margin-right:auto;
+  padding-left:24px; padding-right:24px; padding-top:15px; padding-bottom:15px;
+  display:flex; justify-content:space-between; align-items:center; }
+.rd-nav img { height:40px; width:auto; max-width:100%; }
+.rd-nav nav.hidden { display:none; align-items:center; }
+/* Replicates space-x-8 exactly rather than using gap: if both applied the
+   spacing would double to 64px the moment Tailwind arrived - a new shift. */
+.rd-nav nav.hidden > * + * { margin-left:32px; }
+/* The legacy Next sheet gives the FIRST nav item a 32px margin-right, so on
+   the pages that still load it the Home-to-About gap was 64px and on the two
+   that dropped it, 32px. Same menu, different spacing per page. */
+.rd-nav nav.hidden > * { margin-right:0; }
+.rd-nav nav.hidden a { white-space:nowrap; }    /* never let a label wrap */
+@media (min-width:1024px){ .rd-nav nav.hidden { display:flex; } }
+.rd-nav nav a.bg-white { padding:10px 24px; border-radius:2px; background:#fff; }
+/* the hamburger is lg:hidden in Tailwind; hold that before the CDN answers */
+.rd-nav button[onclick*="mobile-menu"] { display:inline-flex; }
+@media (min-width:1024px){ .rd-nav button[onclick*="mobile-menu"] { display:none; } }
