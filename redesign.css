@@ -7,6 +7,22 @@
     --ease-expo:cubic-bezier(0.16,1,0.3,1);
     --mx:clamp(20px,5vw,64px);
   }
+  /* ---------- reset ----------
+     The system must not depend on the legacy Next stylesheet being present.
+     blog.html and real-estate.html dropped it and fell straight back to browser
+     defaults: 8px body margin, 16px paragraph margins, 40px bulleted list
+     indents, underlined links, 13px buttons - so those two pages diverged from
+     the four that still load it. Scoped to .rd so admin/ and studio/ are
+     untouched. On pages that DO load the legacy sheet this is a no-op, because
+     it resets the same properties to the same values. */
+  body.rd { margin:0; }
+  .rd *, .rd *::before, .rd *::after { box-sizing:border-box; }
+  .rd h1, .rd h2, .rd h3, .rd h4, .rd h5, .rd h6,
+  .rd p, .rd figure, .rd blockquote, .rd dl, .rd dd { margin:0; }
+  .rd ul, .rd ol { margin:0; padding:0; list-style:none; }
+  .rd a { text-decoration:none; }
+  .rd button { font:inherit; }
+
   .rd { font-family:var(--sans); color:var(--ink); background:var(--paper); }
   .rd ::selection { background:var(--navy); color:#fff; }
   .serif { font-family:var(--serif); }
