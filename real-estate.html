@@ -8,104 +8,82 @@
 <meta property="og:url" content="https://www.smithandadams.com/real-estate"/>
 <meta property="og:type" content="website"/>
 <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet"/>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config = { corePlugins: { preflight: false } }</script>
+<link rel="stylesheet" href="/redesign.css">
 <style>
-  .satoshi{font-family:'Satoshi','General Sans',system-ui,sans-serif;}
-  .geist{font-family:'General Sans','Satoshi',system-ui,sans-serif;}
-  .playfair{font-family:'Playfair Display',serif;}
-  body{font-family:'Satoshi','General Sans',system-ui,sans-serif;}
-  .re-card{transition:transform .35s ease, box-shadow .35s ease;}
-  .re-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(12,30,40,.16);}
-  .re-card:hover .re-card-img{transform:scale(1.06);}
-  .re-input{appearance:none;background:#fff;border:1px solid #e3e1da;border-radius:10px;padding:11px 14px;font-size:14px;color:#0C1E28;font-family:inherit;outline:none;width:100%;}
-  .re-input:focus{border-color:#0C1E28;}
-  select.re-input{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230C1E28' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 12px center;background-size:12px;padding-right:34px;}
-  .spin{width:34px;height:34px;border:3px solid #e3e1da;border-top-color:#0C1E28;border-radius:50%;animation:respin .8s linear infinite;}
+  /* Map the legacy type classes used by the dynamic card/block templates
+     onto the redesign tokens, so JS-injected markup inherits the redesign
+     type without touching the render logic. Listings stay in the sans face
+     for legibility across a dense grid; serif is reserved for the hero. */
+  .satoshi{font-family:var(--sans);}
+  .geist{font-family:var(--sans);}
+  .playfair{font-family:var(--serif);}
+  body{font-family:var(--sans);}
+  .re-card{transition:transform .4s var(--ease-expo), box-shadow .4s var(--ease-expo);}
+  .re-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(17,34,45,.14);}
+  .re-card:hover .re-card-img{transform:scale(1.05);}
+  .re-input{appearance:none;background:#fff;border:1px solid var(--line);border-radius:2px;padding:12px 14px;font-size:14px;color:var(--navy);font-family:var(--sans);outline:none;width:100%;}
+  .re-input:focus{border-color:var(--navy);}
+  select.re-input{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2311222D' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 12px center;background-size:12px;padding-right:34px;}
+  .spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--navy);border-radius:50%;animation:respin .8s linear infinite;}
   @keyframes respin{to{transform:rotate(360deg);}}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18073134136');</script>
 <script defer src="/cms-loader.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.smithandadams.com/"}, {"@type": "ListItem", "position": 2, "name": "Real Estate", "item": "https://www.smithandadams.com/real-estate"}]}</script>
 </head>
-<body class="antialiased bg-[#FDFCF9] overflow-x-hidden w-full">
+<body class="antialiased bg-[#FDFCF9] overflow-x-hidden w-full rd rd-dark-hero">
 <main class="min-h-screen">
 
-<!-- HEADER -->
-<header class="fixed w-full z-50 transition-all duration-300 bg-transparent" id="re-header">
-  <div class="container mx-auto px-4 md:px-6 py-6 flex justify-between items-center">
-    <a class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" width="150" height="40" class="h-10 w-auto invert-[1]" style="color:transparent" src="./logo.png"/></a>
-    <nav class="hidden lg:flex items-center space-x-8">
-      <div class="relative group"><a class="text-white transition-colors duration-300 hover:text-gray-300 satoshi" href="index.html">Home</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
-      <div class="relative group"><a class="text-white transition-colors duration-300 hover:text-gray-300 satoshi" href="about.html">About Us</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
-      <div class="relative group"><a class="text-white transition-colors duration-300 hover:text-gray-300 satoshi" href="property-management.html">Property Management</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
-      <div class="relative group"><a class="text-white transition-colors duration-300 hover:text-gray-300 satoshi" href="invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
-      <div class="relative group"><a class="text-white transition-colors duration-300 font-semibold satoshi" href="real-estate.html">Real Estate</a><div class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></div></div>
-      <div class="relative group"><a class="text-white transition-colors duration-300 hover:text-gray-300 satoshi" href="our-developments.html">Our Developments</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
-      <div class="relative group"><a class="text-white transition-colors duration-300 hover:text-gray-300 satoshi" href="blog.html">Blog</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div>
-      <div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi" href="contact.html">Contact Us</a></div>
-    </nav>
-    <button onclick="var m=document.getElementById('mobile-menu');['opacity-0','opacity-100','invisible','pointer-events-none'].forEach(c=>m.classList.toggle(c));" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white w-6"></span><span class="block h-0.5 bg-white my-1 w-4"></span><span class="block h-0.5 bg-white w-5"></span></div></button>
-  </div>
-  <div id="mobile-menu" class="fixed inset-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 opacity-0 invisible pointer-events-none" style="height:100vh">
-    <div class="flex flex-col items-center justify-center h-full space-y-8">
-      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="index.html">Home</a>
-      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="about.html">About Us</a>
-      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="property-management.html">Property Management</a>
-      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="invest-in-portugal.html">Invest in Portugal</a>
-      <a class="text-2xl font-medium text-white font-semibold satoshi" href="real-estate.html">Real Estate</a>
-      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="our-developments.html">Our Developments</a>
-      <a class="text-2xl font-medium text-gray-300 hover:text-white satoshi" href="blog.html">Blog</a>
-      <a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium mt-4 satoshi" href="contact.html">Contact Us</a>
-    </div>
-  </div>
-</header>
+<header class="rd-nav fixed w-full z-50 transition-all duration-300"><div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center"><a class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" loading="lazy" width="150" height="40" decoding="async" data-nimg="1" class="h-10 w-auto invert-[1]" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></a><nav class="hidden lg:flex items-center space-x-8"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="index.html">Home</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="about.html">About Us</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="property-management.html">Property Management</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi font-semibold text-white satoshi" href="real-estate.html">Real Estate</a><div class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></div><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="our-developments.html">Our Developments</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="blog.html">Blog</a><span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 transform hover:-translate-y-0.5 satoshi" href="contact.html">Contact Us</a></div></nav><button onclick="var m=document.getElementById('mobile-menu');['opacity-0','opacity-100','invisible','pointer-events-none'].forEach(function(c){m.classList.toggle(c);});" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span></div></button></div><div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none" style="height:100vh"><div class="flex flex-col items-center justify-center h-full space-y-8"><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="index.html">Home</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="about.html">About Us</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-white font-semibold satoshi" href="real-estate.html">Real Estate</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="our-developments.html">Our Developments</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="blog.html">Blog</a><a class="bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi" href="contact.html">Contact Us</a></div></div></header>
 
-<!-- HERO (cinematic, looping video - editable via backoffice) -->
-<section id="re-hero" style="position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden;background:#0C1E28;background-size:cover;background-position:center;">
-  <video id="re-hero-video" autoplay muted loop playsinline preload="auto" poster="/real-estate-hero-poster.jpg" src="/real-estate-hero.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"></video>
-  <div id="re-hero-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,30,40,.45) 0%,rgba(12,30,40,.18) 42%,rgba(12,30,40,.9) 100%);"></div>
-  <div style="position:relative;max-width:1280px;margin:0 auto;width:100%;padding:0 24px clamp(56px,8vw,110px);">
-    <p class="satoshi" style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.65);margin:0 0 22px;">Smith &amp; Adams · Real Estate</p>
-    <h1 id="re-hero-title" data-i18n="hero_title" class="geist" style="font-size:clamp(44px,7vw,92px);font-weight:800;color:#fff;letter-spacing:-.045em;line-height:1.0;margin:0;max-width:16ch;text-shadow:0 2px 30px rgba(0,0,0,.35);">Property in Portugal</h1>
-    <p id="re-hero-sub" data-i18n="hero_subtitle" class="satoshi" style="font-size:clamp(16px,1.7vw,21px);color:rgba(255,255,255,.82);line-height:1.65;max-width:660px;margin:26px 0 0;text-shadow:0 1px 16px rgba(0,0,0,.4);">A curated selection of apartments, villas and investment opportunities across Portugal's most sought-after locations.</p>
+<!-- HERO (cinematic, looping video - editable via backoffice re_page.hero) -->
+<section class="rd-hero" id="re-hero" style="background-size:cover;background-position:center;">
+  <div class="rd-hero__media">
+    <video id="re-hero-video" autoplay muted loop playsinline preload="auto" poster="/real-estate-hero-poster.jpg" src="/real-estate-hero.mp4"></video>
   </div>
-  <a href="#re-listings" aria-label="Scroll to listings" style="position:absolute;left:50%;bottom:22px;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:24px;text-decoration:none;animation:rebounce 2s infinite;">⌄</a>
+  <div class="rd-hero__scrim"></div>
+  <div class="rd-wrap rd-hero__inner">
+    <p class="rd-label" style="color:rgba(255,255,255,0.62); margin:0 0 26px;">Smith &amp; Adams · Real Estate</p>
+    <h1 id="re-hero-title" data-i18n="hero_title">Property in Portugal</h1>
+    <p id="re-hero-sub" data-i18n="hero_subtitle" class="rd-hero__sub">A curated selection of apartments, villas and investment opportunities across Portugal's most sought-after locations.</p>
+  </div>
+  <a href="#re-listings" class="rd-scrollcue" aria-label="Scroll to listings"><span>Browse</span><span class="bar"></span></a>
 </section>
-<style>@keyframes rebounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}</style>
 
 <!-- FILTER BAR -->
-<section id="re-listings" style="background:#FDFCF9;padding:28px 24px 0;scroll-margin-top:0;">
-  <div style="max-width:1280px;margin:0 auto;">
-    <div style="background:#fff;border:1px solid #ece9e1;border-radius:18px;box-shadow:0 8px 30px rgba(12,30,40,.06);padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end;">
-      <div><label data-i18n="f_location" class="satoshi" style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:7px;">Location</label><select id="f-region" class="re-input satoshi"></select></div>
-      <div><label data-i18n="f_type" class="satoshi" style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:7px;">Type</label><select id="f-type" class="re-input satoshi"></select></div>
-      <div><label data-i18n="f_transaction" class="satoshi" style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:7px;">For</label><select id="f-transaction" class="re-input satoshi"></select></div>
-      <div><label data-i18n="f_beds" class="satoshi" style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:7px;">Bedrooms</label><select id="f-beds" class="re-input satoshi"></select></div>
-      <div><label data-i18n="f_price" class="satoshi" style="display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9ca3af;margin-bottom:7px;">Max price</label><select id="f-price" class="re-input satoshi"></select></div>
-      <div><button id="f-reset" class="satoshi" style="width:100%;background:#0C1E28;color:#fff;border:none;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600;cursor:pointer;" data-i18n="f_reset">Reset</button></div>
+<section id="re-listings" style="background:var(--paper);padding:clamp(40px,6vw,72px) var(--mx) 0;scroll-margin-top:0;">
+  <div style="max-width:1360px;margin:0 auto;">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 8px 30px rgba(17,34,45,.05);padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end;">
+      <div><label data-i18n="f_location" class="rd-label" style="display:block;margin-bottom:9px;">Location</label><select id="f-region" class="re-input"></select></div>
+      <div><label data-i18n="f_type" class="rd-label" style="display:block;margin-bottom:9px;">Type</label><select id="f-type" class="re-input"></select></div>
+      <div><label data-i18n="f_transaction" class="rd-label" style="display:block;margin-bottom:9px;">For</label><select id="f-transaction" class="re-input"></select></div>
+      <div><label data-i18n="f_beds" class="rd-label" style="display:block;margin-bottom:9px;">Bedrooms</label><select id="f-beds" class="re-input"></select></div>
+      <div><label data-i18n="f_price" class="rd-label" style="display:block;margin-bottom:9px;">Max price</label><select id="f-price" class="re-input"></select></div>
+      <div><button id="f-reset" class="satoshi" style="width:100%;background:var(--navy);color:#fff;border:none;border-radius:2px;padding:13px 14px;font-size:14px;font-weight:600;cursor:pointer;" data-i18n="f_reset">Reset</button></div>
     </div>
   </div>
 </section>
 
 <!-- RESULTS -->
-<section style="background:#FDFCF9;padding:24px 24px clamp(64px,9vw,110px);">
-  <div style="max-width:1280px;margin:0 auto;">
-    <div id="re-count" class="satoshi" style="font-size:14px;color:#6b7280;margin:14px 2px 22px;"></div>
+<section style="background:var(--paper);padding:24px var(--mx) clamp(72px,10vw,140px);">
+  <div style="max-width:1360px;margin:0 auto;">
+    <div id="re-count" class="rd-label" style="margin:16px 2px 24px;color:var(--slate);"></div>
     <div id="re-loading" style="display:flex;justify-content:center;padding:60px 0;"><div class="spin"></div></div>
-    <div id="re-empty" class="satoshi" style="display:none;text-align:center;padding:60px 20px;color:#6b7280;font-size:16px;"></div>
+    <div id="re-empty" class="satoshi" style="display:none;text-align:center;padding:60px 20px;color:var(--slate);font-size:16px;"></div>
     <div id="re-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;"></div>
   </div>
 </section>
 
 <!-- ORGANIC CONTENT BLOCKS (editable via backoffice) -->
-<section id="re-blocks-wrap" style="background:#FDFCF9;display:none;"><div id="re-blocks" style="max-width:1080px;margin:0 auto;padding:0 24px clamp(48px,8vw,96px);"></div></section>
-
-<div id="re-footer-mount"></div>
+<section id="re-blocks-wrap" style="background:var(--paper);display:none;"><div id="re-blocks" style="max-width:1080px;margin:0 auto;padding:0 var(--mx) clamp(48px,8vw,96px);"></div></section>
 
 <script>
 (function(){
@@ -178,24 +156,24 @@
       if(p.bedrooms)specs.push(['bed',p.bedrooms]);
       if(p.bathrooms)specs.push(['bath',p.bathrooms]);
       if(p.area_sqm)specs.push(['area',Math.round(p.area_sqm)+' m²']);
-      var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#0C1E28')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
+      var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#11222D')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
       var a=document.createElement('a');
       a.href='property/'+encodeURIComponent(p.slug);
       a.className='re-card';
-      a.style.cssText='display:block;background:#fff;border:1px solid #ece9e1;border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;';
+      a.style.cssText='display:block;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;';
       a.innerHTML=
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
           '<img class="re-card-img" src="'+img+'" alt="'+pick(p.title).replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;" loading="lazy"/>'+
-          '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:rgba(12,30,40,.88);color:#fff;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;">'+(p.transaction_type==='rent'?t.rent:t.sale)+'</span>'+
-          (p.golden_visa?'<span class="satoshi" style="position:absolute;top:12px;right:12px;background:#C9A227;color:#0C1E28;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;">'+t.gv+'</span>':'')+
+          '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:rgba(17,34,45,.9);color:#fff;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;">'+(p.transaction_type==='rent'?t.rent:t.sale)+'</span>'+
+          (p.golden_visa?'<span class="satoshi" style="position:absolute;top:12px;right:12px;background:#C9A227;color:#11222D;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;">'+t.gv+'</span>':'')+
         '</div>'+
-        '<div style="padding:18px 20px 22px;">'+
-          '<p class="satoshi" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9ca3af;margin:0 0 8px;">'+[(t.types[p.property_type]||p.property_type),p.region].filter(Boolean).join(' · ')+'</p>'+
-          '<h3 class="geist" style="font-size:19px;font-weight:700;color:#0C1E28;line-height:1.3;margin:0 0 10px;min-height:50px;">'+pick(p.title)+'</h3>'+
-          '<div class="satoshi" style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:#4b5563;margin:0 0 14px;font-weight:500;">'+specsHtml+'</div>'+
-          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid #f0eee8;padding-top:14px;">'+
-            '<span class="geist" style="font-size:20px;font-weight:800;color:#0C1E28;">'+fmtPrice(p.price,p.currency)+'</span>'+
-            '<span class="satoshi" style="font-size:13px;font-weight:600;color:#0C1E28;">'+t.view+' →</span>'+
+        '<div style="padding:20px 22px 24px;">'+
+          '<p class="rd-label" style="margin:0 0 10px;color:var(--slate);">'+[(t.types[p.property_type]||p.property_type),p.region].filter(Boolean).join(' · ')+'</p>'+
+          '<h3 class="serif" style="font-size:22px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 12px;min-height:56px;letter-spacing:-0.01em;">'+pick(p.title)+'</h3>'+
+          '<div class="satoshi" style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink);margin:0 0 16px;font-weight:500;">'+specsHtml+'</div>'+
+          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;">'+
+            '<span class="serif" style="font-size:22px;font-weight:500;color:var(--navy);">'+fmtPrice(p.price,p.currency)+'</span>'+
+            '<span class="satoshi" style="font-size:13px;font-weight:600;color:var(--navy);">'+t.view+' →</span>'+
           '</div>'+
         '</div>';
       grid.appendChild(a);
@@ -247,30 +225,47 @@
         var heading=pick(b.heading||{}),body=pick(b.body||{}),cap=pick(b.caption||{});
         var el=document.createElement('div');el.style.marginBottom='40px';
         if(b.type==='text'){
-          el.innerHTML=(heading?'<h2 class="geist" style="font-size:clamp(24px,3vw,34px);font-weight:800;color:#0C1E28;letter-spacing:-.02em;margin:0 0 16px;">'+esc(heading)+'</h2>':'')+
-            '<div class="satoshi" style="font-size:17px;color:#4b5563;line-height:1.85;">'+(body||'')+'</div>';
+          el.innerHTML=(heading?'<h2 class="serif" style="font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--navy);letter-spacing:-.01em;margin:0 0 18px;">'+esc(heading)+'</h2>':'')+
+            '<div class="satoshi" style="font-size:17px;color:var(--ink);line-height:1.85;">'+(body||'')+'</div>';
         }else if(b.type==='image'){
-          el.innerHTML='<figure style="margin:0;"><img src="'+esc(b.image||'')+'" alt="'+esc(cap)+'" style="width:100%;border-radius:16px;display:block;"/>'+(cap?'<figcaption class="satoshi" style="font-size:13px;color:#9ca3af;margin-top:8px;text-align:center;">'+esc(cap)+'</figcaption>':'')+'</figure>';
+          el.innerHTML='<figure style="margin:0;"><img src="'+esc(b.image||'')+'" alt="'+esc(cap)+'" style="width:100%;border-radius:3px;display:block;"/>'+(cap?'<figcaption class="satoshi" style="font-size:13px;color:var(--slate);margin-top:10px;text-align:center;">'+esc(cap)+'</figcaption>':'')+'</figure>';
         }else if(b.type==='text_image'){
-          var imgHtml='<div style="flex:1;min-width:280px;"><img src="'+esc(b.image||'')+'" alt="'+esc(heading)+'" style="width:100%;border-radius:16px;display:block;"/></div>';
-          var txtHtml='<div style="flex:1;min-width:280px;">'+(heading?'<h2 class="geist" style="font-size:clamp(22px,2.6vw,30px);font-weight:800;color:#0C1E28;margin:0 0 14px;">'+esc(heading)+'</h2>':'')+'<div class="satoshi" style="font-size:16px;color:#4b5563;line-height:1.8;">'+(body||'')+'</div></div>';
-          el.style.display='flex';el.style.gap='32px';el.style.alignItems='center';el.style.flexWrap='wrap';
+          var imgHtml='<div style="flex:1;min-width:280px;"><img src="'+esc(b.image||'')+'" alt="'+esc(heading)+'" style="width:100%;border-radius:3px;display:block;"/></div>';
+          var txtHtml='<div style="flex:1;min-width:280px;">'+(heading?'<h2 class="serif" style="font-size:clamp(24px,2.8vw,34px);font-weight:500;color:var(--navy);margin:0 0 16px;letter-spacing:-.01em;">'+esc(heading)+'</h2>':'')+'<div class="satoshi" style="font-size:16px;color:var(--ink);line-height:1.8;">'+(body||'')+'</div></div>';
+          el.style.display='flex';el.style.gap='40px';el.style.alignItems='center';el.style.flexWrap='wrap';
           el.innerHTML=(b.image_side==='right')?(txtHtml+imgHtml):(imgHtml+txtHtml);
         }
         c.appendChild(el);
       });
     }
   }).catch(function(e){console.warn('[real-estate] page content',e);});
-
-  // header bg on scroll
-  var hdr=document.getElementById('re-header');
-  function onScroll(){if(window.scrollY>40){hdr.classList.add('bg-[#0C1E28]','shadow-lg');}else{hdr.classList.remove('bg-[#0C1E28]','shadow-lg');}}
-  window.addEventListener('scroll',onScroll);onScroll();
 })();
 </script>
 
 <!-- FOOTER -->
-<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a href="index.html"><img alt="Smith &amp; Adams Logo" width="160" height="32" class="invert h-8 w-auto" src="./logo.png"/></a><p data-cms="global.footer.description" data-cms-attr="html" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams is an independent real estate investment advisory firm in Portugal, helping international investors and Residency Investors build euro-denominated portfolios with secure, transparent returns.</p></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="index.html">Home</a></li><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="property-management.html">Property Management</a></li><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="invest-in-portugal.html">Invest in Portugal</a></li><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="real-estate.html">Real Estate</a></li><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="our-developments.html">Our Developments</a></li><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="blog.html">Blog</a></li><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="about.html">About</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="satoshi text-[15px] text-gray-300 hover:text-white"><a href="contact.html">Contact Us</a></li><li class="satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li><li class="satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] text-white geist mb-4">Visit Our Office</h4><p class="satoshi text-[15px] text-gray-300 mb-4">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl satoshi font-bold text-base text-center">Get Directions</a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-white/10 mt-10"><p class="satoshi text-[14px] text-gray-400">© Smith &amp; Adams Group. All rights reserved.</p></div></div></footer>
+<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p data-cms="global.footer.description" data-cms-attr="html" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams is an independent real estate investment advisory firm in Portugal, helping international investors and Residency Investors build euro-denominated portfolios with secure, transparent returns.</p><div class="flex gap-4 mt-6"><a data-cms="global.social.instagram" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a data-cms="global.social.linkedin" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a data-cms="global.social.youtube" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="invest-in-portugal.html">Invest in Portugal</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="real-estate.html">Real Estate</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="our-developments.html">Our Developments</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer">Get Directions</a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4" data-cms="global.footer.office_title" data-cms-attr="html">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4" data-cms="global.footer.office_description" data-cms-attr="html">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><a data-cms="global.footer.office_cta_url" href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer" target="_blank" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center"><span data-cms="global.footer.office_cta_label">Get Directions</span></a></div></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="terms.html">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="privacy.html">Privacy Policy</a></p></div></div></footer>
 
 </main>
+    <script id="header-scroll-script">
+        document.addEventListener('DOMContentLoaded', function () {
+            const header = document.querySelector('header');
+            if (!header) return;
+            const container = header.querySelector('.container');
+            function apply(){
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-sm');
+                    if (container) { container.classList.remove('py-6','md:py-6'); container.classList.add('py-4','md:py-4'); }
+                } else {
+                    header.classList.remove('shadow-sm');
+                    if (container) { container.classList.remove('py-4','md:py-4'); container.classList.add('py-6','md:py-6'); }
+                }
+            }
+            apply();
+            window.addEventListener('scroll', apply);
+        });
+    </script>
+<script src="/vendor/gsap.min.js"></script>
+<script src="/vendor/ScrollTrigger.min.js"></script>
+<script defer src="/redesign.js"></script>
+<script src="/chat.js"></script>
 </body></html>
