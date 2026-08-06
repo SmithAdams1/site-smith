@@ -58,14 +58,49 @@
             if (frames[i+d] && frames[i+d].complete && frames[i+d].naturalWidth) { paint(frames[i+d]); return; }
           }
         }
-        for (var k = 0; k < N; k++) {
-          (function (idx) {
-            var img = new Image();
-            img.onload = function () { if (!firstReady) { firstReady = true; sizeCanvas(); drawIndex(0); } };
-            img.src = '/hero-frames/f_' + pad(idx + 1) + '.jpg';
-            frames[idx] = img;
-          })(k);
+        // Frames load in two passes instead of firing all 120 (6.9 MB) at once.
+        // Pass 1 takes every 8th frame, so the flythrough becomes scrubable after
+        // ~0.9 MB; drawIndex() already falls back to the nearest loaded frame, so
+        // the sequence stays continuous, just coarse, until pass 2 fills it in.
+        // The end result is identical — only the order of arrival changes.
+        var conn = navigator.connection || {};
+        var frugal = !!(conn.saveData || /(^|-)[23]g$/.test(conn.effectiveType || ''));
+        var STEP = 8, MAX_INFLIGHT = 6;
+
+        function loadFrame(idx, done) {
+          if (frames[idx]) { if (done) done(); return; }
+          var img = new Image();
+          img.onload = function () {
+            if (!firstReady) { firstReady = true; sizeCanvas(); drawIndex(0); }
+            if (done) done();
+          };
+          img.onerror = function () { if (done) done(); };
+          img.src = '/hero-frames/f_' + pad(idx + 1) + '.jpg';
+          frames[idx] = img;
         }
+
+        function fillRemaining() {
+          // On saveData or 2G/3G we stop at the coarse pass: the poster behind the
+          // canvas carries the hero, and nobody waits on 7 MB of stills.
+          if (frugal) return;
+          var queue = [];
+          for (var i = 0; i < N; i++) if (!frames[i]) queue.push(i);
+          var inflight = 0;
+          (function pump() {
+            while (inflight < MAX_INFLIGHT && queue.length) {
+              inflight++;
+              loadFrame(queue.shift(), function () { inflight--; pump(); });
+            }
+          })();
+        }
+
+        var coarse = [];
+        for (var k = 0; k < N; k += STEP) coarse.push(k);
+        if (coarse[coarse.length - 1] !== N - 1) coarse.push(N - 1);
+        var pendingCoarse = coarse.length;
+        coarse.forEach(function (i) {
+          loadFrame(i, function () { if (--pendingCoarse === 0) fillRemaining(); });
+        });
         window.addEventListener('resize', function () { sizeCanvas(); drawIndex(current); });
 
         var p1 = fly.querySelector('.p1'), p2 = fly.querySelector('.p2'), p3 = fly.querySelector('.p3');
