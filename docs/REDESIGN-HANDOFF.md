@@ -5,7 +5,7 @@ _Last updated: 2026-08-07. Author account: this session (commits authored as Suz
 > **Read this first if you are a fresh session.** It is the single source of truth for where the redesign stands and what is left. The goal: reformulate `smithandadams.com` around Brand Book Edition 03, page by page, into a shared design system (`redesign.css` + `redesign.js`), without breaking SEO or the CMS. Nothing here is in production yet.
 
 ## Branch / deploy state
-- `homepage-redesign` is many commits ahead of `main`**; `main` (production) is untouched at `c798471`.
+- `homepage-redesign` is ~40 commits ahead of `main`; `main` (production) is untouched at `c798471`.
 - Preview URL the client reviews: `https://site-smith-git-homepage-redesign-smith-adams1.vercel.app`
 - **Never push to `main`** without explicit approval. Always commit as author Suzan (see above) or Vercel won't deploy the preview.
 - Push target: `git push upstream homepage-redesign` (`upstream` = SmithAdams1, `origin` = abiliodiz-cell fork).
@@ -13,7 +13,7 @@ _Last updated: 2026-08-07. Author account: this session (commits authored as Suz
 ## The rules that keep biting (do not relearn these the hard way)
 1. **The served HTML must match what the visitor and crawler eventually see.** AI crawlers don't run JS. Every fix in this project traces back to baking the truth into the HTML and making JS idempotent. Verify with the CMS blocked, not just live.
 2. **Vercel filesystem shadows `vercel.json` rewrites** — `/api/sitemap` and `/api/seo_blog` are affected.
-3. **Tailwind CDN (`cdn.tailwindcss.com`) generates CSS in JS after first paint.** This is the cause of the header flicker and of everything-below-the-header restyling on arrival. Still present; see roadmap item 3. `corePlugins:{preflight:false}`.
+3. **Tailwind is now a compiled stylesheet (`tailwind.css`), not the CDN** — the runtime CDN generated CSS in JS after first paint, which caused the header flicker and the everything-below-restyles-on-load flash. Fixed in commit `07b0ac6`. Two consequences: (a) any new Tailwind class on a converted page needs a recompile (see item 3 in the roadmap), and (b) `admin.html`/`page.html` still use the CDN.
 4. **Two classes of page**: some still load the legacy `_next` stylesheet (index, about, invest, property-management), some dropped it (blog, real-estate). This caused the underlined-nav and menu-shift bugs.
 5. **CSS specificity**: use `:where()` for zero-specificity resets so a `.rd h2` rule never outranks a single-class rule. This silently flattened margins site-wide once.
 6. **Local `python3 -m http.server` does not support Range requests**, so `<video>` `currentTime` seeks pin to 0 locally but work on Vercel. Don't diagnose video seeks against localhost.
