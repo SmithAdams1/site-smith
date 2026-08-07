@@ -423,11 +423,72 @@
       <div class="page-head">
         <div>
           <h2>Real Estate</h2>
-          <div class="sub">Properties, hero video and Real Estate page blocks.</div>
+          <div class="sub">Properties and the Real Estate page hero.</div>
         </div>
-        <a class="btn ghost" id="re-open-tab" href="/admin-real-estate.html" target="_blank" rel="noopener">Open full screen ↗</a>
+        <div class="row" style="display:flex;gap:8px;align-items:center;">
+          <a class="btn ghost" id="re-legacy" href="/admin-real-estate.html" target="_blank" rel="noopener">Legacy editor ↗</a>
+          <button class="btn" id="re-new" type="button">＋ New property</button>
+        </div>
       </div>
-      <div class="embed-host"><iframe id="re-frame" class="embed-frame" title="Real Estate backoffice" src="about:blank"></iframe></div>
+
+      <!-- LIST -->
+      <div id="re-list"></div>
+
+      <!-- EDITOR (hidden until New / Edit) -->
+      <div id="re-editor" class="hidden">
+        <div class="page-head">
+          <button class="btn ghost" id="re-back" type="button">← Back to list</button>
+          <div class="row" style="display:flex;gap:8px;">
+            <button class="btn ghost danger" id="re-delete" type="button">Delete</button>
+            <button class="btn" id="re-save" type="button">Save property</button>
+          </div>
+        </div>
+        <div class="re-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;max-width:1000px;">
+          <label class="re-f">Title (EN)<input id="re-title-en" type="text"></label>
+          <label class="re-f">Title (PT)<input id="re-title-pt" type="text"></label>
+          <label class="re-f">Slug <span class="re-hint">(auto from EN if blank)</span><input id="re-slug" type="text"></label>
+          <label class="re-f">Reference<input id="re-reference" type="text"></label>
+          <label class="re-f">Status<select id="re-status"><option value="draft">Draft</option><option value="published">Published</option></select></label>
+          <label class="re-f">Transaction<select id="re-transaction"><option value="sale">For sale</option><option value="rent">For rent</option></select></label>
+          <label class="re-f">Type<select id="re-type"><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="townhouse">Townhouse</option><option value="penthouse">Penthouse</option><option value="studio">Studio</option><option value="plot">Plot</option><option value="commercial">Commercial</option></select></label>
+          <label class="re-f">Price (€)<input id="re-price" type="number" min="0" step="1000"></label>
+          <label class="re-f">Region<input id="re-region" type="text" placeholder="e.g. Lisbon"></label>
+          <label class="re-f">City<input id="re-city" type="text"></label>
+          <label class="re-f">Address<input id="re-address" type="text"></label>
+          <label class="re-f">Energy rating<input id="re-energy" type="text" placeholder="A+, B…"></label>
+          <label class="re-f">Bedrooms<input id="re-beds" type="number" min="0"></label>
+          <label class="re-f">Bathrooms<input id="re-baths" type="number" min="0"></label>
+          <label class="re-f">Area (m²)<input id="re-area" type="number" min="0"></label>
+          <label class="re-f">Plot (m²)<input id="re-plot" type="number" min="0"></label>
+          <label class="re-f">Year built<input id="re-year" type="number" min="0"></label>
+          <label class="re-f">&nbsp;<span style="display:flex;gap:18px;align-items:center;padding-top:8px;"><label style="display:inline-flex;gap:6px;align-items:center;font-weight:400;"><input id="re-gv" type="checkbox"> Golden Visa</label><label style="display:inline-flex;gap:6px;align-items:center;font-weight:400;"><input id="re-featured" type="checkbox"> Featured</label></span></label>
+          <label class="re-f">Latitude<input id="re-lat" type="number" step="0.000001"></label>
+          <label class="re-f">Longitude<input id="re-lng" type="number" step="0.000001"></label>
+          <label class="re-f" style="grid-column:1/-1;">Summary (EN)<input id="re-summary-en" type="text"></label>
+          <label class="re-f" style="grid-column:1/-1;">Summary (PT)<input id="re-summary-pt" type="text"></label>
+          <label class="re-f" style="grid-column:1/-1;">Description (EN)<textarea id="re-desc-en" rows="4"></textarea></label>
+          <label class="re-f" style="grid-column:1/-1;">Description (PT)<textarea id="re-desc-pt" rows="4"></textarea></label>
+          <label class="re-f">Highlights (EN) <span class="re-hint">one per line</span><textarea id="re-hl-en" rows="4"></textarea></label>
+          <label class="re-f">Highlights (PT) <span class="re-hint">one per line</span><textarea id="re-hl-pt" rows="4"></textarea></label>
+          <div class="re-f" style="grid-column:1/-1;">Gallery <span class="re-hint">first image is the cover</span>
+            <div id="re-thumbs" class="gal-strip" style="display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;"></div>
+            <input id="re-file" type="file" accept="image/*" multiple>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO (re_page) -->
+      <div id="re-hero-panel" style="margin-top:26px;border-top:1px solid var(--line,#e4e1da);padding-top:20px;max-width:1000px;">
+        <div class="page-head"><div><h3 style="margin:0;">Real Estate page hero</h3><div class="sub">The banner at the top of /real-estate.</div></div><button class="btn" id="re-hero-save" type="button">Save hero</button></div>
+        <div class="re-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;">
+          <label class="re-f">Hero title (EN)<input id="re-h-title-en" type="text"></label>
+          <label class="re-f">Hero title (PT)<input id="re-h-title-pt" type="text"></label>
+          <label class="re-f" style="grid-column:1/-1;">Hero subtitle (EN)<textarea id="re-h-sub-en" rows="2"></textarea></label>
+          <label class="re-f" style="grid-column:1/-1;">Hero subtitle (PT)<textarea id="re-h-sub-pt" rows="2"></textarea></label>
+          <label class="re-f">Background video URL<input id="re-h-bgvideo" type="text" placeholder="/real-estate-hero.mp4"></label>
+          <label class="re-f">Background colour<input id="re-h-bgcolor" type="text" placeholder="#11222D"></label>
+        </div>
+      </div>
     </section>
 
     <!-- ================= BLOG (embedded) =========================== -->
@@ -780,6 +841,170 @@
     _embedLoaded[frameId] = true;
     f.src = src;
   }
+
+  // ============================================================
+  // Real Estate — native (properties + re_page hero)
+  // The insert/update payload mirrors admin-real-estate.html's
+  // saveProperty() column-for-column; the legacy editor stays
+  // linked as a fallback until these saves are confirmed live.
+  // ============================================================
+  const RE_BUCKET = 'properties';
+  let reState = { current: null, images: [], brochureUrl: null };
+  const reG = id => document.getElementById(id);
+  const reNum = v => { const t = String(v==null?'':v).trim(); return t===''?null:Number(t); };
+  const reLines = v => String(v||'').split('\n').map(x=>x.trim()).filter(Boolean);
+
+  function reShowList(){ reG('re-list').classList.remove('hidden'); reG('re-editor').classList.add('hidden'); reG('re-hero-panel').classList.remove('hidden'); reG('re-new').classList.remove('hidden'); }
+  function reShowEditor(){ reG('re-list').classList.add('hidden'); reG('re-editor').classList.remove('hidden'); reG('re-hero-panel').classList.add('hidden'); reG('re-new').classList.add('hidden'); }
+
+  async function reLoad(){
+    reShowList();
+    const box = reG('re-list');
+    box.innerHTML = '<div style="color:var(--muted);padding:20px;">Loading…</div>';
+    const { data, error } = await sb.from('properties').select('*').order('featured',{ascending:false}).order('created_at',{ascending:false});
+    if(error){ box.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load properties</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
+    reRenderList(data||[]);
+    reLoadHero();
+  }
+
+  function reRenderList(rows){
+    const box = reG('re-list');
+    if(!rows.length){ box.innerHTML = '<div class="empty"><h3>No properties yet</h3><p>Use “New property” to add the first one.</p></div>'; return; }
+    box.innerHTML = rows.map(p=>{
+      const t = (p.title && (p.title.en||p.title.pt)) || p.slug || '(untitled)';
+      const loc = [p.city,p.region].filter(Boolean).join(', ');
+      const price = p.price!=null ? '€'+Number(p.price).toLocaleString('en-GB') : '';
+      const pub = p.status==='published';
+      return `<div class="card re-row" data-id="${p.id}" style="display:flex;gap:14px;align-items:center;padding:12px 14px;margin-bottom:10px;">
+        <div style="flex:0 0 84px;height:60px;border-radius:4px;overflow:hidden;background:#eee;">${p.cover_image?`<img src="${escapeHtml(p.cover_image)}" style="width:100%;height:100%;object-fit:cover;">`:''}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:600;color:#11222D;">${escapeHtml(t)}</div>
+          <div class="meta" style="font-size:13px;color:var(--muted);">${escapeHtml(loc)}${price?' · '+price:''}${p.reference?' · '+escapeHtml(p.reference):''}</div>
+        </div>
+        <span class="badge ${pub?'':'draft'}">${pub?'Published':'Draft'}</span>
+        <button class="btn ghost sm re-feat" data-id="${p.id}" data-on="${p.featured?1:0}" type="button">${p.featured?'★ Featured':'☆ Feature'}</button>
+        <button class="btn ghost sm re-edit" data-id="${p.id}" type="button">Edit</button>
+        <button class="btn ghost sm danger re-del" data-id="${p.id}" type="button">Delete</button>
+      </div>`;
+    }).join('');
+  }
+
+  function reClearForm(){
+    ['re-title-en','re-title-pt','re-slug','re-reference','re-price','re-region','re-city','re-address','re-energy','re-beds','re-baths','re-area','re-plot','re-year','re-lat','re-lng','re-summary-en','re-summary-pt','re-desc-en','re-desc-pt','re-hl-en','re-hl-pt'].forEach(id=>{ const el=reG(id); if(el) el.value=''; });
+    reG('re-status').value='draft'; reG('re-transaction').value='sale'; reG('re-type').value='apartment';
+    reG('re-gv').checked=false; reG('re-featured').checked=false;
+    reState.images=[]; reState.brochureUrl=null; reRenderThumbs();
+  }
+
+  function reNewProp(){ reState.current=null; reClearForm(); reShowEditor(); }
+
+  async function reEdit(id){
+    const { data, error } = await sb.from('properties').select('*').eq('id',id).single();
+    if(error||!data){ toast('Could not load property.'); return; }
+    reState.current=data; reState.images=Array.isArray(data.images)?data.images.slice():[]; reState.brochureUrl=data.brochure_url||null;
+    const set=(id,v)=>{ const el=reG(id); if(el) el.value=(v==null?'':v); };
+    set('re-title-en',data.title&&data.title.en); set('re-title-pt',data.title&&data.title.pt);
+    set('re-slug',data.slug); set('re-reference',data.reference);
+    reG('re-status').value=data.status||'draft'; reG('re-transaction').value=data.transaction_type||'sale'; reG('re-type').value=data.property_type||'apartment';
+    set('re-price',data.price); set('re-region',data.region); set('re-city',data.city); set('re-address',data.address); set('re-energy',data.energy_rating);
+    set('re-beds',data.bedrooms); set('re-baths',data.bathrooms); set('re-area',data.area_sqm); set('re-plot',data.plot_sqm); set('re-year',data.year_built);
+    set('re-lat',data.latitude); set('re-lng',data.longitude);
+    reG('re-gv').checked=!!data.golden_visa; reG('re-featured').checked=!!data.featured;
+    set('re-summary-en',data.summary&&data.summary.en); set('re-summary-pt',data.summary&&data.summary.pt);
+    set('re-desc-en',data.description&&data.description.en); set('re-desc-pt',data.description&&data.description.pt);
+    set('re-hl-en',((data.highlights&&data.highlights.en)||[]).join('\n')); set('re-hl-pt',((data.highlights&&data.highlights.pt)||[]).join('\n'));
+    reRenderThumbs(); reShowEditor();
+  }
+
+  function reCollect(){
+    const titleEn = reG('re-title-en').value.trim();
+    if(!titleEn){ toast('English title is required.'); return null; }
+    const slug = reG('re-slug').value.trim() || slugify(titleEn);
+    return { slug, reference: reG('re-reference').value.trim()||null, status: reG('re-status').value,
+      transaction_type: reG('re-transaction').value, property_type: reG('re-type').value,
+      region: reG('re-region').value.trim()||null, city: reG('re-city').value.trim()||null, address: reG('re-address').value.trim()||null,
+      price: reNum(reG('re-price').value), currency:'EUR',
+      bedrooms: reNum(reG('re-beds').value), bathrooms: reNum(reG('re-baths').value), area_sqm: reNum(reG('re-area').value),
+      plot_sqm: reNum(reG('re-plot').value), year_built: reNum(reG('re-year').value), energy_rating: reG('re-energy').value.trim()||null,
+      latitude: reNum(reG('re-lat').value), longitude: reNum(reG('re-lng').value),
+      golden_visa: reG('re-gv').checked, featured: reG('re-featured').checked,
+      title:{en:titleEn,pt:reG('re-title-pt').value.trim()},
+      summary:{en:reG('re-summary-en').value.trim(),pt:reG('re-summary-pt').value.trim()},
+      description:{en:reG('re-desc-en').value,pt:reG('re-desc-pt').value},
+      highlights:{en:reLines(reG('re-hl-en').value),pt:reLines(reG('re-hl-pt').value)},
+      images: reState.images, cover_image: reState.images[0]||null, brochure_url: reState.brochureUrl||null };
+  }
+
+  async function reSave(){
+    const payload = reCollect(); if(!payload) return;
+    const res = reState.current ? await sb.from('properties').update(payload).eq('id',reState.current.id)
+                                : await sb.from('properties').insert(payload).select().single();
+    if(res.error){ toast('Save error: '+res.error.message); return; }
+    if(!reState.current && res.data) reState.current = res.data;
+    toast('Property saved.'); reLoad();
+  }
+
+  async function reDelete(id){
+    if(!confirm('Delete this property? This cannot be undone.')) return;
+    const { error } = await sb.from('properties').delete().eq('id',id);
+    if(error){ toast('Delete error: '+error.message); return; }
+    toast('Property deleted.'); reLoad();
+  }
+
+  async function reToggleFeatured(id,on){
+    const { error } = await sb.from('properties').update({featured:!on}).eq('id',id);
+    if(error){ toast('Error: '+error.message); return; }
+    reLoad();
+  }
+
+  function reRenderThumbs(){
+    const box = reG('re-thumbs'); if(!box) return;
+    box.innerHTML = reState.images.map((u,i)=>`<div class="gal-thumb" style="position:relative;width:96px;height:66px;border-radius:4px;overflow:hidden;border:1px solid #e4e1da;${i===0?'outline:2px solid #11222D;':''}"><img src="${escapeHtml(u)}" style="width:100%;height:100%;object-fit:cover;"><button type="button" class="re-thumb-x" data-i="${i}" style="position:absolute;top:2px;right:2px;background:rgba(17,34,45,.85);color:#fff;border:none;border-radius:2px;width:18px;height:18px;cursor:pointer;line-height:1;">×</button></div>`).join('') || '<div style="color:var(--muted);font-size:13px;">No images yet.</div>';
+  }
+
+  async function reUpload(files){
+    for(const file of files){
+      const path = Date.now()+'-'+Math.random().toString(36).slice(2,8)+'-'+file.name.replace(/[^a-z0-9.\-]/gi,'_');
+      const { error } = await sb.storage.from(RE_BUCKET).upload(path,file,{cacheControl:'3600',upsert:false});
+      if(error){ toast('Upload error: '+error.message); continue; }
+      const { data } = sb.storage.from(RE_BUCKET).getPublicUrl(path);
+      reState.images.push(data.publicUrl);
+    }
+    reRenderThumbs();
+  }
+
+  async function reLoadHero(){
+    const { data } = await sb.from('re_page').select('hero').eq('id','real-estate').limit(1);
+    const hero = (data && data[0] && data[0].hero) || {};
+    const set=(id,v)=>{ const el=reG(id); if(el) el.value=(v==null?'':v); };
+    set('re-h-title-en',hero.title&&hero.title.en); set('re-h-title-pt',hero.title&&hero.title.pt);
+    set('re-h-sub-en',hero.subtitle&&hero.subtitle.en); set('re-h-sub-pt',hero.subtitle&&hero.subtitle.pt);
+    set('re-h-bgvideo',hero.bg_video); set('re-h-bgcolor',hero.bg_color);
+  }
+  async function reSaveHero(){
+    const hero = { title:{en:reG('re-h-title-en').value.trim(),pt:reG('re-h-title-pt').value.trim()},
+      subtitle:{en:reG('re-h-sub-en').value.trim(),pt:reG('re-h-sub-pt').value.trim()},
+      bg_video:reG('re-h-bgvideo').value.trim()||null, bg_color:reG('re-h-bgcolor').value.trim()||null };
+    const { error } = await sb.from('re_page').update({hero}).eq('id','real-estate');
+    if(error){ toast('Hero save error: '+error.message); return; }
+    toast('Hero saved.');
+  }
+
+  (function reWire(){
+    const on=(id,fn)=>{ const el=reG(id); if(el) el.addEventListener('click',fn); };
+    on('re-new',reNewProp); on('re-back',reLoad); on('re-save',reSave); on('re-hero-save',reSaveHero);
+    on('re-delete',()=>{ if(reState.current) reDelete(reState.current.id); });
+    const list=reG('re-list');
+    if(list) list.addEventListener('click',e=>{
+      const ed=e.target.closest('.re-edit'); if(ed){ reEdit(ed.dataset.id); return; }
+      const dl=e.target.closest('.re-del'); if(dl){ reDelete(dl.dataset.id); return; }
+      const ft=e.target.closest('.re-feat'); if(ft){ reToggleFeatured(ft.dataset.id, ft.dataset.on==='1'); return; }
+    });
+    const thumbs=reG('re-thumbs');
+    if(thumbs) thumbs.addEventListener('click',e=>{ const x=e.target.closest('.re-thumb-x'); if(x){ reState.images.splice(+x.dataset.i,1); reRenderThumbs(); } });
+    const file=reG('re-file');
+    if(file) file.addEventListener('change',e=>{ if(e.target.files&&e.target.files.length) reUpload(e.target.files); e.target.value=''; });
+  })();
 
   // ============================================================
   // Media library (bucket: site-media)
