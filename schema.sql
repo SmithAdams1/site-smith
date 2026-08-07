@@ -116,14 +116,22 @@ CREATE POLICY "Authenticated delete site-media"
   ON storage.objects FOR DELETE
   USING (bucket_id = 'site-media' AND auth.role() = 'authenticated');
 
--- 8. Create Admin User (admin@smithandadams.com / b9FyTKJj>=HU9dP=A)
--- Requires pgcrypto extension (enabled by default in Supabase)
+-- 8. Create Admin User (admin@smithandadams.com)
+-- Requires pgcrypto extension (enabled by default in Supabase).
+--
+-- SECURITY: never hard-code the password here. This repo is public, and any
+-- literal committed to it is exposed in git history for good. Set the password
+-- at run time via a psql variable and pass it out of band:
+--   psql "$SUPABASE_DB_URL" -v admin_pw="<the password>" -f schema.sql
+-- The earlier edition of this file shipped a real password in cleartext; it has
+-- been rotated in Supabase and removed here. If you are seeding a fresh project,
+-- create the admin through the Supabase Auth dashboard instead of this block.
 DO $$
 DECLARE
     new_user_id uuid := gen_random_uuid();
     encrypted_pw text;
 BEGIN
-    encrypted_pw := crypt('b9FyTKJj>=HU9dP=A', gen_salt('bf'));
+    encrypted_pw := crypt(:'admin_pw', gen_salt('bf'));
 
     INSERT INTO auth.users (
         instance_id, id, aud, role, email, encrypted_password, email_confirmed_at, recovery_sent_at, last_sign_in_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at, confirmation_token, email_change, email_change_token_new, recovery_token
