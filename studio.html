@@ -345,6 +345,27 @@
   #section-real-estate .btn.danger{color:#b91c1c;border-color:#f0c4c4;background:#fff;}
   #section-real-estate .btn.danger:hover{background:#fef2f2;}
   #section-real-estate .badge.feat{background:#fef9c3;color:#a16207;}
+  /* ===== Blog native editor (reuses the RE field system) ===== */
+  #section-blog .re-f{display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  #section-blog .re-f input,#section-blog .re-f textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font-size:14px;font-weight:400;letter-spacing:normal;text-transform:none;color:var(--navy);background:#fff;outline:none;font-family:inherit;}
+  #section-blog .re-f input:focus,#section-blog .re-f textarea:focus{border-color:var(--navy);}
+  #section-blog .re-f textarea{resize:vertical;min-height:56px;}
+  #section-blog .re-hint{font-weight:400;text-transform:none;letter-spacing:normal;color:var(--muted-2);font-size:10.5px;}
+  #section-blog .re-group{grid-column:1/-1;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin:22px 0 2px;padding-top:18px;border-top:1px solid var(--line);}
+  #section-blog .re-group:first-child{margin-top:0;padding-top:0;border-top:0;}
+  #section-blog .re-row{display:flex;gap:14px;align-items:center;padding:12px 14px;margin-bottom:10px;}
+  #section-blog .re-thumb{width:66px;height:50px;border-radius:8px;object-fit:cover;background:#f4f3ee;flex-shrink:0;border:1px solid var(--line);}
+  #section-blog .re-meta{min-width:0;flex:1;}
+  #section-blog .re-ttl{font-weight:600;color:var(--navy);font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #section-blog .re-sub{color:var(--muted);font-size:12.5px;margin-top:3px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  #section-blog .re-actions{margin-left:auto;display:flex;gap:8px;align-items:center;flex-shrink:0;}
+  #section-blog .re-actions .btn{padding:7px 12px;font-size:13px;border-radius:8px;}
+  #section-blog .btn.danger{color:#b91c1c;border-color:#f0c4c4;background:#fff;}
+  #section-blog .btn.danger:hover{background:#fef2f2;}
+  #section-blog .bl-quill{background:#fff;border-radius:9px;}
+  #section-blog .bl-quill .ql-container{min-height:200px;font-size:15px;font-family:inherit;border-bottom-left-radius:9px;border-bottom-right-radius:9px;}
+  #section-blog .bl-quill .ql-toolbar{border-top-left-radius:9px;border-top-right-radius:9px;}
+  #section-blog .bl-quill .ql-editor{min-height:200px;}
 </style>
 </head>
 <body>
@@ -447,7 +468,6 @@
           <div class="sub">Properties and the Real Estate page hero.</div>
         </div>
         <div class="row" style="display:flex;gap:8px;align-items:center;">
-          <a class="btn ghost" id="re-legacy" href="/admin-real-estate.html" target="_blank" rel="noopener">Legacy editor ↗</a>
           <button class="btn" id="re-new" type="button">＋ New property</button>
         </div>
       </div>
@@ -521,16 +541,51 @@
       </div>
     </section>
 
-    <!-- ================= BLOG (embedded) =========================== -->
+    <!-- ================= BLOG (native) ============================= -->
     <section class="section hidden" id="section-blog">
       <div class="page-head">
         <div>
           <h2>Blog</h2>
-          <div class="sub">Create and edit posts, categories and translations.</div>
+          <div class="sub">Articles for /blog and the homepage journal.</div>
         </div>
-        <a class="btn ghost" id="blog-open-tab" href="/admin.html" target="_blank" rel="noopener">Open full screen ↗</a>
+        <div class="row" style="display:flex;gap:8px;align-items:center;">
+          <button class="btn" id="bl-new" type="button">＋ New post</button>
+        </div>
       </div>
-      <div class="embed-host"><iframe id="blog-frame" class="embed-frame" title="Blog backoffice" src="about:blank"></iframe></div>
+
+      <!-- LIST -->
+      <div id="bl-list"></div>
+
+      <!-- EDITOR (hidden until New / Edit) -->
+      <div id="bl-editor" class="hidden">
+        <div class="page-head">
+          <button class="btn ghost" id="bl-back" type="button">← Back to list</button>
+          <div class="row" style="display:flex;gap:8px;">
+            <button class="btn ghost danger" id="bl-delete" type="button">Delete</button>
+            <button class="btn" id="bl-save" type="button">Save post</button>
+          </div>
+        </div>
+        <div class="re-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;max-width:1000px;">
+          <div class="re-group">Basics</div>
+          <label class="re-f">Title (EN)<input id="bl-title-en" type="text"></label>
+          <label class="re-f">Title (PT)<input id="bl-title-pt" type="text"></label>
+          <label class="re-f">Category<input id="bl-category" type="text" placeholder="e.g. Golden Visa"></label>
+          <label class="re-f">Read time<input id="bl-readtime" type="text" placeholder="e.g. 6 min read"></label>
+          <label class="re-f" style="grid-column:1/-1;">Excerpt (EN)<textarea id="bl-excerpt-en" rows="2"></textarea></label>
+          <label class="re-f" style="grid-column:1/-1;">Excerpt (PT)<textarea id="bl-excerpt-pt" rows="2"></textarea></label>
+
+          <div class="re-group">Cover image</div>
+          <div class="re-f" style="grid-column:1/-1;"><span>Cover <span class="re-hint">required — shown on /blog and the homepage journal</span></span>
+            <div id="bl-cover-wrap" style="margin:8px 0;"></div>
+            <input id="bl-file" type="file" accept="image/*">
+          </div>
+
+          <div class="re-group">Content (EN)</div>
+          <div style="grid-column:1/-1;"><div id="bl-content-en" class="bl-quill"></div></div>
+          <div class="re-group">Content (PT) <span class="re-hint" style="font-weight:400;letter-spacing:normal;text-transform:none;">optional</span></div>
+          <div style="grid-column:1/-1;"><div id="bl-content-pt" class="bl-quill"></div></div>
+        </div>
+      </div>
     </section>
 
     <!-- ================= CONTENT (external) ========================= -->
@@ -710,8 +765,8 @@
     if(name === 'content') loadContentEditor();
     if(name === 'media') loadMedia();
     if(name === 'nav') loadNavManager();
-    if(name === 'real-estate') loadEmbed('re-frame', '/admin-real-estate.html?embed=1');
-    if(name === 'blog') loadEmbed('blog-frame', '/admin.html?embed=1');
+    if(name === 'real-estate') reLoad();
+    if(name === 'blog') blLoad();
   }
   function routeFromHash(){
     const raw = (location.hash || '#pages').replace(/^#/, '');
@@ -2482,6 +2537,117 @@
       { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]
     ));
   }
+
+  // ============================================================
+  // Blog — native (posts + translations, Quill EN/PT)
+  // Payload mirrors admin.html savePost(): { title, slug, category,
+  // read_time, excerpt, content, image_url, translations:{pt:{...}} }.
+  // Cover uploads to the 'blog-media' bucket.
+  // ============================================================
+  const BL_BUCKET = 'blog-media';
+  let blState = { current: null, cover: null };
+  let blQEn = null, blQPt = null;
+  const blG = id => document.getElementById(id);
+
+  function blInitQuills(){
+    if(blQEn) return;
+    const tb = [['bold','italic','underline'],[{header:[2,3,false]}],['blockquote'],[{list:'ordered'},{list:'bullet'}],['link'],['clean']];
+    blQEn = new Quill('#bl-content-en', { theme:'snow', modules:{ toolbar: tb } });
+    blQPt = new Quill('#bl-content-pt', { theme:'snow', modules:{ toolbar: tb } });
+  }
+  function blShowList(){ blG('bl-list').classList.remove('hidden'); blG('bl-editor').classList.add('hidden'); blG('bl-new').classList.remove('hidden'); }
+  function blShowEditor(){ blG('bl-list').classList.add('hidden'); blG('bl-editor').classList.remove('hidden'); blG('bl-new').classList.add('hidden'); blInitQuills(); }
+
+  async function blLoad(){
+    blShowList();
+    const box = blG('bl-list');
+    box.innerHTML = '<div style="color:var(--muted);padding:20px;">Loading…</div>';
+    const { data, error } = await sb.from('posts').select('*').order('created_at',{ascending:false});
+    if(error){ box.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load posts</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
+    blRenderList(data||[]);
+  }
+  function blRenderList(rows){
+    const box = blG('bl-list');
+    if(!rows.length){ box.innerHTML = '<div class="empty"><h3>No posts yet</h3><p>Use “New post” to write the first one.</p></div>'; return; }
+    box.innerHTML = rows.map(p=>{
+      const d = p.created_at ? new Date(p.created_at).toLocaleDateString('en-GB') : '';
+      const meta = [p.category&&`<span class="badge nav">${escapeHtml(p.category)}</span>`, d&&`<span>${d}</span>`, p.read_time&&`<span>${escapeHtml(p.read_time)}</span>`].filter(Boolean).join('');
+      return `<div class="card re-row" data-id="${p.id}">
+        ${p.image_url?`<img class="re-thumb" src="${escapeHtml(p.image_url)}" alt="">`:'<div class="re-thumb"></div>'}
+        <div class="re-meta"><div class="re-ttl">${escapeHtml(p.title||'(untitled)')}</div><div class="re-sub">${meta}</div></div>
+        <div class="re-actions"><button class="btn ghost bl-edit" data-id="${p.id}" type="button">Edit</button><button class="btn ghost danger bl-del" data-id="${p.id}" type="button">Delete</button></div>
+      </div>`;
+    }).join('');
+  }
+  function blRenderCover(){
+    const w = blG('bl-cover-wrap'); if(!w) return;
+    w.innerHTML = blState.cover
+      ? `<div style="position:relative;width:200px;height:120px;border-radius:8px;overflow:hidden;border:1px solid var(--line);"><img src="${escapeHtml(blState.cover)}" style="width:100%;height:100%;object-fit:cover;"><button type="button" id="bl-cover-x" style="position:absolute;top:4px;right:4px;background:rgba(17,34,45,.85);color:#fff;border:none;border-radius:3px;width:22px;height:22px;cursor:pointer;line-height:1;">×</button></div>`
+      : '<div style="color:var(--muted);font-size:13px;">No cover yet.</div>';
+  }
+  function blClear(){
+    blState = { current:null, cover:null };
+    ['bl-title-en','bl-title-pt','bl-category','bl-readtime','bl-excerpt-en','bl-excerpt-pt'].forEach(id=>{ const el=blG(id); if(el) el.value=''; });
+    if(blQEn) blQEn.root.innerHTML=''; if(blQPt) blQPt.root.innerHTML='';
+    blRenderCover();
+  }
+  function blNew(){ blShowEditor(); blClear(); }
+  async function blEdit(id){
+    const { data, error } = await sb.from('posts').select('*').eq('id',id).single();
+    if(error||!data){ toast('Could not load post.'); return; }
+    blShowEditor();
+    blState.current = data; blState.cover = data.image_url||null;
+    blG('bl-title-en').value = data.title||''; blG('bl-category').value = data.category||''; blG('bl-readtime').value = data.read_time||''; blG('bl-excerpt-en').value = data.excerpt||'';
+    blQEn.root.innerHTML = data.content||'';
+    const pt = (data.translations && data.translations.pt) || {};
+    blG('bl-title-pt').value = pt.title||''; blG('bl-excerpt-pt').value = pt.excerpt||''; blQPt.root.innerHTML = pt.content||'';
+    blRenderCover();
+  }
+  async function blUpload(file){
+    toast('Uploading…');
+    const path = Date.now()+'-'+Math.random().toString(36).slice(2,8)+'-'+file.name.replace(/[^a-z0-9.\-]/gi,'_');
+    const { error } = await sb.storage.from(BL_BUCKET).upload(path,file,{cacheControl:'3600',upsert:false});
+    if(error){ toast('Upload error: '+error.message); return; }
+    const { data } = sb.storage.from(BL_BUCKET).getPublicUrl(path);
+    blState.cover = data.publicUrl; blRenderCover(); toast('Cover uploaded.');
+  }
+  function blCollect(){
+    const titleEn = blG('bl-title-en').value.trim();
+    if(!titleEn){ toast('English title is required.'); return null; }
+    if(!blState.cover){ toast('A cover image is required.'); return null; }
+    const ptTitle = blG('bl-title-pt').value.trim(), ptExcerpt = blG('bl-excerpt-pt').value.trim();
+    let ptContent = blQPt.root.innerHTML; if(ptContent === '<p><br></p>') ptContent = '';
+    const translations = {};
+    if(ptTitle||ptExcerpt||ptContent){ translations.pt = {}; if(ptTitle) translations.pt.title=ptTitle; if(ptExcerpt) translations.pt.excerpt=ptExcerpt; if(ptContent) translations.pt.content=ptContent; }
+    const slug = (blState.current && blState.current.slug) ? blState.current.slug : slugify(titleEn);
+    return { title:titleEn, slug, category: blG('bl-category').value.trim(), read_time: blG('bl-readtime').value.trim(), excerpt: blG('bl-excerpt-en').value.trim(), content: blQEn.root.innerHTML, image_url: blState.cover, translations };
+  }
+  async function blSave(){
+    const payload = blCollect(); if(!payload) return;
+    const res = blState.current ? await sb.from('posts').update(payload).eq('id',blState.current.id)
+                                : await sb.from('posts').insert(payload).select().single();
+    if(res.error){ toast('Save error: '+res.error.message); return; }
+    if(!blState.current && res.data) blState.current = res.data;
+    toast('Post saved.'); blLoad();
+  }
+  async function blDelete(id){
+    if(!confirm('Delete this post? This cannot be undone.')) return;
+    const { error } = await sb.from('posts').delete().eq('id',id);
+    if(error){ toast('Delete error: '+error.message); return; }
+    toast('Post deleted.'); blLoad();
+  }
+  (function blWire(){
+    const on = (id,fn)=>{ const el=blG(id); if(el) el.addEventListener('click',fn); };
+    on('bl-new', blNew); on('bl-back', blLoad); on('bl-save', blSave);
+    on('bl-delete', ()=>{ if(blState.current) blDelete(blState.current.id); else blLoad(); });
+    const list = blG('bl-list');
+    if(list) list.addEventListener('click', e=>{
+      const ed = e.target.closest('.bl-edit'); if(ed){ blEdit(ed.dataset.id); return; }
+      const dl = e.target.closest('.bl-del'); if(dl){ blDelete(dl.dataset.id); return; }
+    });
+    const cw = blG('bl-cover-wrap'); if(cw) cw.addEventListener('click', e=>{ if(e.target.id==='bl-cover-x'){ blState.cover=null; blRenderCover(); } });
+    const file = blG('bl-file'); if(file) file.addEventListener('change', e=>{ if(e.target.files && e.target.files[0]) blUpload(e.target.files[0]); e.target.value=''; });
+  })();
 
   boot();
 </script>
