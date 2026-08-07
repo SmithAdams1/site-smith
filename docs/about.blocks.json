@@ -1,0 +1,94 @@
+{
+  "_note": "Phase 2 pilot — About represented as rd- design-system blocks. Field values seeded from the current live copy (site_content). EN only for now; pt fills in later. Drives lib/renderRdBlocks.js; the SSR/parity gate compares its output to today's about.html.",
+  "slug": "about",
+  "title": { "en": "About Us | Independent Real Estate Advisory in Portugal | Smith & Adams" },
+  "blocks": [
+    {
+      "type": "rd_hero",
+      "data": {
+        "eyebrow": { "en": "About · Smith &amp; Adams" },
+        "title": { "en": "Independent advisory, built around the investor" },
+        "subtitle": { "en": "Since 2020, Smith &amp; Adams has helped international investors build euro-denominated property portfolios in Portugal, and secure residency where that&rsquo;s part of the plan." },
+        "image": "hygge-house-beato/exterior.jpg",
+        "image_alt": { "en": "Smith &amp; Adams flagship development, Lisbon" },
+        "ctas": [
+          { "label": { "en": "Book a consultation" }, "href": "contact.html" },
+          { "label": { "en": "Our journey" }, "href": "#journey", "style": "ghost" }
+        ],
+        "caption_k": { "en": "Lisboa · Portugal" },
+        "caption_v": { "en": "Since 2020" }
+      }
+    },
+    {
+      "type": "rd_prose",
+      "data": {
+        "bg": "paper",
+        "eyebrow": { "en": "Who we are" },
+        "title": { "en": "Smith &amp; Adams Group" },
+        "body": [
+          { "en": "Smith &amp; Adams is a Lisbon-based real estate investment advisory firm. We give investors an independent view of the Portuguese property market, then go further: coordinating an end-to-end solution across planning, development, construction, and property management, so a single advisory relationship covers the full lifecycle of the investment." },
+          { "en": "Our focus is simple: help objective investors maximise the return on any tangible asset they acquire, while keeping ownership genuinely hands-off. From the first conversation to ongoing management, everything we do is built around that outcome." }
+        ],
+        "image": "./urban-collections/AML-Shooting-Smith&amp;Adams-Abril26-15.jpg",
+        "image_alt": { "en": "The Smith &amp; Adams team, Lisbon" }
+      }
+    },
+    {
+      "type": "rd_timeline",
+      "data": {
+        "anchor": "journey",
+        "eyebrow": { "en": "Our Journey" },
+        "title": { "en": "From foundation to flagship" },
+        "items": [
+          { "index": { "en": "2020" }, "title": { "en": "The Foundation" }, "body": { "en": "Suelen Pires founded Smith &amp; Adams with a focus on real estate and Golden Visa advisory, working closely with strategic partners on sales and property management, and building the trust the firm is structured around today." } },
+          { "index": { "en": "2021" }, "title": { "en": "The Campolide Project" }, "body": { "en": "Smith &amp; Adams advised on and structured the Campolide collection across more than 10 buildings, bringing the authentic &lsquo;Lisboeta&rsquo; soul to modern living." } },
+          { "index": { "en": "2022" }, "title": { "en": "Strategic Independence" }, "body": { "en": "Smith &amp; Adams brought every detail closer to home, assuming full responsibility for sales and property management, ensuring that every client is welcomed with care and dedication." } },
+          { "index": { "en": "2022" }, "title": { "en": "Hygge Kaffe" }, "body": { "en": "The acquisition of Hygge Kaffe officially wove the Hygge philosophy into the soul of Smith &amp; Adams." } },
+          { "index": { "en": "2023" }, "title": { "en": "Dubai Office" }, "body": { "en": "Smith &amp; Adams&rsquo; vision travelled across borders with the opening of a new office in Dubai, bringing us closer to our clients on the other side of the world." } },
+          { "index": { "en": "2023" }, "title": { "en": "Hygge Baixa Hotel Opening" }, "body": { "en": "In the heart of Lisbon, the Hygge Baixa Hotel opened as an urban sanctuary, advised on and now managed by Smith &amp; Adams, where signature design meets the art of slowing down." } },
+          { "index": { "en": "2025" }, "title": { "en": "Hygge Fanqueiros" }, "body": { "en": "Smith &amp; Adams took on the Hygge Fanqueiros project, a historic boutique stay where the comfort of home meets the ritual of a perfect coffee, advised, structured and now managed by us." } },
+          { "index": { "en": "2026" }, "title": { "en": "Hygge House Beato" }, "body": { "en": "The Hygge Beato project marks the flagship of our vision: 137 curated studios within an apart-hotel structure, advised and structured by Smith &amp; Adams, where thoughtful design meets a deep sense of belonging." } }
+        ]
+      }
+    },
+    {
+      "type": "rd_pillars",
+      "data": {
+        "eyebrow": { "en": "What we do" },
+        "title": { "en": "Advisory, residency and management" },
+        "items": [
+          { "title": { "en": "Investment Advisory &amp; Structuring" }, "body": { "en": "We identify and structure real estate investment opportunities in Portugal, advising on asset selection, legal and tax framework, financing, and long-term strategy, for investors focused on capital preservation, euro income, and steady growth." } },
+          { "title": { "en": "Residency &amp; Citizenship Advisory" }, "body": { "en": "We coordinate immigration and legal services for clients pursuing Golden Visa or D2 Visa residency, working alongside specialised law firms and regulated partners to manage the visa process, property transaction, and family inclusion end to end." } },
+          { "title": { "en": "Asset &amp; Property Management" }, "body": { "en": "For properties we&rsquo;ve advised on, and for independent owners, we manage every asset to maximise its yield potential, backed by a proven track record of over 90% occupancy across our short-term rental portfolio. From tenant relations and maintenance to financial reporting, we handle the day-to-day so ownership from abroad stays genuinely hands-off." } }
+        ]
+      }
+    },
+    {
+      "type": "rd_proof",
+      "data": {
+        "eyebrow": { "en": "Since 2020" },
+        "title": { "en": "Track Record &amp; Global Footprint" },
+        "body": { "en": "Since 2020, Smith &amp; Adams has grown into a Lisbon-based advisory platform serving investors and Residency Investors from across Europe, the Middle East, Asia, and the Americas." },
+        "stats": [
+          { "value": { "en": "1,000+" }, "label": { "en": "Investors advised" } },
+          { "value": { "en": "&euro;300M+" }, "label": { "en": "In advised investment value" } },
+          { "value": { "en": "30+" }, "label": { "en": "Countries represented" } }
+        ],
+        "bullets": [
+          { "en": "Advised and supported <strong style=\"color:#fff; font-weight:600;\">1,000+ international investors</strong> building euro-denominated portfolios in Portugal." },
+          { "en": "Expanded its presence <strong style=\"color:#fff; font-weight:600;\">across Lisbon and key Portuguese cities</strong>, operating from Lisbon as its main hub." },
+          { "en": "Attracted clients from <strong style=\"color:#fff; font-weight:600;\">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> &mdash; reflecting a truly global client base." }
+        ]
+      }
+    },
+    {
+      "type": "rd_close",
+      "data": {
+        "bg": "paper",
+        "title": { "en": "Independent advice, from the first conversation to handover." },
+        "body": { "en": "Tell us what you&rsquo;re looking for in Portugal. We&rsquo;ll give you an honest read on whether &mdash; and how &mdash; we can help." },
+        "cta": { "label": { "en": "Book a consultation" }, "href": "contact.html" }
+      }
+    }
+  ]
+}
