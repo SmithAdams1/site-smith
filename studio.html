@@ -619,8 +619,8 @@
     if(name === 'content') loadContentEditor();
     if(name === 'media') loadMedia();
     if(name === 'nav') loadNavManager();
-    if(name === 'real-estate') loadEmbed('re-frame', '/admin-real-estate.html');
-    if(name === 'blog') loadEmbed('blog-frame', '/admin.html');
+    if(name === 'real-estate') loadEmbed('re-frame', '/admin-real-estate.html?embed=1');
+    if(name === 'blog') loadEmbed('blog-frame', '/admin.html?embed=1');
   }
   function routeFromHash(){
     const raw = (location.hash || '#pages').replace(/^#/, '');

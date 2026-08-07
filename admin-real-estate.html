@@ -54,7 +54,22 @@
   .block-type{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0C1E28;}
   .block-body{padding:14px;}
   .miniimg{width:100%;max-width:260px;border-radius:10px;border:1px solid #e3e0d6;margin-top:8px;display:block;}
+  /* Embedded inside Studio (see studio.html loadEmbed): the parent already
+     provides the top bar, the account and sign-out, so hide this file's own
+     chrome and let it present as a native Studio panel. Auth is inherited from
+     the shared same-origin Supabase session, so the login screen never shows. */
+  html.embedded #re-topbar{display:none!important}
+  html.embedded #login{display:none!important}   /* parent Studio owns auth; never nest a login */
+  html.embedded body{padding-top:0!important}
+  html.embedded .wrap{padding-left:0;padding-right:0}
 </style>
+<script>
+  // Set before first paint so the chrome never flashes. Embedded = in an iframe
+  // (Studio) or an explicit ?embed=1 (used for testing the embedded layout).
+  try{ if (window.self !== window.top || /[?&]embed=1\b/.test(location.search)) {
+    document.documentElement.classList.add('embedded');
+  } }catch(e){ document.documentElement.classList.add('embedded'); }
+</script>
 </head>
 <body>
 
@@ -73,7 +88,7 @@
 
 <!-- APP -->
 <div id="app" class="hidden">
-  <div style="background:#0C1E28;color:#fff;">
+  <div id="re-topbar" style="background:#0C1E28;color:#fff;">
     <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding-top:18px;padding-bottom:18px;">
       <div><div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;">Smith &amp; Adams</div><div style="font-size:18px;font-weight:700;">Real Estate - Backoffice</div></div>
       <div class="row"><span id="who" style="font-size:13px;opacity:.7;"></span><button class="btn ghost sm" id="logout">Sign out</button></div>
