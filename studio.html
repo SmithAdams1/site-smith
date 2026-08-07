@@ -324,6 +324,27 @@
     #section-editor.active{grid-template-columns:1fr;height:auto;}
     #section-editor .inspector{border-left:0;border-top:1px solid var(--line);}
   }
+  /* ===== Real Estate native editor — Studio-compliant ===== */
+  #section-real-estate .re-f{display:flex;flex-direction:column;gap:5px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  #section-real-estate .re-f input,#section-real-estate .re-f select,#section-real-estate .re-f textarea{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font-size:14px;font-weight:400;letter-spacing:normal;text-transform:none;color:var(--navy);background:#fff;outline:none;font-family:inherit;}
+  #section-real-estate .re-f input:focus,#section-real-estate .re-f select:focus,#section-real-estate .re-f textarea:focus{border-color:var(--navy);}
+  #section-real-estate .re-f textarea{resize:vertical;min-height:64px;}
+  #section-real-estate .re-hint{font-weight:400;text-transform:none;letter-spacing:normal;color:var(--muted-2);font-size:10.5px;}
+  #section-real-estate .re-group{grid-column:1/-1;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin:22px 0 2px;padding-top:18px;border-top:1px solid var(--line);}
+  #section-real-estate .re-group:first-child{margin-top:0;padding-top:0;border-top:0;}
+  #section-real-estate .re-checks{grid-column:1/-1;display:flex;gap:26px;align-items:center;flex-wrap:wrap;}
+  #section-real-estate .re-checks label{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;letter-spacing:normal;text-transform:none;color:var(--navy);cursor:pointer;}
+  #section-real-estate .re-checks input{width:auto;margin:0;}
+  #section-real-estate .re-row{display:flex;gap:14px;align-items:center;padding:12px 14px;margin-bottom:10px;}
+  #section-real-estate .re-thumb{width:66px;height:50px;border-radius:8px;object-fit:cover;background:#f4f3ee;flex-shrink:0;border:1px solid var(--line);}
+  #section-real-estate .re-meta{min-width:0;flex:1;}
+  #section-real-estate .re-ttl{font-weight:600;color:var(--navy);font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  #section-real-estate .re-sub{color:var(--muted);font-size:12.5px;margin-top:3px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  #section-real-estate .re-actions{margin-left:auto;display:flex;gap:8px;align-items:center;flex-shrink:0;}
+  #section-real-estate .re-actions .btn{padding:7px 12px;font-size:13px;border-radius:8px;}
+  #section-real-estate .btn.danger{color:#b91c1c;border-color:#f0c4c4;background:#fff;}
+  #section-real-estate .btn.danger:hover{background:#fef2f2;}
+  #section-real-estate .badge.feat{background:#fef9c3;color:#a16207;}
 </style>
 </head>
 <body>
@@ -444,33 +465,42 @@
           </div>
         </div>
         <div class="re-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;max-width:1000px;">
+          <div class="re-group">Basics</div>
           <label class="re-f">Title (EN)<input id="re-title-en" type="text"></label>
           <label class="re-f">Title (PT)<input id="re-title-pt" type="text"></label>
           <label class="re-f">Slug <span class="re-hint">(auto from EN if blank)</span><input id="re-slug" type="text"></label>
           <label class="re-f">Reference<input id="re-reference" type="text"></label>
           <label class="re-f">Status<select id="re-status"><option value="draft">Draft</option><option value="published">Published</option></select></label>
-          <label class="re-f">Transaction<select id="re-transaction"><option value="sale">For sale</option><option value="rent">For rent</option></select></label>
           <label class="re-f">Type<select id="re-type"><option value="apartment">Apartment</option><option value="villa">Villa</option><option value="townhouse">Townhouse</option><option value="penthouse">Penthouse</option><option value="studio">Studio</option><option value="plot">Plot</option><option value="commercial">Commercial</option></select></label>
+          <label class="re-f">Transaction<select id="re-transaction"><option value="sale">For sale</option><option value="rent">For rent</option></select></label>
           <label class="re-f">Price (€)<input id="re-price" type="number" min="0" step="1000"></label>
+
+          <div class="re-group">Location</div>
           <label class="re-f">Region<input id="re-region" type="text" placeholder="e.g. Lisbon"></label>
           <label class="re-f">City<input id="re-city" type="text"></label>
-          <label class="re-f">Address<input id="re-address" type="text"></label>
-          <label class="re-f">Energy rating<input id="re-energy" type="text" placeholder="A+, B…"></label>
+          <label class="re-f" style="grid-column:1/-1;">Address<input id="re-address" type="text"></label>
+          <label class="re-f">Latitude<input id="re-lat" type="number" step="0.000001"></label>
+          <label class="re-f">Longitude<input id="re-lng" type="number" step="0.000001"></label>
+
+          <div class="re-group">Specification</div>
           <label class="re-f">Bedrooms<input id="re-beds" type="number" min="0"></label>
           <label class="re-f">Bathrooms<input id="re-baths" type="number" min="0"></label>
           <label class="re-f">Area (m²)<input id="re-area" type="number" min="0"></label>
           <label class="re-f">Plot (m²)<input id="re-plot" type="number" min="0"></label>
           <label class="re-f">Year built<input id="re-year" type="number" min="0"></label>
-          <label class="re-f">&nbsp;<span style="display:flex;gap:18px;align-items:center;padding-top:8px;"><label style="display:inline-flex;gap:6px;align-items:center;font-weight:400;"><input id="re-gv" type="checkbox"> Golden Visa</label><label style="display:inline-flex;gap:6px;align-items:center;font-weight:400;"><input id="re-featured" type="checkbox"> Featured</label></span></label>
-          <label class="re-f">Latitude<input id="re-lat" type="number" step="0.000001"></label>
-          <label class="re-f">Longitude<input id="re-lng" type="number" step="0.000001"></label>
+          <label class="re-f">Energy rating<input id="re-energy" type="text" placeholder="A+, B…"></label>
+          <div class="re-checks"><label><input id="re-gv" type="checkbox"> Golden Visa eligible</label><label><input id="re-featured" type="checkbox"> Featured</label></div>
+
+          <div class="re-group">Content</div>
           <label class="re-f" style="grid-column:1/-1;">Summary (EN)<input id="re-summary-en" type="text"></label>
           <label class="re-f" style="grid-column:1/-1;">Summary (PT)<input id="re-summary-pt" type="text"></label>
           <label class="re-f" style="grid-column:1/-1;">Description (EN)<textarea id="re-desc-en" rows="4"></textarea></label>
           <label class="re-f" style="grid-column:1/-1;">Description (PT)<textarea id="re-desc-pt" rows="4"></textarea></label>
           <label class="re-f">Highlights (EN) <span class="re-hint">one per line</span><textarea id="re-hl-en" rows="4"></textarea></label>
           <label class="re-f">Highlights (PT) <span class="re-hint">one per line</span><textarea id="re-hl-pt" rows="4"></textarea></label>
-          <div class="re-f" style="grid-column:1/-1;">Gallery <span class="re-hint">first image is the cover</span>
+
+          <div class="re-group">Gallery</div>
+          <div class="re-f" style="grid-column:1/-1;"><span>Images <span class="re-hint">first image is the cover</span></span>
             <div id="re-thumbs" class="gal-strip" style="display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;"></div>
             <input id="re-file" type="file" accept="image/*" multiple>
           </div>
@@ -875,16 +905,18 @@
       const loc = [p.city,p.region].filter(Boolean).join(', ');
       const price = p.price!=null ? '€'+Number(p.price).toLocaleString('en-GB') : '';
       const pub = p.status==='published';
-      return `<div class="card re-row" data-id="${p.id}" style="display:flex;gap:14px;align-items:center;padding:12px 14px;margin-bottom:10px;">
-        <div style="flex:0 0 84px;height:60px;border-radius:4px;overflow:hidden;background:#eee;">${p.cover_image?`<img src="${escapeHtml(p.cover_image)}" style="width:100%;height:100%;object-fit:cover;">`:''}</div>
-        <div style="flex:1;min-width:0;">
-          <div style="font-weight:600;color:#11222D;">${escapeHtml(t)}</div>
-          <div class="meta" style="font-size:13px;color:var(--muted);">${escapeHtml(loc)}${price?' · '+price:''}${p.reference?' · '+escapeHtml(p.reference):''}</div>
+      const meta = [loc, price, p.reference && escapeHtml(p.reference)].filter(Boolean).map(x=>`<span>${x}</span>`).join('');
+      return `<div class="card re-row" data-id="${p.id}">
+        ${p.cover_image?`<img class="re-thumb" src="${escapeHtml(p.cover_image)}" alt="">`:'<div class="re-thumb"></div>'}
+        <div class="re-meta">
+          <div class="re-ttl">${escapeHtml(t)}</div>
+          <div class="re-sub"><span class="badge ${pub?'pub':'draft'}">${pub?'Published':'Draft'}</span>${p.featured?'<span class="badge feat">★ Featured</span>':''}${meta}</div>
         </div>
-        <span class="badge ${pub?'':'draft'}">${pub?'Published':'Draft'}</span>
-        <button class="btn ghost sm re-feat" data-id="${p.id}" data-on="${p.featured?1:0}" type="button">${p.featured?'★ Featured':'☆ Feature'}</button>
-        <button class="btn ghost sm re-edit" data-id="${p.id}" type="button">Edit</button>
-        <button class="btn ghost sm danger re-del" data-id="${p.id}" type="button">Delete</button>
+        <div class="re-actions">
+          <button class="btn ghost re-feat" title="${p.featured?'Unfeature':'Feature'}" data-id="${p.id}" data-on="${p.featured?1:0}" type="button">${p.featured?'★':'☆'}</button>
+          <button class="btn ghost re-edit" data-id="${p.id}" type="button">Edit</button>
+          <button class="btn ghost danger re-del" data-id="${p.id}" type="button">Delete</button>
+        </div>
       </div>`;
     }).join('');
   }
