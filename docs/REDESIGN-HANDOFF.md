@@ -50,9 +50,11 @@ _(PDF at `~/Desktop/Materiais Smit&Adams Definitive Edition/Brandbook and MKT St
 ## Page status (on `homepage-redesign`)
 | Page | State |
 |---|---|
-| index, about, invest-in-portugal, real-estate, contact, our-developments, property-management | **On the system** (full redesign) |
-| article, property, urban-collection, fanqueiros-hotel, privacy, terms | **Header only** — new nav baked, body still legacy design |
+| index, about, invest-in-portugal, real-estate, contact, our-developments, property-management, **property, article** | **On the system** (full redesign) |
+| urban-collection, fanqueiros-hotel, privacy, terms | **Header only** — new nav baked, body still legacy design |
 | lp-hygge-house, lp-hygge-house-yield, lp-hygge-house-citizenship | **Outside the system** (landing pages, untouched) |
+
+_property.html and article.html are JS-rendered from Supabase (no data-cms hooks); converted by repointing the palette/shape/type inside the renderer strings. Test locally with `?slug=<slug>` (clean URLs only resolve on Vercel). Real slugs: `gilberto-1br`, `campolide-93-5`, `ajuda-20b`, `taipas-5`; post `the-polycentric-shift-understanding-lisbons-expanding-value-map`._
 
 ## Done this session (newest commits, all pushed)
 - `f0ad247` About: real George Hobson portrait + factual bio.
@@ -64,13 +66,13 @@ _(PDF at `~/Desktop/Materiais Smit&Adams Definitive Edition/Brandbook and MKT St
 - Earlier: Invest, Contact, FAQ component, hero video trim, carousel, CMS html fallbacks.
 
 ## Roadmap — client-approved order (2026-08-07)
-The client answered the 5-item roadmap; this is the running order.
+The client answered the 5-item roadmap; this is the running order. Items 1, 2 and 4 are DONE; 3 and 5 remain (the two big pieces).
 
-1. **`property.html` + `article.html` onto the system.** ⬅ NEXT. The two detail templates (every listing / every blog post renders through them). Restyle in place like `our-developments`/`contact`: preserve every `data-cms` hook byte-exactly and in order, the JSON-LD, a single `h1`, canonical, breadcrumbs. Verify against `HEAD` before commit.
-2. **Finish the George block** — DONE except: the message copy still needs George's sign-off (words are attributed to a real person). Photo + bio are in.
-3. **Tailwind CDN → compiled stylesheet.** Everything below the header still restyles when Tailwind's JIT arrives after first paint. Replace the CDN with a built CSS file so first paint is final. This is the root cause behind the flicker class of bugs.
-4. **Brand Book date/source rule on the homepage stats.** The occupancy figures already carry a window + source (Boom). The `1,000+ / €300M+ / 300+` proof points do not. **Client-approved label: "Smith & Adams Annual Report 2026."** Attach it as the source/as-at on those stats (and anywhere the same three figures appear: about.track, about.message p3, invest, our-developments).
-5. **Unified CMS backoffice.** Client's words: one single platform that controls ALL content in the site — add blocks and sub-blocks, images, and text; edit elements already present; "best CMS on the market" quality. Today the backoffice is fragmented (`admin.html`, `admin-v2/v3`, `admin-real-estate.html`) plus a newer `/studio.html` (Supabase `pages` table + `/p/:slug` SSR via `api/page.js` + `lib/renderBlocks.js`; see `docs/STUDIO-HANDOFF.md`). The custom marketing pages (index, about, …) are edited only field-by-field via `site_content` (key/value/locale) through `cms-loader.js`. **The ask is to unify these into one block-builder that also governs the hand-built pages.** Big piece — scope it before building. Note: 11 new `about.message.*` keys (see below) plus the 71 homepage strings in the manifest need adding to whatever schema wins.
+1. ✅ **`property.html` + `article.html` onto the system.** Done — commits `3ca2fd3` (article), `a42f9d0`. Both JS-rendered; converted via the renderer strings.
+2. ✅ **George block** — done bar sign-off: the message copy still needs George's OK (words attributed to a real person). Photo + factual bio are in.
+3. ⬅ **NEXT — Tailwind CDN → compiled stylesheet.** Everything below the header still restyles when Tailwind's JIT arrives after first paint. Replace the CDN with a built CSS file so first paint is final; this is the root cause behind the flicker class of bugs. Big + risky: no build step exists, and it touches every page. Approach: run the Tailwind CLI over all `*.html` to emit a static `tailwind.css`, swap the `<script src="cdn.tailwindcss.com">` for `<link>`, keep `corePlugins:{preflight:false}` semantics, then regression-shoot every page desktop+mobile. Scope it as its own session.
+4. ✅ **Brand Book date/source on the stats.** Done — commit `1ccfdae`. "Smith & Adams Annual Report 2026" attached on index (`home.proof.source`, folded into the governance footnote) and about (`about.track.source`). _Still to do if wanted: the same three figures also appear in `about.message.p3` prose and could be echoed on invest / our-developments, but those weren't in the client's "homepage stats" ask._
+5. **Unified CMS backoffice.** Client's words (2026-08-07): "The backoffice has to be unified and standardised. One single platform that controls all the content inside the site. With features like adding blocks and sub-blocks, images, and text, editing the elements already present. In the style of the best CMS on the market." Today it's fragmented (`admin.html`, `admin-v2/v3`, `admin-real-estate.html`) plus `/studio.html` (Supabase `pages` table + `/p/:slug` SSR via `api/page.js` + `lib/renderBlocks.js`; see `docs/STUDIO-HANDOFF.md`). Hand-built marketing pages are edited field-by-field via `site_content` (key/value/locale) through `cms-loader.js`. **The ask is to unify these into one block-builder that also governs the hand-built pages — add/edit blocks and sub-blocks, images and text, everywhere.** Largest item; scope and design before building. Must absorb: the 13 new `about.message.*` keys + `home.proof.source` + `about.track.source`, plus the 71 homepage strings in `docs/CMS-REHOOK-MANIFEST.md`.
 
 ### New CMS keys added this session (need wiring into the admin/Studio schema, item 5)
 `about.message.eyebrow`, `.photo`, `.bio`, `.bio2`, `.bio3`, `.bio_open`, `.bio_close`, `.lead`, `.p1`, `.p2`, `.p3`, `.name`, `.role`. All have inline EN fallbacks in `about.html`; PT to be added.
