@@ -26,7 +26,13 @@ Go the ambitious route, consciously superseding the old "don't blockify bespoke 
 - ✅ `lib/renderRdBlocks.js` — six rd- block renderers (hero, prose, timeline, pillars, proof, close); pure, SSR + editor.
 - ✅ `docs/about.blocks.json` — About block model seeded with live copy.
 - ⚠️ **Model is one block short of the current page.** The live `about.html` has **7** sections; the model has 6 — it is missing the **"A message from our Head of Investment" (George Hobson)** block (component `rd-msg`, keys `about.message.*`, portrait + statement + bio-over-photo toggle). The model was seeded from an older `about.html`. **Next: add an `rd_msg` renderer + insert the George block, then re-run parity against the full 7-section page.** (The first structural parity check passed only because its markers didn't include `rd-msg`.)
-- ⏭️ Then: whole-page SSR (shell + blocks) + serve `/about` from a DB blocks row (api/page.js pattern; needs a rewrite + removing the static about.html, which Vercel would otherwise shadow — the deploy-sensitive cutover, client-tested) → Studio live editor.
+- ✅ **Full-page parity ACHIEVED (offline).** Assembling `about.html`'s shell (head/nav/footer/scripts, verbatim) + `renderRdBlocks(about.blocks.json)` reproduces the current `about.html` with **identical visible + SEO HTML** — the only diffs are the non-visible `data-cms` hooks and decorative section comments, which are exactly what differs between the two content models. Verified by normalized diff (strip comments + data-cms → strings identical). Renderer refinements this took: `attr()` (quote-only, no double-encoding of pre-encoded `&amp;`), per-CTA `arrow`/`wrap` flags, and source-before-bullets order in `rd_proof`.
+- ⏭️ **Next — the deploy-sensitive cutover (client-tested on Vercel):**
+  1. `rd_pages(slug, title jsonb, blocks jsonb, seo jsonb, updated_at)` table + seed `about` from `about.blocks.json` (SQL for the client to run).
+  2. `api/rd-page.js` (+ `api/_renderRdBlocks.js` copy): fetch the row, `renderRdBlocks`, inject into the About shell, serve. The shell = about.html split at `</header>` / `<footer` (or a stored template).
+  3. Expose first at a **test route** (e.g. `/api/rd-page?slug=about`) so it can be compared live **without** removing `about.html` (Vercel filesystem would otherwise shadow a `/about` rewrite).
+  4. Once verified live: flip — `vercel.json` rewrite `/about` → handler + delete the static `about.html`. This is the irreversible step; do it last, client-confirmed.
+- ⏭️ Then the Studio live click-to-edit editor over the same renderer.
 
 ### Risk register for the pilot
 - **SEO/SSR parity is make-or-break** (canonical URL, crawler HTML). Gate every page on it.

@@ -14,7 +14,7 @@
         "image_alt": { "en": "Smith &amp; Adams flagship development, Lisbon" },
         "ctas": [
           { "label": { "en": "Book a consultation" }, "href": "contact.html" },
-          { "label": { "en": "Our journey" }, "href": "#journey", "style": "ghost" }
+          { "label": { "en": "Our journey" }, "href": "#journey", "style": "ghost", "arrow": false }
         ],
         "caption_k": { "en": "Lisboa · Portugal" },
         "caption_v": { "en": "Since 2020" }
@@ -114,7 +114,7 @@
         "bg": "paper",
         "title": { "en": "Independent advice, from the first conversation to handover." },
         "body": { "en": "Tell us what you&rsquo;re looking for in Portugal. We&rsquo;ll give you an honest read on whether &mdash; and how &mdash; we can help." },
-        "cta": { "label": { "en": "Book a consultation" }, "href": "contact.html" }
+        "cta": { "label": { "en": "Book a consultation" }, "href": "contact.html", "wrap": true }
       }
     }
   ]
