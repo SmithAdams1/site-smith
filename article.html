@@ -14,25 +14,26 @@
 
   <style>
     body { font-family: 'Satoshi', sans-serif; background-color: #FDFCF9; margin:0; }
-    .geist { font-family: 'Geist', sans-serif; }
+    .geist { font-family: var(--serif); letter-spacing:-0.01em; }
+    #post-title { font-weight: 500; }
     
     /* Article Formatting */
-    .post-content h2 { font-size: 28px; font-weight: 700; color: #0C1E28; margin-top: 48px; margin-bottom: 24px; font-family: 'Geist', sans-serif; }
-    .post-content h3 { font-size: 22px; font-weight: 700; color: #0C1E28; margin-top: 32px; margin-bottom: 16px; font-family: 'Geist', sans-serif; }
-    .post-content p { font-size: 18px; line-height: 1.8; color: #484848; margin-bottom: 24px; }
-    .post-content ul { list-style-type: disc; margin-left: 24px; margin-bottom: 24px; color: #484848; font-size: 18px; line-height: 1.8;}
+    .post-content h2 { font-size: clamp(26px,3vw,34px); font-weight: 500; color: var(--navy); margin-top: 48px; margin-bottom: 22px; font-family: var(--serif); letter-spacing:-0.01em; }
+    .post-content h3 { font-size: clamp(20px,2.2vw,26px); font-weight: 500; color: var(--navy); margin-top: 32px; margin-bottom: 15px; font-family: var(--serif); letter-spacing:-0.01em; }
+    .post-content p { font-size: 18px; line-height: 1.8; color: var(--ink); margin-bottom: 24px; font-family: var(--sans); }
+    .post-content ul { list-style-type: disc; margin-left: 24px; margin-bottom: 24px; color: var(--ink); font-size: 18px; line-height: 1.8; font-family: var(--sans);}
     .post-content li { margin-bottom: 12px; }
     
     .c-pill {
       display: inline-block;
       padding: 6px 16px;
-      border: 1px solid #0C1E28;
-      border-radius: 100px;
+      border: 1px solid #11222D;
+      border-radius: 2px;
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: #0C1E28;
+      color: #11222D;
     }
   </style>
 
@@ -47,8 +48,9 @@
   gtag('config', 'AW-18073134136');
 </script>
 <script defer src="/cms-loader.js"></script>
+<link rel="stylesheet" href="/redesign.css">
 </head>
-<body class="overflow-x-hidden w-full">
+<body class="rd overflow-x-hidden w-full">
 
   <!-- Header -->
   <style id="rd-nav-dd">
@@ -73,27 +75,27 @@
 .rd-nav nav .rd-dd__item{color:#fff !important;opacity:1 !important;font-size:14px !important}
 .rd-nav nav .rd-dd__item:hover{opacity:1 !important}
 </style>
-<header class="fixed w-full z-50 transition-all duration-300 bg-[#0C1E28]">
+<header class="fixed w-full z-50 transition-all duration-300 bg-[#11222D]">
             <div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center"><a
                     class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" class="h-10 w-auto invert"
                         data-nimg="1" decoding="async" height="40" loading="eager" fetchpriority="high" src="./logo.png"
                         srcset="./logo.png 2x" style="color:transparent" width="150" /></a>
-                <nav class="hidden lg:flex items-center space-x-8" data-sa-rebuilt="1"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/index.html">Home</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/about.html">About Us</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/real-estate.html">Real Estate</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group rd-dd"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="#" onclick="return false;" aria-haspopup="true">Properties <span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a><div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="properties"><a class="satoshi rd-dd__item" href="/our-developments.html">Featured Opportunities</a><a class="satoshi rd-dd__item" href="/property-management.html">Property Management</a></div></div></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/blog.html">Blog</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">Contact Us</a></div><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:16px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></nav><button onclick="document.getElementById('mobile-menu').classList.toggle('opacity-0'); document.getElementById('mobile-menu').classList.toggle('opacity-100'); document.getElementById('mobile-menu').classList.toggle('invisible'); document.getElementById('mobile-menu').classList.toggle('pointer-events-none');" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none">
+                <nav class="hidden lg:flex items-center space-x-8" data-sa-rebuilt="1"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/index.html">Home</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/about.html">About Us</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/real-estate.html">Real Estate</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group rd-dd"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="#" onclick="return false;" aria-haspopup="true">Properties <span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a><div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="properties"><a class="satoshi rd-dd__item" href="/our-developments.html">Featured Opportunities</a><a class="satoshi rd-dd__item" href="/property-management.html">Property Management</a></div></div></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/blog.html">Blog</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div><a class="bg-white text-[#11222D] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">Contact Us</a></div><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:16px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></nav><button onclick="document.getElementById('mobile-menu').classList.toggle('opacity-0'); document.getElementById('mobile-menu').classList.toggle('opacity-100'); document.getElementById('mobile-menu').classList.toggle('invisible'); document.getElementById('mobile-menu').classList.toggle('pointer-events-none');" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none">
                     <div class="w-6 flex flex-col justify-between items-end"><span
                             class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span><span
                             class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span><span
                             class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span></div>
                 </button>
             </div>
-            <div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none"
+            <div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#11222D] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none"
                 style="height:100vh">
-                <div class="flex flex-col items-center justify-center h-full space-y-8"><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/index.html">Home</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/about.html">About Us</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/real-estate.html">Real Estate</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/our-developments.html">Featured Opportunities</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/blog.html">Blog</a><a class="bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi" href="/contact.html">Contact Us</a><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:0;margin-top:24px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></div></div>
+                <div class="flex flex-col items-center justify-center h-full space-y-8"><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/index.html">Home</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/about.html">About Us</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/real-estate.html">Real Estate</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/invest-in-portugal.html">Invest in Portugal</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/our-developments.html">Featured Opportunities</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/blog.html">Blog</a><a class="bg-[#ffffff] text-[#11222D] px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi" href="/contact.html">Contact Us</a><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:0;margin-top:24px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></div></div>
             </div>
         </header>
 
   <main class="pt-[140px] pb-24 min-h-screen" id="article-loader">
     <div class="max-w-[800px] mx-auto px-6 text-center mt-32">
-        <div class="inline-block w-8 h-8 border-4 border-[#0C1E28] border-t-transparent rounded-full animate-spin"></div>
+        <div class="inline-block w-8 h-8 border-4 border-[#11222D] border-t-transparent rounded-full animate-spin"></div>
     </div>
   </main>
 
@@ -101,7 +103,7 @@
     
     <!-- Header info -->
     <div class="max-w-[900px] mx-auto px-6 pt-12 pb-8 text-center">
-        <a href="blog.html" class="inline-flex items-center gap-2 text-gray-500 font-bold uppercase text-xs tracking-widest hover:text-[#0C1E28] transition-colors mb-8">
+        <a href="blog.html" class="inline-flex items-center gap-2 text-gray-500 font-bold uppercase text-xs tracking-widest hover:text-[#11222D] transition-colors mb-8">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
             Back to Journal
         </a>
@@ -111,12 +113,12 @@
             <span class="text-gray-300">•</span>
             <span id="post-read" class="text-gray-400 font-bold text-sm tracking-widest uppercase">Read Time</span>
         </div>
-        <h1 id="post-title" class="geist text-4xl md:text-5xl lg:text-6xl font-bold text-[#0C1E28] leading-[1.1] mb-8">Loading...</h1>
+        <h1 id="post-title" class="geist text-4xl md:text-5xl lg:text-6xl font-bold text-[#11222D] leading-[1.1] mb-8">Loading...</h1>
     </div>
 
     <!-- Feature Image -->
     <div class="max-w-[1200px] mx-auto px-4 md:px-8 mb-16">
-        <div class="aspect-[21/9] w-full rounded-2xl overflow-hidden bg-gray-100">
+        <div class="aspect-[21/9] w-full overflow-hidden bg-gray-100" style="border-radius:2px;">
             <img id="post-image" src="" alt="Cover" class="w-full h-full object-cover">
         </div>
     </div>
@@ -128,7 +130,7 @@
 
     <!-- Social Share Fake -->
     <div class="max-w-[800px] mx-auto px-6 mt-16 pt-8 border-t border-gray-200">
-        <h3 class="font-bold text-xl mb-4 text-[#0C1E28]">Share this article</h3>
+        <h3 class="font-bold text-xl mb-4 text-[#11222D]">Share this article</h3>
         <div class="flex gap-4">
             <button class="bg-[#1DA1F2] text-white px-4 py-2 rounded-lg font-bold text-sm">Twitter</button>
             <button class="bg-[#4267B2] text-white px-4 py-2 rounded-lg font-bold text-sm">Facebook</button>
