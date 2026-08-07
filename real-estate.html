@@ -69,7 +69,7 @@
 <!-- HERO (cinematic, looping video - editable via backoffice re_page.hero) -->
 <section class="rd-hero" id="re-hero" style="background-size:cover;background-position:center;">
   <div class="rd-hero__media">
-    <video id="re-hero-video" autoplay muted loop playsinline preload="auto" poster="/real-estate-hero-poster.jpg" src="/real-estate-hero.mp4"></video>
+    <video id="re-hero-video" data-autoplay autoplay muted loop playsinline webkit-playsinline preload="auto" poster="/real-estate-hero-poster.jpg" src="/real-estate-hero.mp4"></video>
   </div>
   <div class="rd-hero__scrim"></div>
   <div class="rd-wrap rd-hero__inner">
@@ -237,7 +237,9 @@
     if(hero.subtitle&&pick(hero.subtitle))document.getElementById('re-hero-sub').textContent=pick(hero.subtitle);
     var sec=document.getElementById('re-hero');var vid=document.getElementById('re-hero-video');
     if(hero.bg_color)sec.style.backgroundColor=hero.bg_color;
-    if(hero.bg_video){ vid.src=hero.bg_video; try{vid.load();vid.play();}catch(e){} }
+    // play() straight after load() is the race that aborts the start; the
+      // helper picks it up on loadeddata instead.
+      if(hero.bg_video){ vid.src=hero.bg_video; try{vid.load();}catch(e){} }
     else if(hero.bg_image){ if(vid){vid.style.display='none';} sec.style.backgroundImage="url('"+hero.bg_image+"')"; }
     // if neither bg_video nor bg_image set, keep the baked-in brand video default
     // blocks
@@ -291,6 +293,7 @@
     </script>
 <script src="/vendor/gsap.min.js"></script>
 <script src="/vendor/ScrollTrigger.min.js"></script>
+<script defer src="/hero-video.js"></script>
 <script defer src="/redesign.js"></script>
 <script src="/chat.js"></script>
 </body></html>
