@@ -342,3 +342,52 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 /* the hamburger is lg:hidden in Tailwind; hold that before the CDN answers */
 .rd-nav button[onclick*="mobile-menu"] { display:inline-flex; }
 @media (min-width:1024px){ .rd-nav button[onclick*="mobile-menu"] { display:none; } }
+
+/* ---------- MESSAGE FROM (portrait + statement, bio over the photo) ---------- */
+/* Brand book, p16: full bleed plus a plate. The bio never sets type straight on
+   the photograph - it opens a navy plate over it. */
+.rd-msg { display:grid; grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);
+  gap:clamp(28px,4.5vw,80px); align-items:start; }
+@media (max-width:900px){ .rd-msg { grid-template-columns:1fr; gap:32px; } }
+
+.rd-msg__figure { position:relative; margin:0; border-radius:2px; overflow:hidden;
+  background:var(--navy); aspect-ratio:4/5; }
+.rd-msg__figure img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* The trigger sits on its own plate, never as bare type on the image. */
+/* Both the trigger and the collapsed state are switched on by the script. With
+   no JS the bio simply shows over the portrait - readable, rather than a dead
+   button next to text nobody can reach. */
+.rd-msg__trigger { position:absolute; left:0; bottom:0; z-index:2;
+  display:none; align-items:center; gap:10px; border:0; cursor:pointer;
+  background:rgba(17,34,45,0.94); color:#fff; font-family:var(--sans);
+  font-size:11px; font-weight:500; letter-spacing:0.24em; text-transform:uppercase;
+  padding:15px 22px; transition:background .3s ease; }
+.rd-msg__figure[data-js] .rd-msg__trigger { display:inline-flex; }
+.rd-msg__trigger:hover { background:var(--navy); }
+.rd-msg__trigger .x { display:none; }
+.rd-msg__trigger[aria-expanded="true"] .o { display:none; }
+.rd-msg__trigger[aria-expanded="true"] .x { display:inline; }
+
+.rd-msg__bio { position:absolute; inset:0; z-index:1; background:rgba(17,34,45,0.97);
+  color:var(--stone); font-family:var(--sans); font-size:15px; line-height:1.75;
+  padding:clamp(24px,2.6vw,40px); padding-bottom:76px; overflow-y:auto;
+  transition:opacity .4s var(--ease-expo), visibility .4s, transform .4s var(--ease-expo); }
+.rd-msg__figure[data-js] .rd-msg__bio { opacity:0; visibility:hidden; transform:translateY(10px); }
+.rd-msg__figure[data-js] .rd-msg__bio[data-open="1"] { opacity:1; visibility:visible; transform:none; }
+.rd-msg__bio p { margin:0 0 14px; }
+.rd-msg__bio p:last-child { margin-bottom:0; }
+.rd-msg__bio strong { color:#fff; font-weight:600; }
+
+.rd-msg__body p { font-family:var(--sans); font-size:clamp(15px,1.15vw,17px);
+  line-height:1.8; color:var(--ink); margin:0 0 20px; }
+.rd-msg__body p:last-of-type { margin-bottom:0; }
+/* The opening line carries the weight, so it is set in the serif. */
+.rd-msg__lead { font-family:var(--serif) !important; font-weight:500;
+  font-size:clamp(21px,2.1vw,29px) !important; line-height:1.35 !important;
+  color:var(--navy) !important; letter-spacing:-0.01em; margin-bottom:26px !important; }
+.rd-msg__sign { margin-top:34px; padding-top:22px; border-top:1px solid var(--line); }
+.rd-msg__name { font-family:var(--serif); font-size:20px; font-weight:500;
+  color:var(--navy); margin:0; }
+.rd-msg__role { font-family:var(--sans); font-size:13px; color:var(--slate);
+  margin:5px 0 0; letter-spacing:0.01em; }

@@ -52,6 +52,35 @@
         sync();
       })();
 
+      // ---- Bio panel over a portrait (runs always: it is the only way to reach
+      //      the text, so it cannot depend on GSAP or on motion being allowed) ----
+      (function () {
+        var trigger = document.querySelector('.rd-msg__trigger');
+        if (!trigger) return;
+        var panel = document.getElementById(trigger.getAttribute('aria-controls'));
+        if (!panel) return;
+        var figure = trigger.closest('.rd-msg__figure');
+        // Only now does the bio become collapsible and the button appear.
+        if (figure) figure.setAttribute('data-js', '1');
+        function set(open) {
+          trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          if (open) panel.setAttribute('data-open', '1');
+          else panel.removeAttribute('data-open');
+          panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+          if (open) panel.scrollTop = 0;
+        }
+        trigger.addEventListener('click', function () {
+          set(trigger.getAttribute('aria-expanded') !== 'true');
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+            set(false);
+            trigger.focus();
+          }
+        });
+        set(false);
+      })();
+
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasGsap = window.gsap && window.ScrollTrigger;
 
