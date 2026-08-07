@@ -522,7 +522,10 @@
           <div class="re-group">Gallery</div>
           <div class="re-f" style="grid-column:1/-1;"><span>Images <span class="re-hint">first image is the cover</span></span>
             <div id="re-thumbs" class="gal-strip" style="display:flex;gap:10px;flex-wrap:wrap;margin:8px 0;"></div>
-            <input id="re-file" type="file" accept="image/*" multiple>
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+              <input id="re-file" type="file" accept="image/*" multiple>
+              <button type="button" class="btn ghost" id="re-pick">Choose from library</button>
+            </div>
           </div>
         </div>
       </div>
@@ -577,7 +580,10 @@
           <div class="re-group">Cover image</div>
           <div class="re-f" style="grid-column:1/-1;"><span>Cover <span class="re-hint">required — shown on /blog and the homepage journal</span></span>
             <div id="bl-cover-wrap" style="margin:8px 0;"></div>
-            <input id="bl-file" type="file" accept="image/*">
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+              <input id="bl-file" type="file" accept="image/*">
+              <button type="button" class="btn ghost" id="bl-pick">Choose from library</button>
+            </div>
           </div>
 
           <div class="re-group">Content (EN)</div>
@@ -851,11 +857,16 @@
     const keys = Object.keys(contentMap).filter(k => k.indexOf(prefix) === 0).sort();
     if(!keys.length){ wrap.innerHTML = '<div style="color:var(--muted);padding:20px;">No editable fields found for this page.</div>'; return; }
     wrap.innerHTML = '';
+    const keyLooksImg = s => /(?:^|[._-])(image|img|photo|cover|logo|banner|thumbnail|picture|poster|bg[._-]?image|hero[._-]?image)s?(?:$|[._-]|\d)/i.test(s);
+    const valLooksImg = v => /\.(?:jpe?g|png|gif|webp|avif|svg)(?:\?\S*)?$/i.test((v || '').trim());
     keys.forEach(key => {
       const row = document.createElement('div');
       row.style.cssText = 'border:1px solid #eee9df;border-radius:12px;padding:14px 16px;margin-bottom:12px;background:#fff;';
       const short = key.replace(prefix, '');
       row.innerHTML = `<div style="font-size:12px;font-weight:600;letter-spacing:.03em;color:#8a8a8a;margin-bottom:8px;font-family:monospace;">${escapeHtml(short)}</div>`;
+      const inputs = [];
+      const curVal = (contentMap[key] && (contentMap[key].en || contentMap[key].pt)) || '';
+      const isImg = keyLooksImg(short) || valLooksImg(curVal);
       ['en','pt'].forEach(loc => {
         const val = (contentMap[key] && contentMap[key][loc]) || '';
         const multiline = val.length > 60 || /<[a-z]/i.test(val);
@@ -875,9 +886,23 @@
           if(inp.value !== orig) contentDirty[key+'|'+loc] = true; else delete contentDirty[key+'|'+loc];
           updateContentSaveBtn();
         });
+        inputs.push(inp);
         field.appendChild(inp);
         row.appendChild(field);
       });
+      // Image field: offer a preview + "Choose from library" that fills every locale.
+      if(isImg){
+        const media = document.createElement('div');
+        media.style.cssText = 'display:flex;align-items:center;gap:12px;margin:2px 0 10px;';
+        media.innerHTML = `<div class="mp-prev" style="width:104px;height:66px;border-radius:6px;border:1px solid #ddd9cf;background:#f4f3ee center center / cover no-repeat;flex-shrink:0;${curVal?`background-image:url('${escapeAttrJS(curVal)}');`:''}"></div>`;
+        const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn ghost'; btn.textContent = 'Choose from library';
+        btn.addEventListener('click', () => openMediaPicker(url => {
+          inputs.forEach(inp => { inp.value = url; inp.dispatchEvent(new Event('input', { bubbles:true })); });
+          const p = media.querySelector('.mp-prev'); if(p) p.style.backgroundImage = `url('${url}')`;
+        }));
+        media.appendChild(btn);
+        row.insertBefore(media, row.children[1] || null);
+      }
       wrap.appendChild(row);
     });
   }
@@ -1091,6 +1116,8 @@
     if(thumbs) thumbs.addEventListener('click',e=>{ const x=e.target.closest('.re-thumb-x'); if(x){ reState.images.splice(+x.dataset.i,1); reRenderThumbs(); } });
     const file=reG('re-file');
     if(file) file.addEventListener('change',e=>{ if(e.target.files&&e.target.files.length) reUpload(e.target.files); e.target.value=''; });
+    const pick=reG('re-pick');
+    if(pick) pick.addEventListener('click',()=> openMediaPicker(u=>{ reState.images.push(u); reRenderThumbs(); }));
   })();
 
   // ============================================================
@@ -1164,6 +1191,77 @@
         toast('Deleted.'); loadMedia(true);
       });
       grid.appendChild(card);
+    });
+  }
+
+  // ============================================================
+  // Reusable media picker — pick an existing image from the shared
+  // library (site-media) for ANY image field, or upload a new one.
+  //   openMediaPicker(onPick)  →  onPick(publicUrl) once the user chooses.
+  // Same bucket/folders as the Media section, so everything reuses one
+  // library instead of only uploading fresh copies per field.
+  // ============================================================
+  let _mpEl = null, _mpOnPick = null, _mpFolder = 'studio';
+  function _mpClose(){ if(_mpEl) _mpEl.style.display = 'none'; _mpOnPick = null; }
+  function openMediaPicker(onPick){
+    _mpOnPick = onPick;
+    if(!_mpEl) _mpBuild();
+    _mpEl.style.display = 'flex';
+    _mpLoad();
+  }
+  function _mpBuild(){
+    _mpEl = document.createElement('div');
+    _mpEl.id = 'media-picker';
+    _mpEl.style.cssText = 'position:fixed;inset:0;z-index:200;background:rgba(17,34,45,.5);display:none;align-items:center;justify-content:center;padding:24px;';
+    _mpEl.innerHTML =
+      '<div style="background:#fff;border-radius:14px;width:min(880px,100%);max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.3);">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);">'
+      + '<div><div style="font-size:16px;font-weight:700;color:var(--navy);">Choose an image</div><div style="font-size:12px;color:var(--muted);">From the shared library (site-media)</div></div>'
+      + '<div style="display:flex;gap:10px;align-items:center;"><select id="mp-folder" class="btn ghost" style="padding:9px 12px;"></select><button class="btn" id="mp-upload">Upload new</button><button class="btn ghost" id="mp-close">Close</button></div>'
+      + '</div>'
+      + '<div id="mp-grid" style="padding:18px;overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;"></div>'
+      + '</div>';
+    document.body.appendChild(_mpEl);
+    _mpEl.addEventListener('click', e => { if(e.target === _mpEl) _mpClose(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape' && _mpEl && _mpEl.style.display !== 'none') _mpClose(); });
+    const sel = _mpEl.querySelector('#mp-folder');
+    sel.innerHTML = MEDIA_FOLDERS.map(f => `<option value="${f.path}">${escapeHtml(f.label)}</option>`).join('');
+    sel.value = _mpFolder;
+    sel.addEventListener('change', () => { _mpFolder = sel.value; _mpLoad(); });
+    _mpEl.querySelector('#mp-close').addEventListener('click', _mpClose);
+    _mpEl.querySelector('#mp-upload').addEventListener('click', () => {
+      const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true;
+      inp.addEventListener('change', async () => {
+        if(!inp.files.length) return;
+        const grid = _mpEl.querySelector('#mp-grid');
+        grid.insertAdjacentHTML('afterbegin', '<div style="grid-column:1/-1;color:var(--muted);padding:8px;">Uploading…</div>');
+        for(const f of inp.files){
+          const ext = (f.name.split('.').pop() || 'jpg').toLowerCase();
+          const base = (_mpFolder ? _mpFolder + '/' : '') + Date.now() + '-' + Math.random().toString(36).slice(2,7) + '.' + ext;
+          const { error } = await sb.storage.from(MEDIA_BUCKET).upload(base, f, { cacheControl:'3600', upsert:false });
+          if(error) toast('Upload error: ' + error.message);
+        }
+        _mpLoad();
+      });
+      inp.click();
+    });
+  }
+  async function _mpLoad(){
+    const grid = _mpEl.querySelector('#mp-grid');
+    grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);padding:12px;">Loading…</div>';
+    const { data, error } = await sb.storage.from(MEDIA_BUCKET).list(_mpFolder || '', { limit:200, sortBy:{ column:'created_at', order:'desc' } });
+    if(error){ grid.innerHTML = `<div style="grid-column:1/-1;color:#b91c1c;padding:12px;">${escapeHtml(error.message)}</div>`; return; }
+    const files = (data || []).filter(f => f.id && IMG_EXT.test(f.name));
+    if(!files.length){ grid.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);padding:12px;">No images in this folder yet. Use “Upload new”.</div>'; return; }
+    grid.innerHTML = '';
+    files.forEach(f => {
+      const path = (_mpFolder ? _mpFolder + '/' : '') + f.name;
+      const url = sb.storage.from(MEDIA_BUCKET).getPublicUrl(path).data.publicUrl;
+      const b = document.createElement('button'); b.type = 'button';
+      b.style.cssText = 'border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:pointer;padding:0;display:block;text-align:left;';
+      b.innerHTML = `<img src="${escapeAttrJS(url)}" alt="" loading="lazy" style="width:100%;height:104px;object-fit:cover;display:block;background:#f4f3ee;" onerror="this.style.opacity=.3"><div style="font-size:10px;color:var(--muted);padding:5px 7px;word-break:break-all;line-height:1.25;">${escapeHtml(f.name)}</div>`;
+      b.addEventListener('click', () => { const cb = _mpOnPick; _mpClose(); if(cb) cb(url); });
+      grid.appendChild(b);
     });
   }
 
@@ -2647,6 +2745,7 @@
     });
     const cw = blG('bl-cover-wrap'); if(cw) cw.addEventListener('click', e=>{ if(e.target.id==='bl-cover-x'){ blState.cover=null; blRenderCover(); } });
     const file = blG('bl-file'); if(file) file.addEventListener('change', e=>{ if(e.target.files && e.target.files[0]) blUpload(e.target.files[0]); e.target.value=''; });
+    const pick = blG('bl-pick'); if(pick) pick.addEventListener('click', ()=> openMediaPicker(u=>{ blState.cover=u; blRenderCover(); }));
   })();
 
   boot();
