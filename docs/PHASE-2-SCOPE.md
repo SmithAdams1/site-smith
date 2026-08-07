@@ -22,6 +22,12 @@ Go the ambitious route, consciously superseding the old "don't blockify bespoke 
 3. **Studio editor (2c).** Same renderer in an iframe: click a block → inspector (inline text EN/PT, images via the Media picker), drag to reorder, add/remove from the `rd-` palette. WYSIWYG because it's the same renderer.
 4. **Switch** `/about` to the block-served version once 2+3 are proven. Then roll the pattern to the remaining hand-built pages, one at a time, each behind the same parity gate.
 
+### Pilot progress (2026-08-08)
+- ✅ `lib/renderRdBlocks.js` — six rd- block renderers (hero, prose, timeline, pillars, proof, close); pure, SSR + editor.
+- ✅ `docs/about.blocks.json` — About block model seeded with live copy.
+- ⚠️ **Model is one block short of the current page.** The live `about.html` has **7** sections; the model has 6 — it is missing the **"A message from our Head of Investment" (George Hobson)** block (component `rd-msg`, keys `about.message.*`, portrait + statement + bio-over-photo toggle). The model was seeded from an older `about.html`. **Next: add an `rd_msg` renderer + insert the George block, then re-run parity against the full 7-section page.** (The first structural parity check passed only because its markers didn't include `rd-msg`.)
+- ⏭️ Then: whole-page SSR (shell + blocks) + serve `/about` from a DB blocks row (api/page.js pattern; needs a rewrite + removing the static about.html, which Vercel would otherwise shadow — the deploy-sensitive cutover, client-tested) → Studio live editor.
+
 ### Risk register for the pilot
 - **SEO/SSR parity is make-or-break** (canonical URL, crawler HTML). Gate every page on it.
 - **Serving real URLs from the block model** (not `/p/:slug`) needs a routing/rewrite decision in `vercel.json` + `api/page.js` — settle it in step 1.

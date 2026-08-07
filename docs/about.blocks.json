@@ -1,5 +1,6 @@
 {
-  "_note": "Phase 2 pilot — About represented as rd- design-system blocks. Field values seeded from the current live copy (site_content). EN only for now; pt fills in later. Drives lib/renderRdBlocks.js; the SSR/parity gate compares its output to today's about.html.",
+  "_note": "Phase 2 pilot — About as rd- design-system blocks. EN only for now; pt fills in later. Drives lib/renderRdBlocks.js.",
+  "_INCOMPLETE": "⚠️ This model has 6 blocks but the CURRENT about.html has 7 sections: hero, Who-we-are, Journey, What-we-do, Track Record, **A message from our Head of Investment (George Hobson)**, Closing. The George block (component rd-msg, keys about.message.* ×13, portrait + statement + bio-over-photo toggle) is MISSING here — this model was seeded from an earlier about.html before that block was added by another session. BEFORE the parity gate: (1) add an `rd_msg` renderer to lib/renderRdBlocks.js (read the exact George section markup + the bio-panel toggle in redesign.js), (2) insert the George block here between Track Record and Closing. The earlier structural parity check passed only because its markers (rd-hero/navy/funcs/pillars/proof) didn't cover rd-msg.",
   "slug": "about",
   "title": { "en": "About Us | Independent Real Estate Advisory in Portugal | Smith & Adams" },
   "blocks": [
