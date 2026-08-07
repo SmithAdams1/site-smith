@@ -10,7 +10,28 @@ The bespoke marketing pages (home, about, invest, real-estate, property-manageme
 
 So Phase 2 is **not** "make every page a block page". It is: **make every string and every image on every page editable from one place**, while keeping the block-builder for genuinely new/simple pages.
 
-## Two classes of page (the fork — please confirm)
+## DECISION (2026-08-08, client)
+Go the ambitious route, consciously superseding the old "don't blockify bespoke pages" rule:
+- **Blocks everywhere, including the hand-built pages** — but **blocks == the `rd-` design-system components** (typed fields + a fixed on-brand template), never freeform HTML. You reorder/add/remove and edit fields; you cannot produce off-brand output.
+- **Include the live click-to-edit editor (2c).**
+- **Pilot on `about.html` first**: build the shared SSR block renderer + editor, migrate only About, prove byte-level SSR/SEO + visual parity and the live edit, then roll out to the other pages.
+
+### Pilot build order (About)
+1. **Block schema + shared SSR renderer.** Define block types for About's sections (Hero, Statement/Message, Funcs timeline, Pillars, Proof, Close) as typed data; extend `lib/renderBlocks.js` to render each to the *exact* current `rd-` HTML. Serve About from the block model via `api/page.js` on its real URL (not `/p/:slug`).
+2. **SSR/SEO parity gate.** Diff the block-rendered HTML against today's `about.html` (content + `data-cms` + structure). Must match before anything ships. Crawlers get full HTML.
+3. **Studio editor (2c).** Same renderer in an iframe: click a block → inspector (inline text EN/PT, images via the Media picker), drag to reorder, add/remove from the `rd-` palette. WYSIWYG because it's the same renderer.
+4. **Switch** `/about` to the block-served version once 2+3 are proven. Then roll the pattern to the remaining hand-built pages, one at a time, each behind the same parity gate.
+
+### Risk register for the pilot
+- **SEO/SSR parity is make-or-break** (canonical URL, crawler HTML). Gate every page on it.
+- **Serving real URLs from the block model** (not `/p/:slug`) needs a routing/rewrite decision in `vercel.json` + `api/page.js` — settle it in step 1.
+- Effort is real; the pilot exists precisely to prove the architecture on one page before committing to eight.
+
+---
+
+## (Original draft below — superseded by the DECISION above; kept for the reasoning)
+
+## Two classes of page (the fork — superseded)
 1. **Block-builder pages** — `pages` table, served at `/p/:slug` (SSR `api/page.js` + `lib/renderBlocks.js`). Here you **add / remove / reorder blocks and sub-blocks** freely. For new or simple pages. Already exists; extend the block palette.
 2. **Hand-built pages** — the bespoke redesign pages. Here you **edit in place**: every copy string and every image, EN/PT — but you do **not** add/remove/reorder structure. Governed through an upgraded "Site content".
 
