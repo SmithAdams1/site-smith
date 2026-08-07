@@ -1,6 +1,6 @@
 {
   "_note": "Phase 2 pilot — About as rd- design-system blocks. EN only for now; pt fills in later. Drives lib/renderRdBlocks.js.",
-  "_INCOMPLETE": "⚠️ This model has 6 blocks but the CURRENT about.html has 7 sections: hero, Who-we-are, Journey, What-we-do, Track Record, **A message from our Head of Investment (George Hobson)**, Closing. The George block (component rd-msg, keys about.message.* ×13, portrait + statement + bio-over-photo toggle) is MISSING here — this model was seeded from an earlier about.html before that block was added by another session. BEFORE the parity gate: (1) add an `rd_msg` renderer to lib/renderRdBlocks.js (read the exact George section markup + the bio-panel toggle in redesign.js), (2) insert the George block here between Track Record and Closing. The earlier structural parity check passed only because its markers (rd-hero/navy/funcs/pillars/proof) didn't cover rd-msg.",
+  "_status": "7 blocks, matching the current about.html (hero, Who-we-are, Journey, What-we-do, Track Record, George message, Closing). The rd_msg (George) block reuses fixed ids (msg-bio) so redesign.js's always-on bio toggle drives it — one per page, fine for About.",
   "slug": "about",
   "title": { "en": "About Us | Independent Real Estate Advisory in Portugal | Smith & Adams" },
   "blocks": [
@@ -79,7 +79,33 @@
           { "en": "Advised and supported <strong style=\"color:#fff; font-weight:600;\">1,000+ international investors</strong> building euro-denominated portfolios in Portugal." },
           { "en": "Expanded its presence <strong style=\"color:#fff; font-weight:600;\">across Lisbon and key Portuguese cities</strong>, operating from Lisbon as its main hub." },
           { "en": "Attracted clients from <strong style=\"color:#fff; font-weight:600;\">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> &mdash; reflecting a truly global client base." }
-        ]
+        ],
+        "source": { "en": "Source: Smith &amp; Adams Annual Report 2026." }
+      }
+    },
+    {
+      "type": "rd_msg",
+      "data": {
+        "anchor": "message",
+        "eyebrow": { "en": "A message from our Head of Investment" },
+        "photo": "./about/george-hobson.jpg",
+        "photo_alt": { "en": "George Hobson, Head of Investment &amp; Strategy at Smith &amp; Adams" },
+        "photo_pos": "50% 22%",
+        "bio": [
+          { "en": "<strong>George Hobson</strong> leads investment and strategy at Smith &amp; Adams, setting how the group reads the Portuguese market and how each investment is structured &mdash; from the first appraisal through to handover and management." },
+          { "en": "He has spent more than a decade in Portuguese real estate. As a senior investment broker in Lisbon he advised international buyers on residential and yield-focused acquisitions, and earlier built and ran his own brokerage in the Algarve &mdash; giving him a view of the market from the ground up, in both regions where foreign capital concentrates." },
+          { "en": "That experience sits behind the way the group works: independent advice first, held to a single standard the whole way through." }
+        ],
+        "bio_open": { "en": "Read bio" },
+        "bio_close": { "en": "Close bio" },
+        "lead": { "en": "We built Smith &amp; Adams around one idea: that you should be able to own property in Portugal without having to become an expert in Portugal." },
+        "body": [
+          { "en": "Most investors arrive with the same two questions &mdash; is this a good asset, and who looks after it once I have bought it? Answering only the first is what the market usually offers. We give an independent read on the Portuguese property market and then stay on: planning, development, construction and management sit inside the same relationship, so nobody hands you off at the point where the work actually starts." },
+          { "en": "Portugal earns the attention. It offers residency routes into the European Union for both entrepreneurs and passive investors, a legal system that treats foreign ownership the same as domestic, and cities where the demand for good, well-run housing has outrun the supply of it. That combination is rarer than it sounds." },
+          { "en": "What we ask you to judge us on is evidence rather than argument. More than 1,000 investors, over &euro;300M placed and 300+ assets under management &mdash; and, on this site, the occupancy of our own buildings with the dates and the source attached. If a number matters to your decision, you should be able to see where it came from." }
+        ],
+        "name": { "en": "George Hobson" },
+        "role": { "en": "Head of Investment &amp; Strategy, Smith &amp; Adams" }
       }
     },
     {
