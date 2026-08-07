@@ -83,7 +83,7 @@
 <!-- FILTER BAR -->
 <section id="re-listings" style="background:var(--paper);padding:clamp(40px,6vw,72px) var(--mx) 0;scroll-margin-top:0;">
   <div style="max-width:1360px;margin:0 auto;">
-    <div style="background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 8px 30px rgba(17,34,45,.05);padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end;">
+    <div class="reveal" style="background:#fff;border:1px solid var(--line);border-radius:4px;box-shadow:0 8px 30px rgba(17,34,45,.05);padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;align-items:end;">
       <div><label data-i18n="f_location" class="rd-label" style="display:block;margin-bottom:9px;">Location</label><select id="f-region" class="re-input"></select></div>
       <div><label data-i18n="f_type" class="rd-label" style="display:block;margin-bottom:9px;">Type</label><select id="f-type" class="re-input"></select></div>
       <div><label data-i18n="f_transaction" class="rd-label" style="display:block;margin-bottom:9px;">For</label><select id="f-transaction" class="re-input"></select></div>
@@ -181,7 +181,7 @@
       var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#11222D')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
       var a=document.createElement('a');
       a.href='property/'+encodeURIComponent(p.slug);
-      a.className='re-card';
+      a.className='re-card';a.setAttribute('data-reveal','');
       a.style.cssText='display:block;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;';
       a.innerHTML=
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
@@ -200,6 +200,8 @@
         '</div>';
       grid.appendChild(a);
     });
+    // the cards only exist now, after the fetch and the filter pass
+    window.rdReveal(grid);
   }
 
   [fRegion,fType,fTrans,fBeds,fPrice].forEach(function(el){el.addEventListener('change',render);});
@@ -245,7 +247,7 @@
       wrap.style.display='block';c.style.paddingTop='clamp(40px,7vw,80px)';
       blocks.forEach(function(b){
         var heading=pick(b.heading||{}),body=pick(b.body||{}),cap=pick(b.caption||{});
-        var el=document.createElement('div');el.style.marginBottom='40px';
+        var el=document.createElement('div');el.style.marginBottom='40px';el.setAttribute('data-reveal','');
         if(b.type==='text'){
           el.innerHTML=(heading?'<h2 class="serif" style="font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--navy);letter-spacing:-.01em;margin:0 0 18px;">'+esc(heading)+'</h2>':'')+
             '<div class="satoshi" style="font-size:17px;color:var(--ink);line-height:1.85;">'+(body||'')+'</div>';
@@ -259,6 +261,7 @@
         }
         c.appendChild(el);
       });
+      window.rdReveal(c);
     }
   }).catch(function(e){console.warn('[real-estate] page content',e);});
 })();

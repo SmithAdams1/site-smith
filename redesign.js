@@ -54,6 +54,12 @@
 
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasGsap = window.gsap && window.ScrollTrigger;
+
+      // Pages that render content after a fetch call this once the nodes are in
+      // the DOM. Defined before the bail-out below so the call is always safe -
+      // under reduced motion, or with GSAP blocked, it simply does nothing.
+      window.rdReveal = function () {};
+
       if (reduce || !hasGsap) return; // content stays in its visible baseline state
 
       document.documentElement.classList.add('motion-ready');
@@ -171,6 +177,34 @@
           gsap.to(els, { opacity: 1, y: 0, duration: 0.9, ease: EASE, stagger: 0.08, overwrite: true });
         }
       });
+      // ---- Reveals for content that arrives after a fetch ----
+      // These cannot use the .reveal class: the CSS hides .reveal the moment
+      // .motion-ready is set, so a listing the JS then failed to animate would
+      // stay blank. They carry data-reveal instead and are hidden here, in the
+      // same breath as being given their trigger - so a missed call leaves the
+      // content visible rather than invisible.
+      window.rdReveal = function (root) {
+        var scope = (root && root.querySelectorAll) ? root : document;
+        // Re-filtering the listings wipes the grid and builds it again, so the
+        // triggers of the cards that just went away would pile up on detached
+        // nodes. Drop those first.
+        ScrollTrigger.getAll().forEach(function (st) {
+          var el = st.trigger;
+          if (el && el.hasAttribute && el.hasAttribute('data-reveal-done') && !document.contains(el)) st.kill();
+        });
+        var els = gsap.utils.toArray(scope.querySelectorAll('[data-reveal]:not([data-reveal-done])'));
+        if (!els.length) return;
+        els.forEach(function (el) { el.setAttribute('data-reveal-done', '1'); });
+        gsap.set(els, { opacity: 0, y: 26 });
+        ScrollTrigger.batch(els, {
+          start: 'top 92%',
+          onEnter: function (e) {
+            gsap.to(e, { opacity: 1, y: 0, duration: 0.9, ease: EASE, stagger: 0.06, overwrite: true });
+          }
+        });
+        ScrollTrigger.refresh();
+      };
+
       // staggered list lines
       gsap.utils.toArray('.rd-funcs').forEach(function (list) {
         ScrollTrigger.create({
