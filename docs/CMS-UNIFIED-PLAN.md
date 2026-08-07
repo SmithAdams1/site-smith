@@ -53,6 +53,26 @@ Normalise every bespoke page into the `pages`/blocks model: rd-hero, rd-carousel
 2. Within Phase 1, **which to consolidate first — Blog or Real Estate?** (Real Estate is the higher-traffic, more complex domain; Blog is simpler and a faster win.)
 3. **Auth**: keep one shared admin login, or move to per-user accounts (better audit trail; the `pages.updated_by` column already exists for it).
 
+## Verified findings & decisions (2026-08-07)
+Locked with the client, and confirmed against the code:
+- **Fork → phased hybrid.** Unify now (A), migrate pages into blocks later, one at a time (B). Do not big-bang B.
+- **Auth → per-user accounts.** Confirmed no app change is needed: Studio's login already uses `sb.auth.signInWithPassword({ email, password })` with a full email, and every RLS policy authorises `auth.role() = 'authenticated'` (any user). **Action is purely in Supabase:** create one account per person under Authentication → Users. The `admin.html` login still concatenates `@smithandadams.com` (line ~405), but it's being retired; non-`@smithandadams` users must sign in through Studio, not that file.
+- **Consolidation order → Real Estate, then Blog, then Media** ("avança conforme esta lista"). Media *upload* already works, so RE/Blog can upload inline now and gain the shared picker when Media is finished last.
+
+**The surface is further along than the older handoffs claimed:**
+- `admin-v2.html` / `admin-v3.html` **no longer exist** — already deleted.
+- Studio's **Real Estate and Blog sections already embed the real admins in an iframe** (`activateSection` → `loadEmbed('re-frame','/admin-real-estate.html')` and `loadEmbed('blog-frame','/admin.html')`), lazy-loaded on first open. Both are **same-origin with no custom `storageKey`, so they inherit Studio's Supabase session** — no second login. So "one login, one surface, all content types" is effectively already true; the seam is cosmetic (the embedded admins show their own header/login chrome).
+
+**Two ways to finish Phase 1, pick per appetite:**
+1. **Polish the embed (fast, ~zero risk).** When embedded (`window.self !== window.top`), the admins hide their own chrome (RE: the navy `Real Estate — Backoffice` bar + sign-out; Blog/admin.html: its sidebar + login screen) so they present as native Studio panels. Reuses 100% of tested CRUD. Cannot retire `admin*.html` (still the engine behind the iframe).
+2. **True native re-author (slower, higher fidelity).** Rebuild the CRUD inside `studio.html` and retire `admin*.html`. For Real Estate the exact contract is known — port these verbatim:
+   - list: `sb.from('properties').select('*').order('featured',{ascending:false}).order('created_at',{ascending:false})`
+   - save: `payload = { slug, reference, status, price, currency:'EUR', golden_visa, featured, title:{en,pt}, summary:{en,pt}, description:{en,pt}, highlights:{en:[],pt:[]}, images:[], cover_image, brochure_url }` (+ the location/spec fields `region, city, property_type, transaction_type, bedrooms, bathrooms, area_sqm, year, plot, energy, lat, lng` — read the full `saveProperty` in `admin-real-estate.html` before porting); insert with `.select().single()`, else `update().eq('id', current.id)`
+   - upload: `sb.storage.from('properties').upload(path,file,{cacheControl:'3600',upsert:false})` → `getPublicUrl`
+   - hero: `sb.from('re_page').select('hero,blocks').eq('id','real-estate')`
+
+**⚠️ Verification constraint for this whole item.** Everything meaningful in the backoffice is behind Supabase auth, which cannot be exercised headlessly in this environment (interactive login). Studio UI *renders* can be checked, but **authenticated create/edit/delete must be verified by the client logging in.** Build correct-by-construction from the contracts above; hand data-write verification to the client.
+
 ## Security action items (priority)
 - ⚠️ **Rotate `admin@smithandadams.com`'s password in Supabase now.** It shipped in cleartext in a public repo (`schema.sql`, previous editions) and is in git history.
 - Cleartext removed from `schema.sql` in this branch (uses a `:'admin_pw'` psql var).
