@@ -5,7 +5,8 @@
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
     { "source": "/blog/:slug", "destination": "/api/seo_blog?slug=$1" },
     { "source": "/property/:slug", "destination": "/api/property?slug=$1" },
-    { "source": "/p/:slug", "destination": "/api/page?slug=$1" }
+    { "source": "/p/:slug", "destination": "/api/page?slug=$1" },
+    { "source": "/about-preview", "destination": "/api/rd-page?slug=about" }
   ],
   "crons": [
     {
