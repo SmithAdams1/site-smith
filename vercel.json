@@ -7,7 +7,9 @@
     { "source": "/property/:slug", "destination": "/api/property?slug=$1" },
     { "source": "/p/:slug", "destination": "/api/page?slug=$1" },
     { "source": "/about-preview", "destination": "/api/rd-page?slug=about" },
-    { "source": "/invest-preview", "destination": "/api/rd-page?slug=invest-in-portugal" }
+    { "source": "/invest-preview", "destination": "/api/rd-page?slug=invest-in-portugal" },
+    { "source": "/about", "destination": "/api/rd-page?slug=about" },
+    { "source": "/about.html", "destination": "/api/rd-page?slug=about" }
   ],
   "crons": [
     {

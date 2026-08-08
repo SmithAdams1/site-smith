@@ -63,6 +63,14 @@ The block system now serves + edits **two** pages; the recipe is proven and repe
 - **Remaining hand-built pages:** our-developments, property-management (functional: Boom booking + gallery), contact (form). index + real-estate are complex/functional. urban-collection/fanqueiros/privacy/terms are header-only.
 - **The flip (path 1) stays for the end** — one flip per page (rewrite `/<slug>` → handler + delete the static file), each after its `-preview` is signed off.
 
+### DECISION (2026-08-08): block-migration scope = About + Invest only
+Investigating our-developments showed the remaining hand-built pages are bespoke/functional, not built from rd- components: our-developments = 4 one-off showcases + a Boom booking widget + a 66-key portfolio; property-management = Boom widget + gallery; contact = a form. Block-migrating them means one-off renderers (near-zero reuse) plus preserving business-critical widgets (booking, the lead form) through SSR + PT repaint — high effort, high risk, low editing benefit. They are already on the redesign visually and already editable via `site_content` in Studio ("Site pages").
+
+**Client decision:** stop the block model at About + Invest (the pages that fit cleanly); leave the bespoke pages as they are. Proceed to the flips for the two block pages.
+
+### Flip (path 1) — now proceeding, for About + Invest only
+Per page: add a `vercel.json` rewrite `/<slug>` → `/api/rd-page?slug=<slug>` and delete the static `.html` (Vercel's filesystem otherwise shadows the rewrite). Preview branch only — production `main` is untouched, and it's reversible via git. First Studio Save seeds `rd_pages`; until then the committed bilingual fallback serves.
+
 ### Risk register for the pilot
 - **SEO/SSR parity is make-or-break** (canonical URL, crawler HTML). Gate every page on it.
 - **Serving real URLs from the block model** (not `/p/:slug`) needs a routing/rewrite decision in `vercel.json` + `api/page.js` — settle it in step 1.
