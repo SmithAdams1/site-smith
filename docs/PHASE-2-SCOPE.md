@@ -54,6 +54,15 @@ All committed and on the preview. The flip is now a no-regression change (pendin
 
 Until then: production `/about` stays the static bilingual file; `/about-preview` is the EN block-served validation surface (fully working, images and all).
 
+### Rollout progress (path 2) — 2026-08-08
+The block system now serves + edits **two** pages; the recipe is proven and repeatable.
+- ✅ **About** — full pilot (model, SSR, PT switching, editor). `/about-preview`.
+- ✅ **Invest in Portugal** — bilingual model (54/54 CMS keys; FAQ EN from static HTML), palette extended (rd_prose+cards, rd_asset, rd_project, rd_list, rd_faq w/ FAQPage JSON-LD), shell, `/invest-preview`, editor page-picker. Visible-text parity 100%; live, 0 errors.
+- **Infra:** `api/rd-page.js` serves any page in `PAGES` (literal shell/fallback paths so Vercel bundles them); Studio editor has a page picker (`RD_PAGES`); each page has `<slug>.shell.html` + `docs/<name>.blocks.json`.
+- **Per-page recipe:** (1) map sections → blocks, add any missing renderer faithful to the markup; (2) build the bilingual model from `site_content` (+ static for non-CMS bits like FAQ); (3) generate the shell; (4) add the slug to `PAGES`/`readShell`/`readFallback` + a `/<x>-preview` rewrite + the editor picker; (5) visible-text parity gate.
+- **Remaining hand-built pages:** our-developments, property-management (functional: Boom booking + gallery), contact (form). index + real-estate are complex/functional. urban-collection/fanqueiros/privacy/terms are header-only.
+- **The flip (path 1) stays for the end** — one flip per page (rewrite `/<slug>` → handler + delete the static file), each after its `-preview` is signed off.
+
 ### Risk register for the pilot
 - **SEO/SSR parity is make-or-break** (canonical URL, crawler HTML). Gate every page on it.
 - **Serving real URLs from the block model** (not `/p/:slug`) needs a routing/rewrite decision in `vercel.json` + `api/page.js` — settle it in step 1.
