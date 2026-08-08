@@ -420,6 +420,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1.5"/><circle cx="3" cy="12" r="1.5"/><circle cx="3" cy="18" r="1.5"/></svg>
         <span>Site pages</span>
       </a>
+      <a class="nav-item" data-section="rd-pages" href="#rd-pages">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="7" rx="1"/><rect x="3" y="14" width="8" height="7" rx="1"/><rect x="13" y="14" width="8" height="7" rx="1"/></svg>
+        <span>Redesign pages</span>
+      </a>
 
       <div class="group-label">Assets</div>
       <a class="nav-item" data-section="media" href="#media">
@@ -626,6 +630,21 @@
       </div>
     </section>
 
+    <!-- ================= REDESIGN PAGES (rd- block editor) ========== -->
+    <section class="section hidden" id="section-rd-pages">
+      <div class="page-head">
+        <div>
+          <h2>Redesign pages</h2>
+          <div class="sub">Edit the hand-built pages as on-brand blocks. Live preview + fields; saves to <code>rd_pages</code>. Pilot: About.</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn ghost" id="rdp-reload">Reload</button>
+          <button class="btn" id="rdp-save" disabled>Save</button>
+        </div>
+      </div>
+      <div id="rdp-view"><div style="color:var(--muted);padding:20px;">Loading…</div></div>
+    </section>
+
     <!-- ================= NAV (native) =============================== -->
     <section class="section hidden" id="section-nav">
       <div class="page-head">
@@ -701,7 +720,7 @@
   const $  = (id) => document.getElementById(id);
   const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
-  const SECTIONS = ['pages','real-estate','blog','content','media','nav','settings'];
+  const SECTIONS = ['pages','rd-pages','real-estate','blog','content','media','nav','settings'];
 
   function show(el, on=true){ if(!el) return; el.classList.toggle('hidden', !on); }
   function toast(msg, ms=2200){
@@ -768,6 +787,7 @@
       if(s.id === 'section-editor') return;
       s.classList.toggle('hidden', s.id !== `section-${name}`);
     });
+    if(name === 'rd-pages') rdpLoad();
     if(name === 'content') loadContentEditor();
     if(name === 'media') loadMedia();
     if(name === 'nav') loadNavManager();
@@ -1264,6 +1284,130 @@
       grid.appendChild(b);
     });
   }
+
+  // ============================================================
+  // Redesign pages — edit a hand-built page as rd- blocks.
+  //  • Loads the block model from rd_pages (fallback: committed JSON).
+  //  • Live preview via the shared renderer (window.rdRender, set by a
+  //    module <script> at the end of the file — same code the SSR uses).
+  //  • Fields walked recursively from block data ({en,pt} strings, arrays,
+  //    nested objects); image slots get the Media picker.
+  //  • Save upserts the whole block list to rd_pages. Pilot: About.
+  // ============================================================
+  const RDP_SLUG = 'about';
+  let rdpBlocks = null, rdpDirty = false, _rdpTimer = null;
+
+  function rdpSetSave(){ const b = $('rdp-save'); if(b){ b.disabled = !rdpDirty; b.textContent = rdpDirty ? 'Save changes' : 'Saved'; } }
+  function rdpTouch(){ rdpDirty = true; rdpSetSave(); clearTimeout(_rdpTimer); _rdpTimer = setTimeout(rdpRenderPreview, 400); }
+  function rdpIsImg(key, val){ return /(image|img|photo|cover|logo|banner|poster)/i.test(key) || (typeof val === 'string' && /\.(jpe?g|png|gif|webp|avif|svg)(\?|$)/i.test(val)); }
+
+  async function rdpLoad(){
+    const view = $('rdp-view');
+    view.innerHTML = '<div style="color:var(--muted);padding:20px;">Loading…</div>';
+    rdpDirty = false; rdpSetSave();
+    let blocks = null;
+    try {
+      const { data } = await sb.from('rd_pages').select('blocks').eq('slug', RDP_SLUG).maybeSingle();
+      if(data && Array.isArray(data.blocks)) blocks = data.blocks;
+    } catch(e){}
+    if(!blocks){ try { const j = await (await fetch('/docs/about.blocks.json')).json(); blocks = j.blocks; } catch(e){} }
+    rdpBlocks = Array.isArray(blocks) ? blocks : [];
+    rdpRender();
+  }
+
+  function rdpRender(){
+    const view = $('rdp-view');
+    view.innerHTML =
+      '<div style="display:grid;grid-template-columns:minmax(300px,400px) 1fr;gap:20px;align-items:start;">' +
+        '<div id="rdp-fields" style="max-height:80vh;overflow:auto;padding-right:6px;"></div>' +
+        '<div id="rdp-preview" style="position:sticky;top:12px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;"></div>' +
+      '</div>';
+    rdpRenderFields();
+    rdpRenderPreview();
+  }
+
+  function rdpRenderPreview(){
+    const p = $('rdp-preview'); if(!p) return;
+    if(!window.rdRender){ p.innerHTML = '<div style="padding:20px;color:var(--muted);">Preview module loading…</div>'; setTimeout(rdpRenderPreview, 300); return; }
+    let html = '';
+    try { html = window.rdRender(rdpBlocks, 'en'); } catch(e){ html = '<pre style="padding:16px;">' + escapeHtml(e.message) + '</pre>'; }
+    const doc = '<!doctype html><html><head><base href="/"><link rel="stylesheet" href="/tailwind.css"><link rel="stylesheet" href="/redesign.css"></head><body class="rd" style="background:var(--paper);">' + html + '</body></html>';
+    p.innerHTML = '<iframe title="Preview" style="width:100%;height:80vh;border:0;display:block;" srcdoc="' + escapeAttrJS(doc) + '"></iframe>';
+  }
+
+  function rdpInput(container, labelText, get, set, isImg){
+    const row = document.createElement('div'); row.style.cssText = 'margin-bottom:12px;';
+    row.innerHTML = '<div style="font-size:11px;font-weight:600;color:#8a8a8a;margin-bottom:4px;font-family:monospace;">' + escapeHtml(labelText) + '</div>';
+    const cur = get() == null ? '' : String(get());
+    if(isImg){
+      const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex;gap:10px;align-items:center;';
+      wrap.innerHTML = '<div class="rdp-prev" style="width:80px;height:52px;border:1px solid var(--line);border-radius:5px;background:#f4f3ee center center / cover no-repeat;flex-shrink:0;' + (cur ? 'background-image:url(\'' + escapeAttrJS(cur) + '\');' : '') + '"></div>';
+      const inp = document.createElement('input'); inp.type = 'text'; inp.value = cur; inp.style.cssText = 'flex:1;min-width:0;border:1px solid #ddd9cf;border-radius:7px;padding:7px 9px;font:inherit;font-size:12.5px;';
+      const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn ghost'; btn.textContent = 'Library';
+      const setPrev = v => { const pv = wrap.querySelector('.rdp-prev'); if(pv) pv.style.backgroundImage = "url('" + v + "')"; };
+      inp.addEventListener('input', () => { set(inp.value); setPrev(inp.value); rdpTouch(); });
+      btn.addEventListener('click', () => openMediaPicker(url => { inp.value = url; set(url); setPrev(url); rdpTouch(); }));
+      wrap.appendChild(inp); wrap.appendChild(btn); row.appendChild(wrap);
+    } else {
+      const multiline = cur.length > 60 || /<[a-z]/i.test(cur);
+      const inp = document.createElement(multiline ? 'textarea' : 'input');
+      if(multiline) inp.rows = Math.min(7, Math.max(2, Math.ceil(cur.length / 70)));
+      inp.value = cur; inp.style.cssText = 'width:100%;border:1px solid #ddd9cf;border-radius:7px;padding:8px 10px;font:inherit;font-size:13px;box-sizing:border-box;';
+      inp.addEventListener('input', () => { set(inp.value); rdpTouch(); });
+      row.appendChild(inp);
+    }
+    container.appendChild(row);
+  }
+
+  function rdpWalk(ref, container, prefix){
+    Object.keys(ref).forEach(k => {
+      if(k.charAt(0) === '_') return;
+      const val = ref[k];
+      const label = (prefix ? prefix + '.' : '') + k;
+      if(val && typeof val === 'object' && !Array.isArray(val) && ('en' in val || 'pt' in val)){
+        rdpInput(container, label, () => val.en, v => { val.en = v; }, rdpIsImg(k, val.en));
+      } else if(typeof val === 'string'){
+        rdpInput(container, label, () => ref[k], v => { ref[k] = v; }, rdpIsImg(k, val));
+      } else if(Array.isArray(val)){
+        val.forEach((el, i) => {
+          if(el && typeof el === 'object' && ('en' in el || 'pt' in el)){
+            rdpInput(container, label + ' ' + (i + 1), () => el.en, v => { el.en = v; }, false);
+          } else if(el && typeof el === 'object'){
+            const g = document.createElement('div'); g.style.cssText = 'border-left:2px solid var(--line);padding-left:12px;margin:8px 0;';
+            g.innerHTML = '<div style="font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);margin-bottom:6px;">' + escapeHtml(label) + ' ' + (i + 1) + '</div>';
+            rdpWalk(el, g, ''); container.appendChild(g);
+          } else {
+            rdpInput(container, label + ' ' + (i + 1), () => val[i], v => { val[i] = v; }, false);
+          }
+        });
+      } else if(val && typeof val === 'object'){
+        rdpWalk(val, container, label);
+      }
+    });
+  }
+
+  function rdpRenderFields(){
+    const c = $('rdp-fields'); if(!c) return; c.innerHTML = '';
+    rdpBlocks.forEach((b, i) => {
+      const card = document.createElement('div'); card.style.cssText = 'border:1px solid #eee9df;border-radius:10px;padding:12px 14px;margin-bottom:12px;background:#fff;';
+      card.innerHTML = '<div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">' + (i + 1) + '. ' + escapeHtml(b.type || '?') + '</div>';
+      if(b.data) rdpWalk(b.data, card, '');
+      c.appendChild(card);
+    });
+  }
+
+  async function rdpSave(){
+    const btn = $('rdp-save'); if(btn){ btn.disabled = true; btn.textContent = 'Saving…'; }
+    const payload = { slug: RDP_SLUG, blocks: rdpBlocks, updated_at: new Date().toISOString() };
+    const { error } = await sb.from('rd_pages').upsert(payload, { onConflict: 'slug' });
+    if(error){ toast('Save error: ' + error.message); rdpDirty = true; rdpSetSave(); return; }
+    toast('Saved. /about-preview now serves this.'); rdpDirty = false; rdpSetSave();
+  }
+
+  (function rdpWire(){
+    const r = $('rdp-reload'); if(r) r.addEventListener('click', rdpLoad);
+    const s = $('rdp-save'); if(s) s.addEventListener('click', rdpSave);
+  })();
 
   // ============================================================
   // Navigation manager — the full site menu picture.
@@ -2751,5 +2895,11 @@
   boot();
 </script>
 
+<!-- Redesign-page block renderer (ES module) — same code the SSR uses,
+     so the Studio preview matches what ships. Exposes window.rdRender. -->
+<script type="module">
+  import { renderRdBlocks } from '/lib/renderRdBlocks.js';
+  window.rdRender = renderRdBlocks;
+</script>
 </body>
 </html>
