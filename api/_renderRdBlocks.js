@@ -47,7 +47,9 @@ function ctaHtml(cta, locale) {
   if (!cta || !pick(cta.label, locale)) return '';
   const ghost = cta.style === 'ghost' ? ' rd-cta--ghost' : '';
   const label = cta.wrap ? `<span>${pick(cta.label, locale)}</span>` : pick(cta.label, locale);
-  const arrow = cta.arrow === false ? '' : (cta.wrap ? ARROW : ' ' + ARROW);
+  // Space before the arrow unless it's a wrapped label with space:false
+  // (some source CTAs keep the space between </span> and the icon, some don't).
+  const arrow = cta.arrow === false ? '' : ((cta.wrap && cta.space !== true) ? ARROW : ' ' + ARROW);
   return `<a class="rd-cta${ghost}" href="${attr(cta.href || 'contact.html')}">${label}${arrow}</a>`;
 }
 
@@ -223,10 +225,17 @@ const renderers = {
   },
 
   // FAQ accordion using native <details> (rd-faq). Each item: q + a (HTML).
+  // Also emits a FAQPage JSON-LD block derived from the items, so the SEO
+  // rich-result data survives when this section comes from the block model.
   rd_faq(d, locale) {
-    const items = (Array.isArray(d.items) ? d.items : []).map(it =>
+    const list = Array.isArray(d.items) ? d.items : [];
+    const items = list.map(it =>
       `<details>\n              <summary><span>${pick(it.q, locale)}</span><span class="rd-faq__mark" aria-hidden="true"></span></summary>\n              <div class="rd-faq__a">${pick(it.a, locale)}</div>\n            </details>`
     ).join('\n            ');
+    // Plain text for the schema (strip tags, decode the entities we emit).
+    const plain = s => String(s == null ? '' : s).replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&rsquo;|&#8217;/g, '\u2019').replace(/&lsquo;/g, '\u2018').replace(/&mdash;/g, '\u2014').replace(/&ndash;/g, '\u2013').replace(/&euro;/g, '\u20ac').replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
+    const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: list.map(it => ({ '@type': 'Question', name: plain(pick(it.q, locale)), acceptedAnswer: { '@type': 'Answer', text: plain(pick(it.a, locale)) } })) };
+    const ld = list.length ? `\n<script type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}<\/script>` : '';
     return (
 `      <section class="rd-sec"${d.anchor ? ` id="${attr(d.anchor)}"` : ''} style="background:var(--paper);">
         <div class="rd-wrap">
@@ -239,7 +248,7 @@ const renderers = {
             ${items}
           </div>
         </div>
-      </section>`
+      </section>` + ld
     );
   },
 

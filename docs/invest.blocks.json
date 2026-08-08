@@ -1,0 +1,435 @@
+{
+  "_note": "Phase 2 rollout — invest-in-portugal as rd- blocks. Bilingual (EN+PT) from site_content invest.*; FAQ is EN-only (lives in the static HTML, not the CMS — matches production). Hero CTAs/caption are static (EN in both locales, as in prod).",
+  "slug": "invest-in-portugal",
+  "title": {
+    "en": "Invest in Portugal | D2 Visa & Golden Visa Residency | Smith & Adams"
+  },
+  "blocks": [
+    {
+      "type": "rd_hero",
+      "data": {
+        "eyebrow": {
+          "en": "Smith & Adams · Portugal",
+          "pt": "Smith & Adams · Portugal"
+        },
+        "title": {
+          "en": "Invest in Portugal",
+          "pt": "Invista em Portugal"
+        },
+        "subtitle": {
+          "en": "Two clear, proven pathways to European residency. Choose the route that fits your goals: entrepreneurial drive or passive capital.",
+          "pt": "Dois caminhos claros e comprovados para a residência europeia. Escolha a rota ideal para os seus objetivos: espírito empreendedor ou capital passivo."
+        },
+        "image": "hygge-house-beato/atrium.jpg",
+        "image_alt": {
+          "en": "Hygge House Beato, Lisbon"
+        },
+        "ctas": [
+          {
+            "label": {
+              "en": "Book a consultation"
+            },
+            "href": "contact.html"
+          },
+          {
+            "label": {
+              "en": "Read the questions"
+            },
+            "href": "#invest-faq",
+            "style": "ghost",
+            "arrow": false
+          }
+        ],
+        "caption_k": {
+          "en": "Beato · Lisboa"
+        },
+        "caption_v": {
+          "en": "137 studio units"
+        }
+      }
+    },
+    {
+      "type": "rd_prose",
+      "data": {
+        "bg": "paper",
+        "eyebrow": {
+          "en": "Subject 01",
+          "pt": "Assunto 01"
+        },
+        "title": {
+          "en": "D2 Visa",
+          "pt": "Visto D2"
+        },
+        "body": [
+          {
+            "en": "The D2 Visa is Portugal's route for non-EU, non-EEA and non-Swiss nationals who want to live in Portugal by starting a business, buying an existing one, or working as an independent professional. There is no fixed investment threshold - what matters is a credible, well-documented business plan and proof you can sustain both the business and yourself. We prepare your business plan and oversee the company incorporation, which is handled with specialist local lawyers.",
+            "pt": "O Visto D2 é a via de Portugal para cidadãos de fora da UE, EEE e Suíça que querem viver em Portugal criando um negócio, adquirindo um já existente ou trabalhando como profissional independente. Não há um valor mínimo de investimento fixo - o que conta é um plano de negócios credível e bem documentado e a prova de que consegue sustentar o negócio e a si próprio. Preparamos o seu plano de negócios e supervisionamos a constituição da empresa, tratada com advogados locais especializados."
+          }
+        ],
+        "cards": [
+          {
+            "label": {
+              "en": "Purpose",
+              "pt": "Objetivo"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">Built for active participation.</strong> Designed for those starting a company, acquiring one, or operating as a freelancer with a genuine connection to Portugal.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">Feito para participação ativa.</strong> Pensado para quem cria uma empresa, adquire uma, ou atua como freelancer com uma ligação genuína a Portugal."
+            }
+          },
+          {
+            "label": {
+              "en": "Process Timeline",
+              "pt": "Prazo do processo"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">Clear and predictable.</strong> The visa is issued within a few months of a complete application and converts to a 2-year residence permit on arrival.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">Claro e previsível.</strong> O visto é emitido poucos meses após um pedido completo e converte-se numa autorização de residência de 2 anos à chegada."
+            }
+          },
+          {
+            "label": {
+              "en": "Minimum Investment",
+              "pt": "Investimento mínimo"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">No fixed minimum.</strong> You need a viable business plan and proof of sufficient funds - typically from around &euro;11,000 for a single applicant in the first year, more for accompanying family.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">Sem mínimo fixo.</strong> É necessário um plano de negócios viável e prova de fundos suficientes - normalmente a partir de cerca de &euro;11.000 para um requerente no primeiro ano, mais para família acompanhante."
+            }
+          },
+          {
+            "label": {
+              "en": "Renewal Period",
+              "pt": "Período de renovação"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">2+3 years.</strong> An initial 2-year permit, renewable for a further 3 years. Permanent residency can be requested after 5 years of legal residence.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">2+3 anos.</strong> Autorização inicial de 2 anos, renovável por mais 3. A residência permanente pode ser pedida após 5 anos de residência legal."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "rd_prose",
+      "data": {
+        "bg": "paper",
+        "eyebrow": {
+          "en": "Subject 02",
+          "pt": "Assunto 02"
+        },
+        "title": {
+          "en": "Golden Visa",
+          "pt": "Golden Visa"
+        },
+        "body": [
+          {
+            "en": "The Golden Visa is Portugal's residency-by-investment programme for non-EU, non-EEA and non-Swiss nationals who want EU residency without relocating full time. Since 2023, the qualifying routes are investment-based rather than real estate.",
+            "pt": "O Golden Visa é o programa de residência por investimento de Portugal, para cidadãos de fora da UE, EEE e Suíça que querem residência na UE sem se mudarem a tempo inteiro. Desde 2023, as vias elegíveis são baseadas em investimento e já não em imobiliário."
+          }
+        ],
+        "cards": [
+          {
+            "label": {
+              "en": "Purpose",
+              "pt": "Objetivo"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">A passive capital route.</strong> For investors who want optionality in the EU without giving up their base elsewhere.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">Uma via de capital passivo.</strong> Para investidores que querem opcionalidade na UE sem abdicar da sua base noutro lugar."
+            }
+          },
+          {
+            "label": {
+              "en": "Process Timeline",
+              "pt": "Prazo do processo"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">Structured and thorough.</strong> Processing currently runs 12 to 24 months due to AIMA's backlog, though the authority has been working through it steadily.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">Estruturado e rigoroso.</strong> O processamento demora atualmente 12 a 24 meses devido ao atraso da AIMA, embora a autoridade tenha vindo a resolvê-lo de forma constante."
+            }
+          },
+          {
+            "label": {
+              "en": "Minimum Investment",
+              "pt": "Investimento mínimo"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">&euro;500,000 in a qualifying fund.</strong> Real estate no longer qualifies (that route was removed in 2023). We work with fund advisors and can make the right introduction.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">&euro;500.000 num fundo elegível.</strong> O imobiliário já não qualifica (essa via foi removida em 2023). Trabalhamos com consultores de fundos e podemos fazer a apresentação certa."
+            }
+          },
+          {
+            "label": {
+              "en": "Renewal Period",
+              "pt": "Período de renovação"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:700;\">Residency without relocation.</strong> Just 7 days in the first year and 14 days in each subsequent two-year period. Permanent residency available after 5 years.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:700;\">Residência sem mudança.</strong> Apenas 7 dias no primeiro ano e 14 dias em cada período seguinte de dois anos. Residência permanente disponível após 5 anos."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "rd_asset",
+      "data": {
+        "image": "hygge-house-beato/1.jpg",
+        "image_alt": {
+          "en": "Hygge House Beato"
+        },
+        "tag": {
+          "en": "Subject 03",
+          "pt": "Assunto 03"
+        },
+        "eyebrow": {
+          "en": "Real Estate · Lisbon · Beato",
+          "pt": "Imobiliário · Lisboa · Beato"
+        },
+        "title": {
+          "en": "Hygge House",
+          "pt": "Hygge House"
+        },
+        "title_em": {
+          "en": "Beato",
+          "pt": "Beato"
+        },
+        "figs": [
+          {
+            "n": {
+              "en": "137",
+              "pt": "137"
+            },
+            "l": {
+              "en": "Studio Units",
+              "pt": "Unidades Studio"
+            }
+          },
+          {
+            "n": {
+              "en": "Beato",
+              "pt": "Beato"
+            },
+            "l": {
+              "en": "Location",
+              "pt": "Localização"
+            }
+          },
+          {
+            "n": {
+              "en": "Hygge",
+              "pt": "Hygge"
+            },
+            "l": {
+              "en": "Core Concept",
+              "pt": "Conceito Central"
+            }
+          }
+        ],
+        "byline": {
+          "en": "By <strong style=\"color:#0C1E28; font-weight:600;\">Smith & Adams</strong> · Residential Project in Lisbon",
+          "pt": "Por <strong style=\"color:#0C1E28; font-weight:600;\">Smith & Adams</strong> · Projeto Residencial em Lisboa"
+        }
+      }
+    },
+    {
+      "type": "rd_project",
+      "data": {
+        "eyebrow": {
+          "en": "The Project",
+          "pt": "O Projeto"
+        },
+        "quote": {
+          "en": "Where the Nordic philosophy of wellbeing meets the riverside energy of Lisbon. A modern refuge rooted in the city's history.",
+          "pt": "Onde a filosofia nórdica do bem-estar encontra a energia ribeirinha de Lisboa. Um refúgio moderno enraizado na história da cidade."
+        },
+        "body": [
+          {
+            "en": "Hygge House Beato blends contemporary architecture with urban convenience and the welcoming spirit of the Hygge philosophy. Advised and structured by Smith &amp; Adams, it is a direct response to Portugal's growing hospitality market, offering units that combine functionality with a genuine sense of home.",
+            "pt": "O Hygge House Beato une arquitetura contemporânea com a conveniência urbana e o espírito acolhedor da filosofia Hygge. Aconselhado e estruturado pela Smith &amp; Adams, representa uma resposta direta ao crescente mercado de hospitalidade de Portugal, oferecendo unidades que combinam funcionalidade com um sentido genuíno de lar."
+          },
+          {
+            "en": "The building comprises 137 studio-typology units, designed with a focus on efficiency, functionality and quality. Every space was conceived to meet the high standards the Portuguese market demands, without giving up the individuality and character that set this project apart.",
+            "pt": "O edifício é composto por 137 unidades de tipologia studio, concebidas com foco na eficiência, funcionalidade e qualidade. Cada espaço foi pensado para corresponder aos elevados padrões que o mercado português exige, sem abdicar da individualidade e do caráter que distinguem este projeto."
+          }
+        ],
+        "images": [
+          {
+            "src": "hygge-house-beato/2.jpg",
+            "alt": {
+              "en": "Hygge House Beato"
+            }
+          },
+          {
+            "src": "hygge-house-beato/3.jpg",
+            "alt": {
+              "en": "Hygge House Beato"
+            }
+          }
+        ],
+        "closing_quote": {
+          "en": "A project where long-term investment value meets a community centred on the genuine feeling of home.",
+          "pt": "Um projeto onde o valor do investimento a longo prazo encontra uma comunidade centrada no sentimento genuíno de casa."
+        }
+      }
+    },
+    {
+      "type": "rd_list",
+      "data": {
+        "eyebrow": {
+          "en": "Project Pillars",
+          "pt": "Pilares do Projeto"
+        },
+        "items": [
+          {
+            "index": {
+              "en": "01"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Modern Architecture.</strong> A contemporary language that dialogues with the historic identity of the Beato district and its riverside energy.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Arquitetura Moderna.</strong> Linguagem contemporânea que dialoga com a identidade histórica do bairro do Beato e a sua energia ribeirinha."
+            }
+          },
+          {
+            "index": {
+              "en": "02"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Pure Comfort.</strong> Studio units designed for maximum efficiency without compromising quality of life and the sense of home.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Conforto Puro.</strong> Unidades studio desenhadas para a eficiência máxima sem comprometer a qualidade de vida e o sentido de lar."
+            }
+          },
+          {
+            "index": {
+              "en": "03"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Long-Term Investment.</strong> Set within a growing hospitality market, the project offers solid prospects for appreciation and return.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Investimento de Longo Prazo.</strong> Inserido num mercado de hospitalidade em crescimento, o projeto oferece sólidas perspetivas de valorização e retorno."
+            }
+          },
+          {
+            "index": {
+              "en": "04"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Community.</strong> Generous shared spaces that foster connection between residents and reinforce a sense of belonging.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Comunidade.</strong> Espaços comuns generosos que promovem a ligação entre residentes e reforçam o sentido de pertença ao lugar."
+            }
+          },
+          {
+            "index": {
+              "en": "05"
+            },
+            "body": {
+              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Historic Roots.</strong> Located in Beato, the project keeps a living connection with the memory and soul of Lisbon.",
+              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Raízes Históricas.</strong> Localizado no Beato, o projeto mantém uma ligação viva com a memória e a alma de Lisboa."
+            }
+          }
+        ],
+        "closing": {
+          "en": "Hygge House Beato is the ideal choice for those seeking a modern refuge that stays connected to the city's historic roots and its riverside energy. A home that is, at once, a smart investment and a place where life unfolds with ease.",
+          "pt": "O Hygge House Beato é a escolha ideal para quem procura um refúgio moderno que permaneça conectado às raízes históricas da cidade e à sua energia ribeirinha. Um lar que é, ao mesmo tempo, um investimento inteligente e um lugar onde a vida acontece com leveza."
+        }
+      }
+    },
+    {
+      "type": "rd_faq",
+      "data": {
+        "anchor": "invest-faq",
+        "eyebrow": {
+          "en": "FAQ"
+        },
+        "title": {
+          "en": "Investing in Portugal, your questions answered"
+        },
+        "items": [
+          {
+            "q": {
+              "en": "Is Portugal still a strong route to residency through investment?"
+            },
+            "a": {
+              "en": "More than ever. Portugal remains one of Europe's most attractive residency-by-investment destinations, with several fully active pathways. The Golden Visa continues through qualifying investment funds (from €500,000), and property remains an excellent route to euro-denominated income that pairs naturally with options like the D2. We help you choose the path that fits your goals best."
+            }
+          },
+          {
+            "q": {
+              "en": "What Golden Visa routes are open today?"
+            },
+            "a": {
+              "en": "You have real, proven options. The most popular is a €500,000 qualifying investment fund, alongside routes for scientific research, arts and cultural heritage, and job creation. Each is a viable way in, and we match the right one to your capital, timeline, and risk appetite."
+            }
+          },
+          {
+            "q": {
+              "en": "Golden Visa or D2 Visa, which one is for me?"
+            },
+            "a": {
+              "en": "Both are excellent, and both work, they simply suit different people. The Golden Visa is ideal if you want residency with minimal time in Portugal and maximum flexibility. The D2 is perfect if you want to actively build a business or self-employment here. We walk you through both so the choice feels obvious."
+            }
+          },
+          {
+            "q": {
+              "en": "What do I need for the D2 Visa?"
+            },
+            "a": {
+              "en": "Less than most people expect. There is no fixed minimum investment, what counts is a solid business plan and enough capital to support your activity and stay. This makes the D2 one of the most accessible and flexible routes into Portugal, and we help you build a strong, credible application."
+            }
+          },
+          {
+            "q": {
+              "en": "How much time do I actually need to spend in Portugal?"
+            },
+            "a": {
+              "en": "As little or as much as you want. The Golden Visa asks for only a few days a year, ideal for investors who want a foothold in Europe without relocating. The D2 suits those ready to spend more time here. Either way, you know exactly what is expected before you commit."
+            }
+          },
+          {
+            "q": {
+              "en": "Can this lead to Portuguese citizenship?"
+            },
+            "a": {
+              "en": "Yes, and it is a clear, well-trodden path. After five years of legal residency you can apply for citizenship, with a straightforward Portuguese language test (A2) and a clean record. Both the Golden Visa and the D2 count toward that five-year timeline from day one."
+            }
+          },
+          {
+            "q": {
+              "en": "Can I invest and handle everything from abroad?"
+            },
+            "a": {
+              "en": "Completely. Most of our clients never relocate to get started. We coordinate viewings, due diligence, legal structuring and, where relevant, the visa process, then manage the property for you. Distance is never a barrier to owning and earning in Portugal."
+            }
+          },
+          {
+            "q": {
+              "en": "Why invest with an independent advisor?"
+            },
+            "a": {
+              "en": "Because you get clarity, not a sales pitch. We only present opportunities that genuinely fit your goals, with net returns and risks laid out before you commit, and investment plus residency guidance under one roof. One team, one plan, working entirely in your interest."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "rd_close",
+      "data": {
+        "bg": "navy",
+        "title": {
+          "en": "Not sure which route fits you?",
+          "pt": "Não sabe qual rota combina consigo?"
+        },
+        "cta": {
+          "label": {
+            "en": "Speak with a specialist",
+            "pt": "Fale com um especialista"
+          },
+          "href": "contact.html",
+          "wrap": true,
+          "space": true
+        }
+      }
+    }
+  ]
+}
