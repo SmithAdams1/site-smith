@@ -1316,6 +1316,7 @@
   }
 
   function rdpRender(){
+    if(!$('rdp-style')){ const st = document.createElement('style'); st.id = 'rdp-style'; st.textContent = '.rdp-card--sel{outline:2px solid var(--navy);outline-offset:2px;}'; document.head.appendChild(st); }
     const view = $('rdp-view');
     view.innerHTML =
       '<div style="display:grid;grid-template-columns:minmax(300px,400px) 1fr;gap:20px;align-items:start;">' +
@@ -1331,7 +1332,9 @@
     if(!window.rdRender){ p.innerHTML = '<div style="padding:20px;color:var(--muted);">Preview module loading…</div>'; setTimeout(rdpRenderPreview, 300); return; }
     let html = '';
     try { html = window.rdRender(rdpBlocks, 'en'); } catch(e){ html = '<pre style="padding:16px;">' + escapeHtml(e.message) + '</pre>'; }
-    const doc = '<!doctype html><html><head><base href="/"><link rel="stylesheet" href="/tailwind.css"><link rel="stylesheet" href="/redesign.css"></head><body class="rd" style="background:var(--paper);">' + html + '</body></html>';
+    const selCss = '<style>body>section{cursor:pointer}body>section:hover{outline:2px solid #11222D;outline-offset:-2px}</style>';
+    const selJs = 'document.addEventListener("click",function(e){var s=e.target.closest("body>section");if(!s)return;var i=[].indexOf.call(document.querySelectorAll("body>section"),s);if(i>=0)parent.postMessage({rdpSelect:i},"*");},true);';
+    const doc = '<!doctype html><html><head><base href="/"><link rel="stylesheet" href="/tailwind.css"><link rel="stylesheet" href="/redesign.css">' + selCss + '</head><body class="rd" style="background:var(--paper);">' + html + '<scr' + 'ipt>' + selJs + '</scr' + 'ipt></body></html>';
     p.innerHTML = '<iframe title="Preview" style="width:100%;height:80vh;border:0;display:block;" srcdoc="' + escapeAttrJS(doc) + '"></iframe>';
   }
 
@@ -1389,11 +1392,24 @@
   function rdpRenderFields(){
     const c = $('rdp-fields'); if(!c) return; c.innerHTML = '';
     rdpBlocks.forEach((b, i) => {
-      const card = document.createElement('div'); card.style.cssText = 'border:1px solid #eee9df;border-radius:10px;padding:12px 14px;margin-bottom:12px;background:#fff;';
-      card.innerHTML = '<div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">' + (i + 1) + '. ' + escapeHtml(b.type || '?') + '</div>';
+      const card = document.createElement('div'); card.id = 'rdp-card-' + i;
+      card.style.cssText = 'border:1px solid #eee9df;border-radius:10px;padding:12px 14px;margin-bottom:12px;background:#fff;';
+      const head = document.createElement('div'); head.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;';
+      head.innerHTML = '<div style="font-size:12px;font-weight:700;color:var(--navy);">' + (i + 1) + '. ' + escapeHtml(b.type || '?') + '</div>';
+      const ctl = document.createElement('div'); ctl.style.cssText = 'display:flex;gap:4px;flex-shrink:0;';
+      const mk = (txt, title, fn, danger) => { const x = document.createElement('button'); x.type = 'button'; x.textContent = txt; x.title = title; x.style.cssText = 'width:26px;height:26px;border:1px solid #ddd9cf;border-radius:6px;background:#fff;cursor:pointer;font-size:13px;line-height:1;color:' + (danger ? '#b91c1c' : 'var(--navy)') + ';'; x.addEventListener('click', fn); return x; };
+      ctl.appendChild(mk('↑', 'Move up', () => rdpMove(i, -1)));
+      ctl.appendChild(mk('↓', 'Move down', () => rdpMove(i, 1)));
+      ctl.appendChild(mk('✕', 'Remove', () => rdpRemove(i), true));
+      head.appendChild(ctl); card.appendChild(head);
       if(b.data) rdpWalk(b.data, card, '');
       c.appendChild(card);
     });
+    const pal = document.createElement('div'); pal.style.cssText = 'border:1px dashed #ddd9cf;border-radius:10px;padding:12px 14px;margin-top:4px;';
+    pal.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#b6b3a8;margin-bottom:8px;">Add block</div>';
+    const row = document.createElement('div'); row.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;';
+    RDP_PALETTE.forEach(pair => { const x = document.createElement('button'); x.type = 'button'; x.className = 'btn ghost'; x.style.fontSize = '12px'; x.textContent = '+ ' + pair[1]; x.addEventListener('click', () => rdpAdd(pair[0])); row.appendChild(x); });
+    pal.appendChild(row); c.appendChild(pal);
   }
 
   async function rdpSave(){
@@ -1402,6 +1418,35 @@
     const { error } = await sb.from('rd_pages').upsert(payload, { onConflict: 'slug' });
     if(error){ toast('Save error: ' + error.message); rdpDirty = true; rdpSetSave(); return; }
     toast('Saved. /about-preview now serves this.'); rdpDirty = false; rdpSetSave();
+  }
+
+  // Default data for a freshly added block of each rd- type.
+  const RDP_DEFAULTS = {
+    rd_hero:     { eyebrow:{en:'Eyebrow'}, title:{en:'Heading'}, subtitle:{en:'Subtitle text.'}, image:'', image_alt:{en:''}, ctas:[{label:{en:'Book a consultation'},href:'contact.html'}] },
+    rd_prose:    { bg:'paper', eyebrow:{en:'Eyebrow'}, title:{en:'A short statement'}, body:[{en:'A paragraph of body copy.'}] },
+    rd_timeline: { eyebrow:{en:'Eyebrow'}, title:{en:'Section title'}, items:[{index:{en:'01'},title:{en:'Milestone'},body:{en:'What happened.'}}] },
+    rd_pillars:  { eyebrow:{en:'Eyebrow'}, title:{en:'Section title'}, items:[{title:{en:'Pillar'},body:{en:'Body copy.'}}] },
+    rd_proof:    { eyebrow:{en:'Eyebrow'}, title:{en:'Section title'}, stats:[{value:{en:'100+'},label:{en:'Label'}}] },
+    rd_msg:      { eyebrow:{en:'A message'}, photo:'', photo_alt:{en:''}, lead:{en:'Lead line.'}, body:[{en:'A paragraph.'}], name:{en:'Name'}, role:{en:'Role'} },
+    rd_close:    { bg:'paper', title:{en:'Closing heading.'}, body:{en:'Supporting line.'}, cta:{label:{en:'Book a consultation'},href:'contact.html',wrap:true} },
+  };
+  const RDP_PALETTE = [['rd_hero','Hero'],['rd_prose','Prose'],['rd_timeline','Timeline'],['rd_pillars','Pillars'],['rd_proof','Proof'],['rd_msg','Message'],['rd_close','Close']];
+
+  // Structural change → mark dirty, rebuild fields + preview.
+  function rdpMutated(){ rdpDirty = true; rdpSetSave(); rdpRenderFields(); rdpRenderPreview(); }
+  function rdpMove(i, dir){ const j = i + dir; if(j < 0 || j >= rdpBlocks.length) return; const t = rdpBlocks[i]; rdpBlocks[i] = rdpBlocks[j]; rdpBlocks[j] = t; rdpMutated(); }
+  function rdpRemove(i){ if(!confirm('Remove block ' + (i+1) + ' (' + (rdpBlocks[i]&&rdpBlocks[i].type) + ')?')) return; rdpBlocks.splice(i, 1); rdpMutated(); }
+  function rdpAdd(type){ const def = RDP_DEFAULTS[type]; if(!def) return; rdpBlocks.push({ type, data: JSON.parse(JSON.stringify(def)) }); rdpMutated(); const c = $('rdp-card-' + (rdpBlocks.length-1)); if(c) c.scrollIntoView({ block:'center' }); }
+
+  // Click a block in the preview iframe → highlight its card here.
+  if(!window._rdpMsgWired){
+    window._rdpMsgWired = true;
+    window.addEventListener('message', e => {
+      const d = e.data; if(!d || typeof d.rdpSelect !== 'number') return;
+      document.querySelectorAll('.rdp-card--sel').forEach(el => el.classList.remove('rdp-card--sel'));
+      const card = $('rdp-card-' + d.rdpSelect);
+      if(card){ card.classList.add('rdp-card--sel'); card.scrollIntoView({ block:'center', behavior:'smooth' }); }
+    });
   }
 
   (function rdpWire(){
