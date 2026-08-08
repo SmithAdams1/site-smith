@@ -45,7 +45,11 @@ The block model (`about.blocks.json`) is **EN-only**, so flipping `/about` to th
 3. **Add PT editing to the Studio editor** (a EN/PT toggle in the inspector; the renderer already does `pick()` en/pt fallback).
 Then, and only then, the flip is a no-regression change.
 
-**Progress:** ✅ **Part 1 done** — `about.blocks.json` is now bilingual: 52 fields carry `pt` (pulled from `site_content`) across hero/prose/timeline/pillars/proof; George + close stay EN-only (matches prod). Verified: PT renders for all five sections, George/close fall back to EN, and EN full-page parity is unchanged. ⏭️ **Part 2 (server/client PT switching)** and **Part 3 (editor PT)** remain — the flip stays blocked until Part 2.
+**Progress:** ✅ **Bilingual DONE — flip is now UNBLOCKED (no PT regression).**
+- Part 1 — `about.blocks.json` bilingual: 52 `pt` fields across hero/prose/timeline/pillars/proof; George + close EN-only (matches prod).
+- Part 2 — served page switches EN↔PT without reload: handler wraps blocks in `<!--RD:START/END-->`, embeds the model as `#__RD_BLOCKS__` JSON, and a client module repaints via `/lib/renderRdBlocks.js` on `cmsLocale`, re-init'ing reveals + the bio toggle. Live + verified on `/about-preview`.
+- Part 3 — Studio editor edits both locales (EN|PT toggle → fields + preview bind to the locale).
+All committed and on the preview. The flip is now a no-regression change (pending explicit OK). First Studio Save seeds `rd_pages`; until then the handler serves the committed bilingual fallback.
 > **Part 2 design decision to make first:** the current site switches language client-side (no reload, cms-loader re-applies `data-cms`). The block-served page has no `data-cms`, so PT needs either (a) a client re-render — embed the block JSON in the page + a module script that repaints the block region via `/lib/renderRdBlocks.js` when `cmsLocale==='pt'` (keeps the no-reload UX; must preserve DOM parity, e.g. repaint between `<!--RD:START-->`/`<!--RD:END-->` markers, not a wrapper div), or (b) SSR-per-locale — the switcher reloads to `/about?locale=pt` and the handler renders PT (better PT SEO, but a reload, inconsistent with other pages). Pick (a) for UX consistency unless PT SEO is a priority.
 
 Until then: production `/about` stays the static bilingual file; `/about-preview` is the EN block-served validation surface (fully working, images and all).
