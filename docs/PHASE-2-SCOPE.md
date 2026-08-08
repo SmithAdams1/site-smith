@@ -68,7 +68,20 @@ Investigating our-developments showed the remaining hand-built pages are bespoke
 
 **Client decision:** stop the block model at About + Invest (the pages that fit cleanly); leave the bespoke pages as they are. Proceed to the flips for the two block pages.
 
-### Flip (path 1) — now proceeding, for About + Invest only
+### Flip — DONE for About + Invest (2026-08-08, live on preview)
+Both flipped and verified on the preview branch: `/about` and
+`/invest-in-portugal` are block-served (SSR, bilingual, FAQ schema, images
+resolve, zero errors); `/about.html`/`.html` 308 → clean URL; the bespoke
+pages (e.g. `/our-developments`) are untouched; production `main` is
+untouched. Static `about.html` + `invest-in-portugal.html` deleted
+(reversible via git).
+> **Editing note:** About + Invest content is now edited ONLY via Studio →
+> **Redesign pages** (block editor → `rd_pages`). The old "Site pages"
+> (`site_content`) editor no longer affects them — they have no `data-cms`
+> hooks in the block output. First Save per page seeds `rd_pages`; until
+> then the committed bilingual fallback serves.
+
+### Flip (path 1) — (superseded by the DONE note above)
 Per page: add a `vercel.json` rewrite `/<slug>` → `/api/rd-page?slug=<slug>` and delete the static `.html` (Vercel's filesystem otherwise shadows the rewrite). Preview branch only — production `main` is untouched, and it's reversible via git. First Studio Save seeds `rd_pages`; until then the committed bilingual fallback serves.
 
 ### Risk register for the pilot
