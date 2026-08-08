@@ -29,14 +29,17 @@ export default async function handler(req, res) {
   const qLocale = String(req.query.locale || '').toLowerCase();
   const locale = SUPPORTED_LOCALES.includes(qLocale) ? qLocale : 'en';
 
-  const shellFile = SHELLS[slug];
-  if (!shellFile) { res.status(404).send('Unknown rd-page: ' + slug); return; }
+  if (!SHELLS[slug]) { res.status(404).send('Unknown rd-page: ' + slug); return; }
 
   let shell;
   try {
-    shell = fs.readFileSync(path.join(process.cwd(), shellFile), 'utf8');
+    // Literal path so Vercel's file tracer bundles the shell into the
+    // function (api/page.js reads 'page.html' the same way; a variable path
+    // is not traced -> file absent at runtime). Pilot is About-only;
+    // generalising to more pages later moves to vercel.json includeFiles.
+    shell = fs.readFileSync(path.join(process.cwd(), 'about.shell.html'), 'utf8');
   } catch (e) {
-    res.status(500).send('Shell template missing: ' + shellFile);
+    res.status(500).send('Shell template missing: about.shell.html');
     return;
   }
   if (shell.indexOf('<!--RD_BLOCKS-->') < 0) {
@@ -82,10 +85,10 @@ async function fetchBlocks(slug) {
 }
 
 function readFallback(slug) {
-  const f = FALLBACK[slug];
-  if (!f) return null;
+  if (slug !== 'about') return null;
   try {
-    const j = JSON.parse(fs.readFileSync(path.join(process.cwd(), f), 'utf8'));
+    // Literal path (traced + bundled by Vercel), same reason as the shell.
+    const j = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/about.blocks.json'), 'utf8'));
     return Array.isArray(j.blocks) ? j.blocks : null;
   } catch (e) {
     return null;
