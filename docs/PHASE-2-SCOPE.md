@@ -34,6 +34,19 @@ Go the ambitious route, consciously superseding the old "don't blockify bespoke 
   4. Once verified live: flip — `vercel.json` rewrite `/about` → handler + delete the static `about.html`. This is the irreversible step; do it last, client-confirmed.
 - ⏭️ Then the Studio live click-to-edit editor over the same renderer.
 
+### ⚠️ PT / bilingual — the flip is BLOCKED on this (verified 2026-08-08)
+About is **bilingual in production**. `site_content` PT coverage for the *current* page keys:
+- **Has PT:** `about.hero.*`, `about.group.*`, `about.journey.*`, `about.solutions.*`, `about.track.*`.
+- **No PT (EN-only even in prod):** `about.message.*` (George block), `about.cta.*` (closing).
+
+The block model (`about.blocks.json`) is **EN-only**, so flipping `/about` to the block SSR now would **regress PT** for the five translated sections. Do **not** flip until the block system is bilingual:
+1. **Add `pt` to the model** for hero/prose/timeline/pillars/proof, pulled from `site_content` PT (George + close stay EN — matches prod, no regression).
+2. **Make the served page bilingual.** The rendered HTML has no `data-cms`, so cms-loader can't switch it. Follow the `api/page.js` pattern: the handler embeds the block model as a `<script type="application/json">`, and a small client script re-renders the blocks in PT (via the same `/lib/renderRdBlocks.js` module) when `cmsLocale === 'pt'` — so the EN/PT toggle keeps working without a reload.
+3. **Add PT editing to the Studio editor** (a EN/PT toggle in the inspector; the renderer already does `pick()` en/pt fallback).
+Then, and only then, the flip is a no-regression change.
+
+Until then: production `/about` stays the static bilingual file; `/about-preview` is the EN block-served validation surface (fully working, images and all).
+
 ### Risk register for the pilot
 - **SEO/SSR parity is make-or-break** (canonical URL, crawler HTML). Gate every page on it.
 - **Serving real URLs from the block model** (not `/p/:slug`) needs a routing/rewrite decision in `vercel.json` + `api/page.js` — settle it in step 1.
