@@ -24,6 +24,38 @@ const SHELLS = { about: 'about.shell.html' };
 // committed fallback block models, so the route works before the SQL is run
 const FALLBACK = { about: 'docs/about.blocks.json' };
 
+// Client module embedded in the served page: repaints the block region in
+// PT when cmsLocale is 'pt' (block content has no data-cms). Uses the SAME
+// renderer as the SSR. Initial PT paint waits for window.load so redesign.js
+// has already booted on the EN nodes (avoids a double-wire race), then we
+// re-init reveals (make them visible) and the bio toggle on the new nodes.
+const RD_CLIENT_JS = `
+import { renderRdBlocks } from '/lib/renderRdBlocks.js';
+(function(){
+  var el = document.getElementById('__RD_BLOCKS__'); if(!el) return;
+  var model; try { model = JSON.parse(el.textContent); } catch(e){ return; }
+  function loc(){ try { return localStorage.getItem('cmsLocale') === 'pt' ? 'pt' : 'en'; } catch(e){ return 'en'; } }
+  var painted = 'en';
+  function region(){ var m=document.querySelector('main'); if(!m) return null; var s=null,e=null,n; for(n=m.firstChild;n;n=n.nextSibling){ if(n.nodeType===8){ if(n.data==='RD:START')s=n; else if(n.data==='RD:END')e=n; } } return (s&&e)?{m:m,s:s,e:e}:null; }
+  function reinit(){
+    document.querySelectorAll('main .reveal, main .reveal-line').forEach(function(x){ x.style.opacity='1'; x.style.transform='none'; });
+    var t = document.querySelector('main .rd-msg__trigger');
+    if(t && !t._rdWired){ t._rdWired=1; var p=document.getElementById(t.getAttribute('aria-controls')); var f=t.closest('.rd-msg__figure'); if(f)f.setAttribute('data-js','1'); var set=function(o){ t.setAttribute('aria-expanded',o?'true':'false'); if(p){ if(o)p.setAttribute('data-open','1'); else p.removeAttribute('data-open'); p.setAttribute('aria-hidden',o?'false':'true'); } }; t.addEventListener('click',function(){ set(t.getAttribute('aria-expanded')!=='true'); }); set(false); }
+  }
+  function paint(l){ if(l===painted) return; var r=region(); if(!r) return; while(r.s.nextSibling && r.s.nextSibling!==r.e) r.m.removeChild(r.s.nextSibling); var tpl=document.createElement('template'); tpl.innerHTML = renderRdBlocks(model.blocks, l); r.m.insertBefore(tpl.content, r.e); painted=l; reinit(); }
+  window.addEventListener('load', function(){ if(loc()==='pt') paint('pt'); });
+  window.addEventListener('storage', function(ev){ if(ev.key==='cmsLocale') paint(loc()); });
+  document.addEventListener('click', function(ev){ var s=ev.target && ev.target.closest && ev.target.closest('.cms-lang-switcher'); if(s) setTimeout(function(){ paint(loc()); }, 60); }, true);
+})();
+`;
+
+// JSON-in-<script> must escape </script> and the line separators.
+function escapeJsonForScript(obj){
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
+}
+
 export default async function handler(req, res) {
   const slug = String(req.query.slug || 'about').trim();
   const qLocale = String(req.query.locale || '').toLowerCase();
@@ -61,7 +93,14 @@ export default async function handler(req, res) {
     return;
   }
 
-  const html = shell.replace('<!--RD_BLOCKS-->', rendered);
+  // Baseline = EN (canonical) between markers; embed the model + a client
+  // module that repaints in PT when cmsLocale is 'pt' (block content has no
+  // data-cms, so cms-loader can't switch it — this keeps the no-reload UX).
+  const injected =
+    '<!--RD:START-->' + rendered + '<!--RD:END-->' +
+    '<script type="application/json" id="__RD_BLOCKS__">' + escapeJsonForScript({ blocks }) + '</script>' +
+    '<script type="module">' + RD_CLIENT_JS + '</script>';
+  const html = shell.replace('<!--RD_BLOCKS-->', injected);
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
   res.status(200).send(html);
