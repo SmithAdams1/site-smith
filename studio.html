@@ -638,6 +638,7 @@
           <div class="sub">Edit the hand-built pages as on-brand blocks. Live preview + fields; saves to <code>rd_pages</code>. Pilot: About.</div>
         </div>
         <div style="display:flex;gap:10px;align-items:center;">
+          <select id="rdp-page" class="btn ghost" style="padding:8px 12px;"></select>
           <div id="rdp-loc" style="display:inline-flex;border:1px solid #ddd9cf;border-radius:7px;overflow:hidden;font-size:12px;font-weight:700;">
             <button type="button" data-loc="en" style="border:0;padding:7px 13px;cursor:pointer;background:var(--navy);color:#fff;">EN</button>
             <button type="button" data-loc="pt" style="border:0;padding:7px 13px;cursor:pointer;background:#fff;color:var(--navy);">PT</button>
@@ -1298,7 +1299,9 @@
   //    nested objects); image slots get the Media picker.
   //  • Save upserts the whole block list to rd_pages. Pilot: About.
   // ============================================================
-  const RDP_SLUG = 'about';
+  const RD_PAGES = [['about', 'About'], ['invest-in-portugal', 'Invest in Portugal']];
+  const RDP_FALLBACK = { 'about': '/docs/about.blocks.json', 'invest-in-portugal': '/docs/invest.blocks.json' };
+  let rdpSlug = 'about';
   let rdpBlocks = null, rdpDirty = false, _rdpTimer = null, rdpLocale = 'en';
 
   function rdpSetSave(){ const b = $('rdp-save'); if(b){ b.disabled = !rdpDirty; b.textContent = rdpDirty ? 'Save changes' : 'Saved'; } }
@@ -1311,10 +1314,10 @@
     rdpDirty = false; rdpSetSave();
     let blocks = null;
     try {
-      const { data } = await sb.from('rd_pages').select('blocks').eq('slug', RDP_SLUG).maybeSingle();
+      const { data } = await sb.from('rd_pages').select('blocks').eq('slug', rdpSlug).maybeSingle();
       if(data && Array.isArray(data.blocks)) blocks = data.blocks;
     } catch(e){}
-    if(!blocks){ try { const j = await (await fetch('/docs/about.blocks.json')).json(); blocks = j.blocks; } catch(e){} }
+    if(!blocks){ try { const j = await (await fetch(RDP_FALLBACK[rdpSlug])).json(); blocks = j.blocks; } catch(e){} }
     rdpBlocks = Array.isArray(blocks) ? blocks : [];
     rdpRender();
   }
@@ -1418,7 +1421,7 @@
 
   async function rdpSave(){
     const btn = $('rdp-save'); if(btn){ btn.disabled = true; btn.textContent = 'Saving…'; }
-    const payload = { slug: RDP_SLUG, blocks: rdpBlocks, updated_at: new Date().toISOString() };
+    const payload = { slug: rdpSlug, blocks: rdpBlocks, updated_at: new Date().toISOString() };
     const { error } = await sb.from('rd_pages').upsert(payload, { onConflict: 'slug' });
     if(error){ toast('Save error: ' + error.message); rdpDirty = true; rdpSetSave(); return; }
     toast('Saved. /about-preview now serves this.'); rdpDirty = false; rdpSetSave();
@@ -1454,6 +1457,12 @@
   }
 
   (function rdpWire(){
+    const pg = $('rdp-page');
+    if(pg){
+      pg.innerHTML = RD_PAGES.map(p => `<option value="${p[0]}">${escapeHtml(p[1])}</option>`).join('');
+      pg.value = rdpSlug;
+      pg.addEventListener('change', () => { rdpSlug = pg.value; rdpLoad(); });
+    }
     const r = $('rdp-reload'); if(r) r.addEventListener('click', rdpLoad);
     const s = $('rdp-save'); if(s) s.addEventListener('click', rdpSave);
     const loc = $('rdp-loc');

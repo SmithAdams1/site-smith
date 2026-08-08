@@ -19,10 +19,10 @@ const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
 
 const SUPPORTED_LOCALES = ['en', 'pt'];
-// slug -> shell file (its head/nav/footer/scripts, with a <!--RD_BLOCKS--> marker)
-const SHELLS = { about: 'about.shell.html' };
-// committed fallback block models, so the route works before the SQL is run
-const FALLBACK = { about: 'docs/about.blocks.json' };
+// Pages served from the block model. Shell + committed fallback are read via
+// LITERAL paths in readShell()/readFallback() so Vercel's file tracer bundles
+// them into the function (a variable path is not traced).
+const PAGES = { 'about': true, 'invest-in-portugal': true };
 
 // Client module embedded in the served page: repaints the block region in
 // PT when cmsLocale is 'pt' (block content has no data-cms). Uses the SAME
@@ -61,19 +61,10 @@ export default async function handler(req, res) {
   const qLocale = String(req.query.locale || '').toLowerCase();
   const locale = SUPPORTED_LOCALES.includes(qLocale) ? qLocale : 'en';
 
-  if (!SHELLS[slug]) { res.status(404).send('Unknown rd-page: ' + slug); return; }
+  if (!PAGES[slug]) { res.status(404).send('Unknown rd-page: ' + slug); return; }
 
-  let shell;
-  try {
-    // Literal path so Vercel's file tracer bundles the shell into the
-    // function (api/page.js reads 'page.html' the same way; a variable path
-    // is not traced -> file absent at runtime). Pilot is About-only;
-    // generalising to more pages later moves to vercel.json includeFiles.
-    shell = fs.readFileSync(path.join(process.cwd(), 'about.shell.html'), 'utf8');
-  } catch (e) {
-    res.status(500).send('Shell template missing: about.shell.html');
-    return;
-  }
+  const shell = readShell(slug);
+  if (shell == null) { res.status(500).send('Shell template missing for ' + slug); return; }
   if (shell.indexOf('<!--RD_BLOCKS-->') < 0) {
     res.status(500).send('Shell marker <!--RD_BLOCKS--> missing');
     return;
@@ -123,13 +114,18 @@ async function fetchBlocks(slug) {
   }
 }
 
-function readFallback(slug) {
-  if (slug !== 'about') return null;
+// Literal paths so Vercel's file tracer bundles each shell/fallback.
+function readShell(slug) {
   try {
-    // Literal path (traced + bundled by Vercel), same reason as the shell.
-    const j = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/about.blocks.json'), 'utf8'));
-    return Array.isArray(j.blocks) ? j.blocks : null;
-  } catch (e) {
-    return null;
-  }
+    if (slug === 'about') return fs.readFileSync(path.join(process.cwd(), 'about.shell.html'), 'utf8');
+    if (slug === 'invest-in-portugal') return fs.readFileSync(path.join(process.cwd(), 'invest-in-portugal.shell.html'), 'utf8');
+  } catch (e) {}
+  return null;
+}
+function readFallback(slug) {
+  try {
+    if (slug === 'about') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/about.blocks.json'), 'utf8')).blocks;
+    if (slug === 'invest-in-portugal') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/invest.blocks.json'), 'utf8')).blocks;
+  } catch (e) {}
+  return null;
 }
