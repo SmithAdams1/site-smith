@@ -24,8 +24,8 @@ export default async function handler(req, res) {
       const desc  = (p.summary && (p.summary.en || p.summary.pt)) ||
         `${title} in ${[p.city, p.region].filter(Boolean).join(', ')} - Smith & Adams real estate.`;
       let img = p.cover_image || (Array.isArray(p.images) && p.images[0]) || '';
-      if (img && !img.startsWith('http')) img = 'https://smithandadams.com/' + img.replace(/^\.?\//, '');
-      const canonical = `https://smithandadams.com/property/${slug}`;
+      if (img && !img.startsWith('http')) img = 'https://www.smithandadams.com/' + img.replace(/^\.?\//, '');
+      const canonical = `https://www.smithandadams.com/property/${slug}`;
       const fullTitle = `${title} | Smith & Adams Real Estate`;
 
       const jsonLd = JSON.stringify({
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         image: img || undefined,
         url: canonical,
         offers: p.price ? { '@type': 'Offer', price: p.price, priceCurrency: p.currency || 'EUR' } : undefined,
-        provider: { '@type': 'Organization', name: 'Smith & Adams Group', url: 'https://smithandadams.com' },
+        provider: { '@type': 'Organization', name: 'Smith & Adams Group', url: 'https://www.smithandadams.com' },
       });
 
       const seoTags = `

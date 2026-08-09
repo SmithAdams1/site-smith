@@ -32,12 +32,12 @@ export default async function handler(req, res) {
       // Fix potential relative image URLs
       let img = post.image_url || '';
       if(img && !img.startsWith('http') && img.startsWith('.')) img = img.substring(1);
-      if(img && !img.startsWith('http')) img = 'https://smithandadams.com' + (img.startsWith('/') ? img : '/' + img);
+      if(img && !img.startsWith('http')) img = 'https://www.smithandadams.com' + (img.startsWith('/') ? img : '/' + img);
 
       const title = `${post.title} | Smith & Adams Blog`;
       const desc = post.excerpt || '';
 
-      const canonicalUrl = `https://smithandadams.com/blog/${slug}`;
+      const canonicalUrl = `https://www.smithandadams.com/blog/${slug}`;
 
       const jsonLd = JSON.stringify({
         "@context": "https://schema.org",
@@ -54,7 +54,7 @@ export default async function handler(req, res) {
           "name": "Smith & Adams Group",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://smithandadams.com/logo.png"
+            "url": "https://www.smithandadams.com/logo.png"
           }
         },
         "mainEntityOfPage": {

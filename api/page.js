@@ -12,7 +12,7 @@ import { renderBlocks, pickLocalized, escapeHtml, escapeAttr } from './_renderBl
 const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
 
-const SITE_BASE = 'https://smithandadams.com';
+const SITE_BASE = 'https://www.smithandadams.com';
 const DEFAULT_LOCALE = 'en';
 const SUPPORTED_LOCALES = ['en', 'pt'];
 
