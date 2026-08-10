@@ -56,6 +56,55 @@ function escapeJsonForScript(obj){
     .replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
 }
 
+const SITE_BASE = 'https://www.smithandadams.com';
+
+// Portuguese <head> SEO for the localized (/pt/...) URLs. EN comes from the
+// shell verbatim. Keep "&amp;" — these land inside HTML head tags.
+const PT_SEO = {
+  'about': {
+    title: 'Sobre Nós | Consultoria Imobiliária Independente em Portugal | Smith &amp; Adams',
+    desc: 'Desde 2020, a Smith &amp; Adams ajuda investidores internacionais a construir carteiras imobiliárias em euros em Portugal e a obter residência. Conheça o grupo de consultoria independente.',
+  },
+  'invest-in-portugal': {
+    title: 'Investir em Portugal | Visto D2 e Golden Visa | Smith &amp; Adams',
+    desc: 'Dois caminhos para a residência europeia: o Visto D2 para empreendedores e o Golden Visa para investidores. Compare objetivos, prazos e investimento com a Smith &amp; Adams.',
+  },
+};
+
+// Rewrite the shell <head> for the served locale: correct canonical + og:url,
+// reciprocal hreflang (en / pt / x-default), and — for PT — <html lang>, title
+// and descriptions. Regex targets tag shapes (not exact EN text), so it is
+// resilient to copy changes.
+function localizeHead(shell, slug, locale) {
+  const enUrl = SITE_BASE + '/' + slug;
+  const ptUrl = SITE_BASE + '/pt/' + slug;
+  const canonical = locale === 'pt' ? ptUrl : enUrl;
+  const hreflang =
+    '<link rel="alternate" hreflang="en" href="' + enUrl + '"/>' +
+    '<link rel="alternate" hreflang="pt" href="' + ptUrl + '"/>' +
+    '<link rel="alternate" hreflang="x-default" href="' + enUrl + '"/>';
+
+  let out = shell;
+  // canonical -> locale-correct, and append the hreflang set right after it
+  out = out.replace(/<link[^>]*rel=["']canonical["'][^>]*>/i,
+    '<link rel="canonical" href="' + canonical + '"/>' + hreflang);
+  // og:url -> canonical for this locale
+  out = out.replace(/(<meta[^>]*property=["']og:url["'][^>]*content=["'])[^"']*(["'])/i,
+    '$1' + canonical + '$2');
+
+  if (locale === 'pt') {
+    out = out.replace(/<html([^>]*)\slang=["']en["']/i, '<html$1 lang="pt"');
+    const seo = PT_SEO[slug];
+    if (seo) {
+      out = out.replace(/<title>[\s\S]*?<\/title>/i, '<title>' + seo.title + '</title>');
+      out = out.replace(/(<meta[^>]*name=["']description["'][^>]*content=["'])[^"']*(["'])/i, '$1' + seo.desc + '$2');
+      out = out.replace(/(<meta[^>]*property=["']og:title["'][^>]*content=["'])[^"']*(["'])/i, '$1' + seo.title + '$2');
+      out = out.replace(/(<meta[^>]*property=["']og:description["'][^>]*content=["'])[^"']*(["'])/i, '$1' + seo.desc + '$2');
+    }
+  }
+  return out;
+}
+
 export default async function handler(req, res) {
   const slug = String(req.query.slug || 'about').trim();
   const qLocale = String(req.query.locale || '').toLowerCase();
@@ -91,7 +140,8 @@ export default async function handler(req, res) {
     '<!--RD:START-->' + rendered + '<!--RD:END-->' +
     '<script type="application/json" id="__RD_BLOCKS__">' + escapeJsonForScript({ blocks }) + '</script>' +
     '<script type="module">' + RD_CLIENT_JS + '</script>';
-  const html = shell.replace('<!--RD_BLOCKS-->', injected);
+  const localizedShell = localizeHead(shell, slug, locale);
+  const html = localizedShell.replace('<!--RD_BLOCKS-->', injected);
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
   res.status(200).send(html);

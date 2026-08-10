@@ -32,7 +32,27 @@
     (document.head || document.documentElement).appendChild(style);
   })();
 
+  // Pages that have a real server-rendered /pt/ URL variant. For these the
+  // URL is the source of truth for locale; the switcher navigates between them.
+  const LOCALIZED_PAGES = ['/about', '/invest-in-portugal'];
+
+  function cleanPath() {
+    var p = (location.pathname || '/').replace(/\.html$/, '').replace(/\/+$/, '');
+    return p || '/';
+  }
+  function isPtUrl() {
+    var p = cleanPath();
+    return p === '/pt' || p.indexOf('/pt/') === 0;
+  }
+  function enEquivalent() {
+    var p = cleanPath();
+    return isPtUrl() ? (p.replace(/^\/pt/, '') || '/') : p;
+  }
+
   function getLocale() {
+    // A /pt/ URL is authoritative — keeps nav/footer/data-cms consistent with
+    // the server-rendered PT body and with what crawlers index.
+    try { if (isPtUrl()) return 'pt'; } catch (_) {}
     try {
       const v = localStorage.getItem('cmsLocale');
       if (v && SUPPORTED_LOCALES.includes(v)) return v;
@@ -43,6 +63,15 @@
   function setLocale(loc) {
     if (!SUPPORTED_LOCALES.includes(loc)) return;
     try { localStorage.setItem('cmsLocale', loc); } catch (_) {}
+    // If this page has a /pt/ URL variant, navigate to the right URL so the
+    // locale stays reflected in the address (and stays crawlable).
+    try {
+      var en = enEquivalent();
+      if (LOCALIZED_PAGES.indexOf(en) !== -1) {
+        location.href = loc === 'pt' ? '/pt' + en : en;
+        return;
+      }
+    } catch (_) {}
     location.reload();
   }
 
