@@ -6,32 +6,34 @@
    until the visitor accepts. This file renders the banner and, on the
    visitor's choice, updates consent + (on accept) starts GA4.
 
-   TODO: set GA4_ID to the real Measurement ID from GA4 Admin > Data
-   Streams > (Web stream) > "Measurement ID" — it looks like G-XXXXXXXXXX.
-   NOTE: 382833872 is the numeric Property ID, NOT the Measurement ID.
+   Measurement runs through the Google tag GT-TWZKWC9P (routes to GA4 and
+   whatever destinations are linked to it in the Google tag UI). It is
+   configured at load but gated by Consent Mode, so it sends cookieless
+   pings when consent is denied and full data once granted.
    ============================================================ */
 (function () {
   "use strict";
-  var GA4_ID = "G-XXXXXXXXXX"; // <-- replace with the real G- id
-  var ADS_ID = "AW-18073134136";
+  var GOOGLE_TAG = "GT-TWZKWC9P"; // Google tag (routes to GA4 / linked destinations)
+  var ADS_ID = "AW-18073134136"; // Google Ads (kept explicit; if GT already links Ads, we can drop this later)
   var STORE = "sa_consent"; // "granted" | "denied"
 
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   window.gtag = window.gtag || gtag;
 
-  var ga4Ready = /^G-[A-Z0-9]{6,}$/i.test(GA4_ID) && GA4_ID.indexOf("X") < 0;
-
-  // Ensure the gtag library is present (some pages had no tag at all).
+  // Ensure the gtag library is present (some pages had no tag at all), then
+  // configure the Google tag. Consent Mode (default denied) gates it.
   function ensureGtagLib() {
-    if (document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) return;
-    var s = document.createElement("script");
-    s.async = true;
-    s.src = "https://www.googletagmanager.com/gtag/js?id=" + (ga4Ready ? GA4_ID : ADS_ID);
-    document.head.appendChild(s);
-    gtag("js", new Date());
-    gtag("config", ADS_ID);
+    if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GOOGLE_TAG;
+      document.head.appendChild(s);
+      gtag("js", new Date());
+    }
   }
+  ensureGtagLib();
+  gtag("config", GOOGLE_TAG);
 
   function apply(state) {
     gtag("consent", "update", {
@@ -40,10 +42,6 @@
       ad_user_data: state,
       ad_personalization: state,
     });
-    if (state === "granted") {
-      ensureGtagLib();
-      if (ga4Ready) gtag("config", GA4_ID, { anonymize_ip: true });
-    }
   }
 
   var saved = null;
