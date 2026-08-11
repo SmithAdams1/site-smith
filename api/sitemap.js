@@ -25,12 +25,25 @@ export default async function handler(req, res) {
   // Blog posts
   let blogEntries = [];
   try {
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/posts?select=slug,created_at&order=created_at.desc`, { headers: sbHeaders });
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/posts?select=slug,created_at,translations&order=created_at.desc`, { headers: sbHeaders });
     const posts = await r.json();
     if (Array.isArray(posts)) {
-      blogEntries = posts.filter(p => p.slug).map(p => ({
-        loc: `${BASE_URL}/blog/${p.slug}`, lastmod: dateOf(p.created_at), changefreq: 'monthly', priority: '0.7',
-      }));
+      posts.filter(p => p.slug).forEach(p => {
+        const en = `${BASE_URL}/blog/${p.slug}`;
+        const lastmod = dateOf(p.created_at);
+        const hasPt = p.translations && p.translations.pt;
+        if (hasPt) {
+          const pt = `${BASE_URL}/pt/blog/${p.slug}`;
+          const alts =
+            `<xhtml:link rel="alternate" hreflang="en" href="${en}"/>` +
+            `<xhtml:link rel="alternate" hreflang="pt" href="${pt}"/>` +
+            `<xhtml:link rel="alternate" hreflang="x-default" href="${en}"/>`;
+          blogEntries.push({ loc: en, lastmod, changefreq: 'monthly', priority: '0.7', alternates: alts });
+          blogEntries.push({ loc: pt, lastmod, changefreq: 'monthly', priority: '0.7', alternates: alts });
+        } else {
+          blogEntries.push({ loc: en, lastmod, changefreq: 'monthly', priority: '0.7' });
+        }
+      });
     }
   } catch (err) {
     console.error('Sitemap: failed to fetch blog posts', err);

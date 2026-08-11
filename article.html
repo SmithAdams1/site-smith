@@ -155,7 +155,11 @@
 
     // i18n: pega title/excerpt/content traduzidos quando disponíveis. Fallback EN.
     function pickPostText(post, field) {
-        const locale = (localStorage.getItem('cmsLocale') || 'en');
+        // A /pt/ URL is authoritative (server-rendered head + crawlable PT body);
+        // otherwise fall back to the stored cmsLocale.
+        var _p = (location.pathname || '').replace(/\/+$/, '');
+        const locale = (_p === '/pt' || _p.indexOf('/pt/') === 0)
+            ? 'pt' : (localStorage.getItem('cmsLocale') || 'en');
         if (locale === 'en') return post[field];
         return (post.translations && post.translations[locale] && post.translations[locale][field]) || post[field];
     }

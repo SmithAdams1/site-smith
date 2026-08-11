@@ -7,6 +7,7 @@ const escapeAttr = (s) => escapeHtml(s).replace(/"/g, '&quot;');
 
 export default async function handler(req, res) {
   const { slug } = req.query;
+  const locale = String(req.query.locale || '').toLowerCase() === 'pt' ? 'pt' : 'en';
 
   try {
     // 1. Fetch Post from Supabase
@@ -15,7 +16,7 @@ export default async function handler(req, res) {
 
     // We fetch via REST to avoid dependencies
     const supabaseResponse = await fetch(
-      `${SUPABASE_URL}/rest/v1/posts?slug=eq.${encodeURIComponent(slug)}&select=title,excerpt,image_url,category,created_at`,
+      `${SUPABASE_URL}/rest/v1/posts?slug=eq.${encodeURIComponent(slug)}&select=title,excerpt,image_url,category,created_at,translations`,
       {
         headers: {
           'apikey': SUPABASE_ANON_KEY,
@@ -38,9 +39,17 @@ export default async function handler(req, res) {
       if(img && !img.startsWith('http') && img.startsWith('.')) img = img.substring(1);
       if(img && !img.startsWith('http')) img = 'https://www.smithandadams.com' + (img.startsWith('/') ? img : '/' + img);
 
-      const title = `${post.title} | Smith & Adams Blog`;
-      const desc = post.excerpt || '';
-      const canonicalUrl = `https://www.smithandadams.com/blog/${encodeURIComponent(slug)}`;
+      const tr = (post.translations && post.translations.pt) || {};
+      const baseTitle = (locale === 'pt' && tr.title) ? tr.title : post.title;
+      const title = `${baseTitle} | Smith & Adams Blog`;
+      const desc = (locale === 'pt' && tr.excerpt) ? tr.excerpt : (post.excerpt || '');
+      const enUrl = `https://www.smithandadams.com/blog/${encodeURIComponent(slug)}`;
+      const ptUrl = `https://www.smithandadams.com/pt/blog/${encodeURIComponent(slug)}`;
+      const canonicalUrl = locale === 'pt' ? ptUrl : enUrl;
+      const hreflang =
+        `<link rel="alternate" hreflang="en" href="${enUrl}"/>` +
+        `<link rel="alternate" hreflang="pt" href="${ptUrl}"/>` +
+        `<link rel="alternate" hreflang="x-default" href="${enUrl}"/>`;
       const published = post.created_at ? new Date(post.created_at).toISOString() : undefined;
 
       const jsonLd = JSON.stringify({
@@ -64,6 +73,7 @@ export default async function handler(req, res) {
         <title>${escapeHtml(title)}</title>
         <meta name="description" content="${escapeAttr(desc)}">
         <link rel="canonical" href="${escapeAttr(canonicalUrl)}">
+        ${hreflang}
         <meta property="og:title" content="${escapeAttr(title)}">
         <meta property="og:description" content="${escapeAttr(desc)}">
         <meta property="og:image" content="${escapeAttr(img)}">
@@ -86,6 +96,7 @@ export default async function handler(req, res) {
 
       // Replace generic title with all our rich structured tags
       html = html.replace(/<title>.*?<\/title>/, seoTags);
+      if (locale === 'pt') html = html.replace(/<html lang=["']en["']/i, '<html lang="pt"');
 
       // Inject global script hook so client side javascript can bypass location.search
       html = html.replace('<head>', `<head><script>window.INJECTED_SLUG = ${JSON.stringify(slug)};</script>`);

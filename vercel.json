@@ -16,6 +16,7 @@
     { "source": "/p/:slug", "destination": "/api/page?slug=$1" },
     { "source": "/pt/about", "destination": "/api/rd-page?slug=about&locale=pt" },
     { "source": "/pt/invest-in-portugal", "destination": "/api/rd-page?slug=invest-in-portugal&locale=pt" },
+    { "source": "/pt/blog/:slug", "destination": "/api/seo_blog?slug=$1&locale=pt" },
     { "source": "/about", "destination": "/api/rd-page?slug=about" },
     { "source": "/about.html", "destination": "/api/rd-page?slug=about" },
     { "source": "/invest-in-portugal", "destination": "/api/rd-page?slug=invest-in-portugal" },
