@@ -36,7 +36,9 @@
   // PT body). For these the URL is the source of truth for locale and the
   // switcher navigates between /x and /pt/x.
   function hasPtVariant(enPath) {
-    return enPath === '/about' || enPath === '/invest-in-portugal' ||
+    var pages = ['/', '/about', '/invest-in-portugal', '/our-developments',
+      '/property-management', '/contact', '/real-estate'];
+    return pages.indexOf(enPath) !== -1 ||
       enPath.indexOf('/blog/') === 0 || enPath.indexOf('/property/') === 0;
   }
 
