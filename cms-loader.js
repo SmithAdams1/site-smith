@@ -32,9 +32,13 @@
     (document.head || document.documentElement).appendChild(style);
   })();
 
-  // Pages that have a real server-rendered /pt/ URL variant. For these the
-  // URL is the source of truth for locale; the switcher navigates between them.
-  const LOCALIZED_PAGES = ['/about', '/invest-in-portugal'];
+  // Pages that have a real /pt/ URL variant (server-rendered head + crawlable
+  // PT body). For these the URL is the source of truth for locale and the
+  // switcher navigates between /x and /pt/x.
+  function hasPtVariant(enPath) {
+    return enPath === '/about' || enPath === '/invest-in-portugal' ||
+      enPath.indexOf('/blog/') === 0 || enPath.indexOf('/property/') === 0;
+  }
 
   function cleanPath() {
     var p = (location.pathname || '/').replace(/\.html$/, '').replace(/\/+$/, '');
@@ -67,7 +71,7 @@
     // locale stays reflected in the address (and stays crawlable).
     try {
       var en = enEquivalent();
-      if (LOCALIZED_PAGES.indexOf(en) !== -1) {
+      if (hasPtVariant(en)) {
         location.href = loc === 'pt' ? '/pt' + en : en;
         return;
       }

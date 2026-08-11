@@ -71,7 +71,7 @@
 (function(){
   var SUPABASE_URL='https://bcjtkfipcfvvitglgpys.supabase.co';
   var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
-  function locale(){try{var v=localStorage.getItem('cmsLocale');if(v==='pt'||v==='en')return v;}catch(e){}return 'en';}
+  function locale(){var _p=(location.pathname||'').replace(/\/+$/,'');if(_p==='/pt'||_p.indexOf('/pt/')===0)return 'pt';try{var v=localStorage.getItem('cmsLocale');if(v==='pt'||v==='en')return v;}catch(e){}return 'en';}
   var L=locale();document.documentElement.lang=L;
   var T={
     en:{back:'Back to listings',beds:'Bedrooms',baths:'Bathrooms',area:'Area',plot:'Plot',year:'Year built',energy:'Energy rating',type:'Type',ref:'Reference',

@@ -53,14 +53,27 @@ export default async function handler(req, res) {
   let propertyEntries = [];
   try {
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/properties?status=eq.published&select=slug,updated_at&order=updated_at.desc`,
+      `${SUPABASE_URL}/rest/v1/properties?status=eq.published&select=slug,updated_at,title&order=updated_at.desc`,
       { headers: sbHeaders }
     );
     const props = await r.json();
     if (Array.isArray(props)) {
-      propertyEntries = props.filter(p => p.slug).map(p => ({
-        loc: `${BASE_URL}/property/${p.slug}`, lastmod: dateOf(p.updated_at), changefreq: 'weekly', priority: '0.8',
-      }));
+      props.filter(p => p.slug).forEach(p => {
+        const en = `${BASE_URL}/property/${p.slug}`;
+        const lastmod = dateOf(p.updated_at);
+        const hasPt = p.title && p.title.pt;
+        if (hasPt) {
+          const pt = `${BASE_URL}/pt/property/${p.slug}`;
+          const alts =
+            `<xhtml:link rel="alternate" hreflang="en" href="${en}"/>` +
+            `<xhtml:link rel="alternate" hreflang="pt" href="${pt}"/>` +
+            `<xhtml:link rel="alternate" hreflang="x-default" href="${en}"/>`;
+          propertyEntries.push({ loc: en, lastmod, changefreq: 'weekly', priority: '0.8', alternates: alts });
+          propertyEntries.push({ loc: pt, lastmod, changefreq: 'weekly', priority: '0.8', alternates: alts });
+        } else {
+          propertyEntries.push({ loc: en, lastmod, changefreq: 'weekly', priority: '0.8' });
+        }
+      });
     }
   } catch (err) {
     console.error('Sitemap: failed to fetch properties', err);
