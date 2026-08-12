@@ -679,6 +679,44 @@
     }
   }
 
+  // The main nav/footer labels are baked in English (bake-nav.py) and not
+  // covered by data-cms, so translate them to PT on /pt/ pages (by href).
+  var NAV_PT = {
+    '/index.html': 'Início',
+    '/about.html': 'Sobre Nós',
+    '/real-estate.html': 'Imóveis',
+    '/invest-in-portugal.html': 'Investir em Portugal',
+    '/our-developments.html': 'Oportunidades em Destaque',
+    '/property-management.html': 'Gestão de Propriedades',
+    '/blog.html': 'Blog',
+    '/contact.html': 'Contactos',
+    '/terms.html': 'Termos e Condições',
+    '/privacy.html': 'Política de Privacidade'
+  };
+  var HEAD_PT = { 'Menu': 'Menu', 'Contacts': 'Contactos', 'Legal': 'Legal' };
+  function normHref(h) {
+    h = (h || '').replace(/^https?:\/\/[^/]+/, '').replace(/[?#].*$/, '');
+    if (h && h[0] !== '/') h = '/' + h;
+    return h;
+  }
+  function localizeNav() {
+    if (getLocale() !== 'pt') return;
+    document.querySelectorAll('header a[href], #mobile-menu a[href], footer a[href]').forEach(function (a) {
+      var pt = NAV_PT[normHref(a.getAttribute('href'))];
+      if (pt && a.childElementCount === 0) a.textContent = pt;
+    });
+    // "Properties" dropdown trigger keeps its caret child — swap only the text node
+    document.querySelectorAll('header a[aria-haspopup="true"], #mobile-menu a[aria-haspopup="true"]').forEach(function (a) {
+      for (var n = a.firstChild; n; n = n.nextSibling) {
+        if (n.nodeType === 3 && /\bProperties\b/i.test(n.nodeValue)) { n.nodeValue = 'Propriedades '; break; }
+      }
+    });
+    document.querySelectorAll('footer h4').forEach(function (h) {
+      var t = (h.textContent || '').trim();
+      if (HEAD_PT[t]) h.textContent = HEAD_PT[t];
+    });
+  }
+
   function init() {
     loadContent();
     fixLegalLinks();
@@ -691,6 +729,8 @@
     renameDevelopmentsNav();
     injectSwitcher();
     injectStudioPages();   // async: adds published Studio pages to nav/mobile/footer
+    localizeNav();
+    setTimeout(localizeNav, 450); // re-run after async nav injections settle
     applyNavContrast();
     setTimeout(applyNavContrast, 350); // after fonts/layout settle
     window.addEventListener('scroll', applyNavContrast, { passive: true });
