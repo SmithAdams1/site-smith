@@ -1,13 +1,11 @@
 :root {
     --navy:#11222D; --white:#FFFFFF; --stone:#C3CBD1; --slate:#6A7883;
     --ink:#26333C; --paper:#FDFCF9; --line:#E4E1DA;
-    /* Type system (2026-08, distinctive/rare pairing, off the "AI" defaults):
-       --display  Bricolage Grotesque - characterful grotesque for headlines
-       --sans     Hanken Grotesk - clean, uncommon grotesque for body/UI
-       --serif    Fraunces - optical serif, quotes/testimonials only */
-    --display:'Bricolage Grotesque','Hanken Grotesk','Helvetica Neue',Arial,sans-serif;
+    /* Type system: Archivo Expanded (display) + Archivo (body/UI) +
+       Fraunces (quotes/testimonials only). */
+    --display:'Archivo Expanded','Archivo','Helvetica Neue',Arial,sans-serif;
     --serif:'Fraunces', Georgia, 'Times New Roman', serif;
-    --sans:'Hanken Grotesk','Helvetica Neue', Helvetica, Arial, sans-serif;
+    --sans:'Archivo','Helvetica Neue', Helvetica, Arial, sans-serif;
     --ease-quint:cubic-bezier(0.22,1,0.36,1);
     --ease-expo:cubic-bezier(0.16,1,0.3,1);
     --mx:clamp(20px,5vw,64px);
@@ -405,8 +403,8 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
    + Stripe-style pointer motion. All motion respects reduced-motion.
    ════════════════════════════════════════════════════════════════ */
 
-/* Bricolage Grotesque reads best a touch heavier and tighter at big display
-   sizes; this is where the display weight/tracking is tuned. */
+/* Archivo Expanded reads a touch heavier and tighter at big display sizes;
+   this is where the display weight/tracking is tuned. */
 .rd-hero h1, .rd-fly h1, .rd-fly__line, .rd-statement, .rd-proof .n,
 .rd-close h2, .rd-asset__plate h2, .rd-pin__lead, .rd-slide__card h3,
 .rd-msg__lead { font-weight:600; letter-spacing:-0.02em; }
