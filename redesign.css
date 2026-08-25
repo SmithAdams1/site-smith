@@ -1,13 +1,13 @@
 :root {
     --navy:#11222D; --white:#FFFFFF; --stone:#C3CBD1; --slate:#6A7883;
     --ink:#26333C; --paper:#FDFCF9; --line:#E4E1DA;
-    /* Type system (2026-08 overhaul, off the "AI" Playfair look):
-       --display  architectural expanded grotesque for headlines/statements
-       --sans     grotesque with character for body/UI/labels
-       --serif    kept for quotes/testimonials only */
-    --display:'Archivo Expanded','Archivo','Helvetica Neue',Arial,sans-serif;
+    /* Type system (2026-08, distinctive/rare pairing, off the "AI" defaults):
+       --display  Bricolage Grotesque - characterful grotesque for headlines
+       --sans     Hanken Grotesk - clean, uncommon grotesque for body/UI
+       --serif    Fraunces - optical serif, quotes/testimonials only */
+    --display:'Bricolage Grotesque','Hanken Grotesk','Helvetica Neue',Arial,sans-serif;
     --serif:'Fraunces', Georgia, 'Times New Roman', serif;
-    --sans:'Archivo','Helvetica Neue', Helvetica, Arial, sans-serif;
+    --sans:'Hanken Grotesk','Helvetica Neue', Helvetica, Arial, sans-serif;
     --ease-quint:cubic-bezier(0.22,1,0.36,1);
     --ease-expo:cubic-bezier(0.16,1,0.3,1);
     --mx:clamp(20px,5vw,64px);
