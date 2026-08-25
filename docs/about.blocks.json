@@ -1,5 +1,5 @@
 {
-  "_note": "Phase 2 pilot — About as rd- design-system blocks. EN only for now; pt fills in later. Drives lib/renderRdBlocks.js.",
+  "_note": "Phase 2 pilot - About as rd- design-system blocks. EN only for now; pt fills in later. Drives lib/renderRdBlocks.js.",
   "_status": "7 blocks matching the live about.html. Bilingual: hero/prose/timeline/pillars/proof carry pt (from site_content); rd_msg (George) + rd_close are EN-only, matching production. rd_msg (msg-bio) uses fixed ids for redesign.js bio toggle.",
   "slug": "about",
   "title": {
@@ -306,7 +306,7 @@
             "pt": "Expandiu a sua presença <strong style=\"color: rgb(253, 252, 249);\">por Lisboa e principais cidades portuguesas</strong>, operando a partir de Lisboa como o seu principal centro."
           },
           {
-            "en": "Attracted clients from <strong style=\"color:#fff; font-weight:600;\">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> &mdash; reflecting a truly global client base.",
+            "en": "Attracted clients from <strong style=\"color:#fff; font-weight:600;\">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> - reflecting a truly global client base.",
             "pt": "Atraiu clientes de <strong style=\"color: rgb(253, 252, 249);\">dezenas de países na Europa, Oriente Médio, Ásia e Américas</strong> - refletindo uma base de clientes verdadeiramente global."
           }
         ],
@@ -329,10 +329,10 @@
         "photo_pos": "50% 22%",
         "bio": [
           {
-            "en": "<strong>George Hobson</strong> leads investment and strategy at Smith &amp; Adams, setting how the group reads the Portuguese market and how each investment is structured &mdash; from the first appraisal through to handover and management."
+            "en": "<strong>George Hobson</strong> leads investment and strategy at Smith &amp; Adams, setting how the group reads the Portuguese market and how each investment is structured - from the first appraisal through to handover and management."
           },
           {
-            "en": "He has spent more than a decade in Portuguese real estate. As a senior investment broker in Lisbon he advised international buyers on residential and yield-focused acquisitions, and earlier built and ran his own brokerage in the Algarve &mdash; giving him a view of the market from the ground up, in both regions where foreign capital concentrates."
+            "en": "He has spent more than a decade in Portuguese real estate. As a senior investment broker in Lisbon he advised international buyers on residential and yield-focused acquisitions, and earlier built and ran his own brokerage in the Algarve - giving him a view of the market from the ground up, in both regions where foreign capital concentrates."
           },
           {
             "en": "That experience sits behind the way the group works: independent advice first, held to a single standard the whole way through."
@@ -349,13 +349,13 @@
         },
         "body": [
           {
-            "en": "Most investors arrive with the same two questions &mdash; is this a good asset, and who looks after it once I have bought it? Answering only the first is what the market usually offers. We give an independent read on the Portuguese property market and then stay on: planning, development, construction and management sit inside the same relationship, so nobody hands you off at the point where the work actually starts."
+            "en": "Most investors arrive with the same two questions - is this a good asset, and who looks after it once I have bought it? Answering only the first is what the market usually offers. We give an independent read on the Portuguese property market and then stay on: planning, development, construction and management sit inside the same relationship, so nobody hands you off at the point where the work actually starts."
           },
           {
             "en": "Portugal earns the attention. It offers residency routes into the European Union for both entrepreneurs and passive investors, a legal system that treats foreign ownership the same as domestic, and cities where the demand for good, well-run housing has outrun the supply of it. That combination is rarer than it sounds."
           },
           {
-            "en": "What we ask you to judge us on is evidence rather than argument. More than 1,000 investors, over &euro;300M placed and 300+ assets under management &mdash; and, on this site, the occupancy of our own buildings with the dates and the source attached. If a number matters to your decision, you should be able to see where it came from."
+            "en": "What we ask you to judge us on is evidence rather than argument. More than 1,000 investors, over &euro;300M placed and 300+ assets under management - and, on this site, the occupancy of our own buildings with the dates and the source attached. If a number matters to your decision, you should be able to see where it came from."
           }
         ],
         "name": {
@@ -374,7 +374,7 @@
           "en": "Independent advice, from the first conversation to handover."
         },
         "body": {
-          "en": "Tell us what you&rsquo;re looking for in Portugal. We&rsquo;ll give you an honest read on whether &mdash; and how &mdash; we can help."
+          "en": "Tell us what you&rsquo;re looking for in Portugal. We&rsquo;ll give you an honest read on whether - and how - we can help."
         },
         "cta": {
           "label": {

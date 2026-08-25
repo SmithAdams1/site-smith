@@ -1,5 +1,5 @@
 {
-  "_note": "Phase 2 rollout — invest-in-portugal as rd- blocks. Bilingual (EN+PT) from site_content invest.*; FAQ is EN-only (lives in the static HTML, not the CMS — matches production). Hero CTAs/caption are static (EN in both locales, as in prod).",
+  "_note": "Phase 2 rollout - invest-in-portugal as rd- blocks. Bilingual (EN+PT) from site_content invest.*; FAQ is EN-only (lives in the static HTML, not the CMS - matches production). Hero CTAs/caption are static (EN in both locales, as in prod).",
   "slug": "invest-in-portugal",
   "title": {
     "en": "Invest in Portugal | D2 Visa & Golden Visa Residency | Smith & Adams"
