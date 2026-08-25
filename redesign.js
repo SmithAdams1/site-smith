@@ -84,6 +84,29 @@
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasGsap = window.gsap && window.ScrollTrigger;
 
+      // ---- Pointer spotlight on dark sections (Stripe-style; runs without GSAP,
+      //      but not under reduced motion). A soft light follows the cursor. ----
+      if (!reduce) {
+        (function () {
+          var secs = document.querySelectorAll('.rd-sec--navy');
+          Array.prototype.forEach.call(secs, function (sec) {
+            var spot = document.createElement('div');
+            spot.className = 'sa-spot';
+            sec.insertBefore(spot, sec.firstChild);
+            var raf = null, px = 50, py = 30;
+            function paint() { raf = null; spot.style.setProperty('--sx', px + '%'); spot.style.setProperty('--sy', py + '%'); }
+            sec.addEventListener('pointermove', function (e) {
+              var r = sec.getBoundingClientRect();
+              px = ((e.clientX - r.left) / r.width) * 100;
+              py = ((e.clientY - r.top) / r.height) * 100;
+              spot.classList.add('on');
+              if (!raf) raf = requestAnimationFrame(paint);
+            }, { passive: true });
+            sec.addEventListener('pointerleave', function () { spot.classList.remove('on'); });
+          });
+        })();
+      }
+
       // Pages that render content after a fetch call this once the nodes are in
       // the DOM. Defined before the bail-out below so the call is always safe -
       // under reduced motion, or with GSAP blocked, it simply does nothing.

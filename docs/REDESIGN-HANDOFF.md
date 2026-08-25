@@ -93,3 +93,48 @@ Full detail in `docs/CMS-UNIFIED-PLAN.md` (see its "Progress" section). Summary:
 - **Phase 0 security — CLOSED (2026-08-08).** Owner rotated the `admin@smithandadams.com` password in Supabase, so the old cleartext value still in git history (commit `d6f20c0`) is now a dead credential. Cleartext was already out of the current `schema.sql`. History was deliberately **not** rewritten (272-commit rewrite + force-push judged higher-risk than the payoff, with concurrent sessions on the repo). Repo remains **public** — making it private is now optional belt-and-suspenders (`gh repo edit SmithAdams1/site-smith --visibility private`).
 - **Phase 1 of the unified backoffice is complete** (RE + Blog + Media native, legacy admins retired). Next big piece is Phase 2: the block-builder governing hand-built pages (scope separately).
 - Commits: `d5f07a4`, `1154d51`, `e8fa8b6` on `homepage-redesign`. All on the preview only; production untouched.
+
+---
+
+## Session 2026-08-25 — lead pop-up, CRM wiring, and the "de-AI" typography/motion overhaul
+
+### ⚠️ Production reality (read this first)
+- **`main` = the OLD site, still live at www.smithandadams.com** (commit `c798471`, 5 Aug). It has NONE of the redesign.
+- **`homepage-redesign` = ~90 commits ahead**, only on the **preview** deployment (`site-smith-git-homepage-redesign-smith-adams1.vercel.app`). Everything below lives here.
+- So the traffic increase the client sees is hitting the OLD site, which has no pop-up. To capture it either (1) merge the redesign to production, or (2) port just the pop-up (`guide-popup.js` + `api/guide.js` + the PDF) onto `main`. Client leaning to launch soon; **do not merge to main without explicit approval.**
+
+### About/Invest "404" — NOT a bug
+`/about` and `/invest-in-portugal` are served by `api/rd-page.js` (the EN files were replaced by `about.shell.html` / `invest-in-portugal.shell.html`). On the deployed preview both return HTTP 200. The 404 the client saw ("Error response … Nothing matches the given URI") is the **local `python -m http.server`**, which can't run serverless functions. Test those two pages on the deployed preview, not localhost. (Minor optional polish: the baked nav links to `/about.html` which 308-redirects to `/about`; could repoint to clean URLs in `scripts/bake-nav.py`.)
+
+### Investor-guide lead pop-up — SHIPPED (commit `5e7694b`)
+- `guide-popup.js` (self-contained, EN/PT, once-per-visitor via localStorage `sa_guide_v1`, trigger = 20s dwell OR 45% scroll, name+email+RGPD consent, success state with download link, has an X close + backdrop + Esc). Injected on the **conversion pages only**: index, invest (shell), real-estate, our-developments, blog. NOT about/contact.
+- `api/guide.js`: branded email to the lead via Resend (`noreply@smithandadams.com`, verified), internal notify, + Pipedrive (best effort). Email copy uses the guide's own stats.
+- Guide hosted at `/smith-adams-investor-guide-portugal.pdf`; cover thumb `guide-cover.jpg`.
+- Verified in-browser: renders desktop+mobile, validation, success. **Live email send needs RESEND_API_KEY at runtime — confirm by submitting on the deployed preview.**
+
+### CRM integration — IN PROGRESS (not committed on the site yet)
+Goal: guide submissions create a lead in the **own CRM** (`sa-crm`, `crm.smithandadams.com`), tagged as from the website, **all assigned to Benjamin**, enriched with **country from IP**.
+- The CRM already exposes `POST /api/v1/leads` (Bearer `sa_live_…`), fields incl. `full_name, email, target_country, source, notes, campaign_name`; 24h dedup; a **'Website'** lead_source already exists.
+- **DONE (sa-crm, `src/app/api/v1/leads/route.ts`): added an optional `assign_to_email` body field** that overrides the least-loaded auto-assign — so all guide leads can route to Benjamin. (Committed separately in sa-crm.)
+- **TODO on the site (`api/guide.js`):** after the emails, `fetch('${CRM_API_URL}/api/v1/leads', { Authorization: Bearer ${CRM_API_KEY}, body: { full_name:name, email, source:'Website', campaign_name:'Investor Guide', notes:'Investor guide download (website pop-up)', target_country:<country name from x-vercel-ip-country>, assign_to_email:<CRM_ASSIGN_TO> } })`, best-effort. Country from IP = Vercel geo header `req.headers['x-vercel-ip-country']` (ISO-2) → map to name. Consider dropping the Pipedrive push once the CRM path is confirmed.
+- **Env to set on the site's Vercel:** `CRM_API_URL` (https://crm.smithandadams.com), `CRM_API_KEY` (generate in CRM → Definições → Integrações → API), `CRM_ASSIGN_TO` (Benjamin's agent email).
+
+### The "too AI" design/lettering overhaul — APPROVED DIRECTION, NOT yet implemented
+Client feedback: the design and **lettering read as "too AI"** and it put their position at risk — must be substantially better before launch. Root tell: the whole site is set in **Playfair Display**, the #1 template/AI serif. Researched references (top-10 family offices via durkangroup, Pathstone, Rockefeller, Rolex, Stripe): best-in-class use a distinctive grotesque as the primary voice + serif only for editorial accents, navy/off-white palette, generous whitespace, and Stripe-style pointer/hover motion.
+
+**Client-approved direction (2026-08-25):**
+- **Headlines/statements → a wide/expanded grotesque (architectural, fintech-premium): `Archivo Expanded`.** NOT serif.
+- **Body/UI/labels → `Archivo`** (grotesque with more character than Helvetica).
+- **Serif (`Fraunces`) → quotes/testimonials only.**
+- **Motion → "more present, Stripe-like":** cursor-following spotlight on dark sections, animated subtle gradient on the hero/dark sections, layered parallax, card hover-lift + button micro-interactions, staggered scroll reveals. Guard everything with `prefers-reduced-motion` and rAF-throttle mousemove.
+
+**Implementation map (redesign.css is central — one token change propagates to ~20 pages):**
+- `:root` tokens today: `--serif:'Playfair Display'…`, `--sans:'Helvetica Neue'…`. New: `--sans:'Archivo',…`; `--display:'Archivo Expanded','Archivo',sans-serif` (NEW, headlines); `--serif:'Fraunces',Georgia,serif` (quotes only).
+- Headline selectors currently on `var(--serif)` to repoint to `var(--display)`: `.serif, .rd-statement, .rd-hero h1, .rd-hero__caption .v, .rd-fly h1, .rd-fly__line, .rd-proof .n, .rd-pillars h3, .rd-pin__lead, .rd-funcs li .fi, .rd-card h3, .rd-asset__plate h2, .rd-figs .f .n, .rd-close h2, .rd-post h3, .rd-slide__card h3, .rd-carousel__count, .rd-msg__lead, .rd-msg__name` (and the `.dev-serif` class in our-developments' inline `<style>`).
+- KEEP on `var(--serif)` (Fraunces, quotes): `.rd-quote p` (line ~203) and any blockquote/testimonial. Everything else → display.
+- Fonts: every page loads one Google Fonts `<link>` for Playfair — replace with `family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap`. Script it across all `*.html` (+ the two `.shell.html`). Tailwind does NOT drive fonts, so no recompile needed for this.
+- Motion: add to `redesign.css` a `.sa-spot` radial overlay driven by `--sx/--sy`, hover-lift on `.rd-card`/`.re-card`, button transitions; add to `redesign.js` a pointer handler (rAF-throttled) updating `--sx/--sy` on dark sections, an animated-gradient class, and parallax layers — all behind the existing reduced-motion / motion-ready gate.
+- Verify with the CDP helper (recreated this session at `<scratchpad>/cdp.py`); the in-app Browser pane screenshots come back blank here, so use CDP. Screenshot hero + proof + pillars + a quote block, desktop + mobile, before committing.
+- The guide PDF and `guide-cover.jpg` are separate static assets in the OLD brand type — they do NOT auto-update with the font change (fine; regenerate later if wanted).
+
+**Commit as author Suzan <suzan@smithandadams.com>** (Vercel Hobby) and push to `upstream/homepage-redesign`.
