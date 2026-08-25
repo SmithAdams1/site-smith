@@ -405,8 +405,8 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
    + Stripe-style pointer motion. All motion respects reduced-motion.
    ════════════════════════════════════════════════════════════════ */
 
-/* Archivo Expanded carries more weight than the Playfair it replaced; the big
-   display sizes read better a touch heavier and tighter. */
+/* Bricolage Grotesque reads best a touch heavier and tighter at big display
+   sizes; this is where the display weight/tracking is tuned. */
 .rd-hero h1, .rd-fly h1, .rd-fly__line, .rd-statement, .rd-proof .n,
 .rd-close h2, .rd-asset__plate h2, .rd-pin__lead, .rd-slide__card h3,
 .rd-msg__lead { font-weight:600; letter-spacing:-0.02em; }
