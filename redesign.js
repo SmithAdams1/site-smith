@@ -174,7 +174,7 @@
             if (done) done();
           };
           img.onerror = function () { if (done) done(); };
-          img.src = '/hero-frames/f_' + pad(idx + 1) + '.jpg';
+          img.src = '/hero-frames/f_' + pad(idx + 1) + '.jpg?v=2';
           frames[idx] = img;
         }
 

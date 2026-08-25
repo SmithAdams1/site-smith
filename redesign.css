@@ -82,11 +82,14 @@
   @media (max-width:820px){ .rd-hero__caption{ display:none; } }
 
   /* ---------- HERO · scroll-scrubbed flythrough ---------- */
-  .rd-fly { position:relative; height:100svh; overflow:hidden; background:#11222D url('/hero-flythrough-poster.jpg') center center / cover no-repeat; }
+  .rd-fly { position:relative; height:100svh; overflow:hidden; background:#11222D url('/hero-flythrough-poster.jpg?v=2') center center / cover no-repeat; }
   .rd-fly__canvas { position:absolute; inset:0; width:100%; height:100%; z-index:0; display:block; }
+  /* Navy curtain over the office-zoom video: an even veil keeps the footage
+     subtle and classy (never a loud autoplay), with the bottom carrying the
+     type panel. */
   .rd-fly__scrim { position:absolute; inset:0; z-index:1;
-    background:linear-gradient(90deg, rgba(17,34,45,0.62) 0%, rgba(17,34,45,0) 58%),
-               linear-gradient(180deg, rgba(17,34,45,0.28) 0%, rgba(17,34,45,0.05) 45%, rgba(17,34,45,0.82) 100%); }
+    background:linear-gradient(180deg, rgba(17,34,45,0.46) 0%, rgba(17,34,45,0.30) 44%, rgba(17,34,45,0.88) 100%),
+               linear-gradient(90deg, rgba(17,34,45,0.40) 0%, rgba(17,34,45,0.12) 55%, rgba(17,34,45,0) 100%); }
   .rd-fly__panel { position:absolute; left:var(--mx); right:var(--mx); bottom:clamp(48px,9vh,112px); z-index:2; }
   .rd-fly__panel.p1 { opacity:1; }
   .rd-fly__panel.p2, .rd-fly__panel.p3 { opacity:0; }
