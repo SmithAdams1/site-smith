@@ -4,9 +4,23 @@
 // effort) files the lead in Pipedrive like the other website leads.
 //
 // Env: RESEND_API_KEY (required to send), ENQUIRY_NOTIFY_EMAIL (team inbox),
-//      PIPEDRIVE_TOKEN (optional), SITE_BASE_URL (optional, defaults to prod).
+//      SITE_BASE_URL (optional, defaults to prod),
+//      CRM_API_URL + CRM_API_KEY (own CRM ingestion, sa_live_… key),
+//      CRM_ASSIGN_TO (agent email — all guide leads assigned there, e.g. Benjamin),
+//      PIPEDRIVE_TOKEN (optional, legacy — remove once the CRM path is confirmed).
 
 const GUIDE_PATH = '/smith-adams-investor-guide-portugal.pdf';
+
+// Vercel sets x-vercel-ip-country to an ISO-2 code; map the firm's markets to
+// readable names for the CRM's target_country. Unmapped codes pass through raw.
+const COUNTRY_NAMES = {
+  PT: 'Portugal', GB: 'United Kingdom', IE: 'Ireland', US: 'United States',
+  CA: 'Canada', AE: 'United Arab Emirates', SA: 'Saudi Arabia', QA: 'Qatar',
+  KW: 'Kuwait', BH: 'Bahrain', OM: 'Oman', IN: 'India', CN: 'China',
+  HK: 'Hong Kong', SG: 'Singapore', ZA: 'South Africa', BR: 'Brazil',
+  FR: 'France', DE: 'Germany', CH: 'Switzerland', NL: 'Netherlands',
+  ES: 'Spain', IT: 'Italy', AU: 'Australia', TR: 'Türkiye',
+};
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -82,6 +96,30 @@ export default async function handler(req, res) {
           }
         }
       } catch (pdErr) { console.error('[guide] pipedrive error:', pdErr.message); }
+    }
+
+    // 4 — the own CRM (crm.smithandadams.com). All guide leads route to one
+    //     agent via assign_to_email; the country comes from Vercel's geo header.
+    const CRM_API_URL = process.env.CRM_API_URL;   // e.g. https://crm.smithandadams.com
+    const CRM_API_KEY = process.env.CRM_API_KEY;   // sa_live_…
+    if (CRM_API_URL && CRM_API_KEY) {
+      try {
+        const cc = String(req.headers['x-vercel-ip-country'] || '').toUpperCase();
+        const country = COUNTRY_NAMES[cc] || cc || null;
+        await fetch(`${CRM_API_URL.replace(/\/$/, '')}/api/v1/leads`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${CRM_API_KEY}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            full_name: cleanName,
+            email: cleanEmail,
+            source: 'Website',
+            campaign_name: 'Investor Guide',
+            notes: 'Investor guide download (website pop-up)',
+            target_country: country,
+            assign_to_email: process.env.CRM_ASSIGN_TO || undefined,
+          }),
+        });
+      } catch (crmErr) { console.error('[guide] crm error:', crmErr.message); }
     }
 
     return res.status(200).json({ success: true, guideUrl });
