@@ -20,7 +20,7 @@
   var T = PT ? {
     eyebrow: 'GUIA DO INVESTIDOR · PORTUGAL',
     title: 'Porquê investir em Portugal?',
-    body: 'Portugal registou o maior crescimento de preços residenciais da UE em 2025. Receba o guia gratuito — fundamentos do mercado, custos reais de uma compra e como investir bem.',
+    body: 'Portugal registou o maior crescimento de preços residenciais da UE em 2025. Receba o guia gratuito - fundamentos do mercado, custos reais de uma compra e como investir bem.',
     name: 'Nome', email: 'Email',
     consent: 'Aceito receber o guia e comunicações ocasionais da Smith &amp; Adams. Posso cancelar quando quiser.',
     cta: 'Enviar-me o guia', sending: 'A enviar…',
@@ -31,7 +31,7 @@
   } : {
     eyebrow: 'INVESTOR GUIDE · PORTUGAL',
     title: 'Why invest in Portugal?',
-    body: 'Portugal recorded the EU’s strongest residential price growth in 2025. Get the free guide — market fundamentals, what a purchase really costs, and how to invest well.',
+    body: 'Portugal recorded the EU’s strongest residential price growth in 2025. Get the free guide - market fundamentals, what a purchase really costs, and how to invest well.',
     name: 'Name', email: 'Email',
     consent: 'I agree to receive the guide and occasional updates from Smith &amp; Adams. I can unsubscribe anytime.',
     cta: 'Send me the guide', sending: 'Sending…',
@@ -51,23 +51,23 @@
     + '.sag-media{flex:0 0 40%;background:#11222D;}'
     + '.sag-media img{width:100%;height:100%;object-fit:cover;display:block;}'
     + '.sag-body{flex:1;padding:34px 34px 30px;}'
-    + '.sag-eyebrow{font:500 10px/1 "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.22em;color:#6A7883;text-transform:uppercase;margin:0 0 14px;}'
-    + '.sag-h{font-family:"Playfair Display",Georgia,serif;font-weight:500;color:#11222D;font-size:27px;line-height:1.12;letter-spacing:-.01em;margin:0 0 12px;}'
-    + '.sag-p{font:400 14px/1.6 "Helvetica Neue",Helvetica,Arial,sans-serif;color:#26333C;margin:0 0 18px;}'
+    + '.sag-eyebrow{font:500 10px/1 "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.22em;color:#6A7883;text-transform:uppercase;margin:0 0 14px;}'
+    + '.sag-h{font-family:"Archivo Expanded","Archivo","Helvetica Neue",Arial,sans-serif;font-weight:600;color:#11222D;font-size:27px;line-height:1.12;letter-spacing:-.01em;margin:0 0 12px;}'
+    + '.sag-p{font:400 14px/1.6 "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#26333C;margin:0 0 18px;}'
     + '.sag-f{display:block;margin:0 0 11px;}'
     + '.sag-f input[type=text],.sag-f input[type=email]{width:100%;box-sizing:border-box;border:1px solid #d9d5cc;background:#fff;'
-    + 'font:400 15px "Helvetica Neue",Helvetica,Arial,sans-serif;color:#11222D;padding:12px 13px;border-radius:2px;outline:none;}'
+    + 'font:400 15px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#11222D;padding:12px 13px;border-radius:2px;outline:none;}'
     + '.sag-f input:focus{border-color:#11222D;}'
-    + '.sag-consent{display:flex;gap:9px;align-items:flex-start;font:400 12px/1.5 "Helvetica Neue",Helvetica,Arial,sans-serif;color:#6A7883;margin:4px 0 16px;}'
+    + '.sag-consent{display:flex;gap:9px;align-items:flex-start;font:400 12px/1.5 "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#6A7883;margin:4px 0 16px;}'
     + '.sag-consent input{margin-top:2px;flex:0 0 auto;}'
-    + '.sag-btn{width:100%;border:0;background:#11222D;color:#fff;font:600 15px "Helvetica Neue",Helvetica,Arial,sans-serif;'
+    + '.sag-btn{width:100%;border:0;background:#11222D;color:#fff;font:600 15px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;'
     + 'padding:14px;border-radius:2px;cursor:pointer;transition:background .25s ease;}'
     + '.sag-btn:hover{background:#1c3646;}.sag-btn[disabled]{opacity:.6;cursor:default;}'
     + '.sag-x{position:absolute;top:12px;right:12px;z-index:2;width:30px;height:30px;border:0;border-radius:50%;cursor:pointer;'
     + 'background:rgba(255,255,255,.14);color:#fff;font-size:17px;line-height:30px;}'
     + '.sag-body .sag-x{background:rgba(17,34,45,.08);color:#11222D;}'
-    + '.sag-err{font:500 12px "Helvetica Neue",Helvetica,Arial,sans-serif;color:#b3261e;min-height:16px;margin:2px 0 8px;}'
-    + '.sag-oklink{display:inline-block;margin-top:6px;font:600 14px "Helvetica Neue",Helvetica,Arial,sans-serif;color:#11222D;text-decoration:underline;}'
+    + '.sag-err{font:500 12px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#b3261e;min-height:16px;margin:2px 0 8px;}'
+    + '.sag-oklink{display:inline-block;margin-top:6px;font:600 14px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#11222D;text-decoration:underline;}'
     + '@media (max-width:640px){.sag-media{display:none;}.sag-box{max-width:440px;}.sag-body{padding:44px 24px 26px;}.sag-h{font-size:24px;}}'
     + '@media (prefers-reduced-motion:reduce){.sag-ov,.sag-box{transition:none;}}';
 
@@ -147,7 +147,7 @@
     });
   }
 
-  // Triggers: whichever fires first — a dwell timer or scrolling past ~45%.
+  // Triggers: whichever fires first - a dwell timer or scrolling past ~45%.
   var timer = setTimeout(show, 20000);
   function onScroll() {
     var sc = window.scrollY || document.documentElement.scrollTop;

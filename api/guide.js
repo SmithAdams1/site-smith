@@ -6,8 +6,8 @@
 // Env: RESEND_API_KEY (required to send), ENQUIRY_NOTIFY_EMAIL (team inbox),
 //      SITE_BASE_URL (optional, defaults to prod),
 //      CRM_API_URL + CRM_API_KEY (own CRM ingestion, sa_live_… key),
-//      CRM_ASSIGN_TO (agent email — all guide leads assigned there, e.g. Benjamin),
-//      PIPEDRIVE_TOKEN (optional, legacy — remove once the CRM path is confirmed).
+//      CRM_ASSIGN_TO (agent email - all guide leads assigned there, e.g. Benjamin),
+//      PIPEDRIVE_TOKEN (optional, legacy - remove once the CRM path is confirmed).
 
 const GUIDE_PATH = '/smith-adams-investor-guide-portugal.pdf';
 
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
   try {
     if (!RESEND_API_KEY) throw new Error('RESEND_API_KEY not set');
 
-    // 1 — the branded guide email to the requester
+    // 1 - the branded guide email to the requester
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
@@ -55,7 +55,7 @@ export default async function handler(req, res) {
       }),
     });
 
-    // 2 — internal notification (so the lead is captured immediately)
+    // 2 - internal notification (so the lead is captured immediately)
     await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
@@ -70,7 +70,7 @@ export default async function handler(req, res) {
       }),
     }).catch(e => console.error('[guide] notify error:', e.message));
 
-    // 3 — best-effort Pipedrive (same destination as other website leads)
+    // 3 - best-effort Pipedrive (same destination as other website leads)
     const PIPEDRIVE_TOKEN = process.env.PIPEDRIVE_TOKEN;
     if (PIPEDRIVE_TOKEN) {
       try {
@@ -98,7 +98,7 @@ export default async function handler(req, res) {
       } catch (pdErr) { console.error('[guide] pipedrive error:', pdErr.message); }
     }
 
-    // 4 — the own CRM (crm.smithandadams.com). All guide leads route to one
+    // 4 - the own CRM (crm.smithandadams.com). All guide leads route to one
     //     agent via assign_to_email; the country comes from Vercel's geo header.
     const CRM_API_URL = process.env.CRM_API_URL;   // e.g. https://crm.smithandadams.com
     const CRM_API_KEY = process.env.CRM_API_KEY;   // sa_live_…
@@ -137,17 +137,17 @@ function escapeHtml(s) {
 // navy, the plate and the evidence-first voice follow Brand Book Ed. 03.
 function guideEmailHtml(name, guideUrl, base, pt) {
   const navy = '#11222D', paper = '#FDFCF9', ink = '#26333C', slate = '#6A7883', line = '#E4E1DA';
-  const serif = "Georgia, 'Times New Roman', serif";
+  const serif = "'Helvetica Neue', Helvetica, Arial, sans-serif";  // brand is grotesque; email clients lack Archivo
   const sans = "'Helvetica Neue', Helvetica, Arial, sans-serif";
   const t = pt ? {
     pre: 'Portugal registou o maior crescimento de preços residenciais da UE em 2025. Aqui está o quadro completo.',
     eyebrow: 'GUIA DO INVESTIDOR · PORTUGAL',
     h: 'Portugal, nos números.',
     hi: `Obrigado, ${escapeHtml(name)}.`,
-    p1: 'O seu guia do investidor está pronto. Explica porque é que Portugal registou o maior crescimento de preços residenciais da União Europeia em 2025 — e porque isso é a continuação de uma década de valorização estrutural, não um pico isolado.',
+    p1: 'O seu guia do investidor está pronto. Explica porque é que Portugal registou o maior crescimento de preços residenciais da União Europeia em 2025 - e porque isso é a continuação de uma década de valorização estrutural, não um pico isolado.',
     p2: 'Lá dentro: os fundamentos do mercado, o que custa realmente uma compra e como decorre, e como ajudamos a transformar números fortes num bom investimento individual.',
     btn: 'Descarregar o guia (PDF)',
-    talk: 'Prefere falar? Uma conversa, sem compromisso — marque uma consulta.',
+    talk: 'Prefere falar? Uma conversa, sem compromisso - marque uma consulta.',
     talkCta: 'Marcar consulta',
     foot: 'Recebeu este email porque pediu o nosso guia do investidor.',
   } : {
@@ -155,16 +155,16 @@ function guideEmailHtml(name, guideUrl, base, pt) {
     eyebrow: 'INVESTOR GUIDE · PORTUGAL',
     h: 'Portugal, on the numbers.',
     hi: `Thank you, ${escapeHtml(name)}.`,
-    p1: 'Your investor guide is ready. It sets out why Portugal recorded the strongest residential price growth in the European Union in 2025 — and why that is the continuation of a decade of structural appreciation, not a one-off spike.',
+    p1: 'Your investor guide is ready. It sets out why Portugal recorded the strongest residential price growth in the European Union in 2025 - and why that is the continuation of a decade of structural appreciation, not a one-off spike.',
     p2: 'Inside: the market fundamentals, what a purchase actually costs and how it runs, and how we help turn strong headline numbers into a good individual investment.',
     btn: 'Download the guide (PDF)',
-    talk: 'Prefer to talk? One conversation, no obligation — book a consultation.',
+    talk: 'Prefer to talk? One conversation, no obligation - book a consultation.',
     talkCta: 'Book a consultation',
     foot: 'You received this because you requested our investor guide.',
   };
   const stats = [
     ['#1', pt ? 'Crescimento imobiliário na UE, 2025' : 'EU property growth, 2025'],
-    ['+141%', pt ? 'Valorização a 15 anos, 2010–2025' : '15-year appreciation, 2010–2025'],
+    ['+141%', pt ? 'Valorização a 15 anos, 2010-2025' : '15-year appreciation, 2010-2025'],
     ['8.29%', pt ? 'Média Lisboa 10 anos p.a.' : 'Lisbon 10-yr average p.a.'],
   ];
   return `<!doctype html><html><body style="margin:0;background:${paper};font-family:${sans};color:${ink};">
