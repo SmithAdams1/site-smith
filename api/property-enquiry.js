@@ -1,5 +1,7 @@
 // Property enquiry -> Pipedrive (Person + Deal + Note) and optional email.
 // Mirrors api/contact.js, adding the specific property to the deal title and note.
+import { postCrmLead } from './_crm.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
@@ -7,6 +9,15 @@ export default async function handler(req, res) {
   if (!firstName || !email || !phoneNumber) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
+
+  // Own CRM (best-effort, independent of Pipedrive)
+  await postCrmLead(req, {
+    full_name: `${firstName} ${lastName || ''}`.trim(),
+    email,
+    phone: `${phoneCode || ''} ${phoneNumber}`.trim(),
+    campaign_name: 'Property Enquiry',
+    notes: [property ? `Property: ${property}` : null, message ? `Message: ${message}` : null].filter(Boolean).join(' | ') || 'Property enquiry',
+  });
 
   const PIPEDRIVE_TOKEN = process.env.PIPEDRIVE_TOKEN;
   const PIPELINE_ID = 16;

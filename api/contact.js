@@ -1,3 +1,5 @@
+import { postCrmLead } from './_crm.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -8,6 +10,15 @@ export default async function handler(req, res) {
   if (!firstName || !email || !phoneCode || !phoneNumber) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
+
+  // Own CRM (best-effort, independent of Pipedrive so the lead lands even if that path fails)
+  await postCrmLead(req, {
+    full_name: `${firstName} ${lastName || ''}`.trim(),
+    email,
+    phone: `${phoneCode} ${phoneNumber}`.trim(),
+    campaign_name: 'Website Contact',
+    notes: [interest ? `Interest: ${interest}` : null, message ? `Message: ${message}` : null].filter(Boolean).join(' | ') || 'Contact form',
+  });
 
   const PIPEDRIVE_TOKEN = process.env.PIPEDRIVE_TOKEN;
   const PIPELINE_ID = 16;
