@@ -1,15 +1,18 @@
-@font-face{font-family:'Qadone';src:url('/fonts/Qadone.ttf') format('truetype'),url('/fonts/Qadone.otf') format('opentype');font-weight:100 900;font-style:normal;font-display:swap;}
-@font-face{font-family:'Garet';src:url('/fonts/Garet-Book.woff2') format('woff2'),url('/fonts/Garet-Book.woff') format('woff');font-weight:100 450;font-style:normal;font-display:swap;}
-@font-face{font-family:'Garet';src:url('/fonts/Garet-Heavy.woff2') format('woff2'),url('/fonts/Garet-Heavy.woff') format('woff');font-weight:451 900;font-style:normal;font-display:swap;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Light.woff2') format('woff2');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-ExtraBold.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
 
 :root {
     --navy:#11222D; --white:#FFFFFF; --stone:#C3CBD1; --slate:#6A7883;
     --ink:#26333C; --paper:#FDFCF9; --line:#E4E1DA;
     /* Type system: Archivo Expanded (display) + Archivo (body/UI) +
        Fraunces (quotes/testimonials only). */
-    --display:'Qadone','Garet','Helvetica Neue',Arial,sans-serif;
-    --serif:'Fraunces', Georgia, 'Times New Roman', serif;
-    --sans:'Garet','Helvetica Neue', Helvetica, Arial, sans-serif;
+    --display:'Geoform','Helvetica Neue',Arial,sans-serif;
+    --serif:'Geoform','Helvetica Neue',Arial,sans-serif;
+    --sans:'Geoform','Helvetica Neue',Helvetica,Arial,sans-serif;
     --ease-quint:cubic-bezier(0.22,1,0.36,1);
     --ease-expo:cubic-bezier(0.16,1,0.3,1);
     --mx:clamp(20px,5vw,64px);
@@ -38,6 +41,8 @@
   .rd ::selection { background:var(--navy); color:#fff; }
   .serif { font-family:var(--display); }
   .sans  { font-family:var(--sans); }
+  /* Whole site in Geoform: force legacy font classes (nav/footer/legal) onto the system font */
+  .satoshi, .geist, .font-satoshi, .font-geist { font-family: var(--sans) !important; }
   .rd-wrap { max-width:1360px; margin:0 auto; padding-left:var(--mx); padding-right:var(--mx); }
 
   /* tracked label + hairline (brandbook idiom) */
