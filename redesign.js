@@ -106,54 +106,80 @@
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hasGsap = window.gsap && window.ScrollTrigger;
 
-      // ---- Pointer spotlight on dark sections (Stripe-style; runs without GSAP,
-      //      but not under reduced motion). A soft light follows the cursor. ----
+      // ---- Cursor "wave": a large, soft light that EASES toward the pointer.
+      //      The lag between cursor and light is what reads as flow/wave. White
+      //      on navy, blue on white; applied to whole sections (the dispersed
+      //      wave) and to cards (a tighter focal accent). Runs without GSAP but
+      //      not under reduced motion. ----
       if (!reduce) {
+        // Shared tracker: eases current position toward the pointer target and
+        // applies it via `apply(x,y)`. rAF only runs while it still has to move.
+        function attachWave(host, apply, opts) {
+          opts = opts || {};
+          var ease = opts.ease || 0.085;
+          var tx = 50, ty = 50, cx = 50, cy = 50, raf = null, active = false;
+          function loop() {
+            cx += (tx - cx) * ease; cy += (ty - cy) * ease;
+            apply(cx, cy);
+            if (active || Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) {
+              raf = requestAnimationFrame(loop);
+            } else { raf = null; }
+          }
+          host.addEventListener('pointermove', function (e) {
+            var r = host.getBoundingClientRect();
+            tx = ((e.clientX - r.left) / r.width) * 100;
+            ty = ((e.clientY - r.top) / r.height) * 100;
+            active = true;
+            if (opts.on) opts.on(true);
+            if (!raf) raf = requestAnimationFrame(loop);
+          }, { passive: true });
+          host.addEventListener('pointerleave', function () {
+            active = false;
+            if (opts.on) opts.on(false);
+          });
+        }
+
+        function isLight(el) {
+          var m = (getComputedStyle(el).backgroundColor || '').match(/\d+(\.\d+)?/g);
+          if (!m) return false;
+          var opaque = (m[3] === undefined || parseFloat(m[3]) > 0.5);
+          return opaque && (0.299 * m[0] + 0.587 * m[1] + 0.114 * m[2]) > 200;
+        }
+        function isDark(el) {
+          var m = (getComputedStyle(el).backgroundColor || '').match(/\d+(\.\d+)?/g);
+          if (!m) return false;
+          var opaque = (m[3] === undefined || parseFloat(m[3]) > 0.5);
+          return opaque && (0.299 * m[0] + 0.587 * m[1] + 0.114 * m[2]) < 110;
+        }
+
+        // Section-level dispersed wave (white on navy, blue on paper sections).
         (function () {
-          var secs = document.querySelectorAll('.rd-sec--navy');
+          var secs = document.querySelectorAll('.rd-sec');
           Array.prototype.forEach.call(secs, function (sec) {
+            var navy = sec.classList.contains('rd-sec--navy');
+            if (!navy && !isLight(sec)) return;           // skip image/other grounds
             var spot = document.createElement('div');
-            spot.className = 'sa-spot';
+            spot.className = 'sa-spot' + (navy ? '' : ' sa-spot--blue');
+            if (getComputedStyle(sec).position === 'static') sec.style.position = 'relative';
             sec.insertBefore(spot, sec.firstChild);
-            var raf = null, px = 50, py = 30;
-            function paint() { raf = null; spot.style.setProperty('--sx', px + '%'); spot.style.setProperty('--sy', py + '%'); }
-            sec.addEventListener('pointermove', function (e) {
-              var r = sec.getBoundingClientRect();
-              px = ((e.clientX - r.left) / r.width) * 100;
-              py = ((e.clientY - r.top) / r.height) * 100;
-              spot.classList.add('on');
-              if (!raf) raf = requestAnimationFrame(paint);
-            }, { passive: true });
-            sec.addEventListener('pointerleave', function () { spot.classList.remove('on'); });
+            attachWave(sec, function (x, y) {
+              spot.style.setProperty('--sx', x + '%');
+              spot.style.setProperty('--sy', y + '%');
+            }, { on: function (v) { spot.classList.toggle('on', v); } });
           });
         })();
 
-        // ---- Cursor-following glow on blocks (motion-flow). A radial wash
-        //      tracks the pointer inside each card; colour (white on navy,
-        //      blue on white) is picked from the block's own background. ----
+        // Card-level focal glow, also eased.
         (function () {
           var blocks = document.querySelectorAll(
             '.rd-card, .rd-post, .re-card, .dev-projects-card, .dev-projects a[class*="rounded"]'
           );
           Array.prototype.forEach.call(blocks, function (el) {
-            var m = (getComputedStyle(el).backgroundColor || '').match(/\d+(\.\d+)?/g);
-            // Treat as a dark block only when it has an opaque, dark fill.
-            var dark = false;
-            if (m && (m[3] === undefined || parseFloat(m[3]) > 0.5)) {
-              var lum = 0.299 * m[0] + 0.587 * m[1] + 0.114 * m[2];
-              dark = lum < 110;
-            }
-            el.classList.add('rd-glow', dark ? 'rd-glow--light' : 'rd-glow--dark');
-            var raf = null, gx = 50, gy = 50;
-            function paint() { raf = null; el.style.setProperty('--gx', gx + '%'); el.style.setProperty('--gy', gy + '%'); }
-            el.addEventListener('pointermove', function (e) {
-              var r = el.getBoundingClientRect();
-              gx = ((e.clientX - r.left) / r.width) * 100;
-              gy = ((e.clientY - r.top) / r.height) * 100;
-              el.classList.add('is-on');
-              if (!raf) raf = requestAnimationFrame(paint);
-            }, { passive: true });
-            el.addEventListener('pointerleave', function () { el.classList.remove('is-on'); });
+            el.classList.add('rd-glow', isDark(el) ? 'rd-glow--light' : 'rd-glow--dark');
+            attachWave(el, function (x, y) {
+              el.style.setProperty('--gx', x + '%');
+              el.style.setProperty('--gy', y + '%');
+            }, { ease: 0.13, on: function (v) { el.classList.toggle('is-on', v); } });
           });
         })();
       }
