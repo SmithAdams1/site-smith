@@ -147,3 +147,12 @@ The redesign line is feature-complete and sitting at **go-live** (`docs/GO-LIVE-
 - **Content:** Beato project + Urban Collection removed from index; hero is the scroll-scrubbed Earth→office video.
 - **Go-live pre-flight status:** author Suzan ✓ · working tree clean ✓ · `vercel.json` preview-rewrites already removed ✓ · **`tailwind.css` recompiled against the latest HTML ✓ (commit `5e21a12`)**. Remaining before merge: the 2-minute in-browser EN↔PT check on `/about` + `/invest-in-portugal`, then **explicit owner approval** to `git merge --ff-only homepage-redesign` into `main` and push (see GO-LIVE-PLAN steps).
 - **Next actionable step = GO-LIVE (requires explicit owner approval),** or finish the CRM live-confirm + Pipedrive removal first.
+
+---
+## Bloco - 2026-08-26 13:59 (conta: furkan@smithandadams.com / Claude)
+Pós-go-live. Hotfixes em produção (commit 1f89796, main -> upstream, deployed + verificado):
+- **Scroll Chrome**: removido `background-position` animado (`sa-drift`) nas secções navy (forçava repaint por frame = principal causa do lag); Lenis `duration` 1.05 -> 0.85.
+- **Nav reordenada** para Home | About Us | Invest in Portugal | Real Estate | Properties | Blog, via CSS `order` (desktop + mobile), sem editar o HTML de cada página.
+- **Dropdown Properties** agora abre a clique/toque/teclado (era só hover; o trigger "#" não fazia nada). "Featured Opportunities" e "Property Management" (páginas OK) já são alcançáveis. Verificado em prod: clique abre menu + navega.
+- Cache-buster g5 -> g6 (18 ficheiros). `homepage-redesign` sincronizado com main.
+- **Report do Board** (old vs new) publicado como Artifact para a apresentação de sexta.
