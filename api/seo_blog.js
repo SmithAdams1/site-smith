@@ -30,6 +30,13 @@ export default async function handler(req, res) {
     const filePath = path.join(process.cwd(), 'article.html');
     let html = fs.readFileSync(filePath, 'utf8');
 
+    // Deleted / unknown slug -> a real 404, so removed posts drop out of the
+    // index instead of soft-404ing (200 with a client-side "not found").
+    if (!data || data.length === 0) {
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.status(404).send(html);
+    }
+
     // 3. If Valid Post, Inject SEO Meta Tags natively!
     if (data && data.length > 0) {
       const post = data[0];
