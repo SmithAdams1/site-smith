@@ -8,8 +8,8 @@
 :root {
     --navy:#11222D; --white:#FFFFFF; --stone:#C3CBD1; --slate:#6A7883;
     --ink:#26333C; --paper:#FDFCF9; --line:#E4E1DA;
-    /* Type system: Archivo Expanded (display) + Archivo (body/UI) +
-       Fraunces (quotes/testimonials only). */
+    /* Type system: Geoform (self-hosted woff2) across the whole site —
+       display, body/UI and quotes, differentiated by weight/style. */
     --display:'Geoform','Helvetica Neue',Arial,sans-serif;
     --serif:'Geoform','Helvetica Neue',Arial,sans-serif;
     --sans:'Geoform','Helvetica Neue',Helvetica,Arial,sans-serif;
