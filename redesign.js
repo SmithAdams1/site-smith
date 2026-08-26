@@ -127,6 +127,35 @@
             sec.addEventListener('pointerleave', function () { spot.classList.remove('on'); });
           });
         })();
+
+        // ---- Cursor-following glow on blocks (motion-flow). A radial wash
+        //      tracks the pointer inside each card; colour (white on navy,
+        //      blue on white) is picked from the block's own background. ----
+        (function () {
+          var blocks = document.querySelectorAll(
+            '.rd-card, .rd-post, .re-card, .dev-projects-card, .dev-projects a[class*="rounded"]'
+          );
+          Array.prototype.forEach.call(blocks, function (el) {
+            var m = (getComputedStyle(el).backgroundColor || '').match(/\d+(\.\d+)?/g);
+            // Treat as a dark block only when it has an opaque, dark fill.
+            var dark = false;
+            if (m && (m[3] === undefined || parseFloat(m[3]) > 0.5)) {
+              var lum = 0.299 * m[0] + 0.587 * m[1] + 0.114 * m[2];
+              dark = lum < 110;
+            }
+            el.classList.add('rd-glow', dark ? 'rd-glow--light' : 'rd-glow--dark');
+            var raf = null, gx = 50, gy = 50;
+            function paint() { raf = null; el.style.setProperty('--gx', gx + '%'); el.style.setProperty('--gy', gy + '%'); }
+            el.addEventListener('pointermove', function (e) {
+              var r = el.getBoundingClientRect();
+              gx = ((e.clientX - r.left) / r.width) * 100;
+              gy = ((e.clientY - r.top) / r.height) * 100;
+              el.classList.add('is-on');
+              if (!raf) raf = requestAnimationFrame(paint);
+            }, { passive: true });
+            el.addEventListener('pointerleave', function () { el.classList.remove('is-on'); });
+          });
+        })();
       }
 
       // Pages that render content after a fetch call this once the nodes are in

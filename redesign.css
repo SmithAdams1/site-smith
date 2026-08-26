@@ -469,3 +469,21 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 
 /* ---- Properties dropdown: also open on click/tap/keyboard (hover still works) ---- */
 .rd-dd.rd-dd--open .rd-dd__menu{opacity:1;visibility:visible;transform:none;}
+
+/* ---- Cursor-following glow on blocks (motion-flow) ----
+   A soft radial gradient tracks the pointer inside each card: a white wash on
+   navy blocks, a blue wash on white blocks. Variant is chosen in JS from the
+   block's own background luminance and applied as --glow. Real content is
+   lifted above the glow layer so the wash never sits on top of the text. */
+.rd-glow { position:relative; overflow:hidden; }
+.rd-glow > * { position:relative; z-index:1; }
+.rd-glow::after {
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  opacity:0; transition:opacity .5s var(--ease-expo);
+  background:radial-gradient(340px circle at var(--gx,50%) var(--gy,50%),
+            var(--glow, rgba(31,74,107,0.16)), transparent 66%);
+}
+.rd-glow.is-on::after { opacity:1; }
+.rd-glow--light { --glow: rgba(255,255,255,0.16); }   /* navy block  -> white glow */
+.rd-glow--dark  { --glow: rgba(31,90,140,0.20); }     /* white block -> blue glow  */
+@media (prefers-reduced-motion:reduce){ .rd-glow::after { display:none; } }
