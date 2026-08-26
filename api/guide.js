@@ -112,11 +112,12 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             full_name: cleanName,
             email: cleanEmail,
-            source: 'Website',
+            source: 'Website Organic',
             campaign_name: 'Investor Guide',
             notes: 'Investor guide download (website pop-up)',
             target_country: country,
             assign_to_email: process.env.CRM_ASSIGN_TO || undefined,
+            pipeline_name: process.env.CRM_PIPELINE || 'Benjamin Pipeline',
           }),
         });
       } catch (crmErr) { console.error('[guide] crm error:', crmErr.message); }
