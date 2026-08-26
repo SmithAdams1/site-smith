@@ -11,6 +11,28 @@
         window.addEventListener('scroll', onScroll, { passive: true });
       })();
 
+      // ---- Properties dropdown: open on click/tap/keyboard as well as hover.
+      //      Hover alone is unreliable (touch devices can't hover, and the
+      //      "Properties" trigger points at "#", so a click did nothing) - which
+      //      made Featured Opportunities / Property Management look broken. ----
+      (function () {
+        var dd = document.querySelector('.rd-dd');
+        if (!dd) return;
+        var trig = dd.querySelector('a');
+        if (trig) {
+          trig.addEventListener('click', function (e) {
+            e.preventDefault();
+            dd.classList.toggle('rd-dd--open');
+          });
+        }
+        document.addEventListener('click', function (e) {
+          if (!dd.contains(e.target)) dd.classList.remove('rd-dd--open');
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') dd.classList.remove('rd-dd--open');
+        });
+      })();
+
       // ---- Portfolio carousel (runs always: this is navigation, not decoration,
       //      so it must work under reduced motion and without GSAP) ----
       (function () {
@@ -120,7 +142,7 @@
       // ---- Lenis smooth scroll (the "single continuous surface") ----
       var lenis = null;
       if (window.Lenis) {
-        lenis = new Lenis({ duration: 1.05, easing: function (t) { return 1 - Math.pow(1 - t, 3); } });
+        lenis = new Lenis({ duration: 0.85, easing: function (t) { return 1 - Math.pow(1 - t, 3); } });
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
         gsap.ticker.lagSmoothing(0);

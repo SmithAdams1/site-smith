@@ -428,11 +428,11 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
     rgba(150,188,230,0.16), rgba(150,188,230,0) 60%); }
 .sa-spot.on { opacity:1; }
 
-/* ---- Subtle animated gradient drift on dark sections ---- */
+/* Static subtle wash on dark sections. (An animated background-position used to
+   live here; animating background-position forces a full repaint every frame and
+   was the main cause of janky scrolling in Chrome — removed.) */
 .rd-sec--navy::before { content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-  background:linear-gradient(120deg, rgba(150,188,230,0.06), transparent 42%, rgba(150,188,230,0.045) 82%);
-  background-size:220% 220%; animation:sa-drift 22s ease-in-out infinite alternate; }
-@keyframes sa-drift { from { background-position:0% 50%; } to { background-position:100% 50%; } }
+  background:linear-gradient(120deg, rgba(150,188,230,0.05), transparent 46%, rgba(150,188,230,0.04) 84%); }
 
 /* ---- Card hover-lift + button micro-interaction ---- */
 .rd-card, .re-card, .dev-projects .dev-projects-card,
@@ -447,3 +447,25 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
   .rd-card, .re-card { transition:none; }
   .rd-card:hover, .re-card:hover { transform:none; box-shadow:none; }
 }
+
+/* ---- Nav order (Home · About · Invest · Real Estate · Properties · Blog · Contact) ---- */
+.rd-nav nav > div:has(a[href*="index"]){order:1}
+.rd-nav nav > div:has(a[href*="about"]){order:2}
+.rd-nav nav > div:has(a[href*="invest-in-portugal"]){order:3}
+.rd-nav nav > div:has(a[href*="real-estate"]){order:4}
+.rd-nav nav > div.rd-dd{order:5}
+.rd-nav nav > div:has(a[href*="blog"]){order:6}
+.rd-nav nav > div:has(a[href*="contact"]){order:7}
+.rd-nav nav > .cms-lang-switcher{order:8}
+#mobile-menu .flex.flex-col > a[href*="index"]{order:1}
+#mobile-menu .flex.flex-col > a[href*="about"]{order:2}
+#mobile-menu .flex.flex-col > a[href*="invest-in-portugal"]{order:3}
+#mobile-menu .flex.flex-col > a[href*="real-estate"]{order:4}
+#mobile-menu .flex.flex-col > a[href*="our-developments"]{order:5}
+#mobile-menu .flex.flex-col > a[href*="property-management"]{order:6}
+#mobile-menu .flex.flex-col > a[href*="blog"]{order:7}
+#mobile-menu .flex.flex-col > a[href*="contact"]{order:8}
+#mobile-menu .flex.flex-col > .cms-lang-switcher{order:9}
+
+/* ---- Properties dropdown: also open on click/tap/keyboard (hover still works) ---- */
+.rd-dd.rd-dd--open .rd-dd__menu{opacity:1;visibility:visible;transform:none;}
