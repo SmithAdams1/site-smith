@@ -174,7 +174,6 @@ function guideEmailHtml(name, guideUrl, base, pt) {
       <tr><td style="background:${navy};padding:26px 32px;">
         <table role="presentation" width="100%"><tr>
           <td style="font-family:${serif};color:#fff;font-size:19px;letter-spacing:.08em;">SMITH &amp; ADAMS</td>
-          <td align="right" style="font-family:${sans};color:rgba(255,255,255,.6);font-size:10px;letter-spacing:.18em;">${t.eyebrow}</td>
         </tr></table>
       </td></tr>
       <tr><td style="padding:36px 32px 8px;">

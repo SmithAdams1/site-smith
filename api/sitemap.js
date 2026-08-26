@@ -3,11 +3,7 @@ export default async function handler(req, res) {
   const today = new Date().toISOString().split('T')[0];
 
   const staticPages = [
-    { loc: `${BASE_URL}/urban-collection`,    lastmod: today, changefreq: 'monthly', priority: '0.9' },
     { loc: `${BASE_URL}/blog`,                lastmod: today, changefreq: 'daily',   priority: '0.8' },
-    { loc: `${BASE_URL}/lp-hygge-house`,             lastmod: today, changefreq: 'monthly', priority: '0.6' },
-    { loc: `${BASE_URL}/lp-hygge-house-yield`,       lastmod: today, changefreq: 'monthly', priority: '0.6' },
-    { loc: `${BASE_URL}/lp-hygge-house-citizenship`, lastmod: today, changefreq: 'monthly', priority: '0.6' },
     { loc: `${BASE_URL}/terms`,               lastmod: today, changefreq: 'yearly',  priority: '0.3' },
     { loc: `${BASE_URL}/privacy`,             lastmod: today, changefreq: 'yearly',  priority: '0.3' },
   ];

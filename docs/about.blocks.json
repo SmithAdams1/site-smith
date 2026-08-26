@@ -9,9 +9,6 @@
     {
       "type": "rd_hero",
       "data": {
-        "eyebrow": {
-          "en": "About · Smith &amp; Adams"
-        },
         "title": {
           "en": "Independent advisory, built around the investor",
           "pt": "Consultoria independente, construída em torno do investidor"
@@ -20,9 +17,10 @@
           "en": "Since 2020, Smith &amp; Adams has helped international investors build euro-denominated property portfolios in Portugal, and secure residency where that&rsquo;s part of the plan.",
           "pt": "Desde 2020, a Smith &amp; Adams ajuda investidores internacionais a construir carteiras imobiliárias denominadas em euros em Portugal, e a garantir residência quando isso faz parte do plano."
         },
-        "image": "hygge-house-beato/exterior.jpg",
+        "image": "hygge-house-projects/35.jpg",
         "image_alt": {
-          "en": "Smith &amp; Adams flagship development, Lisbon"
+          "en": "Lisbon, Portugal",
+          "pt": "Lisboa, Portugal"
         },
         "ctas": [
           {
@@ -52,10 +50,6 @@
       "type": "rd_prose",
       "data": {
         "bg": "paper",
-        "eyebrow": {
-          "en": "Who we are",
-          "pt": "Quem somos"
-        },
         "title": {
           "en": "Smith &amp; Adams Group",
           "pt": "Smith &<br/>Adams Group"
@@ -80,10 +74,6 @@
       "type": "rd_timeline",
       "data": {
         "anchor": "journey",
-        "eyebrow": {
-          "en": "Our Journey",
-          "pt": "A Nossa Trajetória"
-        },
         "title": {
           "en": "From foundation to flagship",
           "pt": "Da fundação ao projeto de referência"
@@ -186,20 +176,6 @@
               "en": "Smith &amp; Adams took on the Hygge Fanqueiros project, a historic boutique stay where the comfort of home meets the ritual of a perfect coffee, advised, structured and now managed by us.",
               "pt": "A Smith &amp; Adams assumiu o projeto Hygge Fanqueiros, um alojamento boutique histórico onde o conforto de casa encontra o ritual de um café perfeito, aconselhado, estruturado e agora gerido por nós."
             }
-          },
-          {
-            "index": {
-              "en": "2026",
-              "pt": "2026"
-            },
-            "title": {
-              "en": "Hygge House Beato",
-              "pt": "Hygge House Beato"
-            },
-            "body": {
-              "en": "The Hygge Beato project marks the flagship of our vision: 137 curated studios within an apart-hotel structure, advised and structured by Smith &amp; Adams, where thoughtful design meets a deep sense of belonging.",
-              "pt": "O projeto Hygge Beato marca o expoente da nossa visão: 137 estúdios criteriosos numa estrutura de apart-hotel, aconselhados e estruturados pela Smith &amp; Adams, onde o design cuidado encontra um profundo sentido de pertença."
-            }
           }
         ]
       }
@@ -207,10 +183,6 @@
     {
       "type": "rd_pillars",
       "data": {
-        "eyebrow": {
-          "en": "What we do",
-          "pt": "O que fazemos"
-        },
         "title": {
           "en": "Advisory, residency and management",
           "pt": "Consultoria, residência e gestão"
@@ -252,10 +224,6 @@
     {
       "type": "rd_proof",
       "data": {
-        "eyebrow": {
-          "en": "Since 2020",
-          "pt": "Desde 2020"
-        },
         "title": {
           "en": "Track Record &amp; Global Footprint",
           "pt": "Histórico &<br/>Presença Global"
@@ -319,9 +287,6 @@
       "type": "rd_msg",
       "data": {
         "anchor": "message",
-        "eyebrow": {
-          "en": "A message from our Head of Investment"
-        },
         "photo": "./about/george-hobson.jpg",
         "photo_alt": {
           "en": "George Hobson, Head of Investment &amp; Strategy at Smith &amp; Adams"

@@ -8,10 +8,6 @@
     {
       "type": "rd_hero",
       "data": {
-        "eyebrow": {
-          "en": "Smith & Adams · Portugal",
-          "pt": "Smith & Adams · Portugal"
-        },
         "title": {
           "en": "Invest in Portugal",
           "pt": "Invista em Portugal"
@@ -20,9 +16,10 @@
           "en": "Two clear, proven pathways to European residency. Choose the route that fits your goals: entrepreneurial drive or passive capital.",
           "pt": "Dois caminhos claros e comprovados para a residência europeia. Escolha a rota ideal para os seus objetivos: espírito empreendedor ou capital passivo."
         },
-        "image": "hygge-house-beato/atrium.jpg",
+        "image": "hygge-house-projects/35.jpg",
         "image_alt": {
-          "en": "Hygge House Beato, Lisbon"
+          "en": "Lisbon, Portugal",
+          "pt": "Lisboa, Portugal"
         },
         "ctas": [
           {
@@ -39,23 +36,13 @@
             "style": "ghost",
             "arrow": false
           }
-        ],
-        "caption_k": {
-          "en": "Beato · Lisboa"
-        },
-        "caption_v": {
-          "en": "137 studio units"
-        }
+        ]
       }
     },
     {
       "type": "rd_prose",
       "data": {
         "bg": "paper",
-        "eyebrow": {
-          "en": "Subject 01",
-          "pt": "Assunto 01"
-        },
         "title": {
           "en": "D2 Visa",
           "pt": "Visto D2"
@@ -114,10 +101,6 @@
       "type": "rd_prose",
       "data": {
         "bg": "paper",
-        "eyebrow": {
-          "en": "Subject 02",
-          "pt": "Assunto 02"
-        },
         "title": {
           "en": "Golden Visa",
           "pt": "Golden Visa"
@@ -173,174 +156,9 @@
       }
     },
     {
-      "type": "rd_asset",
-      "data": {
-        "image": "hygge-house-beato/1.jpg",
-        "image_alt": {
-          "en": "Hygge House Beato"
-        },
-        "tag": {
-          "en": "Subject 03",
-          "pt": "Assunto 03"
-        },
-        "eyebrow": {
-          "en": "Real Estate · Lisbon · Beato",
-          "pt": "Imobiliário · Lisboa · Beato"
-        },
-        "title": {
-          "en": "Hygge House",
-          "pt": "Hygge House"
-        },
-        "title_em": {
-          "en": "Beato",
-          "pt": "Beato"
-        },
-        "figs": [
-          {
-            "n": {
-              "en": "137",
-              "pt": "137"
-            },
-            "l": {
-              "en": "Studio Units",
-              "pt": "Unidades Studio"
-            }
-          },
-          {
-            "n": {
-              "en": "Beato",
-              "pt": "Beato"
-            },
-            "l": {
-              "en": "Location",
-              "pt": "Localização"
-            }
-          },
-          {
-            "n": {
-              "en": "Hygge",
-              "pt": "Hygge"
-            },
-            "l": {
-              "en": "Core Concept",
-              "pt": "Conceito Central"
-            }
-          }
-        ],
-        "byline": {
-          "en": "By <strong style=\"color:#0C1E28; font-weight:600;\">Smith & Adams</strong> · Residential Project in Lisbon",
-          "pt": "Por <strong style=\"color:#0C1E28; font-weight:600;\">Smith & Adams</strong> · Projeto Residencial em Lisboa"
-        }
-      }
-    },
-    {
-      "type": "rd_project",
-      "data": {
-        "eyebrow": {
-          "en": "The Project",
-          "pt": "O Projeto"
-        },
-        "quote": {
-          "en": "Where the Nordic philosophy of wellbeing meets the riverside energy of Lisbon. A modern refuge rooted in the city's history.",
-          "pt": "Onde a filosofia nórdica do bem-estar encontra a energia ribeirinha de Lisboa. Um refúgio moderno enraizado na história da cidade."
-        },
-        "body": [
-          {
-            "en": "Hygge House Beato blends contemporary architecture with urban convenience and the welcoming spirit of the Hygge philosophy. Advised and structured by Smith &amp; Adams, it is a direct response to Portugal's growing hospitality market, offering units that combine functionality with a genuine sense of home.",
-            "pt": "O Hygge House Beato une arquitetura contemporânea com a conveniência urbana e o espírito acolhedor da filosofia Hygge. Aconselhado e estruturado pela Smith &amp; Adams, representa uma resposta direta ao crescente mercado de hospitalidade de Portugal, oferecendo unidades que combinam funcionalidade com um sentido genuíno de lar."
-          },
-          {
-            "en": "The building comprises 137 studio-typology units, designed with a focus on efficiency, functionality and quality. Every space was conceived to meet the high standards the Portuguese market demands, without giving up the individuality and character that set this project apart.",
-            "pt": "O edifício é composto por 137 unidades de tipologia studio, concebidas com foco na eficiência, funcionalidade e qualidade. Cada espaço foi pensado para corresponder aos elevados padrões que o mercado português exige, sem abdicar da individualidade e do caráter que distinguem este projeto."
-          }
-        ],
-        "images": [
-          {
-            "src": "hygge-house-beato/2.jpg",
-            "alt": {
-              "en": "Hygge House Beato"
-            }
-          },
-          {
-            "src": "hygge-house-beato/3.jpg",
-            "alt": {
-              "en": "Hygge House Beato"
-            }
-          }
-        ],
-        "closing_quote": {
-          "en": "A project where long-term investment value meets a community centred on the genuine feeling of home.",
-          "pt": "Um projeto onde o valor do investimento a longo prazo encontra uma comunidade centrada no sentimento genuíno de casa."
-        }
-      }
-    },
-    {
-      "type": "rd_list",
-      "data": {
-        "eyebrow": {
-          "en": "Project Pillars",
-          "pt": "Pilares do Projeto"
-        },
-        "items": [
-          {
-            "index": {
-              "en": "01"
-            },
-            "body": {
-              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Modern Architecture.</strong> A contemporary language that dialogues with the historic identity of the Beato district and its riverside energy.",
-              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Arquitetura Moderna.</strong> Linguagem contemporânea que dialoga com a identidade histórica do bairro do Beato e a sua energia ribeirinha."
-            }
-          },
-          {
-            "index": {
-              "en": "02"
-            },
-            "body": {
-              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Pure Comfort.</strong> Studio units designed for maximum efficiency without compromising quality of life and the sense of home.",
-              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Conforto Puro.</strong> Unidades studio desenhadas para a eficiência máxima sem comprometer a qualidade de vida e o sentido de lar."
-            }
-          },
-          {
-            "index": {
-              "en": "03"
-            },
-            "body": {
-              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Long-Term Investment.</strong> Set within a growing hospitality market, the project offers solid prospects for appreciation and return.",
-              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Investimento de Longo Prazo.</strong> Inserido num mercado de hospitalidade em crescimento, o projeto oferece sólidas perspetivas de valorização e retorno."
-            }
-          },
-          {
-            "index": {
-              "en": "04"
-            },
-            "body": {
-              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Community.</strong> Generous shared spaces that foster connection between residents and reinforce a sense of belonging.",
-              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Comunidade.</strong> Espaços comuns generosos que promovem a ligação entre residentes e reforçam o sentido de pertença ao lugar."
-            }
-          },
-          {
-            "index": {
-              "en": "05"
-            },
-            "body": {
-              "en": "<strong style=\"color:#0C1E28; font-weight:600;\">Historic Roots.</strong> Located in Beato, the project keeps a living connection with the memory and soul of Lisbon.",
-              "pt": "<strong style=\"color:#0C1E28; font-weight:600;\">Raízes Históricas.</strong> Localizado no Beato, o projeto mantém uma ligação viva com a memória e a alma de Lisboa."
-            }
-          }
-        ],
-        "closing": {
-          "en": "Hygge House Beato is the ideal choice for those seeking a modern refuge that stays connected to the city's historic roots and its riverside energy. A home that is, at once, a smart investment and a place where life unfolds with ease.",
-          "pt": "O Hygge House Beato é a escolha ideal para quem procura um refúgio moderno que permaneça conectado às raízes históricas da cidade e à sua energia ribeirinha. Um lar que é, ao mesmo tempo, um investimento inteligente e um lugar onde a vida acontece com leveza."
-        }
-      }
-    },
-    {
       "type": "rd_faq",
       "data": {
         "anchor": "invest-faq",
-        "eyebrow": {
-          "en": "FAQ"
-        },
         "title": {
           "en": "Investing in Portugal, your questions answered"
         },

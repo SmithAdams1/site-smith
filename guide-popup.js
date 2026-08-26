@@ -85,7 +85,6 @@
       +     '<div class="sag-media"><img src="/guide-cover.jpg" alt=""></div>'
       +     '<button class="sag-x" type="button" aria-label="' + T.close + '">&times;</button>'
       +     '<div class="sag-body">'
-      +       '<p class="sag-eyebrow">' + T.eyebrow + '</p>'
       +       '<h2 class="sag-h">' + T.title + '</h2>'
       +       '<p class="sag-p">' + T.body + '</p>'
       +       '<form class="sag-form" novalidate>'

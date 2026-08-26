@@ -13,8 +13,8 @@
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&amp;display=swap" rel="stylesheet"/>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,400,700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Expanded:wght@500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&amp;display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/tailwind.css">
-<link rel="stylesheet" href="/redesign.css">
+<link rel="stylesheet" href="/tailwind.css?v=g1">
+<link rel="stylesheet" href="/redesign.css?v=g1">
 <style>
   /* Map the legacy type classes used by the dynamic card/block templates
      onto the redesign tokens, so JS-injected markup inherits the redesign
@@ -72,7 +72,7 @@
   </div>
   <div class="rd-hero__scrim"></div>
   <div class="rd-wrap rd-hero__inner">
-    <p class="rd-label" style="color:rgba(255,255,255,0.62); margin:0 0 26px;">Smith &amp; Adams · Real Estate</p>
+    
     <h1 id="re-hero-title" data-i18n="hero_title">Find a home to live life your way</h1>
     <p id="re-hero-sub" data-i18n="hero_subtitle" class="rd-hero__sub">Premium residential real estate across Portugal, from Lisbon and Cascais to Porto, the Algarve and Comporta, sourced and vetted by Smith &amp; Adams.</p>
   </div>
@@ -189,7 +189,7 @@
           (p.golden_visa?'<span class="satoshi" style="position:absolute;top:12px;right:12px;background:#C9A227;color:#11222D;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;">'+t.gv+'</span>':'')+
         '</div>'+
         '<div style="padding:20px 22px 24px;">'+
-          '<p class="rd-label" style="margin:0 0 10px;color:var(--slate);">'+[(t.types[p.property_type]||p.property_type),p.region].filter(Boolean).join(' · ')+'</p>'+
+          ''+
           '<h3 class="serif" style="font-size:22px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 12px;min-height:56px;letter-spacing:-0.01em;">'+pick(p.title)+'</h3>'+
           '<div class="satoshi" style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink);margin:0 0 16px;font-weight:500;">'+specsHtml+'</div>'+
           '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;">'+
@@ -293,7 +293,7 @@
 <script src="/vendor/gsap.min.js"></script>
 <script src="/vendor/ScrollTrigger.min.js"></script>
 <script defer src="/hero-video.js"></script>
-<script defer src="/redesign.js"></script>
+<script defer src="/redesign.js?v=g1"></script>
 <script src="/chat.js"></script>
-<script defer src="/guide-popup.js"></script>
+<script defer src="/guide-popup.js?v=g1"></script>
 </body></html>
