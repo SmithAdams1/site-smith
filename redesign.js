@@ -136,7 +136,7 @@
         var ctx = canvas.getContext('2d');
         var N = 120, current = 0, firstReady = false;
         var frames = new Array(N);
-        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var dpr = 1; // frames are 1280px; a >1 backing store only multiplies per-frame drawImage cost (Chrome scroll jank) with no real detail gain
 
         function pad(n){ n = String(n); while (n.length < 3) n = '0' + n; return n; }
         function sizeCanvas(){ canvas.width = Math.round(fly.clientWidth * dpr); canvas.height = Math.round(fly.clientHeight * dpr); }
@@ -150,6 +150,7 @@
         }
         function drawIndex(i){
           i = i < 0 ? 0 : i > N - 1 ? N - 1 : i;
+          if (i === current && frames[i] && frames[i].complete && frames[i].naturalWidth) return; // same frame already on screen — skip the redundant drawImage
           var img = frames[i];
           if (img && img.complete && img.naturalWidth) { current = i; paint(img); return; }
           for (var d = 1; d < N; d++) {
