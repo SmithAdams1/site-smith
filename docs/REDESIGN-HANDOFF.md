@@ -138,3 +138,12 @@ Client feedback: the design and **lettering read as "too AI"** and it put their 
 - The guide PDF and `guide-cover.jpg` are separate static assets in the OLD brand type — they do NOT auto-update with the font change (fine; regenerate later if wanted).
 
 **Commit as author Suzan <suzan@smithandadams.com>** (Vercel Hobby) and push to `upstream/homepage-redesign`.
+
+## Latest state — 2026-08-26 (SUPERSEDES the two "NOT yet implemented / IN PROGRESS" sections above)
+The redesign line is feature-complete and sitting at **go-live** (`docs/GO-LIVE-PLAN.md`). Nothing merged to production yet — `main` is still `c798471`.
+- **Type overhaul → DONE.** The "too AI" tell was fixed and iterated past the Archivo proposal: final pairing is **Qadone (display: titles/subtitles) + Garet (body)** — commit `72734d1`. All eyebrows removed; Playfair gone. (Superseded tries: Bricolage Grotesque, Archivo Expanded, Garet-only.)
+- **CRM integration → DONE (committed + env redeployed).** `api/guide.js` posts guide-download leads to the own CRM (`crm.smithandadams.com`) as origin **"Website Organic"**, routed to the **Benjamin Pipeline**, assigned via `CRM_ASSIGN_TO`, country from IP — commits `6f32254`, `ff98577`. Env vars set on the site's Vercel. **Still to do:** confirm one live submit actually lands the lead, then drop the Pipedrive push.
+- **Backoffice → DONE.** Studio native for Real Estate, Blog, and Media (shared picker), plus the Phase-2 "Redesign pages" block editor pilot (about/invest SSR from the block model). Legacy `admin*.html` are unreferenced → delete in the go-live cleanup.
+- **Content:** Beato project + Urban Collection removed from index; hero is the scroll-scrubbed Earth→office video.
+- **Go-live pre-flight status:** author Suzan ✓ · working tree clean ✓ · `vercel.json` preview-rewrites already removed ✓ · **`tailwind.css` recompiled against the latest HTML ✓ (commit `5e21a12`)**. Remaining before merge: the 2-minute in-browser EN↔PT check on `/about` + `/invest-in-portugal`, then **explicit owner approval** to `git merge --ff-only homepage-redesign` into `main` and push (see GO-LIVE-PLAN steps).
+- **Next actionable step = GO-LIVE (requires explicit owner approval),** or finish the CRM live-confirm + Pipedrive removal first.
