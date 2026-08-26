@@ -133,7 +133,10 @@
       }).then(function (r) { return r.ok ? r.json() : Promise.reject(); })
         .then(function (d) {
           try { localStorage.setItem(KEY, 'done'); } catch (e) {}
-          var url = (d && d.guideUrl) || '/smith-adams-investor-guide-portugal.pdf';
+          // Always use the relative path so the on-page download resolves to the
+          // current host (preview or production). The API's absolute guideUrl is
+          // for the email only; on preview it points at prod, where the PDF isn't live yet.
+          var url = '/smith-adams-investor-guide-portugal.pdf';
           box.querySelector('.sag-body').innerHTML =
             '<p class="sag-eyebrow">' + T.eyebrow + '</p>'
           + '<h2 class="sag-h">' + T.okTitle + '</h2>'
