@@ -1,3 +1,4 @@
+@font-face{font-family:'Qadone';src:url('/fonts/Qadone.ttf') format('truetype'),url('/fonts/Qadone.otf') format('opentype');font-weight:100 900;font-style:normal;font-display:swap;}
 @font-face{font-family:'Garet';src:url('/fonts/Garet-Book.woff2') format('woff2'),url('/fonts/Garet-Book.woff') format('woff');font-weight:100 450;font-style:normal;font-display:swap;}
 @font-face{font-family:'Garet';src:url('/fonts/Garet-Heavy.woff2') format('woff2'),url('/fonts/Garet-Heavy.woff') format('woff');font-weight:451 900;font-style:normal;font-display:swap;}
 
@@ -6,7 +7,7 @@
     --ink:#26333C; --paper:#FDFCF9; --line:#E4E1DA;
     /* Type system: Archivo Expanded (display) + Archivo (body/UI) +
        Fraunces (quotes/testimonials only). */
-    --display:'Garet','Helvetica Neue',Arial,sans-serif;
+    --display:'Qadone','Garet','Helvetica Neue',Arial,sans-serif;
     --serif:'Fraunces', Georgia, 'Times New Roman', serif;
     --sans:'Garet','Helvetica Neue', Helvetica, Arial, sans-serif;
     --ease-quint:cubic-bezier(0.22,1,0.36,1);
