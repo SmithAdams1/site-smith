@@ -110,16 +110,16 @@ const renderers = {
   // panel with a short blurb and a "Know more" link to that unit's page.
   rd_units(d, locale) {
     const units = [
-      { id: 'inv', logo: '/assets/logos/bu-investments.png', name: 'Smith &amp; Adams Investments', href: '/invest-in-portugal',
+      { id: 'inv', logo: '/assets/logos/bu-investments.png?v=2', name: 'Smith &amp; Adams Investments', href: '/invest-in-portugal',
         blurb: { en: 'Independent investment advisory. We identify, vet and structure property investments across Portugal for yield and capital growth.',
                  pt: 'Consultoria de investimento independente. Identificamos, avaliamos e estruturamos investimentos imobili&aacute;rios em Portugal para rendimento e valoriza&ccedil;&atilde;o.' } },
-      { id: 're', logo: '/assets/logos/bu-real-estate.png', name: 'Smith &amp; Adams Real Estate', href: '/real-estate',
+      { id: 're', logo: '/assets/logos/bu-real-estate.png?v=2', name: 'Smith &amp; Adams Real Estate', href: '/real-estate',
         blurb: { en: 'Premium residential real estate across Portugal, sourced and vetted, from Lisbon and Cascais to the Algarve and Comporta.',
                  pt: 'Imobili&aacute;rio residencial premium em Portugal, selecionado e verificado, de Lisboa e Cascais ao Algarve e Comporta.' } },
-      { id: 'pm', logo: '/assets/logos/bu-property-management.png', name: 'Smith &amp; Adams Property Management', href: '/property-management',
+      { id: 'pm', logo: '/assets/logos/bu-property-management.png?v=2', name: 'Smith &amp; Adams Property Management', href: '/property-management',
         blurb: { en: 'End-to-end management of your apartment: tenants, maintenance and financial reporting, for hands-off euro-denominated income.',
                  pt: 'Gest&atilde;o completa do seu apartamento: inquilinos, manuten&ccedil;&atilde;o e relat&oacute;rios financeiros, para rendimento em euros sem preocupa&ccedil;&otilde;es.' } },
-      { id: 'ho', logo: '/assets/logos/bu-hospitality.png', name: 'Smith &amp; Adams Hospitality', href: '/hospitality',
+      { id: 'ho', logo: '/assets/logos/bu-hospitality.png?v=2', name: 'Smith &amp; Adams Hospitality', href: '/hospitality',
         blurb: { en: 'Our Hygge House stays and Hygge Kaffe coffee house: hospitality built around the Nordic idea of well-being.',
                  pt: 'As nossas estadias Hygge House e o Hygge Kaffe: hospitalidade constru&iacute;da em torno do conceito n&oacute;rdico de bem-estar.' } }
     ];
