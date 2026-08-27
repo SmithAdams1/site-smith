@@ -74,7 +74,7 @@ export default async function handler(req, res) {
   const localized = [
     { path: '/', priority: '1.0', changefreq: 'weekly' },
     { path: '/invest-in-portugal', priority: '0.9' },
-    { path: '/our-developments', priority: '0.9' },
+    { path: '/hospitality', priority: '0.9' },
     { path: '/real-estate', priority: '0.9', changefreq: 'daily' },
     { path: '/property-management', priority: '0.8' },
     { path: '/about', priority: '0.7' },

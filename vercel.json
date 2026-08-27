@@ -7,7 +7,9 @@
       "has": [{ "type": "host", "value": "smithandadams.com" }],
       "destination": "https://www.smithandadams.com/:path*",
       "permanent": true
-    }
+    },
+    { "source": "/our-developments", "destination": "/hospitality", "permanent": true },
+    { "source": "/our-developments.html", "destination": "/hospitality", "permanent": true }
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
