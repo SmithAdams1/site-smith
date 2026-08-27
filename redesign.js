@@ -209,6 +209,21 @@
       (function () {
         var fly = document.querySelector('.rd-fly');
         if (!fly) return;
+
+        // Mobile / touch: the pinned canvas scrub is janky on phones - the pin
+        // fights the address-bar resize and the per-frame redraw stutters - and it
+        // costs bandwidth. Show a static hero on the CSS poster instead: the intro
+        // panel stays visible and the section scrolls away normally.
+        var isTouch = window.matchMedia('(max-width: 900px)').matches
+                   || window.matchMedia('(pointer: coarse)').matches;
+        if (isTouch) {
+          var p1m = fly.querySelector('.p1'); if (p1m) { p1m.style.opacity = '1'; p1m.style.transform = 'none'; }
+          var p2m = fly.querySelector('.p2'); if (p2m) p2m.style.display = 'none';
+          var p3m = fly.querySelector('.p3'); if (p3m) p3m.style.display = 'none';
+          var cuem = fly.querySelector('.rd-scrollcue'); if (cuem) cuem.style.display = 'none';
+          return;
+        }
+
         var canvas = fly.querySelector('.rd-fly__canvas');
         var ctx = canvas.getContext('2d');
         var N = 120, current = 0, firstReady = false;
