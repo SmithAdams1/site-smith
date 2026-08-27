@@ -11,13 +11,19 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
-  // Own CRM (best-effort, independent of Pipedrive so the lead lands even if that path fails)
+  // Own CRM (best-effort, independent of Pipedrive so the lead lands even if that path fails).
+  // Direct Inquiries whose Area of Interest is Property Management route to Teresa
+  // Cherry on the Property Management pipeline (mirrors the CRM's own Meta-form routing).
+  const isPropertyManagement = interest === 'property-management';
   await postCrmLead(req, {
     full_name: `${firstName} ${lastName || ''}`.trim(),
     email,
     phone: `${phoneCode} ${phoneNumber}`.trim(),
-    campaign_name: 'Website Contact',
+    campaign_name: isPropertyManagement ? 'Property Management' : 'Website Contact',
     notes: [interest ? `Interest: ${interest}` : null, message ? `Message: ${message}` : null].filter(Boolean).join(' | ') || 'Contact form',
+    ...(isPropertyManagement
+      ? { assign_to_email: 'teresa.pinto@smithandadams.com', pipeline_name: 'Property Management' }
+      : {}),
   });
 
   const PIPEDRIVE_TOKEN = process.env.PIPEDRIVE_TOKEN;

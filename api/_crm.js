@@ -29,8 +29,8 @@ export async function postCrmLead(req, lead) {
         campaign_name: lead.campaign_name || 'Website form',
         notes: lead.notes || undefined,
         target_country: lead.target_country || country,
-        assign_to_email: process.env.CRM_ASSIGN_TO || undefined,
-        pipeline_name: process.env.CRM_PIPELINE || 'Benjamin Pipeline',
+        assign_to_email: lead.assign_to_email || process.env.CRM_ASSIGN_TO || undefined,
+        pipeline_name: lead.pipeline_name || process.env.CRM_PIPELINE || 'Benjamin Pipeline',
       }),
     });
   } catch (e) {
