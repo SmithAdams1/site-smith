@@ -156,3 +156,17 @@ Pós-go-live. Hotfixes em produção (commit 1f89796, main -> upstream, deployed
 - **Dropdown Properties** agora abre a clique/toque/teclado (era só hover; o trigger "#" não fazia nada). "Featured Opportunities" e "Property Management" (páginas OK) já são alcançáveis. Verificado em prod: clique abre menu + navega.
 - Cache-buster g5 -> g6 (18 ficheiros). `homepage-redesign` sincronizado com main.
 - **Report do Board** (old vs new) publicado como Artifact para a apresentação de sexta.
+
+---
+## Bloco - 2026-08-27 16:24 (conta: furkan@smithandadams.com / Claude)
+- **CRM**: Direct Inquiries com Area of Interest = Property Management → Teresa Cherry (teresa.pinto@smithandadams.com) + pipeline "Property Management" (api/contact.js + _crm.js overrides).
+- **Property Management**: hero novo (Julho-23); bloco "A track record you can measure" (navy) substituiu os números 100%/300%/Lisbon a seguir ao hero.
+- **Nav**: Home | About Us | Invest in Portugal | Real Estate | Property Management | Hospitality | Blog. Dropdown Properties removido; /hospitality novo com 301 de /our-developments; sitemap/canonical/og/title/pt-static atualizados.
+- **Hospitality**: hero (Jun26-37); bloco **Hygge House** (logo 1x + copy hyggekaffe.pt) a seguir ao Hygge concept; Previous Projects **removido** e movido para **Real Estate**.
+- **Real Estate**: hero passou de vídeo a imagem (Jun26-4) + CTA para o form no fim; recebeu a secção Previous Projects.
+- **About**: hero (Abril26-40); novo tipo de bloco **rd_units** (quadro interativo CSS-only das 4 business units: Investments/Real Estate/Property Management/Hospitality → Know more p/ cada página) a substituir a foto após "Smith & Adams Group" (rd_units em api/_renderRdBlocks.js + lib/renderRdBlocks.js; docs/about.blocks.json).
+- **Invest**: hero = ponte25abril (assets/hero-invest.jpg).
+- **Hero homepage**: mobile/touch → hero estático (sem pin/canvas) p/ scroll suave; desktop Chrome → canvas cap 1440 + contexto opaco.
+- **CMS**: dev.hero.title atualizado p/ "Hospitality" (SQL corrido pelo Abílio).
+- Cache g8→g11. Assets em /assets e /assets/logos.
+- **A seguir**: Google Analytics + Google Ads + estratégia 1 mês (lead gen / nurturing / MQL→SQL).
