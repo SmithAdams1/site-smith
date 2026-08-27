@@ -225,13 +225,23 @@
         }
 
         var canvas = fly.querySelector('.rd-fly__canvas');
-        var ctx = canvas.getContext('2d');
+        var ctx = canvas.getContext('2d', { alpha: false }); // opaque = cheaper compositing per frame
+
         var N = 120, current = 0, firstReady = false;
         var frames = new Array(N);
-        var dpr = 1; // frames are 1280px; a >1 backing store only multiplies per-frame drawImage cost (Chrome scroll jank) with no real detail gain
 
         function pad(n){ n = String(n); while (n.length < 3) n = '0' + n; return n; }
-        function sizeCanvas(){ canvas.width = Math.round(fly.clientWidth * dpr); canvas.height = Math.round(fly.clientHeight * dpr); }
+        // Cap the canvas backing store. The frames are 1280px, so on a wide desktop
+        // a full-width backing (up to 2560px+) only upscaled a 1280 source while
+        // multiplying the per-frame drawImage cost - the main source of Chrome
+        // scroll jank. 1440px is past the frame's own detail and keeps drawImage cheap.
+        function sizeCanvas(){
+          var CAP = 1440;
+          var w = fly.clientWidth, h = fly.clientHeight;
+          var s = w > CAP ? CAP / w : 1;
+          canvas.width = Math.round(w * s);
+          canvas.height = Math.round(h * s);
+        }
         function paint(img){
           if (!img || !img.complete || !img.naturalWidth) return;
           var cw = canvas.width, ch = canvas.height;
