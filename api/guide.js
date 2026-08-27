@@ -9,23 +9,14 @@
 //      CRM_ASSIGN_TO (agent email - all guide leads assigned there, e.g. Benjamin),
 //      PIPEDRIVE_TOKEN (optional, legacy - remove once the CRM path is confirmed).
 
-const GUIDE_PATH = '/smith-adams-investor-guide-portugal.pdf';
+import { postCrmLead } from './_crm.js';
 
-// Vercel sets x-vercel-ip-country to an ISO-2 code; map the firm's markets to
-// readable names for the CRM's target_country. Unmapped codes pass through raw.
-const COUNTRY_NAMES = {
-  PT: 'Portugal', GB: 'United Kingdom', IE: 'Ireland', US: 'United States',
-  CA: 'Canada', AE: 'United Arab Emirates', SA: 'Saudi Arabia', QA: 'Qatar',
-  KW: 'Kuwait', BH: 'Bahrain', OM: 'Oman', IN: 'India', CN: 'China',
-  HK: 'Hong Kong', SG: 'Singapore', ZA: 'South Africa', BR: 'Brazil',
-  FR: 'France', DE: 'Germany', CH: 'Switzerland', NL: 'Netherlands',
-  ES: 'Spain', IT: 'Italy', AU: 'Australia', TR: 'Türkiye',
-};
+const GUIDE_PATH = '/smith-adams-investor-guide-portugal.pdf';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { name, email, consent, locale } = req.body || {};
+  const { name, email, consent, locale, attribution } = req.body || {};
   const cleanName = String(name || '').trim();
   const cleanEmail = String(email || '').trim();
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail);
@@ -98,30 +89,16 @@ export default async function handler(req, res) {
       } catch (pdErr) { console.error('[guide] pipedrive error:', pdErr.message); }
     }
 
-    // 4 - the own CRM (crm.smithandadams.com). All guide leads route to one
-    //     agent via assign_to_email; the country comes from Vercel's geo header.
-    const CRM_API_URL = process.env.CRM_API_URL;   // e.g. https://crm.smithandadams.com
-    const CRM_API_KEY = process.env.CRM_API_KEY;   // sa_live_…
-    if (CRM_API_URL && CRM_API_KEY) {
-      try {
-        const cc = String(req.headers['x-vercel-ip-country'] || '').toUpperCase();
-        const country = COUNTRY_NAMES[cc] || cc || null;
-        await fetch(`${CRM_API_URL.replace(/\/$/, '')}/api/v1/leads`, {
-          method: 'POST',
-          headers: { Authorization: `Bearer ${CRM_API_KEY}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            full_name: cleanName,
-            email: cleanEmail,
-            source: 'Website Organic',
-            campaign_name: 'Investor Guide',
-            notes: 'Investor guide download (website pop-up)',
-            target_country: country,
-            assign_to_email: process.env.CRM_ASSIGN_TO || undefined,
-            pipeline_name: process.env.CRM_PIPELINE || 'Benjamin Pipeline',
-          }),
-        });
-      } catch (crmErr) { console.error('[guide] crm error:', crmErr.message); }
-    }
+    // 4 - the own CRM (crm.smithandadams.com), via the shared helper so the
+    //     marketing attribution (gclid / client_id / utm) forwarded by the
+    //     pop-up is carried through for offline conversion import.
+    await postCrmLead(req, {
+      full_name: cleanName,
+      email: cleanEmail,
+      campaign_name: 'Investor Guide',
+      notes: 'Investor guide download (website pop-up)',
+      attribution,
+    });
 
     return res.status(200).json({ success: true, guideUrl });
   } catch (err) {
