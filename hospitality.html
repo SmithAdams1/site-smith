@@ -95,7 +95,7 @@
 <!-- ════════ PAGE HERO ════════ -->
 <section class="rd-hero">
   <div class="rd-hero__media">
-    <img src="hygge-house-projects/35.jpg" alt="Lisbon, Portugal" loading="eager" fetchpriority="high" decoding="async">
+    <img src="/assets/hero-hospitality.jpg" alt="Hygge House hospitality, Lisbon" loading="eager" fetchpriority="high" decoding="async">
   </div>
   <div class="rd-hero__scrim"></div>
   <div class="rd-wrap rd-hero__inner">
@@ -473,6 +473,57 @@
     </div>
   </div>
 
+</section>
+
+<!-- ════════ HYGGE KAFFE (brand block · Hygge House palette) ════════ -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+<section class="hygge-kaffe" id="hygge-kaffe">
+  <style>
+    .hygge-kaffe{--hk-sage:#87AA87;--hk-forest:#495144;--hk-cream:#E2E0DC;--hk-ink:#27282B;--hk-taupe:#6D655C;
+      background:var(--hk-cream);color:var(--hk-ink);
+      font-family:'Noto Sans','Helvetica Neue',Arial,sans-serif;
+      padding:clamp(56px,8vw,120px) var(--mx);}
+    .hygge-kaffe__wrap{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+      gap:clamp(28px,5vw,72px);align-items:center;}
+    @media(max-width:860px){.hygge-kaffe__wrap{grid-template-columns:1fr;gap:36px;}}
+    .hygge-kaffe__eyebrow{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;
+      color:var(--hk-forest);font-weight:600;margin:0 0 18px;}
+    .hygge-kaffe__logo{font-family:'Noto Sans',sans-serif;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;font-size:clamp(34px,5vw,58px);line-height:1;color:var(--hk-ink);margin:0;}
+    .hygge-kaffe__logo small{display:block;font-size:0.32em;letter-spacing:0.42em;font-weight:600;
+      color:var(--hk-taupe);margin-top:12px;}
+    .hygge-kaffe__tag{font-size:clamp(18px,2vw,24px);font-style:italic;color:var(--hk-forest);
+      margin:24px 0 0;font-weight:500;}
+    .hygge-kaffe__body{font-size:16px;line-height:1.7;color:var(--hk-ink);margin:20px 0 0;max-width:46ch;}
+    .hygge-kaffe__cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;
+      background:var(--hk-sage);color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+      padding:15px 30px;border-radius:999px;transition:background .3s ease,transform .3s ease;}
+    .hygge-kaffe__cta:hover{background:var(--hk-forest);transform:translateY(-2px);}
+    .hygge-kaffe__gallery{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;
+      gap:14px;}
+    .hygge-kaffe__gallery img{width:100%;height:100%;object-fit:cover;display:block;border-radius:4px;}
+    .hygge-kaffe__gallery figure{margin:0;overflow:hidden;border-radius:4px;}
+    .hygge-kaffe__gallery .hk-tall{grid-row:1 / span 2;aspect-ratio:3/4.4;}
+    .hygge-kaffe__gallery .hk-a{aspect-ratio:1/1;}
+    .hygge-kaffe__gallery .hk-b{aspect-ratio:4/3;}
+    @media(max-width:520px){.hygge-kaffe__gallery{grid-template-columns:1fr 1fr;}
+      .hygge-kaffe__gallery .hk-tall{grid-row:auto;aspect-ratio:3/4;grid-column:1 / -1;}}
+  </style>
+  <div class="hygge-kaffe__wrap">
+    <div class="hygge-kaffe__text">
+      <p class="hygge-kaffe__eyebrow">Part of Hygge House</p>
+      <h2 class="hygge-kaffe__logo">Hygge Kaffe<small>Coffee House &middot; Lisbon</small></h2>
+      <p class="hygge-kaffe__tag">You don't spell it, you feel it.</p>
+      <p class="hygge-kaffe__body">Hygge is the Danish art of cosy, unhurried togetherness, and it is the whole idea behind our Lisbon coffee house. Specialty coffee, all-day brunch and fresh bakes, served in a warm, light-filled room made for slowing down and staying a while.</p>
+      <a class="hygge-kaffe__cta" href="https://hyggekaffe.pt" target="_blank" rel="noopener">Visit Hygge Kaffe
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="hygge-kaffe__gallery">
+      <figure class="hk-tall"><img src="/assets/hygge-kaffe-1.jpg" alt="Hygge Kaffe, Lisbon" loading="lazy" decoding="async"></figure>
+      <figure class="hk-a"><img src="/assets/hygge-kaffe-2.jpg" alt="Specialty coffee at Hygge Kaffe" loading="lazy" decoding="async"></figure>
+      <figure class="hk-b"><img src="/assets/hygge-kaffe-3.jpg" alt="Brunch at Hygge Kaffe" loading="lazy" decoding="async"></figure>
+    </div>
+  </div>
 </section>
 
 <footer class="w-full py-12 md:py-16" style="background:#0C1E28;"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" class="invert" style="color:transparent" src="./logo.png"/></div></a><p data-cms="global.footer.description" data-cms-attr="html" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams is an independent real estate investment advisory firm in Portugal, helping international investors and Residency Investors build euro-denominated portfolios with secure, transparent returns.</p></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="invest-in-portugal.html">Invest in Portugal</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="hospitality.html">Our Developments</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">Blogs</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone" href="tel:+351938227348">+351938227348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li></ul></div></div></div><div class="w-full flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-700 mt-12"><p data-cms="global.footer.copyright" class="text-center text-gray-400 mb-4 sm:mb-0 satoshi">Copyright © <!-- -->2026<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 text-sm sm:text-base satoshi">All Rights Reserved |<a class="text-gray-300 hover:text-white ml-1" href="terms.html">Terms and Conditions</a> |<a class="text-gray-300 hover:text-white ml-1" href="privacy.html">Privacy Policy</a></p></div></div></footer>
