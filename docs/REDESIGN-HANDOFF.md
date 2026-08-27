@@ -1,14 +1,14 @@
 # Redesign handoff — `homepage-redesign`
 
-_Last updated: 2026-08-07. Author account: this session (commits authored as Suzan &lt;suzan@smithandadams.com&gt; — Vercel Hobby only deploys commits by that author). Repo `SmithAdams1/site-smith`, working branch **`homepage-redesign`**._
+_Last updated: 2026-08-28. Commits authored as Suzan &lt;suzan@smithandadams.com&gt; (Vercel Hobby only deploys that author). Repo `SmithAdams1/site-smith`, working branch **`homepage-redesign`**._
 
-> **Read this first if you are a fresh session.** It is the single source of truth for where the redesign stands and what is left. The goal: reformulate `smithandadams.com` around Brand Book Edition 03, page by page, into a shared design system (`redesign.css` + `redesign.js`), without breaking SEO or the CMS. Nothing here is in production yet.
+> **Read this first if you are a fresh session.** The redesign is **LIVE in production** at `www.smithandadams.com`, served from `main`. Much of the recent work was done across several parallel sessions and is NOT all described below — **treat the git log as the source of truth**, not this doc. Known later changes not fully documented here: nav restructure (Properties → Property Management + Hospitality), `Featured Opportunities`/`our-developments` → **Hospitality** (`/hospitality`, 301), the About business-units panel, the hero/motion reworks, **display type is now "Geoform"** (Qadone/Archivo/Bricolage were interim), and the GA4/Ads + CRM attribution instrumentation.
 
 ## Branch / deploy state
-- `homepage-redesign` is ~40 commits ahead of `main`; `main` (production) is untouched at `c798471`.
-- Preview URL the client reviews: `https://site-smith-git-homepage-redesign-smith-adams1.vercel.app`
-- **Never push to `main`** without explicit approval. Always commit as author Suzan (see above) or Vercel won't deploy the preview.
-- Push target: `git push upstream homepage-redesign` (`upstream` = SmithAdams1, `origin` = abiliodiz-cell fork).
+- **Production = `main`** (www). As of this update `main` is at `2ea0e2f`; `homepage-redesign` at `715decb`.
+- ⚠️ **Production is 1 commit behind** `homepage-redesign`: `715decb` (guide.js forwards marketing attribution to the CRM). Until it reaches `main`, the guide pop-up's leads do NOT carry gclid/client_id (the contact + property-enquiry forms already do, via `api/_crm.js`).
+- Commit as author Suzan or Vercel won't deploy. Push: `git push upstream homepage-redesign`.
+- **Offline conversions (Google Ads):** site captures gclid/client_id/utm (`sa-events.js`) → all forms + guide pop-up forward it → CRM stores it in `raw_payload.attribution` → on a **won** deal the CRM sends a GA4 `crm_won` event (`sa-crm` `lib/analytics/ga4.ts`). **Pending:** set `GA4_MEASUREMENT_ID` + `GA4_API_SECRET` on the `sa-crm` Vercel project, and mark `crm_won` as a conversion in GA4 + link GA4↔Google Ads.
 
 ## The rules that keep biting (do not relearn these the hard way)
 1. **The served HTML must match what the visitor and crawler eventually see.** AI crawlers don't run JS. Every fix in this project traces back to baking the truth into the HTML and making JS idempotent. Verify with the CMS blocked, not just live.
