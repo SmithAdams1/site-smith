@@ -2,7 +2,7 @@
 <title>Property | Smith &amp; Adams</title>
 <meta name="description" content="Premium property in Portugal, curated by Smith & Adams."/>
 <link rel="icon" href="favicon.ico" type="image/x-icon"/>
-<link rel="stylesheet" href="/tailwind.css?v=g11">
+<link rel="stylesheet" href="/tailwind.css?v=g12">
 <style>
   .satoshi{font-family:var(--sans);}
   .geist{font-family:var(--sans);}
@@ -20,8 +20,8 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18073134136');</script>
 <script defer src="/cms-loader.js"></script>
-<link rel="stylesheet" href="/redesign.css?v=g11">
-<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#11222d"/><script defer src="/consent.js"></script><script defer src="/_vercel/insights/script.js"></script><script defer src="/_vercel/speed-insights/script.js"></script></head>
+<link rel="stylesheet" href="/redesign.css?v=g12">
+<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#11222d"/><script defer src="/consent.js"></script><script defer src="/sa-events.js?v=1"></script><script defer src="/_vercel/insights/script.js"></script><script defer src="/_vercel/speed-insights/script.js"></script></head>
 <body class="rd antialiased overflow-x-hidden w-full" style="background:var(--paper);">
 <main class="min-h-screen">
 
@@ -239,10 +239,11 @@
       var fd=new FormData(form);var body={};fd.forEach(function(v,k){body[k]=v;});
       body.interest='real-estate';
       body.property={slug:p.slug,reference:p.reference||'',title:pick(p.title),url:propUrl,price:fmtPrice(p.price,p.currency)};
+      body.attribution=(window.saLeadContext?window.saLeadContext():{});
       fetch('/api/property-enquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
         .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
         .then(function(res){
-          if(res.ok&&res.j.success){form.reset();msgEl.style.color='#128C3E';msgEl.textContent=t.sent;btn.textContent=t.send;btn.disabled=false;}
+          if(res.ok&&res.j.success){if(window.saTrackLead)window.saTrackLead('property');form.reset();msgEl.style.color='#128C3E';msgEl.textContent=t.sent;btn.textContent=t.send;btn.disabled=false;}
           else{throw new Error('fail');}
         }).catch(function(){msgEl.style.color='#b91c1c';msgEl.textContent=t.err;btn.textContent=t.send;btn.disabled=false;});
     });

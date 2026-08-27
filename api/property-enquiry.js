@@ -5,7 +5,7 @@ import { postCrmLead } from './_crm.js';
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { firstName, lastName, email, phoneCode, phoneNumber, message, property } = req.body || {};
+  const { firstName, lastName, email, phoneCode, phoneNumber, message, property, attribution } = req.body || {};
   if (!firstName || !email || !phoneNumber) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
@@ -17,6 +17,7 @@ export default async function handler(req, res) {
     phone: `${phoneCode || ''} ${phoneNumber}`.trim(),
     campaign_name: 'Property Enquiry',
     notes: [property ? `Property: ${property}` : null, message ? `Message: ${message}` : null].filter(Boolean).join(' | ') || 'Property enquiry',
+    attribution,
   });
 
   const PIPEDRIVE_TOKEN = process.env.PIPEDRIVE_TOKEN;

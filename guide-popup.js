@@ -129,10 +129,11 @@
 
       fetch('/api/guide', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, consent: true, locale: PT ? 'pt' : 'en' })
+        body: JSON.stringify({ name: name, email: email, consent: true, locale: PT ? 'pt' : 'en', attribution: (window.saLeadContext ? window.saLeadContext() : {}) })
       }).then(function (r) { return r.ok ? r.json() : Promise.reject(); })
         .then(function (d) {
           try { localStorage.setItem(KEY, 'done'); } catch (e) {}
+          if (window.saTrackLead) window.saTrackLead('guide');
           // Always use the relative path so the on-page download resolves to the
           // current host (preview or production). The API's absolute guideUrl is
           // for the email only; on preview it points at prod, where the PDF isn't live yet.

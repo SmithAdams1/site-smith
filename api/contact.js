@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { firstName, lastName, email, phoneCode, phoneNumber, interest, message } = req.body;
+  const { firstName, lastName, email, phoneCode, phoneNumber, interest, message, attribution } = req.body;
 
   if (!firstName || !email || !phoneCode || !phoneNumber) {
     return res.status(400).json({ error: 'Missing required fields' });
@@ -21,6 +21,7 @@ export default async function handler(req, res) {
     phone: `${phoneCode} ${phoneNumber}`.trim(),
     campaign_name: isPropertyManagement ? 'Property Management' : 'Website Contact',
     notes: [interest ? `Interest: ${interest}` : null, message ? `Message: ${message}` : null].filter(Boolean).join(' | ') || 'Contact form',
+    attribution,
     ...(isPropertyManagement
       ? { assign_to_email: 'teresa.pinto@smithandadams.com', pipeline_name: 'Property Management' }
       : {}),
