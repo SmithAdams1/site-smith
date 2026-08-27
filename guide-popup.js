@@ -8,7 +8,16 @@
   'use strict';
   if (window.self !== window.top) return;            // never inside an embed (Studio)
   var KEY = 'sa_guide_v1';
-  try { if (localStorage.getItem(KEY)) return; } catch (e) {}
+  // Frequency: converters ('done') never see it again; non-converters ('seen')
+  // get another chance after 30 days rather than being blocked forever.
+  try {
+    var v = localStorage.getItem(KEY);
+    if (v === 'done') return;
+    if (v === 'seen') {
+      var seenTs = parseInt(localStorage.getItem(KEY + '_ts') || '0', 10);
+      if (Date.now() - seenTs < 30 * 864e5) return;
+    }
+  } catch (e) {}
 
   var path = location.pathname.toLowerCase();
   // Not on pages where it would be noise or intrusive.
@@ -76,7 +85,8 @@
   var shown = false;
   function show() {
     if (shown) return; shown = true;
-    try { localStorage.setItem(KEY, 'seen'); } catch (e) {}
+    try { localStorage.setItem(KEY, 'seen'); localStorage.setItem(KEY + '_ts', String(Date.now())); } catch (e) {}
+    if (window.gtag) { try { window.gtag('event', 'guide_popup_view'); } catch (e) {} }
     var style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
     var ov = h(''
@@ -139,8 +149,7 @@
           // for the email only; on preview it points at prod, where the PDF isn't live yet.
           var url = '/smith-adams-investor-guide-portugal.pdf';
           box.querySelector('.sag-body').innerHTML =
-            '<p class="sag-eyebrow">' + T.eyebrow + '</p>'
-          + '<h2 class="sag-h">' + T.okTitle + '</h2>'
+            '<h2 class="sag-h">' + T.okTitle + '</h2>'
           + '<p class="sag-p">' + T.okBody + '</p>'
           + '<a class="sag-oklink" href="' + url + '" target="_blank" rel="noopener">' + T.okLink + ' &rarr;</a>';
         })
@@ -150,12 +159,22 @@
     });
   }
 
-  // Triggers: whichever fires first - a dwell timer or scrolling past ~45%.
-  var timer = setTimeout(show, 20000);
+  // Triggers: whichever fires first - a dwell timer, scrolling past ~45%, or
+  // (desktop only) the cursor leaving through the top of the window (exit intent,
+  // to catch abandoning visitors before they go).
+  function trigger() {
+    clearTimeout(timer);
+    window.removeEventListener('scroll', onScroll);
+    document.removeEventListener('mouseout', onLeave);
+    show();
+  }
+  var timer = setTimeout(trigger, 20000);
   function onScroll() {
     var sc = window.scrollY || document.documentElement.scrollTop;
     var h2 = document.documentElement.scrollHeight - window.innerHeight;
-    if (h2 > 0 && sc / h2 > 0.45) { clearTimeout(timer); window.removeEventListener('scroll', onScroll); show(); }
+    if (h2 > 0 && sc / h2 > 0.45) trigger();
   }
+  function onLeave(e) { if (e.clientY <= 0 && !e.relatedTarget) trigger(); }
   window.addEventListener('scroll', onScroll, { passive: true });
+  if (!('ontouchstart' in window)) document.addEventListener('mouseout', onLeave);
 })();
