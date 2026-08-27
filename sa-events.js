@@ -40,8 +40,23 @@
     }
   } catch (e) {}
 
+  // GA4 client id lives in the _ga cookie as "GA1.1.<clientId>.<ts>" once the
+  // Google tag has set it (consent granted). It lets the CRM send offline
+  // qualify_lead / close_convert_lead events back to GA4 via the Measurement
+  // Protocol, tied to the same user, so Ads gets the MQL/SQL conversions.
+  function gaClientId() {
+    try {
+      var m = document.cookie.match(/_ga=GA\d\.\d\.([\d.]+)/);
+      return m ? m[1] : null;
+    } catch (e) { return null; }
+  }
+
   window.saLeadContext = function () {
-    try { return JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) { return {}; }
+    var ctx = {};
+    try { ctx = JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (e) {}
+    var cid = gaClientId();
+    if (cid) ctx.ga_client_id = cid;
+    return ctx;
   };
 
   // ---- 2. fire a lead conversion (GA4 + Google Ads) ----

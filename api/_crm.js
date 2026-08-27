@@ -38,6 +38,7 @@ export async function postCrmLead(req, lead) {
         notes,
         target_country: lead.target_country || country,
         gclid: attr.gclid || undefined,
+        ga_client_id: attr.ga_client_id || undefined,
         utm_source: attr.utm_source || undefined,
         utm_medium: attr.utm_medium || undefined,
         utm_campaign: attr.utm_campaign || undefined,
