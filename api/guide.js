@@ -16,9 +16,10 @@ const GUIDE_PATH = '/smith-adams-investor-guide-portugal.pdf';
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { name, email, consent, locale, attribution } = req.body || {};
+  const { name, email, phone, consent, locale, attribution } = req.body || {};
   const cleanName = String(name || '').trim();
   const cleanEmail = String(email || '').trim();
+  const cleanPhone = String(phone || '').trim() || undefined;
   const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail);
   if (!cleanName || !isEmail) return res.status(400).json({ error: 'Missing name or valid email' });
   if (!consent) return res.status(400).json({ error: 'Consent is required' });
@@ -95,6 +96,7 @@ export default async function handler(req, res) {
     await postCrmLead(req, {
       full_name: cleanName,
       email: cleanEmail,
+      phone: cleanPhone,
       campaign_name: 'Investor Guide',
       notes: 'Investor guide download (website pop-up)',
       attribution,

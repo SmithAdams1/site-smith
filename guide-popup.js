@@ -30,23 +30,23 @@
     eyebrow: 'GUIA DO INVESTIDOR · PORTUGAL',
     title: 'Porquê investir em Portugal?',
     body: 'Portugal registou o maior crescimento de preços residenciais da UE em 2025. Receba o guia gratuito - fundamentos do mercado, custos reais de uma compra e como investir bem.',
-    name: 'Nome', email: 'Email',
+    name: 'Nome', email: 'Email', phone: 'Telefone',
     consent: 'Aceito receber o guia e comunicações ocasionais da Smith &amp; Adams. Posso cancelar quando quiser.',
     cta: 'Enviar-me o guia', sending: 'A enviar…',
     okTitle: 'Está a caminho.', okBody: 'Enviámos o guia para o seu email. Pode também descarregá-lo já aqui:',
     okLink: 'Descarregar o guia (PDF)',
-    errName: 'Escreva o seu nome.', errEmail: 'Escreva um email válido.', errConsent: 'É preciso o seu consentimento.',
+    errName: 'Escreva o seu nome.', errEmail: 'Escreva um email válido.', errConsent: 'É preciso o seu consentimento.', errPhone: 'Escreva um telefone válido.',
     errSend: 'Não foi possível enviar. Tente novamente.', close: 'Fechar'
   } : {
     eyebrow: 'INVESTOR GUIDE · PORTUGAL',
     title: 'Why invest in Portugal?',
     body: 'Portugal recorded the EU’s strongest residential price growth in 2025. Get the free guide - market fundamentals, what a purchase really costs, and how to invest well.',
-    name: 'Name', email: 'Email',
+    name: 'Name', email: 'Email', phone: 'Phone',
     consent: 'I agree to receive the guide and occasional updates from Smith &amp; Adams. I can unsubscribe anytime.',
     cta: 'Send me the guide', sending: 'Sending…',
     okTitle: 'It’s on its way.', okBody: 'We’ve emailed the guide to you. You can also download it right here:',
     okLink: 'Download the guide (PDF)',
-    errName: 'Please enter your name.', errEmail: 'Please enter a valid email.', errConsent: 'Please tick consent to continue.',
+    errName: 'Please enter your name.', errEmail: 'Please enter a valid email.', errConsent: 'Please tick consent to continue.', errPhone: 'Please enter a valid phone number.',
     errSend: 'Could not send. Please try again.', close: 'Close'
   };
 
@@ -77,6 +77,11 @@
     + '.sag-body .sag-x{background:rgba(17,34,45,.08);color:#11222D;}'
     + '.sag-err{font:500 12px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#b3261e;min-height:16px;margin:2px 0 8px;}'
     + '.sag-oklink{display:inline-block;margin-top:6px;font:600 14px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#11222D;text-decoration:underline;}'
+    + '.sag-phone{display:flex;gap:8px;margin:0 0 11px;}'
+    + '.sag-phone select{flex:0 0 auto;max-width:150px;box-sizing:border-box;border:1px solid #d9d5cc;background:#fff;font:400 14px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#11222D;padding:12px 8px;border-radius:2px;outline:none;}'
+    + '.sag-phone select:focus{border-color:#11222D;}'
+    + '.sag-phone input{flex:1;min-width:0;box-sizing:border-box;border:1px solid #d9d5cc;background:#fff;font:400 15px "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#11222D;padding:12px 13px;border-radius:2px;outline:none;}'
+    + '.sag-phone input:focus{border-color:#11222D;}'
     + '@media (max-width:640px){.sag-media{display:none;}.sag-box{max-width:440px;}.sag-body{padding:44px 24px 26px;}.sag-h{font-size:24px;}}'
     + '@media (prefers-reduced-motion:reduce){.sag-ov,.sag-box{transition:none;}}';
 
@@ -89,6 +94,37 @@
     if (window.gtag) { try { window.gtag('event', 'guide_popup_view'); } catch (e) {} }
     var style = document.createElement('style'); style.textContent = css; document.head.appendChild(style);
 
+    var phoneSel = '<select class="sag-code" name="phoneCode" aria-label="Country code">'
+      + '<optgroup label="Popular">'
+      + '<option value="+351" selected>🇵🇹 +351 Portugal</option>'
+      + '<option value="+1">🇺🇸 +1 United States</option>'
+      + '<option value="+44">🇬🇧 +44 United Kingdom</option>'
+      + '<option value="+353">🇮🇪 +353 Ireland</option>'
+      + '<option value="+971">🇦🇪 +971 UAE (Dubai)</option>'
+      + '<option value="+974">🇶🇦 +974 Qatar</option>'
+      + '<option value="+966">🇸🇦 +966 Saudi Arabia</option>'
+      + '<option value="+965">🇰🇼 +965 Kuwait</option>'
+      + '<option value="+973">🇧🇭 +973 Bahrain</option>'
+      + '<option value="+968">🇴🇲 +968 Oman</option>'
+      + '</optgroup><optgroup label="Other">'
+      + '<option value="+1">🇨🇦 +1 Canada</option>'
+      + '<option value="+55">🇧🇷 +55 Brazil</option>'
+      + '<option value="+33">🇫🇷 +33 France</option>'
+      + '<option value="+49">🇩🇪 +49 Germany</option>'
+      + '<option value="+41">🇨🇭 +41 Switzerland</option>'
+      + '<option value="+31">🇳🇱 +31 Netherlands</option>'
+      + '<option value="+32">🇧🇪 +32 Belgium</option>'
+      + '<option value="+352">🇱🇺 +352 Luxembourg</option>'
+      + '<option value="+34">🇪🇸 +34 Spain</option>'
+      + '<option value="+61">🇦🇺 +61 Australia</option>'
+      + '<option value="+65">🇸🇬 +65 Singapore</option>'
+      + '<option value="+852">🇭🇰 +852 Hong Kong</option>'
+      + '<option value="+91">🇮🇳 +91 India</option>'
+      + '<option value="+86">🇨🇳 +86 China</option>'
+      + '<option value="+90">🇹🇷 +90 Turkey</option>'
+      + '<option value="+972">🇮🇱 +972 Israel</option>'
+      + '<option value="+27">🇿🇦 +27 South Africa</option>'
+      + '</optgroup></select>';
     var ov = h(''
       + '<div class="sag-ov" role="dialog" aria-modal="true" aria-label="' + T.title + '">'
       +   '<div class="sag-box">'
@@ -100,6 +136,7 @@
       +       '<form class="sag-form" novalidate>'
       +         '<label class="sag-f"><input type="text" name="name" placeholder="' + T.name + '" autocomplete="name"></label>'
       +         '<label class="sag-f"><input type="email" name="email" placeholder="' + T.email + '" autocomplete="email"></label>'
+      +         '<div class="sag-phone">' + phoneSel + '<input type="tel" name="phoneNumber" placeholder="' + T.phone + '" autocomplete="tel"></div>'
       +         '<label class="sag-consent"><input type="checkbox" name="consent"><span>' + T.consent + '</span></label>'
       +         '<div class="sag-err" aria-live="polite"></div>'
       +         '<button class="sag-btn" type="submit">' + T.cta + '</button>'
@@ -130,8 +167,10 @@
       var name = form.name.value.trim();
       var email = form.email.value.trim();
       var consent = form.consent.checked;
+      var phone = (form.phoneCode.value + ' ' + form.phoneNumber.value.trim()).trim();
       if (!name) { err.textContent = T.errName; return; }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { err.textContent = T.errEmail; return; }
+      if (form.phoneNumber.value.replace(/\D/g, '').length < 6) { err.textContent = T.errPhone; return; }
       if (!consent) { err.textContent = T.errConsent; return; }
       err.textContent = '';
       var btn = form.querySelector('.sag-btn');
@@ -139,7 +178,7 @@
 
       fetch('/api/guide', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, consent: true, locale: PT ? 'pt' : 'en', attribution: (window.saLeadContext ? window.saLeadContext() : {}) })
+        body: JSON.stringify({ name: name, email: email, phone: phone, consent: true, locale: PT ? 'pt' : 'en', attribution: (window.saLeadContext ? window.saLeadContext() : {}) })
       }).then(function (r) { return r.ok ? r.json() : Promise.reject(); })
         .then(function (d) {
           try { localStorage.setItem(KEY, 'done'); } catch (e) {}
