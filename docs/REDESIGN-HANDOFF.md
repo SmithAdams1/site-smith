@@ -228,3 +228,42 @@ Live in production (`main` = www). This session's work:
 2. In Google Ads, set `close_convert_lead` **Primary** and `qualify_lead` **Secondary**.
 3. Delete the test leads ("Launch Check", "CRM Routing Test").
 4. Confirm the Benjamin Pipeline has a stage named "Qualificado" (the `qualify_lead` trigger matches `/qualif/i`).
+
+---
+## Bloco - 2026-08-28 21:14 WEST (sessão: Abílio / commits autor Suzan / gh SmithAdams1)
+Foco: slides Performance Marketing + 2 campanhas Google Ads + promo. Extensão Claude-in-Chrome **muito instável** (cai a cada poucos passos) - as ações que precisam do browser ficam listadas como pendentes.
+
+### FEITO
+- **Slides de Performance Marketing** (Artifact, com destaque "relançamento em 28 dias / tempo recorde"): https://claude.ai/code/artifact/abb683cc-a5fd-4a80-a8fe-a3b0e144d1b7 (8 slides: motor de medição · resultados 28d · antes/depois · plano 30d · campanhas · recomendações). Para projetar OU copiar para o canvas.
+- **Identidade da conta Google Ads verificada** (feito pelo Abílio).
+
+### PROMO "gasta 400 recebe 400"
+- Crédito de **novo anunciante, ao NÍVEL DA CONTA** (não por campanha) e **não automático**: aplicar o código em **Faturação -> Promoções**, depois **gastar €400 em ~60 dias** -> €400 de crédito. O gasto das duas campanhas conta para o mesmo limiar. (Não aplico faturação/promos - só guio.)
+
+### CAMPANHA 1 - Invest in Portugal | US | Search  (EM RASCUNHO no Ads)
+- Estado no Ads (ocid 8147391285): criada em RASCUNHO até ao passo de **Lances**. Configurado: Objetivo **Leads** · Tipo **Search** · Nome "Invest in Portugal | US | Search" · Landing **/invest-in-portugal** · Lances = **Cliques (Maximize Clicks)**.
+- **Falta (retomar no rascunho):** definir limite CPC (~€5); **Definições da campanha** (localização **EUA** presence; idioma **EN**; **DESLIGAR** Search Partners + Display expansion); **Palavras-chave e anúncios** (2 ad groups + keywords + ~30 negativos + 2 RSA) do Artifact https://claude.ai/code/artifact/bee4db60-f269-44ed-9a73-5365ca3536f6 ; **Orçamento** (Abílio pôs €600/mês). **NÃO publicar sem OK do Abílio.**
+
+### CAMPANHA 2 - Property Management (€400/mês) - A CRIAR (spec pronto)
+- Objetivo Leads · Search · Landing **/property-management** (leads caem na **Teresa** via routing do CRM) · Orçamento **€400/mês** · Lances Maximize Clicks (cap CPC ~€4) · Search Partners/Display OFF.
+- Geo (DECISÃO): sugiro **EUA + Reino Unido + Portugal**, idioma EN (donos internacionais de apartamentos em Lisboa). Confirmar com Abílio.
+- Keywords (phrase/exact): "property management lisbon" · "airbnb management portugal" · "short term rental management lisbon" · "property management portugal" · "vacation rental management lisbon" · "airbnb management lisbon" · "rental management portugal".
+- Negativos: jobs · software · course · free · diy · salary · company (research) · "how to".
+- RSA headlines (<=30): Property Management Lisbon · Hands-Off Rental Income · Full-Service Management · Airbnb & Rental Management · Euro-Denominated Income · High Occupancy, Reported · Independent Operator · Managed In-House · We Run It, You Earn · Book a Free Consultation · Smith & Adams Group · Quarterly Reporting · Lisbon Property Experts · Your Apartment, Managed.
+- RSA descriptions (<=90): "Full-service management of your Lisbon apartment: tenants, maintenance, reporting." · "Hands-off euro income from short and long-term rentals, run in-house." · "Not a marketplace. A local operator managing your asset end to end. Book a call." · "Transparent, net-of-cost reporting every quarter. Speak to our team."
+
+### PENDENTE - precisa do Chrome (fazer quando a extensão estabilizar)
+1. Injetar/copiar os slides Performance Marketing no canvas que o Abílio abriu.
+2. Terminar Campanha 1 (rascunho) e criar Campanha 2 (spec acima). Publicar só com OK do Abílio.
+3. **Medição no Ads:** importar **generate_lead** e pô-lo **Primária**; **close_convert_lead** Primária, **qualify_lead** Secundária; ligar **Enhanced Conversions for Leads**.
+
+### PENDENTE - ações cliente (do bloco anterior, ainda válidas)
+- Redeploy **sa-crm** na Vercel (código qualify_lead/close_convert_lead ir para produção).
+- **sa-crm Vercel env:** GA4_MEASUREMENT_ID + GA4_API_SECRET.
+- Apagar leads de teste ("Launch Check", "CRM Routing Test"); confirmar fase "Qualificado" no Benjamin Pipeline.
+
+### CONTEXTO em curso (noutra sessão): campo de telefone no pop-up do guia
+- Estava a adicionar o **select de código de país (174 países, o mesmo do contact.html)** + input de número ao **guide-popup.js**, com o telefone **obrigatório**; no submit junta code+number e envia no POST; **api/guide.js** a ler/reencaminhar para postCrmLead. Inner do select guardado em /tmp/phonecode_options.html (174 options, tem 'selected' pré-definido). Decisão em aberto: lista completa (consistência) vs curada (~25, UX do pop-up) - inclinação para a completa.
+
+### Git/estado
+- Site e sa-crm publicados. Push com **gh SmithAdams1** (abiliodiz-cell dá 403). Author commits = Suzan.
