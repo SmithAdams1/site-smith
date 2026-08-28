@@ -204,3 +204,27 @@ Contexto: análise GA/Ads, nova meta description, fecho da medição e ARRANQUE 
 - Dados GA4 (28d, 31 Jul-27 Ago): 766 sessões / 599 users (99% novos); canais Direct 44%, Organic Search 29% (eng 63%), Organic Social 13%, Paid Social/Meta 7%, Referral 4%, AI Assistant 2,5%, Paid Search ~0. **0 conversões medidas** (agora destravado com generate_lead key event).
 - Board report (old vs new): https://claude.ai/code/artifact/8ebf4b69-041a-466a-a8f9-a1f00bbb0b6e
 - Git: author Suzan <suzan@smithandadams.com>; push com **gh account SmithAdams1** (a conta abiliodiz-cell dá 403 no repo da org).
+
+## Session summary — marketing, analytics & the deck (2026-08-28)
+Live in production (`main` = www). This session's work:
+
+**Attribution + conversion funnel (end to end, live)**
+- Site captures `gclid`/`ga_client_id`/`utm_*` (`sa-events.js`); all forms **and** the guide pop-up forward it. `guide.js` now routes through the shared `api/_crm.js` (`postCrmLead`) so guide leads also carry attribution (merged to `main`).
+- CRM stores it in `leads.raw_payload.attribution`. On the lifecycle transitions the CRM sends GA4 events (Measurement Protocol, `sa-crm/lib/analytics/ga4.ts`).
+- **GA4 funnel:** `generate_lead` (site, form/pop-up) → `qualify_lead` (CRM, lead enters a "Qualificado" stage) → `close_convert_lead` (CRM, status→won, with `deal_value`). All keyed on the website `client_id`.
+- **Google Ads:** `close_convert_lead` + `qualify_lead` **imported** as conversion actions (via GA4 web import). GA4 secrets set on `sa-crm` Vercel.
+
+**GA4 first numbers (28d, 31/07–27/08/2026)** — for the deck / reporting:
+- 766 sessions (up from ~0 prior period), 599 active users (597 new), 46% engaged, 4.2k events.
+- Channels: Direct 44% · Organic Search 29% · Organic Social 13% · Paid Social 7% · Referral 4% · **AI Assistant 2.5%** (AEO working) · Paid Search ~0 (Ads not spending yet).
+- GA4 "new leads" = 1 (measurement just went live; conversions build over coming weeks).
+
+**Pop-up (`guide-popup.js`):** added desktop exit-intent, a `guide_popup_view` GA4 event, and a 30-day re-show for non-converters. **`seo_blog.js`:** returns real 404 for deleted post slugs.
+
+**Presentation deck** — "Clicks to Clients" performance-marketing slides (Artifact + a standalone HTML file sent to the client). 9 slides: brand strategy · the new approach · marketing/demand strategy · what we built · **site before/after** · GA4 results · measurement funnel · pipeline (8,670 leads · US CPL $25 · €280K ticket) · 90-day plan. Sourced from GA4 (above), the CRM handoff, and Brand Book Ed.03. Deck source lives in the session scratchpad (`perf-deck.html`).
+
+**Pending — client actions:**
+1. **Redeploy `sa-crm`** on Vercel so the `qualify_lead`/`close_convert_lead` code is live.
+2. In Google Ads, set `close_convert_lead` **Primary** and `qualify_lead` **Secondary**.
+3. Delete the test leads ("Launch Check", "CRM Routing Test").
+4. Confirm the Benjamin Pipeline has a stage named "Qualificado" (the `qualify_lead` trigger matches `/qualif/i`).
