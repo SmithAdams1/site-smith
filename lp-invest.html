@@ -76,9 +76,9 @@
 
 <section class="lp-hero">
   <div class="lp-hero__text">
-    <p class="lp-eyebrow">Portugal Golden Visa &middot; Real Estate</p>
-    <h1>Your Portugal Golden Visa, from <b>&euro;280,000</b>.</h1>
-    <p class="lp-sub">Invest in vetted Portuguese real estate and secure residency, with an independent advisory that guides you from first analysis to hands-on management.</p>
+    <p class="lp-eyebrow">Portugal Golden Visa &middot; Residency by Investment</p>
+    <h1>Your Portugal Golden Visa, from a <b>&euro;280,000</b> investment.</h1>
+    <p class="lp-sub">Independent advice for international investors on Portugal&rsquo;s Golden Visa and D2 routes: the right eligible real estate, the residency application, and hands-on management, structured around a return that stands on its own.</p>
     <div class="lp-proof">
       <div><div class="n">1,000+</div><div class="l">Investors advised</div></div>
       <div><div class="n">&euro;300M+</div><div class="l">In advised assets</div></div>
@@ -86,14 +86,14 @@
     </div>
     <div class="lp-trust">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c9b790" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-      <span>Independent. We are paid to be right about the asset, not to sell it.</span>
+      <span>Advisers, not brokers. Our only incentive is an investment worth making.</span>
     </div>
   </div>
 
   <div class="lp-card">
     <form id="lp-form" novalidate>
-      <h2>Get your investment plan</h2>
-      <p class="k">A free, no-obligation consultation with a Portugal adviser.</p>
+      <h2>Speak with a Portugal adviser</h2>
+      <p class="k">A confidential, no-obligation review of your Golden Visa options and the numbers behind them.</p>
       <div class="lp-f"><label>Full name</label><input type="text" name="name" autocomplete="name" placeholder="Your name"></div>
       <div class="lp-f"><label>Email</label><input type="email" name="email" autocomplete="email" placeholder="you@email.com"></div>
       <div class="lp-f"><label>Phone</label>
@@ -131,26 +131,26 @@
           <option>Just exploring</option>
         </select>
       </div>
-      <div class="lp-f"><label>Can you invest &euro;280,000 or more?</label>
+      <div class="lp-f"><label>Investment capacity</label>
         <select name="funds">
           <option value="" selected disabled>Select</option>
-          <option>Yes, I have the funds ready</option>
-          <option>Yes, within a few months</option>
-          <option>Not yet, exploring options</option>
+          <option>&euro;280,000+ available now</option>
+          <option>&euro;280,000+ within a few months</option>
+          <option>Still exploring</option>
         </select>
       </div>
       <label class="lp-consent"><input type="checkbox" name="consent"><span>I agree to be contacted by Smith &amp; Adams about my enquiry. I can unsubscribe anytime.</span></label>
       <div class="lp-err" aria-live="polite"></div>
-      <button type="submit" class="lp-btn">Book my consultation</button>
-      <p class="lp-fineprint">No obligation &middot; Replies within one business day</p>
+      <button type="submit" class="lp-btn">Request my consultation</button>
+      <p class="lp-fineprint">Confidential &middot; No obligation &middot; A reply within one business day</p>
     </form>
   </div>
 </section>
 
 <section class="lp-strip">
   <div class="wrap">
-    <h3>One relationship, the whole journey.</h3>
-    <p>Smith &amp; Adams is an independent, Lisbon-based group. We do not broker a deal and disappear: we advise on the asset, structure the purchase and the visa, and manage the property for euro-denominated income, all under one roof.</p>
+    <h3>An adviser for the whole investment, not one end of it.</h3>
+    <p>Smith &amp; Adams is an independent, Lisbon-based group. We do not source a deal and step away. We give you an objective view of the market, structure the acquisition and the residency, and manage the property for transparent, euro-denominated income, with net-of-cost performance reported to you every quarter.</p>
     <div class="lp-steps">
       <div class="lp-step"><div class="s">01</div><h4>Advise</h4><p>An independent view of the market and the right eligible asset for your goals, before a single euro moves.</p></div>
       <div class="lp-step"><div class="s">02</div><h4>Acquire &amp; structure</h4><p>Sourcing, due diligence and the Golden Visa or D2 process, handled end to end.</p></div>
@@ -197,9 +197,9 @@
       .then(function(res){
         if(res.ok && res.j.success){
           if(window.saTrackLead) window.saTrackLead('consultation'); /* fires GA4 generate_lead (imported into Ads) */
-          form.parentNode.innerHTML='<div class="lp-ok"><h2>Thank you.</h2><p>We’ve received your details. A Portugal adviser will be in touch within one business day.</p></div>';
+          form.parentNode.innerHTML='<div class="lp-ok"><h2>Thank you.</h2><p>Your details are with our advisory team. A Portugal adviser will be in touch within one business day.</p></div>';
         } else { throw new Error('fail'); }
-      }).catch(function(){ err.textContent='Something went wrong. Please try again.'; btn.disabled=false; btn.textContent='Book my consultation'; });
+      }).catch(function(){ err.textContent='Something went wrong. Please try again.'; btn.disabled=false; btn.textContent='Request my consultation'; });
   });
 })();
 </script>
