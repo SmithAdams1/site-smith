@@ -185,7 +185,7 @@
 .rd-nav { background: rgba(253,252,249,0.92) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--line); transition: background .4s var(--ease-expo), box-shadow .4s ease, backdrop-filter .4s ease; }
 .rd-nav .container { padding-top: 15px; padding-bottom: 15px; }
-.rd-nav img { transition: filter .4s ease; }
+.rd-nav img { transition: filter .4s ease; height: clamp(30px, 3.4vw, 44px) !important; width: auto !important; }
 .rd-nav nav a { font-family: var(--sans) !important; font-weight: 500 !important; font-size: 14px !important;
   letter-spacing: 0.005em; color: var(--navy) !important; opacity: .78; transition: opacity .25s ease, color .3s ease, background .3s ease; }
 .rd-nav nav a:hover { opacity: 1; }

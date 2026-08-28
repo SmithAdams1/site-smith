@@ -3,8 +3,14 @@
       (function () {
         var nav = document.querySelector('.rd-nav');
         if (!nav) return;
+        // Over a full-height dark hero, keep the bar transparent until the hero
+        // has almost scrolled past. Flipping to the solid light bar at 40px,
+        // while still on the hero, was the "nav goes white immediately" issue.
+        var darkHero = document.body.classList.contains('rd-dark-hero');
+        var heroEl = darkHero ? document.querySelector('.rd-fly, .rd-hero, #re-hero') : null;
+        function solidAt() { return (heroEl && heroEl.offsetHeight) ? Math.max(60, heroEl.offsetHeight - 90) : 40; }
         var onScroll = function () {
-          if ((window.scrollY || window.pageYOffset) > 40) nav.classList.add('rd-nav--solid');
+          if ((window.scrollY || window.pageYOffset) > solidAt()) nav.classList.add('rd-nav--solid');
           else nav.classList.remove('rd-nav--solid');
         };
         onScroll();
