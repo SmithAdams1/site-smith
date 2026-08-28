@@ -267,3 +267,11 @@ Foco: slides Performance Marketing + 2 campanhas Google Ads + promo. Extensão C
 
 ### Git/estado
 - Site e sa-crm publicados. Push com **gh SmithAdams1** (abiliodiz-cell dá 403). Author commits = Suzan.
+
+---
+## Update - 2026-08-28 21:25 WEST
+- **Campo de telefone no pop-up do guia: FEITO e em produção (cache g13, commit aa7babf).**
+  - guide-popup.js: linha de telefone (select de código de país **curado, ~28 mercados-alvo** + input de número), **obrigatório**, validação leniente (>=6 dígitos); junta code+number e envia no POST.
+  - api/guide.js: lê `phone` e reencaminha para postCrmLead (-> lead.phone -> CRM).
+  - Verificado por código/curl em prod (sag-phone/phoneCode/phoneNumber/errPhone presentes; node --check OK). Screenshot visual falhou só por causa do pane interno instável + Lenis (não do código).
+  - **Opção:** troquei consistência total pela lista curada (UX + peso do pop-up). Se quiserem paridade com o contact.html, mudar para a lista completa (174 países) - o inner está em /tmp/phonecode_full.html.
