@@ -9,8 +9,8 @@
 <meta property="og:type" content="website"/><meta property="og:image" content="https://www.smithandadams.com/og-image.jpg"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image" content="https://www.smithandadams.com/og-image.jpg"/>
 <link rel="icon" href="favicon.ico" type="image/x-icon"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-<link rel="stylesheet" href="/tailwind.css?v=g14">
-<link rel="stylesheet" href="/redesign.css?v=g14">
+<link rel="stylesheet" href="/tailwind.css?v=g15">
+<link rel="stylesheet" href="/redesign.css?v=g15">
 <style>
   /* Map the legacy type classes used by the dynamic card/block templates
      onto the redesign tokens, so JS-injected markup inherits the redesign
@@ -116,13 +116,13 @@
         any:'Any',sale:'For sale',rent:'For rent',beds_plus:'+ beds',from:'From',results_one:'property',results_many:'properties',
         empty:'No properties match your filters. Try adjusting them.',gv:'Golden Visa eligible',
         types:{apartment:'Apartment',villa:'Villa',townhouse:'Townhouse',plot:'Plot',commercial:'Commercial',penthouse:'Penthouse',studio:'Studio'},
-        view:'View details'},
+        sold:'Sold',view:'View details'},
     pt:{hero_title:'Encontre a casa para viver à sua maneira',hero_subtitle:'Imóveis residenciais premium em todo o Portugal, de Lisboa e Cascais ao Porto, Algarve e Comporta, selecionados e verificados pela Smith & Adams.',
         f_location:'Localização',f_type:'Tipo',f_transaction:'Para',f_beds:'Quartos',f_price:'Preço máx.',f_reset:'Limpar',
         any:'Todos',sale:'Venda',rent:'Arrendamento',beds_plus:'+ quartos',from:'Desde',results_one:'imóvel',results_many:'imóveis',
         empty:'Nenhum imóvel corresponde aos filtros. Tente ajustar.',gv:'Elegível Golden Visa',
         types:{apartment:'Apartamento',villa:'Moradia',townhouse:'Casa em banda',plot:'Terreno',commercial:'Comercial',penthouse:'Penthouse',studio:'Estúdio'},
-        view:'Ver detalhes'}
+        sold:'Vendido',view:'Ver detalhes'}
   };
   var t=T[L];
 
@@ -177,18 +177,18 @@
       var a=document.createElement('a');
       a.href='property/'+encodeURIComponent(p.slug);
       a.className='re-card';a.setAttribute('data-reveal','');
-      a.style.cssText='display:block;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;';
+      a.style.cssText='display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;';
       a.innerHTML=
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
-          '<img class="re-card-img" src="'+img+'" alt="'+pick(p.title).replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;" loading="lazy"/>'+
-          '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:rgba(17,34,45,.9);color:#fff;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;">'+(p.transaction_type==='rent'?t.rent:t.sale)+'</span>'+
+          '<img class="re-card-img" src="'+img+'" alt="'+pick(p.title).replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;'+(p.sold?'filter:grayscale(.55);opacity:.92;':'')+'" loading="lazy"/>'+
+          '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:rgba(17,34,45,.9);color:#fff;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;">'+(p.sold?t.sold:(p.transaction_type==='rent'?t.rent:t.sale))+'</span>'+
           (p.golden_visa?'<span class="satoshi" style="position:absolute;top:12px;right:12px;background:#C9A227;color:#11222D;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;">'+t.gv+'</span>':'')+
         '</div>'+
-        '<div style="padding:20px 22px 24px;">'+
+        '<div style="padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;">'+
           ''+
           '<h3 class="serif" style="font-size:22px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 12px;min-height:56px;letter-spacing:-0.01em;">'+pick(p.title)+'</h3>'+
           '<div class="satoshi" style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink);margin:0 0 16px;font-weight:500;">'+specsHtml+'</div>'+
-          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;">'+
+          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;margin-top:auto;">'+
             '<span class="serif" style="font-size:22px;font-weight:500;color:var(--navy);">'+fmtPrice(p.price,p.currency)+'</span>'+
             '<span class="satoshi" style="font-size:13px;font-weight:600;color:var(--navy);">'+t.view+' →</span>'+
           '</div>'+
@@ -528,7 +528,7 @@
 <script src="/vendor/gsap.min.js"></script>
 <script src="/vendor/ScrollTrigger.min.js"></script>
 <script defer src="/hero-video.js"></script>
-<script defer src="/redesign.js?v=g14"></script>
+<script defer src="/redesign.js?v=g15"></script>
 <script src="/chat.js"></script>
-<script defer src="/guide-popup.js?v=g14"></script>
+<script defer src="/guide-popup.js?v=g15"></script>
 </body></html>
