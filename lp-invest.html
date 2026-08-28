@@ -190,7 +190,7 @@
       body:JSON.stringify({
         firstName:parts[0], lastName:parts.slice(1).join(' '),
         email:email, phoneCode:form.phoneCode.value, phoneNumber:form.phoneNumber.value.trim(),
-        interest:'golden-visa', message:msg,
+        interest:'golden-visa', source:'lp-invest', message:msg,
         attribution:(window.saLeadContext?window.saLeadContext():{})
       })
     }).then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})

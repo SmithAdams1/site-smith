@@ -14,7 +14,7 @@ const COUNTRY_NAMES = {
 export async function postCrmLead(req, lead) {
   const CRM_API_URL = process.env.CRM_API_URL;
   const CRM_API_KEY = process.env.CRM_API_KEY;
-  if (!CRM_API_URL || !CRM_API_KEY || !lead || !lead.email) return;
+  if (!CRM_API_URL || !CRM_API_KEY || !lead || !lead.email) return false;
   try {
     const cc = String((req.headers && req.headers['x-vercel-ip-country']) || '').toUpperCase();
     const country = COUNTRY_NAMES[cc] || cc || null;
@@ -26,7 +26,7 @@ export async function postCrmLead(req, lead) {
       .map((k) => `${k}=${attr[k]}`)
       .join(' | ');
     const notes = [lead.notes, attrStr ? `Attribution: ${attrStr}` : null].filter(Boolean).join(' | ') || undefined;
-    await fetch(`${CRM_API_URL.replace(/\/$/, '')}/api/v1/leads`, {
+    const crmRes = await fetch(`${CRM_API_URL.replace(/\/$/, '')}/api/v1/leads`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${CRM_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -46,8 +46,10 @@ export async function postCrmLead(req, lead) {
         pipeline_name: lead.pipeline_name || process.env.CRM_PIPELINE || 'Benjamin Pipeline',
       }),
     });
+    return crmRes.ok;
   } catch (e) {
     console.error('[crm] lead error:', e.message);
+    return false;
   }
 }
 
