@@ -170,3 +170,37 @@ Pós-go-live. Hotfixes em produção (commit 1f89796, main -> upstream, deployed
 - **CMS**: dev.hero.title atualizado p/ "Hospitality" (SQL corrido pelo Abílio).
 - Cache g8→g11. Assets em /assets e /assets/logos.
 - **A seguir**: Google Analytics + Google Ads + estratégia 1 mês (lead gen / nurturing / MQL→SQL).
+
+---
+## Bloco - 2026-08-28 12:12 WEST (sessão: Abílio / commits autor Suzan / gh ativo SmithAdams1)
+Contexto: análise GA/Ads, nova meta description, fecho da medição e ARRANQUE da 1ª campanha Google Ads. Site e sa-crm publicados e sincronizados (upstream/main ahead 0). Continuar noutra conta a partir daqui.
+
+### FEITO nesta sessão
+- **Meta description da home** reorientada para *Invest in Portugal* + solidez do grupo (commit 5eb5559): "Invest in Portugal with an independent partner. From first analysis to hands-on management, Smith & Adams has advised 1,000+ investors and over EUR300M in assets." (description + og:description).
+- **Medição / Analytics**:
+  - `sa-events.js` (todas as páginas): capta gclid/ga_client_id/utm (first-touch), dispara `generate_lead` nos forms + click_call/click_whatsapp. gclid/client_id/utm reencaminhados p/ CRM (raw_payload.attribution).
+  - CRM (sa-crm): Measurement Protocol server-side envia `close_convert_lead` (status won) e `qualify_lead` (fase com "qualif"). Funil GA4: generate_lead -> qualify_lead -> close_convert_lead.
+  - **GA4: `generate_lead` marcado como EVENTO-CHAVE hoje** (via Chrome, Admin -> Data display -> Events -> Recent events -> estrela). Key events agora: generate_lead, qualify_lead, close_convert_lead (+ purchase).
+
+### PENDENTE - medição (para a campanha otimizar a leads)
+1. **Google Ads**: importar `generate_lead` do GA4 e pô-lo como conversão **Primária**; validar as ações qualify_lead/close_convert_lead ("requer atenção"). Ligar **Enhanced Conversions for Leads**.
+2. **GA4 <-> Ads**: confirmar associação (já há conversões importadas, logo o link existe).
+3. **sa-crm Vercel env**: pôr `GA4_MEASUREMENT_ID` + `GA4_API_SECRET` (Data Streams -> Measurement Protocol) senão os eventos offline MQL/SQL são no-op.
+
+### CAMPANHA Google Ads - DECISÕES + ESTADO
+- Conta Ads: ocid 8147391285. **Sem campanhas ativas** (só o ecrã de boas-vindas) antes desta.
+- Decisões do Abílio: **Foco = Invest in Portugal (advisory)** · **Mercado = EUA** · **Orçamento = EUR500/mês (~EUR16/dia)** · Landing = /invest-in-portugal.
+- **Plano completo (pronto a publicar) no Artifact**: https://claude.ai/code/artifact/bee4db60-f269-44ed-9a73-5365ca3536f6 (config, 2 ad groups + keywords exact/phrase, ~30 negativos, 2 RSA completos, assets, bidding, checklist).
+- Bidding: arrancar **Maximize Clicks** (limite CPC ~EUR5); mudar p/ Maximize Conversions após ~15-30 conversões.
+- Search Partners + Display expansion **OFF**; localização "presence"; idioma EN.
+- **ESTADO: opção A escolhida (montar eu no Ads pelo Chrome, PARAR antes de "Publicar" p/ aprovação do Abílio).** Parei aqui porque a extensão Claude-in-Chrome anda **instável** (cai a cada poucos passos). Retomar: reconectar extensão -> ads.google.com/aw/campaigns (ocid=8147391285) -> New campaign -> Leads -> Search -> seguir o Artifact. NÃO publicar sem OK do Abílio (compromete gasto).
+
+### BACKLOG do site (notas Head of Strategy + Abílio) - triado no Artifact do briefing (secção 07)
+- Briefing de growth (dados GA/Ads + otimizado vs antes + plano 30 dias + backlog): https://claude.ai/code/artifact/fdf30d35-38ef-415e-b282-c7b72becf283
+- Maioria das notas de design/conteúdo ainda ABERTAS (headline "Nobody" -> positiva; remover fonte "Annual Report"; fontes/variações; 3a cor gold; gaps; stats maiores; footer/nav dinâmicos; logo dinâmico; listings RE partidos + "Taipas = sold" + preço pinned; blocos Invest; About logos/tree/timeline/Meet the team; PM/Hospitality intros; Press; AI agent impreciso).
+- DECISÃO pendente: (1) manter hero otimizado vs remover walkthrough; (2) nav "Our Services" 6 unidades vs nav atual.
+
+### Notas operacionais
+- Dados GA4 (28d, 31 Jul-27 Ago): 766 sessões / 599 users (99% novos); canais Direct 44%, Organic Search 29% (eng 63%), Organic Social 13%, Paid Social/Meta 7%, Referral 4%, AI Assistant 2,5%, Paid Search ~0. **0 conversões medidas** (agora destravado com generate_lead key event).
+- Board report (old vs new): https://claude.ai/code/artifact/8ebf4b69-041a-466a-a8f9-a1f00bbb0b6e
+- Git: author Suzan <suzan@smithandadams.com>; push com **gh account SmithAdams1** (a conta abiliodiz-cell dá 403 no repo da org).
