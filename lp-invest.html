@@ -16,8 +16,10 @@
   .lp-top{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(18px,4vw,48px);background:var(--navy);}
   .lp-top img{height:30px;width:auto;filter:invert(1);}
   .lp-top a{color:#fff;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.01em;}
-  .lp-hero{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(28px,4vw,64px);align-items:center;
-    background:var(--navy);color:#fff;padding:clamp(36px,6vw,84px) clamp(18px,4vw,48px) clamp(48px,7vw,96px);}
+  .lp-hero{position:relative;display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(28px,4vw,64px);align-items:center;
+    color:#fff;padding:clamp(36px,6vw,84px) clamp(18px,4vw,48px) clamp(48px,7vw,96px);
+    background-image:linear-gradient(100deg, rgba(11,19,25,0.94) 0%, rgba(17,34,45,0.82) 42%, rgba(17,34,45,0.55) 100%), url('/assets/hero-invest.jpg');
+    background-size:cover; background-position:center;}
   @media(max-width:900px){.lp-hero{grid-template-columns:1fr;padding-bottom:36px;}}
   .lp-eyebrow{font-family:var(--sans);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#c9b790;font-weight:600;margin:0 0 20px;}
   .lp-hero h1{font-family:var(--display);font-weight:500;font-size:clamp(34px,4.6vw,60px);line-height:1.04;letter-spacing:-0.02em;margin:0;max-width:15ch;}
