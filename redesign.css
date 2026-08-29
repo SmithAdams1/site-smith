@@ -114,7 +114,7 @@
     font-size:clamp(26px,3.6vw,54px); line-height:1.12; letter-spacing:-0.01em; max-width:22ch; margin:0; }
 
   /* ---------- generic section ---------- */
-  .rd-sec { padding:clamp(52px,7.5vw,112px) 0; }
+  .rd-sec { padding:clamp(40px,5vw,72px) 0; }
   .rd-sec--navy { background:var(--navy); color:#fff; }
   .rd-sec--navy .rd-statement { color:#fff; }
   .rd-sec--navy .rd-body { color:var(--stone); }
@@ -139,7 +139,7 @@
 
   /* ---------- pinned "six functions" ---------- */
   .rd-pin { background:var(--navy); color:#fff; }
-  .rd-pin__stage { min-height:auto; display:flex; align-items:center; padding:clamp(52px,7.5vw,112px) 0; }
+  .rd-pin__stage { min-height:auto; display:flex; align-items:center; padding:clamp(40px,5vw,72px) 0; }
   .rd-pin__grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,6vw,96px); align-items:center; width:100%; }
   .rd-pin__lead { font-family:var(--display); font-weight:500; font-size:clamp(28px,3.6vw,52px); line-height:1.1; letter-spacing:-0.01em; }
   .rd-funcs { list-style:none; margin:0; padding:0; }
@@ -572,3 +572,9 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
   /* About hero: subject (team) sits on the left - frame the image to the left so
      she stays in view and clear of the bottom-left type. */
   .rd-hero__media img[src*="hero-about"]{ object-position:left center; }
+
+  /* Cursor-following glow removed. It clipped at each block/section edge (so it
+     looked "broken" between blocks) and reads as a techy gimmick - off-brand for
+     a Tier-1 advisory. Removing both the section spotlight and the card glow. */
+  .sa-spot { display:none !important; }
+  .rd-glow::after { display:none !important; }

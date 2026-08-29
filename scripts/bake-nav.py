@@ -83,7 +83,7 @@ MOB = [('Home', '/index.html'), ('About Us', '/about.html'),
        ('Investments', '/invest-in-portugal.html'),
        ('Real Estate', '/real-estate.html'),
        ('Property Management', '/property-management.html'),
-       ('Hospitality', '/hospitality.html'), ('Blog', '/blog.html')]
+       ('Hospitality', '/hospitality.html'), ('Press', '/blog.html')]
 
 
 def build_mobile(cur):
@@ -119,7 +119,7 @@ def build_nav(cur):
         f'<span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a>'
         f'<div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="services">'
         f'{items}</div></div></div>')
-    parts.append(top_link('Blog', '/blog.html', cur))
+    parts.append(top_link('Press', '/blog.html', cur))
     parts.append('<div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium '
                  'transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">'
                  'Contact Us</a></div>')
