@@ -8,6 +8,12 @@
 :root {
     --navy:#11222D; --white:#FFFFFF; --stone:#C3CBD1; --slate:#6A7883;
     --ink:#26333C; --paper:#FDFCF9; --line:#E4E1DA;
+    /* Third colour (Design Direction v2): champagne. Warm and quiet by design —
+       carries text/numerals on NAVY; on PAPER it appears only as thin rules or
+       marks, never as gold text. See docs / the design-direction artifact. */
+    --gold:#D6C29A; --gold-line:rgba(214,194,154,.5);
+    --sunken:#F6F2EA;
+    --seam:0 24px 60px rgba(17,34,45,.14);
     /* Type system: Geoform (self-hosted woff2) across the whole site —
        display, body/UI and quotes, differentiated by weight/style. */
     --display:'Geoform','Helvetica Neue',Arial,sans-serif;
@@ -497,3 +503,55 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 .rd-glow--light { --glow: rgba(255,255,255,0.14); }   /* navy block  -> white glow */
 .rd-glow--dark  { --glow: rgba(31,90,140,0.16); }     /* white block -> blue glow  */
 @media (prefers-reduced-motion:reduce){ .rd-glow::after { display:none; } }
+
+  /* ══════════════════════════════════════════════════════════════════
+     DESIGN DIRECTION v2 — champagne (#D6C29A) + editorial depth.
+     Human-crafted, not templated: type leads, hairlines over boxes,
+     gold as punctuation (text/numerals on navy; rules/marks on paper),
+     depth reserved for one seam moment per page.
+     ══════════════════════════════════════════════════════════════════ */
+
+  /* Eyebrow / label — a short champagne tick before the word. */
+  .rd-label, .rd-eyebrow {
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:var(--sans); font-size:11px; font-weight:500;
+    letter-spacing:0.22em; text-transform:uppercase; color:var(--slate); }
+  .rd-label::before, .rd-eyebrow::before {
+    content:""; width:20px; height:2px; background:var(--gold); flex:0 0 auto; }
+  .rd-sec--navy .rd-label, .rd-sec--navy .rd-eyebrow,
+  .rd-hero .rd-label, .rd-hero .rd-eyebrow { color:var(--stone); }
+
+  /* Proof numerals: the one deliberate champagne moment on the navy band. */
+  .rd-sec--navy .rd-proof .n { color:var(--gold); }
+
+  /* A short champagne rule, dropped under a statement where wanted. */
+  .rd-goldrule { height:2px; width:52px; background:var(--gold); border:0; margin:26px 0 0; }
+
+  /* Editorial two-rail spread: label in the margin, content off-centre. */
+  .rd-spread { display:grid; grid-template-columns:minmax(150px,210px) minmax(0,1fr);
+    gap:clamp(24px,5vw,72px); }
+  .rd-spread__rail { padding-top:6px; }
+  .rd-spread__no { font-family:var(--display); font-weight:400; font-size:13px;
+    color:var(--slate); letter-spacing:.1em; margin-top:18px; }
+  @media (max-width:720px){ .rd-spread{ grid-template-columns:1fr; gap:18px; } }
+
+  /* Line-icon capability row — icon set inline with the words, no chip. */
+  .rd-cap { display:grid; grid-template-columns:34px 1fr; gap:20px;
+    padding:22px 0; border-bottom:1px solid var(--line); align-items:start; }
+  .rd-cap:first-child { border-top:1px solid var(--line); }
+  .rd-ico { width:26px; height:26px; stroke:var(--navy); stroke-width:1.3; fill:none;
+    stroke-linecap:round; stroke-linejoin:round; margin-top:2px; }
+  .rd-sec--navy .rd-ico { stroke:var(--gold); }
+  .rd-cap__t { font-family:var(--display); font-weight:500; color:var(--navy); font-size:17px; }
+  .rd-sec--navy .rd-cap__t { color:#fff; }
+  .rd-cap__s { font-size:14px; color:var(--slate); line-height:1.55; margin-top:5px; max-width:60ch; }
+
+  /* The seam: one paper card bridging a navy band (the single depth moment). */
+  .rd-seam { position:relative; }
+  .rd-seam__band { background:var(--navy); color:#fff; border-radius:2px;
+    padding:clamp(118px,15vw,178px) clamp(28px,4vw,56px) clamp(40px,6vw,64px); }
+  .rd-seam__over { position:absolute; top:0; left:clamp(20px,5vw,64px); right:clamp(20px,5vw,64px);
+    transform:translateY(-36%); max-width:640px; background:var(--paper);
+    border:1px solid var(--line); border-radius:2px; box-shadow:var(--seam);
+    padding:clamp(28px,3.4vw,40px); }
+  @media (max-width:600px){ .rd-seam__over{ transform:translateY(-22%); } }
