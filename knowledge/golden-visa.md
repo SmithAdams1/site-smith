@@ -24,3 +24,6 @@ Sources: TO PROVIDE (adviser memo, AIMA pages, the law/decree, S&A's actual curr
 
 ## Disclaimer to include on public GV/tax content
 "Information as of 2026 and not legal or tax advice; rules change - confirm current terms with a qualified adviser."
+
+## VERIFIED (2026-08-29) - current routes
+As of 2026 the Golden Visa qualifies via (not real estate): regulated CMVM investment funds (commonly from €500,000; fund must be ≥60% invested in Portuguese companies), cultural heritage (from €250,000), eligible lower-density investment (from €200,000), scientific research, and business/job creation. Administered by AIMA. The direct real-estate purchase route CLOSED in Oct 2023 (so the legacy "€280,000 Golden Visa" no longer exists as a GV route). Light-touch stay requirement; path to permanent residency and citizenship over time (confirm current citizenship timeline - reform in flux). Sources (secondary, consistent; verify against AIMA before high-stakes use): Global Citizen Solutions, Portugalist, Get Golden Visa (2026 guides).

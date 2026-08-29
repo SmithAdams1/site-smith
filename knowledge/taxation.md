@@ -22,3 +22,6 @@ Sources: TO PROVIDE (tax adviser memo, Portal das Finanças, current Orçamento 
 
 ## Disclaimer (mandatory on all tax content)
 "Information as of 2026, general in nature, and not tax advice. Portuguese tax rules change - confirm your situation with a qualified adviser (S&A Tax Representation can help)."
+
+## VERIFIED (2026-08-29)
+NHR was discontinued for new applicants on 2025-01-01 and replaced by IFICI ("NHR 2.0", Tax Incentive for Scientific Research and Innovation). IFICI = 20% flat PIT on eligible Portuguese employment/self-employment income for 10 years + relief on certain foreign income. ELIGIBILITY IS NARROW: highly-qualified professionals (degree EQF level 6+/PhD) in science, tech/innovation, healthcare, green energy, R&D, qualifying startups/exporters; only NEW tax residents (not resident in prior 5 yrs); no grandfathering for former NHR/residents. NOT automatic for passive property investors. Source: International Bar Association (ibanet.org) overview + advisory guides (2025/2026).

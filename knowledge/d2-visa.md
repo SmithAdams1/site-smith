@@ -20,3 +20,6 @@ Sources: TO PROVIDE.
 - FAQ (schema): minimum investment, stay requirement, can I work, family, citizenship years.
 
 ## Disclaimer: same as golden-visa.md.
+
+## VERIFIED (2026-08-29)
+D2 (immigrant entrepreneur visa): NO fixed minimum investment - applicant proves funds to start/run the business + a viable business plan (market analysis, 3-5yr forecasts). Can create/buy/branch a company; no job-creation requirement. Visa valid ~4 months to enter PT, then convert to a 2-year residence permit at AIMA. Requires genuine residence (~6+ months/year). PR after 5 years; citizenship timeline in reform (verify). Sources: Global Citizen Solutions, Portugalist, imin-portugal (2026).

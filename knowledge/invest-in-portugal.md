@@ -18,3 +18,8 @@ Sources: TO PROVIDE (INE, Banco de Portugal, Confidencial Imobiliário, Idealist
 - Location deep-dives (Lisbon, Porto, Algarve, and S&A's actual project locations e.g. Beato).
 
 ## Disclaimer: figures as of their source date; past performance is not indicative of future returns.
+
+## VERIFIED (2026-08-29) - "why Portugal" credibility
+- Sovereign credit rating raised in 2025: S&P to A (Feb) then A+ (Aug); Fitch to A (Sep) - on sustained debt reduction/budget surpluses. Source: S&P/Fitch via Investing.com, ECO, gov.pt.
+- Safety: 7th safest country in the world, 5th in Europe - 2025 Global Peace Index (visionofhumanity.org).
+- EU + Eurozone + Schengen member (established). Use these third-party markers (not S&A's own numbers) for the "financially secure / safe" positioning.
