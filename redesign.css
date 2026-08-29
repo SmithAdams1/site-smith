@@ -49,6 +49,11 @@
   .sans  { font-family:var(--sans); }
   /* Whole site in Geoform: force legacy font classes (nav/footer/legal) onto the system font */
   .satoshi, .geist, .font-satoshi, .font-geist { font-family: var(--sans) !important; }
+  /* Footer links must never fall back to the browser's default blue/purple when a
+     page's Tailwind Preflight (a{color:inherit}) isn't applied. Inherit the container
+     colour (gray-300/400 / white headings); keep the white "Get Directions" button dark. */
+  footer a:not([class*="bg-"]) { color: inherit; text-decoration: none; }
+  footer a:not([class*="bg-"]):hover { color: #ffffff; }
   .rd-wrap { max-width:1360px; margin:0 auto; padding-left:var(--mx); padding-right:var(--mx); }
 
   /* tracked label + hairline (brandbook idiom) */
