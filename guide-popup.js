@@ -52,8 +52,8 @@
 
   var css = ''
     + '.sag-ov{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:20px;'
-    + 'background:rgba(17,34,45,.55);opacity:0;transition:opacity .35s ease;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);}'
-    + '.sag-ov.sag-on{opacity:1;}'
+    + 'background:rgba(17,34,45,.55);opacity:0;pointer-events:none;transition:opacity .35s ease;-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);}'
+    + '.sag-ov.sag-on{opacity:1;pointer-events:auto;}'
     + '.sag-box{position:relative;display:flex;width:100%;max-width:760px;background:#FDFCF9;box-shadow:0 30px 80px rgba(17,34,45,.35);'
     + 'transform:translateY(14px);transition:transform .45s cubic-bezier(.16,1,.3,1);overflow:hidden;}'
     + '.sag-ov.sag-on .sag-box{transform:none;}'

@@ -282,8 +282,8 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
    scrolling, so with JS blocked this degrades to a horizontal scroller
    rather than hiding the properties from readers and crawlers alike. */
 .rd-carousel { position:relative; background:var(--navy); }
-.rd-track { display:flex; overflow-x:auto; scroll-snap-type:x mandatory;
-  scrollbar-width:none; -ms-overflow-style:none; scroll-behavior:smooth; }
+.rd-track { display:flex; overflow-x:auto; scroll-snap-type:x proximity;
+  overscroll-behavior-x:contain; scrollbar-width:none; -ms-overflow-style:none; scroll-behavior:smooth; }
 .rd-track::-webkit-scrollbar { display:none; }
 .rd-slide { position:relative; flex:0 0 100%; scroll-snap-align:start;
   min-height:92svh; display:flex; align-items:flex-end; overflow:hidden; background:var(--navy); }
