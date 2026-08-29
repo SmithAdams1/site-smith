@@ -30,9 +30,14 @@ SKIP = {'admin.html', 'admin-real-estate.html', 'studio.html', 'page.html'}
 
 LINK = 'text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi'
 TOP = [('Home', '/index.html'), ('About Us', '/about.html'),
-       ('Real Estate', '/real-estate.html'), ('Invest in Portugal', '/invest-in-portugal.html')]
-DROP = [('Featured Opportunities', '/our-developments.html'),
-        ('Property Management', '/property-management.html')]
+       ('Invest in Portugal', '/invest-in-portugal.html')]
+# "Our Services" dropdown - the operating business units (Invest in Portugal stays
+# top-level as the primary funnel page).
+SERVICES_LABEL = 'Our Services'
+SERVICES_CUR = ('real-estate', 'property-management', 'hospitality')
+DROP = [('Real Estate', '/real-estate.html'),
+        ('Property Management', '/property-management.html'),
+        ('Hospitality', '/hospitality.html')]
 
 STYLE = '''<style id="rd-nav-dd">
 /* The Properties dropdown used to be opened by JS listeners attached during the
@@ -72,12 +77,13 @@ MOB_SWITCHER = SWITCHER.replace('margin-left:16px;', 'margin-left:0;margin-top:2
 
 MOB_LINK = 'text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi'
 MOB_ACTIVE = 'text-2xl font-medium transition-colors duration-300 text-white font-semibold satoshi'
-MOB_CTA = ('bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-full font-medium '
+MOB_CTA = ('bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium '
            'transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi')
 MOB = [('Home', '/index.html'), ('About Us', '/about.html'),
-       ('Real Estate', '/real-estate.html'), ('Invest in Portugal', '/invest-in-portugal.html'),
-       ('Featured Opportunities', '/our-developments.html'),
-       ('Property Management', '/property-management.html'), ('Blog', '/blog.html')]
+       ('Invest in Portugal', '/invest-in-portugal.html'),
+       ('Real Estate', '/real-estate.html'),
+       ('Property Management', '/property-management.html'),
+       ('Hospitality', '/hospitality.html'), ('Blog', '/blog.html')]
 
 
 def build_mobile(cur):
@@ -104,17 +110,17 @@ def top_link(label, href, cur):
 
 def build_nav(cur):
     parts = [top_link(l, h, cur) for l, h in TOP]
-    child_active = cur in ('our-developments', 'property-management')
+    child_active = cur in SERVICES_CUR
     trig_cls = LINK + (' font-semibold' if child_active else '')
     items = ''.join(f'<a class="satoshi rd-dd__item" href="{h}">{l}</a>' for l, h in DROP)
     parts.append(
         f'<div class="relative group rd-dd"><a class="{trig_cls}" href="#" '
-        f'onclick="return false;" aria-haspopup="true">Properties '
+        f'onclick="return false;" aria-haspopup="true">{SERVICES_LABEL} '
         f'<span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a>'
-        f'<div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="properties">'
+        f'<div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="services">'
         f'{items}</div></div></div>')
     parts.append(top_link('Blog', '/blog.html', cur))
-    parts.append('<div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-full font-medium '
+    parts.append('<div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium '
                  'transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">'
                  'Contact Us</a></div>')
     # Baked so the switcher is present at first paint. It used to be appended by
