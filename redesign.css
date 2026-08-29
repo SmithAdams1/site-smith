@@ -568,3 +568,7 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
      Nav "Contact Us" was a rounded-full pill - align it. Social icon circles are unaffected
      (they are not <a class="rounded-full"> text buttons). Per-page CTAs handled in their sections. */
   .rd nav a.rounded-full, .rd #mobile-menu a.rounded-full { border-radius:2px !important; }
+
+  /* About hero: subject (team) sits on the left - frame the image to the left so
+     she stays in view and clear of the bottom-left type. */
+  .rd-hero__media img[src*="hero-about"]{ object-position:left center; }

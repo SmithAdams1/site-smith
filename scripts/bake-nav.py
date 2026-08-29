@@ -29,13 +29,13 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKIP = {'admin.html', 'admin-real-estate.html', 'studio.html', 'page.html'}
 
 LINK = 'text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi'
-TOP = [('Home', '/index.html'), ('About Us', '/about.html'),
-       ('Invest in Portugal', '/invest-in-portugal.html')]
-# "Our Services" dropdown - the operating business units (Invest in Portugal stays
-# top-level as the primary funnel page).
+TOP = [('Home', '/index.html'), ('About Us', '/about.html')]
+# "Our Services" dropdown - all business units, including Investments (the page
+# still lives at /invest-in-portugal.html, but the tab is labelled "Investments").
 SERVICES_LABEL = 'Our Services'
-SERVICES_CUR = ('real-estate', 'property-management', 'hospitality')
-DROP = [('Real Estate', '/real-estate.html'),
+SERVICES_CUR = ('invest-in-portugal', 'real-estate', 'property-management', 'hospitality')
+DROP = [('Investments', '/invest-in-portugal.html'),
+        ('Real Estate', '/real-estate.html'),
         ('Property Management', '/property-management.html'),
         ('Hospitality', '/hospitality.html')]
 
@@ -80,7 +80,7 @@ MOB_ACTIVE = 'text-2xl font-medium transition-colors duration-300 text-white fon
 MOB_CTA = ('bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium '
            'transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi')
 MOB = [('Home', '/index.html'), ('About Us', '/about.html'),
-       ('Invest in Portugal', '/invest-in-portugal.html'),
+       ('Investments', '/invest-in-portugal.html'),
        ('Real Estate', '/real-estate.html'),
        ('Property Management', '/property-management.html'),
        ('Hospitality', '/hospitality.html'), ('Blog', '/blog.html')]
