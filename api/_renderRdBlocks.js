@@ -137,7 +137,7 @@ const renderers = {
       '.sa-bu__connector{width:1px;height:32px;background:var(--line);margin:0 auto 24px;}' +
       '.sa-bu__r{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}' +
       '.sa-bu__tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}' +
-      '.sa-bu__tab{display:flex;align-items:center;justify-content:center;padding:22px 14px;border:1px solid var(--line);border-radius:4px;cursor:pointer;opacity:0.45;transition:opacity .25s ease,border-color .25s ease,transform .25s ease;background:#fff;min-height:92px;}' +
+      '.sa-bu__tab{display:flex;align-items:center;justify-content:center;padding:22px 14px;border:1px solid var(--line);border-radius:4px;cursor:pointer;opacity:0.62;transition:opacity .25s ease,border-color .25s ease,transform .25s ease;background:#fff;min-height:92px;}' +
       '.sa-bu__tab:hover{opacity:0.8;transform:translateY(-2px);}' +
       '.sa-bu__tab img{max-width:100%;max-height:42px;width:auto;height:auto;object-fit:contain;}' +
       '.sa-bu__panels{margin-top:20px;}' +
@@ -150,7 +150,8 @@ const renderers = {
       checkedCss +
       '</style>' +
       '<div class="rd-wrap"><div class="sa-bu reveal">' +
-      '<p class="sa-bu__group">' + groupLabel + '</p>' +
+      '<p class="rd-label" style="justify-content:center;margin:0 auto 14px;">' + (locale === 'pt' ? 'O Grupo' : 'The Group') + '</p>' +
+      '<h2 class="rd-statement" style="text-align:center;font-size:clamp(26px,3.4vw,44px);letter-spacing:-0.015em;margin:0 auto 18px;max-width:22ch;">' + groupLabel + '</h2>' +
       '<div class="sa-bu__connector"></div>' +
       radios +
       '<div class="sa-bu__tabs">' + tabs + '</div>' +

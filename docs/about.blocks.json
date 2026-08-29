@@ -25,15 +25,17 @@
     "ctas": [
      {
       "label": {
-       "en": "Book a consultation"
+       "en": "Explore our approach",
+       "pt": "Conhe&ccedil;a a nossa abordagem"
       },
-      "href": "contact.html"
+      "href": "#journey"
      },
      {
       "label": {
-       "en": "Our journey"
+       "en": "Book a consultation",
+       "pt": "Marcar consulta"
       },
-      "href": "#journey",
+      "href": "contact.html",
       "style": "ghost",
       "arrow": false
      }
@@ -64,6 +66,68 @@
       "pt": "O nosso foco é simples: ajudar investidores objetivos a maximizar o retorno de qualquer ativo tangível que adquiram, mantendo a propriedade genuinamente sem preocupações. Da primeira conversa à gestão contínua, tudo o que fazemos gira em torno desse resultado."
      }
     ]
+   }
+  },
+  {
+   "type": "rd_proof",
+   "data": {
+    "title": {
+     "en": "Track Record &amp; Global Footprint",
+     "pt": "Histórico &<br/>Presença Global"
+    },
+    "body": {
+     "en": "Since 2020, Smith &amp; Adams has grown into a Lisbon-based advisory platform serving investors and Residency Investors from across Europe, the Middle East, Asia, and the Americas.",
+     "pt": "Desde 2020, a Smith &amp; Adams tornou-se uma plataforma de consultoria sediada em Lisboa, ao serviço de investidores e Residency Investors da Europa, Médio Oriente, Ásia e Américas."
+    },
+    "stats": [
+     {
+      "value": {
+       "en": "1,000+",
+       "pt": "1.000+"
+      },
+      "label": {
+       "en": "Investors advised",
+       "pt": "Investidores aconselhados"
+      }
+     },
+     {
+      "value": {
+       "en": "&euro;300M+",
+       "pt": "€300M+"
+      },
+      "label": {
+       "en": "In advised investment value",
+       "pt": "Em valor de investimento aconselhado"
+      }
+     },
+     {
+      "value": {
+       "en": "30+",
+       "pt": "30+"
+      },
+      "label": {
+       "en": "Countries represented",
+       "pt": "Países representados"
+      }
+     }
+    ],
+    "bullets": [
+     {
+      "en": "Advised and supported <strong style=\"color:#fff; font-weight:600;\">1,000+ international investors</strong> building euro-denominated portfolios in Portugal.",
+      "pt": "Aconselhou e apoiou <strong style=\"color:#FDFCF9; font-weight:600;\">mais de 1.000 investidores internacionais</strong> na construção de carteiras denominadas em euros em Portugal."
+     },
+     {
+      "en": "Expanded its presence <strong style=\"color:#fff; font-weight:600;\">across Lisbon and key Portuguese cities</strong>, operating from Lisbon as its main hub.",
+      "pt": "Expandiu a sua presença <strong style=\"color: rgb(253, 252, 249);\">por Lisboa e principais cidades portuguesas</strong>, operando a partir de Lisboa como o seu principal centro."
+     },
+     {
+      "en": "Attracted clients from <strong style=\"color:#fff; font-weight:600;\">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> - reflecting a truly global client base.",
+      "pt": "Atraiu clientes de <strong style=\"color: rgb(253, 252, 249);\">dezenas de países na Europa, Oriente Médio, Ásia e Américas</strong> - refletindo uma base de clientes verdadeiramente global."
+     }
+    ],
+    "source": {
+     "en": "Source: Smith &amp; Adams Annual Report 2026."
+    }
    }
   },
   {
@@ -222,68 +286,6 @@
    }
   },
   {
-   "type": "rd_proof",
-   "data": {
-    "title": {
-     "en": "Track Record &amp; Global Footprint",
-     "pt": "Histórico &<br/>Presença Global"
-    },
-    "body": {
-     "en": "Since 2020, Smith &amp; Adams has grown into a Lisbon-based advisory platform serving investors and Residency Investors from across Europe, the Middle East, Asia, and the Americas.",
-     "pt": "Desde 2020, a Smith &amp; Adams tornou-se uma plataforma de consultoria sediada em Lisboa, ao serviço de investidores e Residency Investors da Europa, Médio Oriente, Ásia e Américas."
-    },
-    "stats": [
-     {
-      "value": {
-       "en": "1,000+",
-       "pt": "1.000+"
-      },
-      "label": {
-       "en": "Investors advised",
-       "pt": "Investidores aconselhados"
-      }
-     },
-     {
-      "value": {
-       "en": "&euro;300M+",
-       "pt": "€300M+"
-      },
-      "label": {
-       "en": "In advised investment value",
-       "pt": "Em valor de investimento aconselhado"
-      }
-     },
-     {
-      "value": {
-       "en": "30+",
-       "pt": "30+"
-      },
-      "label": {
-       "en": "Countries represented",
-       "pt": "Países representados"
-      }
-     }
-    ],
-    "bullets": [
-     {
-      "en": "Advised and supported <strong style=\"color:#fff; font-weight:600;\">1,000+ international investors</strong> building euro-denominated portfolios in Portugal.",
-      "pt": "Aconselhou e apoiou <strong style=\"color:#FDFCF9; font-weight:600;\">mais de 1.000 investidores internacionais</strong> na construção de carteiras denominadas em euros em Portugal."
-     },
-     {
-      "en": "Expanded its presence <strong style=\"color:#fff; font-weight:600;\">across Lisbon and key Portuguese cities</strong>, operating from Lisbon as its main hub.",
-      "pt": "Expandiu a sua presença <strong style=\"color: rgb(253, 252, 249);\">por Lisboa e principais cidades portuguesas</strong>, operando a partir de Lisboa como o seu principal centro."
-     },
-     {
-      "en": "Attracted clients from <strong style=\"color:#fff; font-weight:600;\">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> - reflecting a truly global client base.",
-      "pt": "Atraiu clientes de <strong style=\"color: rgb(253, 252, 249);\">dezenas de países na Europa, Oriente Médio, Ásia e Américas</strong> - refletindo uma base de clientes verdadeiramente global."
-     }
-    ],
-    "source": {
-     "en": "Source: Smith &amp; Adams Annual Report 2026."
-    }
-   }
-  },
-  {
    "type": "rd_msg",
    "data": {
     "anchor": "message",
@@ -329,6 +331,82 @@
     "role": {
      "en": "Head of Investment &amp; Strategy, Smith &amp; Adams"
     }
+   }
+  },
+  {
+   "type": "rd_faq",
+   "data": {
+    "anchor": "faq",
+    "eyebrow": {
+     "en": "FAQ",
+     "pt": "FAQ"
+    },
+    "title": {
+     "en": "Questions, answered.",
+     "pt": "Perguntas, respondidas."
+    },
+    "items": [
+     {
+      "q": {
+       "en": "What is Smith &amp; Adams?",
+       "pt": "O que &eacute; a Smith &amp; Adams?"
+      },
+      "a": {
+       "en": "An independent, Lisbon-based group advising international investors on Portuguese real estate and residency, from first analysis to long-term management.",
+       "pt": "Um grupo independente sediado em Lisboa que aconselha investidores internacionais em imobili&aacute;rio e resid&ecirc;ncia em Portugal, da primeira an&aacute;lise &agrave; gest&atilde;o de longo prazo."
+      }
+     },
+     {
+      "q": {
+       "en": "What does &lsquo;independent advisory&rsquo; mean for me?",
+       "pt": "O que significa &lsquo;consultoria independente&rsquo; para mim?"
+      },
+      "a": {
+       "en": "We are advisers, not brokers - paid to be right about the asset, not to sell it. That includes recommending against a deal when it is not right for you.",
+       "pt": "Somos consultores, n&atilde;o intermedi&aacute;rios - pagos para ter raz&atilde;o sobre o ativo, n&atilde;o para o vender. Isso inclui desaconselhar um neg&oacute;cio quando n&atilde;o &eacute; o certo para si."
+      }
+     },
+     {
+      "q": {
+       "en": "What does the group do?",
+       "pt": "O que faz o grupo?"
+      },
+      "a": {
+       "en": "Four business units under one relationship: Investments, Real Estate, Property Management, and Hospitality.",
+       "pt": "Quatro unidades de neg&oacute;cio numa s&oacute; rela&ccedil;&atilde;o: Investimentos, Imobili&aacute;rio, Gest&atilde;o de Propriedades e Hospitalidade."
+      }
+     },
+     {
+      "q": {
+       "en": "Which investors do you work with?",
+       "pt": "Com que investidores trabalham?"
+      },
+      "a": {
+       "en": "Over 1,000 investors from 30+ countries across Europe, the Middle East, Asia and the Americas.",
+       "pt": "Mais de 1.000 investidores de mais de 30 pa&iacute;ses da Europa, M&eacute;dio Oriente, &Aacute;sia e Am&eacute;ricas."
+      }
+     },
+     {
+      "q": {
+       "en": "Do you help with residency (Golden Visa or D2)?",
+       "pt": "Ajudam com a resid&ecirc;ncia (Golden Visa ou D2)?"
+      },
+      "a": {
+       "en": "Yes. Where residency is part of the plan, we structure the Golden Visa or D2 route alongside the investment; a specialist confirms the details for your case.",
+       "pt": "Sim. Quando a resid&ecirc;ncia faz parte do plano, estruturamos a via Golden Visa ou D2 em conjunto com o investimento; um especialista confirma os detalhes do seu caso."
+      }
+     },
+     {
+      "q": {
+       "en": "How do I start?",
+       "pt": "Como come&ccedil;o?"
+      },
+      "a": {
+       "en": "Book a consultation and a Portugal adviser will walk you through your options, with no obligation.",
+       "pt": "Marque uma consulta e um consultor de Portugal apresenta-lhe as op&ccedil;&otilde;es, sem compromisso."
+      }
+     }
+    ]
    }
   },
   {
