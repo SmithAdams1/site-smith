@@ -560,3 +560,6 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
   .rd-pin .rd-funcs li .fi { color:var(--gold); font-weight:500; }
   .rd-pillars .rd-ico { display:block; width:30px; height:30px; stroke:var(--navy); stroke-width:1.3;
     fill:none; stroke-linecap:round; stroke-linejoin:round; margin:0 0 4px; }
+
+  /* Propagation: champagne process numerals on ANY navy section (About/Invest/PM), not only rd-pin. */
+  .rd-sec--navy .rd-funcs li .fi { color:var(--gold); font-weight:500; }
