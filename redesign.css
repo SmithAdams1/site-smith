@@ -563,3 +563,8 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
 
   /* Propagation: champagne process numerals on ANY navy section (About/Invest/PM), not only rd-pin. */
   .rd-sec--navy .rd-funcs li .fi { color:var(--gold); font-weight:500; }
+
+  /* Button consistency (Head of Strategy): all text CTAs square (2px), like the hero/footer.
+     Nav "Contact Us" was a rounded-full pill - align it. Social icon circles are unaffected
+     (they are not <a class="rounded-full"> text buttons). Per-page CTAs handled in their sections. */
+  .rd nav a.rounded-full, .rd #mobile-menu a.rounded-full { border-radius:2px !important; }
