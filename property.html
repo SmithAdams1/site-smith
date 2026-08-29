@@ -202,7 +202,7 @@
           (pick(p.description)?'<h2 class="geist" style="font-size:22px;font-weight:600;color:#11222D;margin:0 0 14px;">'+esc(t.overview)+'</h2><div class="pd-desc satoshi" style="font-size:16px;color:#4b5563;line-height:1.85;margin-bottom:32px;">'+pick(p.description)+'</div>':'')+
           (hl.length?'<h2 class="geist" style="font-size:22px;font-weight:600;color:#11222D;margin:0 0 16px;">'+esc(t.highlights)+'</h2><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:0 0 34px;">'+hl.map(function(h){var lab=pick(h);return '<div class="satoshi" style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #E4E1DA;border-radius:2px;padding:13px 15px;font-size:15px;color:#11222D;font-weight:500;"><span style="flex:0 0 auto;color:#6A7883;">'+ic(amenityIcon(lab),20,'#6A7883')+'</span>'+esc(lab)+'</div>';}).join('')+'</div>':'')+
           (mapEmbed?'<h2 class="geist" style="font-size:22px;font-weight:600;color:#11222D;margin:0 0 14px;">'+esc(t.location)+'</h2><div style="border-radius:2px;overflow:hidden;border:1px solid #E4E1DA;"><iframe src="'+esc(mapEmbed)+'" width="100%" height="340" style="border:0;" loading="lazy"></iframe></div>':'')+
-          (p.brochure_url?'<div style="margin-top:24px;"><a href="'+esc(p.brochure_url)+'" target="_blank" rel="noopener" class="satoshi" style="display:inline-flex;align-items:center;gap:8px;background:#11222D;color:#fff;padding:13px 22px;border-radius:2px;font-weight:600;text-decoration:none;">↓ '+esc(t.brochure)+'</a></div>':'')+
+          (p.brochure_url?'<div style="margin-top:24px;"><button type="button" id="pd-broc" class="satoshi" style="display:inline-flex;align-items:center;gap:8px;background:#11222D;color:#fff;padding:13px 22px;border:0;border-radius:2px;font-weight:600;cursor:pointer;">↓ '+esc(t.brochure)+'</button></div>':'')+
         '</div>'+
         // SIDEBAR ENQUIRY
         '<aside><div style="position:sticky;top:24px;background:#fff;border:1px solid #E4E1DA;border-radius:2px;box-shadow:0 10px 40px rgba(17,34,45,.08);padding:26px;">'+
@@ -229,6 +229,57 @@
     var propUrl='https://www.smithandadams.com/property/'+encodeURIComponent(p.slug);
     var waText=encodeURIComponent((L==='pt'?'Olá, tenho interesse no imóvel: ':'Hello, I am interested in the property: ')+pick(p.title)+' - '+propUrl);
     document.getElementById('pd-wa').href='https://wa.me/351938227348?text='+waText;
+
+    // Brochure: lead-gated download -> our CRM (Benjamin / Benjamin Pipeline), same as the pop-up.
+    var brocBtn=document.getElementById('pd-broc');
+    if(brocBtn&&p.brochure_url){
+      brocBtn.addEventListener('click',function(){
+        if(document.getElementById('pd-broc-ov'))return;
+        var consent=(L==='pt'?'Aceito ser contactado pela Smith & Adams sobre este pedido.':'I agree to be contacted by Smith & Adams about my enquiry.');
+        var title=(L==='pt'?'Descarregar a brochura':'Download the brochure');
+        var sub=(L==='pt'?'Deixe os seus dados e a brochura abre de seguida.':'Leave your details and the brochure opens next.');
+        var ov=document.createElement('div');ov.id='pd-broc-ov';
+        ov.style.cssText='position:fixed;inset:0;z-index:2147483000;background:rgba(17,34,45,.55);display:flex;align-items:center;justify-content:center;padding:20px;';
+        ov.innerHTML='<div style="background:#FDFCF9;max-width:460px;width:100%;border-radius:2px;padding:30px;position:relative;box-shadow:0 30px 80px rgba(17,34,45,.35);">'
+          +'<button type="button" id="pd-broc-x" aria-label="Close" style="position:absolute;top:12px;right:12px;border:0;background:rgba(17,34,45,.08);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:17px;">&times;</button>'
+          +'<h3 class="geist" style="font-size:22px;color:#11222D;margin:0 0 6px;">'+title+'</h3>'
+          +'<p class="satoshi" style="font-size:14px;color:#6A7883;margin:0 0 18px;">'+sub+'</p>'
+          +'<form id="pd-broc-form" style="display:flex;flex-direction:column;gap:11px;">'
+            +'<input class="re-input" name="name" placeholder="'+esc(t.first)+' '+esc(t.last)+'" autocomplete="name" required/>'
+            +'<input class="re-input" type="email" name="email" placeholder="'+esc(t.email)+'" autocomplete="email" required/>'
+            +'<div style="display:grid;grid-template-columns:90px 1fr;gap:10px;"><input class="re-input" name="phoneCode" value="+1"/><input class="re-input" name="phoneNumber" placeholder="'+esc(t.phone)+'" autocomplete="tel" required/></div>'
+            +'<label class="satoshi" style="display:flex;gap:8px;font-size:12px;color:#6A7883;align-items:flex-start;"><input type="checkbox" name="consent" required style="margin-top:3px;"/><span>'+consent+'</span></label>'
+            +'<button type="submit" class="satoshi" style="background:#11222D;color:#fff;border:0;border-radius:2px;padding:14px;font-weight:600;cursor:pointer;">&#8595; '+esc(t.brochure)+'</button>'
+            +'<p id="pd-broc-msg" class="satoshi" style="font-size:12.5px;margin:2px 0 0;text-align:center;color:#6A7883;"></p>'
+          +'</form></div>';
+        document.body.appendChild(ov);
+        var closeB=function(){ov.remove();};
+        document.getElementById('pd-broc-x').addEventListener('click',closeB);
+        ov.addEventListener('click',function(e){if(e.target===ov)closeB();});
+        var bf=document.getElementById('pd-broc-form');
+        bf.addEventListener('submit',function(ev){
+          ev.preventDefault();
+          var bmsg=document.getElementById('pd-broc-msg');var bbtn=bf.querySelector('button[type=submit]');
+          if(bf.phoneNumber.value.replace(/\D/g,'').length<6){bmsg.style.color='#b3261e';bmsg.textContent=t.err;return;}
+          var parts=bf.name.value.trim().split(/\s+/);
+          bbtn.disabled=true;bbtn.textContent=t.sending;bmsg.textContent='';
+          fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+            firstName:parts[0],lastName:parts.slice(1).join(' '),email:bf.email.value.trim(),
+            phoneCode:bf.phoneCode.value,phoneNumber:bf.phoneNumber.value.trim(),
+            interest:'golden-visa',source:'beato-sol-15',
+            message:'Brochure request: '+pick(p.title)+(p.reference?' ('+p.reference+')':''),
+            attribution:(window.saLeadContext?window.saLeadContext():{})
+          })}).then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
+          .then(function(res){
+            if(res.ok&&res.j.success){
+              if(window.saTrackLead)window.saTrackLead('brochure');
+              window.open(p.brochure_url,'_blank','noopener');
+              bf.parentNode.innerHTML='<h3 class="geist" style="font-size:22px;color:#11222D;margin:0 0 8px;">'+(L==='pt'?'Obrigado.':'Thank you.')+'</h3><p class="satoshi" style="font-size:14px;color:#6A7883;">'+(L==='pt'?'A brochura abriu numa nova aba. Um consultor entrará em contacto.':'Your brochure opened in a new tab. An advisor will be in touch shortly.')+'</p>';
+            } else {throw new Error('fail');}
+          }).catch(function(){bmsg.style.color='#b3261e';bmsg.textContent=t.err;bbtn.disabled=false;bbtn.textContent='↓ '+t.brochure;});
+        });
+      });
+    }
 
     // enquiry submit -> /api/property-enquiry (Pipedrive + email)
     var form=document.getElementById('pd-form');

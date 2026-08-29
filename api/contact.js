@@ -17,15 +17,19 @@ export default async function handler(req, res) {
   //     Benjamin Pipeline, explicitly, so it never depends on env defaults.
   const isPropertyManagement = interest === 'property-management';
   const isInvestLP = source === 'lp-invest';
+  const isBeato = source === 'beato-sol-15';
 
   const campaignName = isPropertyManagement
     ? 'Property Management'
     : isInvestLP
       ? 'LP - Golden Visa (Invest)'
-      : 'Website Contact';
+      : isBeato
+        ? 'Beato Sol 15 (brochure)'
+        : 'Website Contact';
 
   const notes = [
     isInvestLP ? 'Source: Landing Page (Invest / Golden Visa)' : null,
+    isBeato ? 'Source: Beato Sol 15 brochure request' : null,
     interest ? `Interest: ${interest}` : null,
     `Phone code: ${phoneCode}`,
     message ? `Message: ${message}` : null,
