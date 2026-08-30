@@ -1,346 +1,371 @@
 {
- "_note": "Phase 2 rollout - invest-in-portugal as rd- blocks. Bilingual (EN+PT) from site_content invest.*; FAQ is EN-only (lives in the static HTML, not the CMS - matches production). Hero CTAs/caption are static (EN in both locales, as in prod).",
- "slug": "invest-in-portugal",
- "title": {
-  "en": "Invest in Portugal | D2 Visa & Golden Visa Residency | Smith & Adams"
- },
- "blocks": [
-  {
-   "type": "rd_hero",
-   "data": {
-    "title": {
-     "en": "Invest in Portugal, with one accountable partner.",
-     "pt": "Invista em Portugal, com um parceiro responsável do princípio ao fim."
-    },
-    "subtitle": {
-     "en": "Independent advice on the return, the residency and the life behind them - from first analysis to long-term management.",
-     "pt": "Consultoria independente sobre o retorno, a residência e a vida por detrás deles - da primeira análise à gestão de longo prazo."
-    },
-    "image": "/assets/hero-invest.jpg",
-    "image_alt": {
-     "en": "25 de Abril Bridge, Lisbon",
-     "pt": "Ponte 25 de Abril, Lisboa"
-    },
-    "ctas": [
-     {
-      "label": {
-       "en": "Why Portugal",
-       "pt": "Porquê Portugal"
-      },
-      "href": "#why"
-     },
-     {
-      "label": {
-       "en": "Book a consultation",
-       "pt": "Marcar consulta"
-      },
-      "href": "contact.html",
-      "style": "ghost",
-      "arrow": false
-     }
-    ]
-   }
+  "_note": "Phase 2 rollout - invest-in-portugal as rd- blocks. Bilingual (EN+PT) from site_content invest.*; FAQ is EN-only (lives in the static HTML, not the CMS - matches production). Hero CTAs/caption are static (EN in both locales, as in prod).",
+  "slug": "invest-in-portugal",
+  "title": {
+    "en": "Invest in Portugal | D2 Visa & Golden Visa Residency | Smith & Adams"
   },
-  {
-   "type": "rd_prose",
-   "data": {
-    "anchor": "why",
-    "eyebrow": {
-     "en": "Why Portugal",
-     "pt": "Porquê Portugal"
+  "blocks": [
+    {
+      "type": "rd_hero",
+      "data": {
+        "title": {
+          "en": "Invest in Portugal, with one accountable partner.",
+          "pt": "Invista em Portugal, com um parceiro responsável do princípio ao fim."
+        },
+        "subtitle": {
+          "en": "Independent advice on the return, the residency and the life behind them - from first analysis to long-term management.",
+          "pt": "Consultoria independente sobre o retorno, a residência e a vida por detrás deles - da primeira análise à gestão de longo prazo."
+        },
+        "image": "/assets/hero-invest.jpg",
+        "image_alt": {
+          "en": "25 de Abril Bridge, Lisbon",
+          "pt": "Ponte 25 de Abril, Lisboa"
+        },
+        "ctas": [
+          {
+            "label": {
+              "en": "Why Portugal",
+              "pt": "Porquê Portugal"
+            },
+            "href": "#why"
+          },
+          {
+            "label": {
+              "en": "Book a consultation",
+              "pt": "Marcar consulta"
+            },
+            "href": "contact.html",
+            "style": "ghost",
+            "arrow": false
+          }
+        ]
+      }
     },
-    "title": {
-     "en": "Why invest in Portugal?",
-     "pt": "Porquê investir em Portugal?"
+    {
+      "type": "rd_prose",
+      "data": {
+        "anchor": "why",
+        "eyebrow": {
+          "en": "Why Portugal",
+          "pt": "Porquê Portugal"
+        },
+        "title": {
+          "en": "Why invest in Portugal?",
+          "pt": "Porquê investir em Portugal?"
+        },
+        "body": [
+          {
+            "en": "Portugal offers a rare combination for international capital: full access to the European Union, the Eurozone and the Schengen Area, inside one of the world&rsquo;s most stable and welcoming countries.",
+            "pt": "Portugal oferece uma combinação rara para o capital internacional: acesso pleno à União Europeia, à Zona Euro e ao Espaço Schengen, num dos países mais estáveis e acolhedores do mundo."
+          },
+          {
+            "en": "It is financially secure. In 2025 Portugal&rsquo;s sovereign credit rating was raised to A+ (S&amp;P), on sustained debt reduction and budget surpluses - among the fastest debt reductions in Europe. Your returns are euro-denominated, in a mature and transparent property market.",
+            "pt": "É financeiramente seguro. Em 2025 o rating soberano de Portugal subiu para A+ (S&amp;P), com redução sustentada da dívida e excedentes orçamentais - das reduções de dívida mais rápidas da Europa. Os seus retornos são denominados em euros, num mercado imobiliário maduro e transparente."
+          },
+          {
+            "en": "It is safe and livable. Portugal ranks 7th in the world on the 2025 Global Peace Index - 5th in Europe - with a mild Atlantic climate, world-class healthcare and a cost of living below much of Western Europe.",
+            "pt": "É seguro e habitável. Portugal é o 7.º país mais seguro do mundo no Global Peace Index 2025 - 5.º na Europa - com clima atlântico ameno, saúde de excelência e um custo de vida abaixo de grande parte da Europa Ocidental."
+          },
+          {
+            "en": "And it is a place people genuinely want to be. That demand - from residents, professionals and visitors - is what underpins occupancy, yield and long-term value.",
+            "pt": "E é um lugar onde as pessoas realmente querem estar. Essa procura - de residentes, profissionais e visitantes - é o que sustenta a ocupação, a rentabilidade e o valor a longo prazo."
+          }
+        ]
+      }
     },
-    "body": [
-     {
-      "en": "Portugal offers a rare combination for international capital: full access to the European Union, the Eurozone and the Schengen Area, inside one of the world&rsquo;s most stable and welcoming countries.",
-      "pt": "Portugal oferece uma combinação rara para o capital internacional: acesso pleno à União Europeia, à Zona Euro e ao Espaço Schengen, num dos países mais estáveis e acolhedores do mundo."
-     },
-     {
-      "en": "It is financially secure. In 2025 Portugal&rsquo;s sovereign credit rating was raised to A+ (S&amp;P), on sustained debt reduction and budget surpluses - among the fastest debt reductions in Europe. Your returns are euro-denominated, in a mature and transparent property market.",
-      "pt": "É financeiramente seguro. Em 2025 o rating soberano de Portugal subiu para A+ (S&amp;P), com redução sustentada da dívida e excedentes orçamentais - das reduções de dívida mais rápidas da Europa. Os seus retornos são denominados em euros, num mercado imobiliário maduro e transparente."
-     },
-     {
-      "en": "It is safe and livable. Portugal ranks 7th in the world on the 2025 Global Peace Index - 5th in Europe - with a mild Atlantic climate, world-class healthcare and a cost of living below much of Western Europe.",
-      "pt": "É seguro e habitável. Portugal é o 7.º país mais seguro do mundo no Global Peace Index 2025 - 5.º na Europa - com clima atlântico ameno, saúde de excelência e um custo de vida abaixo de grande parte da Europa Ocidental."
-     },
-     {
-      "en": "And it is a place people genuinely want to be. That demand - from residents, professionals and visitors - is what underpins occupancy, yield and long-term value.",
-      "pt": "E é um lugar onde as pessoas realmente querem estar. Essa procura - de residentes, profissionais e visitantes - é o que sustenta a ocupação, a rentabilidade e o valor a longo prazo."
-     }
-    ]
-   }
-  },
-  {
-   "type": "rd_proof",
-   "data": {
-    "title": {
-     "en": "A secure base for euro-denominated capital.",
-     "pt": "Uma base segura para capital denominado em euros."
+    {
+      "type": "rd_proof",
+      "data": {
+        "title": {
+          "en": "A secure base for euro-denominated capital.",
+          "pt": "Uma base segura para capital denominado em euros."
+        },
+        "body": {
+          "en": "Independent, third-party markers of stability and safety - not our own numbers.",
+          "pt": "Indicadores de estabilidade e segurança de terceiros - não os nossos próprios números."
+        },
+        "stats": [
+          {
+            "value": {
+              "en": "A+",
+              "pt": "A+"
+            },
+            "label": {
+              "en": "Sovereign credit rating, 2025 (S&amp;P)",
+              "pt": "Rating soberano, 2025 (S&amp;P)"
+            }
+          },
+          {
+            "value": {
+              "en": "7th",
+              "pt": "7.º"
+            },
+            "label": {
+              "en": "Safest country in the world (2025 Global Peace Index)",
+              "pt": "País mais seguro do mundo (Global Peace Index 2025)"
+            }
+          },
+          {
+            "value": {
+              "en": "EU",
+              "pt": "UE"
+            },
+            "label": {
+              "en": "Union, Eurozone &amp; Schengen member",
+              "pt": "Membro da União, Zona Euro e Schengen"
+            }
+          }
+        ]
+      }
     },
-    "body": {
-     "en": "Independent, third-party markers of stability and safety - not our own numbers.",
-     "pt": "Indicadores de estabilidade e segurança de terceiros - não os nossos próprios números."
+    {
+      "type": "rd_prose",
+      "data": {
+        "eyebrow": {
+          "en": "01 &middot; The investment case",
+          "pt": "01 &middot; O caso de investimento"
+        },
+        "title": {
+          "en": "Invest for the return, first.",
+          "pt": "Investir pelo retorno, primeiro."
+        },
+        "body": [
+          {
+            "en": "Before residency or lifestyle, the asset has to stand on its own. We select vetted Portuguese real estate for yield and capital growth, and manage it for transparent, net-of-cost, euro-denominated income.",
+            "pt": "Antes da residência ou do estilo de vida, o ativo tem de valer por si. Selecionamos imobiliário português criterioso para rendimento e valorização, e gerimo-lo para um rendimento transparente, líquido de custos e em euros."
+          },
+          {
+            "en": "Portugal&rsquo;s property taxes are clear and predictable. Separately, qualified professionals relocating to Portugal may benefit from the IFICI regime (a 20% flat rate on qualifying income); eligibility is specific, and a specialist confirms what applies to you. <a href=\"/portugal-tax\" style=\"color:#11222D;text-decoration:underline;\">See our Portugal tax guide</a>.",
+            "pt": "Os impostos sobre imóveis em Portugal são claros e previsíveis. Em separado, profissionais qualificados que se mudem para Portugal podem beneficiar do regime IFICI (taxa fixa de 20% sobre rendimento elegível); a elegibilidade é específica e um especialista confirma o que se aplica ao seu caso. <a href=\"/portugal-tax\" style=\"color:#11222D;text-decoration:underline;\">Veja o nosso guia de fiscalidade</a>."
+          }
+        ],
+        "cards": [
+          {
+            "label": {
+              "en": "Sourcing &amp; due diligence",
+              "pt": "Seleção e due diligence"
+            },
+            "body": {
+              "en": "An independent read on the market and the right eligible asset for your goals.",
+              "pt": "Uma leitura independente do mercado e o ativo certo para os seus objetivos."
+            }
+          },
+          {
+            "label": {
+              "en": "Structuring",
+              "pt": "Estruturação"
+            },
+            "body": {
+              "en": "Acquisition and ownership structured cleanly, with legal and tax support.",
+              "pt": "Aquisição e detenção estruturadas de forma limpa, com apoio jurídico e fiscal."
+            }
+          },
+          {
+            "label": {
+              "en": "Management &amp; reporting",
+              "pt": "Gestão e relatórios"
+            },
+            "body": {
+              "en": "Hands-off management with net-of-cost performance, reported every quarter.",
+              "pt": "Gestão sem preocupações, com desempenho líquido de custos reportado trimestralmente."
+            }
+          }
+        ],
+        "downloads": [
+          {
+            "label": {
+              "en": "Download &middot; Why invest in Portugal",
+              "pt": "Descarregar &middot; Porqu&ecirc; investir em Portugal"
+            },
+            "href": "/brochures/why-invest-in-portugal.pdf"
+          }
+        ]
+      }
     },
-    "stats": [
-     {
-      "value": {
-       "en": "A+",
-       "pt": "A+"
-      },
-      "label": {
-       "en": "Sovereign credit rating, 2025 (S&amp;P)",
-       "pt": "Rating soberano, 2025 (S&amp;P)"
+    {
+      "type": "rd_prose",
+      "data": {
+        "eyebrow": {
+          "en": "02 &middot; Residency by investment",
+          "pt": "02 &middot; Residência por investimento"
+        },
+        "title": {
+          "en": "Two proven routes to European residency.",
+          "pt": "Dois caminhos comprovados para a residência europeia."
+        },
+        "body": [
+          {
+            "en": "Where residency is part of the plan, two established routes lead to Portuguese residency - and, over time, a path to citizenship. A specialist confirms the current terms and the best fit for your case.",
+            "pt": "Quando a residência faz parte do plano, dois caminhos consolidados conduzem à residência portuguesa - e, com o tempo, a um caminho para a cidadania. Um especialista confirma os termos atuais e a melhor opção para o seu caso."
+          }
+        ],
+        "cards": [
+          {
+            "label": {
+              "en": "Golden Visa",
+              "pt": "Golden Visa"
+            },
+            "body": {
+              "en": "Residency by investment through qualifying routes such as regulated (CMVM) investment funds, cultural heritage and business creation. Minimums depend on the route; administered by AIMA, with light-touch stay requirements. <a href=\"/golden-visa\" style=\"color:#11222D;text-decoration:underline;\">Read the Golden Visa 2026 guide</a>.",
+              "pt": "Residência por investimento através de vias elegíveis como fundos de investimento regulados (CMVM), património cultural e criação de empresas. Os mínimos dependem da via; gerido pela AIMA, com requisitos de permanência reduzidos. <a href=\"/golden-visa\" style=\"color:#11222D;text-decoration:underline;\">Leia o guia do Golden Visa 2026</a>."
+            }
+          },
+          {
+            "label": {
+              "en": "D2 Visa",
+              "pt": "Visto D2"
+            },
+            "body": {
+              "en": "For entrepreneurs and business owners establishing or relocating a business to Portugal. Built on a viable business plan rather than a fixed minimum, and requires genuine residence - suited to those who want to build here, not only invest. <a href=\"/d2-visa\" style=\"color:#11222D;text-decoration:underline;\">Read the D2 visa 2026 guide</a>.",
+              "pt": "Para empreendedores e empresários que criam ou relocalizam um negócio em Portugal. Assenta num plano de negócios viável e não num mínimo fixo, e exige residência efetiva - ideal para quem quer construir cá, não apenas investir. <a href=\"/d2-visa\" style=\"color:#11222D;text-decoration:underline;\">Leia o guia do Visto D2 2026</a>."
+            }
+          }
+        ],
+        "downloads": [
+          {
+            "label": {
+              "en": "Download &middot; Golden Visa guide",
+              "pt": "Descarregar &middot; Guia Golden Visa"
+            },
+            "href": "/brochures/portugal-golden-visa.pdf"
+          },
+          {
+            "label": {
+              "en": "Download &middot; D2 Visa guide",
+              "pt": "Descarregar &middot; Guia Visto D2"
+            },
+            "href": "/brochures/portugal-d2-visa.pdf"
+          }
+        ]
       }
-     },
-     {
-      "value": {
-       "en": "7th",
-       "pt": "7.º"
-      },
-      "label": {
-       "en": "Safest country in the world (2025 Global Peace Index)",
-       "pt": "País mais seguro do mundo (Global Peace Index 2025)"
-      }
-     },
-     {
-      "value": {
-       "en": "EU",
-       "pt": "UE"
-      },
-      "label": {
-       "en": "Union, Eurozone &amp; Schengen member",
-       "pt": "Membro da União, Zona Euro e Schengen"
-      }
-     }
-    ]
-   }
-  },
-  {
-   "type": "rd_prose",
-   "data": {
-    "eyebrow": {
-     "en": "01 &middot; The investment case",
-     "pt": "01 &middot; O caso de investimento"
     },
-    "title": {
-     "en": "Invest for the return, first.",
-     "pt": "Investir pelo retorno, primeiro."
+    {
+      "type": "rd_prose",
+      "data": {
+        "eyebrow": {
+          "en": "03 &middot; Lifestyle",
+          "pt": "03 &middot; Estilo de vida"
+        },
+        "title": {
+          "en": "A place worth living in, not only investing in.",
+          "pt": "Um lugar para viver, não apenas para investir."
+        },
+        "body": [
+          {
+            "en": "For many investors the real return is the life: a mild climate, safety, healthcare and a pace that much of Northern Europe has lost. Whether it is a holiday home, a future retirement or a base for the family, we help you find and hold the right property.",
+            "pt": "Para muitos investidores, o verdadeiro retorno é a vida: clima ameno, segurança, saúde e um ritmo que grande parte do Norte da Europa perdeu. Seja uma casa de férias, uma futura reforma ou uma base para a família, ajudamo-lo a encontrar e a manter o imóvel certo."
+          },
+          {
+            "en": "<span style=\"font-size:13px;color:var(--slate);\">Information as of 2026 and general in nature; not legal or tax advice. Programme terms change - Smith &amp; Adams confirms the current position for your case.</span>",
+            "pt": "<span style=\"font-size:13px;color:var(--slate);\">Informação de 2026 e de carácter geral; não constitui aconselhamento jurídico ou fiscal. Os termos dos programas mudam - a Smith &amp; Adams confirma a posição atual para o seu caso.</span>"
+          }
+        ]
+      }
     },
-    "body": [
-     {
-      "en": "Before residency or lifestyle, the asset has to stand on its own. We select vetted Portuguese real estate for yield and capital growth, and manage it for transparent, net-of-cost, euro-denominated income.",
-      "pt": "Antes da residência ou do estilo de vida, o ativo tem de valer por si. Selecionamos imobiliário português criterioso para rendimento e valorização, e gerimo-lo para um rendimento transparente, líquido de custos e em euros."
-     },
-     {
-      "en": "Portugal&rsquo;s property taxes are clear and predictable. Separately, qualified professionals relocating to Portugal may benefit from the IFICI regime (a 20% flat rate on qualifying income); eligibility is specific, and a specialist confirms what applies to you. <a href=\"/portugal-tax\" style=\"color:#11222D;text-decoration:underline;\">See our Portugal tax guide</a>.",
-      "pt": "Os impostos sobre imóveis em Portugal são claros e previsíveis. Em separado, profissionais qualificados que se mudem para Portugal podem beneficiar do regime IFICI (taxa fixa de 20% sobre rendimento elegível); a elegibilidade é específica e um especialista confirma o que se aplica ao seu caso. <a href=\"/portugal-tax\" style=\"color:#11222D;text-decoration:underline;\">Veja o nosso guia de fiscalidade</a>."
-     }
-    ],
-    "cards": [
-     {
-      "label": {
-       "en": "Sourcing &amp; due diligence",
-       "pt": "Seleção e due diligence"
-      },
-      "body": {
-       "en": "An independent read on the market and the right eligible asset for your goals.",
-       "pt": "Uma leitura independente do mercado e o ativo certo para os seus objetivos."
+    {
+      "type": "rd_faq",
+      "data": {
+        "anchor": "invest-faq",
+        "eyebrow": {
+          "en": "FAQ",
+          "pt": "FAQ"
+        },
+        "title": {
+          "en": "Investing in Portugal, answered.",
+          "pt": "Investir em Portugal, respondido."
+        },
+        "items": [
+          {
+            "q": {
+              "en": "Why is Portugal considered financially secure?",
+              "pt": "Porque é Portugal considerado financeiramente seguro?"
+            },
+            "a": {
+              "en": "It is an EU, Eurozone and Schengen member with a sovereign credit rating raised to A+ in 2025 (S&amp;P), on sustained debt reduction and budget surpluses - among the fastest in Europe.",
+              "pt": "É membro da UE, da Zona Euro e de Schengen, com rating soberano elevado para A+ em 2025 (S&amp;P), assente em redução sustentada da dívida e excedentes orçamentais - dos mais rápidos da Europa."
+            }
+          },
+          {
+            "q": {
+              "en": "Is Portugal safe?",
+              "pt": "Portugal é seguro?"
+            },
+            "a": {
+              "en": "Yes. Portugal ranks 7th in the world - and 5th in Europe - on the 2025 Global Peace Index.",
+              "pt": "Sim. Portugal é o 7.º do mundo - e 5.º da Europa - no Global Peace Index 2025."
+            }
+          },
+          {
+            "q": {
+              "en": "What are the routes to residency by investment?",
+              "pt": "Quais são as vias de residência por investimento?"
+            },
+            "a": {
+              "en": "The Golden Visa (through qualifying routes such as regulated investment funds, cultural heritage and business creation, administered by AIMA) and the D2 entrepreneur visa (built on a viable business plan). A specialist confirms the best fit and the current terms.",
+              "pt": "O Golden Visa (através de vias elegíveis como fundos de investimento regulados, património cultural e criação de empresas, gerido pela AIMA) e o visto D2 de empreendedor (assente num plano de negócios viável). Um especialista confirma a melhor opção e os termos atuais."
+            }
+          },
+          {
+            "q": {
+              "en": "How much do I need for the Golden Visa?",
+              "pt": "Quanto preciso para o Golden Visa?"
+            },
+            "a": {
+              "en": "As of 2026, qualifying routes include regulated investment funds (commonly from &euro;500,000), cultural heritage (from &euro;250,000) and eligible lower-density investment (from &euro;200,000). Amounts and routes change, so we confirm the current position for your case.",
+              "pt": "Em 2026, as vias elegíveis incluem fundos de investimento regulados (habitualmente a partir de &euro;500.000), património cultural (a partir de &euro;250.000) e investimento elegível em baixa densidade (a partir de &euro;200.000). Os valores e as vias mudam, por isso confirmamos a posição atual para o seu caso."
+            }
+          },
+          {
+            "q": {
+              "en": "Do I have to live in Portugal?",
+              "pt": "Tenho de viver em Portugal?"
+            },
+            "a": {
+              "en": "The Golden Visa has light-touch stay requirements. The D2 requires genuine residence in Portugal. Both offer a path to permanent residency and, over time, citizenship - a specialist confirms the timelines.",
+              "pt": "O Golden Visa tem requisitos de permanência reduzidos. O D2 exige residência efetiva em Portugal. Ambos oferecem um caminho para a residência permanente e, com o tempo, a cidadania - um especialista confirma os prazos."
+            }
+          },
+          {
+            "q": {
+              "en": "Will I pay less tax in Portugal?",
+              "pt": "Vou pagar menos impostos em Portugal?"
+            },
+            "a": {
+              "en": "Property taxes are clear and predictable. Qualified professionals who become new tax residents may qualify for the IFICI regime (a 20% flat rate on eligible income); it is targeted and not automatic. We work with tax specialists to confirm what applies to you.",
+              "pt": "Os impostos sobre imóveis são claros e previsíveis. Profissionais qualificados que se tornem novos residentes fiscais podem qualificar-se para o regime IFICI (taxa fixa de 20% sobre rendimento elegível); é dirigido e não automático. Trabalhamos com especialistas fiscais para confirmar o que se aplica a si."
+            }
+          },
+          {
+            "q": {
+              "en": "How do I start?",
+              "pt": "Como começo?"
+            },
+            "a": {
+              "en": "Book a consultation. A Portugal adviser will review your goals and walk you through the routes, with no obligation.",
+              "pt": "Marque uma consulta. Um consultor de Portugal analisa os seus objetivos e apresenta-lhe as vias, sem compromisso."
+            }
+          }
+        ]
       }
-     },
-     {
-      "label": {
-       "en": "Structuring",
-       "pt": "Estruturação"
-      },
-      "body": {
-       "en": "Acquisition and ownership structured cleanly, with legal and tax support.",
-       "pt": "Aquisição e detenção estruturadas de forma limpa, com apoio jurídico e fiscal."
-      }
-     },
-     {
-      "label": {
-       "en": "Management &amp; reporting",
-       "pt": "Gestão e relatórios"
-      },
-      "body": {
-       "en": "Hands-off management with net-of-cost performance, reported every quarter.",
-       "pt": "Gestão sem preocupações, com desempenho líquido de custos reportado trimestralmente."
-      }
-     }
-    ]
-   }
-  },
-  {
-   "type": "rd_prose",
-   "data": {
-    "eyebrow": {
-     "en": "02 &middot; Residency by investment",
-     "pt": "02 &middot; Residência por investimento"
     },
-    "title": {
-     "en": "Two proven routes to European residency.",
-     "pt": "Dois caminhos comprovados para a residência europeia."
-    },
-    "body": [
-     {
-      "en": "Where residency is part of the plan, two established routes lead to Portuguese residency - and, over time, a path to citizenship. A specialist confirms the current terms and the best fit for your case.",
-      "pt": "Quando a residência faz parte do plano, dois caminhos consolidados conduzem à residência portuguesa - e, com o tempo, a um caminho para a cidadania. Um especialista confirma os termos atuais e a melhor opção para o seu caso."
-     }
-    ],
-    "cards": [
-     {
-      "label": {
-       "en": "Golden Visa",
-       "pt": "Golden Visa"
-      },
-      "body": {
-       "en": "Residency by investment through qualifying routes such as regulated (CMVM) investment funds, cultural heritage and business creation. Minimums depend on the route; administered by AIMA, with light-touch stay requirements. <a href=\"/golden-visa\" style=\"color:#11222D;text-decoration:underline;\">Read the Golden Visa 2026 guide</a>.",
-       "pt": "Residência por investimento através de vias elegíveis como fundos de investimento regulados (CMVM), património cultural e criação de empresas. Os mínimos dependem da via; gerido pela AIMA, com requisitos de permanência reduzidos. <a href=\"/golden-visa\" style=\"color:#11222D;text-decoration:underline;\">Leia o guia do Golden Visa 2026</a>."
+    {
+      "type": "rd_close",
+      "data": {
+        "bg": "navy",
+        "title": {
+          "en": "Not sure which route fits you?",
+          "pt": "Não sabe qual rota combina consigo?"
+        },
+        "cta": {
+          "label": {
+            "en": "Speak with a specialist",
+            "pt": "Fale com um especialista"
+          },
+          "href": "contact.html",
+          "wrap": true,
+          "space": true
+        }
       }
-     },
-     {
-      "label": {
-       "en": "D2 Visa",
-       "pt": "Visto D2"
-      },
-      "body": {
-       "en": "For entrepreneurs and business owners establishing or relocating a business to Portugal. Built on a viable business plan rather than a fixed minimum, and requires genuine residence - suited to those who want to build here, not only invest. <a href=\"/d2-visa\" style=\"color:#11222D;text-decoration:underline;\">Read the D2 visa 2026 guide</a>.",
-       "pt": "Para empreendedores e empresários que criam ou relocalizam um negócio em Portugal. Assenta num plano de negócios viável e não num mínimo fixo, e exige residência efetiva - ideal para quem quer construir cá, não apenas investir. <a href=\"/d2-visa\" style=\"color:#11222D;text-decoration:underline;\">Leia o guia do Visto D2 2026</a>."
-      }
-     }
-    ]
-   }
-  },
-  {
-   "type": "rd_prose",
-   "data": {
-    "eyebrow": {
-     "en": "03 &middot; Lifestyle",
-     "pt": "03 &middot; Estilo de vida"
-    },
-    "title": {
-     "en": "A place worth living in, not only investing in.",
-     "pt": "Um lugar para viver, não apenas para investir."
-    },
-    "body": [
-     {
-      "en": "For many investors the real return is the life: a mild climate, safety, healthcare and a pace that much of Northern Europe has lost. Whether it is a holiday home, a future retirement or a base for the family, we help you find and hold the right property.",
-      "pt": "Para muitos investidores, o verdadeiro retorno é a vida: clima ameno, segurança, saúde e um ritmo que grande parte do Norte da Europa perdeu. Seja uma casa de férias, uma futura reforma ou uma base para a família, ajudamo-lo a encontrar e a manter o imóvel certo."
-     },
-     {
-      "en": "<span style=\"font-size:13px;color:var(--slate);\">Information as of 2026 and general in nature; not legal or tax advice. Programme terms change - Smith &amp; Adams confirms the current position for your case.</span>",
-      "pt": "<span style=\"font-size:13px;color:var(--slate);\">Informação de 2026 e de carácter geral; não constitui aconselhamento jurídico ou fiscal. Os termos dos programas mudam - a Smith &amp; Adams confirma a posição atual para o seu caso.</span>"
-     }
-    ]
-   }
-  },
-  {
-   "type": "rd_faq",
-   "data": {
-    "anchor": "invest-faq",
-    "eyebrow": {
-     "en": "FAQ",
-     "pt": "FAQ"
-    },
-    "title": {
-     "en": "Investing in Portugal, answered.",
-     "pt": "Investir em Portugal, respondido."
-    },
-    "items": [
-     {
-      "q": {
-       "en": "Why is Portugal considered financially secure?",
-       "pt": "Porque é Portugal considerado financeiramente seguro?"
-      },
-      "a": {
-       "en": "It is an EU, Eurozone and Schengen member with a sovereign credit rating raised to A+ in 2025 (S&amp;P), on sustained debt reduction and budget surpluses - among the fastest in Europe.",
-       "pt": "É membro da UE, da Zona Euro e de Schengen, com rating soberano elevado para A+ em 2025 (S&amp;P), assente em redução sustentada da dívida e excedentes orçamentais - dos mais rápidos da Europa."
-      }
-     },
-     {
-      "q": {
-       "en": "Is Portugal safe?",
-       "pt": "Portugal é seguro?"
-      },
-      "a": {
-       "en": "Yes. Portugal ranks 7th in the world - and 5th in Europe - on the 2025 Global Peace Index.",
-       "pt": "Sim. Portugal é o 7.º do mundo - e 5.º da Europa - no Global Peace Index 2025."
-      }
-     },
-     {
-      "q": {
-       "en": "What are the routes to residency by investment?",
-       "pt": "Quais são as vias de residência por investimento?"
-      },
-      "a": {
-       "en": "The Golden Visa (through qualifying routes such as regulated investment funds, cultural heritage and business creation, administered by AIMA) and the D2 entrepreneur visa (built on a viable business plan). A specialist confirms the best fit and the current terms.",
-       "pt": "O Golden Visa (através de vias elegíveis como fundos de investimento regulados, património cultural e criação de empresas, gerido pela AIMA) e o visto D2 de empreendedor (assente num plano de negócios viável). Um especialista confirma a melhor opção e os termos atuais."
-      }
-     },
-     {
-      "q": {
-       "en": "How much do I need for the Golden Visa?",
-       "pt": "Quanto preciso para o Golden Visa?"
-      },
-      "a": {
-       "en": "As of 2026, qualifying routes include regulated investment funds (commonly from &euro;500,000), cultural heritage (from &euro;250,000) and eligible lower-density investment (from &euro;200,000). Amounts and routes change, so we confirm the current position for your case.",
-       "pt": "Em 2026, as vias elegíveis incluem fundos de investimento regulados (habitualmente a partir de &euro;500.000), património cultural (a partir de &euro;250.000) e investimento elegível em baixa densidade (a partir de &euro;200.000). Os valores e as vias mudam, por isso confirmamos a posição atual para o seu caso."
-      }
-     },
-     {
-      "q": {
-       "en": "Do I have to live in Portugal?",
-       "pt": "Tenho de viver em Portugal?"
-      },
-      "a": {
-       "en": "The Golden Visa has light-touch stay requirements. The D2 requires genuine residence in Portugal. Both offer a path to permanent residency and, over time, citizenship - a specialist confirms the timelines.",
-       "pt": "O Golden Visa tem requisitos de permanência reduzidos. O D2 exige residência efetiva em Portugal. Ambos oferecem um caminho para a residência permanente e, com o tempo, a cidadania - um especialista confirma os prazos."
-      }
-     },
-     {
-      "q": {
-       "en": "Will I pay less tax in Portugal?",
-       "pt": "Vou pagar menos impostos em Portugal?"
-      },
-      "a": {
-       "en": "Property taxes are clear and predictable. Qualified professionals who become new tax residents may qualify for the IFICI regime (a 20% flat rate on eligible income); it is targeted and not automatic. We work with tax specialists to confirm what applies to you.",
-       "pt": "Os impostos sobre imóveis são claros e previsíveis. Profissionais qualificados que se tornem novos residentes fiscais podem qualificar-se para o regime IFICI (taxa fixa de 20% sobre rendimento elegível); é dirigido e não automático. Trabalhamos com especialistas fiscais para confirmar o que se aplica a si."
-      }
-     },
-     {
-      "q": {
-       "en": "How do I start?",
-       "pt": "Como começo?"
-      },
-      "a": {
-       "en": "Book a consultation. A Portugal adviser will review your goals and walk you through the routes, with no obligation.",
-       "pt": "Marque uma consulta. Um consultor de Portugal analisa os seus objetivos e apresenta-lhe as vias, sem compromisso."
-      }
-     }
-    ]
-   }
-  },
-  {
-   "type": "rd_close",
-   "data": {
-    "bg": "navy",
-    "title": {
-     "en": "Not sure which route fits you?",
-     "pt": "Não sabe qual rota combina consigo?"
-    },
-    "cta": {
-     "label": {
-      "en": "Speak with a specialist",
-      "pt": "Fale com um especialista"
-     },
-     "href": "contact.html",
-     "wrap": true,
-     "space": true
     }
-   }
-  }
- ]
+  ]
 }
