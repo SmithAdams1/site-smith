@@ -317,3 +317,5 @@ Bloco longo. Tudo em produção (main -> upstream/SmithAdams1, autor Suzan). Cac
 - **Ações cliente**: marcar click_whatsapp/click_call como key events no GA4 quando tiverem dados; lead de teste + Tag Assistant p/ limpar o aviso do Ads. Preços de campolide-93-5/ajuda-20b (foram nulificados; hoje estão `sold`).
 - **urban-collection.html / fanqueiros-hotel.html** ainda são páginas antigas (não-rd) - rebuild pendente.
 - About: case studies + bios da equipa (assets do Abilio).
+
+- **PM Asset Management refinamento (2026-08-30):** removido o preço (EUR1.800); cada um dos 8 cards com ícone (lucide, quadrado filetado, traço navy, filete/tom gold no hover) + micro-animação (card sobe no hover, respeita prefers-reduced-motion). `.am-grid`/`.am-ico` na property-management.html.
