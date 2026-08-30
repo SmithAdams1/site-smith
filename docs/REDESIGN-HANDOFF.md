@@ -275,3 +275,45 @@ Foco: slides Performance Marketing + 2 campanhas Google Ads + promo. Extensão C
   - api/guide.js: lê `phone` e reencaminha para postCrmLead (-> lead.phone -> CRM).
   - Verificado por código/curl em prod (sag-phone/phoneCode/phoneNumber/errPhone presentes; node --check OK). Screenshot visual falhou só por causa do pane interno instável + Lenis (não do código).
   - **Opção:** troquei consistência total pela lista curada (UX + peso do pop-up). Se quiserem paridade com o contact.html, mudar para a lista completa (174 países) - o inner está em /tmp/phonecode_full.html.
+
+---
+## Update - 2026-08-30 11:58 WEST  (autor: Suzan / sessão Claude)
+
+Bloco longo. Tudo em produção (main -> upstream/SmithAdams1, autor Suzan). Cache-bust do CSS/HTML em **g27**; sa-events em **v4**.
+
+### Design / UX (páginas)
+- **Página de detalhe do imóvel (property.html)** reconstruída no design novo: overview numa **caixa à esquerda da imagem em destaque** (grid `.pd-hero`, 2 col >=920px), fundo paper, **footer canónico** (paths absolutos p/ a rota /property/:slug), fontes Geoform. Preço: esconde se `sold`, "From" se `upcoming`, "Price on application" sem preço.
+- **H1 dos heroes** uniformizados em todo o site para `clamp(32px,4.6vw,60px)` (o default `.rd-hero h1` estava em 104px). Também blog `.journal-title` e contact `.contact-title`.
+- **Footer**: menu com as designações atuais (Home·About Us·Investments·Real Estate·Property Management·Hospitality·Press) em TODAS as páginas + page.html (nav mobile); index/contact tinham variante antiga -> trocadas pelo canónico. **Bug corrigido**: o `<script type=application/ld+json>` do WebPage nunca era fechado com `</script>` nos shells -> JSON-LD inválido E o script do Vercel Web Analytics (`/_vercel/insights/script.js`) ficava preso lá dentro sem executar; corrigido nos 5 shells. **Cor dos links do footer** (apareciam azul/roxo em páginas sem Preflight) forçada a herdar via redesign.css.
+
+### Real Estate / imóveis (BD site: bcjtkfipcfvvitglgpys, só leitura anon)
+- **Beato Sol 15** como imóvel promovido (Upcoming/Recommended, From EUR280k) + **form de brochura gated** (popup -> /api/contact -> Benjamin/Benjamin Pipeline, campanha "Beato Sol 15 (brochure)", verificado).
+- **Preços/sold**: apenas imóveis SEM preço ficam `sold` (regra do Abilio); gilberto EUR250k e beato EUR280k mantêm preço. Corri SQL de revert (eu tinha, por engano, nulificado preços num UPDATE largo).
+- **22 previous projects** importados do Boomnow/Guesty (extraídos do fiber React `memoizedProps.listing`: pictures[].original, amenities, beds/baths) como properties `sold` sem preço, com galeria+amenities+descrição on-brand; SQL corrido pelo Abilio. Grelha mostra 27 imóveis. Secção estática "Previous Projects" removida do real-estate.
+
+### SEO / GEO (roadmap acordado "vamos por ordem": P1..P5)
+- **P1 pillars (EN+PT, blocos rd-, server-rendered, FAQPage+BreadcrumbList, tabelas comparativas GEO, factos da KB `knowledge/`):**
+  - `/golden-visa` (rota imobiliária fechou out/2023; EUR280k = preço, não via GV; vias: fundos CMVM EUR500k, património EUR250k, baixa densidade EUR200k; AIMA; cidadania em reforma - sem número fixo).
+  - `/d2-visa` (sem mínimo fixo; **Art. 85.º Lei 23/2007** = exceções de ausência justificada = apelo do D2; residência efetiva; RP aos 5 anos).
+  - `/portugal-tax` (HIGH-YMYL: só IFICI verificado - NHR fechou 2025-01-01, 20%/10 anos, elegibilidade estreita, não p/ investidores passivos; IMT/IMI/AIMI/Selo descritos SEM taxas inventadas; Representação Fiscal; 3x disclaimer).
+  - Cluster interligado (Invest<->GV/D2/Tax). Wiring: api/rd-page.js (PAGES/readShell/readFallback/PT_SEO), vercel rewrites, sitemap.
+- **Property SSR + schema rico**: api/property.js server-renderiza o conteúdo do imóvel para #pd-root (crawlers sem JS) + `RealEstateListing/Residence` completo (morada, quartos, área, geo, amenityFeature, Offer SoldOut/PreOrder/InStock) + BreadcrumbList; provider `@id`=#organization.
+- **P3 Organization**: homepage já tinha RealEstateAgent `@id #organization` completo (sameAs, contactPoint, geo); liguei property.js + 4 shells WebPage + contact LocalBusiness ao mesmo @id.
+- **P4 Real Estate SSR**: ItemList JSON-LD (27 imóveis) + 27 `<a href=/property/:slug>` server-side injetados em #re-grid (cliente reescreve p/ o utilizador). **INFRA: Vercel Hobby limita a 12 funções serverless e o projeto está no limite** -> a lógica foi dobrada em api/property.js (`?list=1`), NÃO criar novas api/*.js sem remover uma. real-estate.html renomeado -> real-estate.shell.html (um .html estático no root faz shadow aos rewrites); pt-static lê o shell.
+- **P5 CWV**: preload da imagem LCP do hero (index/real-estate/invest/GV/D2/tax). **WebP dos heroes DEFERIDO** - ambiente sem cwebp nem Pillow; JPGs já otimizados (sips não reduz). Precisa de ferramenta de imagem.
+
+### Medição / Ads / GA4 / GSC (feito por mim via Claude-in-Chrome)
+- **Google Ads (AW-18073134136)**: criei 2 ações de conversão (snippet de evento, valor por conversão, Enhanced Conversions ON): **"Enviar formulário de leads" label `w_EoCJ26uuocELjI-K1D`** (todos os forms/leads) + **"Contacto" label `l5vTCKC6uuocELjI-K1D`** (WhatsApp+call). Ligados no `sa-events.js` (ADS_LABELS, v4) com value/currency por evento.
+- **GA4 (522575386)**: `generate_lead` já é key event. `click_whatsapp`/`click_call` só marcáveis quando tiverem dados (o UI não cria por nome); disparam conversão Ads via label na mesma.
+- **Search Console (www)**: sitemap re-submetido -> **95 páginas** descobertas (eram 19).
+- Aviso Ads "etiqueta não encontrada" = atraso de deteção/consent; a tag AW está em todas as páginas.
+
+### Property Management
+- Chip "346 homes" -> **"300+"**; nova secção **Asset Management** (8 pilares do one-pager: health checks, preservação, key holding, condomínio, seguros, compliance de arrendamento, representação fiscal, enhancement; fee EUR1.800+IVA/imóvel/ano) em `data-cms` (defaults EN, PT por semear).
+
+### PENDENTE / próximos
+- **Enriquecer PM em PT** (semear site_content propmgmt.asset.* em PT) e traduzir as pillars se se quiser PT nativo (hoje PT das pillars vem do rd-page render em PT - OK; a secção Asset é EN por default).
+- **WebP dos heroes** quando houver cwebp/Pillow (maior ganho de LCP).
+- **Ações cliente**: marcar click_whatsapp/click_call como key events no GA4 quando tiverem dados; lead de teste + Tag Assistant p/ limpar o aviso do Ads. Preços de campolide-93-5/ajuda-20b (foram nulificados; hoje estão `sold`).
+- **urban-collection.html / fanqueiros-hotel.html** ainda são páginas antigas (não-rd) - rebuild pendente.
+- About: case studies + bios da equipa (assets do Abilio).
