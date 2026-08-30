@@ -58,7 +58,7 @@ export default async function handler(req, res) {
         offers: p.price
           ? { '@type': 'Offer', price: p.price, priceCurrency: p.currency || 'EUR', availability }
           : { '@type': 'Offer', availability, priceCurrency: p.currency || 'EUR' },
-        provider: { '@type': 'RealEstateAgent', name: 'Smith & Adams Group', url: 'https://www.smithandadams.com' },
+        provider: { '@type': 'RealEstateAgent', '@id': 'https://www.smithandadams.com/#organization', name: 'Smith & Adams Group', url: 'https://www.smithandadams.com' },
       };
       const breadcrumb = {
         '@context': 'https://schema.org',
