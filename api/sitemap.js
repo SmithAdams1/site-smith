@@ -75,6 +75,7 @@ export default async function handler(req, res) {
     { path: '/', priority: '1.0', changefreq: 'weekly' },
     { path: '/invest-in-portugal', priority: '0.9' },
     { path: '/golden-visa', priority: '0.9' },
+    { path: '/d2-visa', priority: '0.9' },
     { path: '/hospitality', priority: '0.9' },
     { path: '/real-estate', priority: '0.9', changefreq: 'daily' },
     { path: '/property-management', priority: '0.8' },
