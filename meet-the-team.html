@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex"/>
+<title>Smith & Adams - Meet the Team (preview)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root{--navy:#11222D;--gold:#B58B45;--champ:#D6C29A;--paper:#FDFCF9;--line:#E7E2D6;--muted:#6A7883;--stone:#EEF0EE;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--navy);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1180px;margin:0 auto;padding:clamp(40px,7vw,96px) clamp(20px,5vw,56px);}
+  .eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 14px;}
+  h1{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(30px,5.4vw,56px);line-height:1.03;letter-spacing:-.01em;margin:0 0 14px;}
+  .lead{color:var(--muted);font-size:16px;line-height:1.6;max-width:62ch;margin:0 0 8px;}
+  .sec-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600;margin:48px 0 20px;padding-top:22px;border-top:1px solid var(--line);}
+  .grid{display:grid;gap:clamp(14px,2vw,22px);}
+  .grid--lead{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}
+  .grid--team{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));}
+  .mt{margin:0;display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(16px);
+    transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1);}
+  .mt.in{opacity:1;transform:none;}
+  .mt__ph{position:relative;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,#f3f4f2,var(--stone));border:1px solid var(--line);border-radius:3px;
+    overflow:hidden;transition:border-color .35s ease,box-shadow .35s ease;}
+  .mt--lead .mt__ph{aspect-ratio:4/5;}
+  .mt--team .mt__ph{aspect-ratio:1/1;}
+  .mt__ini{font-family:'Playfair Display',Georgia,serif;font-weight:500;color:var(--navy);opacity:.32;
+    letter-spacing:.02em;}
+  .mt--lead .mt__ini{font-size:38px;} .mt--team .mt__ini{font-size:26px;}
+  .mt__ph::after{content:"PHOTO";position:absolute;bottom:8px;left:0;right:0;text-align:center;
+    font-size:8.5px;letter-spacing:.18em;color:var(--muted);opacity:.55;}
+  .mt:hover .mt__ph{border-color:var(--champ);box-shadow:0 14px 30px rgba(17,34,45,.10);}
+  figcaption{display:flex;flex-direction:column;gap:3px;}
+  .mt__name{font-family:'Playfair Display',Georgia,serif;color:var(--navy);}
+  .mt--lead .mt__name{font-size:18px;} .mt--team .mt__name{font-size:15px;}
+  .mt__role{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+  @media (prefers-reduced-motion:reduce){.mt{opacity:1;transform:none;transition:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">People & Structure</p>
+  <h1>Meet the Team</h1>
+  <p class="lead">The people who turn vision into delivery, across investment, immigration, hospitality and growth. (Preview - photo frames are placeholders, ready for real headshots.)</p>
+
+  <p class="sec-label">Leadership</p>
+  <div class="grid grid--lead">
+<figure class="mt mt--lead"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">SP</span></span><figcaption><span class="mt__name">Suelen Pires</span><span class="mt__role">CEO</span></figcaption></figure>
+<figure class="mt mt--lead"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">CP</span></span><figcaption><span class="mt__name">Cristina Pereira</span><span class="mt__role">CFO</span></figcaption></figure>
+<figure class="mt mt--lead"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">AI</span></span><figcaption><span class="mt__name">Adam Ismail</span><span class="mt__role">Head of Hospitality</span></figcaption></figure>
+<figure class="mt mt--lead"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">JR</span></span><figcaption><span class="mt__name">Joana Ribeiro</span><span class="mt__role">Head of Business Growth</span></figcaption></figure>
+<figure class="mt mt--lead"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">AD</span></span><figcaption><span class="mt__name">Abílio Diz</span><span class="mt__role">Head of Marketing</span></figcaption></figure>
+<figure class="mt mt--lead"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">GH</span></span><figcaption><span class="mt__name">George Hobson</span><span class="mt__role">Head of Investment & Strategy</span></figcaption></figure>
+  </div>
+
+  <p class="sec-label">The Team</p>
+  <div class="grid grid--team">
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">BS</span></span><figcaption><span class="mt__name">Benjamin Sharps</span><span class="mt__role">Senior Investor Advisor</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">AI</span></span><figcaption><span class="mt__name">Alex Ivatsko</span><span class="mt__role">Digital Marketing Manager</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">MB</span></span><figcaption><span class="mt__name">Matilde Boulton</span><span class="mt__role">Designer</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">MC</span></span><figcaption><span class="mt__name">Mona Campbel</span><span class="mt__role">Data Analyst</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">RS</span></span><figcaption><span class="mt__name">Renato Silva</span><span class="mt__role">Revenue Manager</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">TK</span></span><figcaption><span class="mt__name">Taibo Karã</span><span class="mt__role">Customer Service Manager</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">SF</span></span><figcaption><span class="mt__name">Soraia Fernandes</span><span class="mt__role">Hospitality Team Manager</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">BF</span></span><figcaption><span class="mt__name">Bruna Fernandes</span><span class="mt__role">Comms Team Manager</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">HA</span></span><figcaption><span class="mt__name">Heloisa Araújo</span><span class="mt__role">Backoffice</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">RP</span></span><figcaption><span class="mt__name">Rafael Prado</span><span class="mt__role">OPPS</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">NA</span></span><figcaption><span class="mt__name">Nayane</span><span class="mt__role">OPPS Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">JH</span></span><figcaption><span class="mt__name">João Henrique</span><span class="mt__role">OPPS Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">TA</span></span><figcaption><span class="mt__name">Taina</span><span class="mt__role">Backoffice Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">LI</span></span><figcaption><span class="mt__name">Lisa</span><span class="mt__role">Backoffice Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">BR</span></span><figcaption><span class="mt__name">Beatriz Rosa</span><span class="mt__role">Backoffice Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">II</span></span><figcaption><span class="mt__name">Ismail Ibraim</span><span class="mt__role">Customer Service Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">JL</span></span><figcaption><span class="mt__name">João Leite</span><span class="mt__role">Customer Service Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">JJ</span></span><figcaption><span class="mt__name">Jahed Jahed</span><span class="mt__role">Customer Service Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">DA</span></span><figcaption><span class="mt__name">Dario</span><span class="mt__role">Comms Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">SO</span></span><figcaption><span class="mt__name">Sofia</span><span class="mt__role">Comms Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">AD</span></span><figcaption><span class="mt__name">Adriel</span><span class="mt__role">Comms Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">FA</span></span><figcaption><span class="mt__name">Fabio</span><span class="mt__role">Comms Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">IP</span></span><figcaption><span class="mt__name">Inês Passos</span><span class="mt__role">Comms Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">KI</span></span><figcaption><span class="mt__name">Kia</span><span class="mt__role">Comms Agent</span></figcaption></figure>
+<figure class="mt mt--team"><span class="mt__ph" aria-hidden="true"><span class="mt__ini">MA</span></span><figcaption><span class="mt__name">Mauro</span><span class="mt__role">Comms Agent</span></figcaption></figure>
+  </div>
+</div>
+<script>
+  (function(){
+    var els=[].slice.call(document.querySelectorAll('.mt'));
+    if(!('IntersectionObserver'in window)){els.forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(en){en.forEach(function(e){
+      if(e.isIntersecting){var el=e.target,i=els.indexOf(el);
+        setTimeout(function(){el.classList.add('in')},Math.min(i,14)*40);io.unobserve(el);}})},
+      {rootMargin:'0px 0px -8% 0px',threshold:.1});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+</body>
+</html>
