@@ -22,7 +22,7 @@ const SUPPORTED_LOCALES = ['en', 'pt'];
 // Pages served from the block model. Shell + committed fallback are read via
 // LITERAL paths in readShell()/readFallback() so Vercel's file tracer bundles
 // them into the function (a variable path is not traced).
-const PAGES = { 'about': true, 'invest-in-portugal': true, 'golden-visa': true, 'd2-visa': true };
+const PAGES = { 'about': true, 'invest-in-portugal': true, 'golden-visa': true, 'd2-visa': true, 'portugal-tax': true };
 
 // Client module embedded in the served page: repaints the block region in
 // PT when cmsLocale is 'pt' (block content has no data-cms). Uses the SAME
@@ -76,6 +76,10 @@ const PT_SEO = {
   'd2-visa': {
     title: 'Visto D2 de Portugal 2026 | Requisitos e Prazos | Smith &amp; Adams',
     desc: 'Como funciona o Visto D2 de Portugal em 2026: a via de residência para empreendedores - requisitos, plano de negócios, prazos, permanência e cidadania, com a Smith &amp; Adams.',
+  },
+  'portugal-tax': {
+    title: 'Fiscalidade em Portugal 2026 | IFICI e Impostos sobre Imóveis | Smith &amp; Adams',
+    desc: 'Fiscalidade em Portugal em 2026: o NHR fechou e foi substituído pelo IFICI, mais os impostos sobre imóveis (IMT, IMI, AIMI, Selo), arrendamento e mais-valias, com a Smith &amp; Adams.',
   },
 };
 
@@ -179,6 +183,7 @@ function readShell(slug) {
     if (slug === 'invest-in-portugal') return fs.readFileSync(path.join(process.cwd(), 'invest-in-portugal.shell.html'), 'utf8');
     if (slug === 'golden-visa') return fs.readFileSync(path.join(process.cwd(), 'golden-visa.shell.html'), 'utf8');
     if (slug === 'd2-visa') return fs.readFileSync(path.join(process.cwd(), 'd2-visa.shell.html'), 'utf8');
+    if (slug === 'portugal-tax') return fs.readFileSync(path.join(process.cwd(), 'portugal-tax.shell.html'), 'utf8');
   } catch (e) {}
   return null;
 }
@@ -188,6 +193,7 @@ function readFallback(slug) {
     if (slug === 'invest-in-portugal') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/invest.blocks.json'), 'utf8')).blocks;
     if (slug === 'golden-visa') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/golden-visa.blocks.json'), 'utf8')).blocks;
     if (slug === 'd2-visa') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/d2-visa.blocks.json'), 'utf8')).blocks;
+    if (slug === 'portugal-tax') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/portugal-tax.blocks.json'), 'utf8')).blocks;
   } catch (e) {}
   return null;
 }

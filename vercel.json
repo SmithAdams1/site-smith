@@ -20,6 +20,7 @@
     { "source": "/pt/invest-in-portugal", "destination": "/api/rd-page?slug=invest-in-portugal&locale=pt" },
     { "source": "/pt/golden-visa", "destination": "/api/rd-page?slug=golden-visa&locale=pt" },
     { "source": "/pt/d2-visa", "destination": "/api/rd-page?slug=d2-visa&locale=pt" },
+    { "source": "/pt/portugal-tax", "destination": "/api/rd-page?slug=portugal-tax&locale=pt" },
     { "source": "/pt/blog/:slug", "destination": "/api/seo_blog?slug=$1&locale=pt" },
     { "source": "/pt/property/:slug", "destination": "/api/property?slug=$1&locale=pt" },
     { "source": "/pt", "destination": "/api/pt-static?page=index" },
@@ -34,7 +35,9 @@
     { "source": "/golden-visa", "destination": "/api/rd-page?slug=golden-visa" },
     { "source": "/golden-visa.html", "destination": "/api/rd-page?slug=golden-visa" },
     { "source": "/d2-visa", "destination": "/api/rd-page?slug=d2-visa" },
-    { "source": "/d2-visa.html", "destination": "/api/rd-page?slug=d2-visa" }
+    { "source": "/d2-visa.html", "destination": "/api/rd-page?slug=d2-visa" },
+    { "source": "/portugal-tax", "destination": "/api/rd-page?slug=portugal-tax" },
+    { "source": "/portugal-tax.html", "destination": "/api/rd-page?slug=portugal-tax" }
   ],
   "headers": [
     {

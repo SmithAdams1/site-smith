@@ -1,0 +1,240 @@
+{
+ "_note": "Portugal tax for investors 2026 pillar (SEO + GEO). HIGH-RISK YMYL. Bilingual EN+PT. ONLY IFICI specifics are verified (knowledge/taxation.md VERIFIED 2026-08-29): NHR closed to new applicants 2025-01-01, replaced by IFICI = 20% flat PIT on eligible PT employment/self-employment income for 10 years + relief on certain foreign income; eligibility NARROW (highly-qualified professionals, EQF6+/PhD, in science/tech/health/green/R&D/startups/exporters, new tax residents only, no grandfathering) and NOT automatic for passive property investors. IMT/IMI/AIMI/Stamp Duty/rental/CGT rates are TO VERIFY -> described qualitatively, NO invented figures, always route to a specialist. Mandatory dated disclaimer on every tax section. rd_faq auto-emits FAQPage JSON-LD.",
+ "slug": "portugal-tax",
+ "title": {
+  "en": "Portugal Tax for Investors 2026 | IFICI & Property Taxes | Smith & Adams"
+ },
+ "blocks": [
+  {
+   "type": "rd_hero",
+   "data": {
+    "title": {
+     "en": "Portugal Tax for Investors, in 2026.",
+     "pt": "Fiscalidade em Portugal para Investidores, em 2026."
+    },
+    "subtitle": {
+     "en": "What actually changed - NHR, IFICI and the taxes on property - explained plainly, then confirmed for your case with tax specialists.",
+     "pt": "O que mudou realmente - NHR, IFICI e os impostos sobre imóveis - explicado com clareza e, depois, confirmado para o seu caso com especialistas fiscais."
+    },
+    "image": "/assets/hero-invest.jpg",
+    "image_alt": {
+     "en": "25 de Abril Bridge, Lisbon, Portugal",
+     "pt": "Ponte 25 de Abril, Lisboa, Portugal"
+    },
+    "ctas": [
+     {
+      "label": { "en": "What changed", "pt": "O que mudou" },
+      "href": "#ifici"
+     },
+     {
+      "label": { "en": "Book a consultation", "pt": "Marcar consulta" },
+      "href": "contact.html",
+      "style": "ghost",
+      "arrow": false
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "anchor": "ifici",
+    "eyebrow": { "en": "NHR is gone", "pt": "O NHR acabou" },
+    "title": { "en": "NHR is closed. What IFICI means in 2026.", "pt": "O NHR fechou. O que é o IFICI em 2026." },
+    "body": [
+     {
+      "en": "Portugal's Non-Habitual Resident (NHR) regime closed to new applicants on 1 January 2025 and was replaced by IFICI (the Tax Incentive for Scientific Research and Innovation, sometimes called &ldquo;NHR 2.0&rdquo;). If you have read older guides promising NHR, they are out of date.",
+      "pt": "O regime de Residente Não Habitual (NHR) fechou a novos requerentes a 1 de janeiro de 2025 e foi substituído pelo IFICI (Incentivo Fiscal à Investigação Científica e Inovação, por vezes chamado &ldquo;NHR 2.0&rdquo;). Se leu guias antigos a prometer NHR, estão desatualizados."
+     },
+     {
+      "en": "IFICI applies a 20% flat rate of personal income tax on eligible Portuguese employment or self-employment income for 10 years, with relief on certain foreign-source income. Crucially, eligibility is narrow: it targets highly-qualified professionals (typically a degree at EQF level 6 or above) in fields such as science, technology and innovation, healthcare, green energy, R&amp;D and qualifying startups or exporters, and only for people who become new Portuguese tax residents (not resident in the previous five years).",
+      "pt": "O IFICI aplica uma taxa fixa de 20% de IRS sobre rendimento elegível de trabalho dependente ou independente em Portugal durante 10 anos, com alívio sobre certos rendimentos de fonte estrangeira. Fundamental: a elegibilidade é estreita - dirige-se a profissionais altamente qualificados (tipicamente com grau de nível 6 ou superior do QEQ) em áreas como ciência, tecnologia e inovação, saúde, energia verde, I&amp;D e startups ou exportadoras elegíveis, e apenas para quem se torne novo residente fiscal em Portugal (não residente nos cinco anos anteriores)."
+     },
+     {
+      "en": "It is not automatic, and it is not a passive-investor benefit. Buying property or holding a Golden Visa does not, by itself, grant IFICI. A tax specialist confirms whether your specific situation and activity qualify.",
+      "pt": "Não é automático e não é um benefício para investidores passivos. Comprar um imóvel ou ter um Golden Visa não confere, por si só, o IFICI. Um especialista fiscal confirma se a sua situação e atividade específicas se qualificam."
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "anchor": "property",
+    "eyebrow": { "en": "01 &middot; Property taxes", "pt": "01 &middot; Impostos sobre imóveis" },
+    "title": { "en": "The taxes on Portuguese property.", "pt": "Os impostos sobre imóveis em Portugal." },
+    "body": [
+     {
+      "en": "Owning and transacting property in Portugal involves a small, predictable set of taxes. The rates and bands are set annually and depend on value, location and use, so we confirm the exact figures for your case - the table explains what each one is and when it applies.",
+      "pt": "Deter e transacionar imóveis em Portugal envolve um conjunto pequeno e previsível de impostos. As taxas e escalões são definidos anualmente e dependem do valor, localização e uso, por isso confirmamos os valores exatos para o seu caso - a tabela explica o que é cada um e quando se aplica."
+     },
+     {
+      "en": "<div style=\"overflow-x:auto;margin-top:8px;\"><table style=\"width:100%;border-collapse:collapse;font-size:15px;color:#11222D;\"><thead><tr style=\"background:#11222D;color:#fff;\"><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">Tax</th><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">What it is</th><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">When it applies</th></tr></thead><tbody><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;font-weight:600;\">IMT</td><td style=\"padding:12px 14px;color:#4b5563;\">Property transfer tax on a purchase</td><td style=\"padding:12px 14px;color:#4b5563;\">One-off, at purchase; based on price/value and property type</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;font-weight:600;\">Stamp Duty</td><td style=\"padding:12px 14px;color:#4b5563;\">Duty on the transaction and deeds (Imposto do Selo)</td><td style=\"padding:12px 14px;color:#4b5563;\">One-off, at purchase (and on some financing)</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;font-weight:600;\">IMI</td><td style=\"padding:12px 14px;color:#4b5563;\">Annual municipal property tax</td><td style=\"padding:12px 14px;color:#4b5563;\">Every year; set by each municipality on the tax value (VPT)</td></tr><tr><td style=\"padding:12px 14px;font-weight:600;\">AIMI</td><td style=\"padding:12px 14px;color:#4b5563;\">Annual surcharge on higher-value property holdings</td><td style=\"padding:12px 14px;color:#4b5563;\">Yearly, above a value threshold</td></tr></tbody></table></div>"
+     },
+     {
+      "en": "<span style=\"font-size:13px;color:var(--slate);\">Information as of 2026 and general in nature; not tax advice. Rates and thresholds change annually - Smith &amp; Adams confirms your position against the Portal das Finanças and current law.</span>",
+      "pt": "<span style=\"font-size:13px;color:var(--slate);\">Informação de 2026 e de carácter geral; não constitui aconselhamento fiscal. As taxas e limiares mudam anualmente - a Smith &amp; Adams confirma a sua posição junto do Portal das Finanças e da lei em vigor.</span>"
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "eyebrow": { "en": "02 &middot; Income &amp; gains", "pt": "02 &middot; Rendimento e mais-valias" },
+    "title": { "en": "Rental income and capital gains.", "pt": "Rendimento de arrendamento e mais-valias." },
+    "body": [
+     {
+      "en": "If you let a Portuguese property, the rental income is taxable in Portugal, with different options and deductions available. When you sell, capital gains on Portuguese property can be taxable, with certain reliefs in some situations. How each is taxed depends on whether you are a Portuguese tax resident or a non-resident, and on the year's rules.",
+      "pt": "Se arrendar um imóvel em Portugal, o rendimento de arrendamento é tributável em Portugal, com diferentes opções e deduções disponíveis. Quando vende, as mais-valias sobre imóveis em Portugal podem ser tributáveis, com certos alívios em algumas situações. A forma como cada uma é tributada depende de ser residente fiscal em Portugal ou não residente, e das regras do ano."
+     },
+     {
+      "en": "Because the treatment differs by residency and changes year to year, we do not quote a single rate here - we model your actual position with tax specialists before you commit.",
+      "pt": "Como o tratamento difere consoante a residência e muda de ano para ano, não indicamos aqui uma taxa única - modelamos a sua posição real com especialistas fiscais antes de qualquer compromisso."
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "eyebrow": { "en": "03 &middot; Tax residency", "pt": "03 &middot; Residência fiscal" },
+    "title": { "en": "When you become a Portuguese tax resident.", "pt": "Quando se torna residente fiscal em Portugal." },
+    "body": [
+     {
+      "en": "Broadly, you become a Portuguese tax resident if you spend more than 183 days in Portugal in a 12-month period, or you have a home here that you use as your habitual residence. Tax residency changes what and how you are taxed, and it is the gateway to regimes such as IFICI - so it is worth planning deliberately, not by accident.",
+      "pt": "Em termos gerais, torna-se residente fiscal em Portugal se permanecer mais de 183 dias em Portugal num período de 12 meses, ou se tiver cá uma habitação que use como residência habitual. A residência fiscal altera o que e como é tributado, e é a porta de entrada para regimes como o IFICI - por isso vale a pena planeá-la de forma deliberada, e não por acaso."
+     },
+     {
+      "en": "<span style=\"font-size:13px;color:var(--slate);\">Information as of 2026 and general in nature; not tax advice. Confirm your residency position with a qualified adviser.</span>",
+      "pt": "<span style=\"font-size:13px;color:var(--slate);\">Informação de 2026 e de carácter geral; não constitui aconselhamento fiscal. Confirme a sua situação de residência com um consultor qualificado.</span>"
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "eyebrow": { "en": "04 &middot; Fiscal representation", "pt": "04 &middot; Representação fiscal" },
+    "title": { "en": "Do you need a fiscal representative?", "pt": "Precisa de um representante fiscal?" },
+    "body": [
+     {
+      "en": "Non-residents with tax obligations in Portugal - for example, owning or letting property - generally need a fiscal representative: a Portuguese-based party who receives correspondence from the tax authority and helps keep you compliant. Tax Representation is one of our business units, so we can act as your representative and handle filings, deadlines and the Portal das Finanças on your behalf.",
+      "pt": "Não residentes com obrigações fiscais em Portugal - por exemplo, deter ou arrendar imóveis - precisam, em geral, de um representante fiscal: uma entidade sediada em Portugal que recebe a correspondência da autoridade tributária e ajuda a manter a sua conformidade. A Representação Fiscal é uma das nossas unidades de negócio, pelo que podemos atuar como seu representante e tratar de declarações, prazos e do Portal das Finanças em seu nome."
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_proof",
+   "data": {
+    "title": { "en": "Advised, not sold.", "pt": "Assessorado, não vendido." },
+    "body": {
+     "en": "Independent counsel, accountable from the first analysis to long-term ownership.",
+     "pt": "Consultoria independente, responsável desde a primeira análise até à posse de longo prazo."
+    },
+    "stats": [
+     { "value": { "en": "1,000+", "pt": "1.000+" }, "label": { "en": "investors advised", "pt": "investidores assessorados" } },
+     { "value": { "en": "&euro;300M+", "pt": "&euro;300M+" }, "label": { "en": "in advised assets", "pt": "em ativos assessorados" } },
+     { "value": { "en": "300+", "pt": "300+" }, "label": { "en": "assets under management", "pt": "ativos sob gestão" } }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "eyebrow": { "en": "Why Smith &amp; Adams", "pt": "Porquê a Smith &amp; Adams" },
+    "title": { "en": "Tax you can plan around.", "pt": "Uma fiscalidade que pode planear." },
+    "body": [
+     {
+      "en": "Tax is where good investments quietly gain or lose value. We work with tax specialists to model your position before you commit, structure the acquisition cleanly, and - through our Tax Representation unit - keep you compliant year after year, with net-of-cost, euro-denominated reporting.",
+      "pt": "A fiscalidade é onde os bons investimentos, em silêncio, ganham ou perdem valor. Trabalhamos com especialistas fiscais para modelar a sua posição antes de qualquer compromisso, estruturar a aquisição de forma limpa e - através da nossa unidade de Representação Fiscal - manter a sua conformidade ano após ano, com relatórios líquidos de custos e em euros."
+     },
+     {
+      "en": "We are advisers, not brokers: where a different structure or route serves you better, we say so.",
+      "pt": "Somos consultores, não intermediários: quando uma estrutura ou via diferente o serve melhor, dizemo-lo."
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_faq",
+   "data": {
+    "anchor": "tax-faq",
+    "eyebrow": { "en": "FAQ", "pt": "FAQ" },
+    "title": { "en": "Portugal tax for investors, answered.", "pt": "Fiscalidade em Portugal, respondida." },
+    "items": [
+     {
+      "q": { "en": "Is the NHR regime still available in Portugal?", "pt": "O regime NHR ainda existe em Portugal?" },
+      "a": {
+       "en": "No. NHR closed to new applicants on 1 January 2025 and was replaced by IFICI. Older guides that promise NHR to new arrivals are out of date.",
+       "pt": "Não. O NHR fechou a novos requerentes a 1 de janeiro de 2025 e foi substituído pelo IFICI. Guias antigos que prometem NHR a novos residentes estão desatualizados."
+      }
+     },
+     {
+      "q": { "en": "What is IFICI?", "pt": "O que é o IFICI?" },
+      "a": {
+       "en": "IFICI (the Tax Incentive for Scientific Research and Innovation) applies a 20% flat rate on eligible Portuguese employment or self-employment income for 10 years, with relief on certain foreign income.",
+       "pt": "O IFICI (Incentivo Fiscal à Investigação Científica e Inovação) aplica uma taxa fixa de 20% sobre rendimento elegível de trabalho dependente ou independente em Portugal durante 10 anos, com alívio sobre certos rendimentos estrangeiros."
+      }
+     },
+     {
+      "q": { "en": "Do I qualify for IFICI as a property investor?", "pt": "Qualifico-me para o IFICI como investidor imobiliário?" },
+      "a": {
+       "en": "Not automatically. IFICI targets highly-qualified professionals in specific fields (science, technology, healthcare, green energy, R&amp;D, qualifying startups or exporters) who become new Portuguese tax residents. Buying property or holding a Golden Visa does not, by itself, grant it - a specialist confirms your eligibility.",
+       "pt": "Não automaticamente. O IFICI dirige-se a profissionais altamente qualificados em áreas específicas (ciência, tecnologia, saúde, energia verde, I&amp;D, startups ou exportadoras elegíveis) que se tornem novos residentes fiscais em Portugal. Comprar um imóvel ou ter um Golden Visa não o confere, por si só - um especialista confirma a sua elegibilidade."
+      }
+     },
+     {
+      "q": { "en": "What taxes do I pay when I buy property in Portugal?", "pt": "Que impostos pago ao comprar imóvel em Portugal?" },
+      "a": {
+       "en": "A purchase typically involves IMT (property transfer tax) and Stamp Duty, both one-off at completion, based on the price or value and the property type. The exact amounts are set by the year's rules, so we confirm them for your purchase.",
+       "pt": "Uma compra envolve normalmente o IMT (imposto sobre transmissões) e o Imposto do Selo, ambos únicos na escritura, com base no preço ou valor e no tipo de imóvel. Os montantes exatos são definidos pelas regras do ano, por isso confirmamo-los para a sua compra."
+      }
+     },
+     {
+      "q": { "en": "Is there an annual property tax?", "pt": "Existe um imposto anual sobre imóveis?" },
+      "a": {
+       "en": "Yes - IMI, a municipal property tax charged each year on the property's tax value (VPT), with rates set by each municipality. Higher-value holdings may also pay AIMI, an annual surcharge above a value threshold.",
+       "pt": "Sim - o IMI, um imposto municipal cobrado todos os anos sobre o valor patrimonial tributário (VPT), com taxas definidas por cada município. Patrimónios de maior valor podem ainda pagar AIMI, uma sobretaxa anual acima de um limiar de valor."
+      }
+     },
+     {
+      "q": { "en": "How is rental income taxed?", "pt": "Como é tributado o rendimento de arrendamento?" },
+      "a": {
+       "en": "Rental income from a Portuguese property is taxable in Portugal, with different options and deductions. The treatment differs for residents and non-residents and changes year to year, so we model your actual position rather than quote a single rate.",
+       "pt": "O rendimento de arrendamento de um imóvel em Portugal é tributável em Portugal, com diferentes opções e deduções. O tratamento difere entre residentes e não residentes e muda de ano para ano, por isso modelamos a sua posição real em vez de indicar uma taxa única."
+      }
+     },
+     {
+      "q": { "en": "Is there capital gains tax when I sell?", "pt": "Há imposto sobre mais-valias quando vendo?" },
+      "a": {
+       "en": "Capital gains on Portuguese property can be taxable, with certain reliefs in some situations, and the treatment differs between residents and non-residents. We confirm the current rules and model the outcome before you sell.",
+       "pt": "As mais-valias sobre imóveis em Portugal podem ser tributáveis, com certos alívios em algumas situações, e o tratamento difere entre residentes e não residentes. Confirmamos as regras atuais e modelamos o resultado antes de vender."
+      }
+     },
+     {
+      "q": { "en": "Do I need a fiscal representative in Portugal?", "pt": "Preciso de um representante fiscal em Portugal?" },
+      "a": {
+       "en": "Non-residents with tax obligations in Portugal, such as owning or letting property, generally need a fiscal representative. Our Tax Representation unit can act as yours and handle filings, deadlines and the Portal das Finanças on your behalf.",
+       "pt": "Não residentes com obrigações fiscais em Portugal, como deter ou arrendar imóveis, precisam geralmente de um representante fiscal. A nossa unidade de Representação Fiscal pode atuar como o seu e tratar de declarações, prazos e do Portal das Finanças em seu nome."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_close",
+   "data": {
+    "bg": "navy",
+    "title": { "en": "Plan the tax before you invest.", "pt": "Planeie a fiscalidade antes de investir." },
+    "cta": {
+     "label": { "en": "Speak with a specialist", "pt": "Fale com um especialista" },
+     "href": "contact.html",
+     "wrap": true,
+     "space": true
+    }
+   }
+  }
+ ]
+}
