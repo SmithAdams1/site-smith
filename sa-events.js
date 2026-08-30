@@ -16,14 +16,17 @@
   // setup: the label after "AW-18073134136/"). Until a label exists, the GA4
   // `generate_lead` event still fires; only the Ads conversion is skipped.
   var ADS_LABELS = {
-    guide:               'lp-brochure-download',
-    brochure:            'lp-brochure-download', // same action as the guide download
-    consultation:        null,
-    contact:             null,
-    property:            null,
-    'property-management': null,
-    whatsapp:            null,
-    call:                null
+    // "Enviar formulario de leads" website action (created 2026-08-30) - every
+    // form/lead submission maps here (Ads optimises on it; GA4 keeps lead_type).
+    guide:               'w_EoCJ26uuocELjI-K1D',
+    brochure:            'w_EoCJ26uuocELjI-K1D',
+    consultation:        'w_EoCJ26uuocELjI-K1D',
+    contact:             'w_EoCJ26uuocELjI-K1D',
+    property:            'w_EoCJ26uuocELjI-K1D',
+    'property-management': 'w_EoCJ26uuocELjI-K1D',
+    // "Contacto" website action - WhatsApp + phone-call click intents.
+    whatsapp:            'l5vTCKC6uuocELjI-K1D',
+    call:                'l5vTCKC6uuocELjI-K1D'
   };
 
   // Estimated lead VALUES (EUR) so GA4 and Ads can optimise toward value, not
