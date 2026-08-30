@@ -11,14 +11,47 @@
   'use strict';
 
   var ADS_ID = 'AW-18073134136';
-  // Google Ads conversion labels. `guide` reuses the existing brochure action;
-  // add the others once the conversion actions are created in Google Ads.
+  // Google Ads conversion labels, keyed by lead type. Fill each `null` with the
+  // conversion label from Google Ads (Tools > Conversions > the action > tag
+  // setup: the label after "AW-18073134136/"). Until a label exists, the GA4
+  // `generate_lead` event still fires; only the Ads conversion is skipped.
   var ADS_LABELS = {
-    guide: 'lp-brochure-download',
-    contact: null,
-    consultation: null,
-    property: null
+    guide:               'lp-brochure-download',
+    brochure:            'lp-brochure-download', // same action as the guide download
+    consultation:        null,
+    contact:             null,
+    property:            null,
+    'property-management': null,
+    whatsapp:            null,
+    call:                null
   };
+
+  // Estimated lead VALUES (EUR) so GA4 and Ads can optimise toward value, not
+  // just count. These are relative proxies for lead quality, NOT revenue -
+  // tune them once you know your lead->deal economics.
+  var LEAD_VALUES = {
+    consultation:        200,
+    property:            120,
+    'property-management': 80,
+    contact:             80,
+    whatsapp:            60,
+    call:                60,
+    guide:               40,
+    brochure:            40,
+    lead:                50
+  };
+  var LEAD_CURRENCY = 'EUR';
+
+  function fireAds(type, value) {
+    var label = ADS_LABELS[type];
+    if (label && typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        send_to: ADS_ID + '/' + label,
+        value: value != null ? value : (LEAD_VALUES[type] || 0),
+        currency: LEAD_CURRENCY
+      });
+    }
+  }
 
   var ATTR_KEYS = ['gclid', 'gbraid', 'wbraid', 'fbclid',
     'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
@@ -63,13 +96,14 @@
   window.saTrackLead = function (type, extra) {
     try {
       if (typeof window.gtag !== 'function') return;
+      type = type || 'lead';
       var ctx = window.saLeadContext() || {};
-      var params = { lead_type: type || 'lead' };
+      var value = (extra && extra.value != null) ? extra.value : (LEAD_VALUES[type] || 0);
+      var params = { lead_type: type, value: value, currency: LEAD_CURRENCY };
       for (var k in ctx) { if (Object.prototype.hasOwnProperty.call(ctx, k)) params[k] = ctx[k]; }
       if (extra) { for (var e2 in extra) { if (Object.prototype.hasOwnProperty.call(extra, e2)) params[e2] = extra[e2]; } }
       window.gtag('event', 'generate_lead', params);
-      var label = ADS_LABELS[type];
-      if (label) window.gtag('event', 'conversion', { send_to: ADS_ID + '/' + label });
+      fireAds(type, value);
     } catch (e) {}
   };
 
@@ -78,7 +112,12 @@
     var a = ev.target && ev.target.closest ? ev.target.closest('a[href]') : null;
     if (!a || typeof window.gtag !== 'function') return;
     var href = a.getAttribute('href') || '';
-    if (/^tel:/i.test(href)) window.gtag('event', 'click_call', { link_url: href });
-    else if (/(wa\.me|api\.whatsapp\.com|whatsapp:)/i.test(href)) window.gtag('event', 'click_whatsapp', { link_url: href });
+    if (/^tel:/i.test(href)) {
+      window.gtag('event', 'click_call', { link_url: href, value: LEAD_VALUES.call, currency: LEAD_CURRENCY });
+      fireAds('call');
+    } else if (/(wa\.me|api\.whatsapp\.com|whatsapp:)/i.test(href)) {
+      window.gtag('event', 'click_whatsapp', { link_url: href, value: LEAD_VALUES.whatsapp, currency: LEAD_CURRENCY });
+      fireAds('whatsapp');
+    }
   }, true);
 })();
