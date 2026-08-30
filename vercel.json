@@ -18,6 +18,7 @@
     { "source": "/p/:slug", "destination": "/api/page?slug=$1" },
     { "source": "/pt/about", "destination": "/api/rd-page?slug=about&locale=pt" },
     { "source": "/pt/invest-in-portugal", "destination": "/api/rd-page?slug=invest-in-portugal&locale=pt" },
+    { "source": "/pt/golden-visa", "destination": "/api/rd-page?slug=golden-visa&locale=pt" },
     { "source": "/pt/blog/:slug", "destination": "/api/seo_blog?slug=$1&locale=pt" },
     { "source": "/pt/property/:slug", "destination": "/api/property?slug=$1&locale=pt" },
     { "source": "/pt", "destination": "/api/pt-static?page=index" },
@@ -28,7 +29,9 @@
     { "source": "/about", "destination": "/api/rd-page?slug=about" },
     { "source": "/about.html", "destination": "/api/rd-page?slug=about" },
     { "source": "/invest-in-portugal", "destination": "/api/rd-page?slug=invest-in-portugal" },
-    { "source": "/invest-in-portugal.html", "destination": "/api/rd-page?slug=invest-in-portugal" }
+    { "source": "/invest-in-portugal.html", "destination": "/api/rd-page?slug=invest-in-portugal" },
+    { "source": "/golden-visa", "destination": "/api/rd-page?slug=golden-visa" },
+    { "source": "/golden-visa.html", "destination": "/api/rd-page?slug=golden-visa" }
   ],
   "headers": [
     {

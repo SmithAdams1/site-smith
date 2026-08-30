@@ -22,7 +22,7 @@ const SUPPORTED_LOCALES = ['en', 'pt'];
 // Pages served from the block model. Shell + committed fallback are read via
 // LITERAL paths in readShell()/readFallback() so Vercel's file tracer bundles
 // them into the function (a variable path is not traced).
-const PAGES = { 'about': true, 'invest-in-portugal': true };
+const PAGES = { 'about': true, 'invest-in-portugal': true, 'golden-visa': true };
 
 // Client module embedded in the served page: repaints the block region in
 // PT when cmsLocale is 'pt' (block content has no data-cms). Uses the SAME
@@ -68,6 +68,10 @@ const PT_SEO = {
   'invest-in-portugal': {
     title: 'Investir em Portugal | Visto D2 e Golden Visa | Smith &amp; Adams',
     desc: 'Dois caminhos para a residência europeia: o Visto D2 para empreendedores e o Golden Visa para investidores. Compare objetivos, prazos e investimento com a Smith &amp; Adams.',
+  },
+  'golden-visa': {
+    title: 'Golden Visa de Portugal 2026 | Vias, Custo e Prazos | Smith &amp; Adams',
+    desc: 'Como funciona o Golden Visa de Portugal em 2026: vias de investimento elegíveis, custo, prazos, permanência e o caminho para a cidadania, com a Smith &amp; Adams.',
   },
 };
 
@@ -169,6 +173,7 @@ function readShell(slug) {
   try {
     if (slug === 'about') return fs.readFileSync(path.join(process.cwd(), 'about.shell.html'), 'utf8');
     if (slug === 'invest-in-portugal') return fs.readFileSync(path.join(process.cwd(), 'invest-in-portugal.shell.html'), 'utf8');
+    if (slug === 'golden-visa') return fs.readFileSync(path.join(process.cwd(), 'golden-visa.shell.html'), 'utf8');
   } catch (e) {}
   return null;
 }
@@ -176,6 +181,7 @@ function readFallback(slug) {
   try {
     if (slug === 'about') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/about.blocks.json'), 'utf8')).blocks;
     if (slug === 'invest-in-portugal') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/invest.blocks.json'), 'utf8')).blocks;
+    if (slug === 'golden-visa') return JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/golden-visa.blocks.json'), 'utf8')).blocks;
   } catch (e) {}
   return null;
 }

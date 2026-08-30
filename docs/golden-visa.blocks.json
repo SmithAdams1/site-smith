@@ -1,0 +1,248 @@
+{
+ "_note": "Golden Visa 2026 pillar page (SEO + GEO). Bilingual EN+PT. Facts from knowledge/golden-visa.md (VERIFIED 2026-08-29): direct real-estate route closed Oct 2023; current routes = CMVM funds from EUR500k (>=60% PT companies), cultural heritage from EUR250k, lower-density from EUR200k, research, business/job creation; administered by AIMA; light-touch stay; citizenship period under reform (do NOT state a fixed number). Proof trio 1,000+/EUR300M+/300+. rd_faq auto-emits FAQPage JSON-LD.",
+ "slug": "golden-visa",
+ "title": {
+  "en": "Portugal Golden Visa 2026 | Routes, Cost & Timeline | Smith & Adams"
+ },
+ "blocks": [
+  {
+   "type": "rd_hero",
+   "data": {
+    "title": {
+     "en": "The Portugal Golden Visa, in 2026.",
+     "pt": "O Golden Visa de Portugal, em 2026."
+    },
+    "subtitle": {
+     "en": "Residency by investment in the EU, advised end to end by an independent partner - from choosing a qualifying route to holding the investment for the long term.",
+     "pt": "Residência por investimento na UE, com consultoria independente do princípio ao fim - da escolha de uma via elegível à detenção do investimento a longo prazo."
+    },
+    "image": "/assets/hero-invest.jpg",
+    "image_alt": {
+     "en": "25 de Abril Bridge, Lisbon, Portugal",
+     "pt": "Ponte 25 de Abril, Lisboa, Portugal"
+    },
+    "ctas": [
+     {
+      "label": { "en": "How it works", "pt": "Como funciona" },
+      "href": "#how"
+     },
+     {
+      "label": { "en": "Book a consultation", "pt": "Marcar consulta" },
+      "href": "contact.html",
+      "style": "ghost",
+      "arrow": false
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "anchor": "what",
+    "eyebrow": { "en": "Residency by investment", "pt": "Residência por investimento" },
+    "title": { "en": "What is the Portugal Golden Visa?", "pt": "O que é o Golden Visa de Portugal?" },
+    "body": [
+     {
+      "en": "The Portugal Golden Visa is a residency-by-investment programme: in exchange for a qualifying investment in Portugal, an investor and their family obtain Portuguese residency, with the right to live, work and travel in the Schengen Area and, over time, a path to permanent residency and citizenship. It is administered by AIMA (the Agency for Integration, Migration and Asylum).",
+      "pt": "O Golden Visa de Portugal é um programa de residência por investimento: em troca de um investimento elegível em Portugal, o investidor e a sua família obtêm residência portuguesa, com o direito de viver, trabalhar e circular no Espaço Schengen e, com o tempo, um caminho para a residência permanente e a cidadania. É gerido pela AIMA (Agência para a Integração, Migrações e Asilo)."
+     },
+     {
+      "en": "One point matters more than any other in 2026: the direct real-estate purchase route was removed in October 2023. Buying a property no longer qualifies for the Golden Visa on its own. The programme continues through the investment routes below, and any &ldquo;from &euro;280,000&rdquo; figure you may have seen refers to the price of a specific property, not a Golden Visa qualifying amount.",
+      "pt": "Um ponto importa mais do que qualquer outro em 2026: a via direta de compra de imóvel foi eliminada em outubro de 2023. Comprar um imóvel deixou de qualificar, por si só, para o Golden Visa. O programa continua através das vias de investimento abaixo, e qualquer valor de &ldquo;a partir de &euro;280.000&rdquo; que tenha visto refere-se ao preço de um imóvel específico, não a um montante de qualificação para o Golden Visa."
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "anchor": "routes",
+    "eyebrow": { "en": "01 &middot; Qualifying routes", "pt": "01 &middot; Vias elegíveis" },
+    "title": { "en": "How you qualify in 2026.", "pt": "Como qualificar em 2026." },
+    "body": [
+     {
+      "en": "As of 2026, the Golden Visa qualifies through investment (not real estate). The most common routes and their typical minimums:",
+      "pt": "Em 2026, o Golden Visa qualifica-se através de investimento (não imobiliário). As vias mais comuns e os seus mínimos habituais:"
+     },
+     {
+      "en": "<div style=\"overflow-x:auto;margin-top:8px;\"><table style=\"width:100%;border-collapse:collapse;font-size:15px;color:#11222D;\"><thead><tr style=\"background:#11222D;color:#fff;\"><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">Route</th><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">Typical minimum (2026)</th><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">Notes</th></tr></thead><tbody><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;\">Regulated investment funds (CMVM)</td><td style=\"padding:12px 14px;font-weight:600;\">from &euro;500,000</td><td style=\"padding:12px 14px;color:#4b5563;\">Fund at least 60% invested in Portuguese companies</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;\">Cultural heritage support</td><td style=\"padding:12px 14px;font-weight:600;\">from &euro;250,000</td><td style=\"padding:12px 14px;color:#4b5563;\">Contribution to national artistic or heritage production</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;\">Eligible lower-density investment</td><td style=\"padding:12px 14px;font-weight:600;\">from &euro;200,000</td><td style=\"padding:12px 14px;color:#4b5563;\">Designated lower-density areas</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;\">Scientific research</td><td style=\"padding:12px 14px;font-weight:600;\">from &euro;500,000</td><td style=\"padding:12px 14px;color:#4b5563;\">Into accredited research institutions</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;\">Business &amp; job creation</td><td style=\"padding:12px 14px;font-weight:600;\">Job-based</td><td style=\"padding:12px 14px;color:#4b5563;\">Create or maintain qualifying Portuguese jobs</td></tr><tr><td style=\"padding:12px 14px;color:#9a3b2e;\">Direct real-estate purchase</td><td style=\"padding:12px 14px;font-weight:600;color:#9a3b2e;\">Closed</td><td style=\"padding:12px 14px;color:#4b5563;\">Removed as a Golden Visa route in October 2023</td></tr></tbody></table></div>"
+     },
+     {
+      "en": "<span style=\"font-size:13px;color:var(--slate);\">Routes and minimums as of 2026, based on current programme guidance; amounts and eligibility change. Smith &amp; Adams confirms the current position against AIMA before you commit.</span>",
+      "pt": "<span style=\"font-size:13px;color:var(--slate);\">Vias e mínimos em 2026, com base na orientação atual do programa; valores e elegibilidade mudam. A Smith &amp; Adams confirma a posição atual junto da AIMA antes de qualquer compromisso.</span>"
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "anchor": "how",
+    "eyebrow": { "en": "02 &middot; The process", "pt": "02 &middot; O processo" },
+    "title": { "en": "How the Golden Visa works, step by step.", "pt": "Como funciona o Golden Visa, passo a passo." },
+    "body": [
+     {
+      "en": "<ol style=\"margin:8px 0 0;padding-left:22px;line-height:1.9;\"><li><strong>Define your goals.</strong> Return, residency, family and timeline - so the route fits the outcome, not the other way round.</li><li><strong>Choose a qualifying route</strong> and complete due diligence on the specific investment (for a fund, its strategy, managers and CMVM regulation).</li><li><strong>Prepare and invest.</strong> Obtain a Portuguese tax number (NIF), open a bank account and make the qualifying investment.</li><li><strong>Apply through AIMA</strong> with the supporting documents, including proof of the investment and a clean criminal record.</li><li><strong>Give biometrics</strong> at an appointment in Portugal and receive the residence permit.</li><li><strong>Renew and maintain</strong> the investment and permit; over time, apply for permanent residency and, later, citizenship.</li></ol>",
+      "pt": "<ol style=\"margin:8px 0 0;padding-left:22px;line-height:1.9;\"><li><strong>Defina os seus objetivos.</strong> Retorno, residência, família e prazos - para a via servir o resultado, e não o contrário.</li><li><strong>Escolha uma via elegível</strong> e faça a due diligence do investimento específico (num fundo, a sua estratégia, gestores e regulação pela CMVM).</li><li><strong>Prepare e invista.</strong> Obtenha número de contribuinte (NIF), abra conta bancária e realize o investimento elegível.</li><li><strong>Candidate-se junto da AIMA</strong> com os documentos de suporte, incluindo prova do investimento e registo criminal limpo.</li><li><strong>Recolha de biometria</strong> numa marcação em Portugal e emissão da autorização de residência.</li><li><strong>Renove e mantenha</strong> o investimento e a autorização; com o tempo, peça a residência permanente e, mais tarde, a cidadania.</li></ol>"
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "eyebrow": { "en": "03 &middot; Golden Visa vs D2", "pt": "03 &middot; Golden Visa vs D2" },
+    "title": { "en": "Golden Visa or D2: which route fits?", "pt": "Golden Visa ou D2: qual a via certa?" },
+    "body": [
+     {
+      "en": "Portugal offers a second, often-overlooked route to residency: the D2 visa for entrepreneurs. The Golden Visa suits passive investors; the D2 suits those building a business here.",
+      "pt": "Portugal oferece uma segunda via de residência, muitas vezes esquecida: o visto D2 para empreendedores. O Golden Visa serve investidores passivos; o D2 serve quem quer construir cá um negócio."
+     },
+     {
+      "en": "<div style=\"overflow-x:auto;margin-top:8px;\"><table style=\"width:100%;border-collapse:collapse;font-size:15px;color:#11222D;\"><thead><tr style=\"background:#11222D;color:#fff;\"><th style=\"text-align:left;padding:12px 14px;font-weight:600;\"></th><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">Golden Visa</th><th style=\"text-align:left;padding:12px 14px;font-weight:600;\">D2 Visa</th></tr></thead><tbody><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;font-weight:600;\">Best for</td><td style=\"padding:12px 14px;\">Passive investors</td><td style=\"padding:12px 14px;\">Entrepreneurs &amp; business owners</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;font-weight:600;\">Basis</td><td style=\"padding:12px 14px;\">Qualifying investment</td><td style=\"padding:12px 14px;\">Viable business plan</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;font-weight:600;\">Entry amount</td><td style=\"padding:12px 14px;\">Route-dependent (from &euro;200k&ndash;&euro;500k)</td><td style=\"padding:12px 14px;\">No fixed minimum</td></tr><tr style=\"border-bottom:1px solid #E4E1DA;\"><td style=\"padding:12px 14px;font-weight:600;\">Physical stay</td><td style=\"padding:12px 14px;\">Light-touch</td><td style=\"padding:12px 14px;\">Genuine residence</td></tr><tr><td style=\"padding:12px 14px;font-weight:600;\">Path to citizenship</td><td style=\"padding:12px 14px;\">Yes, over time</td><td style=\"padding:12px 14px;\">Yes, over time</td></tr></tbody></table></div>"
+     },
+     {
+      "en": "See our full comparison on the <a href=\"/invest-in-portugal\" style=\"color:#11222D;text-decoration:underline;\">Invest in Portugal</a> page, where we set the two routes side by side.",
+      "pt": "Veja a comparação completa na página <a href=\"/invest-in-portugal\" style=\"color:#11222D;text-decoration:underline;\">Investir em Portugal</a>, onde colocamos as duas vias lado a lado."
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "eyebrow": { "en": "Family, stay &amp; citizenship", "pt": "Família, permanência e cidadania" },
+    "title": { "en": "Family, stay and the path to citizenship.", "pt": "Família, permanência e o caminho para a cidadania." },
+    "body": [
+     {
+      "en": "<strong>Family.</strong> The Golden Visa allows family reunification - typically a spouse or partner, dependent children and dependent parents - subject to the current rules, so the whole family holds residency together.",
+      "pt": "<strong>Família.</strong> O Golden Visa permite o reagrupamento familiar - habitualmente cônjuge ou parceiro, filhos dependentes e pais dependentes - sujeito às regras em vigor, para que toda a família tenha residência em conjunto."
+     },
+     {
+      "en": "<strong>Stay.</strong> The Golden Visa has a light-touch physical-presence requirement, which is why it suits investors who do not intend to relocate full time.",
+      "pt": "<strong>Permanência.</strong> O Golden Visa tem um requisito de presença física reduzido, razão pela qual serve investidores que não pretendem mudar-se a tempo inteiro."
+     },
+     {
+      "en": "<strong>Citizenship.</strong> Golden Visa holders can move to permanent residency and, later, apply for Portuguese (and therefore EU) citizenship. The qualifying period is under legislative review in 2026, so we confirm the current timeline for your case before you rely on it.",
+      "pt": "<strong>Cidadania.</strong> Os titulares do Golden Visa podem passar a residentes permanentes e, mais tarde, pedir a cidadania portuguesa (e, portanto, da UE). O período de qualificação está em revisão legislativa em 2026, pelo que confirmamos o prazo atual para o seu caso antes de o assumir."
+     },
+     {
+      "en": "<span style=\"font-size:13px;color:var(--slate);\">Information as of 2026 and general in nature; not legal or tax advice. Golden Visa rules change - Smith &amp; Adams confirms the current position for your case against official sources (AIMA).</span>",
+      "pt": "<span style=\"font-size:13px;color:var(--slate);\">Informação de 2026 e de carácter geral; não constitui aconselhamento jurídico ou fiscal. As regras do Golden Visa mudam - a Smith &amp; Adams confirma a posição atual para o seu caso junto de fontes oficiais (AIMA).</span>"
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_proof",
+   "data": {
+    "title": { "en": "Advised, not sold.", "pt": "Assessorado, não vendido." },
+    "body": {
+     "en": "Independent counsel, accountable from the first analysis to long-term ownership.",
+     "pt": "Consultoria independente, responsável desde a primeira análise até à posse de longo prazo."
+    },
+    "stats": [
+     { "value": { "en": "1,000+", "pt": "1.000+" }, "label": { "en": "investors advised", "pt": "investidores assessorados" } },
+     { "value": { "en": "&euro;300M+", "pt": "&euro;300M+" }, "label": { "en": "in advised assets", "pt": "em ativos assessorados" } },
+     { "value": { "en": "300+", "pt": "300+" }, "label": { "en": "assets under management", "pt": "ativos sob gestão" } }
+    ]
+   }
+  },
+  {
+   "type": "rd_prose",
+   "data": {
+    "eyebrow": { "en": "Why Smith &amp; Adams", "pt": "Porquê a Smith &amp; Adams" },
+    "title": { "en": "Advisers, not brokers.", "pt": "Consultores, não intermediários." },
+    "body": [
+     {
+      "en": "The Golden Visa is a means, not the goal. Our single mandate is your outcome: an independent read on which route (and which underlying investment) actually serves you, structured cleanly and held for the long term.",
+      "pt": "O Golden Visa é um meio, não o fim. O nosso único mandato é o seu resultado: uma leitura independente sobre qual a via (e qual o investimento subjacente) que realmente o serve, estruturada de forma limpa e mantida a longo prazo."
+     },
+     {
+      "en": "One team is accountable from first analysis to ongoing management, with net-of-cost, euro-denominated performance reported every quarter. Where an alternative route or provider is genuinely better for you, we say so.",
+      "pt": "Uma só equipa é responsável desde a primeira análise até à gestão contínua, com desempenho líquido de custos e em euros reportado trimestralmente. Quando uma via ou parceiro alternativo é genuinamente melhor para si, dizemo-lo."
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_faq",
+   "data": {
+    "anchor": "gv-faq",
+    "eyebrow": { "en": "FAQ", "pt": "FAQ" },
+    "title": { "en": "Portugal Golden Visa, answered.", "pt": "Golden Visa de Portugal, respondido." },
+    "items": [
+     {
+      "q": { "en": "Can I still get the Portugal Golden Visa by buying property?", "pt": "Ainda consigo o Golden Visa comprando um imóvel?" },
+      "a": {
+       "en": "No. The direct real-estate purchase route was removed in October 2023. As of 2026 the Golden Visa qualifies through investment routes such as regulated (CMVM) funds, cultural heritage and business creation - not by buying a home.",
+       "pt": "Não. A via direta de compra de imóvel foi eliminada em outubro de 2023. Em 2026 o Golden Visa qualifica-se através de vias de investimento como fundos regulados (CMVM), património cultural e criação de empresas - não pela compra de uma casa."
+      }
+     },
+     {
+      "q": { "en": "How much do I need for the Golden Visa in 2026?", "pt": "Quanto preciso para o Golden Visa em 2026?" },
+      "a": {
+       "en": "It depends on the route. Common minimums are: regulated investment funds from &euro;500,000, cultural heritage from &euro;250,000, and eligible lower-density investment from &euro;200,000. Amounts change, so we confirm the current position for your case.",
+       "pt": "Depende da via. Os mínimos habituais são: fundos de investimento regulados a partir de &euro;500.000, património cultural a partir de &euro;250.000 e investimento elegível em baixa densidade a partir de &euro;200.000. Os valores mudam, por isso confirmamos a posição atual para o seu caso."
+      }
+     },
+     {
+      "q": { "en": "What is the &ldquo;from &euro;280,000&rdquo; figure I have seen?", "pt": "O que é o valor de &ldquo;a partir de &euro;280.000&rdquo; que vi?" },
+      "a": {
+       "en": "That is the price of a specific property, not a Golden Visa qualifying amount. Buying property no longer qualifies for the Golden Visa on its own.",
+       "pt": "É o preço de um imóvel específico, não um montante de qualificação para o Golden Visa. Comprar um imóvel já não qualifica, por si só, para o Golden Visa."
+      }
+     },
+     {
+      "q": { "en": "How long does the Golden Visa take?", "pt": "Quanto tempo demora o Golden Visa?" },
+      "a": {
+       "en": "Timelines depend on your route, documents and AIMA processing, and have varied through recent reforms. A specialist gives you a realistic timeline once your route is chosen.",
+       "pt": "Os prazos dependem da via, dos documentos e do processamento da AIMA, e têm variado com as reformas recentes. Um especialista dá-lhe um prazo realista assim que a via estiver escolhida."
+      }
+     },
+     {
+      "q": { "en": "Do I have to live in Portugal?", "pt": "Tenho de viver em Portugal?" },
+      "a": {
+       "en": "No. The Golden Visa has a light-touch physical-presence requirement, which is why it suits investors who do not plan to relocate full time.",
+       "pt": "Não. O Golden Visa tem um requisito de presença física reduzido, razão pela qual serve investidores que não pretendem mudar-se a tempo inteiro."
+      }
+     },
+     {
+      "q": { "en": "Does the Golden Visa lead to citizenship?", "pt": "O Golden Visa leva à cidadania?" },
+      "a": {
+       "en": "It offers a path to permanent residency and, over time, Portuguese (EU) citizenship. The qualifying period is under legislative review in 2026, so we confirm the current timeline before you rely on it.",
+       "pt": "Oferece um caminho para a residência permanente e, com o tempo, a cidadania portuguesa (da UE). O período de qualificação está em revisão legislativa em 2026, por isso confirmamos o prazo atual antes de o assumir."
+      }
+     },
+     {
+      "q": { "en": "Can my family be included?", "pt": "A minha família pode ser incluída?" },
+      "a": {
+       "en": "Yes. The Golden Visa allows family reunification - typically a spouse or partner, dependent children and dependent parents - subject to the current rules.",
+       "pt": "Sim. O Golden Visa permite o reagrupamento familiar - habitualmente cônjuge ou parceiro, filhos dependentes e pais dependentes - sujeito às regras em vigor."
+      }
+     },
+     {
+      "q": { "en": "How do I start?", "pt": "Como começo?" },
+      "a": {
+       "en": "Book a consultation. A Portugal adviser will review your goals and walk you through the routes, with no obligation.",
+       "pt": "Marque uma consulta. Um consultor de Portugal analisa os seus objetivos e apresenta-lhe as vias, sem compromisso."
+      }
+     }
+    ]
+   }
+  },
+  {
+   "type": "rd_close",
+   "data": {
+    "bg": "navy",
+    "title": { "en": "Ready to explore your Golden Visa route?", "pt": "Pronto para explorar a sua via de Golden Visa?" },
+    "cta": {
+     "label": { "en": "Speak with a specialist", "pt": "Fale com um especialista" },
+     "href": "contact.html",
+     "wrap": true,
+     "space": true
+    }
+   }
+  }
+ ]
+}
