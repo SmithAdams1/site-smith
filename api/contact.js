@@ -7,7 +7,10 @@ export default async function handler(req, res) {
 
   const { firstName, lastName, email, phoneCode, phoneNumber, interest, message, attribution, source } = req.body;
 
-  if (!firstName || !email || !phoneCode || !phoneNumber) {
+  const isBrochure = typeof source === 'string' && source.indexOf('brochure-') === 0;
+  // Brochure (gated-download) leads are low-friction: name + email only. Every
+  // other form still requires a phone.
+  if (!firstName || !email || (!isBrochure && (!phoneCode || !phoneNumber))) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
@@ -19,19 +22,27 @@ export default async function handler(req, res) {
   const isInvestLP = source === 'lp-invest';
   const isBeato = source === 'beato-sol-15';
 
+  const brochureName = source === 'brochure-golden-visa' ? 'Golden Visa'
+    : source === 'brochure-d2' ? 'D2 Visa'
+    : source === 'brochure-invest' ? 'Why invest in Portugal'
+    : null;
+
   const campaignName = isPropertyManagement
     ? 'Property Management'
     : isInvestLP
       ? 'LP - Golden Visa (Invest)'
       : isBeato
         ? 'Beato Sol 15 (brochure)'
-        : 'Website Contact';
+        : brochureName
+          ? `Brochure - ${brochureName}`
+          : 'Website Contact';
 
   const notes = [
     isInvestLP ? 'Source: Landing Page (Invest / Golden Visa)' : null,
     isBeato ? 'Source: Beato Sol 15 brochure request' : null,
+    brochureName ? `Source: Brochure download - ${brochureName} (Invest page)` : null,
     interest ? `Interest: ${interest}` : null,
-    `Phone code: ${phoneCode}`,
+    (phoneCode || phoneNumber) ? `Phone code: ${phoneCode || ''}` : null,
     message ? `Message: ${message}` : null,
   ].filter(Boolean).join(' | ') || 'Contact form';
 
