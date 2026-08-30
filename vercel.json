@@ -37,7 +37,9 @@
     { "source": "/d2-visa", "destination": "/api/rd-page?slug=d2-visa" },
     { "source": "/d2-visa.html", "destination": "/api/rd-page?slug=d2-visa" },
     { "source": "/portugal-tax", "destination": "/api/rd-page?slug=portugal-tax" },
-    { "source": "/portugal-tax.html", "destination": "/api/rd-page?slug=portugal-tax" }
+    { "source": "/portugal-tax.html", "destination": "/api/rd-page?slug=portugal-tax" },
+    { "source": "/real-estate", "destination": "/api/real-estate" },
+    { "source": "/real-estate.html", "destination": "/api/real-estate" }
   ],
   "headers": [
     {
