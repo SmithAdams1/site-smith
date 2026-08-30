@@ -8,7 +8,7 @@ import path from 'path';
 export default async function handler(req, res) {
   const SUPABASE_URL = 'https://bcjtkfipcfvvitglgpys.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
-  const filePath = path.join(process.cwd(), 'real-estate.html');
+  const filePath = path.join(process.cwd(), 'real-estate.shell.html');
   const BASE = 'https://www.smithandadams.com';
 
   try {

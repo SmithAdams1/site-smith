@@ -16,7 +16,7 @@ function readFile(page) {
     if (page === 'our-developments') return fs.readFileSync(path.join(process.cwd(), 'hospitality.html'), 'utf8');
     if (page === 'property-management') return fs.readFileSync(path.join(process.cwd(), 'property-management.html'), 'utf8');
     if (page === 'contact') return fs.readFileSync(path.join(process.cwd(), 'contact.html'), 'utf8');
-    if (page === 'real-estate') return fs.readFileSync(path.join(process.cwd(), 'real-estate.html'), 'utf8');
+    if (page === 'real-estate') return fs.readFileSync(path.join(process.cwd(), 'real-estate.shell.html'), 'utf8');
   } catch (e) {}
   return null;
 }

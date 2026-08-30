@@ -35,7 +35,7 @@ VOID = {'img', 'source', 'input', 'br', 'hr', 'meta', 'link'}
 
 PAGES = ['index.html', 'about.html', 'contact.html', 'invest-in-portugal.html',
          'our-developments.html', 'property-management.html', 'urban-collection.html',
-         'real-estate.html', 'blog.html']
+         'real-estate.shell.html', 'blog.html']
 
 
 def anon_key():
