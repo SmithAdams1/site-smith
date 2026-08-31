@@ -579,3 +579,17 @@ STATUS: a iniciar pesquisa no browser.
   gap-aware (pageWidth = (cardW+gap)*perView). Verificado nas 2 paginas (flags reais TR/IN/GB/AE corretas).
 - [2026-08-31 17:02 WEST] Abilio: aprovacao em MANUAL + "avanca" para (1) homepage push (2) covers (3) artigos.
   A executar por ordem. assets/blog NAO commitado (covers dos artigos vao para blog-media via backoffice).
+
+- [2026-08-31 17:10 WEST] STOP a pedido do Abilio ("Vamos parar").
+  ESTADO no momento do stop:
+  * HOMEPAGE: commit 144d92e (autor suzan) FEITO e **PUSHED para SmithAdams1/site-smith main** -> Vercel a
+    deploiar. (title/meta Investment Advisory + carousel testimonials 6 cards + bandeiras reais webp + spacing.)
+  * DESCOBERTA: remote `origin` abiliodiz-cell/site-smith NAO existe (404). Repo VIVO = `SmithAdams1/site-smith`
+    (era `upstream`). Push feito para upstream/main (fast-forward limpo ac13a3e..144d92e). ATUALIZAR docs/memoria:
+    STUDIO-HANDOFF dizia abiliodiz-cell (desatualizado). Considerar corrigir o git remote origin.
+  * BACKOFFICE (12 covers + 3 artigos): **NAO iniciado**. Tudo preparado: in-app Claude Browser (tab seed)
+    logado como abilio.diz@; pipeline validado (createClient herda sessao; fetch Unsplash->blob OK); assignments
+    dos 12 covers + 3 artigos ja no handoff (entradas 15:34). Bloqueio anterior (classificador auto-mode) devia
+    ficar resolvido agora que o Abilio pos aprovacao em MANUAL, mas NAO chegou a correr.
+  * A RETOMAR: covers (1 passagem JS: para cada slug, fetch Unsplash rendition -> storage.upload blog-media ->
+    posts.update image_url) e depois os 3 artigos (insert em posts; artigo 1 sem numeros [A VERIFICAR]).
