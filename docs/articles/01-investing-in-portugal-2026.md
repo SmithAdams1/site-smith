@@ -65,7 +65,36 @@ Sources: AirDNA, Airbtics, Turismo de Portugal, INE (2026). Premium, professiona
 
 ## Net-of-cost returns: what most Portugal numbers leave out
 
-A gross yield is a starting point, not a result. The return an investor actually keeps is what remains after acquisition costs, annual property taxes, management, and income tax. A worked, clearly modelled illustration for a professionally managed Lisbon short-term-rental apartment looks like this:
+A gross yield is a starting point, not a result. The return an investor actually keeps is what remains after acquisition costs, annual property taxes, management, and income tax. The chart below is a clearly modelled illustration for a professionally managed Lisbon short-term-rental apartment, across three operating scenarios.
+
+<figure>
+<svg viewBox="0 0 640 330" width="100%" style="max-width:640px;height:auto;font-family:Archivo,'Helvetica Neue',Helvetica,Arial,sans-serif;" role="img" aria-labelledby="roiTitle roiDesc">
+  <title id="roiTitle">Modelled net annual ROI, Lisbon short-term rental</title>
+  <desc id="roiDesc">Modelled net annual return on investment for a professionally managed Lisbon short-term-rental apartment: Conservative 8.75 percent, Professional 10.38 percent, Optimized 11.97 percent. Modelled, not a forecast.</desc>
+  <line x1="40" y1="250" x2="600" y2="250" stroke="#E4E1DA" stroke-width="1"/>
+  <g fill="#11222D">
+    <rect x="80" y="119" width="110" height="131" rx="2"/>
+    <rect x="265" y="94" width="110" height="156" rx="2"/>
+    <rect x="450" y="70" width="110" height="180" rx="2"/>
+  </g>
+  <g fill="#D6C29A">
+    <rect x="80" y="116" width="110" height="3"/>
+    <rect x="265" y="91" width="110" height="3"/>
+    <rect x="450" y="67" width="110" height="3"/>
+  </g>
+  <g fill="#11222D" font-size="21" font-weight="600" text-anchor="middle">
+    <text x="135" y="107">8.75%</text>
+    <text x="320" y="82">10.38%</text>
+    <text x="505" y="58">11.97%</text>
+  </g>
+  <g fill="#6A7883" font-size="12.5" letter-spacing="1.5" text-anchor="middle">
+    <text x="135" y="273">CONSERVATIVE</text>
+    <text x="320" y="273">PROFESSIONAL</text>
+    <text x="505" y="273">OPTIMIZED</text>
+  </g>
+  <text x="40" y="300" fill="#6A7883" font-size="12" font-family="Archivo,Helvetica,Arial,sans-serif">Modelled net annual ROI (%) &middot; Lisbon STR &middot; as of 2026</text>
+</svg>
+<figcaption>
 
 | Scenario | ADR | Occupancy | Net annual ROI |
 |---|---|---|---|
@@ -73,9 +102,12 @@ A gross yield is a starting point, not a result. The return an investor actually
 | Professional | €140 | 72% | 10.38% |
 | Optimized | €155 | 75% | 11.97% |
 
-*Illustrative model for a professionally managed Lisbon short-term-rental apartment (a €280,000 unit, 21% management fee), built from the independent benchmarks above. Modelled, not a forecast or a guarantee. As of 2026. Sources: AirDNA, Airbtics, Turismo de Portugal, INE.*
+*Illustrative model for a professionally managed Lisbon short-term-rental apartment (an illustrative €280,000 apartment price, unrelated to any visa threshold; 21% management fee), built from the independent benchmarks above. Modelled, not a forecast or a guarantee. As of 2026. Sources: AirDNA, Airbtics, Turismo de Portugal, INE.*
 
-The discipline that produces those numbers is the same one Smith & Adams reports on every asset it manages: performance stated net of cost, in euros, quarterly, in the same format every time.
+</figcaption>
+</figure>
+
+The chart is the picture; the table underneath it is the record. The discipline that produces those numbers is the same one Smith & Adams reports on every asset it manages: performance stated net of cost, in euros, quarterly, in the same format every time.
 
 ## The costs to model before you buy
 
