@@ -349,142 +349,173 @@
           "en": "The people who turn vision into delivery, across investment, immigration, hospitality and growth.",
           "pt": "As pessoas que transformam a vis&atilde;o em execu&ccedil;&atilde;o, no investimento, imigra&ccedil;&atilde;o, hotelaria e crescimento."
         },
-        "leaders": [
+        "groups": [
           {
-            "name": "Suelen Pires",
-            "role": "CEO",
-            "photo": "/team/suelen.jpg"
+            "label": {
+              "en": "Executive",
+              "pt": "Executivo"
+            },
+            "layout": "lead",
+            "people": [
+              {
+                "name": "Suelen Pires",
+                "role": "CEO",
+                "photo": "/team/suelen.jpg"
+              },
+              {
+                "name": "Cristina Pereira",
+                "role": "CFO"
+              }
+            ]
           },
           {
-            "name": "Cristina Pereira",
-            "role": "CFO"
+            "label": {
+              "en": "Heads of Department",
+              "pt": "Direção"
+            },
+            "layout": "lead",
+            "people": [
+              {
+                "name": "Adam Ismail",
+                "role": "Head of Hospitality",
+                "photo": "/team/adam.jpg"
+              },
+              {
+                "name": "Joana Ribeiro",
+                "role": "Head of Business Growth"
+              },
+              {
+                "name": "Abílio Diz",
+                "role": "Head of Marketing",
+                "photo": "/team/abilio.jpg"
+              },
+              {
+                "name": "George Hobson",
+                "role": "Head of Investment & Strategy",
+                "photo": "/team/george.jpg"
+              },
+              {
+                "name": "Teresa",
+                "role": "Head of Client Relations & Asset Management",
+                "photo": "/team/teresa.jpg"
+              }
+            ]
           },
           {
-            "name": "Adam Ismail",
-            "role": "Head of Hospitality",
-            "photo": "/team/adam.jpg"
-          },
-          {
-            "name": "Joana Ribeiro",
-            "role": "Head of Business Growth"
-          },
-          {
-            "name": "Abílio Diz",
-            "role": "Head of Marketing",
-            "photo": "/team/abilio.jpg"
-          },
-          {
-            "name": "George Hobson",
-            "role": "Head of Investment & Strategy",
-            "photo": "/team/george.jpg"
-          }
-        ],
-        "team": [
-          {
-            "name": "Benjamin Sharps",
-            "role": "Senior Investor Advisor"
-          },
-          {
-            "name": "Alex Ivatsko",
-            "role": "Digital Marketing Manager",
-            "photo": "/team/alex.jpg"
-          },
-          {
-            "name": "Matilde Boulton",
-            "role": "Designer"
-          },
-          {
-            "name": "Mona Campbel",
-            "role": "Data Analyst",
-            "photo": "/team/mona.jpg"
-          },
-          {
-            "name": "Renato Silva",
-            "role": "Revenue Manager",
-            "photo": "/team/renato.jpg"
-          },
-          {
-            "name": "Taibo Karã",
-            "role": "Customer Service Manager",
-            "photo": "/team/taibo.jpg"
-          },
-          {
-            "name": "Soraia Fernandes",
-            "role": "Hospitality Team Manager",
-            "photo": "/team/soraia.jpg"
-          },
-          {
-            "name": "Bruna Fernandes",
-            "role": "Comms Team Manager"
-          },
-          {
-            "name": "Heloisa Araújo",
-            "role": "Backoffice"
-          },
-          {
-            "name": "Rafael Prado",
-            "role": "OPPS"
-          },
-          {
-            "name": "Nayane",
-            "role": "OPPS Agent"
-          },
-          {
-            "name": "João Henrique",
-            "role": "OPPS Agent"
-          },
-          {
-            "name": "Taina",
-            "role": "Backoffice Agent"
-          },
-          {
-            "name": "Lisa",
-            "role": "Backoffice Agent"
-          },
-          {
-            "name": "Beatriz Rosa",
-            "role": "Backoffice Agent"
-          },
-          {
-            "name": "Ismail Ibraim",
-            "role": "Customer Service Agent"
-          },
-          {
-            "name": "João Leite",
-            "role": "Customer Service Agent"
-          },
-          {
-            "name": "Jahed Jahed",
-            "role": "Customer Service Agent",
-            "photo": "/team/jahed.jpg"
-          },
-          {
-            "name": "Dario",
-            "role": "Comms Agent"
-          },
-          {
-            "name": "Sofia",
-            "role": "Comms Agent"
-          },
-          {
-            "name": "Adriel",
-            "role": "Comms Agent"
-          },
-          {
-            "name": "Fabio",
-            "role": "Comms Agent"
-          },
-          {
-            "name": "Inês Passos",
-            "role": "Comms Agent"
-          },
-          {
-            "name": "Kia",
-            "role": "Comms Agent"
-          },
-          {
-            "name": "Mauro",
-            "role": "Comms Agent"
+            "label": {
+              "en": "The Team",
+              "pt": "A Equipa"
+            },
+            "layout": "team",
+            "people": [
+              {
+                "name": "Benjamin Sharps",
+                "role": "Senior Investor Advisor"
+              },
+              {
+                "name": "Alex Ivatsko",
+                "role": "Digital Marketing Manager",
+                "photo": "/team/alex.jpg"
+              },
+              {
+                "name": "Matilde Boulton",
+                "role": "Designer"
+              },
+              {
+                "name": "Mona Campbel",
+                "role": "Data Analyst",
+                "photo": "/team/mona.jpg"
+              },
+              {
+                "name": "Renato Silva",
+                "role": "Revenue Manager",
+                "photo": "/team/renato.jpg"
+              },
+              {
+                "name": "Taibo Karã",
+                "role": "Customer Service Manager",
+                "photo": "/team/taibo.jpg"
+              },
+              {
+                "name": "Soraia Fernandes",
+                "role": "Hospitality Team Manager",
+                "photo": "/team/soraia.jpg"
+              },
+              {
+                "name": "Bruna Fernandes",
+                "role": "Comms Team Manager"
+              },
+              {
+                "name": "Heloisa Araújo",
+                "role": "Backoffice"
+              },
+              {
+                "name": "Rafael Prado",
+                "role": "OPPS"
+              },
+              {
+                "name": "Nayane",
+                "role": "OPPS Agent"
+              },
+              {
+                "name": "João Henrique",
+                "role": "OPPS Agent"
+              },
+              {
+                "name": "Taina",
+                "role": "Backoffice Agent"
+              },
+              {
+                "name": "Lisa",
+                "role": "Backoffice Agent"
+              },
+              {
+                "name": "Beatriz Rosa",
+                "role": "Backoffice Agent"
+              },
+              {
+                "name": "Ismail Ibraim",
+                "role": "Customer Service Agent"
+              },
+              {
+                "name": "João Leite",
+                "role": "Customer Service Agent",
+                "photo": "/team/joao.jpg"
+              },
+              {
+                "name": "Jahed Jahed",
+                "role": "Customer Service Agent",
+                "photo": "/team/jahed.jpg"
+              },
+              {
+                "name": "Dario",
+                "role": "Comms Agent"
+              },
+              {
+                "name": "Sofia",
+                "role": "Comms Agent"
+              },
+              {
+                "name": "Adriel",
+                "role": "Comms Agent"
+              },
+              {
+                "name": "Fabio",
+                "role": "Comms Agent"
+              },
+              {
+                "name": "Inês Passos",
+                "role": "Comms Agent"
+              },
+              {
+                "name": "Kia",
+                "role": "Comms Agent"
+              },
+              {
+                "name": "Mauro",
+                "role": "Comms Agent"
+              }
+            ]
           }
         ]
       }
