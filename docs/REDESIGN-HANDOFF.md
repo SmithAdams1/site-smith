@@ -593,3 +593,5 @@ STATUS: a iniciar pesquisa no browser.
     ficar resolvido agora que o Abilio pos aprovacao em MANUAL, mas NAO chegou a correr.
   * A RETOMAR: covers (1 passagem JS: para cada slug, fetch Unsplash rendition -> storage.upload blog-media ->
     posts.update image_url) e depois os 3 artigos (insert em posts; artigo 1 sem numeros [A VERIFICAR]).
+
+- **Artigo 1 PUBLICADO** (2026-08-31 18:07 WEST): post id 341902f7 na tabela posts, slug investing-in-portugal-real-estate-2026, LIVE em /blog/... com header correto, gr\xc3\xa1fico SVG + tabelas intactos, capa investing-2026-hero.webp. Inserido via consola (fetch do HTML + supabase client autenticado pela sess\xc3\xa3o do Ab\xc3\xadlio; NUNCA passei a password). PENDENTE: trocar capa Unsplash->foto do Drive; artigos 2/3 (GV vs D2, GV rotas); tradu\xc3\xa7\xc3\xa3o PT. [2026-08-31 18:07 WEST]
