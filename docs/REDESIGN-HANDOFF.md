@@ -621,3 +621,8 @@ PENDENTE: fotos variadas copyright-free (agente a curar Unsplash/Pexels) -> capa
 - **Traducao PT-EU dos 4 artigos** (2026-08-31 21:09 WEST): investing, tax, GV rotas, GV vs D2 traduzidos (4 agentes em paralelo, HTML/tabelas/SVG preservados byte-a-byte, 0 travessoes, voz da casa). Ficheiros docs/articles/*-pt.html. Escrito translations.pt (title+excerpt+content) em cada post pela sessao Studio. Verificado live em /pt/blog/ (SVG intacto, PT correto). Commit 5997dc4. [2026-08-31 21:09 WEST]
 
 - **Traducao PT dos 6 artigos restantes** (2026-08-31 21:22 WEST): polycentric, liquidity, scarcity, portfolios, cities, yield (6 agentes em paralelo, buscaram conteudo via Supabase REST anon, traduziram, 0 travessoes, HTML preservado). translations.pt escrito pela sessao Studio; verificado live em /pt/blog/. Commit 6369637. **RESULTADO: os 14 posts do blog estao agora bilingues EN/PT.** [2026-08-31 21:22 WEST]
+
+---
+## Sessao 2026-08-31 21:38 WEST (conta: abilio.diz / Claude Code)
+
+- **Redesign dos cards "Real stories" (testemunhos na home)**: a bandeira do pais preenchia o card inteiro (.rd-flag inset:0 cover + veu de paper) - lavado e contra a contencao da marca. Nova solucao (Head of Design + tendencias atuais): card limpo em paper; **aspa editorial** em marca-d'agua (navy 13%, .rd-quote__mark); **bandeira como chip circular** 36px no rodape ao lado do autor (.rd-quote__flag, anel hairline + sombra subtil); hover com elevacao + filete champagne (var(--gold-line)). data-cms dos quotes/autores preservados. index.html seccao TESTIMONIALS. Aprovado pelo Abilio ("muito melhor"). Commit 5aeab21. LIVE.
