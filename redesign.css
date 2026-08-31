@@ -151,7 +151,7 @@
   .rd-funcs li { display:flex; gap:20px; padding:18px 0; border-bottom:1px solid rgba(255,255,255,0.14); }
   .rd-funcs li .fi { font-family:var(--display); font-size:15px; color:var(--stone); width:2ch; flex-shrink:0; padding-top:3px; }
   .rd-funcs li .ft { display:block; font-family:var(--sans); font-weight:500; font-size:clamp(16px,1.4vw,19px); color:#fff; }
-  .rd-funcs li .fd { display:block; font-family:var(--sans); font-size:13.5px; color:var(--stone); margin-top:5px; line-height:1.5; }
+  .rd-funcs li .fd { display:block; font-family:var(--sans); font-size:15px; color:var(--stone); margin-top:6px; line-height:1.55; }
   @media (max-width:900px){ .rd-pin__grid{ grid-template-columns:1fr; gap:32px; } .rd-pin__stage{ min-height:auto; padding:clamp(64px,12vw,120px) 0; } }
 
   /* ---------- two ways ---------- */

@@ -9,7 +9,11 @@
       "permanent": true
     },
     { "source": "/our-developments", "destination": "/hospitality", "permanent": true },
-    { "source": "/our-developments.html", "destination": "/hospitality", "permanent": true }
+    { "source": "/our-developments.html", "destination": "/hospitality", "permanent": true },
+    { "source": "/blog/lisbon-urban-collection-premium-investment", "destination": "/blog", "permanent": true },
+    { "source": "/blog/urban-collection-floor-plans-lisbon-luxury", "destination": "/blog", "permanent": true },
+    { "source": "/blog/portugal-fastest-growing-investment-destination", "destination": "/blog", "permanent": true },
+    { "source": "/blog/portuguese-lifestyle-international-residents", "destination": "/blog", "permanent": true }
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },

@@ -365,10 +365,11 @@
                     border:1px solid var(--line); background:var(--paper);
                     position:relative; overflow:hidden; }
                   .rd-quote .rd-flag{ position:absolute; inset:0; z-index:0; pointer-events:none;
-                    background-repeat:no-repeat; background-position:right -6% bottom -8%; background-size:60% auto;
-                    opacity:.08;
-                    -webkit-mask-image:radial-gradient(135% 135% at 88% 90%, #000 0%, #000 26%, transparent 66%);
-                            mask-image:radial-gradient(135% 135% at 88% 90%, #000 0%, #000 26%, transparent 66%); }
+                    background-repeat:no-repeat; background-position:center; background-size:cover;
+                    opacity:.16; }
+                  /* Paper veil over the full-bleed flag so the quote stays readable. */
+                  .rd-quote::after{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+                    background:linear-gradient(180deg, rgba(253,252,249,.30), rgba(253,252,249,.48)); }
                   .rd-flag--tr{ background-image:url('/assets/flags/turkey.webp'); }
                   .rd-flag--in{ background-image:url('/assets/flags/india.webp'); }
                   .rd-flag--gb{ background-image:url('/assets/flags/uk.webp'); }
