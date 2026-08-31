@@ -135,113 +135,135 @@
       "data": {}
     },
     {
-      "type": "rd_timeline",
+      "type": "rd_prose",
       "data": {
-        "anchor": "journey",
-        "title": {
-          "en": "From foundation to flagship",
-          "pt": "Da fundação ao projeto de referência"
+        "anchor": "how-we-work",
+        "bg": "paper",
+        "eyebrow": {
+          "en": "How we work",
+          "pt": "Como trabalhamos"
         },
-        "items": [
+        "title": {
+          "en": "One team, accountable from first analysis to long-term ownership.",
+          "pt": "Uma equipa, responsável da primeira análise à propriedade de longo prazo."
+        },
+        "body": [
           {
-            "index": {
-              "en": "2020",
-              "pt": "2020"
-            },
-            "title": {
-              "en": "The Foundation",
-              "pt": "A Fundação"
+            "en": "We are advisers, not brokers: we are paid to be right about the asset, not to sell it. Every mandate runs through the same four stages, and the same team stays accountable across all of them.",
+            "pt": "Somos consultores, não intermediários: somos pagos para estar certos sobre o ativo, não para o vender. Cada mandato passa pelas mesmas quatro fases, e a mesma equipa mantém-se responsável em todas elas."
+          },
+          {
+            "en": "That discipline sits behind 1,000+ investors advised, &euro;300M+ in advised assets and 300+ assets under management, with performance reported net of cost, in euros, quarterly.",
+            "pt": "Essa disciplina está por trás de mais de 1.000 investidores assessorados, mais de &euro;300M em ativos assessorados e mais de 300 ativos sob gestão, com desempenho reportado líquido de custos, em euros, trimestralmente."
+          }
+        ],
+        "cards": [
+          {
+            "label": {
+              "en": "01 &middot; An objective market view",
+              "pt": "01 &middot; Uma visão objetiva do mercado"
             },
             "body": {
-              "en": "Suelen Pires founded Smith &amp; Adams with a focus on real estate and Golden Visa advisory, working closely with strategic partners on sales and property management, and building the trust the firm is structured around today.",
-              "pt": "Suelen Pires fundou a Smith &amp; Adams com foco em consultoria de imobiliário e Golden Visa, trabalhando de perto com parceiros estratégicos em vendas e gestão de propriedades, construindo a confiança em torno da qual a empresa está estruturada hoje."
+              "en": "We start from the data, not a listing: an independent read of the market, the district and the segment, so the shortlist reflects your objectives.",
+              "pt": "Partimos dos dados, não de um anúncio: uma leitura independente do mercado, da zona e do segmento, para que a lista reflita os seus objetivos."
             }
           },
           {
-            "index": {
-              "en": "2021",
-              "pt": "2021"
-            },
-            "title": {
-              "en": "The Campolide Project",
-              "pt": "O Projeto Campolide"
+            "label": {
+              "en": "02 &middot; The right eligible asset",
+              "pt": "02 &middot; O ativo elegível certo"
             },
             "body": {
-              "en": "Smith &amp; Adams advised on and structured the Campolide collection across more than 10 buildings, bringing the authentic &lsquo;Lisboeta&rsquo; soul to modern living.",
-              "pt": "A Smith &amp; Adams aconselhou e estruturou a coleção Campolide, distribuída por mais de 10 edifícios, trazendo a autêntica alma 'Lisboeta' à vida moderna."
+              "en": "We identify, vet and structure the acquisition, confirming eligibility for your route (investment, Golden Visa fund or D2) before you commit.",
+              "pt": "Identificamos, avaliamos e estruturamos a aquisição, confirmando a elegibilidade da sua via (investimento, fundo Golden Visa ou D2) antes de avançar."
             }
           },
           {
-            "index": {
-              "en": "2022",
-              "pt": "2022"
-            },
-            "title": {
-              "en": "Strategic Independence",
-              "pt": "Independência Estratégica"
+            "label": {
+              "en": "03 &middot; Acquisition and residency, structured",
+              "pt": "03 &middot; Aquisição e residência, estruturadas"
             },
             "body": {
-              "en": "Smith &amp; Adams brought every detail closer to home, assuming full responsibility for sales and property management, ensuring that every client is welcomed with care and dedication.",
-              "pt": "A Smith &amp; Adams trouxe cada detalhe para mais perto de si, assumindo total responsabilidade pelas vendas e pela gestão de propriedades, garantindo que cada cliente é acolhido com cuidado e dedicação."
+              "en": "We run the acquisition and, where relevant, the residency application end to end, with legal and tax partners, so nothing falls between advisers.",
+              "pt": "Conduzimos a aquisição e, quando aplicável, o pedido de residência de ponta a ponta, com parceiros jurídicos e fiscais, para que nada caia entre consultores."
             }
           },
           {
-            "index": {
-              "en": "2022",
-              "pt": "2022"
-            },
-            "title": {
-              "en": "Hygge Kaffe",
-              "pt": "Hygge Kaffe"
+            "label": {
+              "en": "04 &middot; Hands-on management, reported",
+              "pt": "04 &middot; Gestão prática, reportada"
             },
             "body": {
-              "en": "The acquisition of Hygge Kaffe officially wove the Hygge philosophy into the soul of Smith &amp; Adams.",
-              "pt": "A aquisição da Hygge Kaffe entrelaçou oficialmente a filosofia Hygge na alma da Smith &amp; Adams."
-            }
-          },
-          {
-            "index": {
-              "en": "2023",
-              "pt": "2023"
-            },
-            "title": {
-              "en": "Dubai Office",
-              "pt": "Escritório no Dubai"
-            },
-            "body": {
-              "en": "Smith &amp; Adams&rsquo; vision travelled across borders with the opening of a new office in Dubai, bringing us closer to our clients on the other side of the world.",
-              "pt": "A visão da Smith &amp; Adams atravessou fronteiras com a abertura de um novo escritório no Dubai, aproximando-nos dos nossos clientes do outro lado do mundo."
-            }
-          },
-          {
-            "index": {
-              "en": "2023",
-              "pt": "2023"
-            },
-            "title": {
-              "en": "Hygge Baixa Hotel Opening",
-              "pt": "Abertura do Hygge Baixa Hotel"
-            },
-            "body": {
-              "en": "In the heart of Lisbon, the Hygge Baixa Hotel opened as an urban sanctuary, advised on and now managed by Smith &amp; Adams, where signature design meets the art of slowing down.",
-              "pt": "No coração de Lisboa, o Hygge Baixa Hotel abriu como um santuário urbano, aconselhado e agora gerido pela Smith &amp; Adams, onde o design característico encontra a arte de abrandar."
-            }
-          },
-          {
-            "index": {
-              "en": "2025",
-              "pt": "2025"
-            },
-            "title": {
-              "en": "Hygge Fanqueiros",
-              "pt": "Hygge Fanqueiros"
-            },
-            "body": {
-              "en": "Smith &amp; Adams took on the Hygge Fanqueiros project, a historic boutique stay where the comfort of home meets the ritual of a perfect coffee, advised, structured and now managed by us.",
-              "pt": "A Smith &amp; Adams assumiu o projeto Hygge Fanqueiros, um alojamento boutique histórico onde o conforto de casa encontra o ritual de um café perfeito, aconselhado, estruturado e agora gerido por nós."
+              "en": "We operate the asset ourselves: guests or tenants, maintenance and dynamic pricing, with net-of-cost, euro-denominated performance reported to you quarterly.",
+              "pt": "Operamos nós mesmos o ativo: hóspedes ou inquilinos, manutenção e preços dinâmicos, com desempenho líquido de custos, em euros, reportado trimestralmente."
             }
           }
         ]
+      }
+    },
+    {
+      "type": "rd_table",
+      "data": {
+        "anchor": "modelled-scenario",
+        "eyebrow": {
+          "en": "Illustrative Lisbon short-term-rental model",
+          "pt": "Modelo ilustrativo de arrendamento de curta duração em Lisboa"
+        },
+        "title": {
+          "en": "Modelled, not a forecast",
+          "pt": "Modelado, não uma previsão"
+        },
+        "columns": [
+          {
+            "en": "Scenario",
+            "pt": "Cenário"
+          },
+          {
+            "en": "ADR",
+            "pt": "ADR"
+          },
+          {
+            "en": "Occupancy",
+            "pt": "Ocupação"
+          },
+          {
+            "en": "Net annual ROI",
+            "pt": "ROI líquido anual"
+          }
+        ],
+        "rows": [
+          [
+            {
+              "en": "Conservative",
+              "pt": "Conservador"
+            },
+            "&euro;125",
+            "68%",
+            "8.75%"
+          ],
+          [
+            {
+              "en": "Professional",
+              "pt": "Profissional"
+            },
+            "&euro;140",
+            "72%",
+            "10.38%"
+          ],
+          [
+            {
+              "en": "Optimized",
+              "pt": "Otimizado"
+            },
+            "&euro;155",
+            "75%",
+            "11.97%"
+          ]
+        ],
+        "note": {
+          "en": "Illustrative model for a professionally managed Lisbon short-term-rental apartment (a &euro;280,000 unit, 21% management fee), built from independent market benchmarks (ADR &euro;120-150, occupancy 65-75%). Modelled, not a forecast or a guarantee. As of 2026. Sources: AirDNA, Airbtics, Turismo de Portugal, INE. Information, not investment or tax advice; past or modelled performance is not indicative of future returns.",
+          "pt": "Modelo ilustrativo para um apartamento de arrendamento de curta duração em Lisboa com gestão profissional (uma unidade de &euro;280.000, 21% de comissão de gestão), construído a partir de benchmarks de mercado independentes (ADR &euro;120-150, ocupação 65-75%). Modelado, não uma previsão nem uma garantia. Em 2026. Fontes: AirDNA, Airbtics, Turismo de Portugal, INE. Informação, não aconselhamento de investimento ou fiscal; o desempenho passado ou modelado não é indicativo de retornos futuros."
+        }
       }
     },
     {
