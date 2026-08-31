@@ -604,3 +604,14 @@ STATUS: a iniciar pesquisa no browser.
 - **Capas do blog TROCADAS (todos os 13 posts)**: as capas AI/stock terriveis (cover_0.xxx com texto queimado, passaportes) foram substituidas pela **pool real** assets/blog/investing-2026-* (hero/lisbon-facade/azulejo/porto/algarve, Unsplash licenciado). Update do image_url via consola com a sessao autenticada do Studio (tab Claude_Browser). Verificado em prod: 13/13 pool, 0 terriveis. Mapa tematico (Lisboa->facade/hero, Porto->porto, Algarve/GV->algarve, lifestyle/law/tax->azulejo).
 - NOTA: a "pool" sao 5 fotos reutilizadas (repeticao). A ideia do Drive foi abandonada.
 - RISCO DE CONTEUDO (por tratar): 2 posts LIVE estao factualmente DESATUALIZADOS -> **portugal-golden-visa-2024-complete-guide** (rota imovel fechou out/2023) e **portuguese-tax-benefits-nhr-program** (NHR acabou jan/2025). Tem capa boa agora mas conteudo errado. Recomendo despublicar ou reescrever. Tambem: slug **"w"** (Portuguese Lifestyle) esta partido (1 letra).
+
+---
+## Sessao 2026-08-31 19:42 WEST (conta: abilio.diz / Claude Code - via sessao Studio)
+
+Bloco de conteudo (todos LIVE via consola autenticada, sem passar password):
+- **Reescrito** post fiscalidade (slug portuguese-tax-benefits-nhr-program): NHR->IFICI + tabela de impostos 2026 (IMT/Selo/IMI/AIMI/rendas/mais-valias, IMT 7.5% nao-residente DL97/2026 ressalvado). docs/articles/rewrite-tax-2026.html.
+- **Reescrito** post Golden Visa (slug portugal-golden-visa-2024-complete-guide mantido p/ nao 404): "GV in 2026: routes that still qualify" + tabela de rotas (fundos 500k/heritage 250k/low-density 200k/research/business). docs/articles/rewrite-golden-visa-2026.html.
+- **NOVO** post GV vs D2 (slug golden-visa-vs-d2-portugal-2026, id 3e8b4a05): comparativo com tabela lado-a-lado. Factos D2 de agente de pesquisa (subsistencia=100% salario minimo 920EUR 2026, sem investimento fixo, residencia real, permit 2+3, cidadania em reforma/incerta). docs/articles/golden-visa-vs-d2-2026.html.
+- **Slug "w" corrigido** -> portuguese-lifestyle-international-residents.
+- Cidadania/nacionalidade: reforma 2025-26 em fluxo (10 anos geral / 7 CPLP-EU, data disputada) - apresentado como provisorio em todos os artigos.
+PENDENTE: fotos variadas copyright-free (agente a curar Unsplash/Pexels) -> capa distinta por artigo; traducao PT dos artigos.
