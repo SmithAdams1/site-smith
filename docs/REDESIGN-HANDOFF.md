@@ -358,3 +358,39 @@ PENDENTE deste bloco: Task 6 (About Case Studies, substituir rd_timeline), Task 
 contexto por unidade no About), Task 8 (mais artigos SEO/GEO) - pipeline multi-papel
 (Head of Legal + Head of Investment -> Copywriter -> CEO/CFO family office) + pesquisa online + pasta AI.
 Nota: o set solid (assets/icons-line) continua para grelhas de cartoes utilitarias (PM ja feito).
+
+---
+
+## Sessao 2026-08-31 11:38 WEST (conta: suzan@smithandadams.com / Claude Code - conta Abilio)
+
+Bloco: fotografia real no site (homepage + Meet the Team) + telefone no popup. Tudo LIVE em prod, verificado (curl 200 + SSR-render).
+
+- **Homepage - bloco "authority"**: foto alinhada a direita atras do copy "An authority on the whole
+  of the business" (index.html, seccao POSITIONING). Ficheiro renomeado `urban-collections/AML-Shooting-Smith&Adams-Abril26-15.jpg`
+  -> `urban-collections/aml-authority.jpg` (o `&` no path e fragil a servir). CSS `.rd-authority*`
+  (style inline no index.html): grid texto-esquerda / foto-direita, mask linear-gradient que dissolve
+  a foto no paper para o texto ficar legivel; <=860px a foto passa para baixo (220px, mask vertical).
+  A figure tem class `reveal` (fade-in on scroll).
+- **Meet the Team (/about, bloco rd_team)**: juntadas as **10 headshots** do shoot Abril a
+  docs/about.blocks.json (campo `photo` -> /team/*.jpg): Suelen, Adam, Abilio, George (leaders);
+  Alex, Mona, Renato, Taibo, Soraia, Jahed (team). Renderer rd_team ganhou **object-position:50% 22%**
+  default no .rdt__img + override opcional `photo_pos` por pessoa (igual ao rd-msg). lib/renderRdBlocks.js
+  + api/_renderRdBlocks.js sincronizados byte-identical (cp). Fotos web-optimizadas em **/team/** (sips
+  resampleWidth 680, 25-104KB cada; fonte = ~/Downloads/<Nome>.jpg 8-12MB).
+- **meet-the-team.html** (pagina preview standalone, noindex, nao linkada): as mesmas 10 fotos aplicadas
+  nas molduras placeholder (mt__ph--img, object-position 50% 22%).
+- **Popup do guide - telefone**: JA ESTAVA FEITO por outra sessao (guide-popup.js: .sag-phone com
+  select de 27 country codes, +351 default, validacao obrigatoria >=6 digitos; api/guide.js le+limpa+
+  reenvia `phone` ao postCrmLead). SO acrescentei: o telefone no **email de notificacao interna** a
+  equipa (antes so ia no CRM, a equipa nao o via para ligar).
+
+Commits (autor Suzan): 4bc4752 (authority photo), 84bc7fd (phone na notificacao), a25a600 (preview page),
+88efc6c (about rd_team photos) -> main.
+
+AMBIGUIDADES / PENDENTE (perguntar ao Abilio):
+- **Teresa.jpg** existe em ~/Downloads mas NAO ha "Teresa" na lista da equipa (nem em about.blocks.json
+  nem em meet-the-team.html). Quem e? -> adicionar pessoa ou descartar foto.
+- **Joao.jpg** e ambiguo: ha **Joao Henrique** (OPPS Agent) e **Joao Leite** (Customer Service Agent).
+  Nao atribui a foto para nao por a cara na pessoa errada. -> confirmar qual.
+- Restantes membros sem foto (Cristina, Joana, Benjamin, Matilde, Bruna, Heloisa, Rafael, Nayane,
+  Taina, Lisa, Beatriz, Ismail, Dario, Sofia, Adriel, Fabio, Ines, Kia, Mauro) continuam com iniciais.
