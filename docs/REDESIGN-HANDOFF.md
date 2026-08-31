@@ -330,3 +330,31 @@ Merged para producao nesta sessao:
 - **Icones proprios**: 36 SVGs em assets/icons-line/ (fill #1A1A1A -> currentColor) + galeria /icons (noindex). Aplicados nos 8 cards de Asset Management (property-management.html), sizing aspect-preserving.
 
 NOTAS: renderer lib/renderRdBlocks.js <-> api/_renderRdBlocks.js tem de ficar sempre identico (cp depois de editar). Vercel Hobby = 12 funcoes serverless (no limite) - nao criar api/*.js novos. Verificar sempre em www.smithandadams.com (edge cacheia /pagina.html; usar a rota limpa /pagina para bust).
+
+---
+
+## Sessao 2026-08-31 10:49 WEST (conta: suzan@smithandadams.com / Claude Code)
+
+Bloco: Hospitality color-scheme + brochure modal + icones da marca (Tasks 2 e 5). Tudo LIVE em prod, verificado.
+
+- **Hospitality (Task 2)**: "Book your stay" agora sob um segmento **Branded Residences**
+  (eyebrow slate + "Stay in a Hygge residence" + intro, com data-cms dev.branded.*).
+- **Hospitality color scheme**: a seccao `.hygge-house` ("Part of Smith & Adams") vinha com a
+  paleta Nordic (sage-green #87AA87 / cream #E2E0DC / Noto Sans / pill 999px). Re-skinned para a
+  marca S&A: bg var(--sunken), texto var(--ink), eyebrow slate, tag navy italic (Geoform),
+  CTA navy 2px. Sem verdes/azuis fora da paleta no conteudo.
+- **Brochure modal (brochure-gate.js)**: (1) fonte -> **Geoform** (era Helvetica/Playfair);
+  (2) ficheiro passou a **ASCII puro** (escapes \uXXXX) para o texto renderizar bem seja como for
+  servido (corrige o "we'll" -> "weâ€™ll"); (3) removido "No obligation." da sub-linha.
+- **Icones da marca hairline (Task 5)**: decidido com o Abilio criar **variantes hairline** (nao usar
+  o set solid nas paginas editoriais). Homepage 3 pilares -> network / target / chart (class rd-ico).
+  Invest 3 segmentos -> rd_prose ganhou campo `icon` (map RD_PROSE_ICONS): trending-up (Investment
+  case), globe (Residency), sun (Lifestyle). renderRdBlocks.js + api/_renderRdBlocks.js sincronizados
+  byte-identical; docs/invest.blocks.json blocks 3/4/5 com `icon`.
+
+Commits (autor Suzan): c9a73de, 5b39084, 1f8f324 -> main.
+
+PENDENTE deste bloco: Task 6 (About Case Studies, substituir rd_timeline), Task 7 (paragrafo de
+contexto por unidade no About), Task 8 (mais artigos SEO/GEO) - pipeline multi-papel
+(Head of Legal + Head of Investment -> Copywriter -> CEO/CFO family office) + pesquisa online + pasta AI.
+Nota: o set solid (assets/icons-line) continua para grelhas de cartoes utilitarias (PM ja feito).
