@@ -361,20 +361,28 @@
                     -ms-overflow-style:none; scrollbar-width:none; scroll-behavior:smooth; padding:2px; }
                   .rd-quotes-track::-webkit-scrollbar{ display:none; }
                   .rd-quotes-track > .rd-quote{ flex:0 0 calc((100% - 32px)/3); box-sizing:border-box; scroll-snap-align:start;
-                    padding:clamp(28px,3vw,44px) clamp(22px,2.4vw,40px);
+                    display:flex; flex-direction:column;
+                    padding:clamp(28px,3vw,40px) clamp(24px,2.4vw,36px);
                     border:1px solid var(--line); background:var(--paper);
-                    position:relative; overflow:hidden; }
-                  .rd-quote .rd-flag{ position:absolute; inset:0; z-index:0; pointer-events:none;
+                    position:relative; overflow:hidden;
+                    transition:border-color .4s ease, box-shadow .4s ease, transform .4s ease; }
+                  .rd-quote:hover{ border-color:var(--gold-line); box-shadow:0 18px 40px rgba(17,34,45,.09); transform:translateY(-3px); }
+                  /* Editorial quotation mark as a quiet watermark (a mark, not gold text). */
+                  .rd-quote__mark{ font-family:var(--display,'Playfair Display',Georgia,serif); font-weight:600;
+                    font-size:66px; line-height:.6; color:var(--navy); opacity:.13; margin:0 0 6px; display:block; }
+                  .rd-quote > p{ position:relative; z-index:1; font-family:var(--sans); color:var(--ink);
+                    font-size:clamp(15px,1.05vw,16.5px); line-height:1.7; margin:0 0 26px; flex:1 1 auto; }
+                  .rd-quote__foot{ display:flex; align-items:center; gap:13px; margin-top:auto;
+                    padding-top:20px; border-top:1px solid var(--line); }
+                  .rd-quote__flag{ width:36px; height:36px; border-radius:50%; flex:0 0 auto;
                     background-repeat:no-repeat; background-position:center; background-size:cover;
-                    opacity:.16; }
-                  /* Paper veil over the full-bleed flag so the quote stays readable. */
-                  .rd-quote::after{ content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-                    background:linear-gradient(180deg, rgba(253,252,249,.30), rgba(253,252,249,.48)); }
+                    box-shadow:inset 0 0 0 1px rgba(17,34,45,.14), 0 2px 6px rgba(17,34,45,.10); }
+                  .rd-quote .who{ position:relative; z-index:1; font-family:var(--sans); font-weight:600;
+                    color:var(--navy); font-size:14.5px; }
                   .rd-flag--tr{ background-image:url('/assets/flags/turkey.webp'); }
                   .rd-flag--in{ background-image:url('/assets/flags/india.webp'); }
                   .rd-flag--gb{ background-image:url('/assets/flags/uk.webp'); }
                   .rd-flag--ae{ background-image:url('/assets/flags/uae.webp'); }
-                  .rd-quote > p, .rd-quote > .who{ position:relative; z-index:1; }
                   .rd-quotes-dots{ display:flex; gap:9px; justify-content:center; align-items:center; padding:24px 0 0; }
                   .rd-quotes-dots button{ width:7px; height:7px; padding:0; border:0; border-radius:50%;
                     background:var(--line); cursor:pointer; transition:background .3s, transform .3s; }
@@ -383,12 +391,12 @@
                 </style>
                 <div class="rd-quotes-carousel">
                   <div class="rd-quotes-track" id="rdQuotesTrack">
-                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--tr" aria-hidden="true"></span><p data-cms="index.testimonials.0.quote" data-cms-attr="html">Smith &amp; Adams gave me an honest, independent read on the market and showed me only a handful of options that genuinely fit. Buying from abroad was completely hands-off.</p><span class="who" data-cms="index.testimonials.0.author">Emre Y., Istanbul</span></div>
-                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--in" aria-hidden="true"></span><p data-cms="index.testimonials.5.quote" data-cms-attr="html">The whole process was clear and simple from the very first conversation. Smith &amp; Adams helped me put my family on stable, secure footing in Portugal, without any of the usual uncertainty.</p><span class="who" data-cms="index.testimonials.5.author">Manav Goyal, India</span></div>
-                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--gb" aria-hidden="true"></span><p data-cms="index.testimonials.6.quote" data-cms-attr="html">The way they manage the property is genuinely professional, and the reporting is completely transparent. I can see exactly how the asset is performing, quarter after quarter.</p><span class="who" data-cms="index.testimonials.6.author">Alan Fox, United Kingdom</span></div>
-                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--tr" aria-hidden="true"></span><p data-cms="index.testimonials.1.quote" data-cms-attr="html">What stood out was the objectivity, no pressure to buy anything specific. The returns and the risks were laid out clearly before I committed.</p><span class="who" data-cms="index.testimonials.1.author">Selin A., Ankara</span></div>
-                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--ae" aria-hidden="true"></span><p data-cms="index.testimonials.7.quote" data-cms-attr="html">They stayed with me through the entire investment, from the first assessment to choosing the assets that actually made sense. The advice was straight and the guidance never stopped.</p><span class="who" data-cms="index.testimonials.7.author">Preston Felicity, Dubai</span></div>
-                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--tr" aria-hidden="true"></span><p data-cms="index.testimonials.2.quote" data-cms-attr="html">The entire purchase was handled end to end while I stayed in Istanbul: legal, financing, and property management afterwards. I never had to fly over.</p><span class="who" data-cms="index.testimonials.2.author">Mehmet K., Istanbul</span></div>
+                    <div class="rd-quote reveal"><span class="rd-quote__mark" aria-hidden="true">&#8220;</span><p data-cms="index.testimonials.0.quote" data-cms-attr="html">Smith &amp; Adams gave me an honest, independent read on the market and showed me only a handful of options that genuinely fit. Buying from abroad was completely hands-off.</p><div class="rd-quote__foot"><span class="rd-quote__flag rd-flag--tr" aria-hidden="true"></span><span class="who" data-cms="index.testimonials.0.author">Emre Y., Istanbul</span></div></div>
+                    <div class="rd-quote reveal"><span class="rd-quote__mark" aria-hidden="true">&#8220;</span><p data-cms="index.testimonials.5.quote" data-cms-attr="html">The whole process was clear and simple from the very first conversation. Smith &amp; Adams helped me put my family on stable, secure footing in Portugal, without any of the usual uncertainty.</p><div class="rd-quote__foot"><span class="rd-quote__flag rd-flag--in" aria-hidden="true"></span><span class="who" data-cms="index.testimonials.5.author">Manav Goyal, India</span></div></div>
+                    <div class="rd-quote reveal"><span class="rd-quote__mark" aria-hidden="true">&#8220;</span><p data-cms="index.testimonials.6.quote" data-cms-attr="html">The way they manage the property is genuinely professional, and the reporting is completely transparent. I can see exactly how the asset is performing, quarter after quarter.</p><div class="rd-quote__foot"><span class="rd-quote__flag rd-flag--gb" aria-hidden="true"></span><span class="who" data-cms="index.testimonials.6.author">Alan Fox, United Kingdom</span></div></div>
+                    <div class="rd-quote reveal"><span class="rd-quote__mark" aria-hidden="true">&#8220;</span><p data-cms="index.testimonials.1.quote" data-cms-attr="html">What stood out was the objectivity, no pressure to buy anything specific. The returns and the risks were laid out clearly before I committed.</p><div class="rd-quote__foot"><span class="rd-quote__flag rd-flag--tr" aria-hidden="true"></span><span class="who" data-cms="index.testimonials.1.author">Selin A., Ankara</span></div></div>
+                    <div class="rd-quote reveal"><span class="rd-quote__mark" aria-hidden="true">&#8220;</span><p data-cms="index.testimonials.7.quote" data-cms-attr="html">They stayed with me through the entire investment, from the first assessment to choosing the assets that actually made sense. The advice was straight and the guidance never stopped.</p><div class="rd-quote__foot"><span class="rd-quote__flag rd-flag--ae" aria-hidden="true"></span><span class="who" data-cms="index.testimonials.7.author">Preston Felicity, Dubai</span></div></div>
+                    <div class="rd-quote reveal"><span class="rd-quote__mark" aria-hidden="true">&#8220;</span><p data-cms="index.testimonials.2.quote" data-cms-attr="html">The entire purchase was handled end to end while I stayed in Istanbul: legal, financing, and property management afterwards. I never had to fly over.</p><div class="rd-quote__foot"><span class="rd-quote__flag rd-flag--tr" aria-hidden="true"></span><span class="who" data-cms="index.testimonials.2.author">Mehmet K., Istanbul</span></div></div>
                   </div>
                   <div class="rd-quotes-dots" id="rdQuotesDots"></div>
                 </div>
