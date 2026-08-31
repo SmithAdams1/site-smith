@@ -319,3 +319,14 @@ Bloco longo. Tudo em produção (main -> upstream/SmithAdams1, autor Suzan). Cac
 - About: case studies + bios da equipa (assets do Abilio).
 
 - **PM Asset Management refinamento (2026-08-30):** removido o preço (EUR1.800); cada um dos 8 cards com ícone (lucide, quadrado filetado, traço navy, filete/tom gold no hover) + micro-animação (card sobe no hover, respeita prefers-reduced-motion). `.am-grid`/`.am-ico` na property-management.html.
+
+
+## Sessao 2026-08-31 (conta: suzan@smithandadams.com / Claude Code)
+Merged para producao nesta sessao:
+- **GV**: removida a linha negativa "Direct real-estate purchase / Closed" da tabela "How you qualify in 2026" (docs/golden-visa.blocks.json). Contexto correto (rota fechada out/2023) mantido no paragrafo intro + FAQ.
+- **Meet the Team** na /about: novo bloco **rd_team** (renderer lib + api/_renderRdBlocks.js) com 6 lideres + 25 equipa (do organograma SmithAdams_Purpose_and_Team). Placeholders de foto = iniciais. FALTA: headshots do Abilio -> juntar `photo` a cada pessoa em docs/about.blocks.json.
+- **Brochuras no Invest**: "Why invest" removido (fica no pop-up). GV + D2 = gated por formulario (**brochure-gate.js**) -> POST /api/contact (source brochure-golden-visa / brochure-d2, campanha "Brochure - ...", pipeline Benjamin) + saTrackLead('brochure') (GA4 generate_lead + Ads), depois entrega o PDF. PDFs em /brochures/. api/contact.js: brochure leads exigem so nome+email. rd_prose ganhou campo `downloads` (gate:true = botao de form; senao link directo).
+- **WebP dos heroes**: <picture> webp+jpg fallback. rd_hero renderer emite <picture>; estaticas (index/real-estate/PM/hospitality/pillars) com preload webp + <img>-> <picture>. ~2.0MB -> 0.8MB. webp em assets/hero-*.webp (Pillow via /usr/bin/python3 - o `python3` default NAO tem Pillow).
+- **Icones proprios**: 36 SVGs em assets/icons-line/ (fill #1A1A1A -> currentColor) + galeria /icons (noindex). Aplicados nos 8 cards de Asset Management (property-management.html), sizing aspect-preserving.
+
+NOTAS: renderer lib/renderRdBlocks.js <-> api/_renderRdBlocks.js tem de ficar sempre identico (cp depois de editar). Vercel Hobby = 12 funcoes serverless (no limite) - nao criar api/*.js novos. Verificar sempre em www.smithandadams.com (edge cacheia /pagina.html; usar a rota limpa /pagina para bust).
