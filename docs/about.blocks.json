@@ -352,7 +352,8 @@
         "leaders": [
           {
             "name": "Suelen Pires",
-            "role": "CEO"
+            "role": "CEO",
+            "photo": "/team/suelen.jpg"
           },
           {
             "name": "Cristina Pereira",
@@ -360,7 +361,8 @@
           },
           {
             "name": "Adam Ismail",
-            "role": "Head of Hospitality"
+            "role": "Head of Hospitality",
+            "photo": "/team/adam.jpg"
           },
           {
             "name": "Joana Ribeiro",
@@ -368,11 +370,13 @@
           },
           {
             "name": "Abílio Diz",
-            "role": "Head of Marketing"
+            "role": "Head of Marketing",
+            "photo": "/team/abilio.jpg"
           },
           {
             "name": "George Hobson",
-            "role": "Head of Investment & Strategy"
+            "role": "Head of Investment & Strategy",
+            "photo": "/team/george.jpg"
           }
         ],
         "team": [
@@ -382,7 +386,8 @@
           },
           {
             "name": "Alex Ivatsko",
-            "role": "Digital Marketing Manager"
+            "role": "Digital Marketing Manager",
+            "photo": "/team/alex.jpg"
           },
           {
             "name": "Matilde Boulton",
@@ -390,19 +395,23 @@
           },
           {
             "name": "Mona Campbel",
-            "role": "Data Analyst"
+            "role": "Data Analyst",
+            "photo": "/team/mona.jpg"
           },
           {
             "name": "Renato Silva",
-            "role": "Revenue Manager"
+            "role": "Revenue Manager",
+            "photo": "/team/renato.jpg"
           },
           {
             "name": "Taibo Karã",
-            "role": "Customer Service Manager"
+            "role": "Customer Service Manager",
+            "photo": "/team/taibo.jpg"
           },
           {
             "name": "Soraia Fernandes",
-            "role": "Hospitality Team Manager"
+            "role": "Hospitality Team Manager",
+            "photo": "/team/soraia.jpg"
           },
           {
             "name": "Bruna Fernandes",
@@ -446,7 +455,8 @@
           },
           {
             "name": "Jahed Jahed",
-            "role": "Customer Service Agent"
+            "role": "Customer Service Agent",
+            "photo": "/team/jahed.jpg"
           },
           {
             "name": "Dario",
