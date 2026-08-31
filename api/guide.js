@@ -58,6 +58,7 @@ export default async function handler(req, res) {
         subject: `Investor guide download: ${cleanName}`,
         html: `<h2>Investor guide lead</h2><p><strong>Name:</strong> ${escapeHtml(cleanName)}<br>`
             + `<strong>Email:</strong> ${escapeHtml(cleanEmail)}<br>`
+            + (cleanPhone ? `<strong>Phone:</strong> ${escapeHtml(cleanPhone)}<br>` : '')
             + `<strong>Consent:</strong> yes<br><strong>Locale:</strong> ${pt ? 'PT' : 'EN'}</p>`,
       }),
     }).catch(e => console.error('[guide] notify error:', e.message));
