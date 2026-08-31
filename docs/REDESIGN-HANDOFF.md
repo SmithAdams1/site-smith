@@ -422,3 +422,25 @@ Restantes sem foto continuam com iniciais.
 - **Homepage authority photo**: reenquadrada para o aperto de mao (object-position 50% 50%, desktop+mobile) - caras cortadas, foco nas maos, a pedido do Abilio. Commit (Suzan). [2026-08-31 12:11 WEST]
 
 - **About Task 7 (unit context paragraphs)**: as 4 blurbs do rd_units passaram de 1 frase para um paragrafo de contexto cada (EN+PT), evidence-first, sem numeros inventados. Aprovado pelo Abilio. Hardcoded no renderer (lib+api sync). Commit ca647a5 (Suzan). [2026-08-31 12:33 WEST]
+
+---
+## Sessao 2026-08-31 12:44 WEST (conta: suzan@smithandadams.com / Claude Code - conta Abilio)
+
+Bloco: About Task 6 - "How we work" substitui a timeline. LIVE, verificado (curl).
+
+- **Task 6 (Case Studies) reenquadrada**: NAO ha desempenho realizado/datado dos projetos (Campolide,
+  Hygge Baixa, Fanqueiros) em fontes acessiveis (repo, knowledge/, materiais Desktop). As unicas analises
+  de yield sao do **Beato** e sao **projecoes** (nao resultados) - alem de Beato estar excluido do site.
+  Decisao do Abilio: reenquadrar como **"How we work"** (metodologia + cenario de mercado modelado, rotulado).
+- **rd_timeline -> rd_prose(how-we-work) + rd_table** em docs/about.blocks.json:
+  - rd_prose: eyebrow "How we work" + statement "One team, accountable..." + 2 paras + 4 cards do metodo
+    (visao de mercado / ativo elegivel / aquisicao+residencia / gestao+reporting). Proof points agregados.
+  - **rd_table (NOVO tipo de bloco, reutilizavel)**: tabela GEO responsiva (header navy, tabular-nums) com
+    o modelo ilustrativo de STR Lisboa (Conservative/Professional/Optimized, ROI 8.75/10.38/11.97%),
+    ROTULADO "modelled, not a forecast", com fontes datadas (AirDNA/Airbtics/Turismo PT/INE) + disclaimer YMFL.
+    NUNCA apresentado como resultado real da S&A. Numeros tracaveis aos benchmarks do doc Beato (mercado Lisboa).
+- Renderer rd_table adicionado a lib/renderRdBlocks.js + api/_renderRdBlocks.js (byte-identical). Reutilizavel
+  para comparativos futuros (yield por cidade, Portugal vs pais).
+
+Commit 99e240d (Suzan). PENDENTE: Task 8 (artigos SEO/GEO). Task 6 fica "final" salvo se o Abilio quiser
+depois trocar o modelo por numeros realizados internos.
