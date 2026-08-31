@@ -142,23 +142,25 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
 <section class="hygge-house" id="hygge-house">
   <style>
-    .hygge-house{--hk-sage:#87AA87;--hk-forest:#495144;--hk-cream:#E2E0DC;--hk-ink:#27282B;--hk-taupe:#6D655C;
-      background:var(--hk-cream);color:var(--hk-ink);
-      font-family:'Noto Sans','Helvetica Neue',Arial,sans-serif;
+    /* Re-skinned onto the Smith & Adams palette (navy / sunken / ink, Geoform,
+       2px radius) so this block respects the rest of the site instead of the
+       Nordic sage-green brand colours it shipped with. */
+    .hygge-house{background:var(--sunken);color:var(--ink);
+      font-family:var(--sans);
       padding:clamp(56px,8vw,120px) var(--mx);}
     .hygge-house__wrap{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
       gap:clamp(28px,5vw,72px);align-items:center;}
     @media(max-width:860px){.hygge-house__wrap{grid-template-columns:1fr;gap:36px;}}
-    .hygge-house__eyebrow{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;
-      color:var(--hk-forest);font-weight:600;margin:0 0 20px;}
+    .hygge-house__eyebrow{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;
+      color:var(--slate);font-weight:500;margin:0 0 20px;}
     .hygge-house__logo{width:clamp(180px,20vw,240px);height:auto;display:block;}
-    .hygge-house__tag{font-size:clamp(18px,2vw,24px);font-style:italic;color:var(--hk-forest);
+    .hygge-house__tag{font-family:var(--display);font-size:clamp(18px,2vw,24px);font-style:italic;color:var(--navy);
       margin:24px 0 0;font-weight:500;}
-    .hygge-house__body{font-size:16px;line-height:1.7;color:var(--hk-ink);margin:18px 0 0;max-width:48ch;}
+    .hygge-house__body{font-size:16px;line-height:1.7;color:var(--ink);margin:18px 0 0;max-width:48ch;}
     .hygge-house__cta{display:inline-flex;align-items:center;gap:10px;margin-top:30px;
-      background:var(--hk-sage);color:#fff;text-decoration:none;font-weight:600;font-size:15px;
-      padding:15px 30px;border-radius:999px;transition:background .3s ease,transform .3s ease;}
-    .hygge-house__cta:hover{background:var(--hk-forest);transform:translateY(-2px);}
+      background:var(--navy);color:#fff;text-decoration:none;font-weight:600;font-size:15px;
+      padding:16px 32px;border-radius:2px;transition:background .3s ease,transform .5s var(--ease-expo);}
+    .hygge-house__cta:hover{background:#1c3646;transform:translateY(-2px);}
     .hygge-house__gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
     .hygge-house__gallery figure{margin:0;overflow:hidden;border-radius:4px;}
     .hygge-house__gallery img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -234,8 +236,13 @@
 </style>
 <section style="padding:clamp(28px,4vw,52px) 0;">
   <div class="dev-wrap">
+    <div style="max-width:720px; margin:0 0 clamp(26px,4vw,40px);">
+      <p data-cms="dev.branded.eyebrow" style="font-size:11px; letter-spacing:.24em; text-transform:uppercase; color:var(--slate); font-weight:500; margin:0 0 12px;">Branded Residences</p>
+      <h2 data-cms="dev.branded.title" class="dev-serif" style="font-size:clamp(28px,3.8vw,46px); font-weight:500; color:var(--navy); line-height:1.05; margin:0 0 16px;">Stay in a Hygge residence</h2>
+      <p data-cms="dev.branded.body" style="color:var(--slate,#6A7883); font-size:16px; line-height:1.6; margin:0;">Our Hygge developments are branded residences: hotel-grade design and service, managed end to end. Book a stay and see, first-hand, the standard your investment is held to.</p>
+    </div>
     <div class="bk-card">
-      
+
       <h2 data-cms="dev.booking.title" class="dev-serif" style="font-size:clamp(26px,3.4vw,42px); font-weight:500; color:#fff; margin:0 0 26px; line-height:1.05;">Book your stay</h2>
       <div id="bk-form">
         <div class="bk-field"><label data-cms="dev.booking.label_in">Check-in</label><input type="date" id="bk-in"></div>
