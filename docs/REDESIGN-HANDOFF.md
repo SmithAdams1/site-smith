@@ -416,3 +416,5 @@ Commits (autor Suzan): bc181b1 (about 3 tiers + renderer + fotos), a4a0c35 (prev
 RESOLVIDO deste bloco: as ambiguidades anteriores - Joao = Joao Leite; Teresa = nova Head (construida).
 PENDENTE: **Teresa nao tem apelido** (usei so "Teresa") -> confirmar nome completo com o Abilio.
 Restantes sem foto continuam com iniciais.
+
+- **Teresa** nome completo = **Teresa Cherry Pinto** (about.blocks.json + preview). Commit 62d9570 (Suzan). [2026-08-31 12:05 WEST]
