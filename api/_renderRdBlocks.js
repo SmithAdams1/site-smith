@@ -57,9 +57,16 @@ function ctaHtml(cta, locale) {
 const renderers = {
   // Full-bleed hero: media (img or video), scrim, eyebrow, h1, sub, CTAs.
   rd_hero(d, locale) {
-    const media = d.video
-      ? `<video ${d.autoplay ? 'data-autoplay ' : ''}muted loop playsinline preload="none"${d.poster ? ` poster="${attr(d.poster)}"` : ''}><source src="${attr(d.video)}" type="video/mp4"></video>`
-      : `<img src="${attr(d.image || '')}" alt="${attr(pick(d.image_alt, locale))}" loading="eager" decoding="async">`;
+    let media;
+    if (d.video) {
+      media = `<video ${d.autoplay ? 'data-autoplay ' : ''}muted loop playsinline preload="none"${d.poster ? ` poster="${attr(d.poster)}"` : ''}><source src="${attr(d.video)}" type="video/mp4"></video>`;
+    } else {
+      const heroImg = d.image || '';
+      const heroTag = `<img src="${attr(heroImg)}" alt="${attr(pick(d.image_alt, locale))}" loading="eager" decoding="async">`;
+      // Serve WebP with a JPG fallback (older browsers keep the jpg).
+      const heroWebp = /\.jpe?g$/i.test(heroImg) ? heroImg.replace(/\.jpe?g$/i, '.webp') : '';
+      media = heroWebp ? `<picture><source srcset="${attr(heroWebp)}" type="image/webp">${heroTag}</picture>` : heroTag;
+    }
     const ctas = (Array.isArray(d.ctas) ? d.ctas : []).map(c => ctaHtml(c, locale)).join('\n            ');
     return (
 `      <section class="rd-hero"${d.hero_bg ? ` style="background-size:cover;background-position:center;"` : ''}>
