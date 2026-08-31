@@ -170,7 +170,8 @@
               "pt": "Gestão sem preocupações, com desempenho líquido de custos reportado trimestralmente."
             }
           }
-        ]
+        ],
+        "icon": "trending-up"
       }
     },
     {
@@ -239,7 +240,8 @@
             },
             "href": "/brochures/portugal-d2-visa.pdf"
           }
-        ]
+        ],
+        "icon": "globe"
       }
     },
     {
@@ -262,7 +264,8 @@
             "en": "<span style=\"font-size:13px;color:var(--slate);\">Information as of 2026 and general in nature; not legal or tax advice. Programme terms change - Smith &amp; Adams confirms the current position for your case.</span>",
             "pt": "<span style=\"font-size:13px;color:var(--slate);\">Informação de 2026 e de carácter geral; não constitui aconselhamento jurídico ou fiscal. Os termos dos programas mudam - a Smith &amp; Adams confirma a posição atual para o seu caso.</span>"
           }
-        ]
+        ],
+        "icon": "sun"
       }
     },
     {

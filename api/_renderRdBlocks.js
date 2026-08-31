@@ -43,6 +43,20 @@ function pick(field, locale) {
 
 const ARROW = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
+// Optional hairline segment icons for rd_prose. Authored at 24x24 as strokes so
+// they ride the shared .rd-ico system (navy on paper, gold on navy sections) and
+// match the homepage pillar icons. Referenced by name via a block's `icon` field.
+const RD_PROSE_ICONS = {
+  'trending-up': '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+  'globe': '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 3.8 5.6 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.6-3.8-9S9.5 5.5 12 3z"/>',
+  'sun': '<circle cx="12" cy="11" r="3.5"/><path d="M12 2.5v2M12 15.5v1.5M5.6 11H3.6M20.4 11h-2M6.9 5.9 5.5 4.5M17.1 5.9l1.4-1.4M6.9 16.1l-1.4 1.4M17.1 16.1l1.4 1.4"/><path d="M3 20h18"/>'
+};
+function rdProseIcon(name) {
+  return RD_PROSE_ICONS[name]
+    ? '<svg class="rd-ico reveal" viewBox="0 0 24 24" style="width:34px;height:34px;display:block;margin:0 0 22px;">' + RD_PROSE_ICONS[name] + '</svg>'
+    : '';
+}
+
 function ctaHtml(cta, locale) {
   if (!cta || !pick(cta.label, locale)) return '';
   const ghost = cta.style === 'ghost' ? ' rd-cta--ghost' : '';
@@ -118,6 +132,7 @@ const renderers = {
         <div class="rd-wrap">
           ${d.hairline === false ? '' : '<hr class="rd-hair">'}
           <div style="max-width:900px; padding-top:clamp(28px,4vw,48px);">
+            ${d.icon ? rdProseIcon(d.icon) : ''}
             ${d.eyebrow ? `<p class="rd-label reveal" style="margin:0 0 22px;${navy ? 'color:rgba(255,255,255,0.55);' : ''}">${pick(d.eyebrow, locale)}</p>` : ''}
             <h2 class="rd-statement reveal" style="font-size:clamp(32px,4.6vw,64px); margin:0;${navy ? 'color:#fff;' : ''}">${pick(d.title, locale)}</h2>
             ${paras}${dls}
