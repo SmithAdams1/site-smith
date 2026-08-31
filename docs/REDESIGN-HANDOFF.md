@@ -446,3 +446,136 @@ Commit 99e240d (Suzan). PENDENTE: Task 8 (artigos SEO/GEO). Task 6 fica "final" 
 depois trocar o modelo por numeros realizados internos.
 
 - **Task 8 (artigos SEO/GEO)**: em serie, 1 de cada vez para revisao do Abilio. **Draft 1/3 escrito**: docs/articles/01-investing-in-portugal-2026.md ("Investing in Portugal 2026"). So factos verificados; [A VERIFICAR] em yields por cidade / price change / bandas fiscais 2026 (fontes indicadas). FAQ+schema+disclaimer. Publish path = blog Supabase via backoffice (draft NAO esta wired ao site). A seguir: 2/3 Golden Visa vs D2, 3/3 GV rotas+minimos - apos revisao do 1. Commit (Suzan). [2026-08-31 12:48 WEST]
+
+---
+## Sessao 2026-08-31 15:03 WEST (conta: abilio.diz@smithandadams.com / Claude Code)
+
+Bloco ABERTO (registo incremental, atualizado a medida que avanca): **fotografia real para os artigos SEO/GEO (Task 8)**.
+Contexto: a outra conta estava a vasculhar o Drive por fotos dos artigos mas ficou inviavel. Decisao do Abilio:
+procurar imagens **copyright-free, reais (NAO-AI), boas e no estilo S&A** (editorial Rathbones/Saltus, navy + champagne #D6C29A).
+
+- Alvo imediato: **artigo 1/3** docs/articles/01-investing-in-portugal-2026.md ("Investing in Portugal 2026").
+  Precisa de pelo menos 1 hero + 1-2 imagens de seccao (Lisboa/imobiliario premium). Reutilizavel para 2/3 e 3/3.
+- Licenca: para site comercial de servicos financeiros, priorizar **Unsplash/Pexels** (uso comercial livre,
+  sem atribuicao) e Wikimedia (atribuicao) em vez de "Google CC" (labeling pouco fiavel). Vetar cada foto como
+  fotografia REAL (fotografo com perfil/EXIF), rejeitar qualquer coisa com cheiro a AI.
+- Plano: pesquisar -> shortlist curada (fonte/fotografo/licenca/link) -> Abilio escolhe -> download full-res
+  para assets/ e wiring. Downloads full-res para o repo confirmados com o Abilio antes.
+
+STATUS: a iniciar pesquisa no browser.
+
+- [2026-08-31 15:12 WEST] Shortlist v1 montada. Fonte = Unsplash (Unsplash License: uso comercial livre,
+  sem atribuicao). 10 candidatos, TODOS fotografia real verificada visualmente (sem tells de AI):
+  Lisboa #01 skyline s/ Tejo (photo-1501927023255-9063be98970c), #02 Alfama telhados (…1536663815808-535e2280d2c2),
+  #03 telhados+cupula (…1689880595827-2a61bb91b116), #04 sob Castelo S.Jorge (…1726524625096-9f290bb65120),
+  #05 fachada pombalina/Pr.Camoes (…1710195572585-65b91ec09a66), #06 azulejo (…1695084791802-0ab9026da52a),
+  #07 Tram 28 (…1664234281426-4c5eb9b730f8); Porto #08 Douro (…1632245809643-8d40095f45db),
+  #09 ponte D.Luis (…1581371945115-efd84739c065); Algarve #10 Ponta da Piedade (…1608649944716-228404a0a8bb).
+  Previews em scratchpad (cand-01..10.jpg + shortlist.jpg). A AGUARDAR escolha do Abilio -> depois download
+  full-res p/ assets/ + optimizacao (sips/webp) + wiring no artigo/blocks.
+
+- [2026-08-31 15:15 WEST] Abilio escolheu o BANCO COMPLETO (#01 hero, #05 fachada, #06 azulejo, #08 Porto,
+  #10 Algarve) + OK para download/optimizacao. Feito: 5 imagens full-res -> **assets/blog/** como
+  investing-2026-{hero,lisbon-facade,azulejo,porto,algarve}.{jpg,webp} (webp+jpg, progressive, ~150-460KB webp).
+  Provenance+licenca em assets/blog/CREDITS.md (Unsplash License, sem atribuicao obrigatoria).
+  NAO commitado, NAO publicado (a pedido). PENDENTE: wiring no artigo/blocks + (no publish) upload p/ Supabase
+  storage do blog. Paths root-relative sugeridos: /assets/blog/investing-2026-hero.jpg (hero), restantes por seccao.
+
+- [2026-08-31 15:22 WEST] Pedido do Abilio: tratar imagens de TODOS os artigos (novos+velhos) e fazer deploy
+  automatico via backoffice. INVESTIGACAO (read-only):
+  - Blog real = tabela Supabase **posts** (bcjtkfipcfvvitglgpys), servida em /blog/<slug> por api/seo_blog.js.
+    Os blog/*.html sao LEGADO estatico (nao e a fonte viva). Backoffice = **/studio.html -> seccao Blog**
+    (campo de cover; upload p/ bucket blog-media). Chrome real ligado (Browser 1, local) c/ sessao Supabase.
+  - **12 posts vivos**, todos JA com image_url. Diagnostico dos covers (contact sheet current_covers.jpg):
+    * 1 Tax/NHR (ponte 25 Abril) e 2 Financing (igreja Graca) = fotos reais OK.
+    * 3 Golden Visa, 5 Property law, 6 Lifestyle = **MESMA foto passaporte-na-mao** (duplicada 3x).
+    * 7-12 (cover_*.webp) = **covers graficos com texto sobreposto**, varios com tells de AI; #12 tem
+      ERROS ortograficos "INOVATION"/"INFRASTUCTURE CATALYS". Violam a regra no-AI/editorial da marca.
+  - PLANO imagens: substituir covers 7-12 (AI-look) + de-duplicar 3/5/6; manter 1/2. Fotos reais Unsplash
+    (mesmo processo do artigo 1). Deploy via /studio Blog no Chrome do Abilio.
+  - **BLOQUEIO a assinalar**: NAO publicar os artigos NOVOS automaticamente -> artigo 1 ainda tem
+    [A VERIFICAR] (numeros financeiros nao verificados; o proprio doc proibe ir live) e artigos 2/3 nem
+    escritos estao. YMYL: nao meter numeros nao verificados live. Novos artigos = preparar+segurar p/ revisao.
+
+- [2026-08-31 15:34 WEST] Banco de fotografia FINALIZADO (todas Unsplash, reais, vetadas visualmente).
+  Metodo de deploy decidido: correr JS dentro de /studio.html (Chrome do Abilio, sessao Supabase autenticada)
+  usando o mesmo cliente sb do backoffice -> storage.from('blog-media').upload + posts.update/insert. Sem password.
+  Assignments (post -> unsplash id):
+  1 Tax/NHR=1762144062379-9b87ebe582cf(Pr.Comercio); 2 Financing=1710195572585(fachada); 3 GV=1682271630116(Belem);
+  4 Lx-vs-Porto=1632245809643(Porto); 5 Prop.law=1689880595827(cupula); 6 Lifestyle=1664234281426(tram);
+  7 Lx-yield=1536663815808(Alfama); 8 Lx-vs-EU=1762068305260(rio largo); 9 Portfolios=1726524625096(sob castelo);
+  10 Scarcity=1712777826094(telhados densos); 11 Liquidity=1651060782121(telhados vermelhos);
+  12 Polycentric=1608208291890(aereo dourado amplo).
+  Artigos: Art1 Investing=1501927023255(skyline, JA em assets/blog); Art2 GVvsD2=1581371945115(ponte Porto);
+  Art3 GVrotas=1695084791802(azulejo).
+  A SEGUIR: verificar sessao no /studio, testar 1 update end-to-end, depois os restantes 11; depois artigos.
+
+- [2026-08-31 15:40 WEST] BLOQUEADO em: login. /studio.html no Chrome do Abilio mostra gate email+password
+  (admin@smithandadams.com), SEM sessao persistida (localStorage sem auth-token). Nao posso introduzir password.
+  Banner de cookies -> cliquei "Essential only" (privacy-preserving). window.supabase (lib UMD) esta disponivel,
+  por isso apos o Abilio entrar posso criar cliente que herda a sessao do localStorage e correr os writes.
+  A AGUARDAR: Abilio fazer sign-in no tab. Enviei plan_sheet.jpg para veto de picks.
+
+- [2026-08-31 15:44 WEST] DECISOES confirmadas pelo Abilio (AskUserQuestion): (a) covers vivos =
+  **substituir TODOS os 12** (nao so os AI-look); (b) artigos novos = **preparar E publicar**. Restricao YMYL
+  mantida por mim: publicar so factos verificados, sem numeros [A VERIFICAR] inventados (base = knowledge/ +
+  skill sa-content). Inserir post = fica LIVE de imediato (tabela posts nao tem flag published).
+
+- [2026-08-31 15:58 WEST] Abilio disse "Entrei" mas o tab do /studio que EU controlo (Claude-in-Chrome)
+  continua no gate de login (localStorage sem auth-token; so _gcl_ls + sa_consent). A extensao corre noutro
+  profile/janela que nao o do login do Abilio. -> preciso que ele faca sign-in NO TAB que eu controlo.
+- NOVOS PEDIDOS do Abilio (homepage, index.html = ficheiro estatico -> deploy por git push autor Suzan, NAO backoffice):
+  (1) <title>/meta: hoje "Smith & Adams | Premium Real Estate Investment & Portugal Golden Visa" (PT SERP mostra
+      "Investimento Imobiliario Premium em Portugal & Golden Visa"). Abilio quer reposicionar p/ "Investment Advisory -
+      Real Estate, Golden Visa, D2 Visa, Property Management & Hospitality". MINHA RECOMENDACAO: direcao certa
+      (advisory + todas as unidades) MAS string ~90 chars = Google trunca (~60). Propor title curto + lista completa
+      na meta description. Confirmar antes de aplicar.
+  (2) Bloco TESTIMONIALS "Real stories, real success" (index.html linhas 350-364): grid estatico de 3 (Turcos,
+      anonimizados "Emre Y., Istanbul"). Pedidos: (a) bandeiras do pais/cidade em opacidade no fundo de cada card;
+      (b) +3 testemunhos (India=Manav Goyal, UK=Alan Fox, Dubai=Preston Felicity) com pontos dados pelo Abilio;
+      (c) cards ROTATIVOS (carousel) p/ mostrar todos. FLAG DE INTEGRIDADE: sao clientes reais/consentidos? Nao
+      publicar testemunhos inventados como reais (YMYL). A confirmar com Abilio antes de publicar.
+
+- [2026-08-31 16:04 WEST] DECISOES Abilio: (title) opcao recomendada = title curto "Smith & Adams | Investment
+  Advisory in Portugal" + unidades todas na meta description; (testemunhos) = CLIENTES REAIS/consentidos ->
+  posso escrever e publicar como genuinos (Abilio, business owner, assere que sao reais). Bandeiras = tratamento
+  subtil (baixa opacidade) p/ nao chocar com estetica editorial. Carousel rotativo p/ mostrar os 6.
+  ORDEM: avancar JA nas alteracoes de homepage (index.html, git push autor Suzan -> Vercel) por o backoffice
+  estar bloqueado no login. Covers/artigos assim que Abilio fizer sign-in no tab controlado.
+
+- [2026-08-31 16:14 WEST] Login RESOLVIDO no **in-app Claude Browser** (tab seed, abilio.diz@..., studio dashboard
+  carregado). Pipeline validado: window.supabase.createClient herda a sessao; fetch Unsplash->blob OK (CORS).
+  MAS o WRITE (storage.upload + posts.update via JS no browser) foi BLOQUEADO pelo **classificador auto-mode do
+  Claude Code** (nao foi o utilizador). Leituras passam; mutacoes nao. Nao contornar. -> preciso que o Abilio
+  autorize/mude modo de permissoes, OU faz ele os uploads, OU via UI (mas o in-app browser nao tem file_upload).
+  ENTRETANTO: avanço nas alteracoes de homepage (index.html: title/meta + testimonials) que sao Edit+git, nao
+  este classificador. Covers/artigos ficam pendentes dessa autorizacao.
+
+- [2026-08-31 16:30 WEST] Homepage FEITA (staged, por commit/push autor Suzan): (1) title/meta/og/twitter ->
+  "Smith & Adams | Investment Advisory in Portugal" + description com todas as unidades (sem em-dash);
+  keywords expandidas. (2) Testimonials index.html: bloco reescrito -> CAROUSSEL rotativo (6 cards, 3/pagina
+  desktop, 1/mobile, auto 5.5s, pausa hover/focus, dots, prefers-reduced-motion, sync no scroll). Bandeiras
+  em watermark (~8% opacidade, canto inf-dir) via sprite SVG inline (fl-tr/in/gb/ae). 3 novos testemunhos REAIS
+  (Abilio confirmou): Manav Goyal/India, Alan Fox/United Kingdom, Preston Felicity/Dubai. Tudo inline (style+svg+
+  script) em index.html (sem CSP; ha inline scripts). FALTA: verificar em preview + commit+push (Vercel).
+- [2026-08-31 16:30 WEST] BACKOFFICE (covers 12 + artigos) CONTINUA BLOQUEADO pelo classificador auto-mode nas
+  ESCRITAS Supabase. Abilio avisou "os artigos ainda nao foram alterados". Preciso que ele: mude o modo de
+  permissoes p/ um que peca aprovacao (ou autorize a accao) -> depois corro os 12 swaps + inserts de uma vez.
+  Alternativa: Abilio faz uploads no /studio Blog (dou nomes/ids). Tudo pronto do meu lado (blobs vêm de Unsplash).
+
+- [2026-08-31 16:48 WEST] HOMEPAGE VERIFICADA em preview local (python http.server:8799, in-app browser).
+  Descoberto e corrigido bug: CMS site_content ja tinha testimonials 0-4 (0-2 mostrados + 3=Burcu/4=Ahmet
+  dormentes). Os meus cards novos colidiam com 3/4/5 (cms-loader sobrepunha). CORRIGIDO -> novos usam indices
+  livres **5 (Manav), 6 (Alan), 7 (Preston)**; render confirmado com o MEU texto + flags certas (IN/GB/AE).
+  Carousel: 2 paginas x3 desktop, rotacao + dots OK. Flags watermark subtis (~8%) bonitas, texto legivel.
+  NOTA PT: novos 5/6/7 nao tem traducao PT no CMS -> em /pt aparecem em EN ate se adicionar via backoffice.
+  Servidor de preview parado. Homepage PRONTA a deploiar (git commit+push autor Suzan -> Vercel), FALTA so
+  a mesma autorizacao de escrita.
+
+- [2026-08-31 17:02 WEST] Bandeiras: Abilio forneceu ficheiros reais em ~/Downloads. Convertidos p/
+  assets/flags/{turkey,india,uk,uae}.webp (~9-14KB). Substitui os SVG hand-made por estas imagens reais,
+  aplicadas de forma ORGANICA: background com mask radial (fade suave a partir do canto inf-dir), opacidade .08.
+  Cards agora com ESPACAMENTO (gap 16px, border completa por card em vez do frame de grelha). Carousel tornado
+  gap-aware (pageWidth = (cardW+gap)*perView). Verificado nas 2 paginas (flags reais TR/IN/GB/AE corretas).
+- [2026-08-31 17:02 WEST] Abilio: aprovacao em MANUAL + "avanca" para (1) homepage push (2) covers (3) artigos.
+  A executar por ordem. assets/blog NAO commitado (covers dos artigos vao para blog-media via backoffice).

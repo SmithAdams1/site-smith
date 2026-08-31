@@ -15,12 +15,12 @@
     <meta content="" name="next-size-adjust" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect" />
-    <title>Smith & Adams | Premium Real Estate Investment & Portugal Golden Visa</title>
-    <meta name="description" content="Invest in Portugal with an independent partner. From first analysis to hands-on management, Smith & Adams has advised 1,000+ investors and over €300M in assets."/>
-    <meta content="Portugal Golden Visa, real estate investment, Lisbon property, EU residency" name="keywords" />
+    <title>Smith & Adams | Investment Advisory in Portugal</title>
+    <meta name="description" content="Independent investment advisory in Portugal: real estate, Golden Visa, D2 visa, property management and hospitality. 1,000+ investors advised, €300M+ in assets."/>
+    <meta content="investment advisory Portugal, Portugal Golden Visa, D2 visa, real estate investment, property management, hospitality, Lisbon property, EU residency" name="keywords" />
     <link rel="canonical" href="https://www.smithandadams.com/" /><link rel="alternate" hreflang="en" href="https://www.smithandadams.com/"/><link rel="alternate" hreflang="pt" href="https://www.smithandadams.com/pt"/><link rel="alternate" hreflang="x-default" href="https://www.smithandadams.com/"/>
-    <meta property="og:title" content="Smith & Adams | Premium Real Estate Investment & Portugal Golden Visa" />
-    <meta property="og:description" content="Invest in Portugal with an independent partner. From first analysis to hands-on management, Smith & Adams has advised 1,000+ investors and over €300M in assets." />
+    <meta property="og:title" content="Smith & Adams | Investment Advisory in Portugal" />
+    <meta property="og:description" content="Independent investment advisory in Portugal: real estate, Golden Visa, D2 visa, property management and hospitality. 1,000+ investors advised, €300M+ in assets." />
     <meta property="og:url" content="https://www.smithandadams.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://www.smithandadams.com/og-image.jpg" />
@@ -30,8 +30,8 @@
     <meta property="og:site_name" content="Smith &amp; Adams" />
     <meta property="og:locale" content="en_GB" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Smith &amp; Adams | Premium Real Estate Investment &amp; Portugal Golden Visa" />
-    <meta name="twitter:description" content="Independent real estate investment and residency advisory in Portugal - vetted opportunities, structured end to end, managed hands-off." />
+    <meta name="twitter:title" content="Smith &amp; Adams | Investment Advisory in Portugal" />
+    <meta name="twitter:description" content="Independent investment advisory in Portugal: real estate, Golden Visa, D2 visa, property management and hospitality. 1,000+ investors advised, €300M+ in assets." />
     <meta name="twitter:image" content="https://www.smithandadams.com/og-image.jpg" />
     <link href="favicon.ico" rel="icon" sizes="582x582" type="image/x-icon" />
     <!-- Redesign: Playfair Display for statements (Direction A), Helvetica Neue for working text -->
@@ -355,11 +355,65 @@
                     <h2 class="rd-statement reveal" style="font-size:clamp(28px,4vw,58px);">Real stories, real success.</h2>
                     <p class="rd-body reveal" style="margin-top:24px; max-width:56ch;">International investors we have advised across Portugal, in their words.</p>
                 </div>
-                <div class="rd-quotes">
-                    <div class="rd-quote reveal"><p data-cms="index.testimonials.0.quote" data-cms-attr="html">Smith &amp; Adams gave me an honest, independent read on the market and showed me only a handful of options that genuinely fit. Buying from abroad was completely hands-off.</p><span class="who" data-cms="index.testimonials.0.author">Emre Y., Istanbul</span></div>
-                    <div class="rd-quote reveal"><p data-cms="index.testimonials.1.quote" data-cms-attr="html">What stood out was the objectivity, no pressure to buy anything specific. The returns and the risks were laid out clearly before I committed.</p><span class="who" data-cms="index.testimonials.1.author">Selin A., Ankara</span></div>
-                    <div class="rd-quote reveal"><p data-cms="index.testimonials.2.quote" data-cms-attr="html">The entire purchase was handled end to end while I stayed in Istanbul: legal, financing, and property management afterwards. I never had to fly over.</p><span class="who" data-cms="index.testimonials.2.author">Mehmet K., Istanbul</span></div>
+                <style id="rd-testi-style">
+                  .rd-quotes-carousel{ position:relative; margin-top:clamp(40px,5vw,64px); }
+                  .rd-quotes-track{ display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory;
+                    -ms-overflow-style:none; scrollbar-width:none; scroll-behavior:smooth; padding:2px; }
+                  .rd-quotes-track::-webkit-scrollbar{ display:none; }
+                  .rd-quotes-track > .rd-quote{ flex:0 0 calc((100% - 32px)/3); box-sizing:border-box; scroll-snap-align:start;
+                    padding:clamp(28px,3vw,44px) clamp(22px,2.4vw,40px);
+                    border:1px solid var(--line); background:var(--paper);
+                    position:relative; overflow:hidden; }
+                  .rd-quote .rd-flag{ position:absolute; inset:0; z-index:0; pointer-events:none;
+                    background-repeat:no-repeat; background-position:right -6% bottom -8%; background-size:60% auto;
+                    opacity:.08;
+                    -webkit-mask-image:radial-gradient(135% 135% at 88% 90%, #000 0%, #000 26%, transparent 66%);
+                            mask-image:radial-gradient(135% 135% at 88% 90%, #000 0%, #000 26%, transparent 66%); }
+                  .rd-flag--tr{ background-image:url('/assets/flags/turkey.webp'); }
+                  .rd-flag--in{ background-image:url('/assets/flags/india.webp'); }
+                  .rd-flag--gb{ background-image:url('/assets/flags/uk.webp'); }
+                  .rd-flag--ae{ background-image:url('/assets/flags/uae.webp'); }
+                  .rd-quote > p, .rd-quote > .who{ position:relative; z-index:1; }
+                  .rd-quotes-dots{ display:flex; gap:9px; justify-content:center; align-items:center; padding:24px 0 0; }
+                  .rd-quotes-dots button{ width:7px; height:7px; padding:0; border:0; border-radius:50%;
+                    background:var(--line); cursor:pointer; transition:background .3s, transform .3s; }
+                  .rd-quotes-dots button[aria-current="true"]{ background:var(--navy); transform:scale(1.25); }
+                  @media (max-width:820px){ .rd-quotes-track > .rd-quote{ flex-basis:86%; } }
+                </style>
+                <div class="rd-quotes-carousel">
+                  <div class="rd-quotes-track" id="rdQuotesTrack">
+                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--tr" aria-hidden="true"></span><p data-cms="index.testimonials.0.quote" data-cms-attr="html">Smith &amp; Adams gave me an honest, independent read on the market and showed me only a handful of options that genuinely fit. Buying from abroad was completely hands-off.</p><span class="who" data-cms="index.testimonials.0.author">Emre Y., Istanbul</span></div>
+                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--in" aria-hidden="true"></span><p data-cms="index.testimonials.5.quote" data-cms-attr="html">The whole process was clear and simple from the very first conversation. Smith &amp; Adams helped me put my family on stable, secure footing in Portugal, without any of the usual uncertainty.</p><span class="who" data-cms="index.testimonials.5.author">Manav Goyal, India</span></div>
+                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--gb" aria-hidden="true"></span><p data-cms="index.testimonials.6.quote" data-cms-attr="html">The way they manage the property is genuinely professional, and the reporting is completely transparent. I can see exactly how the asset is performing, quarter after quarter.</p><span class="who" data-cms="index.testimonials.6.author">Alan Fox, United Kingdom</span></div>
+                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--tr" aria-hidden="true"></span><p data-cms="index.testimonials.1.quote" data-cms-attr="html">What stood out was the objectivity, no pressure to buy anything specific. The returns and the risks were laid out clearly before I committed.</p><span class="who" data-cms="index.testimonials.1.author">Selin A., Ankara</span></div>
+                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--ae" aria-hidden="true"></span><p data-cms="index.testimonials.7.quote" data-cms-attr="html">They stayed with me through the entire investment, from the first assessment to choosing the assets that actually made sense. The advice was straight and the guidance never stopped.</p><span class="who" data-cms="index.testimonials.7.author">Preston Felicity, Dubai</span></div>
+                    <div class="rd-quote reveal"><span class="rd-flag rd-flag--tr" aria-hidden="true"></span><p data-cms="index.testimonials.2.quote" data-cms-attr="html">The entire purchase was handled end to end while I stayed in Istanbul: legal, financing, and property management afterwards. I never had to fly over.</p><span class="who" data-cms="index.testimonials.2.author">Mehmet K., Istanbul</span></div>
+                  </div>
+                  <div class="rd-quotes-dots" id="rdQuotesDots"></div>
                 </div>
+                <script>
+                (function(){
+                  var track=document.getElementById('rdQuotesTrack');
+                  var dotsWrap=document.getElementById('rdQuotesDots');
+                  if(!track||!dotsWrap) return;
+                  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                  function perView(){ return window.innerWidth<=820?1:3; }
+                  function pages(){ return Math.max(1, Math.ceil(track.children.length/perView())); }
+                  var cur=0, timer=null;
+                  function mark(){ var bs=dotsWrap.children; for(var i=0;i<bs.length;i++) bs[i].setAttribute('aria-current', i===cur?'true':'false'); }
+                  function pageWidth(){ var f=track.children[0]; if(!f) return track.clientWidth; var cw=f.getBoundingClientRect().width; var cs=getComputedStyle(track); var gap=parseFloat(cs.columnGap||cs.gap)||0; return (cw+gap)*perView(); }
+                  function go(i,user){ var n=pages(); cur=((i%n)+n)%n; track.scrollTo({left:cur*pageWidth(), behavior:'smooth'}); mark(); if(user) restart(); }
+                  function next(){ go(cur+1); }
+                  function restart(){ if(reduce) return; if(timer) clearInterval(timer); timer=setInterval(next,5500); }
+                  function buildDots(){ dotsWrap.innerHTML=''; var n=pages(); for(var i=0;i<n;i++){ (function(i){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Show testimonials, group '+(i+1)); b.addEventListener('click',function(){ go(i,true); }); dotsWrap.appendChild(b); })(i); } mark(); }
+                  var st; track.addEventListener('scroll',function(){ clearTimeout(st); st=setTimeout(function(){ var p=Math.round(track.scrollLeft/pageWidth()); if(p!==cur){ cur=Math.min(p,pages()-1); mark(); } },120); });
+                  track.addEventListener('mouseenter',function(){ if(timer) clearInterval(timer); });
+                  track.addEventListener('mouseleave',restart);
+                  track.addEventListener('focusin',function(){ if(timer) clearInterval(timer); });
+                  var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ buildDots(); go(Math.min(cur,pages()-1)); },200); });
+                  buildDots(); restart();
+                })();
+                </script>
             </div>
         </section>
 
