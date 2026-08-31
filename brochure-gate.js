@@ -24,7 +24,7 @@
         '<button type="button" class="sa-bg__x" data-close aria-label="' + t("Fechar", "Close") + '">&times;</button>' +
         '<p class="sa-bg__eyebrow"></p>' +
         '<h3 class="sa-bg__title">' + t("Receba o guia", "Get the guide") + '</h3>' +
-        '<p class="sa-bg__sub">' + t("Deixe os seus dados e enviamos-lhe o guia. Sem compromisso.", "Leave your details and we'll send you the guide. No obligation.") + '</p>' +
+        '<p class="sa-bg__sub">' + t("Deixe os seus dados e enviamos-lhe o guia.", "Leave your details and we'll send you the guide.") + '</p>' +
         '<form class="sa-bg__form" novalidate>' +
           '<label>' + t("Nome", "First name") + '<input name="firstName" type="text" autocomplete="given-name" required></label>' +
           '<label>' + t("Email", "Email") + '<input name="email" type="email" autocomplete="email" required></label>' +
@@ -89,10 +89,10 @@
     var phone = form.phone.value.trim();
     if (!firstName || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
       msg.className = "sa-bg__msg err";
-      msg.textContent = t("Indique o nome e um email válido.", "Please add your name and a valid email.");
+      msg.textContent = t("Indique o nome e um email v\u00e1lido.", "Please add your name and a valid email.");
       return;
     }
-    btn.disabled = true; btn.textContent = t("A enviar…", "Sending…");
+    btn.disabled = true; btn.textContent = t("A enviar\u2026", "Sending\u2026");
     var attribution = (typeof window.saLeadContext === "function") ? window.saLeadContext() : undefined;
     var body = {
       firstName: firstName, email: email,
@@ -108,7 +108,7 @@
       .then(function () {
         try { if (window.saTrackLead) window.saTrackLead("brochure", { lead_detail: pending.type }); } catch (e2) {}
         msg.className = "sa-bg__msg ok";
-        msg.innerHTML = t("Obrigado. O seu guia está a abrir…", "Thank you. Your guide is opening…") +
+        msg.innerHTML = t("Obrigado. O seu guia est\u00e1 a abrir\u2026", "Thank you. Your guide is opening\u2026") +
           ' <a href="' + pending.href + '" target="_blank" rel="noopener" style="color:#11222D;font-weight:600;">' + t("Descarregar", "Download") + "</a>";
         btn.textContent = t("Enviado", "Sent");
         deliver(pending.href);
@@ -118,7 +118,7 @@
         // Never trap the visitor: acknowledge + still deliver the guide.
         try { if (window.saTrackLead) window.saTrackLead("brochure", { lead_detail: pending.type }); } catch (e3) {}
         msg.className = "sa-bg__msg ok";
-        msg.innerHTML = t("Obrigado. A abrir o seu guia…", "Thank you. Opening your guide…") +
+        msg.innerHTML = t("Obrigado. A abrir o seu guia\u2026", "Thank you. Opening your guide\u2026") +
           ' <a href="' + pending.href + '" target="_blank" rel="noopener" style="color:#11222D;font-weight:600;">' + t("Descarregar", "Download") + "</a>";
         deliver(pending.href);
         setTimeout(close, 2600);
