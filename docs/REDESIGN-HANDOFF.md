@@ -394,3 +394,25 @@ AMBIGUIDADES / PENDENTE (perguntar ao Abilio):
   Nao atribui a foto para nao por a cara na pessoa errada. -> confirmar qual.
 - Restantes membros sem foto (Cristina, Joana, Benjamin, Matilde, Bruna, Heloisa, Rafael, Nayane,
   Taina, Lisa, Beatriz, Ismail, Dario, Sofia, Adriel, Fabio, Ines, Kia, Mauro) continuam com iniciais.
+
+---
+## Sessao 2026-08-31 11:53 WEST (conta: suzan@smithandadams.com / Claude Code - conta Abilio)
+
+Bloco: Meet the Team reorganizado em **3 camadas**. LIVE em prod, verificado (curl: sections + 12 fotos + Teresa; imgs 200).
+
+- **rd_team renderer** (lib/renderRdBlocks.js + api/_renderRdBlocks.js, sincronizados): agora aceita
+  `data.groups[]` generico -> cada grupo { label:{en,pt}, layout:'lead'|'team', people:[] }. Fallback
+  para o formato antigo leaders/team mantido (nao parte dados legados). Grupos vazios nao renderizam.
+- **docs/about.blocks.json** (bloco rd_team): passou de leaders/team para **3 grupos**:
+  1. **Executive** / Executivo (layout lead): Suelen Pires (CEO), Cristina Pereira (CFO).
+  2. **Heads of Department** / Direcao (layout lead): Adam Ismail, Joana Ribeiro, Abilio Diz,
+     George Hobson + **NOVA Teresa - Head of Client Relations & Asset Management** (foto /team/teresa.jpg).
+  3. **The Team** / A Equipa (layout team): os 25 restantes; **Joao Leite** recebeu foto /team/joao.jpg.
+- Fotos novas web-optimizadas: **team/teresa.jpg** (80KB) e **team/joao.jpg** (88KB) - sips resampleWidth 680.
+- **meet-the-team.html** (preview standalone) espelha a mesma estrutura de 3 camadas.
+
+Commits (autor Suzan): bc181b1 (about 3 tiers + renderer + fotos), a4a0c35 (preview) -> main.
+
+RESOLVIDO deste bloco: as ambiguidades anteriores - Joao = Joao Leite; Teresa = nova Head (construida).
+PENDENTE: **Teresa nao tem apelido** (usei so "Teresa") -> confirmar nome completo com o Abilio.
+Restantes sem foto continuam com iniciais.
