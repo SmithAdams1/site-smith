@@ -420,3 +420,5 @@ Restantes sem foto continuam com iniciais.
 - **Teresa** nome completo = **Teresa Cherry Pinto** (about.blocks.json + preview). Commit 62d9570 (Suzan). [2026-08-31 12:05 WEST]
 
 - **Homepage authority photo**: reenquadrada para o aperto de mao (object-position 50% 50%, desktop+mobile) - caras cortadas, foco nas maos, a pedido do Abilio. Commit (Suzan). [2026-08-31 12:11 WEST]
+
+- **About Task 7 (unit context paragraphs)**: as 4 blurbs do rd_units passaram de 1 frase para um paragrafo de contexto cada (EN+PT), evidence-first, sem numeros inventados. Aprovado pelo Abilio. Hardcoded no renderer (lib+api sync). Commit ca647a5 (Suzan). [2026-08-31 12:33 WEST]
