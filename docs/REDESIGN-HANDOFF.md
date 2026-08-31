@@ -617,3 +617,5 @@ Bloco de conteudo (todos LIVE via consola autenticada, sem passar password):
 PENDENTE: fotos variadas copyright-free (agente a curar Unsplash/Pexels) -> capa distinta por artigo; traducao PT dos artigos.
 
 - **Fotos variadas (capas distintas)** (2026-08-31 19:50 WEST): 12 imagens copyright-free Pexels descarregadas+aplicadas (agente curou; eu verifiquei visualmente montage), capa unica por artigo. assets/blog/blog-*.jpg + creditos em CREDITS.md. 14 posts = 14 imagens distintas (verificado em prod). euro-financing(158776) estava bloqueado -> usei pool lisbon-facade. sips nao exporta webp nesta maquina -> capas novas em .jpg (Pexels ja comprime, 70-409KB). Commit 1de2e83. [2026-08-31 19:50 WEST]
+
+- **Traducao PT-EU dos 4 artigos** (2026-08-31 21:09 WEST): investing, tax, GV rotas, GV vs D2 traduzidos (4 agentes em paralelo, HTML/tabelas/SVG preservados byte-a-byte, 0 travessoes, voz da casa). Ficheiros docs/articles/*-pt.html. Escrito translations.pt (title+excerpt+content) em cada post pela sessao Studio. Verificado live em /pt/blog/ (SVG intacto, PT correto). Commit 5997dc4. [2026-08-31 21:09 WEST]
