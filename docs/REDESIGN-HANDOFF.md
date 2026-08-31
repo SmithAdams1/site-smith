@@ -615,3 +615,5 @@ Bloco de conteudo (todos LIVE via consola autenticada, sem passar password):
 - **Slug "w" corrigido** -> portuguese-lifestyle-international-residents.
 - Cidadania/nacionalidade: reforma 2025-26 em fluxo (10 anos geral / 7 CPLP-EU, data disputada) - apresentado como provisorio em todos os artigos.
 PENDENTE: fotos variadas copyright-free (agente a curar Unsplash/Pexels) -> capa distinta por artigo; traducao PT dos artigos.
+
+- **Fotos variadas (capas distintas)** (2026-08-31 19:50 WEST): 12 imagens copyright-free Pexels descarregadas+aplicadas (agente curou; eu verifiquei visualmente montage), capa unica por artigo. assets/blog/blog-*.jpg + creditos em CREDITS.md. 14 posts = 14 imagens distintas (verificado em prod). euro-financing(158776) estava bloqueado -> usei pool lisbon-facade. sips nao exporta webp nesta maquina -> capas novas em .jpg (Pexels ja comprime, 70-409KB). Commit 1de2e83. [2026-08-31 19:50 WEST]
