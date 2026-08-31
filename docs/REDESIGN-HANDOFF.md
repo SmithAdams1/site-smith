@@ -595,3 +595,5 @@ STATUS: a iniciar pesquisa no browser.
     posts.update image_url) e depois os 3 artigos (insert em posts; artigo 1 sem numeros [A VERIFICAR]).
 
 - **Artigo 1 PUBLICADO** (2026-08-31 18:07 WEST): post id 341902f7 na tabela posts, slug investing-in-portugal-real-estate-2026, LIVE em /blog/... com header correto, gr\xc3\xa1fico SVG + tabelas intactos, capa investing-2026-hero.webp. Inserido via consola (fetch do HTML + supabase client autenticado pela sess\xc3\xa3o do Ab\xc3\xadlio; NUNCA passei a password). PENDENTE: trocar capa Unsplash->foto do Drive; artigos 2/3 (GV vs D2, GV rotas); tradu\xc3\xa7\xc3\xa3o PT. [2026-08-31 18:07 WEST]
+
+- **Home "Insight" cards repontados** (2026-08-31 18:55 WEST): apontavam para posts desatualizados (portugal-golden-visa-2024, portuguese-tax-benefits-nhr) -> agora 3 artigos Press atuais e corretos via SSR (header certo): investing-in-portugal-real-estate-2026 (novo), the-real-estate-yield-in-lisbon..., the-scarcity-premium... Hrefs absolutos /blog/. Commit d594b2e. LIVE. [2026-08-31 18:55 WEST]
