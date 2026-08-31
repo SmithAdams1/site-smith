@@ -418,3 +418,5 @@ PENDENTE: **Teresa nao tem apelido** (usei so "Teresa") -> confirmar nome comple
 Restantes sem foto continuam com iniciais.
 
 - **Teresa** nome completo = **Teresa Cherry Pinto** (about.blocks.json + preview). Commit 62d9570 (Suzan). [2026-08-31 12:05 WEST]
+
+- **Homepage authority photo**: reenquadrada para o aperto de mao (object-position 50% 50%, desktop+mobile) - caras cortadas, foco nas maos, a pedido do Abilio. Commit (Suzan). [2026-08-31 12:11 WEST]
