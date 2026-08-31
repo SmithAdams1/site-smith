@@ -597,3 +597,10 @@ STATUS: a iniciar pesquisa no browser.
 - **Artigo 1 PUBLICADO** (2026-08-31 18:07 WEST): post id 341902f7 na tabela posts, slug investing-in-portugal-real-estate-2026, LIVE em /blog/... com header correto, gr\xc3\xa1fico SVG + tabelas intactos, capa investing-2026-hero.webp. Inserido via consola (fetch do HTML + supabase client autenticado pela sess\xc3\xa3o do Ab\xc3\xadlio; NUNCA passei a password). PENDENTE: trocar capa Unsplash->foto do Drive; artigos 2/3 (GV vs D2, GV rotas); tradu\xc3\xa7\xc3\xa3o PT. [2026-08-31 18:07 WEST]
 
 - **Home "Insight" cards repontados** (2026-08-31 18:55 WEST): apontavam para posts desatualizados (portugal-golden-visa-2024, portuguese-tax-benefits-nhr) -> agora 3 artigos Press atuais e corretos via SSR (header certo): investing-in-portugal-real-estate-2026 (novo), the-real-estate-yield-in-lisbon..., the-scarcity-premium... Hrefs absolutos /blog/. Commit d594b2e. LIVE. [2026-08-31 18:55 WEST]
+
+---
+## Sessao 2026-08-31 19:31 WEST (conta: abilio.diz / Claude Code - via sessao Studio autenticada)
+
+- **Capas do blog TROCADAS (todos os 13 posts)**: as capas AI/stock terriveis (cover_0.xxx com texto queimado, passaportes) foram substituidas pela **pool real** assets/blog/investing-2026-* (hero/lisbon-facade/azulejo/porto/algarve, Unsplash licenciado). Update do image_url via consola com a sessao autenticada do Studio (tab Claude_Browser). Verificado em prod: 13/13 pool, 0 terriveis. Mapa tematico (Lisboa->facade/hero, Porto->porto, Algarve/GV->algarve, lifestyle/law/tax->azulejo).
+- NOTA: a "pool" sao 5 fotos reutilizadas (repeticao). A ideia do Drive foi abandonada.
+- RISCO DE CONTEUDO (por tratar): 2 posts LIVE estao factualmente DESATUALIZADOS -> **portugal-golden-visa-2024-complete-guide** (rota imovel fechou out/2023) e **portuguese-tax-benefits-nhr-program** (NHR acabou jan/2025). Tem capa boa agora mas conteudo errado. Recomendo despublicar ou reescrever. Tambem: slug **"w"** (Portuguese Lifestyle) esta partido (1 letra).
