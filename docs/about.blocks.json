@@ -376,6 +376,11 @@
             "layout": "lead",
             "people": [
               {
+                "name": "George Hobson",
+                "role": "Head of Investment & Strategy",
+                "photo": "/team/george.jpg"
+              },
+              {
                 "name": "Adam Ismail",
                 "role": "Head of Hospitality",
                 "photo": "/team/adam.jpg"
@@ -388,11 +393,6 @@
                 "name": "Abílio Diz",
                 "role": "Head of Marketing",
                 "photo": "/team/abilio.jpg"
-              },
-              {
-                "name": "George Hobson",
-                "role": "Head of Investment & Strategy",
-                "photo": "/team/george.jpg"
               },
               {
                 "name": "Teresa Cherry Pinto",
