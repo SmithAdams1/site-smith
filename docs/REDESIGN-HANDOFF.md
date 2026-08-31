@@ -444,3 +444,5 @@ Bloco: About Task 6 - "How we work" substitui a timeline. LIVE, verificado (curl
 
 Commit 99e240d (Suzan). PENDENTE: Task 8 (artigos SEO/GEO). Task 6 fica "final" salvo se o Abilio quiser
 depois trocar o modelo por numeros realizados internos.
+
+- **Task 8 (artigos SEO/GEO)**: em serie, 1 de cada vez para revisao do Abilio. **Draft 1/3 escrito**: docs/articles/01-investing-in-portugal-2026.md ("Investing in Portugal 2026"). So factos verificados; [A VERIFICAR] em yields por cidade / price change / bandas fiscais 2026 (fontes indicadas). FAQ+schema+disclaimer. Publish path = blog Supabase via backoffice (draft NAO esta wired ao site). A seguir: 2/3 Golden Visa vs D2, 3/3 GV rotas+minimos - apos revisao do 1. Commit (Suzan). [2026-08-31 12:48 WEST]
