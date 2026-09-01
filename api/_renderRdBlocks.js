@@ -100,6 +100,69 @@ const renderers = {
     );
   },
 
+  // Mission / Vision / Values: three buttons that open an accessible modal.
+  // Brand-Book statements are set in the display serif, on paper, never in caps.
+  // data.items: [{key,label{},teaser{},statement{}} | {key,label{},teaser{},intro{},values:[{name{},desc{}}]}]
+  rd_mvv(d, locale) {
+    const items = Array.isArray(d.items) ? d.items : [];
+    const arrow = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    const openLbl = locale === 'pt' ? 'Abrir' : 'Open';
+    const closeLbl = locale === 'pt' ? 'Fechar' : 'Close';
+    const btns = items.map(it =>
+      '<button type="button" class="rd-mvv__btn" data-mvv-open="' + attr(it.key) + '">' +
+        '<span class="rd-mvv__k">' + pick(it.label, locale) + '</span>' +
+        '<span class="rd-mvv__name">' + pick(it.teaser, locale) + '</span>' +
+        '<span class="rd-mvv__cue">' + openLbl + ' ' + arrow + '</span>' +
+      '</button>').join('');
+    const dialogs = items.map(it => {
+      let body;
+      if (Array.isArray(it.values)) {
+        const intro = pick(it.intro, locale) ? '<p class="rd-mvv__intro">' + pick(it.intro, locale) + '</p>' : '';
+        const grid = it.values.map(v => '<div class="rd-mvv__v"><h4>' + pick(v.name, locale) + '</h4><p>' + pick(v.desc, locale) + '</p></div>').join('');
+        body = intro + '<div class="rd-mvv__vgrid">' + grid + '</div>';
+      } else {
+        body = '<p class="rd-mvv__stmt">' + pick(it.statement, locale) + '</p>';
+      }
+      return '<div class="rd-mvv__dialog" data-mvv="' + attr(it.key) + '" role="dialog" aria-modal="true" aria-label="' + attr(pick(it.label, locale)) + '" hidden>' +
+        '<button type="button" class="rd-mvv__close" data-mvv-close aria-label="' + attr(closeLbl) + '">&times;</button>' +
+        '<p class="rd-mvv__dlabel">' + pick(it.label, locale) + '</p>' + body + '</div>';
+    }).join('');
+    const anchor = d.anchor || 'purpose';
+    const id = 'rd-mvv-' + anchor;
+    const css = '<style>' +
+      '.rd-mvv__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:clamp(28px,3.5vw,44px);}' +
+      '.rd-mvv__btn{appearance:none;text-align:left;cursor:pointer;background:#fff;border:1px solid var(--line);border-radius:4px;padding:clamp(24px,2.6vw,34px);display:flex;flex-direction:column;gap:12px;min-height:160px;justify-content:space-between;font-family:inherit;transition:border-color .35s ease,box-shadow .35s ease,transform .35s ease;}' +
+      '.rd-mvv__btn:hover{border-color:var(--gold-line);box-shadow:0 16px 34px rgba(17,34,45,.08);transform:translateY(-2px);}' +
+      '.rd-mvv__k{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--slate);font-weight:600;}' +
+      '.rd-mvv__name{font-family:var(--display,\'Playfair Display\',Georgia,serif);font-weight:500;font-size:clamp(22px,2.4vw,30px);line-height:1.05;color:var(--navy);}' +
+      '.rd-mvv__cue{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);}' +
+      '.rd-mvv__ov{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(17,34,45,.55);}' +
+      '@supports(backdrop-filter:blur(2px)){.rd-mvv__ov{backdrop-filter:blur(3px);}}' +
+      '.rd-mvv__ov.is-open{display:flex;}' +
+      '.rd-mvv__dialog{background:var(--paper);max-width:720px;width:100%;border-radius:4px;padding:clamp(32px,4vw,56px);position:relative;box-shadow:0 40px 90px rgba(17,34,45,.35);max-height:88vh;overflow:auto;}' +
+      '.rd-mvv__close{position:absolute;top:16px;right:16px;width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:#fff;cursor:pointer;font-size:20px;line-height:1;color:var(--navy);}' +
+      '.rd-mvv__close:hover{border-color:var(--navy);}' +
+      '.rd-mvv__dlabel{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--slate);font-weight:600;margin:0 0 18px;}' +
+      '.rd-mvv__stmt{font-family:var(--display,\'Playfair Display\',Georgia,serif);font-weight:500;font-size:clamp(24px,3.2vw,40px);line-height:1.14;color:var(--navy);margin:0;}' +
+      '.rd-mvv__intro{font-family:var(--sans);font-size:14px;line-height:1.6;color:var(--slate);margin:0 0 24px;max-width:62ch;}' +
+      '.rd-mvv__vgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px 34px;}' +
+      '.rd-mvv__v h4{font-family:var(--sans);font-size:15px;color:var(--navy);margin:0 0 5px;}' +
+      '.rd-mvv__v p{font-family:var(--sans);font-size:14px;line-height:1.6;color:var(--ink);margin:0;}' +
+      '@media(max-width:760px){.rd-mvv__grid{grid-template-columns:1fr;}.rd-mvv__vgrid{grid-template-columns:1fr;}}' +
+      '</style>';
+    const js = '<script>(function(){var r=document.getElementById(' + JSON.stringify(id) + ');if(!r)return;var ov=r.querySelector("[data-mvv-ov]");if(!ov)return;var dgs=ov.querySelectorAll(".rd-mvv__dialog");function op(k){for(var i=0;i<dgs.length;i++){dgs[i].hidden=dgs[i].getAttribute("data-mvv")!==k;}ov.classList.add("is-open");var f=ov.querySelector(".rd-mvv__dialog:not([hidden]) .rd-mvv__close");if(f)f.focus();}function cl(){ov.classList.remove("is-open");}var bs=r.querySelectorAll("[data-mvv-open]");for(var i=0;i<bs.length;i++){(function(b){b.addEventListener("click",function(){op(b.getAttribute("data-mvv-open"));});})(bs[i]);}ov.addEventListener("click",function(e){if(e.target===ov||(e.target.getAttribute&&e.target.hasAttribute&&e.target.hasAttribute("data-mvv-close")))cl();});document.addEventListener("keydown",function(e){if(e.key==="Escape"&&ov.classList.contains("is-open"))cl();});})();</script>';
+    return (
+      '<section class="rd-sec" id="' + attr(anchor) + '" style="background:var(--paper);">' + css +
+      '<div class="rd-wrap" id="' + id + '">' +
+        (pick(d.eyebrow, locale) ? '<p class="rd-label">' + pick(d.eyebrow, locale) + '</p>' : '') +
+        (pick(d.title, locale) ? '<h2 class="rd-statement" style="font-size:clamp(26px,3.2vw,42px);margin-top:14px;">' + pick(d.title, locale) + '</h2>' : '') +
+        '<div class="rd-mvv__grid">' + btns + '</div>' +
+        '<div class="rd-mvv__ov" data-mvv-ov>' + dialogs + '</div>' +
+      '</div>' + js +
+      '</section>'
+    );
+  },
+
   // Full-bleed hero: media (img or video), scrim, eyebrow, h1, sub, CTAs.
   rd_hero(d, locale) {
     let media;

@@ -49,6 +49,129 @@
       }
     },
     {
+      "type": "rd_mvv",
+      "data": {
+        "anchor": "purpose",
+        "eyebrow": {
+          "en": "Purpose",
+          "pt": "Propósito"
+        },
+        "title": {
+          "en": "Mission, vision and values",
+          "pt": "Missão, visão e valores"
+        },
+        "items": [
+          {
+            "key": "mission",
+            "label": {
+              "en": "Mission",
+              "pt": "Missão"
+            },
+            "teaser": {
+              "en": "Why we exist",
+              "pt": "Porque existimos"
+            },
+            "statement": {
+              "en": "To give international investors independent, performance-focused access to Portugal's real estate market, combining rigorous advice with hands-on management that protects returns without losing sight of the people we serve.",
+              "pt": "Dar a investidores internacionais um acesso independente e orientado para a performance ao mercado imobiliário português, combinando consultoria rigorosa com uma gestão de proximidade que protege os retornos sem perder de vista as pessoas que servimos."
+            }
+          },
+          {
+            "key": "vision",
+            "label": {
+              "en": "Vision",
+              "pt": "Visão"
+            },
+            "teaser": {
+              "en": "Where we are going",
+              "pt": "Para onde vamos"
+            },
+            "statement": {
+              "en": "To be Portugal's leading end-to-end real estate group, setting the standard for foreign investment across Portugal and the EU.",
+              "pt": "Ser o principal grupo imobiliário integrado de Portugal, definindo o padrão do investimento estrangeiro em Portugal e na União Europeia."
+            }
+          },
+          {
+            "key": "values",
+            "label": {
+              "en": "Values",
+              "pt": "Valores"
+            },
+            "teaser": {
+              "en": "Six commitments",
+              "pt": "Seis compromissos"
+            },
+            "intro": {
+              "en": "Six commitments, in the order we test them. We lead with whichever a piece can actually prove; stated on its own, a value is just decoration.",
+              "pt": "Seis compromissos, pela ordem por que os testamos. Lideramos com aquele que cada peça consegue provar; por si só, um valor é apenas decoração."
+            },
+            "values": [
+              {
+                "name": {
+                  "en": "Independence",
+                  "pt": "Independência"
+                },
+                "desc": {
+                  "en": "We advise without a hidden agenda. If something does not serve the client's return, we say so.",
+                  "pt": "Aconselhamos sem agenda escondida. Se algo não serve o retorno do cliente, dizemo-lo."
+                }
+              },
+              {
+                "name": {
+                  "en": "Performance discipline",
+                  "pt": "Disciplina de performance"
+                },
+                "desc": {
+                  "en": "Every recommendation is backed by verifiable numbers (yield, occupancy, growth), not projections we cannot defend.",
+                  "pt": "Cada recomendação assenta em números verificáveis (yield, ocupação, crescimento), não em projeções que não conseguimos defender."
+                }
+              },
+              {
+                "name": {
+                  "en": "Ownership mentality",
+                  "pt": "Mentalidade de proprietário"
+                },
+                "desc": {
+                  "en": "We manage capital and property as rigorously as if it were our own.",
+                  "pt": "Gerimos capital e imóveis com o mesmo rigor como se fossem nossos."
+                }
+              },
+              {
+                "name": {
+                  "en": "Transparency",
+                  "pt": "Transparência"
+                },
+                "desc": {
+                  "en": "Clear reporting and clear terms. No surprises in the numbers or the fine print.",
+                  "pt": "Relatórios claros e condições claras. Sem surpresas nos números nem nas letras pequenas."
+                }
+              },
+              {
+                "name": {
+                  "en": "Client focus",
+                  "pt": "Foco no cliente"
+                },
+                "desc": {
+                  "en": "Every relationship receives the same level of attention, regardless of ticket size.",
+                  "pt": "Cada relação recebe o mesmo nível de atenção, independentemente do valor do investimento."
+                }
+              },
+              {
+                "name": {
+                  "en": "National reach, institutional standards",
+                  "pt": "Alcance nacional, padrão institucional"
+                },
+                "desc": {
+                  "en": "Deep expertise across Portugal's regional markets, delivered to the standard of an institutional-grade operator.",
+                  "pt": "Conhecimento profundo dos mercados regionais de Portugal, entregue ao padrão de um operador de nível institucional."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "type": "rd_prose",
       "data": {
         "bg": "paper",
