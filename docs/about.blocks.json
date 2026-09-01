@@ -49,6 +49,26 @@
       }
     },
     {
+      "type": "rd_prose",
+      "data": {
+        "bg": "paper",
+        "title": {
+          "en": "Smith &amp; Adams Group",
+          "pt": "Smith &<br/>Adams Group"
+        },
+        "body": [
+          {
+            "en": "Smith &amp; Adams is a Lisbon-based real estate investment advisory firm. We give investors an independent view of the Portuguese property market, then go further: coordinating an end-to-end solution across planning, development, construction, and property management, so a single advisory relationship covers the full lifecycle of the investment.",
+            "pt": "A Smith &amp; Adams é uma consultora de investimento imobiliário sediada em Lisboa. Damos aos investidores uma visão independente do mercado imobiliário português e vamos mais longe: coordenamos uma solução ponta a ponta que abrange planeamento, desenvolvimento, construção e gestão de propriedades, para que uma única relação de consultoria cubra todo o ciclo de vida do investimento."
+          },
+          {
+            "en": "Our focus is simple: help objective investors maximise the return on any tangible asset they acquire, while keeping ownership genuinely hands-off. From the first conversation to ongoing management, everything we do is built around that outcome.",
+            "pt": "O nosso foco é simples: ajudar investidores objetivos a maximizar o retorno de qualquer ativo tangível que adquiram, mantendo a propriedade genuinamente sem preocupações. Da primeira conversa à gestão contínua, tudo o que fazemos gira em torno desse resultado."
+          }
+        ]
+      }
+    },
+    {
       "type": "rd_mvv",
       "data": {
         "anchor": "purpose",
@@ -167,26 +187,6 @@
                 }
               }
             ]
-          }
-        ]
-      }
-    },
-    {
-      "type": "rd_prose",
-      "data": {
-        "bg": "paper",
-        "title": {
-          "en": "Smith &amp; Adams Group",
-          "pt": "Smith &<br/>Adams Group"
-        },
-        "body": [
-          {
-            "en": "Smith &amp; Adams is a Lisbon-based real estate investment advisory firm. We give investors an independent view of the Portuguese property market, then go further: coordinating an end-to-end solution across planning, development, construction, and property management, so a single advisory relationship covers the full lifecycle of the investment.",
-            "pt": "A Smith &amp; Adams é uma consultora de investimento imobiliário sediada em Lisboa. Damos aos investidores uma visão independente do mercado imobiliário português e vamos mais longe: coordenamos uma solução ponta a ponta que abrange planeamento, desenvolvimento, construção e gestão de propriedades, para que uma única relação de consultoria cubra todo o ciclo de vida do investimento."
-          },
-          {
-            "en": "Our focus is simple: help objective investors maximise the return on any tangible asset they acquire, while keeping ownership genuinely hands-off. From the first conversation to ongoing management, everything we do is built around that outcome.",
-            "pt": "O nosso foco é simples: ajudar investidores objetivos a maximizar o retorno de qualquer ativo tangível que adquiram, mantendo a propriedade genuinamente sem preocupações. Da primeira conversa à gestão contínua, tudo o que fazemos gira em torno desse resultado."
           }
         ]
       }
