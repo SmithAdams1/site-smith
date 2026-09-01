@@ -626,3 +626,9 @@ PENDENTE: fotos variadas copyright-free (agente a curar Unsplash/Pexels) -> capa
 ## Sessao 2026-08-31 21:38 WEST (conta: abilio.diz / Claude Code)
 
 - **Redesign dos cards "Real stories" (testemunhos na home)**: a bandeira do pais preenchia o card inteiro (.rd-flag inset:0 cover + veu de paper) - lavado e contra a contencao da marca. Nova solucao (Head of Design + tendencias atuais): card limpo em paper; **aspa editorial** em marca-d'agua (navy 13%, .rd-quote__mark); **bandeira como chip circular** 36px no rodape ao lado do autor (.rd-quote__flag, anel hairline + sombra subtil); hover com elevacao + filete champagne (var(--gold-line)). data-cms dos quotes/autores preservados. index.html seccao TESTIMONIALS. Aprovado pelo Abilio ("muito melhor"). Commit 5aeab21. LIVE.
+
+---
+## Sessao 2026-09-01 11:03 WEST (conta: abilio.diz / Claude Code - continuar sessao Suelen interrompida)
+
+- **Homepage portfolio - continuado da sessao Suelen (sem creditos)**: o trabalho estava na branch feature/home-restructure (HEAD destacada no working dir partilhado, por isso o main estava atras e o push dizia "up-to-date"). Merge --ff-only feature/home-restructure -> main (78f046d restructure + 4 fotos portfolio + 1212dc3 handover) e push. LIVE: 6 residencias com Occupancy/Bedroom/Handover, fotos reais (campolide-97-3, hygge-house-5, anjos-40-j, campolide-93-4). Handover: Yellow Charm/Campolide 2023, Hygge House/Saldanha 2022, One-Bedroom/Anjos 2020, Sunny Two/Campolide 2021. Autor Suzan.
+- PENDENTE (mencionado pela sessao Suelen, NAO feito): "fusao pilares+funcoes" na home (decisao Head of Strategy/Marketing) - contexto incompleto, a avaliar.
