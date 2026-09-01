@@ -632,3 +632,9 @@ PENDENTE: fotos variadas copyright-free (agente a curar Unsplash/Pexels) -> capa
 
 - **Homepage portfolio - continuado da sessao Suelen (sem creditos)**: o trabalho estava na branch feature/home-restructure (HEAD destacada no working dir partilhado, por isso o main estava atras e o push dizia "up-to-date"). Merge --ff-only feature/home-restructure -> main (78f046d restructure + 4 fotos portfolio + 1212dc3 handover) e push. LIVE: 6 residencias com Occupancy/Bedroom/Handover, fotos reais (campolide-97-3, hygge-house-5, anjos-40-j, campolide-93-4). Handover: Yellow Charm/Campolide 2023, Hygge House/Saldanha 2022, One-Bedroom/Anjos 2020, Sunny Two/Campolide 2021. Autor Suzan.
 - PENDENTE (mencionado pela sessao Suelen, NAO feito): "fusao pilares+funcoes" na home (decisao Head of Strategy/Marketing) - contexto incompleto, a avaliar.
+
+---
+## Sessao 2026-09-01 12:33 WEST (conta: abilio.diz / Claude Code)
+
+- **Home**: mantida a separacao pilares/six-functions (decisao Head of Strategy: sao 2 altitudes, fundir achataria e mataria o scroll pinned). So ajuste de copy no Pilar 1 ("Advice and delivery under one roof..." em vez de "Six functions...", que a seccao seguinte ja enumera). Commit 512e5a9.
+- **About - NOVO bloco rd_mvv (Missao/Visao/Valores)**: 3 botoes que abrem **modal popup** acessivel (backdrop blur, ESC/backdrop/x fecham). Conteudo = Brand Book Ed.03 (missao/visao EN+PT fixos p07; 6 valores p08 com descricoes, PT traduzido). Frases em display type, nao maiusculas, sobre paper (regras do Brand Book). Colocado como 1o quadro do /about (apos hero). Renderer rd_mvv em lib+api (byte-identical); dados em about.blocks.json (editavel, bilingue). Verificado live: 3 botoes, modal abre/fecha, missao correta. Commit 261d9b4.
