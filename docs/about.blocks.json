@@ -511,16 +511,18 @@
                 "photo": "/team/jahed.jpg"
               },
               {
-                "name": "Benjamin Sharps",
-                "role": "Senior Investor Advisor"
-              },
-              {
                 "name": "Matilde Boulton",
-                "role": "Designer"
+                "role": "Designer",
+                "photo": "/team/matilde.jpg"
               },
               {
                 "name": "Bruna Fernandes",
-                "role": "Comms Team Manager"
+                "role": "Comms Team Manager",
+                "photo": "/team/bruna.jpg"
+              },
+              {
+                "name": "Benjamin Sharps",
+                "role": "Senior Investor Advisor"
               },
               {
                 "name": "Heloisa Araújo",
