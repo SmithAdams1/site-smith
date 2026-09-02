@@ -325,71 +325,6 @@
       }
     },
     {
-      "type": "rd_table",
-      "data": {
-        "anchor": "modelled-scenario",
-        "eyebrow": {
-          "en": "Illustrative Lisbon short-term-rental model",
-          "pt": "Modelo ilustrativo de arrendamento de curta duração em Lisboa"
-        },
-        "title": {
-          "en": "Modelled, not a forecast",
-          "pt": "Modelado, não uma previsão"
-        },
-        "columns": [
-          {
-            "en": "Scenario",
-            "pt": "Cenário"
-          },
-          {
-            "en": "ADR",
-            "pt": "ADR"
-          },
-          {
-            "en": "Occupancy",
-            "pt": "Ocupação"
-          },
-          {
-            "en": "Net annual ROI",
-            "pt": "ROI líquido anual"
-          }
-        ],
-        "rows": [
-          [
-            {
-              "en": "Conservative",
-              "pt": "Conservador"
-            },
-            "&euro;125",
-            "68%",
-            "8.75%"
-          ],
-          [
-            {
-              "en": "Professional",
-              "pt": "Profissional"
-            },
-            "&euro;140",
-            "72%",
-            "10.38%"
-          ],
-          [
-            {
-              "en": "Optimized",
-              "pt": "Otimizado"
-            },
-            "&euro;155",
-            "75%",
-            "11.97%"
-          ]
-        ],
-        "note": {
-          "en": "Illustrative model for a professionally managed Lisbon short-term-rental apartment (a &euro;280,000 unit, 21% management fee), built from independent market benchmarks (ADR &euro;120-150, occupancy 65-75%). Modelled, not a forecast or a guarantee. As of 2026. Sources: AirDNA, Airbtics, Turismo de Portugal, INE. Information, not investment or tax advice; past or modelled performance is not indicative of future returns.",
-          "pt": "Modelo ilustrativo para um apartamento de arrendamento de curta duração em Lisboa com gestão profissional (uma unidade de &euro;280.000, 21% de comissão de gestão), construído a partir de benchmarks de mercado independentes (ADR &euro;120-150, ocupação 65-75%). Modelado, não uma previsão nem uma garantia. Em 2026. Fontes: AirDNA, Airbtics, Turismo de Portugal, INE. Informação, não aconselhamento de investimento ou fiscal; o desempenho passado ou modelado não é indicativo de retornos futuros."
-        }
-      }
-    },
-    {
       "type": "rd_pillars",
       "data": {
         "title": {
@@ -497,8 +432,8 @@
         "groups": [
           {
             "label": {
-              "en": "Executive",
-              "pt": "Executivo"
+              "en": "Management",
+              "pt": "Direção"
             },
             "layout": "lead",
             "people": [
@@ -507,19 +442,6 @@
                 "role": "CEO",
                 "photo": "/team/suelen.jpg"
               },
-              {
-                "name": "Cristina Pereira",
-                "role": "CFO"
-              }
-            ]
-          },
-          {
-            "label": {
-              "en": "Heads of Department",
-              "pt": "Direção"
-            },
-            "layout": "lead",
-            "people": [
               {
                 "name": "George Hobson",
                 "role": "Head of Investment & Strategy",
@@ -554,17 +476,9 @@
             "layout": "team",
             "people": [
               {
-                "name": "Benjamin Sharps",
-                "role": "Senior Investor Advisor"
-              },
-              {
                 "name": "Alex Ivatsko",
                 "role": "Digital Marketing Manager",
                 "photo": "/team/alex.jpg"
-              },
-              {
-                "name": "Matilde Boulton",
-                "role": "Designer"
               },
               {
                 "name": "Mona Campbel",
@@ -585,6 +499,24 @@
                 "name": "Soraia Fernandes",
                 "role": "Hospitality Team Manager",
                 "photo": "/team/soraia.jpg"
+              },
+              {
+                "name": "João Leite",
+                "role": "Customer Service Agent",
+                "photo": "/team/joao.jpg"
+              },
+              {
+                "name": "Jahed Jahed",
+                "role": "Customer Service Agent",
+                "photo": "/team/jahed.jpg"
+              },
+              {
+                "name": "Benjamin Sharps",
+                "role": "Senior Investor Advisor"
+              },
+              {
+                "name": "Matilde Boulton",
+                "role": "Designer"
               },
               {
                 "name": "Bruna Fernandes",
@@ -621,16 +553,6 @@
               {
                 "name": "Ismail Ibraim",
                 "role": "Customer Service Agent"
-              },
-              {
-                "name": "João Leite",
-                "role": "Customer Service Agent",
-                "photo": "/team/joao.jpg"
-              },
-              {
-                "name": "Jahed Jahed",
-                "role": "Customer Service Agent",
-                "photo": "/team/jahed.jpg"
               },
               {
                 "name": "Dario",
