@@ -11,6 +11,24 @@ const COUNTRY_NAMES = {
   IN: 'India', TR: 'Turkey', IL: 'Israel',
 };
 
+// Derive the real acquisition source from the click ids / utm the visitor
+// arrived with, instead of labelling every form "Website Organic". A Google
+// click id means paid Google; utm medium cpc/paid maps by network; a lead the
+// LP tagged is at least "Landing Page". Names match the CRM's lead_sources.
+function deriveSource(lead, attr) {
+  if (attr.gclid || attr.gbraid || attr.wbraid) return 'Google Ads';
+  const um = String(attr.utm_medium || '').toLowerCase();
+  const us = String(attr.utm_source || '').toLowerCase();
+  if (attr.fbclid) return 'Meta Ads';
+  if (um.includes('cpc') || um.includes('ppc') || um.includes('paid')) {
+    if (us.includes('google')) return 'Google Ads';
+    if (us.includes('facebook') || us.includes('meta') || us.includes('instagram') || us.includes('ig')) return 'Meta Ads';
+    if (us.includes('linkedin')) return 'LinkedIn Ads';
+  }
+  if (lead.source === 'lp-invest') return 'Landing Page';
+  return 'Website Organic';
+}
+
 export async function postCrmLead(req, lead) {
   const CRM_API_URL = process.env.CRM_API_URL;
   const CRM_API_KEY = process.env.CRM_API_KEY;
@@ -33,7 +51,7 @@ export async function postCrmLead(req, lead) {
         full_name: lead.full_name || lead.email,
         email: lead.email,
         phone: lead.phone || undefined,
-        source: 'Website Organic',
+        source: deriveSource(lead, attr),
         campaign_name: lead.campaign_name || 'Website form',
         notes,
         target_country: lead.target_country || country,
