@@ -59,3 +59,35 @@ Proposed shape:
 
 - User memory: `project_sa_golden_visa_lp_ads`, `project_sa_crm`, `project_sa_dashboard`, `project_site_smith_seo`, `reference_li_lead_qualification`, `feedback_git_author_suzan_vercel`, `feedback_no_em_dashes`, `feedback_sql_inline`.
 - Key files: `lp-invest.html`, `api/contact.js`, `api/_crm.js`, `redesign.css`, `redesign.js`, `sa-events.js`.
+
+---
+
+## 8. ChatGPT (OpenAI) Ads - status 2026-09-04 (Claude Code session, git author Suzan / suelen@)
+
+Second ad channel, separate from Google Ads. Account "Smith & Adams" at **ads.openai.com** (OpenAI Ads Manager, Beta), ad account `adacct_6a9949c3bbd881938d0d9831f785fe6c`, driven via the **in-app Claude Browser** (NOT Claude-in-Chrome). Login abilio.diz.
+
+### 8.1 CRITICAL BLOCKER (do not lose this)
+The single ad ("Ad 3") is **rejected by OpenAI ad policy at the CATEGORY level**, not for wording. Exact rejection (reason 1 of 2):
+> Regulated Products & Services -> Financial services -> High risk alternative investments -> **Real estate investments**
+> "Este anuncio nao esta a ser servido porque nao cumpre as nossas Politicas de Publicidade. **A revisao NAO esta disponivel para esta rejeicao.**"
+
+Meaning: **OpenAI Ads currently prohibits real-estate-investment advertising** (treated as a high-risk alternative investment). The ad went "Fora de servico" then, after our edit, "Nao aprovado (+2)". **Rewriting copy does NOT fix it** - we reframed the ad from residency to pure property investment and it was still rejected under this exact category. The earlier hypothesis (Golden Visa / residency being the trigger) was WRONG; the trigger is *real estate investment itself*.
+
+STRATEGIC: this offer likely **cannot be advertised on ChatGPT Ads** under current policy. Options for Abilio:
+(a) manual policy review - UI says review NOT available for this rejection, so probably impossible.
+(b) reframe away from investment/returns toward a non-financial angle - guts the offer, may still fail.
+(c) accept ChatGPT Ads do not fit this offer; keep spend on Google Ads. RECOMMENDED unless OpenAI opens the category.
+
+### 8.2 What was BUILT + is LIVE (production, git author Suzan)
+- **Pixel**: OpenAI pixel `pixelId 4R6dpZN7mfCe7cR5VRagoQ` base snippet in `<head>` + `oaiq('measure','lead_created',{type:'customer_action'})` on form success. Verified: SDK `bzrcdn.openai.com/sdk/oaiq.min.js` = 200, `window.oaiq` defined + queue drained. NOTE `debug:true` still ON - flip to `debug:false` before real conversions count.
+- **Dedicated LP `/lp-portugal-investment`** (`lp-portugal-investment.html`, noindex): property-investment-advisory copy ONLY (zero Golden Visa / D2 / residency / citizenship / visa), house voice, proof 1,000+/EUR300M+/300+, hero `/assets/hero-invest.jpg`, the form, the ChatGPT pixel. Form posts `/api/contact` `interest:'investment'`, `source:'lp-chatgpt'`.
+- **CRM tagging**: `api/contact.js` branches `source==='lp-chatgpt'` -> `campaign_name:'ChatGPT Ads - Portugal Investment'` + note "Source: ChatGPT Ads (Portugal Investment LP)", routed to Benjamin Sharps / Benjamin Pipeline.
+- **`/lp-invest`** (Golden Visa LP for Google Ads): headline softened to "Secure European mobility, investing in Portugal", benefits heading turned into a question, ChatGPT pixel REMOVED (belongs on the ChatGPT LP). Otherwise the Google Ads funnel is untouched.
+- **Ad "Ad 3" edited + saved** in OpenAI Ads Manager: Titulo "Portugal Property Investment Advisory", Descricao "Advisers, not brokers. 1,000+ investors advised, EUR300M+ in assets.", Ligacao -> `https://www.smithandadams.com/lp-portugal-investment?utm_source=chatgpt&utm_medium=cpc&utm_campaign=us_invest_test`. The IMAGE still says "Portugal Residency, Done Right" (could not upload a new one from the in-app browser). Rejected anyway on the real-estate category (8.1).
+
+### 8.3 Still open on ChatGPT Ads
+- The category rejection (8.1) - decision needed from Abilio (recommend option c).
+- Conversions not configured in OpenAI Ads: banner "Associe os seus eventos de conversao a uma campanha" - associate the `lead_created` event with the campaign so it optimises/reports.
+- **Conversions API (server-side)**: Abilio gave the CAPI shape (`POST https://bzr.openai.com/v1/events?pid=4R6dpZN7mfCe7cR5VRagoQ`, `type:lead_created`, `data.type:customer_action`) but NOT the API key. When given, wire best-effort server-side send in `api/contact.js` for `source==='lp-chatgpt'`, shared event_id for dedup with the pixel.
+- Flip pixel `debug:true` -> `false`.
+- If a compliant ad image is ever needed: replace "Portugal Residency, Done Right" with a text-free Lisbon property image (upload from the account), or remove it for a text-only ad.
