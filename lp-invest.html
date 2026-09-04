@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="/redesign.css?v=g27"/>
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18073134136"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18073134136');</script>
+<!-- OpenAI (ChatGPT) Ads pixel -->
+<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"4R6dpZN7mfCe7cR5VRagoQ",debug:true});</script>
 <style>
   body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);}
   .lp-top{display:flex;align-items:center;justify-content:space-between;padding:16px clamp(18px,4vw,48px);background:var(--navy);}
@@ -94,7 +96,7 @@
 <section class="lp-hero">
   <div class="lp-hero__text">
     <p class="lp-eyebrow">Portugal Golden Visa &middot; Residency by Investment</p>
-    <h1>Secure European residency in Portugal, <b>advised end to end.</b></h1>
+    <h1>Secure European mobility, <b>investing in Portugal.</b></h1>
     <p class="lp-sub">Independent advice for international investors and their families on Portugal&rsquo;s Golden Visa and D2 routes: the right qualifying investment, the residency application, and hands-on management, structured around a return that stands on its own.</p>
     <div class="lp-proof">
       <div><div class="n">1,000+</div><div class="l">Investors advised</div></div>
@@ -168,7 +170,7 @@
 <section class="lp-benefits">
   <div class="wrap">
     <p class="eyebrow">Why Portugal, with Smith &amp; Adams</p>
-    <h3>Residency for your family, an investment that stands on its own.</h3>
+    <h3>Residency for your family, or an investment that stands on its own?</h3>
     <p class="intro">The Golden Visa is a means, not the goal. We make sure the investment is worth making first, and structure the residency around it.</p>
     <div class="lp-bgrid">
       <div class="lp-bcard"><span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><h4>Residency for the whole family</h4><p>Include your spouse or partner, dependent children and dependent parents, subject to the current rules, on a single application.</p></div>
@@ -232,6 +234,7 @@
       .then(function(res){
         if(res.ok && res.j.success){
           if(window.saTrackLead) window.saTrackLead('consultation'); /* fires GA4 generate_lead (imported into Ads) */
+          if(window.oaiq) oaiq('measure','lead_created',{type:'customer_action'}); /* OpenAI Ads conversion */
           form.parentNode.innerHTML='<div class="lp-ok"><h2>Thank you.</h2><p>Your details are with our advisory team. A Portugal adviser will be in touch within one business day.</p></div>';
         } else { throw new Error('fail'); }
       }).catch(function(){ err.textContent='Something went wrong. Please try again.'; btn.disabled=false; btn.textContent='Request my consultation'; });
