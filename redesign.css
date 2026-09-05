@@ -254,11 +254,11 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
   border-bottom: 1px solid rgba(255,255,255,0.12) !important; transition: opacity .2s ease; }
 #mobile-menu a:hover, #mobile-menu a:active { opacity: .65; }
 /* the Contact CTA is a button, not a list row */
-#mobile-menu a[href="contact.html"] { font-family: var(--sans) !important; font-weight: 600 !important;
+#mobile-menu a[href$="contact.html"] { font-family: var(--sans) !important; font-weight: 600 !important;
   font-size: 15px !important; letter-spacing: 0.02em; background: #fff !important; color: var(--navy) !important;
   text-align: center !important; border: 0 !important; border-radius: 2px !important;
   padding: 17px 24px !important; margin-top: 32px !important; }
-#mobile-menu a[href="contact.html"]:hover { opacity: 1; background: #f0ede8 !important; }
+#mobile-menu a[href$="contact.html"]:hover { opacity: 1; background: #f0ede8 !important; }
 /* language toggle: white on the navy sheet, pushed to the bottom */
 #mobile-menu .cms-lang-switcher { color: #fff !important; margin-top: 28px !important; margin-left: 0 !important;
   justify-content: flex-start; font-size: 15px; }
