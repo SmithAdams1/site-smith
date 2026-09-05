@@ -20,11 +20,14 @@ function deriveSource(lead, attr) {
   const um = String(attr.utm_medium || '').toLowerCase();
   const us = String(attr.utm_source || '').toLowerCase();
   if (attr.fbclid) return 'Meta Ads';
+  if (attr.rdt_cid) return 'Reddit Ads';
   if (um.includes('cpc') || um.includes('ppc') || um.includes('paid')) {
     if (us.includes('google')) return 'Google Ads';
     if (us.includes('facebook') || us.includes('meta') || us.includes('instagram') || us.includes('ig')) return 'Meta Ads';
     if (us.includes('linkedin')) return 'LinkedIn Ads';
+    if (us.includes('reddit')) return 'Reddit Ads';
   }
+  if (us.includes('reddit')) return 'Reddit Ads';
   if (lead.source === 'lp-invest') return 'Landing Page';
   return 'Website Organic';
 }

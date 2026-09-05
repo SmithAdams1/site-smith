@@ -15,6 +15,7 @@
   "use strict";
   var GOOGLE_TAG = "GT-TWZKWC9P"; // Google tag (routes to GA4 / linked destinations)
   var ADS_ID = "AW-18073134136"; // Google Ads (kept explicit; if GT already links Ads, we can drop this later)
+  var REDDIT_PIXEL = "a2_jlhz18kdehgg"; // Reddit Ads pixel (marketing; loaded only on consent grant)
   var STORE = "sa_consent"; // "granted" | "denied"
 
   window.dataLayer = window.dataLayer || [];
@@ -35,6 +36,27 @@
   ensureGtagLib();
   gtag("config", GOOGLE_TAG);
 
+  // Reddit pixel does not honour Google Consent Mode, so we load it only once
+  // consent is granted (equivalent to ad_storage: granted). Idempotent.
+  function loadRedditPixel() {
+    if (window.rdt) return;
+    !(function (w, d) {
+      if (!w.rdt) {
+        var p = (w.rdt = function () {
+          p.sendEvent ? p.sendEvent.apply(p, arguments) : p.callQueue.push(arguments);
+        });
+        p.callQueue = [];
+        var t = d.createElement("script");
+        t.src = "https://www.redditstatic.com/ads/pixel.js";
+        t.async = true;
+        var s = d.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(t, s);
+      }
+    })(window, document);
+    window.rdt("init", REDDIT_PIXEL);
+    window.rdt("track", "PageVisit");
+  }
+
   function apply(state) {
     gtag("consent", "update", {
       ad_storage: state,
@@ -42,6 +64,7 @@
       ad_user_data: state,
       ad_personalization: state,
     });
+    if (state === "granted") loadRedditPixel();
   }
 
   var saved = null;

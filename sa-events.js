@@ -52,7 +52,7 @@
     }
   }
 
-  var ATTR_KEYS = ['gclid', 'gbraid', 'wbraid', 'fbclid',
+  var ATTR_KEYS = ['gclid', 'gbraid', 'wbraid', 'fbclid', 'rdt_cid',
     'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
   var STORE = 'sa_attr';
 
@@ -125,6 +125,8 @@
       for (var e2 in extra) { if (Object.prototype.hasOwnProperty.call(extra, e2) && !SKIP[e2]) params[e2] = extra[e2]; }
       window.gtag('event', 'generate_lead', params);
       fireAds(type, value);
+      // Reddit Ads pixel (loaded by consent.js only on consent grant).
+      if (window.rdt) { try { window.rdt('track', 'Lead'); } catch (e2) {} }
     } catch (e) {}
   };
 
