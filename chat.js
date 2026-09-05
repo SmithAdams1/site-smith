@@ -297,6 +297,23 @@
     document.getElementById('sa-send').addEventListener('click', function () {
       send(input.value);
     });
+
+    // Get out of the way of the mobile menu: the chat FAB/tooltip sit at a very
+    // high z-index, so while the menu is open they overlap it and swallow the
+    // touch, blocking the menu from scrolling. Hide the widget while the menu is
+    // open (and close the chat window if it was open), restore it when it closes.
+    var mm = document.getElementById('mobile-menu');
+    if (mm) {
+      var syncToMenu = function () {
+        var menuOpen = !mm.classList.contains('invisible');
+        var wrap = document.getElementById('sa-btn-wrap');
+        var win = document.getElementById('sa-win');
+        if (wrap) wrap.style.display = menuOpen ? 'none' : '';
+        if (win) win.style.display = menuOpen ? 'none' : '';
+      };
+      new MutationObserver(syncToMenu).observe(mm, { attributes: true, attributeFilter: ['class'] });
+      syncToMenu();
+    }
   }
 
   if (document.readyState === 'loading') {
