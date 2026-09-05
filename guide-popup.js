@@ -59,7 +59,7 @@
     + '.sag-ov.sag-on .sag-box{transform:none;}'
     + '.sag-media{flex:0 0 40%;background:#11222D;}'
     + '.sag-media img{width:100%;height:100%;object-fit:cover;display:block;}'
-    + '.sag-body{flex:1;padding:34px 34px 30px;}'
+    + '.sag-body{flex:1;min-width:0;padding:34px 34px 30px;}'
     + '.sag-eyebrow{font:500 10px/1 "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:.22em;color:#6A7883;text-transform:uppercase;margin:0 0 14px;}'
     + '.sag-h{font-family:"Archivo Expanded","Archivo","Helvetica Neue",Arial,sans-serif;font-weight:600;color:#11222D;font-size:27px;line-height:1.12;letter-spacing:-.01em;margin:0 0 12px;}'
     + '.sag-p{font:400 14px/1.6 "Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;color:#26333C;margin:0 0 18px;}'
