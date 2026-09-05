@@ -231,7 +231,11 @@
     }).then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
       .then(function(res){
         if(res.ok && res.j.success){
-          if(window.saTrackLead) window.saTrackLead('consultation'); /* fires GA4 generate_lead (imported into Ads) */
+          if(window.saTrackLead){
+            var e164=(form.phoneCode.value+form.phoneNumber.value).replace(/[^\d+]/g,'');
+            if(e164 && e164.charAt(0)!=='+') e164='+'+e164;
+            window.saTrackLead('consultation',{email:email, phone:e164}); /* GA4 generate_lead (imported into Ads) + Enhanced Conversions */
+          }
           form.parentNode.innerHTML='<div class="lp-ok"><h2>Thank you.</h2><p>Your details are with our advisory team. A Portugal adviser will be in touch within one business day.</p></div>';
         } else { throw new Error('fail'); }
       }).catch(function(){ err.textContent='Something went wrong. Please try again.'; btn.disabled=false; btn.textContent='Request my consultation'; });

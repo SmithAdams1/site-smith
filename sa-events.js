@@ -11,22 +11,18 @@
   'use strict';
 
   var ADS_ID = 'AW-18073134136';
-  // Google Ads conversion labels, keyed by lead type. Fill each `null` with the
-  // conversion label from Google Ads (Tools > Conversions > the action > tag
-  // setup: the label after "AW-18073134136/"). Until a label exists, the GA4
-  // `generate_lead` event still fires; only the Ads conversion is skipped.
+  // Google Ads conversion labels, keyed by lead type. INTENTIONALLY EMPTY:
+  // the two direct website actions these used to point to ("Enviar formulario
+  // de leads" = w_EoCJ..., "Contacto" = l5vTC...) were removed in the CRM
+  // (bloco 164). The ACTIVE Ads conversion path is now the GA4 `generate_lead`
+  // event below, imported into Google Ads as a Primary action. Firing a direct
+  // Ads conversion here as well would (a) go to a non-existent action and (b)
+  // double-count once re-created. To add a direct action later: create ONE
+  // website conversion action, put its label here, and demote the GA4 import to
+  // Secondary so the same lead is not counted twice.
   var ADS_LABELS = {
-    // "Enviar formulario de leads" website action (created 2026-08-30) - every
-    // form/lead submission maps here (Ads optimises on it; GA4 keeps lead_type).
-    guide:               'w_EoCJ26uuocELjI-K1D',
-    brochure:            'w_EoCJ26uuocELjI-K1D',
-    consultation:        'w_EoCJ26uuocELjI-K1D',
-    contact:             'w_EoCJ26uuocELjI-K1D',
-    property:            'w_EoCJ26uuocELjI-K1D',
-    'property-management': 'w_EoCJ26uuocELjI-K1D',
-    // "Contacto" website action - WhatsApp + phone-call click intents.
-    whatsapp:            'l5vTCKC6uuocELjI-K1D',
-    call:                'l5vTCKC6uuocELjI-K1D'
+    guide: null, brochure: null, consultation: null, contact: null,
+    property: null, 'property-management': null, whatsapp: null, call: null
   };
 
   // Estimated lead VALUES (EUR) so GA4 and Ads can optimise toward value, not
@@ -95,16 +91,38 @@
     return ctx;
   };
 
+  // Enhanced Conversions for Leads: hand the Google tag the user's first-party
+  // email/phone so Google Ads can match this lead to the ad click even when
+  // cookies are limited (recovers conversions lost to consent/ITP). Sent
+  // unhashed over HTTPS; Google normalises (lowercase, E.164, trim) and SHA256s
+  // it. Must be set BEFORE the conversion event fires. Ref: Google Ads Help
+  // "Configure the Google tag for enhanced conversions for leads".
+  function setUserData(email, phone) {
+    if (typeof window.gtag !== 'function') return;
+    var ud = {};
+    if (email) { var e = String(email).trim().toLowerCase(); if (e) ud.email = e; }
+    if (phone) {
+      var p = String(phone).replace(/[^\d+]/g, '');
+      if (p && p.charAt(0) !== '+') p = '+' + p;
+      if (p.replace(/\D/g, '').length >= 8) ud.phone_number = p; // E.164
+    }
+    if (ud.email || ud.phone_number) window.gtag('set', 'user_data', ud);
+  }
+
   // ---- 2. fire a lead conversion (GA4 + Google Ads) ----
   window.saTrackLead = function (type, extra) {
     try {
       if (typeof window.gtag !== 'function') return;
       type = type || 'lead';
+      extra = extra || {};
+      // Enhanced Conversions first (never forwarded into GA4 event params).
+      setUserData(extra.email, extra.phone);
       var ctx = window.saLeadContext() || {};
-      var value = (extra && extra.value != null) ? extra.value : (LEAD_VALUES[type] || 0);
+      var value = (extra.value != null) ? extra.value : (LEAD_VALUES[type] || 0);
       var params = { lead_type: type, value: value, currency: LEAD_CURRENCY };
       for (var k in ctx) { if (Object.prototype.hasOwnProperty.call(ctx, k)) params[k] = ctx[k]; }
-      if (extra) { for (var e2 in extra) { if (Object.prototype.hasOwnProperty.call(extra, e2)) params[e2] = extra[e2]; } }
+      var SKIP = { email: 1, phone: 1, value: 1 };
+      for (var e2 in extra) { if (Object.prototype.hasOwnProperty.call(extra, e2) && !SKIP[e2]) params[e2] = extra[e2]; }
       window.gtag('event', 'generate_lead', params);
       fireAds(type, value);
     } catch (e) {}
