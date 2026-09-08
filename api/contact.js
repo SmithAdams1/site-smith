@@ -5,14 +5,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { firstName, lastName, email, phoneCode, phoneNumber, interest, message, attribution, source } = req.body;
+  const { firstName, lastName, email, phoneCode, phoneNumber, interest, message, attribution, source, partial } = req.body;
 
   const isBrochure = typeof source === 'string' && source.indexOf('brochure-') === 0;
-  // Brochure (gated-download) leads are low-friction: name + email only. Every
-  // other form still requires a phone.
-  if (!firstName || !email || (!isBrochure && (!phoneCode || !phoneNumber))) {
+  // Brochure (gated download) and step-1 of the 2-step LP (partial:true) are
+  // low-friction: name + email only, captured immediately so an abandoner is
+  // never lost. Every other form still requires a phone.
+  const phoneOptional = isBrochure || partial === true;
+  if (!firstName || !email || (!phoneOptional && (!phoneCode || !phoneNumber))) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
+  const hasPhone = Boolean(phoneCode && phoneNumber);
 
   // --- Own CRM (crm.smithandadams.com) is the source of truth. Routing:
   //   * Property Management inquiries -> Teresa Cherry / Property Management pipeline.
@@ -53,7 +56,7 @@ export default async function handler(req, res) {
   const crmOk = await postCrmLead(req, {
     full_name: `${firstName} ${lastName || ''}`.trim(),
     email,
-    phone: `${phoneCode} ${phoneNumber}`.trim(),
+    phone: hasPhone ? `${phoneCode} ${phoneNumber}`.trim() : undefined,
     campaign_name: campaignName,
     notes,
     attribution,
@@ -68,10 +71,14 @@ export default async function handler(req, res) {
   // --- Pipedrive (legacy, being decommissioned): strictly best-effort. Its failure
   // must never break the form response now that the own CRM is the system of record.
   let pipedriveOk = false;
-  try {
-    pipedriveOk = await postToPipedrive({ firstName, lastName, email, phoneCode, phoneNumber, interest, message });
-  } catch (err) {
-    console.error('[contact] Pipedrive error:', err.message);
+  // Skip the legacy Pipedrive path for phone-less partial captures; the own CRM
+  // already holds the lead and Pipedrive expects a full contact.
+  if (hasPhone) {
+    try {
+      pipedriveOk = await postToPipedrive({ firstName, lastName, email, phoneCode, phoneNumber, interest, message });
+    } catch (err) {
+      console.error('[contact] Pipedrive error:', err.message);
+    }
   }
 
   if (crmOk || pipedriveOk) {
