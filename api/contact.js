@@ -57,6 +57,9 @@ export default async function handler(req, res) {
     campaign_name: campaignName,
     notes,
     attribution,
+    // Forward the raw form source so deriveSource() can label a no-gclid LP
+    // lead "Landing Page" instead of falling through to "Website Organic".
+    source,
     ...(isPropertyManagement
       ? { assign_to_email: 'teresa.pinto@smithandadams.com', pipeline_name: 'Property Management' }
       : { assign_to_email: 'benjamin.sharps@smithandadams.com', pipeline_name: 'Benjamin Pipeline' }),
