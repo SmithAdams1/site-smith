@@ -133,29 +133,12 @@
 
   <div class="lp-card">
     <form id="lp-form" novalidate>
-      <h2>Speak with a Portugal adviser</h2>
-      <p class="k">A confidential, no-obligation review of the buy-back programme and the numbers behind it.</p>
-
-      <div class="lp-stepper" aria-hidden="true">
-        <span class="lp-dot on" data-dot="1"></span>
-        <span class="lp-dot" data-dot="2"></span>
-        <span class="lp-steplabel" id="lp-steplabel">Step 1 of 2</span>
-      </div>
+      <h2>Get the Invest in Portugal Guide</h2>
+      <p class="k">A free guide to the D2 buy-back programme and the numbers behind it. Enter your details and it is yours to download.</p>
 
       <div class="lp-panel" data-step="1">
         <div class="lp-f"><label>Full name</label><input type="text" name="name" autocomplete="name" placeholder="Your name"></div>
         <div class="lp-f"><label>Email</label><input type="email" name="email" autocomplete="email" placeholder="you@email.com"></div>
-        <label class="lp-consent"><input type="checkbox" name="consent"><span>I agree to be contacted by Smith &amp; Adams about my enquiry. I can unsubscribe anytime.</span></label>
-        <div class="lp-err" data-err="1" aria-live="polite"></div>
-        <button type="button" class="lp-btn" id="lp-next">Continue</button>
-        <p class="lp-fineprint">Takes under a minute &middot; No obligation</p>
-      </div>
-
-      <div class="lp-panel" data-step="2" hidden>
-        <div class="lp-reassure">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8a8f76" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <span>Almost done. Your best number and a little context, so the right adviser calls prepared.</span>
-        </div>
         <div class="lp-f"><label>Phone</label>
           <div class="lp-phone">
             <select name="phoneCode" aria-label="Country code">
@@ -175,36 +158,10 @@
             <input type="tel" name="phoneNumber" autocomplete="tel" placeholder="Phone number">
           </div>
         </div>
-        <div class="lp-f"><label>Who is this investment for?</label>
-          <select name="forWho">
-            <option value="" selected disabled>Select</option>
-            <option>Myself only</option>
-            <option>Myself and my spouse</option>
-            <option>Myself and my family</option>
-          </select>
-        </div>
-        <div class="lp-f"><label>When do you plan to invest?</label>
-          <select name="timing">
-            <option value="" selected disabled>Select</option>
-            <option>Within 3 months</option>
-            <option>3 to 6 months</option>
-            <option>6 to 12 months</option>
-            <option>Just exploring</option>
-          </select>
-        </div>
-        <div class="lp-f"><label>Investment capacity</label>
-          <select name="funds">
-            <option value="" selected disabled>Select</option>
-            <option>Under &euro;250,000</option>
-            <option>&euro;250,000 &ndash; &euro;500,000</option>
-            <option>&euro;500,000+</option>
-            <option>Still exploring</option>
-          </select>
-        </div>
-        <div class="lp-err" data-err="2" aria-live="polite"></div>
-        <button type="submit" class="lp-btn">Request my consultation</button>
-        <button type="button" class="lp-back" id="lp-back">&larr; Back</button>
-        <p class="lp-fineprint">Confidential &middot; No obligation &middot; A reply within one business day</p>
+        <label class="lp-consent"><input type="checkbox" name="consent"><span>I agree to be contacted by Smith &amp; Adams about my enquiry. I can unsubscribe anytime.</span></label>
+        <div class="lp-err" data-err="1" aria-live="polite"></div>
+        <button type="submit" class="lp-btn">Download the Guide</button>
+        <p class="lp-fineprint">Instant download &middot; No obligation</p>
       </div>
     </form>
   </div>
@@ -264,68 +221,30 @@
 <script>
 (function(){
   var form=document.getElementById('lp-form');
-  var p1=form.querySelector('[data-step="1"]');
-  var p2=form.querySelector('[data-step="2"]');
   var err1=form.querySelector('[data-err="1"]');
-  var err2=form.querySelector('[data-err="2"]');
-  var nextBtn=document.getElementById('lp-next');
-  var backBtn=document.getElementById('lp-back');
-  var stepLabel=document.getElementById('lp-steplabel');
-  var dot2=form.querySelector('[data-dot="2"]');
   var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  var captured=false;
+  var GUIDE='/smith-adams-investor-guide-portugal.pdf';
 
   function ctx(){ return window.saLeadContext ? window.saLeadContext() : {}; }
   function nameParts(){ return form.name.value.trim().split(/\s+/); }
-
-  function showStep(n){
-    p1.hidden = n!==1; p2.hidden = n!==2;
-    dot2.classList.toggle('on', n===2);
-    stepLabel.textContent = 'Step '+n+' of 2';
-    var focusEl = (n===1?form.name:form.phoneNumber);
-    if(focusEl){ try{ focusEl.focus(); }catch(e){} }
-  }
-
-  nextBtn.addEventListener('click',function(){
-    var name=form.name.value.trim();
-    var email=form.email.value.trim();
-    if(!name){err1.textContent='Please enter your name.';return;}
-    if(!EMAIL.test(email)){err1.textContent='Please enter a valid email.';return;}
-    if(!form.consent.checked){err1.textContent='Please tick consent to continue.';return;}
-    err1.textContent='';
-    nextBtn.disabled=true; nextBtn.textContent='One moment…';
-    function advance(){ nextBtn.disabled=false; nextBtn.textContent='Continue'; showStep(2); }
-    if(captured){ advance(); return; }
-    var parts=nameParts();
-    fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        firstName:parts[0], lastName:parts.slice(1).join(' '),
-        email:email, interest:'golden-visa', source:'lp-invest', partial:true,
-        message:'Landing: Invest (D2 Buy-Back) | Step 1 captured (phone pending)',
-        attribution:ctx()
-      })
-    }).then(function(r){ if(r.ok) captured=true; }).then(advance, advance);
-  });
-
-  backBtn.addEventListener('click',function(){ showStep(1); });
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var name=form.name.value.trim();
     var email=form.email.value.trim();
-    if(form.phoneNumber.value.replace(/\D/g,'').length<6){err2.textContent='Please enter a valid phone number.';return;}
-    err2.textContent='';
-    var btn=p2.querySelector('.lp-btn'); btn.disabled=true; btn.textContent='Sending…';
+    if(!name){err1.textContent='Please enter your name.';return;}
+    if(!EMAIL.test(email)){err1.textContent='Please enter a valid email.';return;}
+    if(form.phoneNumber.value.replace(/\D/g,'').length<6){err1.textContent='Please enter a valid phone number.';return;}
+    if(!form.consent.checked){err1.textContent='Please tick consent to continue.';return;}
+    err1.textContent='';
+    var btn=form.querySelector('.lp-btn'); btn.disabled=true; btn.textContent='Preparing your guide…';
     var parts=nameParts();
-    var msg=['Landing: Invest (D2 Buy-Back)',
-      'For: '+(form.forWho.value||'-'),
-      'Timing: '+(form.timing.value||'-'),
-      'Investment capacity: '+(form.funds.value||'-')].join(' | ');
     fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         firstName:parts[0], lastName:parts.slice(1).join(' '),
         email:email, phoneCode:form.phoneCode.value, phoneNumber:form.phoneNumber.value.trim(),
-        interest:'golden-visa', source:'lp-invest', message:msg,
+        interest:'golden-visa', source:'lp-invest',
+        message:'Landing: Invest (D2 Buy-Back) | Lead magnet: Invest in Portugal Guide',
         attribution:ctx()
       })
     }).then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j};});})
@@ -336,9 +255,10 @@
             if(e164 && e164.charAt(0)!=='+') e164='+'+e164;
             window.saTrackLead('consultation',{email:email, phone:e164});
           }
-          form.parentNode.innerHTML='<div class="lp-ok"><h2>Thank you.</h2><p>Your details are with our advisory team. A Portugal adviser will be in touch within one business day.</p></div>';
+          try{ window.open(GUIDE,'_blank'); }catch(e){}
+          form.parentNode.innerHTML='<div class="lp-ok"><h2>Your guide is on its way.</h2><p>The Invest in Portugal Guide is downloading now. If it did not open, use the button below. A Portugal adviser will also follow up shortly.</p><p style="margin-top:20px;"><a class="lp-btn" style="display:inline-block;width:auto;padding:14px 30px;text-decoration:none;" href="'+GUIDE+'" target="_blank" rel="noopener" download>Download the Guide</a></p></div>';
         } else { throw new Error('fail'); }
-      }).catch(function(){ err2.textContent='Something went wrong. Please try again.'; btn.disabled=false; btn.textContent='Request my consultation'; });
+      }).catch(function(){ err1.textContent='Something went wrong. Please try again.'; btn.disabled=false; btn.textContent='Download the Guide'; });
   });
 })();
 </script>
