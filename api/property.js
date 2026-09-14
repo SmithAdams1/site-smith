@@ -149,11 +149,57 @@ async function renderRealEstateList(req, res) {
   const filePath = path.join(process.cwd(), 'real-estate.shell.html');
   try {
     let html = fs.readFileSync(filePath, 'utf8');
+    const hdr = { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` };
+    const SSR_PAGE = 24; // first page baked in for crawlers / no-JS; client takes over with infinite scroll
+
+    // ---- facets: light scan of every published row (region/type/transaction),
+    //      paginated past PostgREST's 1000-row cap, cached with the page. ----
+    let facetRows = [];
+    try {
+      for (let off = 0; ; off += 1000) {
+        const fr = await fetch(
+          `${SUPABASE_URL}/rest/v1/properties?status=eq.published&select=region,property_type,transaction_type&order=id.asc&limit=1000&offset=${off}`,
+          { headers: hdr }
+        );
+        if (!fr.ok) break;
+        const chunk = await fr.json();
+        facetRows = facetRows.concat(chunk);
+        if (!Array.isArray(chunk) || chunk.length < 1000) break;
+      }
+    } catch (e) { facetRows = []; }
+
+    // Merge English/Portuguese region duplicates (Lisbon -> Lisboa, Oporto -> Porto)
+    // so the Location filter shows one option that queries both underlying values.
+    const REGION_SYN = { lisbon: 'Lisboa', oporto: 'Porto' };
+    const regMap = new Map();   // canonical label -> { label, values:Set, count }
+    const typeMap = new Map();  // property_type -> count
+    const transSet = new Set();
+    for (const r of facetRows) {
+      const raw = (r.region || '').trim();
+      if (raw) {
+        const canon = REGION_SYN[raw.toLowerCase()] || raw;
+        const e = regMap.get(canon) || { label: canon, values: new Set(), count: 0 };
+        e.values.add(raw); e.count += 1; regMap.set(canon, e);
+      }
+      if (r.property_type) typeMap.set(r.property_type, (typeMap.get(r.property_type) || 0) + 1);
+      if (r.transaction_type) transSet.add(r.transaction_type);
+    }
+    const facets = {
+      total: facetRows.length,
+      regions: [...regMap.values()].sort((a, b) => b.count - a.count)
+        .map((e) => ({ label: e.label, values: [...e.values], count: e.count })),
+      types: [...typeMap.entries()].sort((a, b) => b[1] - a[1]).map(([value, count]) => ({ value, count })),
+      transactions: [...transSet],
+    };
+    html = html.replace('</head>',
+      `\n<script>window.__RE_FACETS__=${JSON.stringify(facets).replace(/</g, '\\u003c')};</script>\n</head>`);
+
+    // ---- first page of cards (SSR, crawlable) ----
     let rows = [];
     try {
       const resp = await fetch(
-        `${SUPABASE_URL}/rest/v1/properties?status=eq.published&select=slug,title,cover_image,images,price,currency,sold,upcoming,city,region,bedrooms,bathrooms,property_type&order=featured.desc,sort_order.asc,created_at.desc`,
-        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } }
+        `${SUPABASE_URL}/rest/v1/properties?status=eq.published&select=slug,title,cover_image,images,price,currency,sold,upcoming,city,region,bedrooms,bathrooms,property_type&order=featured.desc,sort_order.asc,created_at.desc&limit=${SSR_PAGE}`,
+        { headers: hdr }
       );
       if (resp.ok) rows = await resp.json();
     } catch (e) { rows = []; }
@@ -170,7 +216,7 @@ async function renderRealEstateList(req, res) {
         '@context': 'https://schema.org',
         '@type': 'ItemList',
         name: 'Smith & Adams real estate in Portugal',
-        numberOfItems: rows.length,
+        numberOfItems: facets.total || rows.length,
         itemListElement: rows.map((p, i) => ({
           '@type': 'ListItem', position: i + 1,
           url: `${BASE}/property/${encodeURIComponent(p.slug)}`,

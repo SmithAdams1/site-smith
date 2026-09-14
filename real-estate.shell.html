@@ -114,13 +114,13 @@
         f_location:'Location',f_type:'Type',f_transaction:'For',f_beds:'Bedrooms',f_price:'Max price',f_reset:'Reset',
         any:'Any',sale:'For sale',rent:'For rent',beds_plus:'+ beds',from:'From',results_one:'property',results_many:'properties',
         empty:'No properties match your filters. Try adjusting them.',gv:'Golden Visa eligible',
-        types:{apartment:'Apartment',villa:'Villa',townhouse:'Townhouse',plot:'Plot',commercial:'Commercial',penthouse:'Penthouse',studio:'Studio'},
+        types:{apartment:'Apartment',villa:'Villa',townhouse:'Townhouse',plot:'Plot',commercial:'Commercial',penthouse:'Penthouse',studio:'Studio',house:'House',land:'Land',building:'Building',farm:'Farm','country-estate':'Country estate',shop:'Shop',warehouse:'Warehouse',office:'Office',mansion:'Mansion',loft:'Loft',restaurant:'Restaurant',hotel:'Hotel'},
         sold:'Sold',view:'View details',upcoming:'Upcoming',recommended:'Recommended',from:'From'},
     pt:{hero_title:'Encontre o imóvel perfeito',hero_subtitle:'Imóveis residenciais premium em todo o Portugal, de Lisboa e Cascais ao Porto, Algarve e Comporta, selecionados e verificados pela Smith & Adams.',
         f_location:'Localização',f_type:'Tipo',f_transaction:'Para',f_beds:'Quartos',f_price:'Preço máx.',f_reset:'Limpar',
         any:'Todos',sale:'Venda',rent:'Arrendamento',beds_plus:'+ quartos',from:'Desde',results_one:'imóvel',results_many:'imóveis',
         empty:'Nenhum imóvel corresponde aos filtros. Tente ajustar.',gv:'Elegível Golden Visa',
-        types:{apartment:'Apartamento',villa:'Moradia',townhouse:'Casa em banda',plot:'Terreno',commercial:'Comercial',penthouse:'Penthouse',studio:'Estúdio'},
+        types:{apartment:'Apartamento',villa:'Moradia',townhouse:'Casa em banda',plot:'Terreno',commercial:'Comercial',penthouse:'Penthouse',studio:'Estúdio',house:'Moradia',land:'Terreno',building:'Prédio',farm:'Quinta','country-estate':'Herdade',shop:'Loja',warehouse:'Armazém',office:'Escritório',mansion:'Palacete',loft:'Loft',restaurant:'Restaurante',hotel:'Hotel'},
         sold:'Vendido',view:'Ver detalhes',upcoming:'Em breve',recommended:'Recomendado',from:'Desde'}
   };
   var t=T[L];
@@ -138,47 +138,32 @@
   var ICONS={bed:'<path d="M2 9v10"/><path d="M2 13h20v6"/><path d="M22 13V9a2 2 0 0 0-2-2H9v6"/><circle cx="5.5" cy="10" r="1.4"/>',bath:'<path d="M3 12h18"/><path d="M4 12v3a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-3"/><path d="M7 12V6a2 2 0 0 1 4 0"/><path d="M7 19l-1 2M18 19l1 2"/>',area:'<path d="M3 8V3h5"/><path d="M21 8V3h-5"/><path d="M3 16v5h5"/><path d="M21 16v5h-5"/>'};
   function ic(name,size,color){var d=ICONS[name]||'';return '<svg width="'+(size||16)+'" height="'+(size||16)+'" viewBox="0 0 24 24" fill="none" stroke="'+(color||'currentColor')+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';}
 
-  var REGIONS=['Lisbon','Cascais','Porto','Algarve','Silver Coast','Comporta','Madeira'];
-  var TYPES=['apartment','villa','townhouse','penthouse','studio','plot','commercial'];
-
-  // populate filters
+  // Filters are driven by real facets computed server-side (window.__RE_FACETS__,
+  // injected by api/property.js). Results are fetched from PostgREST filtered +
+  // paginated, with infinite scroll - so 2000+ listings never load at once.
+  var FACETS=window.__RE_FACETS__||{};
   function opt(v,label){var o=document.createElement('option');o.value=v;o.textContent=label;return o;}
   var fRegion=document.getElementById('f-region'),fType=document.getElementById('f-type'),fTrans=document.getElementById('f-transaction'),fBeds=document.getElementById('f-beds'),fPrice=document.getElementById('f-price');
-  fRegion.appendChild(opt('',t.any));REGIONS.forEach(function(r){fRegion.appendChild(opt(r,r));});
-  fType.appendChild(opt('',t.any));TYPES.forEach(function(ty){fType.appendChild(opt(ty,t.types[ty]||ty));});
-  fTrans.appendChild(opt('',t.any));fTrans.appendChild(opt('sale',t.sale));fTrans.appendChild(opt('rent',t.rent));
-  fBeds.appendChild(opt('',t.any));[1,2,3,4,5].forEach(function(n){fBeds.appendChild(opt(String(n),n+t.beds_plus));});
-  fPrice.appendChild(opt('',t.any));[300000,500000,750000,1000000,2000000,5000000].forEach(function(p){fPrice.appendChild(opt(String(p),t.from?fmtPrice(p):p));});
 
-  var ALL=[];
-  function render(){
-    var region=fRegion.value,type=fType.value,trans=fTrans.value,beds=parseInt(fBeds.value||'0',10),maxp=parseInt(fPrice.value||'0',10);
-    var rows=ALL.filter(function(p){
-      if(region&&p.region!==region)return false;
-      if(type&&p.property_type!==type)return false;
-      if(trans&&p.transaction_type!==trans)return false;
-      if(beds&&(p.bedrooms||0)<beds)return false;
-      if(maxp&&(p.price||0)>maxp)return false;
-      return true;
-    });
-    var grid=document.getElementById('re-grid');grid.innerHTML='';
-    var empty=document.getElementById('re-empty');
-    document.getElementById('re-count').textContent=rows.length+' '+(rows.length===1?t.results_one:t.results_many);
-    if(!rows.length){empty.style.display='block';empty.textContent=t.empty;return;}
-    empty.style.display='none';
-    rows.forEach(function(p){
-      var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'https://via.placeholder.com/600x400?text=Smith+%26+Adams';
-      var specs=[];
-      if(p.bedrooms)specs.push(['bed',p.bedrooms]);
-      if(p.bathrooms)specs.push(['bath',p.bathrooms]);
-      if(p.area_sqm)specs.push(['area',Math.round(p.area_sqm)+' m²']);
-      var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#11222D')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
-      var a=document.createElement('a');
-      a.href='property/'+encodeURIComponent(p.slug);
-      a.className='re-card';a.setAttribute('data-reveal','');
-      a.style.cssText='display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;';
-      if(p.featured){ a.style.borderColor='#D6C29A'; a.style.boxShadow='0 12px 34px rgba(17,34,45,.10)'; }
-      a.innerHTML=
+  fRegion.appendChild(opt('',t.any));
+  (FACETS.regions||[]).forEach(function(r){ fRegion.appendChild(opt((r.values||[r.label]).join('|'), r.label+' ('+r.count+')')); });
+  fType.appendChild(opt('',t.any));
+  (FACETS.types||[]).forEach(function(ty){ fType.appendChild(opt(ty.value,(t.types[ty.value]||ty.value)+' ('+ty.count+')')); });
+  fTrans.appendChild(opt('',t.any));
+  (FACETS.transactions||['sale']).forEach(function(x){ fTrans.appendChild(opt(x,x==='rent'?t.rent:t.sale)); });
+  if((FACETS.transactions||[]).length<=1){ var tw=fTrans.parentNode; if(tw)tw.style.display='none'; }
+  fBeds.appendChild(opt('',t.any));[1,2,3,4,5].forEach(function(n){fBeds.appendChild(opt(String(n),n+t.beds_plus));});
+  fPrice.appendChild(opt('',t.any));[300000,500000,750000,1000000,2000000,5000000,10000000].forEach(function(p){fPrice.appendChild(opt(String(p),fmtPrice(p)));});
+
+  function cardHtml(p){
+    var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'https://via.placeholder.com/600x400?text=Smith+%26+Adams';
+    var specs=[];
+    if(p.bedrooms)specs.push(['bed',p.bedrooms]);
+    if(p.bathrooms)specs.push(['bath',p.bathrooms]);
+    if(p.area_sqm)specs.push(['area',Math.round(p.area_sqm)+' m²']);
+    var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#11222D')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
+    var featStyle=p.featured?'border-color:#D6C29A;box-shadow:0 12px 34px rgba(17,34,45,.10);':'';
+    return '<a href="property/'+encodeURIComponent(p.slug)+'" class="re-card" data-reveal style="display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;'+featStyle+'">'+
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
           '<img class="re-card-img" src="'+img+'" alt="'+pick(p.title).replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;'+(p.sold?'filter:grayscale(.55);opacity:.92;':'')+'" loading="lazy"/>'+
           '<span class="satoshi" style="position:absolute;top:12px;left:12px;'+(p.upcoming?'background:#D6C29A;color:#11222D;':'background:rgba(17,34,45,.9);color:#fff;')+'font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;">'+(p.upcoming?t.upcoming:(p.sold?t.sold:(p.transaction_type==='rent'?t.rent:t.sale)))+'</span>'+
@@ -186,40 +171,74 @@
           (p.golden_visa?'<span class="satoshi" style="position:absolute;top:12px;right:12px;background:#C9A227;color:#11222D;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;">'+t.gv+'</span>':'')+
         '</div>'+
         '<div style="padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;">'+
-          ''+
           '<h3 class="serif" style="font-size:22px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 12px;min-height:56px;letter-spacing:-0.01em;">'+pick(p.title)+'</h3>'+
           '<div class="satoshi" style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink);margin:0 0 16px;font-weight:500;">'+specsHtml+'</div>'+
           '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;margin-top:auto;">'+
             '<span class="serif" style="font-size:22px;font-weight:500;color:var(--navy);">'+(p.sold||!p.price?'':((p.upcoming?t.from+' ':'')+fmtPrice(p.price,p.currency)))+'</span>'+
             '<span class="satoshi" style="font-size:13px;font-weight:600;color:var(--navy);">'+t.view+' →</span>'+
           '</div>'+
-        '</div>';
-      grid.appendChild(a);
-    });
-    // the cards only exist now, after the fetch and the filter pass
-    window.rdReveal(grid);
+        '</div>'+
+      '</a>';
   }
 
-  [fRegion,fType,fTrans,fBeds,fPrice].forEach(function(el){el.addEventListener('change',render);});
-  document.getElementById('f-reset').addEventListener('click',function(){[fRegion,fType,fTrans,fBeds,fPrice].forEach(function(el){el.value='';});render();});
+  var PAGE=24, state={offset:0,loading:false,done:false,total:null};
+  var grid=document.getElementById('re-grid'),
+      countEl=document.getElementById('re-count'),
+      loadingEl=document.getElementById('re-loading'),
+      emptyEl=document.getElementById('re-empty');
+  var moreEl=document.createElement('div');moreEl.id='re-more';moreEl.style.cssText='display:none;justify-content:center;padding:34px 0;';moreEl.innerHTML='<div class="spin"></div>';grid.parentNode.appendChild(moreEl);
+  var sentinel=document.createElement('div');sentinel.id='re-sentinel';sentinel.style.cssText='height:1px;';grid.parentNode.appendChild(sentinel);
 
-  // preselect from URL (?region=Lisbon&for=sale)
+  function buildUrl(){
+    var q='status=eq.published';
+    var region=fRegion.value; if(region){ q+='&region=in.('+region.split('|').map(function(v){return '"'+encodeURIComponent(v)+'"';}).join(',')+')'; }
+    var type=fType.value; if(type) q+='&property_type=eq.'+encodeURIComponent(type);
+    var trans=fTrans.value; if(trans) q+='&transaction_type=eq.'+encodeURIComponent(trans);
+    var beds=parseInt(fBeds.value||'0',10); if(beds) q+='&bedrooms=gte.'+beds;
+    var maxp=parseInt(fPrice.value||'0',10); if(maxp) q+='&price=lte.'+maxp;
+    q+='&order=featured.desc,sort_order.asc,created_at.desc&limit='+PAGE+'&offset='+state.offset;
+    q+='&select=slug,title,cover_image,images,price,currency,sold,upcoming,city,region,bedrooms,bathrooms,area_sqm,property_type,transaction_type,featured,golden_visa';
+    return SUPABASE_URL+'/rest/v1/properties?'+q;
+  }
+  function setCount(){ if(state.total==null){countEl.textContent='';return;} countEl.textContent=state.total+' '+(state.total===1?t.results_one:t.results_many); }
+  function loadMore(){
+    if(state.loading||state.done)return;
+    state.loading=true;
+    if(state.offset===0)loadingEl.style.display='flex'; else moreEl.style.display='flex';
+    var headers={apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY};
+    if(state.offset===0)headers.Prefer='count=exact';
+    fetch(buildUrl(),{headers:headers}).then(function(r){
+      if(state.offset===0){var cr=r.headers.get('content-range');if(cr){var m=cr.match(/\/(\d+)/);if(m)state.total=parseInt(m[1],10);}}
+      return r.json();
+    }).then(function(rows){
+      loadingEl.style.display='none';moreEl.style.display='none';state.loading=false;
+      rows=Array.isArray(rows)?rows:[];
+      if(state.offset===0)grid.innerHTML='';
+      if(state.offset===0&&!rows.length){emptyEl.style.display='block';emptyEl.textContent=t.empty;setCount();state.done=true;return;}
+      emptyEl.style.display='none';
+      grid.insertAdjacentHTML('beforeend',rows.map(cardHtml).join(''));
+      if(window.rdReveal)window.rdReveal(grid);
+      state.offset+=rows.length;
+      if(rows.length<PAGE||(state.total!=null&&state.offset>=state.total))state.done=true;
+      setCount();
+    }).catch(function(e){
+      loadingEl.style.display='none';moreEl.style.display='none';state.loading=false;
+      if(state.offset===0){emptyEl.style.display='block';emptyEl.textContent=t.empty;}
+      console.warn('[real-estate] load error',e);
+    });
+  }
+  function reset(){ state={offset:0,loading:false,done:false,total:null}; grid.innerHTML=''; loadMore(); }
+
+  [fRegion,fType,fTrans,fBeds,fPrice].forEach(function(el){el.addEventListener('change',reset);});
+  document.getElementById('f-reset').addEventListener('click',function(){[fRegion,fType,fTrans,fBeds,fPrice].forEach(function(el){el.value='';});reset();});
+
+  // preselect from URL (?region=Lisboa&type=apartment)
   var qs=new URLSearchParams(location.search);
-  if(qs.get('region'))fRegion.value=qs.get('region');
-  if(qs.get('for'))fTrans.value=qs.get('for');
   if(qs.get('type'))fType.value=qs.get('type');
+  if(qs.get('region')){var want=qs.get('region').toLowerCase();for(var i=0;i<fRegion.options.length;i++){if(fRegion.options[i].value.toLowerCase().split('|').indexOf(want)>=0){fRegion.selectedIndex=i;break;}}}
 
-  fetch(SUPABASE_URL+'/rest/v1/properties?status=eq.published&select=*&order=featured.desc,sort_order.asc,created_at.desc',{
-    headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}
-  }).then(function(r){return r.json();}).then(function(rows){
-    ALL=Array.isArray(rows)?rows:[];
-    document.getElementById('re-loading').style.display='none';
-    render();
-  }).catch(function(e){
-    document.getElementById('re-loading').style.display='none';
-    var empty=document.getElementById('re-empty');empty.style.display='block';empty.textContent=t.empty;
-    console.warn('[real-estate] load error',e);
-  });
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)loadMore();});},{rootMargin:'700px'}).observe(sentinel); }
+  reset();
 
   // ---- editable page content (hero + organic blocks) ----
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}

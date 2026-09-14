@@ -638,3 +638,26 @@ PENDENTE: fotos variadas copyright-free (agente a curar Unsplash/Pexels) -> capa
 
 - **Home**: mantida a separacao pilares/six-functions (decisao Head of Strategy: sao 2 altitudes, fundir achataria e mataria o scroll pinned). So ajuste de copy no Pilar 1 ("Advice and delivery under one roof..." em vez de "Six functions...", que a seccao seguinte ja enumera). Commit 512e5a9.
 - **About - NOVO bloco rd_mvv (Missao/Visao/Valores)**: 3 botoes que abrem **modal popup** acessivel (backdrop blur, ESC/backdrop/x fecham). Conteudo = Brand Book Ed.03 (missao/visao EN+PT fixos p07; 6 valores p08 com descricoes, PT traduzido). Frases em display type, nao maiusculas, sobre paper (regras do Brand Book). Colocado como 1o quadro do /about (apos hero). Renderer rd_mvv em lib+api (byte-identical); dados em about.blocks.json (editavel, bilingue). Verificado live: 3 botoes, modal abre/fecha, missao correta. Commit 261d9b4.
+
+---
+
+## EGO feed import — 2144 properties as drafts (2026-09-14, Suelen session)
+
+Resumed the d05c7729 session's EGO importer. `ego_import.py` (in that session's scratchpad) parses the EGO XML feed (after_login.xml, CastleGallois acct 1320) -> Supabase `properties` (project bcjtkfip), status='draft', upsert on slug. Needs SUPABASE_SERVICE_ROLE_KEY in ~/Code/site-smith/.env.local (gitignored; the anon key only reads, RLS blocks writes + hides drafts from the public).
+
+DONE: all **2144 imported as draft** (0 slug collisions; all with price + images avg 22.5; EN 2130 / PT 2144). Table now 2171 total = 27 published + 2144 draft. Public (anon) still sees only 27 — drafts hidden by RLS.
+
+Published **5 representatives** for live validation (status->published): apartment-cascais-98988 (€2.2M), house-lisboa-96007 (€6.5M), farm-sintra-77659 (€16.5M estate), building-lisboa-89883 (€3.5M), apartment-lisboa-85179 (€450k). /real-estate now lists 32; /property/:slug SSR renders (title/price/images OK).
+
+TWO FLAGS before mass-publish:
+1. **EGO images are hotlink-protected by Referer** (200 with a smithandadams.com/egorealestate.com referer, 522/403 without). In-browser they load because the default referrer-policy sends the origin (no no-referrer meta on the site, property.js emits raw URLs). BUT the URLs carry a `?a=<token>` — durability unknown; if EGO rotates/expires it, all ~47k images break. Long-term robust fix = rehost/proxy the images (big job, deferred). For now hotlink is acceptable but is a dependency to watch.
+2. **Auto-generated titles** can read oddly (e.g. "32-bedroom Farm in Sintra" = really an estate/hotel; "Building in Lisboa" with no beds). Before mass-publish, consider a quality pass / filter on outliers.
+
+NEXT: owner validates the 5 live; then mass-publish the rest (flip draft->published, optionally with sort_order/featured curation) — or refine titles/filters first.
+
+### /real-estate index rebuilt for 2000+ listings (2026-09-14)
+
+Publishing all 2171 exposed that /real-estate fetched every published row (`select=*`, capped at PostgREST's 1000) and rendered them all client-side, with filters hardcoded to the old curated set (REGIONS Lisbon/Cascais/…, TYPES villa/townhouse/…) that don't match EGO data (region=district, types house/land/building/farm/…). Rebuilt to **server-side filter + pagination + infinite scroll**:
+- `api/property.js` renderRealEstateList: computes real facets (paginated light scan past the 1000 cap) — regions with EN/PT synonym merge (Lisbon->Lisboa, Oporto->Porto; option carries all underlying values), types, transactions, total — injected as `window.__RE_FACETS__`. SSR now bakes only the first 24 cards (crawlable) instead of 1000; ItemList numberOfItems = full total.
+- `real-estate.shell.html`: filters populated from facets (with counts); results fetched from PostgREST filtered (`region=in.(...)`, `property_type=eq`, `bedrooms=gte`, `price=lte`) + `limit=24&offset`, `Prefer: count=exact` for the total; IntersectionObserver sentinel drives infinite scroll; transaction filter hidden when only one value (all 'sale'); type label map extended with all EGO types (EN+PT). Card markup unchanged.
+Validated live: Lisboa+Lisbon->826, house->415, Setúbal->278, apartment+3bd+<=750k->154, offset pagination OK.
