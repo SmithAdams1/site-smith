@@ -40,14 +40,22 @@ export default async function handler(req, res) {
     console.error('Sitemap: failed to fetch blog posts', err);
   }
 
-  // Published property listings
+  // Published property listings (paginated past PostgREST's 1000-row cap so the
+  // full catalogue is indexed, not just the first 1000).
   let propertyEntries = [];
   try {
-    const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/properties?status=eq.published&select=slug,updated_at,title&order=updated_at.desc`,
-      { headers: sbHeaders }
-    );
-    const props = await r.json();
+    let props = [];
+    for (let off = 0; ; off += 1000) {
+      const r = await fetch(
+        `${SUPABASE_URL}/rest/v1/properties?status=eq.published&select=slug,updated_at,title&order=updated_at.desc&limit=1000&offset=${off}`,
+        { headers: sbHeaders }
+      );
+      if (!r.ok) break;
+      const chunk = await r.json();
+      if (!Array.isArray(chunk)) break;
+      props = props.concat(chunk);
+      if (chunk.length < 1000) break;
+    }
     if (Array.isArray(props)) {
       props.filter(p => p.slug).forEach(p => {
         const en = `${BASE_URL}/property/${p.slug}`;
