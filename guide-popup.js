@@ -20,8 +20,11 @@
   } catch (e) {}
 
   var path = location.pathname.toLowerCase();
-  // Not on pages where it would be noise or intrusive.
+  // Not on pages where it would be noise or intrusive. /golden-visa is excluded
+  // because it carries its own inline guide form (#download-guide) as the
+  // Google Ads A/B "arm B" conversion surface - the auto pop-up would compete.
   if (/\/(contact|admin|studio|page|thank)/.test(path)) return;
+  if (path === '/golden-visa' || path === '/pt/golden-visa') return;
 
   var PT = (document.documentElement.lang || '').toLowerCase().indexOf('pt') === 0
         || path.indexOf('/pt/') === 0 || path === '/pt';

@@ -16,7 +16,11 @@ const GUIDE_PATH = '/smith-adams-investor-guide-portugal.pdf';
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { name, email, phone, consent, locale, attribution } = req.body || {};
+  const { name, email, phone, consent, locale, attribution, campaign } = req.body || {};
+  // Optional campaign label so guide leads from a specific surface (e.g. the
+  // inline form on /golden-visa = Google Ads A/B arm B) are attributable in the
+  // CRM. Defaults to the generic pop-up label. Sanitised + length-capped.
+  const cleanCampaign = String(campaign || '').trim().slice(0, 80) || 'Investor Guide';
   const cleanName = String(name || '').trim();
   const cleanEmail = String(email || '').trim();
   const cleanPhone = String(phone || '').trim() || undefined;
@@ -98,8 +102,8 @@ export default async function handler(req, res) {
       full_name: cleanName,
       email: cleanEmail,
       phone: cleanPhone,
-      campaign_name: 'Investor Guide',
-      notes: 'Investor guide download (website pop-up)',
+      campaign_name: cleanCampaign,
+      notes: `Investor guide download (${cleanCampaign})`,
       attribution,
     });
 

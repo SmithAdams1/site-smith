@@ -91,3 +91,43 @@ STRATEGIC: this offer likely **cannot be advertised on ChatGPT Ads** under curre
 - **Conversions API (server-side)**: Abilio gave the CAPI shape (`POST https://bzr.openai.com/v1/events?pid=4R6dpZN7mfCe7cR5VRagoQ`, `type:lead_created`, `data.type:customer_action`) but NOT the API key. When given, wire best-effort server-side send in `api/contact.js` for `source==='lp-chatgpt'`, shared event_id for dedup with the pixel.
 - Flip pixel `debug:true` -> `false`.
 - If a compliant ad image is ever needed: replace "Portugal Residency, Done Right" with a text-free Lisbon property image (upload from the account), or remove it for a text-only ad.
+
+---
+
+## 9. Google Ads: keyword -> LP campaign PUBLISHED, DSA paused (2026-09-14, Suelen session)
+
+Diagnosis this session: the running `Invest in Portugal | US | Search` was serving **DSA -> site pages** (`/portugal/golden-visa`, `/invest`, `/residency`, `/advisers`), NOT keyword -> /lp-invest, at 40 EUR/day with **0 CRM leads** since launch. The /lp-invest LP was orphaned (no paid traffic). Fix = publish a dedicated keyword -> LP campaign and pause the DSA.
+
+**PUBLISHED live 2026-09-14: `Invest in Portugal | US | LP`, campaignId 24249877373** (was draftId 10212343414 / campaignId 281499183779749; account ocid 8147391285, real Chrome / abilio.diz).
+- Bidding: **Maximize clicks, CPC cap 7 EUR**
+- Networks: Search-only (Search Partners + Display OFF)
+- Locations: United States, **Presence** (not interest); Language: English
+- AI Max: OFF (no final-URL expansion)
+- Final URL: /lp-invest ; display path /Golden-Visa/Advisers
+- Keywords (7): [portugal golden visa], "portugal golden visa", [golden visa portugal], [portuguese golden visa requirements], [portuguese golden visa cost], [portugal residency by investment], "portugal residency by investment"
+- 1 RSA: 10 headlines (Portugal Golden Visa Advice / Independent Portugal Advisers / Advisers, Not Brokers / 1,000+ Investors Advised / 300M+ in Advised Assets / Speak With a Portugal Adviser / D2 & Golden Visa Routes / Your Family's EU Residency / Book a Confidential Call / No-Obligation Consultation) + 3 descriptions; ad strength "Razoavel" (82%)
+- Budget: **40 EUR/day**
+- Negatives (campaign-level, broad): free, diy, jobs, consulate, embassy
+- Ad group left as "Grupo de anuncios 1" (rename cosmetic, skipped)
+- Identity re-verification popup appeared mid-setup (USER-ONLY; Abilio confirmed) - blocks saves until confirmed.
+
+**Old `Invest in Portugal | US | Search` = PAUSED** ("Colocado em pausa") same day. `SA . Brand . US` (5 EUR/day) left running. Account now ~45 EUR/day effective.
+
+Two Google banners still open (flag to owner):
+- "Adicione um metodo de pagamento alternativo" - billing backup, user-only.
+- "Configurar o acompanhamento de conversoes" - relies on existing site Google tag + GA4 `generate_lead` import as the Ads conversion; verify with Tag Assistant that it fires on an /lp-invest submit.
+
+Post-launch: let it exit learning ~1-2 weeks; check search-terms report to add more negatives; lead response time still the key conversion lever.
+
+## 9b. A/B arm B: inline guide form on /golden-visa (2026-09-14)
+
+Decision (Abilio): run the LP-vs-site A/B from the old session (site = more authority). Arm A = /lp-invest (consultation form). Arm B = **/golden-visa** with an inline **"Download the guide"** lead magnet (perk = the investor guide PDF), so the test measures authority, not form friction.
+
+Built (author must be Suzan on commit):
+- `golden-visa.shell.html`: new inline `<section id="download-guide">` after `<!--RD_BLOCKS-->` (OUTSIDE the RD:START/END region so the PT repaint never wipes it). Navy band + paper form card (name/email/phone/consent). Posts to existing `/api/guide`, fires `saTrackLead('guide')` (= generate_lead -> Ads conversion), reveals inline PDF link on success. EN default with a PT string-swap wired to `document.documentElement.lang` + the cms-lang-switcher.
+- `guide-popup.js`: excluded `/golden-visa` + `/pt/golden-visa` from the auto pop-up so the inline form is the single conversion surface on arm B.
+- `api/guide.js`: accepts optional `campaign` (sanitised, <=80 chars) -> CRM `campaign_name`; the inline form sends `campaign:'Golden Visa Page (guide)'` so arm-B guide leads are attributable (defaults to 'Investor Guide' for the pop-up).
+
+Static checks pass (node --check on guide.js, guide-popup.js, and the extracted inline script). NOT yet deployed.
+
+NEXT: 1) deploy (commit as Suzan -> push SmithAdams1/site-smith -> Vercel) and confirm /golden-visa form live + generate_lead fires; 2) build the **Google Ads Experiment** on `Invest in Portugal | US | LP` (24249877373): 50/50 split, control arm final URL /lp-invest, variant arm final URL /golden-visa; let Ads declare the winner (~2-4 weeks / enough conversions). Note: base bidding is Maximize clicks, so compare conversions/conv-rate per arm in the experiment report. Arm B (guide download) is a softer conversion than arm A (consultation) - compare lead QUALITY/SQL downstream, not just volume.
