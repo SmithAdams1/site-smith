@@ -666,3 +666,13 @@ Validated live: Lisboa+Lisbon->826, house->415, Setúbal->278, apartment+3bd+<=7
 
 - **Titles**: recomputed for EGO rows so the "N-bedroom" prefix only shows for residential-ish types (apartment/house/villa/townhouse/penthouse/studio/mansion/loft/country-estate/farm) with a sane count (1-10). Non-residential (land/building/warehouse/office/shop/hotel/restaurant) and absurd counts drop the prefix. 23 rows fixed (e.g. "32-bedroom Farm in Sintra" -> "Farm in Sintra"). Applied via title-only bulk upsert (no status touched). NOTE for future EGO syncs: `ego_import.py` still uses the old unconditional "{beds}-bedroom" title rule AND resets status='draft' on every upsert - before re-running it, port this title rule in and guard status (don't clobber published), or re-run then re-fix titles + re-publish.
 - **Sitemap**: `api/sitemap.js` already emits /property/:slug (en + /pt) for every published row, but the fetch was capped at PostgREST's 1000. Paginated it so all 2171 are indexed (~4342 property URLs total). /sitemap.xml is dynamic (rewrite -> /api/sitemap), so it updates automatically as the catalogue changes.
+
+## Sessao 2026-09-15 11:45 WEST (conta: abilio.diz / Claude Code - sessao Suelen)
+
+### PENDENTE - confirmar keywords ao vivo (bloqueado por limite semanal de creditos, repoe 2026-09-16 15:00 UTC)
+- Pedido: listar as keywords em uso no Google Ads. Dado a partir do registo (handoff seccao 9), NAO confirmado ao vivo porque a conta bateu no limite semanal (7d exceeded; 5h dentro do limite).
+- **Quando os creditos repuserem, abrir Google Ads (ocid 8147391285, Browser 2 / abilio.diz) e confirmar:**
+  1. Keywords exatas da campanha de marca **SA . Brand . US** (nao estao registadas).
+  2. Se a campanha **Property Management** (spec: property management lisbon / airbnb management portugal / short term rental management lisbon / property management portugal / vacation rental management lisbon / airbnb management lisbon / rental management portugal) chegou a ser **publicada** ou continua so em rascunho.
+  3. Reconfirmar que **Invest in Portugal | US | LP** (24249877373) mantem as 7 keywords GV/Residency + negativas (free/diy/jobs/consulate/embassy) e que a DSA antiga continua **em pausa**.
+- Nota da rota: o URL directo /aw/keywords/search deu 404 (UI mudou); ir por Campanhas -> "Publicos-alvo, palavras-chave e conteudo" -> Palavras-chave de pesquisa, no nivel de todas as campanhas.
