@@ -676,3 +676,10 @@ Validated live: Lisboa+Lisbon->826, house->415, Setúbal->278, apartment+3bd+<=7
   2. Se a campanha **Property Management** (spec: property management lisbon / airbnb management portugal / short term rental management lisbon / property management portugal / vacation rental management lisbon / airbnb management lisbon / rental management portugal) chegou a ser **publicada** ou continua so em rascunho.
   3. Reconfirmar que **Invest in Portugal | US | LP** (24249877373) mantem as 7 keywords GV/Residency + negativas (free/diy/jobs/consulate/embassy) e que a DSA antiga continua **em pausa**.
 - Nota da rota: o URL directo /aw/keywords/search deu 404 (UI mudou); ir por Campanhas -> "Publicos-alvo, palavras-chave e conteudo" -> Palavras-chave de pesquisa, no nivel de todas as campanhas.
+
+### RESOLVIDO 2026-09-15 11:49 WEST - keywords confirmadas ao vivo (via export CSV, sem usar find/modelo)
+- Total **124 keywords**. Export em ~/Downloads/"Relatorio da palavra-chave de pesquisa.csv".
+- **ATIVAS:** `Invest in Portugal | US | LP` = 20 kw (num unico "Grupo de anuncios 1", GV+D2+fund+residency misturados, exact+phrase) · `SA . Brand . US` = 7 kw de marca.
+- **EM PAUSA:** `Invest in Portugal | US | Search` = 97 kw em 5 grupos: "Grupo de anuncios 1" (74, legado, quase tudo broad); **SA . Golden Visa (7) e SA . Golden Visa (KW) (7) = DUPLICADOS**; SA . Investment & Funds (4); SA . Residency & D2 (5).
+- Correcao ao registo anterior: a LP tem **20** kw (nao 7); a "US | Search" nao e DSA sem keywords - tem 97 kw com grupos tematicos, mas esta em pausa.
+- Cleanup sugerido: LP devia ter grupos tematicos (hoje tudo num generico); consolidar os 2 grupos Golden Visa duplicados; decidir o destino da campanha Search em pausa (97 kw legado).
