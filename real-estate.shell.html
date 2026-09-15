@@ -23,6 +23,10 @@
   .re-card{transition:transform .4s var(--ease-expo), box-shadow .4s var(--ease-expo);}
   .re-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(17,34,45,.14);}
   .re-card:hover .re-card-img{transform:scale(1.05);}
+  [data-devs-scroll]{scrollbar-width:thin;scrollbar-color:#d6c29a transparent;}
+  [data-devs-scroll]::-webkit-scrollbar{height:6px;}
+  [data-devs-scroll]::-webkit-scrollbar-thumb{background:#d6c29a;border-radius:99px;}
+  [data-devs-scroll]::-webkit-scrollbar-track{background:transparent;}
   .re-input{appearance:none;background:#fff;border:1px solid var(--line);border-radius:2px;padding:12px 14px;font-size:14px;color:var(--navy);font-family:var(--sans);outline:none;width:100%;}
   .re-input:focus{border-color:var(--navy);}
   select.re-input{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2311222D' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 12px center;background-size:12px;padding-right:34px;}
@@ -95,7 +99,7 @@
     <div id="re-devs-wrap" style="display:none;margin:0 2px 44px;">
       <h2 id="re-devs-label" class="serif" style="font-size:clamp(22px,2.4vw,30px);font-weight:500;color:var(--navy);letter-spacing:-.01em;margin:0 0 6px;">Developments</h2>
       <p id="re-devs-sub" class="satoshi" style="color:var(--slate);font-size:14.5px;margin:0 0 22px;">Collections of residences within a single project.</p>
-      <div id="re-devs" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:26px;"></div>
+      <div id="re-devs" data-devs-scroll style="display:flex;flex-wrap:nowrap;gap:22px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x proximity;"></div>
     </div>
     <!-- ACTIVE DEVELOPMENT header (when viewing one project's units) -->
     <a id="re-dev-active" href="/real-estate" style="display:none;align-items:center;gap:11px;margin:0 2px 22px;text-decoration:none;color:var(--navy);" class="satoshi">
@@ -270,7 +274,7 @@
     var minp=prices.length?Math.min.apply(null,prices):null;
     var loc=[units[0].city,units[0].region].filter(Boolean).join(', ');
     var n=units.length, rw=n===1?t.residence:t.residences;
-    return '<a href="/real-estate?development='+encodeURIComponent(name)+'" class="re-card" data-reveal style="display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;">'+
+    return '<a href="/real-estate?development='+encodeURIComponent(name)+'" class="re-card" data-reveal style="flex:0 0 300px;scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;">'+
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
           '<img class="re-card-img" src="'+img+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;" loading="lazy"/>'+
           '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:#11222D;color:#D6C29A;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px;">'+n+' '+rw+'</span>'+
