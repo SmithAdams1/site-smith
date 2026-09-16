@@ -1078,6 +1078,11 @@
                                 : await sb.from('properties').insert(payload).select().single();
     if(res.error){ toast('Save error: '+res.error.message); return; }
     if(!reState.current && res.data) reState.current = res.data;
+    if(payload.status==='published' && payload.slug){
+      const u=['https://www.smithandadams.com/property/'+payload.slug];
+      if(payload.title && payload.title.pt) u.push('https://www.smithandadams.com/pt/property/'+payload.slug);
+      pingIndexNow(u);
+    }
     toast('Property saved.'); reLoad();
   }
 
@@ -2834,6 +2839,14 @@
   });
 
   // ---------- utils ----------
+  // Fire-and-forget IndexNow ping so Bing/Yandex re-crawl freshly published
+  // content within minutes. Never blocks or breaks a save.
+  function pingIndexNow(urls){
+    try {
+      if(!Array.isArray(urls) || !urls.length) return;
+      fetch('/api/indexnow', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ urls }), keepalive:true }).catch(()=>{});
+    } catch(_){}
+  }
   function escapeHtml(s){
     return String(s == null ? '' : s).replace(/[&<>]/g, c => (
       { '&':'&amp;', '<':'&lt;', '>':'&gt;' }[c]
@@ -2935,6 +2948,11 @@
                                 : await sb.from('posts').insert(payload).select().single();
     if(res.error){ toast('Save error: '+res.error.message); return; }
     if(!blState.current && res.data) blState.current = res.data;
+    if(payload.slug){
+      const u=['https://www.smithandadams.com/blog/'+payload.slug];
+      if(payload.translations && payload.translations.pt) u.push('https://www.smithandadams.com/pt/blog/'+payload.slug);
+      pingIndexNow(u);
+    }
     toast('Post saved.'); blLoad();
   }
   async function blDelete(id){
