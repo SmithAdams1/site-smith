@@ -182,12 +182,15 @@
     // We wait for DOM Load to avoid execution block
     document.addEventListener("DOMContentLoaded", () => {
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // Posts hidden from the site (listing, article URL is redirected, and
+        // excluded from the sitemap) without deleting the underlying data.
+        const HIDDEN_POST_SLUGS = ['golden-visa-vs-d2-portugal-2026'];
         let allPosts = [];
 
         async function fetchPosts() {
             const { data, error } = await supabaseClient.from('posts').select('*').order('created_at', { ascending: false });
             if (error) return console.error(error);
-            allPosts = data;
+            allPosts = (data || []).filter(p => !HIDDEN_POST_SLUGS.includes(p.slug));
 
             document.getElementById('blog-loader').classList.add('hidden');
             renderPosts(allPosts);

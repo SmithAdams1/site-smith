@@ -13,13 +13,14 @@ export default async function handler(req, res) {
   const sbHeaders = { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` };
   const dateOf = (v) => (v ? new Date(v).toISOString().split('T')[0] : today);
 
-  // Blog posts
+  // Blog posts (excluding any hidden slugs)
+  const HIDDEN_POST_SLUGS = ['golden-visa-vs-d2-portugal-2026'];
   let blogEntries = [];
   try {
     const r = await fetch(`${SUPABASE_URL}/rest/v1/posts?select=slug,created_at,translations&order=created_at.desc`, { headers: sbHeaders });
     const posts = await r.json();
     if (Array.isArray(posts)) {
-      posts.filter(p => p.slug).forEach(p => {
+      posts.filter(p => p.slug && !HIDDEN_POST_SLUGS.includes(p.slug)).forEach(p => {
         const en = `${BASE_URL}/blog/${p.slug}`;
         const lastmod = dateOf(p.created_at);
         const hasPt = p.translations && p.translations.pt;

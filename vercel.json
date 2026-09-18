@@ -12,6 +12,8 @@
     { "source": "/our-developments.html", "destination": "/hospitality", "permanent": true },
     { "source": "/urban-collection", "destination": "/real-estate", "permanent": true },
     { "source": "/urban-collection.html", "destination": "/real-estate", "permanent": true },
+    { "source": "/blog/golden-visa-vs-d2-portugal-2026", "destination": "/blog", "permanent": true },
+    { "source": "/pt/blog/golden-visa-vs-d2-portugal-2026", "destination": "/blog", "permanent": true },
     { "source": "/blog/lisbon-urban-collection-premium-investment", "destination": "/blog", "permanent": true },
     { "source": "/blog/urban-collection-floor-plans-lisbon-luxury", "destination": "/blog", "permanent": true },
     { "source": "/blog/portugal-fastest-growing-investment-destination", "destination": "/blog", "permanent": true },
