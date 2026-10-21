@@ -37,7 +37,8 @@ SERVICES_CUR = ('invest-in-portugal', 'real-estate', 'property-management', 'hos
 DROP = [('Investments', '/invest-in-portugal.html'),
         ('Real Estate', '/real-estate.html'),
         ('Property Management', '/property-management.html'),
-        ('Hospitality', '/hospitality.html')]
+        ('Hospitality', '/hospitality.html'),
+        ('Recruitment', 'https://recruitment.smithandadams.com')]
 
 STYLE = '''<style id="rd-nav-dd">
 /* The Properties dropdown used to be opened by JS listeners attached during the
@@ -83,7 +84,8 @@ MOB = [('Home', '/index.html'), ('About Us', '/about.html'),
        ('Investments', '/invest-in-portugal.html'),
        ('Real Estate', '/real-estate.html'),
        ('Property Management', '/property-management.html'),
-       ('Hospitality', '/hospitality.html'), ('Press', '/blog.html')]
+       ('Hospitality', '/hospitality.html'),
+       ('Recruitment', 'https://recruitment.smithandadams.com'), ('Press', '/blog.html')]
 
 
 def build_mobile(cur):
