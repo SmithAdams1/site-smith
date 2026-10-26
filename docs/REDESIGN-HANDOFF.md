@@ -742,3 +742,14 @@ chave sem NOME=); recomendado rodar.
 - Todos os textos da home tem data-cms "home.*" (73 chaves, EN+PT em site_content): /pt agora sai em PT
   (antes so menu/rodape estavam em PT). Editavel no backoffice. Num <a> o data-cms vai num <span> (no <a> reescreve href).
 - /home-v2 (3 variantes) fica como estava, para reunioes.
+
+## Sessao 2026-10-26 (conta: abilio.diz / Claude Code) - About (notas do George)
+- docs/about.blocks.json reordenado: hero "Born from a need." -> historia do grupo (origem: carteira propria sem
+  ninguem para a gerir; pain points do investidor estrangeiro; hoje: especialistas, residencia/cidadania, marcas Hygge)
+  -> MVV sem titulo (caixas pequenas) -> Meet the Team (subiu) -> Track record compacto (sem lista 01/02/03)
+  -> carrossel das 6 marcas com Learn more (Hygge Kaffe primeiro) -> How we work (absorveu os pilares; residencia
+  explicita; sem "01 ·") -> palavra do George ("own" -> "invest") -> FAQ -> CTA "Speak with an expert" em navy.
+- Renderer (api/_renderRdBlocks.js = lib/renderRdBlocks.js): rd_units reescrito como carrossel de marcas;
+  rd_proof aceita compact:true; rd_mvv sem titulo perde o padding de topo; rd_close em fundo claro pinta o CTA navy.
+- A CONFIRMAR com Abilio: texto da origem (escrito a partir da reuniao, sem nomes nem numeros); fotos da equipa.
+- NOTA dev: scripts/dev-server.mjs guarda os modulos em cache; reiniciar depois de mexer em api/*.js.

@@ -1,6 +1,6 @@
 {
   "_note": "Phase 2 pilot - About as rd- design-system blocks. EN only for now; pt fills in later. Drives lib/renderRdBlocks.js.",
-  "_status": "7 blocks matching the live about.html. Bilingual: hero/prose/timeline/pillars/proof carry pt (from site_content); rd_msg (George) + rd_close are EN-only, matching production. rd_msg (msg-bio) uses fixed ids for redesign.js bio toggle.",
+  "_status": "2026-10-26 HoS rework: born-from-a-need hero, group story, MVV without header, team early, compact track record, brand carousel, how-we-work absorbs pillars. Bilingual.",
   "slug": "about",
   "title": {
     "en": "About Us | Independent Real Estate Advisory in Portugal | Smith & Adams"
@@ -10,12 +10,12 @@
       "type": "rd_hero",
       "data": {
         "title": {
-          "en": "Independent advisory, built around the investor",
-          "pt": "Consultoria independente, construída em torno do investidor"
+          "en": "Born from a need.",
+          "pt": "Nascemos de uma necessidade."
         },
         "subtitle": {
-          "en": "Since 2020, Smith &amp; Adams has helped international investors build euro-denominated property portfolios in Portugal, and secure residency where that&rsquo;s part of the plan.",
-          "pt": "Desde 2020, a Smith &amp; Adams ajuda investidores internacionais a construir carteiras imobiliárias denominadas em euros em Portugal, e a garantir residência quando isso faz parte do plano."
+          "en": "Smith &amp; Adams began as the answer to a problem we had ourselves. Today the same answer serves more than 1,000 international investors in Portugal.",
+          "pt": "A Smith &amp; Adams nasceu como resposta a um problema que era nosso. Hoje, essa mesma resposta serve mais de 1.000 investidores internacionais em Portugal."
         },
         "image": "/assets/hero-about.jpg",
         "image_alt": {
@@ -25,10 +25,10 @@
         "ctas": [
           {
             "label": {
-              "en": "Explore our approach",
-              "pt": "Conhe&ccedil;a a nossa abordagem"
+              "en": "Meet the team",
+              "pt": "Conhe&ccedil;a a equipa"
             },
-            "href": "#journey"
+            "href": "#team"
           },
           {
             "label": {
@@ -58,12 +58,20 @@
         },
         "body": [
           {
-            "en": "Smith &amp; Adams is a Lisbon-based real estate investment advisory firm. We give investors an independent view of the Portuguese property market, then go further: coordinating an end-to-end solution across planning, development, construction, and property management, so a single advisory relationship covers the full lifecycle of the investment.",
-            "pt": "A Smith &amp; Adams é uma consultora de investimento imobiliário sediada em Lisboa. Damos aos investidores uma visão independente do mercado imobiliário português e vamos mais longe: coordenamos uma solução ponta a ponta que abrange planeamento, desenvolvimento, construção e gestão de propriedades, para que uma única relação de consultoria cubra todo o ciclo de vida do investimento."
+            "en": "The group did not start as an advisory firm. It started with a portfolio of properties, rental commitments to honour and no one on the ground able to run them to the standard they needed. So we ran them ourselves, and learned the market from the inside: what a building really costs to deliver, what tenants and guests expect, and what an asset earns once every cost is counted.",
+            "pt": "O grupo n&atilde;o come&ccedil;ou como consultora. Come&ccedil;ou com uma carteira de im&oacute;veis, compromissos de arrendamento para cumprir e ningu&eacute;m no terreno capaz de os gerir ao n&iacute;vel que exigiam. Por isso, pass&aacute;mos a geri-los n&oacute;s, e aprendemos o mercado por dentro: quanto custa realmente entregar um edif&iacute;cio, o que esperam inquilinos e h&oacute;spedes, e quanto rende um ativo depois de contados todos os custos."
           },
           {
-            "en": "Our focus is simple: help objective investors maximise the return on any tangible asset they acquire, while keeping ownership genuinely hands-off. From the first conversation to ongoing management, everything we do is built around that outcome.",
-            "pt": "O nosso foco é simples: ajudar investidores objetivos a maximizar o retorno de qualquer ativo tangível que adquiram, mantendo a propriedade genuinamente sem preocupações. Da primeira conversa à gestão contínua, tudo o que fazemos gira em torno desse resultado."
+            "en": "That is the position most foreign investors are in. You do not know the local market, and you need someone who does. Some of the best opportunities are off-plan or under construction, so you need someone who knows which builders charge a fair price and what construction should really cost. After that come project management, property management and asset management, each a consequence of the step before. Looking in from outside, you cannot see how any of it works. You need a trusted partner on the ground.",
+            "pt": "&Eacute; nessa posi&ccedil;&atilde;o que est&aacute; a maioria dos investidores estrangeiros. N&atilde;o conhece o mercado local e precisa de quem o conhe&ccedil;a. Algumas das melhores oportunidades est&atilde;o em planta ou em constru&ccedil;&atilde;o, por isso precisa de quem saiba que construtores praticam pre&ccedil;os justos e quanto deve custar realmente uma obra. Depois v&ecirc;m a gest&atilde;o de projeto, a gest&atilde;o do im&oacute;vel e a gest&atilde;o do ativo, cada uma consequ&ecirc;ncia da anterior. Visto de fora, nada disto &eacute; vis&iacute;vel. Precisa de um parceiro de confian&ccedil;a no terreno."
+          },
+          {
+            "en": "That is what Smith &amp; Adams is today: experts in every field you need, from the first analysis to long-term ownership. More than 1,000 investors have trusted us with over &euro;300M, many of them building a route to residency or citizenship in Portugal through their investment. We advise on the residency routes, coordinate the legal process with specialised law firms, and stay on to manage the asset once the keys are handed over.",
+            "pt": "&Eacute; isso que a Smith &amp; Adams &eacute; hoje: especialistas em cada &aacute;rea de que precisa, da primeira an&aacute;lise &agrave; propriedade de longo prazo. Mais de 1.000 investidores confiaram-nos mais de &euro;300M, muitos deles a construir, atrav&eacute;s do investimento, um caminho para a resid&ecirc;ncia ou a cidadania em Portugal. Aconselhamos sobre as vias de resid&ecirc;ncia, coordenamos o processo jur&iacute;dico com sociedades de advogados especializadas e continuamos a gerir o ativo depois da entrega das chaves."
+          },
+          {
+            "en": "We also own and operate our own brands, Hygge Kaffe and Hygge Residences, so the standard we advise on is the one we hold ourselves to every day.",
+            "pt": "Somos tamb&eacute;m donos e operadores das nossas pr&oacute;prias marcas, Hygge Kaffe e Hygge Residences, por isso o padr&atilde;o que aconselhamos &eacute; o mesmo que cumprimos todos os dias."
           }
         ]
       }
@@ -72,14 +80,6 @@
       "type": "rd_mvv",
       "data": {
         "anchor": "purpose",
-        "eyebrow": {
-          "en": "Purpose",
-          "pt": "Propósito"
-        },
-        "title": {
-          "en": "Mission, vision and values",
-          "pt": "Missão, visão e valores"
-        },
         "items": [
           {
             "key": "mission",
@@ -189,228 +189,6 @@
             ]
           }
         ]
-      }
-    },
-    {
-      "type": "rd_proof",
-      "data": {
-        "title": {
-          "en": "Track Record &amp; Global Footprint",
-          "pt": "Histórico &<br/>Presença Global"
-        },
-        "body": {
-          "en": "Since 2020, Smith &amp; Adams has grown into a Lisbon-based advisory platform serving investors and Residency Investors from across Europe, the Middle East, Asia, and the Americas.",
-          "pt": "Desde 2020, a Smith &amp; Adams tornou-se uma plataforma de consultoria sediada em Lisboa, ao serviço de investidores e Residency Investors da Europa, Médio Oriente, Ásia e Américas."
-        },
-        "stats": [
-          {
-            "value": {
-              "en": "1,000+",
-              "pt": "1.000+"
-            },
-            "label": {
-              "en": "Investors advised",
-              "pt": "Investidores aconselhados"
-            }
-          },
-          {
-            "value": {
-              "en": "&euro;300M+",
-              "pt": "€300M+"
-            },
-            "label": {
-              "en": "In advised investment value",
-              "pt": "Em valor de investimento aconselhado"
-            }
-          },
-          {
-            "value": {
-              "en": "30+",
-              "pt": "30+"
-            },
-            "label": {
-              "en": "Countries represented",
-              "pt": "Países representados"
-            }
-          }
-        ],
-        "bullets": [
-          {
-            "en": "Advised and supported <strong style=\"color:#fff; font-weight:600;\">1,000+ international investors</strong> building euro-denominated portfolios in Portugal.",
-            "pt": "Aconselhou e apoiou <strong style=\"color:#FDFCF9; font-weight:600;\">mais de 1.000 investidores internacionais</strong> na construção de carteiras denominadas em euros em Portugal."
-          },
-          {
-            "en": "Expanded its presence <strong style=\"color:#fff; font-weight:600;\">across Lisbon and key Portuguese cities</strong>, operating from Lisbon as its main hub.",
-            "pt": "Expandiu a sua presença <strong style=\"color: rgb(253, 252, 249);\">por Lisboa e principais cidades portuguesas</strong>, operando a partir de Lisboa como o seu principal centro."
-          },
-          {
-            "en": "Attracted clients from <strong style=\"color:#fff; font-weight:600;\">dozens of countries across Europe, the Middle East, Asia, and the Americas</strong> - reflecting a truly global client base.",
-            "pt": "Atraiu clientes de <strong style=\"color: rgb(253, 252, 249);\">dezenas de países na Europa, Oriente Médio, Ásia e Américas</strong> - refletindo uma base de clientes verdadeiramente global."
-          }
-        ],
-        "source": {
-          "en": "Source: Smith &amp; Adams Annual Report 2026."
-        }
-      }
-    },
-    {
-      "type": "rd_units",
-      "data": {}
-    },
-    {
-      "type": "rd_prose",
-      "data": {
-        "anchor": "how-we-work",
-        "bg": "paper",
-        "eyebrow": {
-          "en": "How we work",
-          "pt": "Como trabalhamos"
-        },
-        "title": {
-          "en": "Experts in every field you need, from first analysis to long-term ownership.",
-          "pt": "Especialistas em cada área de que precisa, da primeira análise à propriedade de longo prazo."
-        },
-        "body": [
-          {
-            "en": "We are experts, not brokers: we are paid to be right about the asset, not to sell it. Every mandate runs through the same four stages, with the same team beside you in all of them.",
-            "pt": "Somos especialistas, não intermediários: somos pagos para estar certos sobre o ativo, não para o vender. Cada mandato passa pelas mesmas quatro fases, com a mesma equipa a seu lado em todas elas."
-          },
-          {
-            "en": "That discipline sits behind 1,000+ investors advised, &euro;300M+ in advised assets and 300+ assets under management, with performance reported net of cost, in euros, quarterly.",
-            "pt": "Essa disciplina está por trás de mais de 1.000 investidores assessorados, mais de &euro;300M em ativos assessorados e mais de 300 ativos sob gestão, com desempenho reportado líquido de custos, em euros, trimestralmente."
-          }
-        ],
-        "cards": [
-          {
-            "label": {
-              "en": "01 &middot; An objective market view",
-              "pt": "01 &middot; Uma visão objetiva do mercado"
-            },
-            "body": {
-              "en": "We start from the data, not a listing: an independent read of the market, the district and the segment, so the shortlist reflects your objectives.",
-              "pt": "Partimos dos dados, não de um anúncio: uma leitura independente do mercado, da zona e do segmento, para que a lista reflita os seus objetivos."
-            }
-          },
-          {
-            "label": {
-              "en": "02 &middot; The right eligible asset",
-              "pt": "02 &middot; O ativo elegível certo"
-            },
-            "body": {
-              "en": "We identify, vet and structure the acquisition, confirming eligibility for your route (investment, Golden Visa fund or D2) before you commit.",
-              "pt": "Identificamos, avaliamos e estruturamos a aquisição, confirmando a elegibilidade da sua via (investimento, fundo Golden Visa ou D2) antes de avançar."
-            }
-          },
-          {
-            "label": {
-              "en": "03 &middot; Acquisition and residency, structured",
-              "pt": "03 &middot; Aquisição e residência, estruturadas"
-            },
-            "body": {
-              "en": "We run the acquisition and, where relevant, the residency application end to end, with legal and tax partners, so nothing falls through the cracks.",
-              "pt": "Conduzimos a aquisição e, quando aplicável, o pedido de residência de ponta a ponta, com parceiros jurídicos e fiscais, para que nada fique por tratar."
-            }
-          },
-          {
-            "label": {
-              "en": "04 &middot; Hands-on management, reported",
-              "pt": "04 &middot; Gestão prática, reportada"
-            },
-            "body": {
-              "en": "We operate the asset ourselves: guests or tenants, maintenance and dynamic pricing, with net-of-cost, euro-denominated performance reported to you quarterly.",
-              "pt": "Operamos nós mesmos o ativo: hóspedes ou inquilinos, manutenção e preços dinâmicos, com desempenho líquido de custos, em euros, reportado trimestralmente."
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "rd_pillars",
-      "data": {
-        "title": {
-          "en": "Advisory, residency and management",
-          "pt": "Consultoria, residência e gestão"
-        },
-        "items": [
-          {
-            "title": {
-              "en": "Investment Advisory &amp; Structuring",
-              "pt": "Consultoria e Estruturação de Investimento"
-            },
-            "body": {
-              "en": "We identify and structure real estate investment opportunities in Portugal, advising on asset selection, legal and tax framework, financing, and long-term strategy, for investors focused on capital preservation, euro income, and steady growth.",
-              "pt": "Identificamos e estruturamos oportunidades de investimento imobiliário em Portugal, aconselhando sobre seleção de ativos, enquadramento jurídico e fiscal, financiamento e estratégia de longo prazo, para investidores focados na preservação de capital, rendimento em euros e crescimento estável."
-            }
-          },
-          {
-            "title": {
-              "en": "Residency &amp; Citizenship Advisory",
-              "pt": "Consultoria de Residência e Cidadania"
-            },
-            "body": {
-              "en": "We coordinate immigration and legal services for clients pursuing Golden Visa or D2 Visa residency, working alongside specialised law firms and regulated partners to manage the visa process, property transaction, and family inclusion end to end.",
-              "pt": "Coordenamos serviços de imigração e jurídicos para clientes que procuram residência via Golden Visa ou Visto D2, em conjunto com sociedades de advogados especializadas e parceiros regulados, para gerir o processo de visto, a transação imobiliária e a inclusão da família de ponta a ponta."
-            }
-          },
-          {
-            "title": {
-              "en": "Asset &amp; Property Management",
-              "pt": "Gestão de Ativos e Propriedades"
-            },
-            "body": {
-              "en": "For properties we&rsquo;ve advised on, and for independent owners, we manage every asset to maximise its yield potential, backed by a proven track record of over 90% occupancy across our short-term rental portfolio. From tenant relations and maintenance to financial reporting, we handle the day-to-day so ownership from abroad stays genuinely hands-off.",
-              "pt": "Para propriedades que aconselhámos e para proprietários independentes, gerimos cada ativo para maximizar o seu potencial de rendimento, com um histórico comprovado de mais de 90% de ocupação na nossa carteira de arrendamento de curta duração. Da relação com inquilinos e manutenção ao reporte financeiro, tratamos do dia a dia para que a propriedade, mesmo a partir do estrangeiro, permaneça genuinamente sem preocupações."
-            }
-          }
-        ]
-      }
-    },
-    {
-      "type": "rd_msg",
-      "data": {
-        "anchor": "message",
-        "photo": "./about/george-hobson.jpg",
-        "photo_alt": {
-          "en": "George Hobson, Head of Investment &amp; Strategy at Smith &amp; Adams"
-        },
-        "photo_pos": "50% 22%",
-        "bio": [
-          {
-            "en": "<strong>George Hobson</strong> leads investment and strategy at Smith &amp; Adams, setting how the group reads the Portuguese market and how each investment is structured - from the first appraisal through to handover and management."
-          },
-          {
-            "en": "He has spent more than a decade in Portuguese real estate. As a senior investment broker in Lisbon he advised international buyers on residential and yield-focused acquisitions, and earlier built and ran his own brokerage in the Algarve - giving him a view of the market from the ground up, in both regions where foreign capital concentrates."
-          },
-          {
-            "en": "That experience sits behind the way the group works: independent advice first, held to a single standard the whole way through."
-          }
-        ],
-        "bio_open": {
-          "en": "Read bio"
-        },
-        "bio_close": {
-          "en": "Close bio"
-        },
-        "lead": {
-          "en": "We built Smith &amp; Adams around one idea: that you should be able to own property in Portugal without having to become an expert in Portugal."
-        },
-        "body": [
-          {
-            "en": "Most investors arrive with the same two questions - is this a good asset, and who looks after it once I have bought it? Answering only the first is what the market usually offers. We give an independent read on the Portuguese property market and then stay on: planning, development, construction and management sit inside the same relationship, so nobody hands you off at the point where the work actually starts."
-          },
-          {
-            "en": "Portugal earns the attention. It offers residency routes into the European Union for both entrepreneurs and passive investors, a legal system that treats foreign ownership the same as domestic, and cities where the demand for good, well-run housing has outrun the supply of it. That combination is rarer than it sounds."
-          },
-          {
-            "en": "What we ask you to judge us on is evidence rather than argument. More than 1,000 investors, over &euro;300M placed and 300+ assets under management - and, on this site, the occupancy of our own buildings with the dates and the source attached. If a number matters to your decision, you should be able to see where it came from."
-          }
-        ],
-        "name": {
-          "en": "George Hobson"
-        },
-        "role": {
-          "en": "Head of Investment &amp; Strategy, Smith &amp; Adams"
-        }
       }
     },
     {
@@ -589,6 +367,179 @@
       }
     },
     {
+      "type": "rd_proof",
+      "data": {
+        "title": {
+          "en": "Track record and footprint",
+          "pt": "Hist&oacute;rico e presen&ccedil;a"
+        },
+        "body": {
+          "en": "Since 2020, a Lisbon-based group serving investors from across Europe, the Middle East, Asia and the Americas, with an office in Dubai.",
+          "pt": "Desde 2020, um grupo sediado em Lisboa ao servi&ccedil;o de investidores da Europa, M&eacute;dio Oriente, &Aacute;sia e Am&eacute;ricas, com escrit&oacute;rio no Dubai."
+        },
+        "stats": [
+          {
+            "value": {
+              "en": "1,000+",
+              "pt": "1.000+"
+            },
+            "label": {
+              "en": "Investors advised",
+              "pt": "Investidores aconselhados"
+            }
+          },
+          {
+            "value": {
+              "en": "&euro;300M+",
+              "pt": "€300M+"
+            },
+            "label": {
+              "en": "In advised investment value",
+              "pt": "Em valor de investimento aconselhado"
+            }
+          },
+          {
+            "value": {
+              "en": "30+",
+              "pt": "30+"
+            },
+            "label": {
+              "en": "Countries represented",
+              "pt": "Países representados"
+            }
+          }
+        ],
+        "source": {
+          "en": "Source: Smith &amp; Adams Annual Report 2026."
+        },
+        "compact": true
+      }
+    },
+    {
+      "type": "rd_units",
+      "data": {}
+    },
+    {
+      "type": "rd_prose",
+      "data": {
+        "anchor": "how-we-work",
+        "bg": "paper",
+        "eyebrow": {
+          "en": "How we work",
+          "pt": "Como trabalhamos"
+        },
+        "title": {
+          "en": "Experts in every field you need, from first analysis to long-term ownership.",
+          "pt": "Especialistas em cada área de que precisa, da primeira análise à propriedade de longo prazo."
+        },
+        "body": [
+          {
+            "en": "We are experts, not brokers: we are paid to be right about the asset, not to sell it. Every mandate runs through the same four stages, with the same team beside you in all of them.",
+            "pt": "Somos especialistas, não intermediários: somos pagos para estar certos sobre o ativo, não para o vender. Cada mandato passa pelas mesmas quatro fases, com a mesma equipa a seu lado em todas elas."
+          },
+          {
+            "en": "Residency and citizenship run through all four stages. For many of our clients the investment is also their route to living in Europe, so we confirm eligibility before you commit and coordinate the application with specialised law firms.",
+            "pt": "A resid&ecirc;ncia e a cidadania atravessam as quatro fases. Para muitos dos nossos clientes, o investimento &eacute; tamb&eacute;m o caminho para viver na Europa, por isso confirmamos a elegibilidade antes de avan&ccedil;ar e coordenamos o pedido com sociedades de advogados especializadas."
+          },
+          {
+            "en": "That discipline sits behind 1,000+ investors advised, &euro;300M+ in advised assets and 300+ assets under management, with performance reported net of cost, in euros, quarterly.",
+            "pt": "Essa disciplina está por trás de mais de 1.000 investidores assessorados, mais de &euro;300M em ativos assessorados e mais de 300 ativos sob gestão, com desempenho reportado líquido de custos, em euros, trimestralmente."
+          }
+        ],
+        "cards": [
+          {
+            "label": {
+              "en": "An objective market view",
+              "pt": "Uma visão objetiva do mercado"
+            },
+            "body": {
+              "en": "We start from the data, not a listing: an independent read of the market, the district and the segment, so the shortlist reflects your objectives.",
+              "pt": "Partimos dos dados, não de um anúncio: uma leitura independente do mercado, da zona e do segmento, para que a lista reflita os seus objetivos."
+            }
+          },
+          {
+            "label": {
+              "en": "The right eligible asset",
+              "pt": "O ativo elegível certo"
+            },
+            "body": {
+              "en": "We identify, vet and structure the acquisition, confirming eligibility for your route (investment, Golden Visa fund or D2) before you commit.",
+              "pt": "Identificamos, avaliamos e estruturamos a aquisição, confirmando a elegibilidade da sua via (investimento, fundo Golden Visa ou D2) antes de avançar."
+            }
+          },
+          {
+            "label": {
+              "en": "Acquisition and residency, structured",
+              "pt": "Aquisição e residência, estruturadas"
+            },
+            "body": {
+              "en": "We run the acquisition and, where relevant, the residency application end to end, with legal and tax partners, so nothing falls through the cracks.",
+              "pt": "Conduzimos a aquisição e, quando aplicável, o pedido de residência de ponta a ponta, com parceiros jurídicos e fiscais, para que nada fique por tratar."
+            }
+          },
+          {
+            "label": {
+              "en": "Hands-on management, reported",
+              "pt": "Gestão prática, reportada"
+            },
+            "body": {
+              "en": "We operate the asset ourselves: guests or tenants, maintenance and dynamic pricing, with net-of-cost, euro-denominated performance reported to you quarterly.",
+              "pt": "Operamos nós mesmos o ativo: hóspedes ou inquilinos, manutenção e preços dinâmicos, com desempenho líquido de custos, em euros, reportado trimestralmente."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "rd_msg",
+      "data": {
+        "anchor": "message",
+        "photo": "./about/george-hobson.jpg",
+        "photo_alt": {
+          "en": "George Hobson, Head of Investment &amp; Strategy at Smith &amp; Adams"
+        },
+        "photo_pos": "50% 22%",
+        "bio": [
+          {
+            "en": "<strong>George Hobson</strong> leads investment and strategy at Smith &amp; Adams, setting how the group reads the Portuguese market and how each investment is structured - from the first appraisal through to handover and management."
+          },
+          {
+            "en": "He has spent more than a decade in Portuguese real estate. As a senior investment broker in Lisbon he advised international buyers on residential and yield-focused acquisitions, and earlier built and ran his own brokerage in the Algarve - giving him a view of the market from the ground up, in both regions where foreign capital concentrates."
+          },
+          {
+            "en": "That experience sits behind the way the group works: independent advice first, held to a single standard the whole way through."
+          }
+        ],
+        "bio_open": {
+          "en": "Read bio"
+        },
+        "bio_close": {
+          "en": "Close bio"
+        },
+        "lead": {
+          "en": "We built Smith &amp; Adams around one idea: that you should be able to invest in property in Portugal without having to become an expert in Portugal.",
+          "pt": "Constru&iacute;mos a Smith &amp; Adams em torno de uma ideia: deve poder investir em im&oacute;veis em Portugal sem ter de se tornar especialista em Portugal."
+        },
+        "body": [
+          {
+            "en": "Most investors arrive with the same two questions - is this a good asset, and who looks after it once I have bought it? Answering only the first is what the market usually offers. We give an independent read on the Portuguese property market and then stay on: planning, development, construction and management sit inside the same relationship, so nobody hands you off at the point where the work actually starts."
+          },
+          {
+            "en": "Portugal earns the attention. It offers residency routes into the European Union for both entrepreneurs and passive investors, a legal system that treats foreign ownership the same as domestic, and cities where the demand for good, well-run housing has outrun the supply of it. That combination is rarer than it sounds."
+          },
+          {
+            "en": "What we ask you to judge us on is evidence rather than argument. More than 1,000 investors, over &euro;300M placed and 300+ assets under management - and, on this site, the occupancy of our own buildings with the dates and the source attached. If a number matters to your decision, you should be able to see where it came from."
+          }
+        ],
+        "name": {
+          "en": "George Hobson"
+        },
+        "role": {
+          "en": "Head of Investment &amp; Strategy, Smith &amp; Adams"
+        }
+      }
+    },
+    {
       "type": "rd_faq",
       "data": {
         "anchor": "faq",
@@ -627,8 +578,8 @@
               "pt": "O que faz o grupo?"
             },
             "a": {
-              "en": "Four business units under one relationship: Investments, Real Estate, Property Management, and Hospitality and F&B.",
-              "pt": "Quatro unidades de neg&oacute;cio numa s&oacute; rela&ccedil;&atilde;o: Investimentos, Imobili&aacute;rio, Gest&atilde;o de Propriedades e Hospitalidade."
+              "en": "Investment Advisory, Real Estate, Property Management and Hospitality and F&amp;B under one relationship, with our own brands Hygge Kaffe and Hygge Residences.",
+              "pt": "Consultoria de Investimento, Imobili&aacute;rio, Gest&atilde;o de Propriedades e Hotelaria e Restaura&ccedil;&atilde;o numa s&oacute; rela&ccedil;&atilde;o, com as nossas marcas Hygge Kaffe e Hygge Residences."
             }
           },
           {
@@ -669,14 +620,17 @@
       "data": {
         "bg": "paper",
         "title": {
-          "en": "Independent advice, from the first conversation to handover."
+          "en": "Talk to the experts before you decide.",
+          "pt": "Fale com os especialistas antes de decidir."
         },
         "body": {
-          "en": "Tell us what you&rsquo;re looking for in Portugal. We&rsquo;ll give you an honest read on whether - and how - we can help."
+          "en": "Tell us what you&rsquo;re looking for in Portugal. We&rsquo;ll give you an honest read on whether - and how - we can help.",
+          "pt": "Diga-nos o que procura em Portugal. Damos-lhe uma leitura honesta sobre se, e como, podemos ajudar."
         },
         "cta": {
           "label": {
-            "en": "Speak with an expert"
+            "en": "Speak with an expert",
+            "pt": "Fale com um especialista"
           },
           "href": "contact.html",
           "wrap": true
