@@ -1,0 +1,164 @@
+<!doctype html>
+<!-- Source of /assets/sa-property-management-brochure.pdf. Regenerate with
+     scripts/build-brochure.sh pm (headless Chrome against the local dev server). -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>S&amp;A Property Management brochure</title>
+<style>
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Light.woff2') format('woff2');font-weight:300;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Regular.woff2') format('woff2');font-weight:400;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Medium.woff2') format('woff2');font-weight:500;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Bold.woff2') format('woff2');font-weight:700;}
+@page{size:297mm 210mm;margin:0}
+:root{--navy:#11222D;--paper:#FDFCF9;--sunken:#F6F2EA;--ink:#26333C;--slate:#6A7883;--stone:#C3CBD1;--line:#E4E1DA;--gold:#D6C29A;--gold-line:rgba(214,194,154,.5)}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{margin:0;padding:0;background:var(--paper)}
+body{font-family:'Geoform','Helvetica Neue',Arial,sans-serif;color:var(--ink);font-size:10.5pt;line-height:1.6}
+.pg{width:100%;height:210mm;position:relative;overflow:hidden;background:var(--paper);page-break-after:always;break-after:page;margin:0 auto}
+.pg:last-child{page-break-after:auto;break-after:auto}
+.in{position:absolute;inset:16mm 18mm 14mm}
+.lab{font-size:7.5pt;letter-spacing:.24em;text-transform:uppercase;color:var(--slate);font-weight:500;display:flex;align-items:center;gap:8px;margin:0 0 5mm}
+.lab::before{content:"";width:16px;height:1px;background:var(--gold)}
+h1,h2,h3{font-weight:500;color:var(--navy);margin:0;letter-spacing:-.01em}
+h2{font-size:25pt;line-height:1.08;max-width:150mm}
+h3{font-size:13pt}
+p{margin:0}
+.foot{position:absolute;left:18mm;right:18mm;bottom:8mm;display:flex;justify-content:space-between;font-size:7pt;color:var(--slate);letter-spacing:.06em}
+.dark{background:var(--navy);color:var(--stone)}
+.dark h1,.dark h2,.dark h3{color:#fff}
+.dark .lab{color:var(--gold)}
+.dark .foot{color:rgba(255,255,255,.45)}
+.logo-w{height:12mm;filter:invert(1)}
+/* cover */
+.cover img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,34,45,.92) 0%,rgba(17,34,45,.7) 45%,rgba(17,34,45,.15) 100%)}
+.cover h1{color:#fff;font-size:42pt;line-height:1.02;max-width:150mm;margin-top:62mm}
+.cover .sub{color:var(--stone);font-size:13pt;font-weight:300;max-width:120mm;margin-top:7mm;line-height:1.5}
+/* who */
+.who{display:grid;grid-template-columns:1.25fr 1fr;height:100%}
+.who .l{padding:16mm 14mm 14mm 18mm}
+.who .l p{margin-top:5mm;max-width:132mm}
+.who .r{background:var(--navy);padding:20mm 16mm;display:grid;grid-template-rows:repeat(4,1fr)}
+.who .r div{border-top:1px solid rgba(255,255,255,.14);padding-top:4mm}
+.who .r .n{color:var(--gold);font-size:26pt;line-height:1}
+.who .r .t{color:#dfe6e6;font-size:9pt;margin-top:2mm}
+/* services */
+.svcs{display:grid;grid-template-columns:1fr 1fr;margin-top:9mm;border-top:1px solid rgba(17,34,45,.16)}
+.svc{padding:7mm 9mm 7mm 0;border-bottom:1px solid rgba(17,34,45,.16)}
+.svc:nth-child(even){padding-left:9mm;border-left:1px solid rgba(17,34,45,.16)}
+.svc svg{width:9mm;height:9mm;fill:none;stroke:var(--navy);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.svc h3{margin-top:3mm}
+.svc p{margin-top:2mm;font-size:9.5pt}
+.svc .u{font-size:7.5pt;color:var(--slate);margin-top:2.5mm;letter-spacing:.04em}
+/* steps + journey */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9mm;margin-top:8mm}
+.steps div{border-top:1px solid var(--gold-line);padding-top:4mm}
+.steps .k{font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.steps h3{margin-top:2mm}
+.steps p{margin-top:2mm;font-size:9.5pt}
+.jour{display:grid;grid-template-columns:repeat(4,1fr);margin-top:9mm}
+.jour div{border-top:1px solid rgba(255,255,255,.14);padding:4mm 5mm 4mm 0}
+.jour b{display:block;color:#fff;font-weight:500;font-size:10pt}
+.jour span{display:block;font-size:8.5pt;margin-top:1.5mm;line-height:1.5}
+/* brands */
+.brands{display:grid;grid-template-columns:repeat(3,1fr);margin-top:16mm;border-top:1px solid var(--line)}
+.brand{padding:10mm 7mm 10mm 0;border-bottom:1px solid var(--line)}
+.brand+.brand:not(:nth-child(3n+1)){padding-left:7mm;border-left:1px solid var(--line)}
+.brand .lg{height:17mm;display:flex;align-items:center}
+.brand .lg img{max-height:12mm;max-width:62mm}
+.brand p{font-size:9.5pt;margin-top:4mm}
+/* cases */
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:7mm;margin-top:8mm}
+.case img{width:100%;height:62mm;object-fit:cover;display:block}
+.case .pl{font-size:7pt;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin-top:4mm}
+.case h3{font-size:12pt;margin-top:1.5mm}
+.case p{font-size:8.8pt;margin-top:1.5mm;line-height:1.5}
+.case dl{display:flex;gap:6mm;margin:3mm 0 0;padding-top:3mm;border-top:1px solid var(--line)}
+.case dt{font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.case dd{margin:0;font-size:13pt;color:var(--navy)}
+.note{font-size:7pt;color:var(--slate);margin-top:6mm;max-width:220mm}
+/* contact */
+.ct{display:grid;grid-template-columns:1.1fr 1fr;gap:16mm;margin-top:12mm}
+.ct .k{font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5mm}
+.ct .v{color:#fff;font-size:12pt;margin-bottom:6mm}
+.ct .v.s{font-size:10pt;color:var(--stone)}
+.legal{position:absolute;left:18mm;right:18mm;bottom:16mm;font-size:7pt;color:rgba(255,255,255,.45);line-height:1.6;border-top:1px solid rgba(255,255,255,.12);padding-top:4mm}
+</style>
+</head>
+<body>
+
+<section class="pg cover dark">
+  <img class="bg" src="/assets/hero-property-management.webp" alt="">
+  <div class="scrim"></div>
+  <div class="in">
+    <img src="/assets/brands/sa-property-management.svg" alt="SA Property Management" style="height:15mm;filter:brightness(0) invert(1)">
+    <h1>End-to-end property management.</h1>
+    <p class="sub">We take care of every aspect of property ownership so you don't have to: hands-off, tailored to your needs and built to maximise your returns.</p>
+  </div>
+  <div class="foot"><span>PROPERTY MANAGEMENT · 2026</span><span>WWW.SMITHANDADAMS.COM/PROPERTY-MANAGEMENT</span></div>
+</section>
+
+<section class="pg">
+  <div class="who">
+    <div class="l">
+      <p class="lab">Why property management</p>
+      <h2>Owning abroad is not hands-off by default.</h2>
+      <p><b>Asset and property management.</b> As a foreign owner you cannot easily set up water and electricity, wait in for a repair or chase a contractor. We handle all of it: utility contracts, a broken boiler, a leak, insurance claims and the paperwork. We represent you at condominium meetings and act as your tax representative where needed.</p>
+      <p><b>Rental management.</b> We set prices by season and demand, manage listings on Airbnb, Booking.com and our own channel, look after guests or tenants from first message to check-out, and keep the home in a condition that earns good reviews. The aim: high occupancy, a strong net yield and an asset that holds its value.</p>
+    </div>
+    <div class="r">
+      <div><p class="n">300+</p><p class="t">Homes under management</p></div>
+      <div><p class="n">~90%</p><p class="t">Average occupancy across active homes</p></div>
+      <div><p class="n">87%</p><p class="t">Of active homes above 80% occupancy</p></div>
+      <div><p class="n">4.7/5</p><p class="t">Guest rating for communication</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>S&amp;A PROPERTY MANAGEMENT</span><span>02</span></div>
+</section>
+
+<section class="pg dark">
+  <div class="in">
+    <p class="lab">How does it work?</p>
+    <h2>Six steps, one team.</h2>
+    <div class="jour" style="grid-template-columns:repeat(3,1fr);margin-top:12mm">
+      <div><span style="color:var(--gold);font-size:7pt;letter-spacing:.22em;text-transform:uppercase">Step one</span><b style="margin-top:2mm">Consultation and assessment</b><span>We visit the property, review its condition, licensing and running costs, and show you what it can realistically earn.</span></div><div><span style="color:var(--gold);font-size:7pt;letter-spacing:.22em;text-transform:uppercase">Step two</span><b style="margin-top:2mm">Set-up and compliance</b><span>Furnishing where needed, photography, the local accommodation licence, insurance and integration with our systems.</span></div><div><span style="color:var(--gold);font-size:7pt;letter-spacing:.22em;text-transform:uppercase">Step three</span><b style="margin-top:2mm">Pricing and distribution</b><span>Listings on Airbnb, Booking.com and our own channel, priced to season and demand.</span></div><div><span style="color:var(--gold);font-size:7pt;letter-spacing:.22em;text-transform:uppercase">Step four</span><b style="margin-top:2mm">Guests and tenants</b><span>Every message, check-in and check-out handled, with issues resolved on the ground.</span></div><div><span style="color:var(--gold);font-size:7pt;letter-spacing:.22em;text-transform:uppercase">Step five</span><b style="margin-top:2mm">Housekeeping and asset care</b><span>Cleaning, inspections, repairs, utilities and condominium matters.</span></div><div><span style="color:var(--gold);font-size:7pt;letter-spacing:.22em;text-transform:uppercase">Step six</span><b style="margin-top:2mm">Payments and reporting</b><span>Income collected, expenses paid, a monthly statement and a quarterly net-of-cost review.</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>S&amp;A PROPERTY MANAGEMENT</span><span>03</span></div>
+</section>
+
+<section class="pg" style="background:var(--sunken)">
+  <div class="in">
+    <p class="lab">What is included</p>
+    <h2>Full-cycle care for your property.</h2>
+    <div class="svcs" style="grid-template-columns:repeat(4,1fr)">
+      <div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Property health checks and investment reviews</h3><p>Inspections with detailed reports, photographs and condition assessments, so issues are caught early.</p></div><div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Asset preservation and maintenance</h3><p>All maintenance and repairs, with trusted contractors coordinated on your behalf.</p></div><div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Key holding and emergency response</h3><p>Secure key holding and a fast response for emergencies, inspections and contractor access.</p></div><div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Condominium representation</h3><p>Your representative at condominium meetings, with the management company and on annual levies.</p></div><div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Insurance assistance and claims</h3><p>Suitable cover for the property and hands-on support through any claim.</p></div><div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Rental and compliance support</h3><p>Licensing, documentation and compliance for short, medium and long-term rentals.</p></div><div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Tax representation</h3><p>Your tax representative in Portugal: IMI, rental income, lease registration and annual returns.</p></div><div class="svc" style="padding:6mm 5mm 6mm 0;border-left:0"><h3 style="margin-top:0;font-size:11.5pt">Investment enhancement</h3><p>Upgrades, furnishing, energy efficiency and positioning to lift occupancy and resale value.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>S&amp;A PROPERTY MANAGEMENT</span><span>04</span></div>
+</section>
+
+<section class="pg dark">
+  <div class="in">
+    <img class="logo-w" src="/logo.png" alt="Smith &amp; Adams Group">
+    <h2 style="margin-top:18mm;font-size:32pt">Speak with an expert.</h2>
+    <p style="margin-top:4mm;max-width:150mm;font-size:11pt">Tell us where your property is and how it is used today. We will come back with what it could earn and what managing it would involve.</p>
+    <div class="ct">
+      <div>
+        <p class="k">Phone</p><p class="v">+351 214 086 709</p>
+        <p class="k">Email</p><p class="v">geral@smithandadams.com</p>
+        <p class="k">Website</p><p class="v">www.smithandadams.com/property-management</p>
+      </div>
+      <div>
+        <p class="k">Lisbon office</p><p class="v s">Av. José Malhoa 14<br>1070-073 Lisboa, Portugal</p>
+        <p class="k">Book a stay</p><p class="v s">smithandadams.bookingsboom.com</p>
+      </div>
+    </div>
+  </div>
+  <p class="legal">Figures from our property-management operations across the managed portfolio, 2026. Occupancy and ratings describe past performance and are not a forecast of future income.</p>
+</section>
+
+</body>
+</html>

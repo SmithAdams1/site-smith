@@ -38,10 +38,41 @@
   <div class="rd-hero__scrim"></div>
   <div class="rd-wrap rd-hero__inner">
     
-    <h1 data-cms="propmgmt.hero.headline" data-cms-attr="html">Complete property management</h1>
-    <p data-cms="propmgmt.hero.subtitle" data-cms-attr="html" class="rd-hero__sub">The Smith &amp; Adams Group manages 100% of your apartment's operations - so you enjoy steady euro-denominated income, effortlessly and from anywhere.</p>
+    <h1 data-cms="propmgmt.hero.headline" data-cms-attr="html">End-to-end property management</h1>
+    <p data-cms="propmgmt.hero.subtitle" data-cms-attr="html" class="rd-hero__sub">S&amp;A Property Management takes care of every aspect of property ownership so you don't have to: a hands-off approach, tailored to your needs and built to maximise your returns.</p>
     <div class="rd-hero__row">
-      <a data-cms="propmgmt.hero.cta_url" class="rd-cta" href="contact.html"><span data-cms="propmgmt.hero.cta_label">Get Started</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a data-cms="propmgmt.hero.cta_url" class="rd-cta" href="contact.html"><span data-cms="propmgmt.hero.cta_label">Speak with an expert</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="rd-cta rd-cta--ghost" href="/assets/sa-property-management-brochure.pdf" download><span data-cms="pm.hero.brochure">Download the brochure</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ WHY DO I NEED PROPERTY MANAGEMENT ══════════════════ -->
+<section class="rd-sec" style="background:var(--paper);" id="pm-why">
+  <style>
+    #pm-why .pm-why__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);margin-top:clamp(28px,4vw,48px);border-top:1px solid var(--navy);}
+    #pm-why .pm-why__grid > div{padding-top:24px;}
+    #pm-why h3{font-family:var(--display);font-weight:500;color:var(--navy);font-size:clamp(20px,1.8vw,26px);margin:0 0 12px;}
+    #pm-why p{font-family:var(--sans);font-size:16px;line-height:1.8;color:var(--ink);margin:0 0 14px;}
+    @media(max-width:820px){#pm-why .pm-why__grid{grid-template-columns:1fr;}}
+  </style>
+  <div class="rd-wrap">
+    <div style="max-width:900px;">
+      <p class="rd-label reveal" data-cms="pm.why.label">What we do</p>
+      <h2 class="rd-statement reveal" style="font-size:clamp(30px,4.2vw,56px);margin:14px 0 0;" data-cms="pm.why.title">Why do I need property management?</h2>
+      <p class="rd-body reveal" style="margin-top:22px;max-width:64ch;" data-cms="pm.why.intro">Owning property in another country is not hands-off by default. Someone has to be there when the water needs connecting, the boiler breaks or the building calls a meeting. That is what we do, in two parts.</p>
+    </div>
+    <div class="pm-why__grid">
+      <div class="reveal">
+        <h3 data-cms="pm.why.asset.title">Asset and property management</h3>
+        <p data-cms="pm.why.asset.p1">As a foreign owner you cannot easily visit the utility companies or the council to set up water, electricity and internet, wait in for a repair or chase a contractor. We handle all of it on your behalf: utility contracts, a broken boiler, a leak, insurance claims and the paperwork that comes with each.</p>
+        <p data-cms="pm.why.asset.p2">We also represent you at condominium meetings, so the building is well maintained, the rules are respected and costs are kept under control, and we act as your tax representative in Portugal where needed.</p>
+      </div>
+      <div class="reveal">
+        <h3 data-cms="pm.why.rental.title">Rental management</h3>
+        <p data-cms="pm.why.rental.p1">The second part is making the property earn. We set prices by season and demand, manage listings on Airbnb, Booking.com and our own channel, look after guests or tenants from first message to check-out, and keep the home in a condition that earns good reviews.</p>
+        <p data-cms="pm.why.rental.p2">The aim is simple: high occupancy, a strong net yield and an asset that holds its value, with every euro of income and cost reported to you.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -55,12 +86,15 @@
     #pm-stats .pm-head{max-width:64ch;}
     #pm-stats .pm-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.14);margin:clamp(32px,5vw,52px) 0 clamp(28px,4vw,44px);}
     #pm-stats .pm-chip{background:#11222D;padding:clamp(18px,2.4vw,26px);}
-    #pm-stats .pm-chip__n{display:block;font-family:var(--display);font-weight:600;letter-spacing:-0.02em;color:#fff;font-size:clamp(30px,4vw,46px);line-height:1;}
+    #pm-stats .pm-chip__n{display:block;font-family:var(--display);font-weight:500;letter-spacing:-0.02em;color:var(--gold);font-size:clamp(26px,2.8vw,36px);line-height:1;}
     #pm-stats .pm-chip__u{font-size:0.5em;color:var(--stone);font-weight:500;}
     #pm-stats .pm-chip__l{display:block;margin-top:10px;font-size:13.5px;color:var(--stone);line-height:1.4;}
     #pm-stats .pm-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(16px,2vw,24px);}
     @media(max-width:820px){#pm-stats .pm-grid{grid-template-columns:1fr;} #pm-stats .pm-chips{grid-template-columns:1fr;}}
-    #pm-stats .pm-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:4px;padding:clamp(26px,3vw,40px);}
+    #pm-stats .pm-card{background:transparent;border:0;border-top:1px solid rgba(255,255,255,0.18);border-radius:0;padding:clamp(20px,2.4vw,28px) 0 0;}
+    #pm-stats .pm-gauge svg{width:clamp(120px,11vw,140px) !important;}
+    #pm-stats .pm-plat{margin-top:clamp(20px,3vw,28px);font-size:13.5px;color:var(--stone);}
+    #pm-stats .pm-plat b{color:#fff;font-weight:600;}
     #pm-stats .pm-card__t{font-family:var(--display);font-weight:600;color:#fff;font-size:clamp(18px,1.5vw,22px);margin:0 0 4px;}
     #pm-stats .pm-card__s{font-size:13px;color:var(--stone);margin:0 0 24px;}
     #pm-stats .pm-gauge{display:flex;align-items:center;gap:clamp(18px,3vw,30px);flex-wrap:wrap;}
@@ -140,6 +174,7 @@
       </div>
     </div>
 
+    <p class="pm-plat reveal" data-cms="pm.stats.platforms" data-cms-attr="html">Our homes are listed and reviewed on <b>Airbnb</b>, <b>Booking.com</b> and our own booking channel.</p>
     <p class="pm-source reveal">Live figures from our property-management operations across the managed portfolio.</p>
   </div>
   <script>
@@ -165,29 +200,27 @@
   </script>
 </section>
 
-<!-- INTRO -->
-<section class="rd-sec" style="background:var(--paper);">
+<!-- HOW DOES IT WORK -->
+<section class="rd-sec" id="pm-how" style="background:var(--sunken);">
+  <style>
+    #pm-how ol{list-style:none;margin:clamp(28px,4vw,48px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(24px,3vw,44px);}
+    #pm-how li{border-top:1px solid rgba(17,34,45,.18);padding:20px 0 30px;}
+    #pm-how .k{font:600 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--slate);}
+    #pm-how h3{font-family:var(--display);font-weight:500;color:var(--navy);font-size:clamp(19px,1.6vw,22px);margin:10px 0 8px;}
+    #pm-how p{font:15px/1.7 var(--sans);color:var(--ink);margin:0;}
+    @media(max-width:900px){#pm-how ol{grid-template-columns:1fr;}}
+  </style>
   <div class="rd-wrap">
-    <hr class="rd-hair">
-    <div style="max-width:900px; padding-top:clamp(28px,4vw,48px);">
-      
-      <h2 data-cms="propmgmt.intro.title" data-cms-attr="html" class="rd-statement reveal" style="font-size:clamp(30px,4.4vw,58px); margin:0; max-width:18ch;">We treat your property as a true investment asset.</h2>
-      <p data-cms="propmgmt.intro.body" data-cms-attr="html" class="rd-body reveal" style="margin-top:26px;">We manage the daily operations of your apartment already listed on rental platforms - ensuring professional management and consistent euro-denominated income with complete peace of mind.</p>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="rd-sec rd-sec--navy">
-  <div class="rd-wrap">
-    
-    <h2 data-cms="propmgmt.howitworks.title" class="rd-statement reveal" style="font-size:clamp(30px,4vw,54px); color:#fff; margin:0 0 clamp(32px,4vw,56px); max-width:18ch;">How it works</h2>
-    <ul class="rd-funcs">
-      <li class="reveal"><span class="fi">01</span><span><span class="ft" data-cms="propmgmt.howitworks.0.title">Property integration</span><span class="fd" data-cms="propmgmt.howitworks.0.body" data-cms-attr="html">We connect your apartment to our operational systems, integrating it with the rental platforms you already use.</span></span></li>
-      <li class="reveal"><span class="fi">02</span><span><span class="ft" data-cms="propmgmt.howitworks.1.title">Day-to-day tenant management</span><span class="fd" data-cms="propmgmt.howitworks.1.body" data-cms-attr="html">We handle all tenant relations: communication, check-ins, check-outs, and issue resolution.</span></span></li>
-      <li class="reveal"><span class="fi">03</span><span><span class="ft" data-cms="propmgmt.howitworks.2.title">Maintenance &amp; asset care</span><span class="fd" data-cms="propmgmt.howitworks.2.body" data-cms-attr="html">We coordinate cleaning and maintenance teams, perform regular inspections, and monitor the overall condition of your property.</span></span></li>
-      <li class="reveal"><span class="fi">04</span><span><span class="ft" data-cms="propmgmt.howitworks.3.title">Financial control &amp; reporting</span><span class="fd" data-cms="propmgmt.howitworks.3.body" data-cms-attr="html">We manage payments and recurring expenses and send you clear monthly reports - track performance from anywhere.</span></span></li>
-    </ul>
+    <p class="rd-label reveal" data-cms="pm.how.label">The process</p>
+    <h2 class="rd-statement reveal" style="font-size:clamp(30px,4vw,54px);margin:14px 0 0;max-width:20ch;" data-cms="pm.how.title">How does it work?</h2>
+    <ol>
+      <li class="reveal"><span class="k" data-cms="pm.how.0.k">Step one</span><h3 data-cms="pm.how.0.t">Consultation and assessment</h3><p data-cms="pm.how.0.d">We visit the property, review its condition, licensing and running costs, and give you a realistic view of what it can earn, short-term or long-term.</p></li>
+      <li class="reveal"><span class="k" data-cms="pm.how.1.k">Step two</span><h3 data-cms="pm.how.1.t">Set-up and compliance</h3><p data-cms="pm.how.1.d">Furnishing and styling where needed, professional photography, the local accommodation licence and insurance, and integration with our operating systems.</p></li>
+      <li class="reveal"><span class="k" data-cms="pm.how.2.k">Step three</span><h3 data-cms="pm.how.2.t">Pricing and distribution</h3><p data-cms="pm.how.2.d">Listings on Airbnb, Booking.com and our own channel, with prices adjusted to season and demand to balance occupancy and rate.</p></li>
+      <li class="reveal"><span class="k" data-cms="pm.how.3.k">Step four</span><h3 data-cms="pm.how.3.t">Guests and tenants</h3><p data-cms="pm.how.3.d">Every message, check-in and check-out handled by our team, with support throughout the stay and issues resolved on the ground.</p></li>
+      <li class="reveal"><span class="k" data-cms="pm.how.4.k">Step five</span><h3 data-cms="pm.how.4.t">Housekeeping and asset care</h3><p data-cms="pm.how.4.d">Cleaning and laundry, regular inspections, repairs and maintenance, utilities and condominium matters, so the property keeps its standard and its value.</p></li>
+      <li class="reveal"><span class="k" data-cms="pm.how.5.k">Step six</span><h3 data-cms="pm.how.5.t">Payments and reporting</h3><p data-cms="pm.how.5.d">We collect income, pay recurring expenses and send you a clear monthly statement, with a net-of-cost review of performance every quarter.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -222,10 +255,12 @@
       <p class="rd-body reveal" style="margin:26px 0 0; max-width:62ch;" data-cms="propmgmt.asset.intro" data-cms-attr="html">Beyond day-to-day lettings, our Asset Management service is a comprehensive solution designed to protect your investment, keep it fully compliant, and maximise its long-term value - so ownership stays hands-off wherever you are.</p>
     </div>
     <style>
-    .am-grid .rd-card{transition:transform .45s var(--ease-expo), box-shadow .45s ease, border-color .45s ease;}
-    .am-grid .rd-card:hover{transform:translateY(-5px);}
-    .am-ico{display:inline-flex;width:42px;height:42px;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:2px;color:#11222D;margin:0 0 18px;transition:color .35s ease,border-color .35s ease,background .35s ease;}
-    .am-grid .rd-card:hover .am-ico{border-color:var(--gold);background:rgba(214,194,154,.14);}
+    .am-grid{gap:0 clamp(24px,3vw,44px) !important;border-top:1px solid var(--navy);}
+    .am-grid .rd-card{background:transparent !important;border:0 !important;border-bottom:1px solid var(--line) !important;border-radius:0 !important;box-shadow:none !important;padding:22px 0 24px !important;transition:none;}
+    .am-grid .rd-card h3{font-size:19px !important;}
+    .am-grid .rd-card:hover{transform:none;}
+    .am-ico{display:inline-flex;width:auto;height:24px;align-items:center;color:#11222D;margin:0 0 14px;border:0;}
+    .am-grid .rd-card:hover .am-ico{color:var(--slate);}
     .am-ico svg{height:20px;width:auto;max-width:26px;display:block;}
     @media (prefers-reduced-motion: reduce){.am-grid .rd-card,.am-ico{transition:none;} .am-grid .rd-card:hover{transform:none;}}
     </style>
@@ -369,19 +404,20 @@
 		c-11.6934,0-21.167,9.4737-21.167,21.168c0,11.6938,9.4736,21.1675,21.167,21.1675h120.5566L68.6533,583.6944L98.5625,613.6494z"/>
 </g></svg></span><h3 data-cms="propmgmt.asset.7.title">Investment enhancement strategy</h3><p data-cms="propmgmt.asset.7.body" data-cms-attr="html">Tailored recommendations on upgrades, furnishings, energy efficiency and market positioning - to lift resale value and occupancy, reduce maintenance costs and protect ROI.</p></div>
     </div>
-    <div class="reveal" style="margin-top:clamp(30px,4vw,48px);">
-      <a class="rd-cta reveal" href="contact.html" data-cms="propmgmt.asset.cta_url"><span data-cms="propmgmt.asset.cta_label">Discuss your property</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
   </div>
 </section>
 
-<!-- WHY SMITH & ADAMS -->
-<section class="rd-sec rd-sec--navy">
-  <div class="rd-wrap" style="max-width:920px;">
-    
-    <h2 data-cms="propmgmt.why.title" data-cms-attr="html" class="rd-statement reveal" style="font-size:clamp(30px,4vw,54px); color:#fff; margin:0 0 24px; max-width:20ch;">Experience, local team, and a proven track record.</h2>
-    <p data-cms="propmgmt.why.body" data-cms-attr="html" class="rd-body reveal" style="margin:0 0 34px; max-width:60ch;">We combine investment advisory, asset management, and hands-on local operations, offering a complete solution for owners seeking secure, hassle-free euro-denominated income.</p>
-    <a data-cms="propmgmt.why.cta_url" class="rd-cta reveal" href="contact.html"><span data-cms="propmgmt.why.cta_label">Contact Us Today</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<!-- CTA band: discuss your property -->
+<section style="background:var(--paper);padding:0 var(--mx) clamp(48px,6vw,80px);">
+  <div style="max-width:1360px;margin:0 auto;background:var(--navy);padding:clamp(28px,4vw,44px);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+    <div style="max-width:60ch;">
+      <h2 class="rd-statement" style="color:#fff;font-size:clamp(22px,2.4vw,32px);margin:0;" data-cms="pm.band.title">Discuss your property with an expert.</h2>
+      <p class="rd-body" style="color:var(--stone);margin:10px 0 0;" data-cms="pm.band.body">Tell us where it is and how it is used today. We will come back with what it could earn and what managing it would involve.</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a class="rd-cta" href="contact.html"><span data-cms="pm.band.cta">Speak with an expert</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="rd-cta rd-cta--ghost" href="/assets/sa-property-management-brochure.pdf" download><span data-cms="pm.hero.brochure">Download the brochure</span></a>
+    </div>
   </div>
 </section>
 
@@ -392,6 +428,7 @@
       
       <h2 id="boom-title" class="serif" style="font-size:clamp(30px,4vw,54px); font-weight:500; color:var(--navy); letter-spacing:-0.01em; line-height:1.05; margin:0;">Book your stay</h2>
       <p id="boom-subtitle" class="satoshi" style="font-size:15px; color:var(--slate); max-width:520px; line-height:1.6; margin:16px auto 0;">Choose your dates and let us host your stay in one of our managed apartments in Lisbon.</p>
+      <p class="satoshi" style="font-size:13px;color:var(--slate);margin:10px auto 0;" data-cms="pm.book.platforms">Also available on Airbnb and Booking.com.</p>
     </div>
 
     <form id="boom-search-form" class="satoshi" style="max-width:1100px; margin:0 auto; background:#ffffff; border:1px solid var(--line); border-radius:4px; padding:clamp(16px,2.5vw,28px); box-shadow:0 12px 32px rgba(17,34,45,0.05); display:grid; grid-template-columns:1.2fr 1.2fr 1fr 1fr auto; gap:clamp(8px,1.5vw,16px); align-items:end;">
@@ -460,9 +497,9 @@
     // i18n estática (não passa pelo CMS)
     const I18N = {
       en: { title: 'Book your stay', subtitle: 'Choose your dates and let us host your stay in one of our managed apartments in Lisbon.', checkin: 'Check-in', checkout: 'Check-out', adults: 'Adults', children: 'Children', search: 'Search →', hint: 'Opens results in a new tab.' },
-      pt: { title: 'Reserve sua estadia', subtitle: 'Escolha as datas e deixe-nos hospedar você em um dos nossos apartamentos geridos em Lisboa.', checkin: 'Check-in', checkout: 'Check-out', adults: 'Adultos', children: 'Crianças', search: 'Pesquisar →', hint: 'Abre os resultados em nova aba.' }
+      pt: { title: 'Reserve a sua estadia', subtitle: 'Escolha as datas e fique num dos apartamentos que gerimos em Lisboa.', checkin: 'Check-in', checkout: 'Check-out', adults: 'Adultos', children: 'Crianças', search: 'Pesquisar →', hint: 'Abre os resultados num novo separador.' }
     };
-    const locale = (localStorage.getItem('cmsLocale') || 'en').toLowerCase();
+    const locale = /^\/pt(\/|$)/.test(location.pathname) ? 'pt' : (localStorage.getItem('cmsLocale') || 'en').toLowerCase();
     const t = I18N[locale] || I18N.en;
 
     document.getElementById('boom-title').textContent    = t.title;
@@ -615,11 +652,11 @@ function switchImg(el, src) {
 <section class="rd-sec rd-sec--navy">
   <div class="rd-wrap" style="display:flex; align-items:center; justify-content:space-between; gap:clamp(24px,5vw,64px); flex-wrap:wrap;">
     <div style="flex:1; min-width:280px;">
-      <h2 data-cms="propmgmt.preportfolio.title" data-cms-attr="html" class="rd-statement reveal" style="font-size:clamp(26px,3.4vw,44px); color:#fff; margin:0 0 20px; max-width:20ch;">Would you like your property in Portugal to be fully managed by Smith &amp; Adams?</h2>
-      <p data-cms="propmgmt.preportfolio.body" data-cms-attr="html" class="rd-body reveal" style="margin:0; max-width:52ch;">Talk to our team and discover how we can take over the management of your apartment or integrate your assets into the Smith &amp; Adams Group's investment strategy.</p>
+      <h2 data-cms="propmgmt.preportfolio.title" data-cms-attr="html" class="rd-statement reveal" style="font-size:clamp(26px,3.4vw,44px); color:#fff; margin:0 0 20px; max-width:20ch;">Do you need your property fully managed in Portugal?</h2>
+      <p data-cms="propmgmt.preportfolio.body" data-cms-attr="html" class="rd-body reveal" style="margin:0; max-width:52ch;">Reach out today and speak with an expert about taking over the management of your property, or about adding it to a wider investment strategy.</p>
     </div>
     <div style="flex-shrink:0;">
-      <a data-cms="propmgmt.preportfolio.cta_url" class="rd-cta reveal" href="contact.html"><span data-cms="propmgmt.preportfolio.cta_label">Talk to our team</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a data-cms="propmgmt.preportfolio.cta_url" class="rd-cta reveal" href="contact.html"><span data-cms="propmgmt.preportfolio.cta_label">Speak with an expert</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 </section>
