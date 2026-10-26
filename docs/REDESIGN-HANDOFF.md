@@ -794,3 +794,4 @@ chave sem NOME=); recomendado rodar.
 - /blog (News): barra de newsletter por baixo do hero.
 - PENDENTE do Abilio: links Airbnb/Booking/Trustpilot/Google (reviews + Place ID); filtros de bairro no "Book
   your stay" dependem de a Boom aceitar um parametro de localizacao (por confirmar).
+- (2026-10-26) Telefones: MOVEL +351 938 227 348 e o principal, FIXO +351 214 086 709 secundario, em todo o lado (rodapes, contacto, JSON-LD=movel, LPs=movel, termos/privacidade CMS, chat, guia PDF, ficha PDF, brochuras). Mesmo criterio no Google Business.

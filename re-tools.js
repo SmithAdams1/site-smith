@@ -278,7 +278,7 @@
     var doc = document.createElement('div');
     doc.className = 'rt-doc';
     doc.innerHTML =
-      '<div class="rt-dh"><img src="/logo.png" alt="Smith &amp; Adams"><span>+351 214 086 709 &middot; geral@smithandadams.com<br>www.smithandadams.com/property/' + esc(p.slug) + '</span></div>' +
+      '<div class="rt-dh"><img src="/logo.png" alt="Smith &amp; Adams"><span>+351 938 227 348 / +351 214 086 709 &middot; geral@smithandadams.com<br>www.smithandadams.com/property/' + esc(p.slug) + '</span></div>' +
       '<div class="rt-dt"><div><p>' + esc([p.city, p.region].filter(Boolean).join(', ')) + '</p><h1>' + esc(pick(p.title)) + '</h1></div><b>' + esc(price) + '</b></div>' +
       (imgs.length ? '<div class="rt-dimg"' + (imgs.length < 3 ? ' style="grid-template-columns:1fr;grid-template-rows:minmax(0,1fr)"' : '') + '>' + imgs.map(function (u) { return '<img src="' + esc(u) + '" alt="">'; }).join('') + '</div>' : '') +
       (spec.length ? '<dl class="rt-dspec">' + spec.map(function (x) { return '<div><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>'; }).join('') + '</dl>' : '') +

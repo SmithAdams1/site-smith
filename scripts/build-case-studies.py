@@ -195,7 +195,7 @@ def page(c, head, tail):
                         <div class="cs-svcs"><p class="rd-label">Services involved</p><ul>{svcs}</ul></div>
                     </aside>
                 </div>
-                <p class="cs-print-foot">Smith &amp; Adams &middot; +351 214 086 709 &middot; geral@smithandadams.com &middot; www.smithandadams.com/case-studies/{c["slug"]}</p>
+                <p class="cs-print-foot">Smith &amp; Adams &middot; +351 938 227 348 / +351 214 086 709 &middot; geral@smithandadams.com &middot; www.smithandadams.com/case-studies/{c["slug"]}</p>
                 <div class="cs-more">
                     <p class="rd-label">More case studies</p>
                     <ul>{others}</ul>
