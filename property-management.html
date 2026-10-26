@@ -119,20 +119,20 @@
     #pm-stats .pm-source{margin-top:clamp(22px,3vw,32px);font-size:12.5px;color:var(--stone);}
   </style>
   <div class="rd-wrap">
-    <p class="rd-label reveal" style="color:var(--stone);">Performance</p>
-    <h2 class="rd-statement reveal pm-head" style="font-size:clamp(28px,4vw,52px);color:#fff;margin:14px 0 0;">A track record you can measure.</h2>
-    <p class="rd-body reveal pm-head" style="margin-top:20px;color:var(--stone);">We run the whole rental operation in-house. Across our managed portfolio, occupancy stays high and guests rate the experience highest where it counts day to day.</p>
+    <p class="rd-label reveal" style="color:var(--stone);" data-cms="pm.stats.label">Performance</p>
+    <h2 class="rd-statement reveal pm-head" style="font-size:clamp(28px,4vw,52px);color:#fff;margin:14px 0 0;" data-cms="pm.stats.title">A track record you can measure.</h2>
+    <p class="rd-body reveal pm-head" style="margin-top:20px;color:var(--stone);" data-cms="pm.stats.body">We run the whole rental operation in-house. Across our managed portfolio, occupancy stays high and guests rate the experience highest where it counts day to day.</p>
 
     <div class="pm-chips reveal">
-      <div class="pm-chip"><span class="pm-chip__n">300+</span><span class="pm-chip__l">Homes under management</span></div>
-      <div class="pm-chip"><span class="pm-chip__n">~90<span class="pm-chip__u">%</span></span><span class="pm-chip__l">Average occupancy across active homes</span></div>
-      <div class="pm-chip"><span class="pm-chip__n">4.7<span class="pm-chip__u">/5</span></span><span class="pm-chip__l">Guest rating for communication</span></div>
+      <div class="pm-chip"><span class="pm-chip__n">300+</span><span class="pm-chip__l" data-cms="pm.stats.c0">Homes under management</span></div>
+      <div class="pm-chip"><span class="pm-chip__n">~90<span class="pm-chip__u">%</span></span><span class="pm-chip__l" data-cms="pm.stats.c1">Average occupancy across active homes</span></div>
+      <div class="pm-chip"><span class="pm-chip__n">4.7<span class="pm-chip__u">/5</span></span><span class="pm-chip__l" data-cms="pm.stats.c2">Guest rating for communication</span></div>
     </div>
 
     <div class="pm-grid">
       <div class="pm-card reveal">
-        <h3 class="pm-card__t">Occupancy</h3>
-        <p class="pm-card__s">Average across active managed homes</p>
+        <h3 class="pm-card__t" data-cms="pm.stats.occ">Occupancy</h3>
+        <p class="pm-card__s" data-cms="pm.stats.occ_s">Average across active managed homes</p>
         <div class="pm-gauge">
           <svg viewBox="0 0 200 200" role="img" aria-label="Average occupancy about 90 percent">
             <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="20"/>
@@ -151,8 +151,8 @@
       </div>
 
       <div class="pm-card reveal">
-        <h3 class="pm-card__t">Where guests rate us highest</h3>
-        <p class="pm-card__s">Guest review scores, out of 5, across our managed homes</p>
+        <h3 class="pm-card__t" data-cms="pm.stats.rate">Where guests rate us highest</h3>
+        <p class="pm-card__s" data-cms="pm.stats.rate_s">Guest review scores, out of 5, across our managed homes</p>
         <p class="pm-group__l">Experience</p>
         <div class="pm-bar">
           <div class="pm-bar__top"><span class="pm-bar__name">Communication</span><span class="pm-bar__val">4.7<span>/5</span></span></div>
@@ -175,7 +175,7 @@
     </div>
 
     <p class="pm-plat reveal" data-cms="pm.stats.platforms" data-cms-attr="html">Our homes are listed and reviewed on <b>Airbnb</b>, <b>Booking.com</b> and our own booking channel.</p>
-    <p class="pm-source reveal">Live figures from our property-management operations across the managed portfolio.</p>
+    <p class="pm-source reveal" data-cms="pm.stats.src">Live figures from our property-management operations across the managed portfolio.</p>
   </div>
   <script>
     (function(){
