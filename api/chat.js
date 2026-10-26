@@ -17,7 +17,7 @@ Escalate to a human specialist when needed.
 COMPANY INFORMATION
 Company: Smith & Adams
 Address: Av. José Malhoa 14, 1070-073 Lisboa, Portugal
-Phone: +351 938 227 348
+Phone: +351 214 086 709
 Email: geral@smithandadams.com
 Investors advised: 1,000+
 Assets advised: €300M+

@@ -691,7 +691,9 @@
     '/blog.html': 'Blog',
     '/contact.html': 'Contactos',
     '/terms.html': 'Termos e Condições',
-    '/privacy.html': 'Política de Privacidade'
+    '/privacy.html': 'Política de Privacidade',
+    '/terms': 'Termos e Condições',
+    '/privacy': 'Política de Privacidade'
   };
   var HEAD_PT = { 'Menu': 'Menu', 'Contacts': 'Contactos', 'Legal': 'Legal' };
   function normHref(h) {
@@ -701,6 +703,13 @@
   }
   function localizeNav() {
     if (getLocale() !== 'pt') return;
+    document.querySelectorAll('.sa-footer-legal p').forEach(function (p) {
+      for (var n = p.firstChild; n; n = n.nextSibling) {
+        if (n.nodeType === 3 && n.nodeValue.indexOf('All Rights Reserved') !== -1) {
+          n.nodeValue = n.nodeValue.replace('All Rights Reserved', 'Todos os direitos reservados');
+        }
+      }
+    });
     document.querySelectorAll('header a[href], #mobile-menu a[href], footer a[href]').forEach(function (a) {
       var pt = NAV_PT[normHref(a.getAttribute('href'))];
       if (pt && a.childElementCount === 0) a.textContent = pt;

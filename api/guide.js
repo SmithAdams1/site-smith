@@ -182,7 +182,7 @@ function guideEmailHtml(name, guideUrl, base, pt) {
         <a href="${base}/contact.html" style="font-family:${sans};color:${navy};font-weight:600;font-size:14px;text-decoration:underline;">${t.talkCta} →</a>
       </td></tr>
       <tr><td style="background:${navy};padding:22px 32px;">
-        <div style="font-family:${sans};color:rgba(255,255,255,.85);font-size:13px;">geral@smithandadams.com&nbsp;&nbsp;·&nbsp;&nbsp;+351 938 227 348&nbsp;&nbsp;·&nbsp;&nbsp;smithandadams.com</div>
+        <div style="font-family:${sans};color:rgba(255,255,255,.85);font-size:13px;">geral@smithandadams.com&nbsp;&nbsp;·&nbsp;&nbsp;+351 214 086 709&nbsp;&nbsp;·&nbsp;&nbsp;smithandadams.com</div>
         <div style="font-family:${sans};color:rgba(255,255,255,.45);font-size:11px;margin-top:10px;">${t.foot}</div>
       </td></tr>
     </table>
