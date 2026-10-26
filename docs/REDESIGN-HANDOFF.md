@@ -716,3 +716,21 @@ chave sem NOME=); recomendado rodar.
   Newsletter no footer de todas as paginas -> /api/contact source=newsletter -> CRM /api/v1/newsletter
   (etiqueta newsletter, sem agente/pipeline/notificacoes; testado ponta a ponta em producao e registo de teste apagado).
   Assets redesign em g29. FALTA F1: gaps (vai nas variacoes de design). FAQs por pagina ficam na F4.
+
+## Sessao 2026-10-26 (conta: abilio.diz / Claude Code) - F2 inicio (commit 3732fe9)
+- /home-v2 (noindex, fora do sitemap, sem links): homepage nova com 3 variacoes (?variant=a|b|c + seletor
+  flutuante; CSS isolado em home-v2.css, JS em home-v2.js; data-variant posto no <head> antes do paint).
+  A = colunas com filetes; B = indice em linhas + timeline horizontal + case grande; C = 2x2 em tom quente,
+  passos+jornada em navy (gold so em navy), cases em retrato.
+  Seccoes: hero "Property investment made easy", stats (4, inclui 100% residencia), Who we are + 4 servicos
+  (icones de linha proprios, inline SVG), brand bar a deslizar, How we can help (3 passos), client journey (8 fases,
+  sem numeros grandes), case studies (S. Juliao 12 un.+restaurante, Anjos 40, Hygge House Picoas 9 un., Hygge Kaffe).
+  Saiu "An authority on the whole..." e o pin 01-06.
+- assets/brands/: SA lockups em Cinzel convertidos em contornos (SVG paths, gerados por fontTools; Cinzel e a fonte
+  do logo SA) + hygge-kaffe.png + hygge-residences.png (wordmark HYGGE original + RESIDENCES em Geoform Medium).
+- case-studies/<slug>.html: geradas por scripts/build-case-studies.py (dados no topo do script; correr apos editar).
+  "Download PDF" = window.print() com @media print (A4, sem nav/footer/widgets, rodape com contactos). noindex ate
+  haver numeros confirmados.
+- A CONFIRMAR: S. Juliao tinha 19 unidades no site, a reuniao diz 12 + restaurante (a v2 usa 12).
+  Picoas sem ocupacao; Kaffe 23% margem/3 locais/2022 vem da reuniao.
+- PROXIMO: Abilio + Matilde escolhem variacao -> promover para / (tirar seletor, PT via CMS), About, brochura PDF.
