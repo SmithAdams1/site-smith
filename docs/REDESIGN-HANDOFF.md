@@ -734,3 +734,11 @@ chave sem NOME=); recomendado rodar.
 - A CONFIRMAR: S. Juliao tinha 19 unidades no site, a reuniao diz 12 + restaurante (a v2 usa 12).
   Picoas sem ocupacao; Kaffe 23% margem/3 locais/2022 vem da reuniao.
 - PROXIMO: Abilio + Matilde escolhem variacao -> promover para / (tirar seletor, PT via CMS), About, brochura PDF.
+
+## Sessao 2026-10-26 (conta: abilio.diz / Claude Code) - Homepage = variante C
+- Abilio + Matilde escolheram a C. scripts/promote-home-v2.py (one-off) gerou:
+  index.html novo (head/nav/footer intactos; seccoes v2; testemunhos/noticias/fecho mantidos),
+  home.css (partilhado + C, sem prefixo data-variant), home.js (so carrossel), home-v1.html (home antiga, noindex).
+- Todos os textos da home tem data-cms "home.*" (73 chaves, EN+PT em site_content): /pt agora sai em PT
+  (antes so menu/rodape estavam em PT). Editavel no backoffice. Num <a> o data-cms vai num <span> (no <a> reescreve href).
+- /home-v2 (3 variantes) fica como estava, para reunioes.

@@ -111,6 +111,7 @@
      Type: Playfair Display (statements) + Helvetica Neue (working text)
 ════════════════════════════════════════════════════════════════ -->
 <link rel="stylesheet" href="/redesign.css?v=g29" />
+<link rel="stylesheet" href="/home.css?v=1" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#11222d"/><script defer src="/consent.js"></script><script defer src="/sa-events.js?v=4"></script><script defer src="/_vercel/speed-insights/script.js"></script><link rel="preload" as="image" href="/assets/hero-home.webp" type="image/webp" fetchpriority="high"/></head>
 
 <body class="antialiased bg-[#FDFCF9] __variable_f367f3 __variable_646807 overflow-x-hidden w-full rd rd-dark-hero">
@@ -155,287 +156,193 @@
             </div>
         </header>
         <!-- ══════════════════ HERO · scroll-scrubbed flythrough ══════════════════ -->
+        <!-- ══════════════════ HERO ══════════════════ -->
         <section class="rd-hero" id="hero">
             <div class="rd-hero__media"><picture><source srcset="/assets/hero-home.webp" type="image/webp"><img src="/assets/hero-home.jpg" alt="Smith &amp; Adams, Lisbon" loading="eager" fetchpriority="high" decoding="async"></picture></div>
             <div class="rd-hero__scrim"></div>
             <div class="rd-wrap rd-hero__inner">
-                <h1>The whole asset, held to one standard.</h1>
-                <p class="rd-hero__sub">Independent real estate investment and residency advisory in Portugal.</p>
+                <h1 data-cms="home.hero.title">Property investment made easy.</h1>
+                <p class="rd-hero__sub" data-cms="home.hero.sub">An independent real estate group providing end-to-end solutions for foreign investors in Portugal.</p>
                 <div class="rd-hero__row">
-                    <a class="rd-cta" href="invest-in-portugal.html">Explore how we invest <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-                    <a class="rd-cta rd-cta--ghost" href="#proof">See the numbers</a>
+                    <a class="rd-cta" href="#help"><span data-cms="home.help.label">How we can help</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                    <a class="rd-cta rd-cta--ghost" href="contact.html"><span data-cms="home.cta.expert">Speak with an expert</span></a>
                 </div>
             </div>
         </section>
 
-        <!-- ══════════════════ PROOF ══════════════════ -->
-        <section class="rd-sec rd-sec--navy" id="proof">
+        <!-- ══════════════════ STATS ══════════════════ -->
+        <section class="rd-sec rd-sec--navy hv-stats" id="proof">
             <div class="rd-wrap">
-                <div class="reveal" style="max-width:820px;">
-                    <p class="rd-label" style="margin-bottom:20px;">Track record</p>
-                    <p class="rd-statement" style="font-size:clamp(26px,3.4vw,50px);">We publish trustworthy, net-of-cost performance on Portuguese property.</p>
-                </div>
-                <div class="rd-proof" style="margin-top:clamp(44px,6vw,80px);">
-                    <div class="reveal"><div class="n" data-count="1000" data-suffix="+">1,000+</div><div class="l">Investors advised</div></div>
-                    <div class="reveal"><div class="n">&euro;300M+</div><div class="l">In advised investment value</div></div>
-                    <div class="reveal"><div class="n" data-count="300" data-suffix="+">300+</div><div class="l">Assets under management</div></div>
+                <p class="rd-label reveal" style="margin-bottom:18px;" data-cms="home.stats.label">Track record</p>
+                <h2 class="rd-statement reveal hv-stats__h" data-cms="home.stats.title">Let the numbers speak for themselves.</h2>
+                <div class="rd-proof hv-proof">
+                    <div class="reveal"><div class="n" data-count="1000" data-suffix="+">1,000+</div><div class="l" data-cms="home.stats.l1">Investors advised</div></div>
+                    <div class="reveal"><div class="n">&euro;300M+</div><div class="l" data-cms="home.stats.l2">In advised investment value</div></div>
+                    <div class="reveal"><div class="n" data-count="300" data-suffix="+">300+</div><div class="l" data-cms="home.stats.l3">Assets under management</div></div>
+                    <div class="reveal"><div class="n">100%</div><div class="l" data-cms="home.stats.l4">Residency applications approved</div></div>
                 </div>
             </div>
         </section>
 
-        <!-- ══════════════════ POSITIONING + PILLARS ══════════════════ -->
-        <style id="rd-authority-css">
-        .rd-authority{position:relative}
-        .rd-authority__copy{position:relative; z-index:2; max-width:min(60ch,56%)}
-        .rd-authority__media{position:absolute; inset:0 0 0 auto; width:min(46%,560px);
-            margin:0; z-index:1; pointer-events:none;}
-        .rd-authority__media img{width:100%; height:100%; object-fit:cover;
-            object-position:50% 50%; display:block; border-radius:2px;
-            -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.32) 24%,#000 66%);
-                    mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.32) 24%,#000 66%);}
-        @media (max-width:860px){
-            .rd-authority__copy{max-width:none}
-            .rd-authority__media{position:static; width:100%; height:220px; margin-top:30px}
-            .rd-authority__media img{object-position:50% 50%;
-                -webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 100%);
-                        mask-image:linear-gradient(180deg,#000 62%,transparent 100%);}
-        }
-        </style>
-
-        <!-- ══════════════════ TWO WAYS IN ══════════════════ -->
-        <section class="rd-sec" style="background:var(--paper);">
+        <!-- ══════════════════ WHO WE ARE ══════════════════ -->
+        <section class="hv-sec hv-who" id="who">
             <div class="rd-wrap">
-                <div style="max-width:820px;">
-                    <p class="rd-label reveal">What we do</p>
-                    <h2 class="rd-statement reveal" style="font-size:clamp(28px,4vw,58px);">Two ways in, one advisory core.</h2>
-                    <p class="rd-body reveal" style="margin-top:24px;">Whether you are here for the return or for the residency it can unlock, the same team runs the whole decision, from the first market read to the keys.</p>
+                <div class="hv-head">
+                    <p class="rd-label reveal" data-cms="home.who.label">Who we are</p>
+                    <h2 class="rd-statement reveal" data-cms="home.who.title">Owning property, without the work of owning property.</h2>
+                    <p class="rd-body reveal" data-cms="home.who.body">One group for the whole of a tangible asset: the advice, the purchase, the running and the reporting. Holding an apartment in Lisbon can be as hands-off as holding shares, and the asset stays in your name.</p>
                 </div>
-                <div class="rd-two">
-                    <div class="rd-card reveal">
-                        <h3>Investment Advisory</h3>
-                        <p>For buyers focused on yield and capital growth. We identify, vet and structure property investments across Lisbon, Porto, the Algarve, Cascais and the Silver Coast.</p>
-                        <p>Net returns and risk are laid out clearly before you commit.</p>
-                        <a class="more" href="invest-in-portugal.html">Explore investment advisory
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-                    </div>
-                    <div class="rd-card reveal">
-                        <h3>Residency &amp; Citizenship Advisory</h3>
-                        <p>For buyers where property is the route to residency. We guide Golden Visa and D2 applicants through eligible investments, end to end.</p>
-                        <p>Property selection, legal structuring and the visa process, so one decision does two jobs.</p>
-                        <a class="more" href="golden-visa.html">Explore residency &amp; citizenship
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-                    </div>
+                <div class="hv-svcs">
+                    <a class="hv-svc reveal" href="/invest-in-portugal.html">
+                        <svg class="hv-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5v22M10 27h12"/><path d="M6 10h20"/><path d="M6 10l-3.5 8h7z"/><path d="M26 10l-3.5 8h7z"/><path d="M2.5 18a3.5 2 0 0 0 7 0M22.5 18a3.5 2 0 0 0 7 0"/><circle cx="16" cy="5" r="1.4"/></svg>
+                        <h3 data-cms="home.svc.advisory.title">Investment Advisory</h3>
+                        <p data-cms="home.svc.advisory.body">Independent advice on where and what to buy, including Golden Visa, D2 residency and the route to EU citizenship.</p>
+                        <span class="hv-more"><span data-cms="home.svc.more">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </a>
+                    <a class="hv-svc reveal" href="/real-estate.html">
+                        <svg class="hv-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 28V9.5L16 4l10 5.5V28"/><path d="M3 28h26"/><path d="M10.5 13v4M16 13v4M21.5 13v4M10.5 21v3M21.5 21v3"/><path d="M13.5 28v-6.5a2.5 2.5 0 0 1 5 0V28"/></svg>
+                        <h3 data-cms="home.svc.realestate.title">Real Estate</h3>
+                        <p data-cms="home.svc.realestate.body">Access to every property on the market, not one developer's stock, with relocation and lifestyle support for you and your family.</p>
+                        <span class="hv-more"><span data-cms="home.svc.more">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </a>
+                    <a class="hv-svc reveal" href="/property-management.html">
+                        <svg class="hv-ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="10.5" cy="16" r="6"/><circle cx="10.5" cy="16" r="2"/><path d="M16.5 16H29M25 16v4.5M21 16v3"/></svg>
+                        <h3 data-cms="home.svc.pm.title">Property Management</h3>
+                        <p data-cms="home.svc.pm.body">Short and long-term rentals, asset and condominium management, utilities and upkeep, run to get the most from the asset.</p>
+                        <span class="hv-more"><span data-cms="home.svc.more">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </a>
+                    <a class="hv-svc reveal" href="/hospitality.html">
+                        <svg class="hv-ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22a11 11 0 0 1 22 0"/><path d="M3 22h26"/><path d="M5.5 25.5h21"/><path d="M16 11V8.5M14 8.5h4"/></svg>
+                        <h3 data-cms="home.svc.hosp.title">Hospitality &amp; F&amp;B</h3>
+                        <p data-cms="home.svc.hosp.body">Branded residences and the brands behind them. We own and operate Hygge, from serviced apartments to restaurants.</p>
+                        <span class="hv-more"><span data-cms="home.svc.more">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="rd-sec" style="background:var(--paper);">
+        <!-- ══════════════════ BRAND BAR ══════════════════
+             The logos are images on purpose: SVG <text> inside an <img> drops
+             to a fallback font, so the SA lockups are outlined paths. The set
+             is listed twice so the loop has no seam; the copy is aria-hidden. -->
+        <section class="hv-brands" aria-label="Brands in the Smith &amp; Adams group">
+            <div class="hv-brands__track">
+                <ul class="hv-brands__set">
+                    <li><img src="/assets/brands/hygge-kaffe.png" alt="Hygge Kaffe" width="626" height="209" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/hygge-residences.png" alt="Hygge Residences" width="626" height="209" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-investment-advisory.svg" alt="Smith &amp; Adams Investment Advisory" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-real-estate.svg" alt="Smith &amp; Adams Real Estate" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-property-management.svg" alt="Smith &amp; Adams Property Management" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-food-beverage.svg" alt="Smith &amp; Adams Food &amp; Beverage" loading="lazy" decoding="async"></li>
+                </ul>
+                <ul class="hv-brands__set" aria-hidden="true">
+                    <li><img src="/assets/brands/hygge-kaffe.png" alt="" width="626" height="209" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/hygge-residences.png" alt="" width="626" height="209" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-investment-advisory.svg" alt="" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-real-estate.svg" alt="" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-property-management.svg" alt="" loading="lazy" decoding="async"></li>
+                    <li><img src="/assets/brands/sa-food-beverage.svg" alt="" loading="lazy" decoding="async"></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ══════════════════ HOW WE CAN HELP + JOURNEY ══════════════════ -->
+        <section class="hv-sec hv-help" id="help">
             <div class="rd-wrap">
-                <div class="rd-authority">
-                    <div class="rd-authority__copy">
-                        <h2 class="rd-statement reveal" style="font-size:clamp(30px,4.6vw,68px);">An authority on the whole of the business, not one end of it.</h2>
-                        <p class="rd-body reveal" style="margin-top:28px; max-width:60ch;">We are an owner-operator group with an advisory practice inside it, not a brokerage, a lifestyle brand or a residency shopfront. Restraint is the strategy: quiet type, generous space, and numbers you can verify.</p>
-                    </div>
-                    <figure class="rd-authority__media reveal" aria-hidden="true">
-                        <img src="/urban-collections/aml-authority.jpg" alt="" loading="lazy" decoding="async">
-                    </figure>
+                <div class="hv-head">
+                    <p class="rd-label reveal" data-cms="home.help.label">How we can help</p>
+                    <h2 class="rd-statement reveal" data-cms="home.help.title">Three steps, one team.</h2>
                 </div>
-                <div class="rd-pillars">
-                    <div class="reveal">
-                        
-<svg class="rd-ico" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M10.8 7.1 6.2 16.9M13.2 7.1 17.8 16.9M7.5 19h9"/></svg>
-                        <h3>End to end, by design</h3>
-                        <p>Advice and delivery under one roof, so nothing is lost between what we recommend and what we run.</p>
-                        <p class="pf">Proof: developments delivered, units under management, in-house trades.</p>
+                <ol class="hv-steps">
+                    <li class="reveal"><span class="hv-step__k" data-cms="home.help.k1">Step one</span><h3 data-cms="home.help.t1">Understand your needs</h3><p data-cms="home.help.d1">An initial consultation about what you want the asset to do: income, growth, residency, a home, or all of them.</p></li>
+                    <li class="reveal"><span class="hv-step__k" data-cms="home.help.k2">Step two</span><h3 data-cms="home.help.t2">Find the solution</h3><p data-cms="home.help.d2">Independent advice on the options that fit, with no upfront cost and no obligation to proceed.</p></li>
+                    <li class="reveal"><span class="hv-step__k" data-cms="home.help.k3">Step three</span><h3 data-cms="home.help.t3">Execution</h3><p data-cms="home.help.d3">We carry it through, then run the asset for profit, efficiency and use, and report on it.</p></li>
+                </ol>
+
+                <div class="hv-journey-wrap">
+                    <div class="hv-head hv-head--sub">
+                        <p class="rd-label reveal" data-cms="home.journey.label">A typical client journey</p>
+                        <h2 class="rd-statement reveal" data-cms="home.journey.title">From the first call to the resale, in one place.</h2>
                     </div>
-                    <div class="reveal">
-                        
-<svg class="rd-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.8"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3"/></svg>
-                        <h3>Independent advice</h3>
-                        <p>We are paid to be right about the asset, not to move it. That includes saying no.</p>
-                        <p class="pf">Proof: fee structure, deals declined, written recommendations.</p>
-                    </div>
-                    <div class="reveal">
-                        
-<svg class="rd-ico" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M8 20v-5M12 20v-9M16 20v-6M20 20v-11"/></svg>
-                        <h3>Reported, not promised</h3>
-                        <p>Yield, occupancy, cost and cash flow, quarterly, in the same format every time.</p>
-                        <p class="pf">Proof: the quarterly report, occupancy history, owner references.</p>
-                    </div>
+                    <ol class="hv-journey">
+                        <li class="reveal"><span class="t" data-cms="home.journey.t1">Investment advisory</span><span class="d" data-cms="home.journey.d1">Strategy, budget and location, including Golden Visa or D2 where residency is part of the plan.</span></li>
+                        <li class="reveal"><span class="t" data-cms="home.journey.t2">Due diligence</span><span class="d" data-cms="home.journey.d2">Our investment team and lawyers check the asset, the title and the numbers before you commit.</span></li>
+                        <li class="reveal"><span class="t" data-cms="home.journey.t3">Project management</span><span class="d" data-cms="home.journey.d3">For properties under construction, we follow the works and the developer on your behalf.</span></li>
+                        <li class="reveal"><span class="t" data-cms="home.journey.t4">Handover and snagging</span><span class="d" data-cms="home.journey.d4">Defects listed and closed before the keys change hands.</span></li>
+                        <li class="reveal"><span class="t" data-cms="home.journey.t5">Asset management</span><span class="d" data-cms="home.journey.d5">Furnishing, licensing, condominium, utilities and maintenance.</span></li>
+                        <li class="reveal"><span class="t" data-cms="home.journey.t6">Rental management</span><span class="d" data-cms="home.journey.d6">Short or long-term letting, priced and run for occupancy and yield.</span></li>
+                        <li class="reveal"><span class="t" data-cms="home.journey.t7">Reporting</span><span class="d" data-cms="home.journey.d7">Income, costs and occupancy, in the same format every quarter.</span></li>
+                        <li class="reveal"><span class="t" data-cms="home.journey.t8">Exit and resale</span><span class="d" data-cms="home.journey.d8">When the time comes, we value, market and sell the asset for you.</span></li>
+                    </ol>
                 </div>
             </div>
         </section>
 
-        <!-- ══════════════════ PINNED · SIX FUNCTIONS ══════════════════ -->
-        <section class="rd-pin" id="scope">
-            <div class="rd-pin__stage rd-wrap">
-                <div class="rd-pin__grid">
-                    <div>
-                        
-                        <p class="rd-pin__lead reveal">End to end is not a phrase here. It is six functions, one team, and one standard, from the first call to the keys.</p>
+        <!-- ══════════════════ CASE STUDIES ══════════════════ -->
+        <section class="hv-sec hv-cases" id="cases" aria-roledescription="carousel" aria-label="Case studies">
+            <div class="rd-wrap">
+                <div class="hv-cases__top">
+                    <div class="hv-head">
+                        <p class="rd-label reveal" data-cms="home.cases.label">Case studies</p>
+                        <h2 class="rd-statement reveal" data-cms="home.cases.title">Assets we own, run and report on.</h2>
                     </div>
-                    <ul class="rd-funcs">
-                        <li class="reveal-line"><span class="fi">01</span><span><span class="ft">Advise</span><span class="fd">Independent analysis before a single euro moves.</span></span></li>
-                        <li class="reveal-line"><span class="fi">02</span><span><span class="ft">Acquire</span><span class="fd">Sourcing and due diligence on assets that fit.</span></span></li>
-                        <li class="reveal-line"><span class="fi">03</span><span><span class="ft">Renovate</span><span class="fd">In-house delivery, built to an operator's standard.</span></span></li>
-                        <li class="reveal-line"><span class="fi">04</span><span><span class="ft">Let</span><span class="fd">Occupancy and yield on owned and client stock.</span></span></li>
-                        <li class="reveal-line"><span class="fi">05</span><span><span class="ft">Operate</span><span class="fd">Hands-off management for owners based abroad.</span></span></li>
-                        <li class="reveal-line"><span class="fi">06</span><span><span class="ft">Report</span><span class="fd">Net-of-cost performance, quarterly, unedited.</span></span></li>
-                    </ul>
+                    <div class="hv-cases__btns">
+                        <button class="rd-carousel__btn" type="button" data-dir="-1" aria-label="Previous case study"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+                        <button class="rd-carousel__btn" type="button" data-dir="1" aria-label="Next case study"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- ══════════════════ TRACKED PERFORMANCE ══════════════════
-             One asset per slide, each with the figure and where the figure
-             comes from. Every slide is in the DOM: with JS blocked the track
-             is still a horizontal scroller, so nothing here is hidden from a
-             reader or a crawler. -->
-        <section class="rd-carousel" id="asset" aria-roledescription="carousel" aria-label="Portfolio performance">
-            <div class="rd-track" id="assetTrack" tabindex="0">
-
-                <article class="rd-slide" aria-label="Hygge House S. Julião, 1 of 6">
-                    <div class="rd-slide__media">
-                        <img src="portfolio/s-juliao.webp" alt="Living room of an apartment at Hygge House S. Julião, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
-                    </div>
-                    <div class="rd-slide__scrim"></div>
-                    <div class="rd-wrap rd-slide__plate">
-                        <div class="rd-slide__card">
-
-                            <h3>Hygge House S. Julião</h3>
-                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">Nineteen apartments in Baixa that we specified, delivered and still run. The standard holds after handover, not only at it, and the occupancy is ours to answer for.</p>
-                            <div class="rd-figs">
-                                <div class="f"><div class="n">85.2%</div><div class="l">Occupancy</div></div>
-                                <div class="f"><div class="n">19</div><div class="l">Units</div></div>
-                                <div class="f"><div class="n">2022</div><div class="l">Handover</div></div>
-                            </div>
-                            <p class="rd-slide__src">Occupancy measured from 6 August 2025 to 6 August 2026. Source: Boom, the platform the building is booked through.</p>
+                <div class="hv-cases__track" tabindex="0">
+                    <article class="hv-case">
+                        <a class="hv-case__media" href="/case-studies/hygge-residences-s-juliao" tabindex="-1"><img src="/portfolio/s-juliao.webp" alt="Living room of an apartment at Hygge Residences S. Julião, Lisbon" loading="lazy" decoding="async" width="1440" height="960"></a>
+                        <div class="hv-case__body">
+                            <p class="hv-case__k" data-cms="home.cases.juliao.place">Baixa, Lisbon</p>
+                            <h3>Hygge Residences S. Julião</h3>
+                            <p data-cms="home.cases.juliao.body">Twelve apartments and a restaurant that we specified, delivered and still run.</p>
+                            <dl class="hv-case__figs"><div><dt data-cms="home.cases.units">Units</dt><dd>12</dd></div><div><dt data-cms="home.cases.occupancy">Occupancy</dt><dd>85.2%</dd></div><div><dt data-cms="home.cases.since">Since</dt><dd>2022</dd></div></dl>
+                            <a class="hv-more" href="/case-studies/hygge-residences-s-juliao"><span data-cms="home.cases.read">Read the case study</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                         </div>
-                    </div>
-                </article>
-
-                <article class="rd-slide" aria-label="Anjos 40, 2 of 6">
-                    <div class="rd-slide__media">
-                        <img src="portfolio/anjos-40.webp" alt="Dining room of an apartment at Anjos 40, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
-                    </div>
-                    <div class="rd-slide__scrim"></div>
-                    <div class="rd-wrap rd-slide__plate">
-                        <div class="rd-slide__card">
-
+                    </article>
+                    <article class="hv-case">
+                        <a class="hv-case__media" href="/case-studies/anjos-40" tabindex="-1"><img src="/portfolio/anjos-40.webp" alt="Dining room of an apartment at Anjos 40, Lisbon" loading="lazy" decoding="async" width="1440" height="960"></a>
+                        <div class="hv-case__body">
+                            <p class="hv-case__k" data-cms="home.cases.anjos.place">Anjos, Lisbon</p>
                             <h3>Anjos 40</h3>
-                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">Eight apartments held since 2021. A smaller building costs less to run per unit, and steady occupancy is what makes that arithmetic work: a shorter cost line, and a net figure we publish rather than describe.</p>
-                            <div class="rd-figs">
-                                <div class="f"><div class="n">86.3%</div><div class="l">Occupancy</div></div>
-                                <div class="f"><div class="n">8</div><div class="l">Units</div></div>
-                                <div class="f"><div class="n">2021</div><div class="l">Handover</div></div>
-                            </div>
-                            <p class="rd-slide__src">Occupancy measured from 6 August 2025 to 6 August 2026. Source: Boom, the platform the building is booked through.</p>
+                            <p data-cms="home.cases.anjos.body">Eight apartments held and let since 2021, with a cost line kept short.</p>
+                            <dl class="hv-case__figs"><div><dt data-cms="home.cases.units">Units</dt><dd>8</dd></div><div><dt data-cms="home.cases.occupancy">Occupancy</dt><dd>86.3%</dd></div><div><dt data-cms="home.cases.since">Since</dt><dd>2021</dd></div></dl>
+                            <a class="hv-more" href="/case-studies/anjos-40"><span data-cms="home.cases.read">Read the case study</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                         </div>
-                    </div>
-                </article>
-
-                <article class="rd-slide" aria-label="Yellow Charm, Campolide, 3 of 6">
-                    <div class="rd-slide__media">
-                        <img src="portfolio/campolide-97-3.webp" alt="Living room of a Smith &amp; Adams apartment in Campolide, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
-                    </div>
-                    <div class="rd-slide__scrim"></div>
-                    <div class="rd-wrap rd-slide__plate">
-                        <div class="rd-slide__card">
-
-                            <h3>Yellow Charm, Campolide</h3>
-                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">A central, stylish apartment a short walk from the city's business core. Managed to the same standard as everything else we run, and reported on the same terms.</p>
-                            <div class="rd-figs">
-                                <div class="f"><div class="n">86.8%</div><div class="l">Occupancy</div></div>
-                                <div class="f"><div class="n">1</div><div class="l">Bedroom</div></div>
-                                <div class="f"><div class="n">2023</div><div class="l">Handover</div></div>
-                            </div>
-                            <p class="rd-slide__src">Occupancy measured from 6 August 2025 to 6 August 2026. Source: Boom, the platform the apartment is booked through.</p>
+                    </article>
+                    <article class="hv-case">
+                        <a class="hv-case__media" href="/case-studies/hygge-house-picoas" tabindex="-1"><img src="/portfolio/hygge-house-5.webp" alt="Bedroom at Hygge House Picoas, Lisbon" loading="lazy" decoding="async" width="1440" height="960"></a>
+                        <div class="hv-case__body">
+                            <p class="hv-case__k" data-cms="home.cases.picoas.place">Picoas, Lisbon</p>
+                            <h3>Hygge House Picoas</h3>
+                            <p data-cms="home.cases.picoas.body">Serviced apartments and food and beverage under one brand and one operator.</p>
+                            <dl class="hv-case__figs"><div><dt data-cms="home.cases.units">Units</dt><dd>9</dd></div><div><dt data-cms="home.cases.model">Model</dt><dd>Stay + F&amp;B</dd></div></dl>
+                            <a class="hv-more" href="/case-studies/hygge-house-picoas"><span data-cms="home.cases.read">Read the case study</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                         </div>
-                    </div>
-                </article>
-
-                <article class="rd-slide" aria-label="Hygge House, Saldanha, 4 of 6">
-                    <div class="rd-slide__media">
-                        <img src="portfolio/hygge-house-5.webp" alt="Bedroom of a Smith &amp; Adams apartment near Saldanha, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
-                    </div>
-                    <div class="rd-slide__scrim"></div>
-                    <div class="rd-wrap rd-slide__plate">
-                        <div class="rd-slide__card">
-
-                            <h3>Hygge House, Saldanha</h3>
-                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">Calm and central, off the Avenidas Novas. The kind of steady, year-round residence that makes the net figure hold rather than flatter.</p>
-                            <div class="rd-figs">
-                                <div class="f"><div class="n">85.2%</div><div class="l">Occupancy</div></div>
-                                <div class="f"><div class="n">1</div><div class="l">Bedroom</div></div>
-                                <div class="f"><div class="n">2022</div><div class="l">Handover</div></div>
-                            </div>
-                            <p class="rd-slide__src">Occupancy measured from 6 August 2025 to 6 August 2026. Source: Boom, the platform the apartment is booked through.</p>
+                    </article>
+                    <article class="hv-case">
+                        <a class="hv-case__media" href="/case-studies/hygge-kaffe" tabindex="-1"><img src="/assets/hygge-kaffe-1.jpg" alt="Hygge Kaffe, Lisbon" loading="lazy" decoding="async" width="1000" height="1500"></a>
+                        <div class="hv-case__body">
+                            <p class="hv-case__k" data-cms="home.cases.kaffe.place">Lisbon</p>
+                            <h3>Hygge Kaffe</h3>
+                            <p data-cms="home.cases.kaffe.body">Our own restaurant brand, built and run in-house across three locations.</p>
+                            <dl class="hv-case__figs"><div><dt data-cms="home.cases.locations">Locations</dt><dd>3</dd></div><div><dt data-cms="home.cases.margin">Margin</dt><dd>23%</dd></div><div><dt data-cms="home.cases.since">Since</dt><dd>2022</dd></div></dl>
+                            <a class="hv-more" href="/case-studies/hygge-kaffe"><span data-cms="home.cases.read">Read the case study</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
                         </div>
-                    </div>
-                </article>
-
-                <article class="rd-slide" aria-label="One-bedroom, Anjos, 5 of 6">
-                    <div class="rd-slide__media">
-                        <img src="portfolio/anjos-40-j.webp" alt="Living room of a Smith &amp; Adams apartment at Anjos 40, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
-                    </div>
-                    <div class="rd-slide__scrim"></div>
-                    <div class="rd-wrap rd-slide__plate">
-                        <div class="rd-slide__card">
-
-                            <h3>One-Bedroom, Anjos</h3>
-                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">A prime one-bedroom with a balcony in one of Lisbon's fastest-moving districts. One of the apartments behind the Anjos 40 figure.</p>
-                            <div class="rd-figs">
-                                <div class="f"><div class="n">85.2%</div><div class="l">Occupancy</div></div>
-                                <div class="f"><div class="n">1</div><div class="l">Bedroom</div></div>
-                                <div class="f"><div class="n">2020</div><div class="l">Handover</div></div>
-                            </div>
-                            <p class="rd-slide__src">Occupancy measured from 6 August 2025 to 6 August 2026. Source: Boom, the platform the apartment is booked through.</p>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="rd-slide" aria-label="Sunny two-bedroom, Campolide, 6 of 6">
-                    <div class="rd-slide__media">
-                        <img src="portfolio/campolide-93-4.webp" alt="Living room of a Smith &amp; Adams two-bedroom apartment in Campolide, Lisbon" loading="lazy" decoding="async" width="1440" height="960" />
-                    </div>
-                    <div class="rd-slide__scrim"></div>
-                    <div class="rd-wrap rd-slide__plate">
-                        <div class="rd-slide__card">
-
-                            <h3>Sunny Two-Bedroom, Campolide</h3>
-                            <p class="rd-body" style="color:var(--stone); margin:18px 0 0;">A brighter, larger apartment on the same Campolide street. More space to run, and occupancy that still holds through the year.</p>
-                            <div class="rd-figs">
-                                <div class="f"><div class="n">84.7%</div><div class="l">Occupancy</div></div>
-                                <div class="f"><div class="n">2</div><div class="l">Bedrooms</div></div>
-                                <div class="f"><div class="n">2021</div><div class="l">Handover</div></div>
-                            </div>
-                            <p class="rd-slide__src">Occupancy measured from 6 August 2025 to 6 August 2026. Source: Boom, the platform the apartment is booked through.</p>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-
-            <div class="rd-carousel__bar">
-                <span class="rd-carousel__count"><span id="assetIdx">1</span> / <span id="assetTotal">6</span></span>
-                <div class="rd-carousel__btns">
-                    <button class="rd-carousel__btn" id="assetPrev" type="button" aria-label="Previous property" aria-controls="assetTrack" disabled>
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-                    </button>
-                    <button class="rd-carousel__btn" id="assetNext" type="button" aria-label="Next property" aria-controls="assetTrack">
-                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                    </button>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- ══════════════════ TESTIMONIALS ══════════════════ -->
+                <!-- ══════════════════ TESTIMONIALS ══════════════════ -->
         <section class="rd-sec" style="background:var(--paper);">
             <div class="rd-wrap">
                 <div style="max-width:820px;">
                     
-                    <h2 class="rd-statement reveal" style="font-size:clamp(28px,4vw,58px);">Real stories, real success.</h2>
-                    <p class="rd-body reveal" style="margin-top:24px; max-width:56ch;">International investors we have advised across Portugal, in their words.</p>
+                    <h2 class="rd-statement reveal" style="font-size:clamp(28px,4vw,58px);" data-cms="home.testimonials.title">Real stories, real success.</h2>
+                    <p class="rd-body reveal" style="margin-top:24px; max-width:56ch;" data-cms="home.testimonials.sub">International investors we have advised across Portugal, in their words.</p>
                 </div>
                 <style id="rd-testi-style">
                   .rd-quotes-carousel{ position:relative; margin-top:clamp(40px,5vw,64px); }
@@ -520,10 +427,10 @@
                 <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap;">
                     <div>
                         
-                        <h2 class="rd-statement reveal" style="font-size:clamp(28px,4vw,58px);">Insight, not marketing.</h2>
+                        <h2 class="rd-statement reveal" style="font-size:clamp(28px,4vw,58px);" data-cms="home.news.title">Insight, not marketing.</h2>
                         <p class="rd-body reveal" data-cms="home.news.subtitle" style="margin-top:16px;">Keep up to date with our latest news, market insight and what we are working on.</p>
                     </div>
-                    <a class="rd-cta reveal" href="blog.html" style="background:var(--navy); color:#fff;">All articles
+                    <a class="rd-cta reveal" href="blog.html" style="background:var(--navy); color:#fff;"><span data-cms="home.news.all">All articles</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
                 </div>
@@ -557,10 +464,10 @@
         <section class="rd-sec rd-close" style="background:var(--paper);">
             <div class="rd-wrap">
                 
-                <h2 class="reveal">Objective advice starts with a conversation.</h2>
-                <p class="reveal">No obligation, no pressure to buy anything specific. Just a clear view of what is possible, and whether residency belongs in the plan.</p>
+                <h2 class="reveal" data-cms="home.close.title">Objective advice starts with a conversation.</h2>
+                <p class="reveal" data-cms="home.close.body">No obligation, no pressure to buy anything specific. Just a clear view of what is possible, and whether residency belongs in the plan.</p>
                 <div class="reveal" style="margin-top:40px; display:flex; justify-content:center;">
-                    <a class="rd-cta" href="contact.html" style="background:var(--navy); color:#fff;">Speak with an expert
+                    <a class="rd-cta" href="contact.html" style="background:var(--navy); color:#fff;"><span data-cms="home.cta.expert">Speak with an expert</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
                     </a>
                 </div>
@@ -575,6 +482,7 @@
          blocked or slow third party would leave the page without one, and a
          CDN request exposes every EU visitor's IP before any consent. -->
     <script src="/redesign.js?v=g29"></script>
+    <script src="/home.js?v=1" defer></script>
     <script src="/chat.js"></script>
 <script defer src="/guide-popup.js?v=g27"></script>
 </body>
