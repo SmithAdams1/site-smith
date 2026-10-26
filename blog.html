@@ -110,6 +110,17 @@
   <h1 data-cms="blog.hero.title" class="journal-title">News</h1>
   <p data-cms="blog.hero.subtitle" data-cms-attr="html" class="journal-subtitle">Stay updated with the latest insights on Portugal Golden Visa, prime real estate investment, lifestyle, and market trends.</p>
 </section>
+<!-- Newsletter bar: for readers who want news without an enquiry -->
+<style>
+.nl-bar{background:var(--sunken,#F6F2EA);border-bottom:1px solid var(--line,#E4E1DA);}
+.nl-bar .sa-nl{max-width:1200px;margin:0 auto;padding:18px 24px;border:0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.nl-bar .sa-nl__title{color:var(--navy,#11222D) !important;font-size:15px !important;margin:0 !important;}
+.nl-bar .sa-nl__sub{color:var(--slate,#6A7883) !important;font-size:13.5px !important;margin:2px 0 0 !important;}
+.nl-bar .sa-nl__form input{background:#fff !important;color:var(--navy,#11222D) !important;border:1px solid #d9d5cc !important;}
+.nl-bar .sa-nl__form button{background:var(--navy,#11222D) !important;color:#fff !important;}
+.nl-bar .sa-nl__msg{width:100%;color:var(--slate,#6A7883) !important;margin:0 !important;}
+</style>
+<div class="nl-bar"><div class="sa-nl"><div class="sa-nl__copy"><p class="sa-nl__title" data-cms="global.footer.newsletter_title">Subscribe to our newsletter</p><p class="sa-nl__sub" data-cms="global.footer.newsletter_sub">Market insight and news from Portugal, straight to your inbox.</p></div><form class="sa-nl__form" novalidate><input type="email" name="email" required autocomplete="email" placeholder="Your email address" aria-label="Email address"><button type="submit">Subscribe</button></form><p class="sa-nl__msg" role="status" aria-live="polite"></p></div></div>
 
 <div class="blog-body">
   <div id="blog-loader" class="text-center py-32"><div class="spinner"></div></div>

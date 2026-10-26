@@ -777,3 +777,20 @@ chave sem NOME=); recomendado rodar.
   apos grandes mudancas do feed). Numeros INE (12 meses ate jun 2026, precos pub. 23/10, rendas pub. 29/09)
   verificados nos xlsx e registados em knowledge/invest-in-portugal.md; IMT 2026 em knowledge/taxation.md.
   Comporta = concelhos de Grandola + Alcacer do Sal (com nota). Cartoes de zona em /real-estate abrem estas paginas.
+
+## Sessao 2026-10-26 (conta: abilio.diz / Claude Code) - F4 (notas do George)
+- /lp-invest: hero "Achieve EU residency for your entire family", "For as little as EUR 280,000", "target 7% net
+  yield" (NAO "minimum": 7% e projecao, so o buy-back do capital e garantido - regra de compliance US),
+  100% residency success no topo, "What you get" (6), "How we can help" com 100%. Formulario/tracking intactos.
+- /contact: campos com caixa + telefone com indicativo, mapa a cores, newsletter, consentimento nomeia Smith & Adams
+  (era JustCall), textos PT do CMS passaram de PT-BR a PT-PT, subtitulo sem "garantir Golden Visa".
+- /invest-in-portugal (docs/invest.blocks.json): Why Portugal alargado, Why Lisbon (INE + ULI/PwC ETRE 2026 11.o),
+  "Have you ever considered residency in the EU?" com marcadores pequenos verificados, D2, estilo de vida alargado,
+  13 FAQs, CTA positivo. Factos em knowledge/invest-in-portugal.md.
+- /property-management: estrutura nova (chaves CMS pm.* EN+PT), brochura assets/sa-property-management-brochure.pdf
+  (docs/brochure/pm-brochure.html; scripts/build-brochure.sh pm).
+- /hospitality: seccao "Our operations" com 3 case studies + numeros, S. Juliao = Hygge Residences, restaurantes
+  (nao cafe), CTAs; chaves hosp.* + dev.* atualizadas EN/PT.
+- /blog (News): barra de newsletter por baixo do hero.
+- PENDENTE do Abilio: links Airbnb/Booking/Trustpilot/Google (reviews + Place ID); filtros de bairro no "Book
+  your stay" dependem de a Boom aceitar um parametro de localizacao (por confirmar).

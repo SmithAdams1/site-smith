@@ -101,15 +101,44 @@
   <div class="rd-wrap rd-hero__inner">
     
     <h1 data-cms="dev.hero.title">Hospitality and F&amp;B</h1>
-    <p data-cms="dev.hero.subtitle" data-cms-attr="html" class="rd-hero__sub">A closer look at the properties we've advised on and now manage across Lisbon, including the Hygge House collection.</p>
+    <p data-cms="dev.hero.subtitle" data-cms-attr="html" class="rd-hero__sub">Our operations and what we own: branded residences, serviced apartments and restaurants that we build, brand and run ourselves under the Hygge name.</p>
     <div class="rd-hero__row">
-      <a class="rd-cta" href="#juliao">See the collection <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="rd-cta rd-cta--ghost" href="contact.html">Speak to an adviser</a>
+      <a class="rd-cta" href="#cases"><span data-cms="hosp.hero.cta">See the case studies</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="rd-cta rd-cta--ghost" href="contact.html"><span data-cms="hosp.hero.cta2">Speak with an expert</span></a>
     </div>
   </div>
   <div class="rd-hero__caption">
     <span class="rd-label k">Lisboa &middot; Portugal</span>
     <span class="v">Hygge House collection</span>
+  </div>
+</section>
+
+<!-- ════════ OUR OPERATIONS · case studies ════════ -->
+<section id="cases" style="padding:clamp(56px,7vw,104px) 0;background:var(--paper);border-top:1px solid var(--line);">
+  <style>
+    #cases .hc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,32px);margin-top:clamp(28px,4vw,44px);}
+    #cases .hc{display:flex;flex-direction:column;text-decoration:none;color:inherit;}
+    #cases .hc img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .8s var(--ease-quint);}
+    #cases .hc__m{overflow:hidden;}
+    #cases .hc:hover img{transform:scale(1.03);}
+    #cases .hc__k{font:500 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin:18px 0 0;}
+    #cases .hc h3{font-family:var(--display);font-weight:500;color:var(--navy);font-size:clamp(20px,1.8vw,24px);margin:8px 0 0;}
+    #cases .hc p{font:15px/1.65 var(--sans);color:var(--ink);margin:8px 0 0;}
+    #cases .hc dl{display:flex;gap:24px;margin:16px 0 0;padding-top:14px;border-top:1px solid var(--line);}
+    #cases .hc dt{font:500 10.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--slate);}
+    #cases .hc dd{margin:4px 0 0;font-family:var(--display);font-size:22px;color:var(--navy);}
+    #cases .hc__more{margin-top:16px;font:600 14px var(--sans);color:var(--navy);}
+    @media(max-width:860px){#cases .hc-grid{grid-template-columns:1fr;}}
+  </style>
+  <div class="dev-wrap">
+    <p class="rd-label" data-cms="hosp.cases.label">Our operations</p>
+    <h2 class="dev-serif" style="font-size:clamp(30px,4vw,52px);font-weight:500;color:var(--navy);line-height:1.05;margin:14px 0 0;max-width:22ch;" data-cms="hosp.cases.title">What we own, and how we run it.</h2>
+    <p class="dev-sans" style="font-size:16.5px;line-height:1.75;color:var(--ink);max-width:62ch;margin:18px 0 0;" data-cms="hosp.cases.body">We do not license the Hygge name to others: we develop the buildings, operate the stays and run the restaurants ourselves. Each case study below shows what we did, how it operates and the figures behind it.</p>
+    <div class="hc-grid">
+      <a class="hc" href="/case-studies/hygge-residences-s-juliao"><div class="hc__m"><img src="/portfolio/s-juliao.webp" alt="Hygge Residences S. Julião, Lisbon" loading="lazy"></div><p class="hc__k" data-cms="hosp.cases.0.k">Baixa, Lisbon</p><h3>Hygge Residences S. Julião</h3><p data-cms="hosp.cases.0.d">Twelve apartments and a restaurant that we specified, delivered and still run.</p><dl><div><dt data-cms="hosp.cases.units">Units</dt><dd>12</dd></div><div><dt data-cms="hosp.cases.occ">Occupancy</dt><dd>85.2%</dd></div><div><dt data-cms="hosp.cases.since">Since</dt><dd>2022</dd></div></dl><span class="hc__more" data-cms="hosp.cases.more">Read the case study &rarr;</span></a>
+      <a class="hc" href="/case-studies/hygge-house-picoas"><div class="hc__m"><img src="/portfolio/hygge-house-5.webp" alt="Hygge House Picoas, Lisbon" loading="lazy"></div><p class="hc__k" data-cms="hosp.cases.1.k">Picoas, Lisbon</p><h3>Hygge House Picoas</h3><p data-cms="hosp.cases.1.d">Serviced apartments and food and beverage under one brand and one operator.</p><dl><div><dt data-cms="hosp.cases.units">Units</dt><dd>9</dd></div><div><dt data-cms="hosp.cases.model">Model</dt><dd data-cms="hosp.cases.model_v">Stay + F&amp;B</dd></div></dl><span class="hc__more" data-cms="hosp.cases.more">Read the case study &rarr;</span></a>
+      <a class="hc" href="/case-studies/hygge-kaffe"><div class="hc__m"><img src="/assets/hygge-kaffe-1.jpg" alt="Hygge Kaffe, Lisbon" loading="lazy"></div><p class="hc__k" data-cms="hosp.cases.2.k">Lisbon</p><h3>Hygge Kaffe</h3><p data-cms="hosp.cases.2.d">Our own restaurant brand, built and run in-house across three locations.</p><dl><div><dt data-cms="hosp.cases.loc">Locations</dt><dd>3</dd></div><div><dt data-cms="hosp.cases.margin">Margin</dt><dd>23%</dd></div><div><dt data-cms="hosp.cases.since">Since</dt><dd>2022</dd></div></dl><span class="hc__more" data-cms="hosp.cases.more">Read the case study &rarr;</span></a>
+    </div>
   </div>
 </section>
 
@@ -174,7 +203,7 @@
       <p class="hygge-house__eyebrow">Part of Smith &amp; Adams</p>
       <img class="hygge-house__logo" src="/assets/logos/hygge-house.png?v=2" alt="Hygge House">
       <p class="hygge-house__tag">The first place dedicated to happiness.</p>
-      <p class="hygge-house__body">Hygge House brings the Nordic idea of well-being to Lisbon: happiness, serenity and time with the people we love. From our coffee house to our stays, every space is designed to feel like home, whether you are over a cappuccino, at brunch with friends, or settling in for the evening.</p>
+      <p class="hygge-house__body">Hygge House brings the Nordic idea of well-being to Lisbon: happiness, serenity and time with the people we love. From our restaurants to our stays, every space is designed to feel like home, whether you are over a cappuccino, at brunch with friends, or settling in for the evening.</p>
       <a class="hygge-house__cta" href="https://hyggekaffe.pt" target="_blank" rel="noopener">Visit Hygge Kaffe
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
@@ -200,7 +229,7 @@
       </div>
       <!-- text -->
       <div>
-        <h2 data-cms="dev.juliao.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.6vw,58px); font-weight:500; color:var(--navy); line-height:1.04; margin:0 0 26px;">Hygge House<br>Hotel S. Julião</h2>
+        <h2 data-cms="dev.juliao.title" data-cms-attr="html" class="dev-serif" style="font-size:clamp(34px,4.6vw,58px); font-weight:500; color:var(--navy); line-height:1.04; margin:0 0 26px;">Hygge Residences<br>S. Julião</h2>
         <div class="dev-cols" style="display:grid; grid-template-columns:1.4fr 1fr; gap:24px; align-items:start;">
           <div>
             <p data-cms="dev.juliao.p1" data-cms-attr="html" class="dev-sans dev-p" style="font-size:15px;">In the heart of historic Lisbon, the Hygge House Hotel in Rua de S. Julião is an extension of our beloved Kaffe concept into the world of hospitality.</p>
