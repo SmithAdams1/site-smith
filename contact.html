@@ -92,14 +92,25 @@
   .c-input-group.full { grid-column:1 / -1; }
   .c-label { font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
     color:var(--slate); margin-bottom:10px; font-family:var(--sans); }
+  /* Boxed fields: the underline-only style made it unclear where to type. */
   .c-input { font-family:var(--sans); font-size:15.5px; color:var(--ink);
-    background:transparent; border:0; border-bottom:1px solid var(--line);
-    border-radius:0; padding:12px 2px; width:100%; transition:border-color .25s ease; }
-  .c-input:focus { outline:none; border-bottom-color:var(--navy); }
+    background:#fff; border:1px solid #d9d5cc; border-radius:2px;
+    padding:13px 14px; width:100%; transition:border-color .25s ease, box-shadow .25s ease; }
+  .c-input:focus { outline:none; border-color:var(--navy); box-shadow:0 0 0 3px rgba(17,34,45,.08); }
+  .phone-wrapper { display:flex; align-items:stretch; background:#fff; border:1px solid #d9d5cc; border-radius:2px; transition:border-color .25s ease, box-shadow .25s ease; }
+  .phone-wrapper:focus-within { border-color:var(--navy); box-shadow:0 0 0 3px rgba(17,34,45,.08); }
+  .phone-code-select { flex:0 0 132px; max-width:132px; border:0; background:transparent; font-family:var(--sans); font-size:14.5px; color:var(--ink); padding:0 10px 0 12px; cursor:pointer; }
+  .phone-code-select:focus { outline:none; }
+  .phone-divider { width:1px; background:#e4e1da; margin:9px 0; }
+  .phone-number-input { flex:1 1 auto; min-width:0; border:0; background:transparent; font-family:var(--sans); font-size:15.5px; color:var(--ink); padding:13px 14px; }
+  .phone-number-input:focus { outline:none; }
+  .c-nl { margin-top:clamp(36px,5vh,56px); padding-top:22px; border-top:1px solid rgba(255,255,255,0.16); }
+  .c-nl .sa-nl { margin:0; padding:0; border:0; display:block; }
+  .c-nl .sa-nl__copy { margin-bottom:14px; }
   .c-input::placeholder { color:#a9b0b6; }
   select.c-input { appearance:none; -webkit-appearance:none; cursor:pointer;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%236A7883' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
-    background-repeat:no-repeat; background-position:right 2px center; background-size:10px; }
+    background-repeat:no-repeat; background-position:right 14px center; background-size:10px; }
   textarea.c-input { resize:vertical; min-height:120px; }
 
   .c-btn { font-family:var(--sans); font-weight:600; font-size:15px; letter-spacing:0.01em;
@@ -111,7 +122,7 @@
 
   .map-wrapper { margin-top:clamp(40px,6vh,72px); height:clamp(240px,32vh,340px);
     border:1px solid var(--line); overflow:hidden; }
-  .map-wrapper iframe { display:block; filter:grayscale(1) contrast(1.05); }
+  .map-wrapper iframe { display:block; }
 
   @media (max-width:900px){
     .split-layout { grid-template-columns:1fr; min-height:0; }
@@ -175,7 +186,7 @@
       <div class="circle-deco"></div>
       <div class="panel-dark-content">
         <h1 data-cms="contact.hero.title" data-cms-attr="html" class="geist contact-title">Get In<br>Touch.</h1>
-        <p data-cms="contact.hero.subtitle" data-cms-attr="html" class="satoshi contact-subtitle">Ready to secure your Portugal Golden Visa? Connect with our expert team for highly personalized guidance on residency and real estate investment.</p>
+        <p data-cms="contact.hero.subtitle" data-cms-attr="html" class="satoshi contact-subtitle">Speak with an expert about investing in Portugal, buying a home or securing residency for your family. We get back to you within 24 hours.</p>
         
         <div class="info-item mt-8">
           <div class="info-icon">
@@ -205,6 +216,11 @@
             <div data-cms="contact.info.address_label" class="info-label satoshi">Lisbon Office</div>
             <p data-cms="contact.info.address" data-cms-attr="html" class="info-val geist" style="margin:0; line-height:1.4;">Av. José Malhoa 14<br>1070-073 Lisboa, Portugal</p>
           </div>
+        </div>
+
+        <!-- For visitors who only want to stay informed, not send an enquiry -->
+        <div class="c-nl">
+          <div class="sa-nl"><div class="sa-nl__copy"><p class="sa-nl__title" data-cms="global.footer.newsletter_title">Subscribe to our newsletter</p><p class="sa-nl__sub" data-cms="global.footer.newsletter_sub">Market insight and news from Portugal, straight to your inbox.</p></div><form class="sa-nl__form" novalidate><input type="email" name="email" required autocomplete="email" placeholder="Your email address" aria-label="Email address"><button type="submit">Subscribe</button></form><p class="sa-nl__msg" role="status" aria-live="polite"></p></div>
         </div>
       </div>
     </div>
@@ -429,7 +445,7 @@
           <label class="c-label">Area of Interest</label>
           <select id="interest" class="c-input" style="appearance: none; cursor:pointer;" required>
             <option value="" disabled selected>Select an option</option>
-            <option value="golden-visa">Portugal Golden Visa</option>
+            <option value="golden-visa">Residency and investment</option>
             <option value="real-estate">Real Estate Investment</option>
             <option value="property-management">Property Management</option>
             <option value="other">Other Inquiry</option>
@@ -448,7 +464,7 @@
         <div class="c-input-group full" style="margin-top:6px;">
           <label style="display:flex; gap:10px; align-items:flex-start; cursor:pointer;">
             <input type="checkbox" id="consentCheck" style="margin-top:3px; flex-shrink:0; width:16px; height:16px; accent-color:#0C1E28;">
-            <span data-cms="contact.consent" data-cms-attr="html" class="satoshi" style="font-size:12.5px; line-height:1.6; color:#6b7280;">By checking this box, I consent to receiving calls from JustCall, including calls made using an artificial or prerecorded voice or automated technology for marketing purposes, at the phone number provided above. You may revoke this consent at any time during our conversation by saying DISCONNECT.</span>
+            <span data-cms="contact.consent" data-cms-attr="html" class="satoshi" style="font-size:12.5px; line-height:1.6; color:#6b7280;">By checking this box, I consent to receiving calls from Smith &amp; Adams, including calls made using an artificial or prerecorded voice or automated technology for marketing purposes, at the phone number provided above. You may revoke this consent at any time by telling us during a call or by emailing geral@smithandadams.com. See our <a href="/privacy" style="text-decoration:underline;">Privacy Policy</a>.</span>
           </label>
         </div>
 
