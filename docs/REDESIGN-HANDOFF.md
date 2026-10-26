@@ -753,3 +753,7 @@ chave sem NOME=); recomendado rodar.
   rd_proof aceita compact:true; rd_mvv sem titulo perde o padding de topo; rd_close em fundo claro pinta o CTA navy.
 - A CONFIRMAR com Abilio: texto da origem (escrito a partir da reuniao, sem nomes nem numeros); fotos da equipa.
 - NOTA dev: scripts/dev-server.mjs guarda os modulos em cache; reiniciar depois de mexer em api/*.js.
+- Brochura do grupo: /assets/smith-adams-group-brochure.pdf (7 pag. A4 horizontal: capa, quem somos+numeros,
+  servicos, 3 passos+jornada, 6 marcas, case studies, contactos+AMI). Fonte docs/brochure/group-brochure.html;
+  regenerar com scripts/build-brochure.sh (precisa do dev server em :5199). Hero da home: CTA ghost passou a
+  "Download our brochure" (CMS home.hero.cta_brochure EN/PT).
