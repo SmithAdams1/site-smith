@@ -685,10 +685,11 @@
     '/index.html': 'Início',
     '/about.html': 'Sobre Nós',
     '/real-estate.html': 'Imóveis',
-    '/invest-in-portugal.html': 'Investir em Portugal',
+    '/invest-in-portugal.html': 'Consultoria de Investimento',
+    '/hospitality.html': 'Hotelaria e Restauração',
     '/our-developments.html': 'Oportunidades em Destaque',
     '/property-management.html': 'Gestão de Propriedades',
-    '/blog.html': 'Blog',
+    '/blog.html': 'Notícias',
     '/contact.html': 'Contactos',
     '/terms.html': 'Termos e Condições',
     '/privacy.html': 'Política de Privacidade',
@@ -718,6 +719,7 @@
     document.querySelectorAll('header a[aria-haspopup="true"], #mobile-menu a[aria-haspopup="true"]').forEach(function (a) {
       for (var n = a.firstChild; n; n = n.nextSibling) {
         if (n.nodeType === 3 && /\bProperties\b/i.test(n.nodeValue)) { n.nodeValue = 'Propriedades '; break; }
+        if (n.nodeType === 3 && /\bOur Services\b/i.test(n.nodeValue)) { n.nodeValue = 'Os Nossos Serviços '; break; }
       }
     });
     document.querySelectorAll('footer h4').forEach(function (h) {

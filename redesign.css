@@ -583,3 +583,13 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .cms-lang-switcher { color: #fff !
      a Tier-1 advisory. Removing both the section spotlight and the card glow. */
   .sa-spot { display:none !important; }
   .rd-glow::after { display:none !important; }
+
+/* F1 (HoS): in-page anchors (e.g. "Why Portugal" -> #why) land below the fixed header. */
+.rd-sec[id]{scroll-margin-top:96px;}
+/* F1 (HoS): hamburger lines were bg-white everywhere - invisible on the light
+   bar (property, article, legal pages, and any page once the nav goes solid). */
+.rd-nav button[onclick*="mobile-menu"] span { background: var(--navy) !important; }
+body.rd-dark-hero .rd-nav:not(.rd-nav--solid) button[onclick*="mobile-menu"] span,
+body:has(#mobile-menu.opacity-100) .rd-nav button[onclick*="mobile-menu"] span { background: #fff !important; }
+/* F1: footer email was clipped in its narrow column. */
+footer a[href^="mailto:"] { overflow-wrap: anywhere; }

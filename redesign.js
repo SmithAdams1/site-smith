@@ -10,8 +10,20 @@
         var heroEl = darkHero ? document.querySelector('.rd-fly, .rd-hero, #re-hero') : null;
         function solidAt() { return (heroEl && heroEl.offsetHeight) ? Math.max(60, heroEl.offsetHeight - 90) : 40; }
         var onScroll = function () {
-          if ((window.scrollY || window.pageYOffset) > solidAt()) nav.classList.add('rd-nav--solid');
-          else nav.classList.remove('rd-nav--solid');
+          var y = window.scrollY || window.pageYOffset, at = solidAt();
+          if (y > at) {
+            nav.classList.add('rd-nav--solid');
+            nav.style.removeProperty('background-color');
+          } else {
+            nav.classList.remove('rd-nav--solid');
+            // HoS: blend in from the first pixel of scroll instead of flipping at the
+            // end of the hero. A navy veil keeps the white links readable over the image.
+            if (darkHero) {
+              var a = Math.min(0.85, (y / at) * 0.85);
+              if (a > 0.01) nav.style.setProperty('background-color', 'rgba(17,34,45,' + a.toFixed(3) + ')', 'important');
+              else nav.style.removeProperty('background-color');
+            }
+          }
         };
         onScroll();
         window.addEventListener('scroll', onScroll, { passive: true });

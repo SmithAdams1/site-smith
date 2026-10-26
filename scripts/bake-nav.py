@@ -34,10 +34,10 @@ TOP = [('Home', '/index.html'), ('About Us', '/about.html')]
 # still lives at /invest-in-portugal.html, but the tab is labelled "Investments").
 SERVICES_LABEL = 'Our Services'
 SERVICES_CUR = ('invest-in-portugal', 'real-estate', 'property-management', 'hospitality')
-DROP = [('Investments', '/invest-in-portugal.html'),
+DROP = [('Investment Advisory', '/invest-in-portugal.html'),
         ('Real Estate', '/real-estate.html'),
         ('Property Management', '/property-management.html'),
-        ('Hospitality', '/hospitality.html'),
+        ('Hospitality &amp; F&amp;B', '/hospitality.html'),
         ('Recruitment', 'https://recruitment.smithandadams.com')]
 
 STYLE = '''<style id="rd-nav-dd">
@@ -81,11 +81,11 @@ MOB_ACTIVE = 'text-2xl font-medium transition-colors duration-300 text-white fon
 MOB_CTA = ('bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium '
            'transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi')
 MOB = [('Home', '/index.html'), ('About Us', '/about.html'),
-       ('Investments', '/invest-in-portugal.html'),
+       ('Investment Advisory', '/invest-in-portugal.html'),
        ('Real Estate', '/real-estate.html'),
        ('Property Management', '/property-management.html'),
-       ('Hospitality', '/hospitality.html'),
-       ('Recruitment', 'https://recruitment.smithandadams.com'), ('Press', '/blog.html')]
+       ('Hospitality &amp; F&amp;B', '/hospitality.html'),
+       ('Recruitment', 'https://recruitment.smithandadams.com'), ('News', '/blog.html')]
 
 
 def build_mobile(cur):
@@ -121,7 +121,7 @@ def build_nav(cur):
         f'<span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a>'
         f'<div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="services">'
         f'{items}</div></div></div>')
-    parts.append(top_link('Press', '/blog.html', cur))
+    parts.append(top_link('News', '/blog.html', cur))
     parts.append('<div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium '
                  'transition-all duration-300 hover:bg-opacity-90 satoshi" href="/contact.html">'
                  'Contact Us</a></div>')
