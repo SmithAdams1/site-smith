@@ -162,6 +162,8 @@
     build(rows[0]);
   }).catch(function(e){console.warn(e);fail(t.err);});
 
+  // Back returns to the last search (filters, page, map) kept by /real-estate.
+  var backUrl=(function(){try{var u=localStorage.getItem('re_last');return u&&/^\/(pt\/)?real-estate/.test(u)?u:'/real-estate';}catch(e){return '/real-estate';}})();
   function build(p){
     document.getElementById('pd-loading').style.display='none';
     var root=document.getElementById('pd-root');root.style.display='block';
@@ -189,7 +191,7 @@
 
     root.innerHTML=
       // BREADCRUMB
-      '<section style="background:var(--paper);padding:26px 24px 0;"><div style="max-width:1200px;margin:0 auto;"><a href="/real-estate.html" class="satoshi" style="color:var(--slate,#6A7883);font-size:14px;text-decoration:none;">← '+esc(t.back)+'</a></div></section>'+
+      '<section style="background:var(--paper);padding:26px 24px 0;"><div style="max-width:1200px;margin:0 auto;"><a href="'+esc(backUrl)+'" class="satoshi" style="color:var(--slate,#6A7883);font-size:14px;text-decoration:none;">← '+esc(t.back)+'</a></div></section>'+
       // HERO: overview box (left) + featured image (right)
       '<section style="background:var(--paper);padding:clamp(18px,3vw,32px) 24px 0;"><div class="pd-hero" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:clamp(22px,3vw,40px);align-items:start;">'+
         '<div class="pd-heroinfo" style="background:#fff;border:1px solid var(--line,#E4E1DA);border-radius:2px;padding:clamp(24px,3vw,34px);box-shadow:0 14px 48px rgba(17,34,45,.07);">'+

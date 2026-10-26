@@ -56,8 +56,9 @@ export default async function handler(req, res) {
     `<link rel="alternate" hreflang="pt" href="${ptUrl}"/>` +
     `<link rel="alternate" hreflang="x-default" href="${enUrl}"/>`;
 
-  // Absolutize relative src/href so assets resolve under /pt/ (not /pt/asset).
-  html = html.replace(/\b(src|href)=("|')(?!https?:|\/\/|\/|#|data:|mailto:|tel:)/gi, '$1=$2/');
+  // Absolutize relative src/href/srcset so assets resolve under /pt/ (not /pt/asset).
+  // srcset matters: the header logo's 2x candidate was 404ing on every /pt page.
+  html = html.replace(/\b(src|href|srcset)=("|')(?!https?:|\/\/|\/|#|data:|mailto:|tel:)/gi, '$1=$2/');
 
   // <html lang>
   html = html.replace(/<html([^>]*)\slang=["']en["']/i, '<html$1 lang="pt"');

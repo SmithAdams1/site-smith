@@ -68,27 +68,109 @@
 <style>
   #re-hero .rd-hero__inner{ padding-top:clamp(104px,15vh,150px); padding-bottom:clamp(34px,5vh,60px); }
   #re-hero h1{ font-size:clamp(32px,4.6vw,60px); max-width:18ch; }
-  .re-searchbar .re-input{ width:100%; }
-  @media(max-width:640px){ .re-searchbar{ grid-template-columns:1fr 1fr; } }
+  .re-input{ width:100%; border:1px solid var(--line); border-radius:2px; padding:11px 12px; font:15px var(--sans); color:var(--navy); background:#fff; }
+  .re-q{ display:grid; grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr)) auto; gap:10px; background:#fff; padding:14px; border-radius:2px; box-shadow:0 20px 50px rgba(17,34,45,.30); margin-top:30px; max-width:1120px; }
+  .re-q label{ display:block; font:500 10.5px var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--slate); margin:0 0 7px; }
+  .re-btn{ background:var(--navy); color:#fff; border:0; border-radius:2px; padding:12px 22px; font:600 14px var(--sans); cursor:pointer; white-space:nowrap; }
+  .re-btn--line{ background:transparent; color:var(--navy); border:1px solid var(--navy); }
+  .re-q .re-btn{ align-self:end; height:45px; }
+  @media(max-width:860px){ .re-q{ grid-template-columns:1fr 1fr; } .re-q .re-q__text{ grid-column:1 / -1; } .re-q .re-btn{ grid-column:1 / -1; } }
+
+  /* areas */
+  .re-areas{ display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:14px; margin-top:22px; }
+  .re-area{ position:relative; display:block; aspect-ratio:3/4; overflow:hidden; background:var(--navy); text-decoration:none; }
+  .re-area img{ width:100%; height:100%; object-fit:cover; opacity:.85; transition:transform .8s var(--ease-quint),opacity .3s; }
+  .re-area:hover img{ transform:scale(1.04); opacity:1; }
+  .re-area span{ position:absolute; left:0; right:0; bottom:0; padding:40px 14px 14px; background:linear-gradient(transparent,rgba(17,34,45,.85)); color:#fff; font:500 16px var(--display); }
+  .re-area small{ display:block; font:500 11px var(--sans); letter-spacing:.08em; color:var(--stone); margin-top:3px; }
+  @media(max-width:1024px){ .re-areas{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
+  @media(max-width:640px){ .re-areas{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+  /* results layout */
+  .re-layout{ display:grid; grid-template-columns:270px minmax(0,1fr); gap:clamp(24px,3vw,40px); align-items:start; }
+  .re-side{ position:sticky; top:96px; background:#fff; border:1px solid var(--line); border-radius:2px; padding:20px; }
+  .re-side h3{ font:600 15px var(--sans); color:var(--navy); margin:0 0 14px; display:flex; justify-content:space-between; align-items:center; }
+  .re-side h3 button{ background:none; border:0; font:500 12.5px var(--sans); color:var(--slate); cursor:pointer; text-decoration:underline; }
+  .re-f{ margin-bottom:14px; }
+  .re-f label{ display:block; font:500 10.5px var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--slate); margin:0 0 6px; }
+  .re-f .re-input{ padding:9px 10px; font-size:14px; }
+  .re-2{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .re-check{ display:flex; gap:8px; align-items:center; font:14px var(--sans); color:var(--ink); }
+  .re-bar{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:0 0 18px; }
+  .re-bar__l{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .re-bar__r{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+  .re-bar select{ border:1px solid var(--line); border-radius:2px; padding:8px 10px; font:14px var(--sans); color:var(--navy); background:#fff; }
+  .re-seg{ display:flex; border:1px solid var(--line); border-radius:2px; padding:2px; background:#fff; }
+  .re-seg button{ background:none; border:0; padding:7px 12px; font:600 13px var(--sans); color:var(--navy); cursor:pointer; border-radius:2px; }
+  .re-seg button[aria-pressed=true]{ background:var(--navy); color:#fff; }
+  #re-count{ font:600 15px var(--sans); color:var(--navy); }
+  .re-chips{ display:flex; gap:6px; flex-wrap:wrap; }
+  .re-chip{ display:inline-flex; align-items:center; gap:6px; background:var(--sunken); border:1px solid var(--line); border-radius:2px; padding:5px 9px; font:13px var(--sans); color:var(--navy); cursor:pointer; }
+  .re-pages{ display:flex; justify-content:center; align-items:center; gap:6px; flex-wrap:wrap; margin-top:36px; }
+  .re-pages button{ min-width:40px; height:40px; border:1px solid var(--line); background:#fff; color:var(--navy); font:600 14px var(--sans); border-radius:2px; cursor:pointer; padding:0 10px; }
+  .re-pages button[aria-current=page]{ background:var(--navy); color:#fff; border-color:var(--navy); }
+  .re-pages button:disabled{ opacity:.4; cursor:default; }
+  .re-pages span{ color:var(--slate); padding:0 4px; }
+  .re-filters-btn{ display:none; }
+  /* map view */
+  .re-mapwrap{ display:none; grid-template-columns:minmax(0,1fr) 400px; gap:20px; }
+  body.re-map .re-mapwrap{ display:grid; }
+  body.re-map #re-gridwrap{ display:none; }
+  #re-map{ height:calc(100vh - 220px); min-height:480px; border:1px solid var(--line); border-radius:2px; }
+  #re-map .leaflet-tile-pane{ filter:grayscale(.55) contrast(1.02); }
+  .re-maplist{ height:calc(100vh - 220px); min-height:480px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; }
+  .re-mini{ flex:0 0 auto; display:grid; grid-template-columns:120px minmax(0,1fr); gap:12px; background:#fff; border:1px solid var(--line); border-radius:2px; text-decoration:none; color:inherit; overflow:hidden; }
+  .re-mini img{ width:120px; height:92px; object-fit:cover; display:block; }
+  .re-mini div{ padding:10px 10px 10px 0; }
+  .re-mini h4{ margin:0 0 4px; font:500 14.5px/1.3 var(--display); color:var(--navy); }
+  .re-mini p{ margin:0; font:12.5px var(--sans); color:var(--slate); }
+  .re-mini b{ display:block; margin-top:4px; font:600 14px var(--sans); color:var(--navy); }
+  .re-mini:hover,.re-mini.is-hot{ border-color:var(--navy); }
+  .re-pin{ background:var(--navy); color:#fff; font:600 11.5px var(--sans); padding:4px 7px; border-radius:2px; white-space:nowrap; box-shadow:0 4px 12px rgba(17,34,45,.3); transform:translate(-50%,-100%); display:inline-block; }
+  .re-pin.is-hot{ background:var(--gold); color:var(--navy); }
+  .re-popup a{ text-decoration:none; color:inherit; display:block; width:220px; }
+  .re-popup img{ width:220px; height:140px; object-fit:cover; display:block; }
+  .re-popup h4{ margin:8px 0 2px; font:500 15px var(--display); color:var(--navy); }
+  .re-popup p{ margin:0; font:13px var(--sans); color:var(--slate); }
+  .re-areabox{ display:flex; align-items:center; gap:8px; font:13.5px var(--sans); color:var(--navy); background:#fff; padding:8px 10px; border:1px solid var(--line); border-radius:2px; }
+  /* results-only mode: after a search the page is just the results */
+  body.re-results #re-hero, body.re-results #re-areas-wrap, body.re-results #re-devs-wrap, body.re-results #re-blocks-wrap{ display:none !important; }
+  body.re-results #re-listings{ padding-top:clamp(108px,12vw,128px) !important; }
+  @media(max-width:1024px){
+    .re-layout{ grid-template-columns:1fr; }
+    .re-side{ display:none; position:fixed; inset:0; z-index:70; overflow-y:auto; border:0; border-radius:0; padding:24px 20px 90px; }
+    body.re-drawer .re-side{ display:block; }
+    .re-side__close{ display:block !important; }
+    .re-filters-btn{ display:inline-flex; }
+    .re-mapwrap{ grid-template-columns:1fr; }
+    .re-maplist{ height:auto; min-height:0; max-height:none; }
+    #re-map{ height:60vh; }
+  }
 </style>
 <!-- HERO (cinematic, looping video - editable via backoffice re_page.hero) -->
 <section class="rd-hero" id="re-hero" style="background-size:cover;background-position:center;">
   <div class="rd-hero__media">
-    <picture><source srcset="/assets/hero-real-estate.webp" type="image/webp"><picture><source srcset="/assets/hero-real-estate.webp" type="image/webp"><img id="re-hero-img" src="/assets/hero-real-estate.jpg" alt="Premium residential real estate in Portugal" loading="eager" fetchpriority="high" decoding="async"></picture></picture>
+    <picture><source srcset="/assets/hero-real-estate.webp" type="image/webp"><img id="re-hero-img" src="/assets/hero-real-estate.jpg" alt="Premium residential real estate in Portugal" loading="eager" fetchpriority="high" decoding="async"></picture>
   </div>
   <div class="rd-hero__scrim"></div>
   <div class="rd-wrap rd-hero__inner">
-    <h1 id="re-hero-title" data-i18n="hero_title">Find your perfect property</h1>
-    <p id="re-hero-sub" data-i18n="hero_subtitle" class="rd-hero__sub">Premium residential real estate across Portugal, from Lisbon and Cascais to Porto, the Algarve and Comporta, sourced and vetted by Smith &amp; Adams.</p>
-    <!-- Search bar, overlaid on the hero (first screen) -->
-    <div class="re-searchbar reveal" style="background:#fff;border-radius:4px;box-shadow:0 20px 50px rgba(17,34,45,.30);padding:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;align-items:end;margin-top:30px;max-width:1120px;">
-      <div><label data-i18n="f_location" class="rd-label" style="display:block;margin-bottom:9px;color:var(--slate);">Location</label><select id="f-region" class="re-input"></select></div>
-      <div><label data-i18n="f_type" class="rd-label" style="display:block;margin-bottom:9px;color:var(--slate);">Type</label><select id="f-type" class="re-input"></select></div>
-      <div><label data-i18n="f_transaction" class="rd-label" style="display:block;margin-bottom:9px;color:var(--slate);">For</label><select id="f-transaction" class="re-input"></select></div>
-      <div><label data-i18n="f_beds" class="rd-label" style="display:block;margin-bottom:9px;color:var(--slate);">Bedrooms</label><select id="f-beds" class="re-input"></select></div>
-      <div><label data-i18n="f_price" class="rd-label" style="display:block;margin-bottom:9px;color:var(--slate);">Max price</label><select id="f-price" class="re-input"></select></div>
-      <div><button id="f-reset" class="satoshi" style="width:100%;background:var(--navy);color:#fff;border:none;border-radius:2px;padding:13px 14px;font-size:14px;font-weight:600;cursor:pointer;" data-i18n="f_reset">Reset</button></div>
-    </div>
+    <h1 id="re-hero-title" data-i18n="hero_title">Let us help you find your dream home</h1>
+    <p id="re-hero-sub" data-i18n="hero_subtitle" class="rd-hero__sub">Independent real estate advisers acting on behalf of the buyer. Through partnerships with large and small agencies across Portugal, we can show you the whole market, not one developer's stock.</p>
+    <form class="re-q reveal" id="re-q" role="search">
+      <div class="re-q__text"><label for="q-text" data-i18n="f_search">Search</label><input id="q-text" class="re-input" type="search" autocomplete="off" data-i18n-ph="ph_search" placeholder="City, area or reference"></div>
+      <div><label for="q-area" data-i18n="f_area">Area</label><select id="q-area" class="re-input"></select></div>
+      <div><label for="q-type" data-i18n="f_type">Type</label><select id="q-type" class="re-input"></select></div>
+      <div><label for="q-maxp" data-i18n="f_price">Max price</label><select id="q-maxp" class="re-input"></select></div>
+      <button class="re-btn" type="submit" data-i18n="search">Search</button>
+    </form>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section id="re-areas-wrap" style="background:var(--paper);padding:clamp(40px,5vw,64px) var(--mx) 0;">
+  <div style="max-width:1360px;margin:0 auto;">
+    <p class="rd-label" data-i18n="areas_label">Explore by area</p>
+    <div class="re-areas" id="re-areas"></div>
   </div>
 </section>
 
@@ -101,15 +183,54 @@
       <p id="re-devs-sub" class="satoshi" style="color:var(--slate);font-size:14.5px;margin:0 0 22px;">Collections of residences within a single project.</p>
       <div id="re-devs" data-devs-scroll style="display:flex;flex-wrap:nowrap;gap:22px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x proximity;"></div>
     </div>
-    <!-- ACTIVE DEVELOPMENT header (when viewing one project's units) -->
-    <a id="re-dev-active" href="/real-estate" style="display:none;align-items:center;gap:11px;margin:0 2px 22px;text-decoration:none;color:var(--navy);" class="satoshi">
-      <span aria-hidden="true" style="font-size:20px;line-height:1;">&#8592;</span>
-      <span><span id="re-dev-back" style="color:var(--slate);font-weight:500;"></span> <b id="re-dev-active-label" style="color:var(--navy);"></b></span>
-    </a>
-    <div id="re-count" class="rd-label" style="margin:16px 2px 24px;color:var(--slate);"></div>
-    <div id="re-loading" style="display:flex;justify-content:center;padding:60px 0;"><div class="spin"></div></div>
-    <div id="re-empty" class="satoshi" style="display:none;text-align:center;padding:60px 20px;color:var(--slate);font-size:16px;"></div>
-    <div id="re-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;"></div>
+
+    <div class="re-layout">
+      <aside class="re-side" id="re-side" aria-label="Filters">
+        <h3><span data-i18n="filters">Filters</span><button type="button" id="f-reset" data-i18n="clear">Clear all</button></h3>
+        <div class="re-f"><label for="f-q" data-i18n="f_search">Search</label><input id="f-q" class="re-input" type="search" autocomplete="off" data-i18n-ph="ph_search" placeholder="City, area or reference"></div>
+        <div class="re-f"><label for="f-area" data-i18n="f_area">Area</label><select id="f-area" class="re-input"></select></div>
+        <div class="re-f"><label for="f-region" data-i18n="f_district">District</label><select id="f-region" class="re-input"></select></div>
+        <div class="re-f"><label for="f-type" data-i18n="f_type">Type</label><select id="f-type" class="re-input"></select></div>
+        <div class="re-f"><label data-i18n="f_pricerange">Price</label><div class="re-2"><select id="f-minp" class="re-input" aria-label="Min price"></select><select id="f-maxp" class="re-input" aria-label="Max price"></select></div></div>
+        <div class="re-f"><label for="f-beds" data-i18n="f_beds">Bedrooms</label><select id="f-beds" class="re-input"></select></div>
+        <div class="re-f"><label class="re-check" style="text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink);"><input type="checkbox" id="f-gv"> <span data-i18n="gv_only">Golden Visa eligible only</span></label></div>
+        <button type="button" class="re-btn re-side__close" id="f-done" style="display:none;width:100%;" data-i18n="show_results">Show results</button>
+      </aside>
+
+      <div>
+        <a id="re-dev-active" href="/real-estate" style="display:none;align-items:center;gap:11px;margin:0 2px 18px;text-decoration:none;color:var(--navy);" class="satoshi">
+          <span aria-hidden="true">&larr;</span>
+          <span><span id="re-dev-back" style="color:var(--slate);font-weight:500;"></span> <b id="re-dev-active-label" style="color:var(--navy);"></b></span>
+        </a>
+        <div class="re-bar">
+          <div class="re-bar__l">
+            <button type="button" class="re-btn re-btn--line re-filters-btn" id="re-filters-btn" data-i18n="filters">Filters</button>
+            <span id="re-count" aria-live="polite"></span>
+            <div class="re-chips" id="re-chips"></div>
+          </div>
+          <div class="re-bar__r">
+            <select id="re-sort" aria-label="Sort"></select>
+            <select id="re-per" aria-label="Results per page"><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>
+            <div class="re-seg" role="group" aria-label="View"><button type="button" data-view="list" aria-pressed="true" data-i18n="list">List</button><button type="button" data-view="map" aria-pressed="false" data-i18n="map">Map</button></div>
+          </div>
+        </div>
+
+        <div id="re-gridwrap">
+          <div id="re-loading" style="display:flex;justify-content:center;padding:60px 0;"><div class="spin"></div></div>
+          <div id="re-empty" class="satoshi" style="display:none;text-align:center;padding:60px 20px;color:var(--slate);font-size:16px;"></div>
+          <div id="re-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;"></div>
+          <nav class="re-pages" id="re-pages" aria-label="Pagination"></nav>
+        </div>
+
+        <div class="re-mapwrap">
+          <div>
+            <div id="re-map"></div>
+            <label class="re-areabox" style="margin-top:10px;"><input type="checkbox" id="re-bbox"> <span data-i18n="search_area">Search as I move the map</span></label>
+          </div>
+          <div class="re-maplist" id="re-maplist"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -120,240 +241,393 @@
 (function(){
   var SUPABASE_URL='https://bcjtkfipcfvvitglgpys.supabase.co';
   var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjanRrZmlwY2Z2dml0Z2xncHlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNDU3NjcsImV4cCI6MjA5MTgyMTc2N30.kgnE2E-xDQT855to1Nz8LNKtwIBGw2QsIw81Us3B_ZA';
+  var HDR={apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY};
 
-  function locale(){try{var v=localStorage.getItem('cmsLocale');if(v==='pt'||v==='en')return v;}catch(e){}return 'en';}
+  function locale(){var p=(location.pathname||'').replace(/\/+$/,'');if(p==='/pt'||p.indexOf('/pt/')===0)return 'pt';try{var v=localStorage.getItem('cmsLocale');if(v==='pt'||v==='en')return v;}catch(e){}return 'en';}
   var L=locale();
 
   var T={
-    en:{hero_title:'Find your perfect property',hero_subtitle:"Premium residential real estate across Portugal, from Lisbon and Cascais to Porto, the Algarve and Comporta, sourced and vetted by Smith & Adams.",
-        f_location:'Location',f_type:'Type',f_transaction:'For',f_beds:'Bedrooms',f_price:'Max price',f_reset:'Reset',
-        any:'Any',sale:'For sale',rent:'For rent',beds_plus:'+ beds',from:'From',results_one:'property',results_many:'properties',
-        empty:'No properties match your filters. Try adjusting them.',gv:'Golden Visa eligible',
+    en:{hero_title:'Let us help you find your dream home',hero_subtitle:"Independent real estate advisers acting on behalf of the buyer. Through partnerships with large and small agencies across Portugal, we can show you the whole market, not one developer's stock.",
+        f_search:'Search',ph_search:'City, area or reference',f_area:'Area',f_district:'District',f_type:'Type',f_price:'Max price',f_pricerange:'Price',f_beds:'Bedrooms',
+        search:'Search',areas_label:'Explore by area',filters:'Filters',clear:'Clear all',gv_only:'Golden Visa eligible only',show_results:'Show results',
+        list:'List',map:'Map',search_area:'Search as I move the map',min:'No min',max:'No max',
+        sort_rec:'Recommended',sort_plow:'Price: low to high',sort_phigh:'Price: high to low',sort_new:'Newest',
+        any:'Any',all_areas:'All of Portugal',sale:'For sale',rent:'For rent',beds_plus:'+ beds',from:'From',results_one:'property',results_many:'properties',
+        empty:'No properties match your search. Try removing a filter.',gv:'Golden Visa eligible',map_area:'Map area',prev:'Previous',next:'Next',
         types:{apartment:'Apartment',villa:'Villa',townhouse:'Townhouse',plot:'Plot',commercial:'Commercial',penthouse:'Penthouse',studio:'Studio',house:'House',land:'Land',building:'Building',farm:'Farm','country-estate':'Country estate',shop:'Shop',warehouse:'Warehouse',office:'Office',mansion:'Mansion',loft:'Loft',restaurant:'Restaurant',hotel:'Hotel'},
-        sold:'Sold',view:'View details',upcoming:'Upcoming',recommended:'Recommended',from:'From',
+        sold:'Sold',view:'View details',upcoming:'Upcoming',recommended:'Recommended',
         developments:'Developments',dev_sub:'Collections of residences within a single project.',residences:'residences',residence:'residence',back_all:'All properties'},
-    pt:{hero_title:'Encontre o imóvel perfeito',hero_subtitle:'Imóveis residenciais premium em todo o Portugal, de Lisboa e Cascais ao Porto, Algarve e Comporta, selecionados e verificados pela Smith & Adams.',
-        f_location:'Localização',f_type:'Tipo',f_transaction:'Para',f_beds:'Quartos',f_price:'Preço máx.',f_reset:'Limpar',
-        any:'Todos',sale:'Venda',rent:'Arrendamento',beds_plus:'+ quartos',from:'Desde',results_one:'imóvel',results_many:'imóveis',
-        empty:'Nenhum imóvel corresponde aos filtros. Tente ajustar.',gv:'Elegível Golden Visa',
+    pt:{hero_title:'Deixe-nos ajudar a encontrar a casa dos seus sonhos',hero_subtitle:'Consultores imobiliários independentes, do lado do comprador. Com parcerias com agências grandes e pequenas em todo o país, mostramos-lhe o mercado inteiro, e não o stock de um só promotor.',
+        f_search:'Pesquisa',ph_search:'Cidade, zona ou referência',f_area:'Zona',f_district:'Distrito',f_type:'Tipo',f_price:'Preço máx.',f_pricerange:'Preço',f_beds:'Quartos',
+        search:'Pesquisar',areas_label:'Explorar por zona',filters:'Filtros',clear:'Limpar',gv_only:'Só elegíveis para Golden Visa',show_results:'Ver resultados',
+        list:'Lista',map:'Mapa',search_area:'Pesquisar ao mover o mapa',min:'Sem mínimo',max:'Sem máximo',
+        sort_rec:'Recomendados',sort_plow:'Preço: mais baixo',sort_phigh:'Preço: mais alto',sort_new:'Mais recentes',
+        any:'Todos',all_areas:'Todo o país',sale:'Venda',rent:'Arrendamento',beds_plus:'+ quartos',from:'Desde',results_one:'imóvel',results_many:'imóveis',
+        empty:'Nenhum imóvel corresponde à pesquisa. Experimente retirar um filtro.',gv:'Elegível Golden Visa',map_area:'Zona do mapa',prev:'Anterior',next:'Seguinte',
         types:{apartment:'Apartamento',villa:'Moradia',townhouse:'Casa em banda',plot:'Terreno',commercial:'Comercial',penthouse:'Penthouse',studio:'Estúdio',house:'Moradia',land:'Terreno',building:'Prédio',farm:'Quinta','country-estate':'Herdade',shop:'Loja',warehouse:'Armazém',office:'Escritório',mansion:'Palacete',loft:'Loft',restaurant:'Restaurante',hotel:'Hotel'},
-        sold:'Vendido',view:'Ver detalhes',upcoming:'Em breve',recommended:'Recomendado',from:'Desde',
+        sold:'Vendido',view:'Ver detalhes',upcoming:'Em breve',recommended:'Recomendado',
         developments:'Empreendimentos',dev_sub:'Conjuntos de residências dentro de um mesmo projeto.',residences:'residências',residence:'residência',back_all:'Todos os imóveis'}
   };
   var t=T[L];
 
-  // Active development (viewing one project's units): ?development=Name
-  var activeDev=(new URLSearchParams(location.search)).get('development')||'';
+  // Areas are the markets people search for, mapped onto the feed's
+  // district (region) and municipality (city) values.
+  var AREAS=[
+    {id:'lisbon',en:'Lisbon',pt:'Lisboa',q:'region=in.("Lisboa","Lisbon")&city=neq.Cascais'},
+    {id:'cascais',en:'Cascais',pt:'Cascais',q:'city=eq.Cascais'},
+    {id:'porto',en:'Porto',pt:'Porto',q:'region=in.("Porto","Oporto")'},
+    {id:'algarve',en:'Algarve',pt:'Algarve',q:'region=eq.Faro'},
+    {id:'silver-coast',en:'Silver Coast',pt:'Costa de Prata',q:'region=eq.Leiria'},
+    {id:'comporta',en:'Comporta',pt:'Comporta',q:'city=in.("Grândola","Alcácer do Sal")'},
+    {id:'coimbra',en:'Coimbra',pt:'Coimbra',q:'region=eq.Coimbra'}
+  ];
+  function areaById(id){for(var i=0;i<AREAS.length;i++)if(AREAS[i].id===id)return AREAS[i];return null;}
+
+  document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){var k=el.getAttribute('data-i18n-ph');if(t[k])el.setAttribute('placeholder',t[k]);});
   document.getElementById('re-devs-label').textContent=t.developments;
   document.getElementById('re-devs-sub').textContent=t.dev_sub;
   document.getElementById('re-dev-back').textContent=t.back_all;
-
-  // static i18n
-  document.querySelectorAll('[data-i18n]').forEach(function(el){var k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
   document.documentElement.lang=L;
 
-  function pick(field){ // bilingual jsonb {en,pt}
-    if(field==null)return '';
-    if(typeof field==='string')return field;
-    return field[L]||field.en||field.pt||'';
-  }
-  function fmtPrice(p,cur){ if(p==null||p==='')return ''; var sym=cur==='USD'?'$':cur==='GBP'?'£':'€'; return sym+Number(p).toLocaleString(L==='pt'?'pt-PT':'en-GB'); }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function pick(f){if(f==null)return '';if(typeof f==='string')return f;return f[L]||f.en||f.pt||'';}
+  function fmtPrice(p,cur){if(p==null||p==='')return '';var sym=cur==='USD'?'$':cur==='GBP'?'£':'€';return sym+Number(p).toLocaleString(L==='pt'?'pt-PT':'en-GB');}
+  function shortPrice(p){if(!p)return '–';if(p>=1e6)return '€'+(Math.round(p/1e5)/10).toString().replace(/\.0$/,'')+'M';return '€'+Math.round(p/1e3)+'k';}
   var ICONS={bed:'<path d="M2 9v10"/><path d="M2 13h20v6"/><path d="M22 13V9a2 2 0 0 0-2-2H9v6"/><circle cx="5.5" cy="10" r="1.4"/>',bath:'<path d="M3 12h18"/><path d="M4 12v3a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4v-3"/><path d="M7 12V6a2 2 0 0 1 4 0"/><path d="M7 19l-1 2M18 19l1 2"/>',area:'<path d="M3 8V3h5"/><path d="M21 8V3h-5"/><path d="M3 16v5h5"/><path d="M21 16v5h-5"/>'};
-  function ic(name,size,color){var d=ICONS[name]||'';return '<svg width="'+(size||16)+'" height="'+(size||16)+'" viewBox="0 0 24 24" fill="none" stroke="'+(color||'currentColor')+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';}
+  function ic(n,s,c){return '<svg width="'+(s||16)+'" height="'+(s||16)+'" viewBox="0 0 24 24" fill="none" stroke="'+(c||'currentColor')+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[n]||'')+'</svg>';}
+  function opt(v,l){var o=document.createElement('option');o.value=v;o.textContent=l;return o;}
+  var $=function(id){return document.getElementById(id);};
 
-  // Filters are driven by real facets computed server-side (window.__RE_FACETS__,
-  // injected by api/property.js). Results are fetched from PostgREST filtered +
-  // paginated, with infinite scroll - so 2000+ listings never load at once.
-  var FACETS=window.__RE_FACETS__||{};
-  function opt(v,label){var o=document.createElement('option');o.value=v;o.textContent=label;return o;}
-  var fRegion=document.getElementById('f-region'),fType=document.getElementById('f-type'),fTrans=document.getElementById('f-transaction'),fBeds=document.getElementById('f-beds'),fPrice=document.getElementById('f-price');
+  // ---------- state (URL is the source of truth; localStorage remembers it) ----------
+  var KEYS=['q','area','region','type','minp','maxp','beds','gv','sort','per','page','view','bbox'];
+  var activeDev=(new URLSearchParams(location.search)).get('development')||'';
+  function readState(){
+    var qs=new URLSearchParams(location.search),s={};
+    KEYS.forEach(function(k){var v=qs.get(k);if(v)s[k]=v;});
+    if(!location.search){try{var saved=JSON.parse(localStorage.getItem('re_state')||'null');if(saved&&saved.per)s.per=saved.per;if(saved&&saved.view)s.view=saved.view;}catch(e){}}
+    return s;
+  }
+  var S=readState();
+  function isSearch(){return !!(S.q||S.area||S.region||S.type||S.minp||S.maxp||S.beds||S.gv||S.bbox||(S.page&&S.page!=='1')||activeDev);}
+  function writeState(push){
+    var qs=new URLSearchParams();
+    if(activeDev)qs.set('development',activeDev);
+    KEYS.forEach(function(k){if(S[k]&&!(k==='page'&&S[k]==='1')&&!(k==='per'&&S[k]==='25')&&!(k==='sort'&&S[k]==='rec')&&!(k==='view'&&S[k]==='list'))qs.set(k,S[k]);});
+    var url=location.pathname+(qs.toString()?'?'+qs.toString():'');
+    history[push?'pushState':'replaceState'](null,'',url);
+    try{localStorage.setItem('re_state',JSON.stringify(S));localStorage.setItem('re_last',url);}catch(e){}
+  }
 
-  fRegion.appendChild(opt('',t.any));
-  (FACETS.regions||[]).forEach(function(r){ fRegion.appendChild(opt((r.values||[r.label]).join('|'), r.label+' ('+r.count+')')); });
-  fType.appendChild(opt('',t.any));
-  (FACETS.types||[]).forEach(function(ty){ fType.appendChild(opt(ty.value,(t.types[ty.value]||ty.value)+' ('+ty.count+')')); });
-  fTrans.appendChild(opt('',t.any));
-  (FACETS.transactions||['sale']).forEach(function(x){ fTrans.appendChild(opt(x,x==='rent'?t.rent:t.sale)); });
-  if((FACETS.transactions||[]).length<=1){ var tw=fTrans.parentNode; if(tw)tw.style.display='none'; }
-  fBeds.appendChild(opt('',t.any));[1,2,3,4,5].forEach(function(n){fBeds.appendChild(opt(String(n),n+t.beds_plus));});
-  fPrice.appendChild(opt('',t.any));[300000,500000,750000,1000000,2000000,5000000,10000000].forEach(function(p){fPrice.appendChild(opt(String(p),fmtPrice(p)));});
+  // ---------- filter controls ----------
+  var FACETS=window.__RE_FACETS__||null;
+  var priceSteps=[100000,200000,300000,400000,500000,750000,1000000,1500000,2000000,3000000,5000000,10000000];
+  function fillStatic(){
+    [$('q-area'),$('f-area')].forEach(function(sel){sel.innerHTML='';sel.appendChild(opt('',t.all_areas));AREAS.forEach(function(a){sel.appendChild(opt(a.id,a[L]));});});
+    $('q-maxp').appendChild(opt('',t.any));$('f-maxp').appendChild(opt('',t.max));$('f-minp').appendChild(opt('',t.min));
+    priceSteps.forEach(function(p){[$('q-maxp'),$('f-maxp'),$('f-minp')].forEach(function(sel){sel.appendChild(opt(String(p),fmtPrice(p)));});});
+    $('f-beds').appendChild(opt('',t.any));[1,2,3,4,5].forEach(function(n){$('f-beds').appendChild(opt(String(n),n+t.beds_plus));});
+    var sorts=[['rec',t.sort_rec],['plow',t.sort_plow],['phigh',t.sort_phigh],['new',t.sort_new]];
+    sorts.forEach(function(x){$('re-sort').appendChild(opt(x[0],x[1]));});
+  }
+  function fillFacets(){
+    [$('q-type'),$('f-type')].forEach(function(sel){sel.innerHTML='';sel.appendChild(opt('',t.any));(FACETS.types||[]).forEach(function(ty){sel.appendChild(opt(ty.value,(t.types[ty.value]||ty.value)+' ('+ty.count+')'));});});
+    var r=$('f-region');r.innerHTML='';r.appendChild(opt('',t.any));
+    (FACETS.regions||[]).forEach(function(x){r.appendChild(opt((x.values||[x.label]).join('|'),x.label+' ('+x.count+')'));});
+    syncControls();
+  }
+  // /pt/real-estate is served without the server-side facets, so build them here.
+  function loadFacets(){
+    if(FACETS){fillFacets();return;}
+    var rows=[];
+    (function page(off){
+      fetch(SUPABASE_URL+'/rest/v1/properties?status=eq.published&select=region,property_type&order=id.asc&limit=1000&offset='+off,{headers:HDR})
+        .then(function(r){return r.json();}).then(function(c){
+          rows=rows.concat(Array.isArray(c)?c:[]);
+          if(Array.isArray(c)&&c.length===1000)return page(off+1000);
+          var syn={lisbon:'Lisboa',oporto:'Porto'},reg={},typ={};
+          rows.forEach(function(x){var raw=(x.region||'').trim();if(raw){var k=syn[raw.toLowerCase()]||raw;reg[k]=reg[k]||{label:k,values:[],count:0};if(reg[k].values.indexOf(raw)<0)reg[k].values.push(raw);reg[k].count++;}if(x.property_type)typ[x.property_type]=(typ[x.property_type]||0)+1;});
+          FACETS={regions:Object.keys(reg).map(function(k){return reg[k];}).sort(function(a,b){return b.count-a.count;}),types:Object.keys(typ).map(function(k){return{value:k,count:typ[k]};}).sort(function(a,b){return b.count-a.count;})};
+          fillFacets();
+        }).catch(function(){});
+    })(0);
+  }
+  function syncControls(){
+    $('f-q').value=S.q||'';$('q-text').value=S.q||'';
+    $('f-area').value=S.area||'';$('q-area').value=S.area||'';
+    $('f-region').value=S.region||'';
+    $('f-type').value=S.type||'';$('q-type').value=S.type||'';
+    $('f-minp').value=S.minp||'';$('f-maxp').value=S.maxp||'';$('q-maxp').value=S.maxp||'';
+    $('f-beds').value=S.beds||'';$('f-gv').checked=S.gv==='1';
+    $('re-sort').value=S.sort||'rec';$('re-per').value=S.per||'25';
+    document.querySelectorAll('.re-seg button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-view')===(S.view||'list')?'true':'false');});
+    $('re-bbox').checked=!!S.bbox;
+  }
 
+  // ---------- query ----------
+  function filterQuery(withBbox){
+    var q='status=eq.published';
+    if(activeDev)q+='&development=eq.'+encodeURIComponent(activeDev);
+    else if(!isSearch())q+='&development=is.null';
+    var a=areaById(S.area);if(a)q+='&'+a.q;
+    if(S.region)q+='&region=in.('+S.region.split('|').map(function(v){return '"'+encodeURIComponent(v)+'"';}).join(',')+')';
+    if(S.type)q+='&property_type=eq.'+encodeURIComponent(S.type);
+    if(S.minp)q+='&price=gte.'+parseInt(S.minp,10);
+    if(S.maxp)q+='&price=lte.'+parseInt(S.maxp,10);
+    if(S.beds)q+='&bedrooms=gte.'+parseInt(S.beds,10);
+    if(S.gv==='1')q+='&golden_visa=is.true';
+    if(S.q){
+      var w=S.q.replace(/[(),."*:]/g,' ').trim();
+      if(w){var e=encodeURIComponent('*'+w+'*');q+='&or=(city.ilike.'+e+',region.ilike.'+e+',address.ilike.'+e+',reference.ilike.'+e+',title->>en.ilike.'+e+',title->>pt.ilike.'+e+')';}
+    }
+    if(withBbox&&S.bbox){var b=S.bbox.split(',').map(Number);if(b.length===4&&b.every(isFinite))q+='&latitude=gte.'+b[0]+'&latitude=lte.'+b[2]+'&longitude=gte.'+b[1]+'&longitude=lte.'+b[3];}
+    return q;
+  }
+  function orderBy(){return {plow:'price.asc.nullslast',phigh:'price.desc.nullslast',new:'created_at.desc'}[S.sort]||'featured.desc,sort_order.asc,created_at.desc';}
+  var SEL='slug,title,cover_image,images,price,currency,sold,upcoming,city,region,bedrooms,bathrooms,area_sqm,property_type,transaction_type,featured,golden_visa,latitude,longitude';
+
+  // ---------- list ----------
   function cardHtml(p){
-    var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'https://via.placeholder.com/600x400?text=Smith+%26+Adams';
+    var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'';
     var specs=[];
     if(p.bedrooms)specs.push(['bed',p.bedrooms]);
     if(p.bathrooms)specs.push(['bath',p.bathrooms]);
     if(p.area_sqm)specs.push(['area',Math.round(p.area_sqm)+' m²']);
     var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#11222D')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
-    var featStyle=p.featured?'border-color:#D6C29A;box-shadow:0 12px 34px rgba(17,34,45,.10);':'';
-    return '<a href="property/'+encodeURIComponent(p.slug)+'" class="re-card" data-reveal style="display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;'+featStyle+'">'+
+    return '<a href="/property/'+encodeURIComponent(p.slug)+'" class="re-card" data-reveal style="display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;">'+
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
-          '<img class="re-card-img" src="'+img+'" alt="'+pick(p.title).replace(/"/g,'&quot;')+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;'+(p.sold?'filter:grayscale(.55);opacity:.92;':'')+'" loading="lazy"/>'+
-          '<span class="satoshi" style="position:absolute;top:12px;left:12px;'+(p.upcoming?'background:#D6C29A;color:#11222D;':'background:rgba(17,34,45,.9);color:#fff;')+'font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;">'+(p.upcoming?t.upcoming:(p.sold?t.sold:(p.transaction_type==='rent'?t.rent:t.sale)))+'</span>'+
-          (p.featured?'<span class="satoshi" style="position:absolute;top:44px;left:12px;background:#11222D;color:#D6C29A;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;">'+t.recommended+'</span>':'')+
-          (p.golden_visa?'<span class="satoshi" style="position:absolute;top:12px;right:12px;background:#C9A227;color:#11222D;font-size:11px;font-weight:700;padding:5px 11px;border-radius:999px;">'+t.gv+'</span>':'')+
+          (img?'<img class="re-card-img" src="'+esc(img)+'" alt="'+esc(pick(p.title))+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;'+(p.sold?'filter:grayscale(.55);opacity:.92;':'')+'" loading="lazy"/>':'')+
+          '<span class="satoshi" style="position:absolute;top:12px;left:12px;'+(p.upcoming?'background:#D6C29A;color:#11222D;':'background:rgba(17,34,45,.9);color:#fff;')+'font-size:11px;font-weight:600;padding:5px 10px;border-radius:2px;">'+(p.upcoming?t.upcoming:(p.sold?t.sold:(p.transaction_type==='rent'?t.rent:t.sale)))+'</span>'+
+          (p.golden_visa?'<span class="satoshi" style="position:absolute;top:12px;right:12px;background:#fff;color:#11222D;font-size:11px;font-weight:600;padding:5px 10px;border-radius:2px;">'+t.gv+'</span>':'')+
         '</div>'+
-        '<div style="padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;">'+
-          '<h3 class="serif" style="font-size:22px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 12px;min-height:56px;letter-spacing:-0.01em;">'+pick(p.title)+'</h3>'+
+        '<div style="padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;">'+
+          '<p class="satoshi" style="font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin:0 0 6px;">'+esc([p.city,p.region].filter(Boolean).join(', '))+'</p>'+
+          '<h3 class="serif" style="font-size:20px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 12px;letter-spacing:-0.01em;">'+esc(pick(p.title))+'</h3>'+
           '<div class="satoshi" style="display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink);margin:0 0 16px;font-weight:500;">'+specsHtml+'</div>'+
-          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;margin-top:auto;">'+
-            '<span class="serif" style="font-size:22px;font-weight:500;color:var(--navy);">'+(p.sold||!p.price?'':((p.upcoming?t.from+' ':'')+fmtPrice(p.price,p.currency)))+'</span>'+
-            '<span class="satoshi" style="font-size:13px;font-weight:600;color:var(--navy);">'+t.view+' →</span>'+
+          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;margin-top:auto;">'+
+            '<span class="serif" style="font-size:21px;font-weight:500;color:var(--navy);">'+(p.sold||!p.price?'':((p.upcoming?t.from+' ':'')+fmtPrice(p.price,p.currency)))+'</span>'+
+            '<span class="satoshi" style="font-size:13px;font-weight:600;color:var(--navy);">'+t.view+' &rarr;</span>'+
           '</div>'+
         '</div>'+
       '</a>';
   }
-
-  var PAGE=24, state={offset:0,loading:false,done:false,total:null};
-  var grid=document.getElementById('re-grid'),
-      countEl=document.getElementById('re-count'),
-      loadingEl=document.getElementById('re-loading'),
-      emptyEl=document.getElementById('re-empty');
-  var moreEl=document.createElement('div');moreEl.id='re-more';moreEl.style.cssText='display:none;justify-content:center;padding:34px 0;';moreEl.innerHTML='<div class="spin"></div>';grid.parentNode.appendChild(moreEl);
-  var sentinel=document.createElement('div');sentinel.id='re-sentinel';sentinel.style.cssText='height:1px;';grid.parentNode.appendChild(sentinel);
-
-  function buildUrl(){
-    var q='status=eq.published';
-    // Grouped multi-unit projects are shown as development cards, not in the
-    // main grid - unless the user is viewing one project's units.
-    if(activeDev){ q+='&development=eq.'+encodeURIComponent(activeDev); }
-    else { q+='&development=is.null'; }
-    var region=fRegion.value; if(region){ q+='&region=in.('+region.split('|').map(function(v){return '"'+encodeURIComponent(v)+'"';}).join(',')+')'; }
-    var type=fType.value; if(type) q+='&property_type=eq.'+encodeURIComponent(type);
-    var trans=fTrans.value; if(trans) q+='&transaction_type=eq.'+encodeURIComponent(trans);
-    var beds=parseInt(fBeds.value||'0',10); if(beds) q+='&bedrooms=gte.'+beds;
-    var maxp=parseInt(fPrice.value||'0',10); if(maxp) q+='&price=lte.'+maxp;
-    q+='&order=featured.desc,sort_order.asc,created_at.desc&limit='+PAGE+'&offset='+state.offset;
-    q+='&select=slug,title,cover_image,images,price,currency,sold,upcoming,city,region,bedrooms,bathrooms,area_sqm,property_type,transaction_type,featured,golden_visa';
-    return SUPABASE_URL+'/rest/v1/properties?'+q;
-  }
-  function setCount(){ if(state.total==null){countEl.textContent='';return;} countEl.textContent=state.total+' '+(state.total===1?t.results_one:t.results_many); }
-  function loadMore(){
-    if(state.loading||state.done)return;
-    state.loading=true;
-    if(state.offset===0)loadingEl.style.display='flex'; else moreEl.style.display='flex';
-    var headers={apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY};
-    if(state.offset===0)headers.Prefer='count=exact';
-    fetch(buildUrl(),{headers:headers}).then(function(r){
-      if(state.offset===0){var cr=r.headers.get('content-range');if(cr){var m=cr.match(/\/(\d+)/);if(m)state.total=parseInt(m[1],10);}}
+  var total=0,seq=0;
+  function loadList(){
+    var my=++seq,per=parseInt(S.per||'25',10),page=Math.max(1,parseInt(S.page||'1',10));
+    $('re-loading').style.display='flex';$('re-empty').style.display='none';
+    var url=SUPABASE_URL+'/rest/v1/properties?'+filterQuery(true)+'&order='+orderBy()+'&limit='+per+'&offset='+((page-1)*per)+'&select='+SEL;
+    fetch(url,{headers:Object.assign({Prefer:'count=exact'},HDR)}).then(function(r){
+      var cr=r.headers.get('content-range');var m=cr&&cr.match(/\/(\d+)/);total=m?parseInt(m[1],10):0;
       return r.json();
     }).then(function(rows){
-      loadingEl.style.display='none';moreEl.style.display='none';state.loading=false;
+      if(my!==seq)return;
+      $('re-loading').style.display='none';
       rows=Array.isArray(rows)?rows:[];
-      if(state.offset===0)grid.innerHTML='';
-      if(state.offset===0&&!rows.length){emptyEl.style.display='block';emptyEl.textContent=t.empty;setCount();state.done=true;return;}
-      emptyEl.style.display='none';
-      grid.insertAdjacentHTML('beforeend',rows.map(cardHtml).join(''));
-      if(window.rdReveal)window.rdReveal(grid);
-      state.offset+=rows.length;
-      if(rows.length<PAGE||(state.total!=null&&state.offset>=state.total))state.done=true;
-      setCount();
-    }).catch(function(e){
-      loadingEl.style.display='none';moreEl.style.display='none';state.loading=false;
-      if(state.offset===0){emptyEl.style.display='block';emptyEl.textContent=t.empty;}
-      console.warn('[real-estate] load error',e);
+      $('re-count').textContent=total+' '+(total===1?t.results_one:t.results_many);
+      if(!rows.length){$('re-grid').innerHTML='';$('re-empty').style.display='block';$('re-empty').textContent=t.empty;$('re-pages').innerHTML='';renderMapList([]);return;}
+      $('re-grid').innerHTML=rows.map(cardHtml).join('');
+      if(window.rdReveal)window.rdReveal($('re-grid'));
+      renderPages(page,Math.ceil(total/per));
+      renderMapList(rows);
+    }).catch(function(e){if(my!==seq)return;$('re-loading').style.display='none';$('re-empty').style.display='block';$('re-empty').textContent=t.empty;console.warn('[real-estate]',e);});
+  }
+  function renderPages(page,pages){
+    var nav=$('re-pages');if(pages<=1){nav.innerHTML='';return;}
+    var set=[1,pages,page-1,page,page+1].filter(function(n){return n>=1&&n<=pages;});
+    set=set.filter(function(n,i){return set.indexOf(n)===i;}).sort(function(a,b){return a-b;});
+    var h='<button type="button" data-p="'+(page-1)+'"'+(page<=1?' disabled':'')+' aria-label="'+t.prev+'">&larr;</button>',last=0;
+    set.forEach(function(n){if(n-last>1)h+='<span>&hellip;</span>';h+='<button type="button" data-p="'+n+'"'+(n===page?' aria-current="page"':'')+'>'+n+'</button>';last=n;});
+    h+='<button type="button" data-p="'+(page+1)+'"'+(page>=pages?' disabled':'')+' aria-label="'+t.next+'">&rarr;</button>';
+    nav.innerHTML=h;
+  }
+  $('re-pages').addEventListener('click',function(e){var b=e.target.closest('button[data-p]');if(!b||b.disabled)return;S.page=b.getAttribute('data-p');apply(true);$('re-listings').scrollIntoView({behavior:'smooth'});});
+
+  // ---------- chips (active filters, removable) ----------
+  function renderChips(){
+    var c=[],a=areaById(S.area);
+    if(S.q)c.push(['q','"'+S.q+'"']);
+    if(a)c.push(['area',a[L]]);
+    if(S.region)c.push(['region',S.region.split('|')[0]]);
+    if(S.type)c.push(['type',t.types[S.type]||S.type]);
+    if(S.minp)c.push(['minp','≥ '+fmtPrice(S.minp)]);
+    if(S.maxp)c.push(['maxp','≤ '+fmtPrice(S.maxp)]);
+    if(S.beds)c.push(['beds',S.beds+t.beds_plus]);
+    if(S.gv==='1')c.push(['gv','Golden Visa']);
+    if(S.bbox)c.push(['bbox',t.map_area]);
+    $('re-chips').innerHTML=c.map(function(x){return '<button type="button" class="re-chip" data-k="'+x[0]+'">'+esc(x[1])+' <span aria-hidden="true">&times;</span></button>';}).join('');
+  }
+  $('re-chips').addEventListener('click',function(e){var b=e.target.closest('.re-chip');if(!b)return;delete S[b.getAttribute('data-k')];S.page='1';syncControls();apply(true);});
+
+  // ---------- map (Leaflet, loaded on first use) ----------
+  var map=null,cluster=null,markers={},mapSeq=0;
+  function loadScript(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+  function loadCss(href){var l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);}
+  var leafletReady=null;
+  function ensureLeaflet(){
+    if(leafletReady)return leafletReady;
+    loadCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css');
+    loadCss('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css');
+    leafletReady=loadScript('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js')
+      .then(function(){return loadScript('https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js');});
+    return leafletReady;
+  }
+  function initMap(){
+    if(map){setTimeout(function(){map.invalidateSize();},50);return Promise.resolve();}
+    return ensureLeaflet().then(function(){
+      var Lf=window.L;
+      map=Lf.map('re-map',{scrollWheelZoom:true}).setView([39.6,-8.2],7);
+      Lf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+      cluster=Lf.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:48,iconCreateFunction:function(c){return Lf.divIcon({html:'<span class="re-pin">'+c.getChildCount()+'</span>',className:'',iconSize:null});}});
+      map.addLayer(cluster);
+      map.on('moveend',function(){if(!$('re-bbox').checked)return;var b=map.getBounds();S.bbox=[b.getSouth(),b.getWest(),b.getNorth(),b.getEast()].map(function(x){return x.toFixed(4);}).join(',');S.page='1';writeState(false);renderChips();loadList();});
     });
   }
-  function reset(){ state={offset:0,loading:false,done:false,total:null}; grid.innerHTML=''; loadMore(); }
+  function loadMarkers(){
+    var my=++mapSeq,rows=[],Lf=window.L;
+    (function page(off){
+      fetch(SUPABASE_URL+'/rest/v1/properties?'+filterQuery(false)+'&latitude=not.is.null&select=slug,title,price,cover_image,images,city,latitude,longitude&order=id.asc&limit=1000&offset='+off,{headers:HDR})
+        .then(function(r){return r.json();}).then(function(c){
+          if(my!==mapSeq)return;
+          rows=rows.concat(Array.isArray(c)?c:[]);
+          if(Array.isArray(c)&&c.length===1000&&off<4000)return page(off+1000);
+          cluster.clearLayers();markers={};
+          // Listings that share an address get a small deterministic offset
+          // so each one stays clickable.
+          var seen={};
+          var ms=rows.map(function(p){
+            var k=p.latitude+','+p.longitude,n=seen[k]=(seen[k]||0)+1,ang=n*2.4,d=n>1?0.0009*Math.sqrt(n):0;
+            var m=Lf.marker([p.latitude+d*Math.sin(ang),p.longitude+d*Math.cos(ang)],{icon:Lf.divIcon({html:'<span class="re-pin" data-slug="'+esc(p.slug)+'">'+shortPrice(p.price)+'</span>',className:'',iconSize:null})});
+            var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'';
+            m.bindPopup('<div class="re-popup"><a href="/property/'+encodeURIComponent(p.slug)+'">'+(img?'<img src="'+esc(img)+'" alt="">':'')+'<h4>'+esc(pick(p.title))+'</h4><p>'+esc(p.city||'')+' &middot; '+fmtPrice(p.price)+'</p></a></div>',{closeButton:false,offset:[0,-18]});
+            markers[p.slug]=m;return m;
+          });
+          cluster.addLayers(ms);
+          if(ms.length&&!S.bbox){map.fitBounds(cluster.getBounds(),{padding:[30,30],maxZoom:13});}
+        }).catch(function(e){console.warn('[re-map]',e);});
+    })(0);
+  }
+  function renderMapList(rows){
+    if((S.view||'list')!=='map')return;
+    $('re-maplist').innerHTML=rows.map(function(p){
+      var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'';
+      return '<a class="re-mini" data-slug="'+esc(p.slug)+'" href="/property/'+encodeURIComponent(p.slug)+'">'+(img?'<img src="'+esc(img)+'" alt="" loading="lazy">':'<span></span>')+'<div><h4>'+esc(pick(p.title))+'</h4><p>'+esc([p.city,p.region].filter(Boolean).join(', '))+'</p><b>'+(p.price?fmtPrice(p.price,p.currency):'')+'</b></div></a>';
+    }).join('')+($('re-pages').innerHTML?'<nav class="re-pages" style="margin-top:12px">'+$('re-pages').innerHTML+'</nav>':'');
+  }
+  $('re-maplist').addEventListener('click',function(e){var b=e.target.closest('button[data-p]');if(!b||b.disabled)return;e.preventDefault();S.page=b.getAttribute('data-p');apply(true);});
+  $('re-maplist').addEventListener('mouseover',function(e){var a=e.target.closest('.re-mini');document.querySelectorAll('.re-pin.is-hot').forEach(function(x){x.classList.remove('is-hot');});if(!a)return;var pin=document.querySelector('.re-pin[data-slug="'+a.getAttribute('data-slug')+'"]');if(pin)pin.classList.add('is-hot');});
 
-  [fRegion,fType,fTrans,fBeds,fPrice].forEach(function(el){el.addEventListener('change',reset);});
-  document.getElementById('f-reset').addEventListener('click',function(){[fRegion,fType,fTrans,fBeds,fPrice].forEach(function(el){el.value='';});reset();});
+  // ---------- apply ----------
+  function apply(push){
+    writeState(push);
+    document.body.classList.toggle('re-results',isSearch());
+    document.body.classList.toggle('rd-dark-hero',!isSearch());
+    document.body.classList.toggle('re-map',(S.view||'list')==='map');
+    renderChips();
+    loadList();
+    if((S.view||'list')==='map')initMap().then(loadMarkers).catch(function(e){console.warn('[re-map]',e);});
+  }
 
-  // preselect from URL (?region=Lisboa&type=apartment)
-  var qs=new URLSearchParams(location.search);
-  if(qs.get('type'))fType.value=qs.get('type');
-  if(qs.get('region')){var want=qs.get('region').toLowerCase();for(var i=0;i<fRegion.options.length;i++){if(fRegion.options[i].value.toLowerCase().split('|').indexOf(want)>=0){fRegion.selectedIndex=i;break;}}}
+  function fromSide(){
+    S.q=$('f-q').value.trim();S.area=$('f-area').value;S.region=$('f-region').value;S.type=$('f-type').value;
+    S.minp=$('f-minp').value;S.maxp=$('f-maxp').value;S.beds=$('f-beds').value;S.gv=$('f-gv').checked?'1':'';
+    Object.keys(S).forEach(function(k){if(!S[k])delete S[k];});S.page='1';
+  }
+  ['f-area','f-region','f-type','f-minp','f-maxp','f-beds','f-gv'].forEach(function(id){$(id).addEventListener('change',function(){fromSide();apply(true);});});
+  var qt;$('f-q').addEventListener('input',function(){clearTimeout(qt);qt=setTimeout(function(){fromSide();apply(false);},400);});
+  $('f-reset').addEventListener('click',function(){var keep={per:S.per,sort:S.sort,view:S.view};S={};Object.keys(keep).forEach(function(k){if(keep[k])S[k]=keep[k];});syncControls();apply(true);});
+  $('re-q').addEventListener('submit',function(e){
+    e.preventDefault();
+    S.q=$('q-text').value.trim();S.area=$('q-area').value;S.type=$('q-type').value;S.maxp=$('q-maxp').value;
+    Object.keys(S).forEach(function(k){if(!S[k])delete S[k];});S.page='1';
+    if(!isSearch())S.page='1';
+    syncControls();apply(true);window.scrollTo(0,0);
+  });
+  $('re-sort').addEventListener('change',function(){S.sort=this.value;S.page='1';apply(true);});
+  $('re-per').addEventListener('change',function(){S.per=this.value;S.page='1';apply(true);});
+  document.querySelectorAll('.re-seg button').forEach(function(b){b.addEventListener('click',function(){S.view=b.getAttribute('data-view');if(S.view==='list')delete S.bbox;syncControls();apply(true);});});
+  $('re-bbox').addEventListener('change',function(){if(this.checked&&map){map.fire('moveend');}else{delete S.bbox;S.page='1';apply(true);}});
+  $('re-filters-btn').addEventListener('click',function(){document.body.classList.add('re-drawer');});
+  $('f-done').addEventListener('click',function(){document.body.classList.remove('re-drawer');});
+  window.addEventListener('popstate',function(){S=readState();syncControls();apply(false);});
 
-  if('IntersectionObserver' in window){ new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)loadMore();});},{rootMargin:'700px'}).observe(sentinel); }
+  // ---------- areas strip (one listing photo per area) ----------
+  $('re-areas').innerHTML=AREAS.map(function(a){return '<a class="re-area" href="/real-estate?area='+a.id+'" data-area="'+a.id+'"><img alt="" loading="lazy"><span>'+a[L]+'<small></small></span></a>';}).join('');
+  $('re-areas').addEventListener('click',function(e){var a=e.target.closest('.re-area');if(!a)return;e.preventDefault();S={area:a.getAttribute('data-area'),per:S.per,view:S.view};Object.keys(S).forEach(function(k){if(!S[k])delete S[k];});syncControls();apply(true);window.scrollTo(0,0);});
+  AREAS.forEach(function(a){
+    fetch(SUPABASE_URL+'/rest/v1/properties?status=eq.published&'+a.q+'&cover_image=not.is.null&select=cover_image&order=featured.desc,price.desc.nullslast&limit=1',{headers:Object.assign({Prefer:'count=exact'},HDR)})
+      .then(function(r){var cr=r.headers.get('content-range');var m=cr&&cr.match(/\/(\d+)/);var el=document.querySelector('.re-area[data-area="'+a.id+'"]');if(m&&el)el.querySelector('small').textContent=m[1]+' '+t.results_many;return r.json();})
+      .then(function(rows){var el=document.querySelector('.re-area[data-area="'+a.id+'"] img');if(el&&rows&&rows[0])el.src=rows[0].cover_image;}).catch(function(){});
+  });
 
-  // ---- developments (multi-unit projects grouped into a single card) ----
+  // ---------- developments (multi-unit projects grouped into a single card) ----------
   function devcardHtml(name,units){
     var wi=units.filter(function(u){return u.cover_image||(Array.isArray(u.images)&&u.images[0]);});
-    var img=(wi[0]&&(wi[0].cover_image||wi[0].images[0]))||'https://via.placeholder.com/600x400?text=Smith+%26+Adams';
+    var img=(wi[0]&&(wi[0].cover_image||wi[0].images[0]))||'';
     var prices=units.map(function(u){return u.price;}).filter(function(x){return x;});
     var minp=prices.length?Math.min.apply(null,prices):null;
     var loc=[units[0].city,units[0].region].filter(Boolean).join(', ');
-    var n=units.length, rw=n===1?t.residence:t.residences;
-    return '<a href="/real-estate?development='+encodeURIComponent(name)+'" class="re-card" data-reveal style="flex:0 0 300px;scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:3px;overflow:hidden;text-decoration:none;color:inherit;">'+
-        '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
-          '<img class="re-card-img" src="'+img+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;" loading="lazy"/>'+
-          '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:#11222D;color:#D6C29A;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px;">'+n+' '+rw+'</span>'+
-        '</div>'+
-        '<div style="padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;">'+
-          '<h3 class="serif" style="font-size:22px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 8px;letter-spacing:-0.01em;">'+esc(name)+'</h3>'+
+    var n=units.length,rw=n===1?t.residence:t.residences;
+    return '<a href="/real-estate?development='+encodeURIComponent(name)+'" class="re-card" data-reveal style="flex:0 0 300px;scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;">'+
+        '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+(img?'<img class="re-card-img" src="'+esc(img)+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;" loading="lazy"/>':'')+
+          '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:#11222D;color:#D6C29A;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:2px;">'+n+' '+rw+'</span></div>'+
+        '<div style="padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;">'+
+          '<h3 class="serif" style="font-size:21px;font-weight:500;color:var(--navy);line-height:1.25;margin:0 0 8px;letter-spacing:-0.01em;">'+esc(name)+'</h3>'+
           '<div class="satoshi" style="font-size:13.5px;color:var(--ink);margin:0 0 16px;font-weight:500;">'+esc(loc)+'</div>'+
-          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px;margin-top:auto;">'+
+          '<div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;margin-top:auto;">'+
             '<span class="serif" style="font-size:20px;font-weight:500;color:var(--navy);">'+(minp?(t.from+' '+fmtPrice(minp,units[0].currency)):'')+'</span>'+
-            '<span class="satoshi" style="font-size:13px;font-weight:600;color:var(--navy);">'+t.view+' &#8594;</span>'+
-          '</div>'+
-        '</div>'+
-      '</a>';
+            '<span class="satoshi" style="font-size:13px;font-weight:600;color:var(--navy);">'+t.view+' &rarr;</span></div></div></a>';
   }
   function loadDevelopments(){
     if(activeDev)return;
-    fetch(SUPABASE_URL+'/rest/v1/properties?status=eq.published&development=not.is.null&select=development,city,region,price,currency,cover_image,images,sort_order&order=development.asc,sort_order.asc',
-      {headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}})
+    fetch(SUPABASE_URL+'/rest/v1/properties?status=eq.published&development=not.is.null&select=development,city,region,price,currency,cover_image,images,sort_order&order=development.asc,sort_order.asc',{headers:HDR})
     .then(function(r){return r.json();}).then(function(rows){
       if(!Array.isArray(rows)||!rows.length)return;
-      var g={};rows.forEach(function(p){var k=p.development;(g[k]=g[k]||[]).push(p);});
-      var keys=Object.keys(g).filter(function(k){return g[k].length>=2;});
+      var g={};rows.forEach(function(p){(g[p.development]=g[p.development]||[]).push(p);});
+      var keys=Object.keys(g).filter(function(k){return g[k].length>=2;}).sort(function(a,b){return g[b].length-g[a].length;});
       if(!keys.length)return;
-      keys.sort(function(a,b){return g[b].length-g[a].length;});
-      document.getElementById('re-devs').innerHTML=keys.map(function(k){return devcardHtml(k,g[k]);}).join('');
-      document.getElementById('re-devs-wrap').style.display='block';
-      if(window.rdReveal)window.rdReveal(document.getElementById('re-devs'));
+      $('re-devs').innerHTML=keys.map(function(k){return devcardHtml(k,g[k]);}).join('');
+      $('re-devs-wrap').style.display='block';
+      if(window.rdReveal)window.rdReveal($('re-devs'));
     }).catch(function(e){console.warn('[re-devs]',e);});
   }
-  if(activeDev){
-    document.getElementById('re-dev-active-label').textContent=activeDev;
-    document.getElementById('re-dev-active').style.display='inline-flex';
-  }
-  reset();
+  if(activeDev){$('re-dev-active-label').textContent=activeDev;$('re-dev-active').style.display='inline-flex';}
+
+  fillStatic();loadFacets();syncControls();
+  apply(false);
   loadDevelopments();
 
-  // ---- editable page content (hero + organic blocks) ----
-  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-  fetch(SUPABASE_URL+'/rest/v1/re_page?id=eq.real-estate&select=hero,blocks&limit=1',{
-    headers:{apikey:SUPABASE_ANON_KEY,Authorization:'Bearer '+SUPABASE_ANON_KEY}
-  }).then(function(r){return r.json();}).then(function(rows){
+  // ---------- editable page content (hero + organic blocks) ----------
+  fetch(SUPABASE_URL+'/rest/v1/re_page?id=eq.real-estate&select=hero,blocks&limit=1',{headers:HDR})
+  .then(function(r){return r.json();}).then(function(rows){
     if(!Array.isArray(rows)||!rows.length)return;
     var pg=rows[0];var hero=pg.hero||{};
-    // hero overrides
-    if(hero.title&&pick(hero.title))document.getElementById('re-hero-title').textContent=pick(hero.title);
-    if(hero.subtitle&&pick(hero.subtitle))document.getElementById('re-hero-sub').textContent=pick(hero.subtitle);
-    var sec=document.getElementById('re-hero');var vid=document.getElementById('re-hero-video');
-    if(hero.bg_color)sec.style.backgroundColor=hero.bg_color;
-    // play() straight after load() is the race that aborts the start; the
-      // helper picks it up on loadeddata instead.
-      if(hero.bg_video && vid){ vid.style.display=''; vid.src=hero.bg_video; try{vid.load();}catch(e){} }
-    else if(hero.bg_image){ if(vid){vid.style.display='none';} sec.style.backgroundImage="url('"+hero.bg_image+"')"; }
-    // if neither bg_video nor bg_image set, keep the baked-in brand video default
-    // blocks
+    if(hero.bg_image){$('re-hero').style.backgroundImage="url('"+hero.bg_image+"')";}
+    if(hero.bg_color)$('re-hero').style.backgroundColor=hero.bg_color;
     var blocks=Array.isArray(pg.blocks)?pg.blocks:[];
-    if(blocks.length){
-      var wrap=document.getElementById('re-blocks-wrap');var c=document.getElementById('re-blocks');
-      wrap.style.display='block';c.style.paddingTop='clamp(40px,7vw,80px)';
-      blocks.forEach(function(b){
-        var heading=pick(b.heading||{}),body=pick(b.body||{}),cap=pick(b.caption||{});
-        var el=document.createElement('div');el.style.marginBottom='40px';el.setAttribute('data-reveal','');
-        if(b.type==='text'){
-          el.innerHTML=(heading?'<h2 class="serif" style="font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--navy);letter-spacing:-.01em;margin:0 0 18px;">'+esc(heading)+'</h2>':'')+
-            '<div class="satoshi" style="font-size:17px;color:var(--ink);line-height:1.85;">'+(body||'')+'</div>';
-        }else if(b.type==='image'){
-          el.innerHTML='<figure style="margin:0;"><img src="'+esc(b.image||'')+'" alt="'+esc(cap)+'" style="width:100%;border-radius:3px;display:block;"/>'+(cap?'<figcaption class="satoshi" style="font-size:13px;color:var(--slate);margin-top:10px;text-align:center;">'+esc(cap)+'</figcaption>':'')+'</figure>';
-        }else if(b.type==='text_image'){
-          var imgHtml='<div style="flex:1;min-width:280px;"><img src="'+esc(b.image||'')+'" alt="'+esc(heading)+'" style="width:100%;border-radius:3px;display:block;"/></div>';
-          var txtHtml='<div style="flex:1;min-width:280px;">'+(heading?'<h2 class="serif" style="font-size:clamp(24px,2.8vw,34px);font-weight:500;color:var(--navy);margin:0 0 16px;letter-spacing:-.01em;">'+esc(heading)+'</h2>':'')+'<div class="satoshi" style="font-size:16px;color:var(--ink);line-height:1.8;">'+(body||'')+'</div></div>';
-          el.style.display='flex';el.style.gap='40px';el.style.alignItems='center';el.style.flexWrap='wrap';
-          el.innerHTML=(b.image_side==='right')?(txtHtml+imgHtml):(imgHtml+txtHtml);
-        }
-        c.appendChild(el);
-      });
-      window.rdReveal(c);
-    }
+    if(!blocks.length)return;
+    var wrap=$('re-blocks-wrap'),c=$('re-blocks');
+    if(!isSearch())wrap.style.display='block';
+    c.style.paddingTop='clamp(40px,7vw,80px)';
+    blocks.forEach(function(b){
+      var heading=pick(b.heading||{}),body=pick(b.body||{}),cap=pick(b.caption||{});
+      var el=document.createElement('div');el.style.marginBottom='40px';el.setAttribute('data-reveal','');
+      if(b.type==='text'){
+        el.innerHTML=(heading?'<h2 class="serif" style="font-size:clamp(26px,3vw,40px);font-weight:500;color:var(--navy);letter-spacing:-.01em;margin:0 0 18px;">'+esc(heading)+'</h2>':'')+'<div class="satoshi" style="font-size:17px;color:var(--ink);line-height:1.85;">'+(body||'')+'</div>';
+      }else if(b.type==='image'){
+        el.innerHTML='<figure style="margin:0;"><img src="'+esc(b.image||'')+'" alt="'+esc(cap)+'" style="width:100%;border-radius:2px;display:block;"/>'+(cap?'<figcaption class="satoshi" style="font-size:13px;color:var(--slate);margin-top:10px;text-align:center;">'+esc(cap)+'</figcaption>':'')+'</figure>';
+      }else if(b.type==='text_image'){
+        var imgHtml='<div style="flex:1;min-width:280px;"><img src="'+esc(b.image||'')+'" alt="'+esc(heading)+'" style="width:100%;border-radius:2px;display:block;"/></div>';
+        var txtHtml='<div style="flex:1;min-width:280px;">'+(heading?'<h2 class="serif" style="font-size:clamp(24px,2.8vw,34px);font-weight:500;color:var(--navy);margin:0 0 16px;letter-spacing:-.01em;">'+esc(heading)+'</h2>':'')+'<div class="satoshi" style="font-size:16px;color:var(--ink);line-height:1.8;">'+(body||'')+'</div></div>';
+        el.style.display='flex';el.style.gap='40px';el.style.alignItems='center';el.style.flexWrap='wrap';
+        el.innerHTML=(b.image_side==='right')?(txtHtml+imgHtml):(imgHtml+txtHtml);
+      }
+      c.appendChild(el);
+    });
+    if(window.rdReveal)window.rdReveal(c);
   }).catch(function(e){console.warn('[real-estate] page content',e);});
 })();
 </script>
+
 
 <!-- FOOTER -->
 

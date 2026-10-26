@@ -757,3 +757,18 @@ chave sem NOME=); recomendado rodar.
   servicos, 3 passos+jornada, 6 marcas, case studies, contactos+AMI). Fonte docs/brochure/group-brochure.html;
   regenerar com scripts/build-brochure.sh (precisa do dev server em :5199). Hero da home: CTA ghost passou a
   "Download our brochure" (CMS home.hero.cta_brochure EN/PT).
+
+## Sessao 2026-10-26 (conta: abilio.diz / Claude Code) - F3 parte 1: Real Estate estilo Rightmove
+- Coordenadas: so 4/2171 tinham lat/lng. scripts/geocode-properties.py (Nominatim, 1 req/s, cache em
+  .geocode-cache.json, gitignored) preencheu por morada (rua) com recurso ao centro da cidade se o resultado
+  da rua ficar a >35 km. Novos imoveis do feed EGO ficam sem coordenadas ate se correr o script outra vez.
+- /real-estate (real-estate.shell.html) reescrito: hero com pesquisa (texto livre/zona/tipo/preco), "Explore by
+  area" (7 zonas: Lisbon, Cascais, Porto, Algarve=Faro, Silver Coast=Leiria, Comporta=Grandola+Alcacer, Coimbra),
+  empreendimentos; ao pesquisar fica so a lista (body.re-results). Filtros laterais (gaveta em mobile), chips
+  removiveis, ordenacao, 25/50/100 com paginas numeradas, vista Mapa (Leaflet+markercluster cdnjs, tiles OSM)
+  com lista lateral e "Search as I move the map" (bbox). Estado no URL + localStorage (re_state, re_last);
+  "Back to listings" no imovel volta a ultima pesquisa. /pt/real-estate calcula os facets no cliente.
+- Imovel (re-tools.js): calculadoras IMT/Selo (tabelas 2026 OfCirc 40129/2026; nao residentes 7,5% DL 97/2026,
+  OfCirc 40131/2026) e credito, EUR/USD/GBP (Frankfurter v2 = taxas BCE), imoveis semelhantes, PDF (ficha propria).
+- Fix: api/pt-static.js nao absolutizava srcset -> logo partido em todas as paginas /pt (404 /pt/logo.png).
+- PROXIMO F3: landing pages por zona + "Why invest in X".
