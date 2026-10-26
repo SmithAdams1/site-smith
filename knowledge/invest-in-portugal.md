@@ -33,3 +33,9 @@ The offering behind the /lp-invest hook. Say these EXACTLY; the distinction is a
 - Sovereign credit rating raised in 2025: S&P to A (Feb) then A+ (Aug); Fitch to A (Sep) - on sustained debt reduction/budget surpluses. Source: S&P/Fitch via Investing.com, ECO, gov.pt.
 - Safety: 7th safest country in the world, 5th in Europe - 2025 Global Peace Index (visionofhumanity.org).
 - EU + Eurozone + Schengen member (established). Use these third-party markers (not S&A's own numbers) for the "financially secure / safe" positioning.
+
+## VERIFIED (2026-10-26) - INE local housing prices and rents (12 months to June 2026)
+Source: INE Destaques "Preços da Habitação ao nível local 2T2026" (pub. 23 Oct 2026) and "Rendas da Habitação ao nível local 2T2026" (pub. 29 Sep 2026); values read from INE xlsx. Price = median EUR/m2 of dwellings sold; rent = median EUR/m2/month of NEW lease contracts. Indicative gross yield = rent*12/price (rough: different stocks).
+Portugal 2,264 / 9.76 (5.2%) | Lisboa 5,192 (+14.7% yoy, INE) / 17.43 (4.0%) | Cascais 4,889 / 16.83 (4.1%) | Porto 3,631 (+18.7% yoy, INE) / 14.48 (4.8%) | Algarve NUTS II 3,338 / 10.96 (3.9%) | Oeste NUTS III 2,130 / 8.07 (4.6%) | Grândola 2,543 / 11.13 | Alcácer do Sal 1,956 / 7.81 (small sample) | Coimbra 2,295 / 9.44 (4.9%).
+Single-quarter Q2 2026 headlines (what press quotes) differ: Lisboa 5,299, Portugal 2,445 (+18.4%). Rent series restarted Jun 2026 on new AT source data - don't mix with older half-year rent figures.
+Used on /real-estate/<area> (scripts/build-area-pages.py).

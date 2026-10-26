@@ -772,3 +772,8 @@ chave sem NOME=); recomendado rodar.
   OfCirc 40131/2026) e credito, EUR/USD/GBP (Frankfurter v2 = taxas BCE), imoveis semelhantes, PDF (ficha propria).
 - Fix: api/pt-static.js nao absolutizava srcset -> logo partido em todas as paginas /pt (404 /pt/logo.png).
 - PROXIMO F3: landing pages por zona + "Why invest in X".
+- F3 parte 2 (2026-10-26): paginas de zona /real-estate/<zona> e /pt/real-estate/<zona> (7 zonas), geradas por
+  scripts/build-area-pages.py (texto EN/PT no script; contagens/precos/foto lidos da BD na build; correr de novo
+  apos grandes mudancas do feed). Numeros INE (12 meses ate jun 2026, precos pub. 23/10, rendas pub. 29/09)
+  verificados nos xlsx e registados em knowledge/invest-in-portugal.md; IMT 2026 em knowledge/taxation.md.
+  Comporta = concelhos de Grandola + Alcacer do Sal (com nota). Cartoes de zona em /real-estate abrem estas paginas.

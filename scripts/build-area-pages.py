@@ -29,8 +29,25 @@ ANON = ('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im
 
 # INE medians. price = median value per m2 of dwellings sold; rent = median
 # rent per m2 of new lease agreements. Fill only with sourced figures.
-STATS = {}
-STATS_SOURCE = {'en': '', 'pt': ''}
+PER = {'en': '12 months to June 2026', 'pt': '12 meses até junho de 2026'}
+STATS = {
+    'lisbon': [{'geo': {'en': 'Lisbon (municipality)', 'pt': 'Lisboa (concelho)'}, 'price': 5192, 'rent': 17.43, 'yoy': 14.7}],
+    'cascais': [{'geo': {'en': 'Cascais (municipality)', 'pt': 'Cascais (concelho)'}, 'price': 4889, 'rent': 16.83}],
+    'porto': [{'geo': {'en': 'Porto (municipality)', 'pt': 'Porto (concelho)'}, 'price': 3631, 'rent': 14.48, 'yoy': 18.7}],
+    'algarve': [{'geo': {'en': 'the Algarve region', 'pt': 'região do Algarve'}, 'price': 3338, 'rent': 10.96}],
+    'silver-coast': [{'geo': {'en': 'the Oeste region', 'pt': 'região Oeste'}, 'price': 2130, 'rent': 8.07}],
+    'comporta': [{'geo': {'en': 'Grândola (municipality)', 'pt': 'Grândola (concelho)'}, 'price': 2543, 'rent': 11.13},
+                 {'geo': {'en': 'Alcácer do Sal (municipality)', 'pt': 'Alcácer do Sal (concelho)'}, 'price': 1956, 'rent': 7.81}],
+    'coimbra': [{'geo': {'en': 'Coimbra (municipality)', 'pt': 'Coimbra (concelho)'}, 'price': 2295, 'rent': 9.44}],
+}
+STATS_NOTE = {
+    'comporta': {'en': 'Comporta is not an INE statistical area. These are the medians for the two municipalities it spans, which include inland areas, so they understate prices on the coast.',
+                 'pt': 'A Comporta não é uma unidade estatística do INE. Estas são as medianas dos dois concelhos que abrange, que incluem zonas do interior e por isso ficam abaixo dos preços da costa.'},
+}
+STATS_SOURCE = {
+    'en': 'Source: INE, <a href="https://www.ine.pt/xportal/xmain?xpid=INE&amp;xpgid=ine_destaques&amp;DESTAQUESdest_boui=770298664&amp;DESTAQUESmodo=2&amp;xlang=pt" target="_blank" rel="noopener">Housing prices at local level, Q2 2026</a> (published 23 October 2026) and <a href="https://www.ine.pt/xportal/xmain?xpid=INE&amp;xpgid=ine_destaques&amp;DESTAQUESdest_boui=770299146&amp;DESTAQUESmodo=2&amp;xlang=pt" target="_blank" rel="noopener">Housing rents at local level, Q2 2026</a> (published 29 September 2026). Medians for the 12 months to June 2026; rents are for new lease agreements. Portugal: €2,264/m² and €9.76/m².',
+    'pt': 'Fonte: INE, <a href="https://www.ine.pt/xportal/xmain?xpid=INE&amp;xpgid=ine_destaques&amp;DESTAQUESdest_boui=770298664&amp;DESTAQUESmodo=2&amp;xlang=pt" target="_blank" rel="noopener">Estatísticas de Preços da Habitação ao nível local, 2.º trimestre de 2026</a> (publicado a 23 de outubro de 2026) e <a href="https://www.ine.pt/xportal/xmain?xpid=INE&amp;xpgid=ine_destaques&amp;DESTAQUESdest_boui=770299146&amp;DESTAQUESmodo=2&amp;xlang=pt" target="_blank" rel="noopener">Estatísticas de Rendas da Habitação ao nível local, 2.º trimestre de 2026</a> (publicado a 29 de setembro de 2026). Medianas dos 12 meses até junho de 2026; rendas dos novos contratos de arrendamento. Portugal: 2.264 €/m² e 9,76 €/m².',
+}
 
 AREAS = [
     {
@@ -154,7 +171,7 @@ UI = {
         'label': 'Real estate · {n}',
         'facts': '{n} at a glance', 'why': 'Why invest {in_n}', 'listings': 'Properties {in_n}',
         'see_all': 'See all {c} properties {in_n}', 'see_all_short': 'See all properties',
-        'price_m2': 'Median price per m² of homes sold', 'rent_m2': 'Median rent per m² of new leases',
+        'price_m2': 'Median price per m² of homes sold', 'rent_m2': 'Median monthly rent per m² of new leases',
         'yield': 'Indicative gross rental yield', 'yield_note': 'rent × 12 ÷ price, INE medians, not a return forecast',
         'our': 'Properties we list here', 'range': 'Asking prices in our listings',
         'faq': 'Questions about buying {in_n}', 'cta_h': 'Thinking about {n}?',
@@ -178,7 +195,7 @@ UI = {
         'label': 'Imobiliário · {n}',
         'facts': '{n} em números', 'why': 'Porquê investir {in_n}', 'listings': 'Imóveis {in_n}',
         'see_all': 'Ver os {c} imóveis {in_n}', 'see_all_short': 'Ver todos os imóveis',
-        'price_m2': 'Valor mediano por m² das casas vendidas', 'rent_m2': 'Renda mediana por m² dos novos contratos',
+        'price_m2': 'Valor mediano por m² das casas vendidas', 'rent_m2': 'Renda mensal mediana por m² dos novos contratos',
         'yield': 'Rentabilidade bruta indicativa', 'yield_note': 'renda × 12 ÷ preço, medianas do INE, não é uma previsão de retorno',
         'our': 'Imóveis que listamos aqui', 'range': 'Preços pedidos nos nossos imóveis',
         'faq': 'Perguntas sobre comprar {in_n}', 'cta_h': 'A pensar {in_n}?',
@@ -259,7 +276,7 @@ CSS = """
 .ar-hero p.lede{color:#e6ebee;font-family:var(--sans);font-weight:300;font-size:clamp(16px,1.35vw,19px);line-height:1.6;max-width:62ch;margin:18px 0 0}
 .ar-sec{padding:clamp(48px,6vw,84px) 0;background:var(--paper)}
 .ar-sec h2{font-family:var(--display);font-weight:500;color:var(--navy);font-size:clamp(26px,3vw,40px);letter-spacing:-.01em;margin:0}
-.ar-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:clamp(24px,3vw,36px) 0 0;border-top:1px solid var(--navy)}
+.ar-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px;margin:clamp(24px,3vw,36px) 0 0;border-top:1px solid var(--navy)}
 .ar-facts div{padding:18px 18px 18px 0;border-bottom:1px solid var(--line)}
 .ar-facts dt{font:500 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
 .ar-facts dd{margin:8px 0 0;font:500 clamp(24px,2.4vw,32px) var(--display);color:var(--navy)}
@@ -289,7 +306,7 @@ CSS = """
 .ar-cta h2{color:#fff}
 .ar-cta p{color:var(--stone);font:16px/1.7 var(--sans);max-width:56ch;margin:16px auto 0}
 .ar-cta .rd-cta{margin-top:28px}
-@media(max-width:860px){.ar-why,.ar-grid{grid-template-columns:1fr}.ar-why div:nth-child(even){padding-left:0;border-left:0}}
+@media(max-width:860px){.ar-why,.ar-grid,.ar-facts{grid-template-columns:1fr}.ar-why div:nth-child(even){padding-left:0;border-left:0}}
 </style>"""
 
 
@@ -309,11 +326,9 @@ def build(a, d, lang, head, tail, today):
     desc = desc if len(desc) <= 158 else desc[:155].rsplit(' ', 1)[0] + '...'
     dstr = today.strftime('%d %b %Y') if lang == 'en' else today.strftime('%d/%m/%Y')
 
-    st = STATS.get(a['slug'])
+    st = STATS.get(a['slug']) or []
     faqs = []
-    cost = []
-    if st and st.get('price'):
-        cost.append(U['a_cost_ine'].format(geo=st['geo'][lang], p=eur(st['price'], lang), per=st['price_period'][lang]))
+    cost = [U['a_cost_ine'].format(geo=g['geo'][lang], p=eur(g['price'], lang), per=PER[lang]) for g in st]
     if d['count'] and d['lo']:
         cost.append(U['a_cost_ours'].format(c=d['count'], n=n, in_n=in_n, lo=eur(d['lo'], lang), hi=eur(d['hi'], lang), md=eur(d['md'], lang), d=dstr))
     if cost:
@@ -346,19 +361,21 @@ def build(a, d, lang, head, tail, today):
     h = h.replace('</head>', ''.join(f'<script type="application/ld+json">{json.dumps(x, ensure_ascii=False)}</script>' for x in ld) + CSS + '\n</head>', 1)
 
     facts = []
-    if st and st.get('price'):
-        facts.append((U['price_m2'], eur(st['price'], lang), st['price_period'][lang] + (f' · {st["price_yoy"][lang]}' if st.get('price_yoy') else '')))
-    if st and st.get('rent'):
-        facts.append((U['rent_m2'], (f'€{st["rent"]:.2f}' if lang == 'en' else f'{st["rent"]:.2f} €'.replace('.', ',')), st['rent_period'][lang]))
-    if st and st.get('price') and st.get('rent'):
-        y = st['rent'] * 12 / st['price'] * 100
-        facts.append((U['yield'], (f'{y:.1f}%' if lang == 'en' else f'{y:.1f}%'.replace('.', ',')), U['yield_note']))
+    num = (lambda x, dp: f'{x:.{dp}f}') if lang == 'en' else (lambda x, dp: f'{x:.{dp}f}'.replace('.', ','))
+    multi = len(st) > 1
+    for g in st:
+        tag = (' · ' + g['geo'][lang]) if multi else ''
+        yoy = (f' · {"+" if g["yoy"] > 0 else ""}{num(g["yoy"], 1)}% ' + ('year on year' if lang == 'en' else 'em termos homólogos')) if g.get('yoy') else ''
+        facts.append((U['price_m2'] + tag, eur(g['price'], lang), PER[lang] + yoy))
+        facts.append((U['rent_m2'] + tag, ('€' + num(g['rent'], 2)) if lang == 'en' else (num(g['rent'], 2) + ' €'), PER[lang]))
+        facts.append((U['yield'] + tag, num(g['rent'] * 12 / g['price'] * 100, 1) + '%', U['yield_note']))
     if d['count']:
         facts.append((U['our'], str(d['count']), U['updated'].format(d=dstr)))
     if d['lo']:
         facts.append((U['range'], f'{eur(d["lo"], lang)} - {eur(d["hi"], lang)}', 'Median ' + eur(d['md'], lang) if lang == 'en' else 'Mediana ' + eur(d['md'], lang)))
     facts_html = ''.join(f'<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd><small>{esc(s)}</small></div>' for k, v, s in facts)
-    src_html = f'<p class="ar-src">{STATS_SOURCE[lang]}</p>' if st and STATS_SOURCE[lang] else ''
+    note = STATS_NOTE.get(a['slug'], {}).get(lang, '')
+    src_html = (f'<p class="ar-src">{note} {STATS_SOURCE[lang]}</p>' if st else '')
     why = ''.join(f'<div><h3>{esc(t)}</h3><p>{esc(p)}</p></div>' for t, p in a['why'][lang])
     faq_html = ''.join(f'<details name="ar-faq"><summary>{esc(q)}</summary><p>{ans}</p></details>' for q, ans in faqs)
     all_url = f'{pre}/real-estate?area={a["slug"]}'
