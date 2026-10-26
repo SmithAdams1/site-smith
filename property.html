@@ -64,6 +64,7 @@
 <div id="pd-loading" style="display:flex;justify-content:center;padding:120px 0;"><div class="spin"></div></div>
 <div id="pd-error" class="satoshi" style="display:none;text-align:center;padding:120px 24px;color:#6A7883;"></div>
 <div id="pd-root" class="pd-detail" style="display:none;"></div>
+<script src="/re-tools.js?v=1"></script>
 
 <script>
 (function(){
@@ -317,6 +318,7 @@
 
     // update document title/meta client-side (fallback when not SSR)
     document.title=pick(p.title)+' | Smith & Adams';
+    if(window.SAPropertyTools)window.SAPropertyTools.mount(p,root,L);
   }
 })();
 </script>
