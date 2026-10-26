@@ -683,3 +683,31 @@ Validated live: Lisboa+Lisbon->826, house->415, Setúbal->278, apartment+3bd+<=7
 - **EM PAUSA:** `Invest in Portugal | US | Search` = 97 kw em 5 grupos: "Grupo de anuncios 1" (74, legado, quase tudo broad); **SA . Golden Visa (7) e SA . Golden Visa (KW) (7) = DUPLICADOS**; SA . Investment & Funds (4); SA . Residency & D2 (5).
 - Correcao ao registo anterior: a LP tem **20** kw (nao 7); a "US | Search" nao e DSA sem keywords - tem 97 kw com grupos tematicos, mas esta em pausa.
 - Cleanup sugerido: LP devia ter grupos tematicos (hoje tudo num generico); consolidar os 2 grupos Golden Visa duplicados; decidir o destino da campanha Search em pausa (97 kw legado).
+
+## Sessao 2026-10-26 (conta: abilio.diz / Claude Code) - HoS reuniao 2 (Praca de Espanha 2) - Fase 1
+Fonte: gravacao "Praca de Espanha 2.m4a" (127 min, transcrita local com mlx-whisper large-v3-turbo,
+condition_on_previous_text=False; txt/srt em ~/Downloads) + notas do Abilio. Plano aprovado em 4 fases
+(F1 quick wins, F2 homepage+About+case studies, F3 Real Estate tipo Rightmove + landing pages por cidade,
+F4 Invest/PM/Hospitality/Contact/LP). Design (gaps, cores, caixas): George pediu que nao venha "so do Claude"
+-> preparar 2-3 variacoes para Abilio+Matilde escolherem antes de aplicar.
+
+FEITO F1 (commits 869f514, 5721c7b, + este):
+- Telefone fixo +351 214 086 709 em todo o site (HTML, tel:, JSON-LD, chat.js, guide.js, CMS footer/terms/privacy).
+  WhatsApp (wa.me no imovel) fica no telemovel de proposito.
+- Footer: linha legal 12px, AMI 27772, links absolutos /terms /privacy (os relativos davam 404 em /property e /pt),
+  Livro de Reclamacoes; email ja nao corta. Dubai office ja estava.
+- Nav: Investment Advisory / News / Hospitality & F&B (bake-nav + footers + mapa PT).
+- Press -> News (titulo, og, H1, PT Noticias); H2 na secao de noticias da home (CMS home.news.subtitle).
+- Bug "Why Portugal": rd_prose nao escrevia o id do anchor. FAQs: so uma aberta de cada vez.
+  lib/renderRdBlocks.js tem de ficar IGUAL a api/_renderRdBlocks.js (o lib repinta no cliente e no Studio).
+- Bug "nav volta ao estilo antigo": property/article/fanqueiros/privacy/terms tinham header escuro antigo -> rd-nav.
+- Nav sobre hero escuro: veu navy progressivo desde o 1o pixel de scroll.
+- Terms: entidade BENEFIT DISCOVERY, LDA (NIPC 517818817, Av. Liberdade 69 4oA, 1250-140 Lisboa, AMI 27772 IMPIC),
+  calculadoras/cambio, Livro de Reclamacoes + RAL.
+- scripts/dev-server.mjs: substituto local do vercel dev (o CLI nao tem login). Config "site-smith-api-dev" em ~/.claude/launch.json.
+
+PENDENTE (do Abilio): numeros/fotos dos case studies (S. Juliao = "Hygge Residences S. Juliao" confirmado),
+historia de origem do About, fotos da equipa, foto real para a LP. DECISAO: a Privacy Policy nomeia como
+responsavel a Choise2Choise Unipessoal, Lda (NIPC 517525534) - confirmar se mantem ou passa a Benefit Discovery.
+ATENCAO: o service_role key do Supabase do site ficou visivel num output desta sessao (.env.local linha 1 e a
+chave sem NOME=); recomendado rodar.
