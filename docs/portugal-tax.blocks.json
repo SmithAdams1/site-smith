@@ -27,7 +27,7 @@
       "href": "#ifici"
      },
      {
-      "label": { "en": "Book a consultation", "pt": "Marcar consulta" },
+      "label": { "en": "Speak with an expert", "pt": "Fale com um especialista" },
       "href": "contact.html",
       "style": "ghost",
       "arrow": false
@@ -130,8 +130,8 @@
    "data": {
     "title": { "en": "Advised, not sold.", "pt": "Assessorado, não vendido." },
     "body": {
-     "en": "Independent counsel, accountable from the first analysis to long-term ownership.",
-     "pt": "Consultoria independente, responsável desde a primeira análise até à posse de longo prazo."
+     "en": "Independent counsel, from the first analysis to long-term ownership.",
+     "pt": "Consultoria independente, da primeira análise à posse de longo prazo."
     },
     "stats": [
      { "value": { "en": "1,000+", "pt": "1.000+" }, "label": { "en": "investors advised", "pt": "investidores assessorados" } },
@@ -151,8 +151,8 @@
       "pt": "A fiscalidade é onde os bons investimentos, em silêncio, ganham ou perdem valor. Trabalhamos com especialistas fiscais para modelar a sua posição antes de qualquer compromisso, estruturar a aquisição de forma limpa e - através da nossa unidade de Representação Fiscal - manter a sua conformidade ano após ano, com relatórios líquidos de custos e em euros."
      },
      {
-      "en": "We are advisers, not brokers: where a different structure or route serves you better, we say so.",
-      "pt": "Somos consultores, não intermediários: quando uma estrutura ou via diferente o serve melhor, dizemo-lo."
+      "en": "We are experts, not brokers: where a different structure or route serves you better, we say so.",
+      "pt": "Somos especialistas, não intermediários: quando uma estrutura ou via diferente o serve melhor, dizemo-lo."
      }
     ]
    }
@@ -229,7 +229,7 @@
     "bg": "navy",
     "title": { "en": "Plan the tax before you invest.", "pt": "Planeie a fiscalidade antes de investir." },
     "cta": {
-     "label": { "en": "Speak with a specialist", "pt": "Fale com um especialista" },
+     "label": { "en": "Speak with an expert", "pt": "Fale com um especialista" },
      "href": "contact.html",
      "wrap": true,
      "space": true

@@ -728,9 +728,38 @@
     });
   }
 
+  // Footer newsletter (.sa-nl) -> /api/contact {source:'newsletter'} -> CRM.
+  function initNewsletter() {
+    var pt = getLocale() === 'pt';
+    var T = pt
+      ? { ph: 'O seu email', btn: 'Subscrever', sending: 'A enviar...', ok: 'Obrigado - subscrição confirmada.', bad: 'Indique um email válido.', err: 'Não foi possível subscrever. Tente novamente.' }
+      : { ph: 'Your email address', btn: 'Subscribe', sending: 'Sending...', ok: 'Thank you - you are subscribed.', bad: 'Please enter a valid email.', err: 'Could not subscribe. Please try again.' };
+    document.querySelectorAll('.sa-nl').forEach(function (box) {
+      var form = box.querySelector('.sa-nl__form'); if (!form || form.dataset.bound) return;
+      form.dataset.bound = '1';
+      var input = form.querySelector('input[type="email"]'), btn = form.querySelector('button'), msg = box.querySelector('.sa-nl__msg');
+      if (pt) { input.placeholder = T.ph; btn.textContent = T.btn; }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = (input.value || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { msg.textContent = T.bad; input.focus(); return; }
+        btn.disabled = true; btn.textContent = T.sending; msg.textContent = '';
+        fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source: 'newsletter', email: email, locale: pt ? 'pt' : 'en', page: location.pathname }) })
+          .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+          .then(function () {
+            form.style.display = 'none'; msg.textContent = T.ok;
+            if (typeof window.gtag === 'function') window.gtag('event', 'newsletter_signup', { page_path: location.pathname });
+          })
+          .catch(function () { msg.textContent = T.err; btn.disabled = false; btn.textContent = T.btn; });
+      });
+    });
+  }
+
   function init() {
     loadContent();
     fixLegalLinks();
+    initNewsletter();
     rebuildDesktopNav();
     injectInvestNav();     // mobile + footer (desktop skipped after rebuild)
     if (SHOW_REAL_ESTATE) injectRealEstateNav(); // mobile + footer

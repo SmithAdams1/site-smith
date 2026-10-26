@@ -593,3 +593,17 @@ body.rd-dark-hero .rd-nav:not(.rd-nav--solid) button[onclick*="mobile-menu"] spa
 body:has(#mobile-menu.opacity-100) .rd-nav button[onclick*="mobile-menu"] span { background: #fff !important; }
 /* F1: footer email was clipped in its narrow column. */
 footer a[href^="mailto:"] { overflow-wrap: anywhere; }
+/* F1 (HoS): newsletter sign-up in every footer (-> CRM, tag 'newsletter'). */
+.sa-nl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 32px;padding:28px 0 4px;margin-top:40px;border-top:1px solid #374151;}
+.sa-nl__title{font-family:var(--sans,inherit);font-size:17px;font-weight:600;color:#fff;margin:0 0 4px;}
+.sa-nl__sub{font-size:14px;line-height:1.5;color:#9ca3af;margin:0;}
+.sa-nl__form{display:flex;gap:8px;flex:1 1 320px;max-width:460px;margin:0;}
+.sa-nl__form input{flex:1;min-width:0;background:transparent;border:1px solid rgba(255,255,255,.28);color:#fff;padding:12px 14px;border-radius:2px;font-size:14px;outline:none;}
+.sa-nl__form input:focus{border-color:#D6C29A;}
+.sa-nl__form input::placeholder{color:#9ca3af;}
+.sa-nl__form button{background:#fff;color:#11222D;border:0;border-radius:2px;padding:12px 20px;font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;}
+.sa-nl__form button:disabled{opacity:.6;cursor:default;}
+.sa-nl__note{flex-basis:100%;font-size:12px;line-height:1.5;color:#6b7280;margin:0;}
+.sa-nl__note a{color:#9ca3af;text-decoration:underline;}
+.sa-nl__msg{flex-basis:100%;font-size:13px;color:#D6C29A;margin:0;min-height:0;}
+.sa-nl__msg:empty{display:none;}

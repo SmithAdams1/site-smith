@@ -9,8 +9,8 @@
       "type": "rd_hero",
       "data": {
         "title": {
-          "en": "Invest in Portugal, with one accountable partner.",
-          "pt": "Invista em Portugal, com um parceiro responsável do princípio ao fim."
+          "en": "Invest in Portugal, with one strategic partner.",
+          "pt": "Invista em Portugal, com um parceiro estratégico."
         },
         "subtitle": {
           "en": "Independent advice on the return, the residency and the life behind them - from first analysis to long-term management.",
@@ -31,8 +31,8 @@
           },
           {
             "label": {
-              "en": "Book a consultation",
-              "pt": "Marcar consulta"
+              "en": "Speak with an expert",
+              "pt": "Fale com um especialista"
             },
             "href": "contact.html",
             "style": "ghost",
@@ -347,8 +347,8 @@
               "pt": "Como começo?"
             },
             "a": {
-              "en": "Book a consultation. A Portugal adviser will review your goals and walk you through the routes, with no obligation.",
-              "pt": "Marque uma consulta. Um consultor de Portugal analisa os seus objetivos e apresenta-lhe as vias, sem compromisso."
+              "en": "Speak with an expert. A Portugal specialist will review your goals and walk you through the routes, with no obligation.",
+              "pt": "Fale com um especialista. Um consultor de Portugal analisa os seus objetivos e apresenta-lhe as vias, sem compromisso."
             }
           }
         ]
@@ -364,7 +364,7 @@
         },
         "cta": {
           "label": {
-            "en": "Speak with a specialist",
+            "en": "Speak with an expert",
             "pt": "Fale com um especialista"
           },
           "href": "contact.html",

@@ -74,4 +74,23 @@ export async function postCrmLead(req, lead) {
   }
 }
 
+// Newsletter sign-up -> CRM /api/v1/newsletter (tagged 'newsletter'; no agent,
+// pipeline or notifications). Returns true when the CRM accepted it.
+export async function postCrmNewsletter({ email, locale, page }) {
+  const CRM_API_URL = process.env.CRM_API_URL;
+  const CRM_API_KEY = process.env.CRM_API_KEY;
+  if (!CRM_API_URL || !CRM_API_KEY || !email) return false;
+  try {
+    const r = await fetch(`${CRM_API_URL.replace(/\/$/, '')}/api/v1/newsletter`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${CRM_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, locale, page }),
+    });
+    return r.ok;
+  } catch (e) {
+    console.error('[crm] newsletter error:', e.message);
+    return false;
+  }
+}
+
 export { COUNTRY_NAMES };

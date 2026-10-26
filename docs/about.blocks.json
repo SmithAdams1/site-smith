@@ -32,8 +32,8 @@
           },
           {
             "label": {
-              "en": "Book a consultation",
-              "pt": "Marcar consulta"
+              "en": "Speak with an expert",
+              "pt": "Fale com um especialista"
             },
             "href": "contact.html",
             "style": "ghost",
@@ -267,13 +267,13 @@
           "pt": "Como trabalhamos"
         },
         "title": {
-          "en": "One team, accountable from first analysis to long-term ownership.",
-          "pt": "Uma equipa, responsável da primeira análise à propriedade de longo prazo."
+          "en": "Experts in every field you need, from first analysis to long-term ownership.",
+          "pt": "Especialistas em cada área de que precisa, da primeira análise à propriedade de longo prazo."
         },
         "body": [
           {
-            "en": "We are advisers, not brokers: we are paid to be right about the asset, not to sell it. Every mandate runs through the same four stages, and the same team stays accountable across all of them.",
-            "pt": "Somos consultores, não intermediários: somos pagos para estar certos sobre o ativo, não para o vender. Cada mandato passa pelas mesmas quatro fases, e a mesma equipa mantém-se responsável em todas elas."
+            "en": "We are experts, not brokers: we are paid to be right about the asset, not to sell it. Every mandate runs through the same four stages, with the same team beside you in all of them.",
+            "pt": "Somos especialistas, não intermediários: somos pagos para estar certos sobre o ativo, não para o vender. Cada mandato passa pelas mesmas quatro fases, com a mesma equipa a seu lado em todas elas."
           },
           {
             "en": "That discipline sits behind 1,000+ investors advised, &euro;300M+ in advised assets and 300+ assets under management, with performance reported net of cost, in euros, quarterly.",
@@ -307,8 +307,8 @@
               "pt": "03 &middot; Aquisição e residência, estruturadas"
             },
             "body": {
-              "en": "We run the acquisition and, where relevant, the residency application end to end, with legal and tax partners, so nothing falls between advisers.",
-              "pt": "Conduzimos a aquisição e, quando aplicável, o pedido de residência de ponta a ponta, com parceiros jurídicos e fiscais, para que nada caia entre consultores."
+              "en": "We run the acquisition and, where relevant, the residency application end to end, with legal and tax partners, so nothing falls through the cracks.",
+              "pt": "Conduzimos a aquisição e, quando aplicável, o pedido de residência de ponta a ponta, com parceiros jurídicos e fiscais, para que nada fique por tratar."
             }
           },
           {
@@ -617,8 +617,8 @@
               "pt": "O que significa &lsquo;consultoria independente&rsquo; para mim?"
             },
             "a": {
-              "en": "We are advisers, not brokers - paid to be right about the asset, not to sell it. That includes recommending against a deal when it is not right for you.",
-              "pt": "Somos consultores, n&atilde;o intermedi&aacute;rios - pagos para ter raz&atilde;o sobre o ativo, n&atilde;o para o vender. Isso inclui desaconselhar um neg&oacute;cio quando n&atilde;o &eacute; o certo para si."
+              "en": "We are experts, not brokers - paid to be right about the asset, not to sell it. That includes recommending against a deal when it is not right for you.",
+              "pt": "Somos especialistas, n&atilde;o intermedi&aacute;rios - pagos para ter raz&atilde;o sobre o ativo, n&atilde;o para o vender. Isso inclui desaconselhar um neg&oacute;cio quando n&atilde;o &eacute; o certo para si."
             }
           },
           {
@@ -657,8 +657,8 @@
               "pt": "Como come&ccedil;o?"
             },
             "a": {
-              "en": "Book a consultation and a Portugal adviser will walk you through your options, with no obligation.",
-              "pt": "Marque uma consulta e um consultor de Portugal apresenta-lhe as op&ccedil;&otilde;es, sem compromisso."
+              "en": "Speak with an expert and a Portugal specialist will walk you through your options, with no obligation.",
+              "pt": "Fale com um especialista e um consultor de Portugal apresenta-lhe as op&ccedil;&otilde;es, sem compromisso."
             }
           }
         ]
@@ -676,7 +676,7 @@
         },
         "cta": {
           "label": {
-            "en": "Book a consultation"
+            "en": "Speak with an expert"
           },
           "href": "contact.html",
           "wrap": true

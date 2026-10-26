@@ -1,4 +1,4 @@
-import { postCrmLead } from './_crm.js';
+import { postCrmLead, postCrmNewsletter } from './_crm.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -6,6 +6,15 @@ export default async function handler(req, res) {
   }
 
   const { firstName, lastName, email, phoneCode, phoneNumber, interest, message, attribution, source, partial } = req.body;
+
+  // Newsletter: email only, its own CRM endpoint (kept here so the site stays
+  // within the Vercel Hobby cap of 12 serverless functions).
+  if (source === 'newsletter') {
+    const em = String(email || '').trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) return res.status(400).json({ error: 'Invalid email' });
+    const ok = await postCrmNewsletter({ email: em, locale: req.body.locale, page: req.body.page });
+    return ok ? res.status(200).json({ ok: true }) : res.status(502).json({ error: 'Subscription failed' });
+  }
 
   const isBrochure = typeof source === 'string' && source.indexOf('brochure-') === 0;
   // Brochure (gated download) and step-1 of the 2-step LP (partial:true) are

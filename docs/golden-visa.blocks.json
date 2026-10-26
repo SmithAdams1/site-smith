@@ -27,7 +27,7 @@
       "href": "#how"
      },
      {
-      "label": { "en": "Book a consultation", "pt": "Marcar consulta" },
+      "label": { "en": "Speak with an expert", "pt": "Fale com um especialista" },
       "href": "contact.html",
       "style": "ghost",
       "arrow": false
@@ -138,8 +138,8 @@
    "data": {
     "title": { "en": "Advised, not sold.", "pt": "Assessorado, não vendido." },
     "body": {
-     "en": "Independent counsel, accountable from the first analysis to long-term ownership.",
-     "pt": "Consultoria independente, responsável desde a primeira análise até à posse de longo prazo."
+     "en": "Independent counsel, from the first analysis to long-term ownership.",
+     "pt": "Consultoria independente, da primeira análise à posse de longo prazo."
     },
     "stats": [
      { "value": { "en": "1,000+", "pt": "1.000+" }, "label": { "en": "investors advised", "pt": "investidores assessorados" } },
@@ -152,15 +152,15 @@
    "type": "rd_prose",
    "data": {
     "eyebrow": { "en": "Why Smith &amp; Adams", "pt": "Porquê a Smith &amp; Adams" },
-    "title": { "en": "Advisers, not brokers.", "pt": "Consultores, não intermediários." },
+    "title": { "en": "Experts, not brokers.", "pt": "Especialistas, não intermediários." },
     "body": [
      {
       "en": "The Golden Visa is a means, not the goal. Our single mandate is your outcome: an independent read on which route (and which underlying investment) actually serves you, structured cleanly and held for the long term.",
       "pt": "O Golden Visa é um meio, não o fim. O nosso único mandato é o seu resultado: uma leitura independente sobre qual a via (e qual o investimento subjacente) que realmente o serve, estruturada de forma limpa e mantida a longo prazo."
      },
      {
-      "en": "One team is accountable from first analysis to ongoing management, with net-of-cost, euro-denominated performance reported every quarter. Where an alternative route or provider is genuinely better for you, we say so.",
-      "pt": "Uma só equipa é responsável desde a primeira análise até à gestão contínua, com desempenho líquido de custos e em euros reportado trimestralmente. Quando uma via ou parceiro alternativo é genuinamente melhor para si, dizemo-lo."
+      "en": "One team of experts stays with you from first analysis to ongoing management, with net-of-cost, euro-denominated performance reported every quarter. Where an alternative route or provider is genuinely better for you, we say so.",
+      "pt": "Uma só equipa de especialistas acompanha-o desde a primeira análise até à gestão contínua, com desempenho líquido de custos e em euros reportado trimestralmente. Quando uma via ou parceiro alternativo é genuinamente melhor para si, dizemo-lo."
      }
     ]
    }
@@ -224,8 +224,8 @@
      {
       "q": { "en": "How do I start?", "pt": "Como começo?" },
       "a": {
-       "en": "Book a consultation. A Portugal adviser will review your goals and walk you through the routes, with no obligation.",
-       "pt": "Marque uma consulta. Um consultor de Portugal analisa os seus objetivos e apresenta-lhe as vias, sem compromisso."
+       "en": "Speak with an expert. A Portugal specialist will review your goals and walk you through the routes, with no obligation.",
+       "pt": "Fale com um especialista. Um consultor de Portugal analisa os seus objetivos e apresenta-lhe as vias, sem compromisso."
       }
      }
     ]
@@ -237,7 +237,7 @@
     "bg": "navy",
     "title": { "en": "Ready to explore your Golden Visa route?", "pt": "Pronto para explorar a sua via de Golden Visa?" },
     "cta": {
-     "label": { "en": "Speak with a specialist", "pt": "Fale com um especialista" },
+     "label": { "en": "Speak with an expert", "pt": "Fale com um especialista" },
      "href": "contact.html",
      "wrap": true,
      "space": true
