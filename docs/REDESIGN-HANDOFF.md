@@ -711,3 +711,8 @@ historia de origem do About, fotos da equipa, foto real para a LP. DECISAO: a Pr
 responsavel a Choise2Choise Unipessoal, Lda (NIPC 517525534) - confirmar se mantem ou passa a Benefit Discovery.
 ATENCAO: o service_role key do Supabase do site ficou visivel num output desta sessao (.env.local linha 1 e a
 chave sem NOME=); recomendado rodar.
+- (adenda F1, commits 1c12d9e/b80782a) Textos: fora "accountable", advisers->experts, CTAs "Speak with an expert"
+  (blocks JSON das paginas rd-, LPs, 2 posts do blog na BD). CTA da News generico (PT estava em pt-BR).
+  Newsletter no footer de todas as paginas -> /api/contact source=newsletter -> CRM /api/v1/newsletter
+  (etiqueta newsletter, sem agente/pipeline/notificacoes; testado ponta a ponta em producao e registo de teste apagado).
+  Assets redesign em g29. FALTA F1: gaps (vai nas variacoes de design). FAQs por pagina ficam na F4.
