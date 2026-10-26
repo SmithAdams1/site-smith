@@ -352,7 +352,7 @@ const renderers = {
       `<li class="reveal"><span class="fi">${String(i + 1).padStart(2, '0')}</span><span class="fd" style="font-size:15px; color:var(--stone);">${pick(b, locale)}</span></li>`
     ).join('\n            ');
     return (
-`      <section class="rd-sec rd-sec--navy${d.compact ? ' rd-proof-compact' : ''}">${d.compact ? '<style>.rd-proof-compact{padding:clamp(40px,4.5vw,64px) 0;}.rd-proof-compact .rd-statement{font-size:clamp(24px,2.6vw,36px)!important;max-width:none!important;}.rd-proof-compact .rd-proof{margin-top:clamp(26px,3vw,40px)!important;}.rd-proof-compact .rd-proof .n{font-size:clamp(34px,4vw,56px);}</style>' : ''}
+`      <section class="rd-sec rd-sec--navy${d.compact ? ' rd-proof-compact' : ''}">${d.compact ? '<style>.rd-proof-compact{padding:clamp(40px,4.5vw,64px) 0;}.rd-proof-compact .rd-statement{font-size:clamp(24px,2.6vw,36px)!important;max-width:none!important;}.rd-proof-compact .rd-proof{margin-top:clamp(26px,3vw,40px)!important;}.rd-proof-compact .rd-proof .n{font-size:clamp(34px,4vw,56px);}.rd-proof-compact .rd-proof{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))!important;}.rd-proof-compact .rd-proof:has(> div:nth-child(5)) .n{font-size:clamp(24px,2.4vw,34px);}.rd-proof-compact .rd-proof:has(> div:nth-child(5)) .l{font-size:13px;}</style>' : ''}
         <div class="rd-wrap">
           ${d.eyebrow ? `<p class="rd-label reveal" style="color:rgba(255,255,255,0.55); margin:0 0 22px;">${pick(d.eyebrow, locale)}</p>` : ''}
           <h2 class="rd-statement reveal" style="font-size:clamp(30px,4vw,54px); color:#fff; margin:0; max-width:18ch;">${pick(d.title, locale)}</h2>

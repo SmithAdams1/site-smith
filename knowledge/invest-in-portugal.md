@@ -39,3 +39,13 @@ Source: INE Destaques "Preços da Habitação ao nível local 2T2026" (pub. 23 O
 Portugal 2,264 / 9.76 (5.2%) | Lisboa 5,192 (+14.7% yoy, INE) / 17.43 (4.0%) | Cascais 4,889 / 16.83 (4.1%) | Porto 3,631 (+18.7% yoy, INE) / 14.48 (4.8%) | Algarve NUTS II 3,338 / 10.96 (3.9%) | Oeste NUTS III 2,130 / 8.07 (4.6%) | Grândola 2,543 / 11.13 | Alcácer do Sal 1,956 / 7.81 (small sample) | Coimbra 2,295 / 9.44 (4.9%).
 Single-quarter Q2 2026 headlines (what press quotes) differ: Lisboa 5,299, Portugal 2,445 (+18.4%). Rent series restarted Jun 2026 on new AT source data - don't mix with older half-year rent figures.
 Used on /real-estate/<area> (scripts/build-area-pages.py).
+
+## VERIFIED (2026-10-26) - "why Portugal" markers (supersede the 2025 ones above)
+- Ratings: S&P A+ positive outlook (affirmed Aug 2026); Fitch upgraded to A+ stable on 4 Sep 2026 (euronews 2026-09-05); Moody's A3 stable (medium, check moodys.com).
+- Global Peace Index 2026 (IEP, 15 Jun 2026): Portugal 7th of 163 (visionofhumanity.org).
+- Henley Passport Index Jul 2026: Portugal joint 5th, 185 visa-free (via euronews 2026-07-24; confirm on henleyglobal PDF).
+- EF EPI 2025: Portugal 6th of 123 (ef.edu/epi).
+- ULI/PwC Emerging Trends in Real Estate Europe 2026: Lisbon 11th for investment prospects (via idealista 2025-12-03; PwC top 10 excludes Lisbon; CBRE's "8th" is a different ranking). Medium confidence.
+- International Living Global Retirement Index 2026: Portugal 4th.
+- Same-sex marriage legal since Lei 9/2010 (31 May 2010). Mainland coastline ~987 km (APA 2014).
+- NOT VERIFIED (omit): number of international schools; InterNations rank.
