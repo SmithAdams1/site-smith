@@ -551,8 +551,8 @@
   window.addEventListener('popstate',function(){S=readState();syncControls();apply(false);});
 
   // ---------- areas strip (one listing photo per area) ----------
-  $('re-areas').innerHTML=AREAS.map(function(a){return '<a class="re-area" href="/real-estate?area='+a.id+'" data-area="'+a.id+'"><img alt="" loading="lazy"><span>'+a[L]+'<small></small></span></a>';}).join('');
-  $('re-areas').addEventListener('click',function(e){var a=e.target.closest('.re-area');if(!a)return;e.preventDefault();S={area:a.getAttribute('data-area'),per:S.per,view:S.view};Object.keys(S).forEach(function(k){if(!S[k])delete S[k];});syncControls();apply(true);window.scrollTo(0,0);});
+  // Each area card opens its landing page (/real-estate/<area>), which links on to the filtered results.
+  $('re-areas').innerHTML=AREAS.map(function(a){return '<a class="re-area" href="'+(L==='pt'?'/pt':'')+'/real-estate/'+a.id+'" data-area="'+a.id+'"><img alt="" loading="lazy"><span>'+a[L]+'<small></small></span></a>';}).join('');
   AREAS.forEach(function(a){
     fetch(SUPABASE_URL+'/rest/v1/properties?status=eq.published&'+a.q+'&cover_image=not.is.null&select=cover_image&order=featured.desc,price.desc.nullslast&limit=1',{headers:Object.assign({Prefer:'count=exact'},HDR)})
       .then(function(r){var cr=r.headers.get('content-range');var m=cr&&cr.match(/\/(\d+)/);var el=document.querySelector('.re-area[data-area="'+a.id+'"]');if(m&&el)el.querySelector('small').textContent=m[1]+' '+t.results_many;return r.json();})

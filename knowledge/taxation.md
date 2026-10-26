@@ -1,6 +1,6 @@
 # Taxation in Portugal (for foreign investors)
 
-Last verified: NOT VERIFIED - skeleton. HIGH-RISK YMYL. Verify every figure/rule against 2026 Portal das Finanças / current law before publishing.
+Last verified: partially (IMT/stamp duty 2026-10-26; NHR/IFICI 2026-08-29). HIGH-RISK YMYL. Verify every figure/rule against 2026 Portal das Finanças / current law before publishing.
 Sources: TO PROVIDE (tax adviser memo, Portal das Finanças, current Orçamento do Estado).
 
 ## CRITICAL flags
@@ -25,3 +25,12 @@ Sources: TO PROVIDE (tax adviser memo, Portal das Finanças, current Orçamento 
 
 ## VERIFIED (2026-08-29)
 NHR was discontinued for new applicants on 2025-01-01 and replaced by IFICI ("NHR 2.0", Tax Incentive for Scientific Research and Innovation). IFICI = 20% flat PIT on eligible Portuguese employment/self-employment income for 10 years + relief on certain foreign income. ELIGIBILITY IS NARROW: highly-qualified professionals (degree EQF level 6+/PhD) in science, tech/innovation, healthcare, green energy, R&D, qualifying startups/exporters; only NEW tax residents (not resident in prior 5 yrs); no grandfathering for former NHR/residents. NOT automatic for passive property investors. Source: International Bar Association (ibanet.org) overview + advisory guides (2025/2026).
+
+## VERIFIED (2026-10-26) - IMT and stamp duty on purchase (mainland)
+Source (official): AT Oficio-Circulado 40129/2026 (tables in force from 1 Jan 2026, Lei 73-A/2025 OE2026) and Oficio-Circulado 40131/2026.
+- Tabela I, habitacao propria e permanente: 0% to 106,346; 2% (deduct 2,126.92) to 145,470; 5% (6,491.02) to 198,347; 7% (10,457.96) to 330,539; 8% (13,763.35) to 660,982; single 6% to 1,150,853; single 7.5% above.
+- Tabela III, other housing (second home / investment): 1% to 106,346; 2% (1,063.46) to 145,470; 5% (5,427.56) to 198,347; 7% (9,394.50) to 330,539; 8% (12,699.89) to 633,931; single 6% to 1,150,853; single 7.5% above.
+- Tabela II: under-35s, own permanent home: 0% to 330,539; 8% (26,443.12) to 660,982; then 6% / 7.5%.
+- NON-RESIDENTS: DL 97/2026 (20 May) added art. 17.10 CIMT: single 7.5% IMT on urban property / fraction exclusively for housing bought by non-residents. Exceptions: previously tax resident in PT (art. 16 CIRS) -> general tables; couples in community property -> 7.5% only if BOTH non-resident and never resident; becoming resident within 2 years -> claim annulment/refund of the difference (reclamacao graciosa within 6 months, art. 17.11-12). Commentators date application from 25 May 2026.
+- Stamp duty (Imposto do Selo): 0.8% on purchase (verba 1.1); 0.6% on loans of 5+ years (verba 17.1.4).
+- Implemented in re-tools.js (property page calculator). Update both together each State Budget.
