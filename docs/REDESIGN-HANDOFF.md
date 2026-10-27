@@ -795,3 +795,11 @@ chave sem NOME=); recomendado rodar.
 - PENDENTE do Abilio: links Airbnb/Booking/Trustpilot/Google (reviews + Place ID); filtros de bairro no "Book
   your stay" dependem de a Boom aceitar um parametro de localizacao (por confirmar).
 - (2026-10-26) Telefones: MOVEL +351 938 227 348 e o principal, FIXO +351 214 086 709 secundario, em todo o lado (rodapes, contacto, JSON-LD=movel, LPs=movel, termos/privacidade CMS, chat, guia PDF, ficha PDF, brochuras). Mesmo criterio no Google Business.
+
+## Sessao 2026-10-27 (conta: abilio.diz / Claude Code) - brochura comprimida + case studies PT
+- Brochuras: o Chrome embebia os WebP sem compressao no PDF. Agora usam JPEG redimensionados em docs/brochure/img/
+  -> grupo 6,0 MB -> 0,5 MB; PM 1,85 MB -> 0,23 MB. build-brochure.sh falha se o dev server nao estiver no :5199.
+- Case studies PT: pt/case-studies/<slug>.html (scripts/build-case-studies.py gera EN+PT; texto PT no dict PT).
+  Continuam noindex ate haver numeros/fotos confirmados; hreflang EN/PT ja ligados.
+- cms-loader.js: hasPtVariant inclui /real-estate/ e /case-studies/ (o botao PT nas paginas de zona so recarregava);
+  nova localizeLinks(): numa pagina /pt, links internos para paginas com versao PT passam a /pt/... (menu incluido).

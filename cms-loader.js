@@ -39,7 +39,8 @@
     var pages = ['/', '/about', '/invest-in-portugal', '/our-developments',
       '/property-management', '/contact', '/real-estate'];
     return pages.indexOf(enPath) !== -1 ||
-      enPath.indexOf('/blog/') === 0 || enPath.indexOf('/property/') === 0;
+      enPath.indexOf('/blog/') === 0 || enPath.indexOf('/property/') === 0 ||
+      enPath.indexOf('/real-estate/') === 0 || enPath.indexOf('/case-studies/') === 0;
   }
 
   function cleanPath() {
@@ -756,6 +757,23 @@
     });
   }
 
+  // On a /pt/ page, internal links to pages that have a PT URL point at that
+  // PT URL, so a reader (and a crawler) stays in Portuguese while navigating.
+  function localizeLinks() {
+    if (!isPtUrl()) return;
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var raw = a.getAttribute('href');
+      if (!raw || raw.charAt(0) === '#' || /^(mailto:|tel:|javascript:)/i.test(raw)) return;
+      var u;
+      try { u = new URL(raw, location.href); } catch (_) { return; }
+      if (u.host !== location.host && !/(^|\.)smithandadams\.com$/.test(u.host)) return;
+      var p = u.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+      if (p === '/index') p = '/';
+      if (p === '/pt' || p.indexOf('/pt/') === 0 || !hasPtVariant(p)) return;
+      a.setAttribute('href', (p === '/' ? '/pt' : '/pt' + p) + u.search + u.hash);
+    });
+  }
+
   function init() {
     loadContent();
     fixLegalLinks();
@@ -771,6 +789,8 @@
     injectStudioPages();   // async: adds published Studio pages to nav/mobile/footer
     localizeNav();
     setTimeout(localizeNav, 450); // re-run after async nav injections settle
+    localizeLinks();
+    setTimeout(localizeLinks, 500); // after async nav injections and CMS values
     applyNavContrast();
     setTimeout(applyNavContrast, 350); // after fonts/layout settle
     window.addEventListener('scroll', applyNavContrast, { passive: true });

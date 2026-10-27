@@ -4,6 +4,7 @@
 # Needs the local dev server (scripts/dev-server.mjs) on :5199 so /fonts, /assets work.
 set -e
 cd "$(dirname "$0")/.."
+curl -sf -o /dev/null http://localhost:5199/ || { echo "dev server not running on :5199 (scripts/dev-server.mjs)" >&2; exit 1; }
 PROFILE=$(mktemp -d)
 SRC=group-brochure.html; OUT=assets/smith-adams-group-brochure.pdf
 if [ "$1" = pm ]; then SRC=pm-brochure.html; OUT=assets/sa-property-management-brochure.pdf; fi

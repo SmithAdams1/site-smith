@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Build the static case-study pages (case-studies/<slug>.html).
+"""Build the static case-study pages: case-studies/<slug>.html (EN) and
+pt/case-studies/<slug>.html (PT).
 
 The shell (head, header, closing CTA, footer, scripts) is lifted from
 index.html so the nav and footer stay in step with the rest of the site.
@@ -77,6 +78,66 @@ CASES = [
     },
 ]
 
+# European Portuguese copy, keyed by slug. Names stay as they are (brands).
+PT = {
+    'hygge-residences-s-juliao': {
+        'place': 'Baixa, Lisboa',
+        'alt': 'Sala de um apartamento no Hygge Residences S. Julião, Lisboa',
+        'lede': 'Doze apartamentos e um restaurante na Baixa que especificámos, entregámos e continuamos a gerir.',
+        'body': [
+            'O S. Julião reúne todo o grupo num só edifício: os apartamentos foram entregues segundo a nossa própria especificação e são arrendados e geridos internamente com a marca Hygge Residences, a par de um restaurante que operamos.',
+            'O padrão mantém-se depois da entrega, e não só no momento da entrega. A ocupação é da nossa responsabilidade e é reportada nos mesmos termos de todos os outros ativos que gerimos.',
+        ],
+        'figs': [('Unidades', '12'), ('Restaurante', '1'), ('Ocupação', '85,2%'), ('Desde', '2022')],
+        'note': 'Ocupação medida entre 6 de agosto de 2025 e 6 de agosto de 2026. Fonte: Boom, a plataforma através da qual o edifício é reservado.',
+    },
+    'anjos-40': {
+        'place': 'Anjos, Lisboa',
+        'alt': 'Sala de jantar de um apartamento no Anjos 40, Lisboa',
+        'lede': 'Oito apartamentos detidos e arrendados desde 2021, com custos controlados.',
+        'body': [
+            'Um edifício mais pequeno custa menos a gerir por unidade, e é a ocupação estável que faz estas contas funcionar.',
+            'O Anjos 40 é gerido com o mesmo padrão de tudo o que gerimos, e o seu resultado líquido é publicado, não apenas descrito.',
+        ],
+        'figs': [('Unidades', '8'), ('Ocupação', '86,3%'), ('Desde', '2021')],
+        'note': 'Ocupação medida entre 6 de agosto de 2025 e 6 de agosto de 2026. Fonte: Boom, a plataforma através da qual o edifício é reservado.',
+    },
+    'hygge-house-picoas': {
+        'place': 'Picoas, Lisboa',
+        'alt': 'Quarto no Hygge House Picoas, Lisboa',
+        'lede': 'Apartamentos com serviços e restauração, com uma só marca e um só operador.',
+        'body': [
+            'O Hygge House Picoas junta a estadia e a mesa debaixo do mesmo teto. Nove unidades funcionam como apartamentos com serviços, com a restauração operada pelo grupo.',
+            'Ser dono da marca e da operação significa que a experiência do hóspede, os preços e os custos são decididos num só lugar.',
+        ],
+        'figs': [('Unidades', '9'), ('Modelo', 'Alojamento + restauração')],
+        'note': '',
+    },
+    'hygge-kaffe': {
+        'place': 'Lisboa',
+        'alt': 'Hygge Kaffe, Lisboa',
+        'lede': 'A nossa marca de restauração, criada e gerida internamente em três espaços.',
+        'body': [
+            'O Hygge Kaffe é a marca de restauração do próprio grupo, aberta em 2022 e gerida internamente em três espaços em Lisboa.',
+            'Dá ao grupo uma experiência operacional direta, que levamos para cada projeto de hotelaria e de residências de marca em que aconselhamos.',
+        ],
+        'figs': [('Espaços', '3'), ('Margem', '23%'), ('Desde', '2022')],
+        'note': '',
+    },
+}
+
+SERVICE_PT = {'Investment Advisory': 'Consultoria de Investimento', 'Real Estate': 'Imobiliário',
+              'Property Management': 'Gestão de Propriedades', 'Hospitality & F&B': 'Hotelaria e Restauração'}
+SERVICE_URL_PT = {'Investment Advisory': '/pt/invest-in-portugal', 'Real Estate': '/pt/real-estate',
+                  'Property Management': '/pt/property-management', 'Hospitality & F&B': '/hospitality'}
+
+UI = {
+    'en': {'cs': 'Case study', 'pdf': 'Download PDF', 'expert': 'Speak with an expert', 'contact': '/contact.html',
+           'svcs': 'Services involved', 'more': 'More case studies', 'title': 'Case study'},
+    'pt': {'cs': 'Caso de estudo', 'pdf': 'Descarregar PDF', 'expert': 'Fale com um especialista', 'contact': '/pt/contact',
+           'svcs': 'Serviços envolvidos', 'more': 'Mais casos de estudo', 'title': 'Caso de estudo'},
+}
+
 SERVICE_URL = {
     'Investment Advisory': '/invest-in-portugal.html',
     'Real Estate': '/real-estate.html',
@@ -151,32 +212,48 @@ def shell():
     return fix(head), fix(tail)
 
 
-def page(c, head, tail):
-    url = f'https://www.smithandadams.com/case-studies/{c["slug"]}'
-    title = f'{c["name"]} | Case study | Smith &amp; Adams'
+def loc(c, lang):
+    """The case in one language: PT fields override the EN ones."""
+    return {**c, **PT[c['slug']]} if lang == 'pt' else c
+
+
+def page(c0, head, tail, lang='en'):
+    c, U = loc(c0, lang), UI[lang]
+    pre = '/pt' if lang == 'pt' else ''
+    en_url = f'https://www.smithandadams.com/case-studies/{c["slug"]}'
+    pt_url = f'https://www.smithandadams.com/pt/case-studies/{c["slug"]}'
+    url = pt_url if lang == 'pt' else en_url
+    title = f'{c["name"]} | {U["title"]} | Smith &amp; Adams'
     h = re.sub(r'<title>.*?</title>', f'<title>{title}</title>', head, count=1)
     h = re.sub(r'<meta name="description"[^>]*>', f'<meta name="description" content="{esc(c["lede"])}" />', h, count=1)
-    h = re.sub(r'<link rel="canonical"[^\n]*', '<meta name="robots" content="noindex, nofollow" />', h, count=1)
+    # noindex until the figures and photos are confirmed; alternates already wired.
+    h = re.sub(r'<link rel="canonical"[^\n]*',
+               '<meta name="robots" content="noindex, nofollow" />'
+               f'<link rel="alternate" hreflang="en" href="{en_url}"/><link rel="alternate" hreflang="pt" href="{pt_url}"/>', h, count=1)
     h = re.sub(r'<meta property="og:url"[^>]*>', f'<meta property="og:url" content="{url}" />', h, count=1)
     h = re.sub(r'<meta property="og:title"[^>]*>', f'<meta property="og:title" content="{title}" />', h, count=1)
     h = re.sub(r'<meta property="og:description"[^>]*>', f'<meta property="og:description" content="{esc(c["lede"])}" />', h, count=1)
     h = re.sub(r'<script type="application/ld\+json">.*?</script>', '', h, flags=re.S)
     h = re.sub(r'<link rel="preload" as="image"[^>]*>', f'<link rel="preload" as="image" href="{c["image"]}" fetchpriority="high"/>', h, count=1)
+    if lang == 'pt':
+        h = h.replace('<html lang="en"', '<html lang="pt"')
     h = h.replace('</head>', CSS + '\n</head>', 1)
 
     figs = ''.join(f'<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>' for k, v in c['figs'])
     note = f'<p class="cs-note">{esc(c["note"])}</p>' if c['note'] else ''
     body = ''.join(f'<p class="reveal">{esc(p)}</p>' for p in c['body'])
-    svcs = ''.join(f'<li><a href="{SERVICE_URL[s]}">{esc(s)} <span aria-hidden="true">&rarr;</span></a></li>' for s in c['services'])
+    sname = (lambda x: SERVICE_PT[x]) if lang == 'pt' else (lambda x: x)
+    surl = SERVICE_URL_PT if lang == 'pt' else SERVICE_URL
+    svcs = ''.join(f'<li><a href="{surl[s]}">{esc(sname(s))} <span aria-hidden="true">&rarr;</span></a></li>' for s in c['services'])
     others = ''.join(
-        f'<li><a href="/case-studies/{o["slug"]}"><span>{esc(o["place"])}</span>{esc(o["name"])}</a></li>'
-        for o in CASES if o is not c)
-    main = f'''        <!-- ══════════════════ CASE STUDY · {esc(c["name"])} ══════════════════ -->
-        <div class="cs-print-head"><img src="/logo.png" alt="Smith &amp; Adams"><span>Case study &middot; smithandadams.com</span></div>
+        f'<li><a href="{pre}/case-studies/{o["slug"]}"><span>{esc(loc(o, lang)["place"])}</span>{esc(o["name"])}</a></li>'
+        for o in CASES if o is not c0)
+    main = f'''        <!-- ══════════════════ CASE STUDY · {esc(c["name"])} ({lang}) ══════════════════ -->
+        <div class="cs-print-head"><img src="/logo.png" alt="Smith &amp; Adams"><span>{U["cs"]} &middot; smithandadams.com</span></div>
         <section class="cs-hero">
             <img src="{c["image"]}" alt="{esc(c["alt"])}" fetchpriority="high" decoding="async">
             <div class="rd-wrap">
-                <p class="rd-label">Case study &middot; {esc(c["place"])}</p>
+                <p class="rd-label">{U["cs"]} &middot; {esc(c["place"])}</p>
                 <h1>{esc(c["name"])}</h1>
                 <p>{esc(c["lede"])}</p>
             </div>
@@ -186,18 +263,18 @@ def page(c, head, tail):
                 <div class="cs-grid">
                     <div class="cs-body">{body}
                         <div class="cs-actions">
-                            <button class="cs-btn cs-btn--solid" type="button" onclick="window.print()">Download PDF</button>
-                            <a class="cs-btn cs-btn--line" href="/contact.html">Speak with an expert</a>
+                            <button class="cs-btn cs-btn--solid" type="button" onclick="window.print()">{U["pdf"]}</button>
+                            <a class="cs-btn cs-btn--line" href="{U["contact"]}">{U["expert"]}</a>
                         </div>
                     </div>
                     <aside>
                         <dl class="cs-figs">{figs}</dl>{note}
-                        <div class="cs-svcs"><p class="rd-label">Services involved</p><ul>{svcs}</ul></div>
+                        <div class="cs-svcs"><p class="rd-label">{U["svcs"]}</p><ul>{svcs}</ul></div>
                     </aside>
                 </div>
-                <p class="cs-print-foot">Smith &amp; Adams &middot; +351 938 227 348 / +351 214 086 709 &middot; geral@smithandadams.com &middot; www.smithandadams.com/case-studies/{c["slug"]}</p>
+                <p class="cs-print-foot">Smith &amp; Adams &middot; +351 938 227 348 / +351 214 086 709 &middot; geral@smithandadams.com &middot; www.smithandadams.com{pre}/case-studies/{c["slug"]}</p>
                 <div class="cs-more">
-                    <p class="rd-label">More case studies</p>
+                    <p class="rd-label">{U["more"]}</p>
                     <ul>{others}</ul>
                 </div>
             </div>
@@ -209,11 +286,11 @@ def page(c, head, tail):
 
 def main():
     head, tail = shell()
-    out = ROOT / 'case-studies'
-    out.mkdir(exist_ok=True)
-    for c in CASES:
-        (out / f'{c["slug"]}.html').write_text(page(c, head, tail))
-        print('wrote', f'case-studies/{c["slug"]}.html')
+    for lang, out in (('en', ROOT / 'case-studies'), ('pt', ROOT / 'pt' / 'case-studies')):
+        out.mkdir(parents=True, exist_ok=True)
+        for c in CASES:
+            (out / f'{c["slug"]}.html').write_text(page(c, head, tail, lang))
+            print('wrote', out.relative_to(ROOT) / f'{c["slug"]}.html')
 
 
 if __name__ == '__main__':
