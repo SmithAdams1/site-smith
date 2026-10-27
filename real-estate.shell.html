@@ -245,6 +245,10 @@
 
   function locale(){var p=(location.pathname||'').replace(/\/+$/,'');if(p==='/pt'||p.indexOf('/pt/')===0)return 'pt';try{var v=localStorage.getItem('cmsLocale');if(v==='pt'||v==='en')return v;}catch(e){}return 'en';}
   var L=locale();
+  // Links built here stay in the visitor's language: /pt pages link to /pt URLs.
+  // Kept as 'pt/' (no leading slash) so every href literal below starts with '/':
+  // api/pt-static prefixes '/' to any href that does not, which would give '//pt/...'.
+  var PRE=/^\/pt(\/|$)/.test(location.pathname)?'pt/':'';
 
   var T={
     en:{hero_title:'Let us help you find your dream home',hero_subtitle:"Independent real estate advisers acting on behalf of the buyer. Through partnerships with large and small agencies across Portugal, we can show you the whole market, not one developer's stock.",
@@ -394,7 +398,7 @@
     if(p.bathrooms)specs.push(['bath',p.bathrooms]);
     if(p.area_sqm)specs.push(['area',Math.round(p.area_sqm)+' m²']);
     var specsHtml=specs.map(function(s){return '<span style="display:inline-flex;align-items:center;gap:5px;">'+ic(s[0],16,'#11222D')+'<span>'+s[1]+'</span></span>';}).join('<span style="color:#d6d3c9;">|</span>');
-    return '<a href="/property/'+encodeURIComponent(p.slug)+'" class="re-card" data-reveal style="display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;">'+
+    return '<a href="/'+PRE+'property/'+encodeURIComponent(p.slug)+'" class="re-card" data-reveal style="display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;">'+
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+
           (img?'<img class="re-card-img" src="'+esc(img)+'" alt="'+esc(pick(p.title))+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;'+(p.sold?'filter:grayscale(.55);opacity:.92;':'')+'" loading="lazy"/>':'')+
           '<span class="satoshi" style="position:absolute;top:12px;left:12px;'+(p.upcoming?'background:#D6C29A;color:#11222D;':'background:rgba(17,34,45,.9);color:#fff;')+'font-size:11px;font-weight:600;padding:5px 10px;border-radius:2px;">'+(p.upcoming?t.upcoming:(p.sold?t.sold:(p.transaction_type==='rent'?t.rent:t.sale)))+'</span>'+
@@ -498,7 +502,7 @@
             var k=p.latitude+','+p.longitude,n=seen[k]=(seen[k]||0)+1,ang=n*2.4,d=n>1?0.0009*Math.sqrt(n):0;
             var m=Lf.marker([p.latitude+d*Math.sin(ang),p.longitude+d*Math.cos(ang)],{icon:Lf.divIcon({html:'<span class="re-pin" data-slug="'+esc(p.slug)+'">'+shortPrice(p.price)+'</span>',className:'',iconSize:null})});
             var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'';
-            m.bindPopup('<div class="re-popup"><a href="/property/'+encodeURIComponent(p.slug)+'">'+(img?'<img src="'+esc(img)+'" alt="">':'')+'<h4>'+esc(pick(p.title))+'</h4><p>'+esc(p.city||'')+' &middot; '+fmtPrice(p.price)+'</p></a></div>',{closeButton:false,offset:[0,-18]});
+            m.bindPopup('<div class="re-popup"><a href="/'+PRE+'property/'+encodeURIComponent(p.slug)+'">'+(img?'<img src="'+esc(img)+'" alt="">':'')+'<h4>'+esc(pick(p.title))+'</h4><p>'+esc(p.city||'')+' &middot; '+fmtPrice(p.price)+'</p></a></div>',{closeButton:false,offset:[0,-18]});
             markers[p.slug]=m;return m;
           });
           cluster.addLayers(ms);
@@ -510,7 +514,7 @@
     if((S.view||'list')!=='map')return;
     $('re-maplist').innerHTML=rows.map(function(p){
       var img=p.cover_image||(Array.isArray(p.images)&&p.images[0])||'';
-      return '<a class="re-mini" data-slug="'+esc(p.slug)+'" href="/property/'+encodeURIComponent(p.slug)+'">'+(img?'<img src="'+esc(img)+'" alt="" loading="lazy">':'<span></span>')+'<div><h4>'+esc(pick(p.title))+'</h4><p>'+esc([p.city,p.region].filter(Boolean).join(', '))+'</p><b>'+(p.price?fmtPrice(p.price,p.currency):'')+'</b></div></a>';
+      return '<a class="re-mini" data-slug="'+esc(p.slug)+'" href="/'+PRE+'property/'+encodeURIComponent(p.slug)+'">'+(img?'<img src="'+esc(img)+'" alt="" loading="lazy">':'<span></span>')+'<div><h4>'+esc(pick(p.title))+'</h4><p>'+esc([p.city,p.region].filter(Boolean).join(', '))+'</p><b>'+(p.price?fmtPrice(p.price,p.currency):'')+'</b></div></a>';
     }).join('')+($('re-pages').innerHTML?'<nav class="re-pages" style="margin-top:12px">'+$('re-pages').innerHTML+'</nav>':'');
   }
   $('re-maplist').addEventListener('click',function(e){var b=e.target.closest('button[data-p]');if(!b||b.disabled)return;e.preventDefault();S.page=b.getAttribute('data-p');apply(true);});
@@ -567,7 +571,7 @@
     var minp=prices.length?Math.min.apply(null,prices):null;
     var loc=[units[0].city,units[0].region].filter(Boolean).join(', ');
     var n=units.length,rw=n===1?t.residence:t.residences;
-    return '<a href="/real-estate?development='+encodeURIComponent(name)+'" class="re-card" data-reveal style="flex:0 0 300px;scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;">'+
+    return '<a href="/'+PRE+'real-estate?development='+encodeURIComponent(name)+'" class="re-card" data-reveal style="flex:0 0 300px;scroll-snap-align:start;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:2px;overflow:hidden;text-decoration:none;color:inherit;">'+
         '<div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#eee;">'+(img?'<img class="re-card-img" src="'+esc(img)+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease;" loading="lazy"/>':'')+
           '<span class="satoshi" style="position:absolute;top:12px;left:12px;background:#11222D;color:#D6C29A;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:2px;">'+n+' '+rw+'</span></div>'+
         '<div style="padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;">'+

@@ -803,3 +803,9 @@ chave sem NOME=); recomendado rodar.
   Continuam noindex ate haver numeros/fotos confirmados; hreflang EN/PT ja ligados.
 - cms-loader.js: hasPtVariant inclui /real-estate/ e /case-studies/ (o botao PT nas paginas de zona so recarregava);
   nova localizeLinks(): numa pagina /pt, links internos para paginas com versao PT passam a /pt/... (menu incluido).
+- (2026-10-27) Validados pelo Abilio: "target 7%", consentimento Smith & Adams, Lisboa 11.a ULI/PwC.
+- Brochuras PT: scripts/brochure-pt.py gera docs/brochure/*.pt.html a partir das EN (para se uma frase EN mudar);
+  PDFs assets/smith-adams-group-brochure-pt.pdf e sa-property-management-brochure-pt.pdf (build-brochure.sh group-pt|pm-pt).
+  Botoes de brochura na home e no PM usam data-cms (home.hero.brochure_url, pm.brochure_url) -> PDF PT em /pt.
+- /pt/real-estate: links dos cartoes/empreendimentos passam a /pt/... (PRE='pt/' para o href comecar por '/';
+  api/pt-static prefixa '/' a hrefs que nao comecem por '/', o que dava '//pt/...').

@@ -1,0 +1,239 @@
+<!doctype html>
+<!-- Source of /assets/smith-adams-group-brochure.pdf. Regenerate with
+     scripts/build-brochure.sh (headless Chrome against the local dev server). -->
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Brochura Smith &amp; Adams Group</title>
+<style>
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Light.woff2') format('woff2');font-weight:300;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Regular.woff2') format('woff2');font-weight:400;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Medium.woff2') format('woff2');font-weight:500;}
+@font-face{font-family:'Geoform';src:url('/fonts/Geoform-Bold.woff2') format('woff2');font-weight:700;}
+@page{size:297mm 210mm;margin:0}
+:root{--navy:#11222D;--paper:#FDFCF9;--sunken:#F6F2EA;--ink:#26333C;--slate:#6A7883;--stone:#C3CBD1;--line:#E4E1DA;--gold:#D6C29A;--gold-line:rgba(214,194,154,.5)}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{margin:0;padding:0;background:var(--paper)}
+body{font-family:'Geoform','Helvetica Neue',Arial,sans-serif;color:var(--ink);font-size:10.5pt;line-height:1.6}
+.pg{width:100%;height:210mm;position:relative;overflow:hidden;background:var(--paper);page-break-after:always;break-after:page;margin:0 auto}
+.pg:last-child{page-break-after:auto;break-after:auto}
+.in{position:absolute;inset:16mm 18mm 14mm}
+.lab{font-size:7.5pt;letter-spacing:.24em;text-transform:uppercase;color:var(--slate);font-weight:500;display:flex;align-items:center;gap:8px;margin:0 0 5mm}
+.lab::before{content:"";width:16px;height:1px;background:var(--gold)}
+h1,h2,h3{font-weight:500;color:var(--navy);margin:0;letter-spacing:-.01em}
+h2{font-size:25pt;line-height:1.08;max-width:150mm}
+h3{font-size:13pt}
+p{margin:0}
+.foot{position:absolute;left:18mm;right:18mm;bottom:8mm;display:flex;justify-content:space-between;font-size:7pt;color:var(--slate);letter-spacing:.06em}
+.dark{background:var(--navy);color:var(--stone)}
+.dark h1,.dark h2,.dark h3{color:#fff}
+.dark .lab{color:var(--gold)}
+.dark .foot{color:rgba(255,255,255,.45)}
+.logo-w{height:12mm;filter:invert(1)}
+/* cover */
+.cover img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,34,45,.92) 0%,rgba(17,34,45,.7) 45%,rgba(17,34,45,.15) 100%)}
+.cover h1{color:#fff;font-size:42pt;line-height:1.02;max-width:150mm;margin-top:62mm}
+.cover .sub{color:var(--stone);font-size:13pt;font-weight:300;max-width:120mm;margin-top:7mm;line-height:1.5}
+/* who */
+.who{display:grid;grid-template-columns:1.25fr 1fr;height:100%}
+.who .l{padding:16mm 14mm 14mm 18mm}
+.who .l p{margin-top:5mm;max-width:132mm}
+.who .r{background:var(--navy);padding:20mm 16mm;display:grid;grid-template-rows:repeat(4,1fr)}
+.who .r div{border-top:1px solid rgba(255,255,255,.14);padding-top:4mm}
+.who .r .n{color:var(--gold);font-size:26pt;line-height:1}
+.who .r .t{color:#dfe6e6;font-size:9pt;margin-top:2mm}
+/* services */
+.svcs{display:grid;grid-template-columns:1fr 1fr;margin-top:9mm;border-top:1px solid rgba(17,34,45,.16)}
+.svc{padding:7mm 9mm 7mm 0;border-bottom:1px solid rgba(17,34,45,.16)}
+.svc:nth-child(even){padding-left:9mm;border-left:1px solid rgba(17,34,45,.16)}
+.svc svg{width:9mm;height:9mm;fill:none;stroke:var(--navy);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.svc h3{margin-top:3mm}
+.svc p{margin-top:2mm;font-size:9.5pt}
+.svc .u{font-size:7.5pt;color:var(--slate);margin-top:2.5mm;letter-spacing:.04em}
+/* steps + journey */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9mm;margin-top:8mm}
+.steps div{border-top:1px solid var(--gold-line);padding-top:4mm}
+.steps .k{font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.steps h3{margin-top:2mm}
+.steps p{margin-top:2mm;font-size:9.5pt}
+.jour{display:grid;grid-template-columns:repeat(4,1fr);margin-top:9mm}
+.jour div{border-top:1px solid rgba(255,255,255,.14);padding:4mm 5mm 4mm 0}
+.jour b{display:block;color:#fff;font-weight:500;font-size:10pt}
+.jour span{display:block;font-size:8.5pt;margin-top:1.5mm;line-height:1.5}
+/* brands */
+.brands{display:grid;grid-template-columns:repeat(3,1fr);margin-top:16mm;border-top:1px solid var(--line)}
+.brand{padding:10mm 7mm 10mm 0;border-bottom:1px solid var(--line)}
+.brand+.brand:not(:nth-child(3n+1)){padding-left:7mm;border-left:1px solid var(--line)}
+.brand .lg{height:17mm;display:flex;align-items:center}
+.brand .lg img{max-height:12mm;max-width:62mm}
+.brand p{font-size:9.5pt;margin-top:4mm}
+/* cases */
+.cases{display:grid;grid-template-columns:repeat(4,1fr);gap:7mm;margin-top:8mm}
+.case img{width:100%;height:62mm;object-fit:cover;display:block}
+.case .pl{font-size:7pt;letter-spacing:.2em;text-transform:uppercase;color:var(--slate);margin-top:4mm}
+.case h3{font-size:12pt;margin-top:1.5mm}
+.case p{font-size:8.8pt;margin-top:1.5mm;line-height:1.5}
+.case dl{display:flex;gap:6mm;margin:3mm 0 0;padding-top:3mm;border-top:1px solid var(--line)}
+.case dt{font-size:6.5pt;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.case dd{margin:0;font-size:13pt;color:var(--navy)}
+.note{font-size:7pt;color:var(--slate);margin-top:6mm;max-width:220mm}
+/* contact */
+.ct{display:grid;grid-template-columns:1.1fr 1fr;gap:16mm;margin-top:12mm}
+.ct .k{font-size:7pt;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5mm}
+.ct .v{color:#fff;font-size:12pt;margin-bottom:6mm}
+.ct .v.s{font-size:10pt;color:var(--stone)}
+.legal{position:absolute;left:18mm;right:18mm;bottom:16mm;font-size:7pt;color:rgba(255,255,255,.45);line-height:1.6;border-top:1px solid rgba(255,255,255,.12);padding-top:4mm}
+</style>
+</head>
+<body>
+
+<!-- 1 · cover -->
+<section class="pg cover dark">
+  <img class="bg" src="/docs/brochure/img/cover-home.jpg" alt="">
+  <div class="scrim"></div>
+  <div class="in">
+    <img class="logo-w" src="/docs/brochure/img/logo.png" alt="Smith &amp; Adams Group">
+    <h1>Investimento imobiliário, simplificado.</h1>
+    <p class="sub">Um grupo imobiliário independente com soluções completas para investidores estrangeiros em Portugal.</p>
+  </div>
+  <div class="foot"><span>BROCHURA DO GRUPO · 2026</span><span>WWW.SMITHANDADAMS.COM</span></div>
+</section>
+
+<!-- 2 · who we are -->
+<section class="pg">
+  <div class="who">
+    <div class="l">
+      <p class="lab">Quem somos</p>
+      <h2>Ter um imóvel, sem o trabalho de ter um imóvel.</h2>
+      <p>A Smith &amp; Adams nasceu como resposta a um problema que era nosso: uma carteira de imóveis, compromissos de arrendamento para cumprir e ninguém no terreno capaz de os gerir ao nível que exigiam. Por isso, passámos a geri-los nós, e aprendemos o mercado por dentro.</p>
+      <p>É nessa posição que está a maioria dos investidores estrangeiros. Não conhece o mercado local, os construtores que praticam preços justos, nem a forma como um ativo é gerido depois da entrega das chaves. Somos o parceiro no terreno: especialistas em cada área de que precisa, da primeira análise à propriedade de longo prazo, incluindo a residência e a cidadania em Portugal.</p>
+      <p>Somos também donos e operadores das nossas marcas, Hygge Kaffe e Hygge Residences, por isso o padrão que aconselhamos é o mesmo que cumprimos todos os dias.</p>
+    </div>
+    <div class="r">
+      <div><p class="n">1.000+</p><p class="t">Investidores aconselhados</p></div>
+      <div><p class="n">&euro;300M+</p><p class="t">Em valor de investimento aconselhado</p></div>
+      <div><p class="n">300+</p><p class="t">Ativos sob gestão</p></div>
+      <div><p class="n">100%</p><p class="t">Pedidos de residência aprovados</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SMITH &amp; ADAMS GROUP</span><span>02</span></div>
+</section>
+
+<!-- 3 · services -->
+<section class="pg" style="background:var(--sunken)">
+  <div class="in">
+    <p class="lab">O que fazemos</p>
+    <h2>Um só grupo para todo o ciclo de um ativo tangível.</h2>
+    <div class="svcs">
+      <div class="svc">
+        <svg viewBox="0 0 32 32"><path d="M16 5v22M10 27h12"/><path d="M6 10h20"/><path d="M6 10l-3.5 8h7z"/><path d="M26 10l-3.5 8h7z"/><path d="M2.5 18a3.5 2 0 0 0 7 0M22.5 18a3.5 2 0 0 0 7 0"/><circle cx="16" cy="5" r="1.4"/></svg>
+        <h3>Consultoria de Investimento</h3>
+        <p>Aconselhamento independente sobre onde e o que comprar, incluindo Golden Visa, residência D2 e o caminho para a cidadania europeia.</p>
+        <p class="u">smithandadams.com/pt/invest-in-portugal</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 32 32"><path d="M6 28V9.5L16 4l10 5.5V28"/><path d="M3 28h26"/><path d="M10.5 13v4M16 13v4M21.5 13v4M10.5 21v3M21.5 21v3"/><path d="M13.5 28v-6.5a2.5 2.5 0 0 1 5 0V28"/></svg>
+        <h3>Imobiliário</h3>
+        <p>Acesso a todos os imóveis do mercado, e não apenas ao stock de um promotor, com apoio à mudança e ao estilo de vida para si e para a sua família.</p>
+        <p class="u">smithandadams.com/pt/real-estate</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 32 32"><circle cx="10.5" cy="16" r="6"/><circle cx="10.5" cy="16" r="2"/><path d="M16.5 16H29M25 16v4.5M21 16v3"/></svg>
+        <h3>Gestão de Propriedades</h3>
+        <p>Arrendamento de curta e longa duração, gestão do ativo e do condomínio, utilidades e manutenção, para tirar o máximo partido do ativo.</p>
+        <p class="u">smithandadams.com/pt/property-management</p>
+      </div>
+      <div class="svc">
+        <svg viewBox="0 0 32 32"><path d="M5 22a11 11 0 0 1 22 0"/><path d="M3 22h26"/><path d="M5.5 25.5h21"/><path d="M16 11V8.5M14 8.5h4"/></svg>
+        <h3>Hotelaria e Restauração</h3>
+        <p>Residências de marca e as marcas por trás delas. Somos donos e operadores da Hygge, de apartamentos com serviços a restaurantes.</p>
+        <p class="u">smithandadams.com/hospitality</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>SMITH &amp; ADAMS GROUP</span><span>03</span></div>
+</section>
+
+<!-- 4 · how we help -->
+<section class="pg dark">
+  <div class="in">
+    <p class="lab">Como podemos ajudar</p>
+    <h2>Três passos, uma só equipa.</h2>
+    <div class="steps">
+      <div><p class="k">Passo um</p><h3>Perceber as suas necessidades</h3><p>Uma primeira conversa sobre o que quer que o ativo faça: rendimento, valorização, residência, uma casa, ou tudo isto.</p></div>
+      <div><p class="k">Passo dois</p><h3>Encontrar a solução</h3><p>Aconselhamento independente sobre as opções certas, sem custos iniciais e sem compromisso.</p></div>
+      <div><p class="k">Passo três</p><h3>Execução</h3><p>Levamos tudo até ao fim e depois gerimos o ativo a pensar na rentabilidade, na eficiência e na utilização, com relatórios regulares.</p></div>
+    </div>
+    <p class="lab" style="margin-top:12mm">O percurso típico de um cliente</p>
+    <div class="jour" style="margin-top:0">
+      <div><b>Consultoria de investimento</b><span>Estratégia, orçamento e localização, incluindo Golden Visa ou D2 quando a residência faz parte do plano.</span></div>
+      <div><b>Due diligence</b><span>A nossa equipa de investimento e os advogados verificam o ativo, o registo e os números.</span></div>
+      <div><b>Gestão de projeto</b><span>Nos imóveis em construção, acompanhamos a obra e o promotor por si.</span></div>
+      <div><b>Entrega e vistoria</b><span>Defeitos identificados e resolvidos antes da entrega das chaves.</span></div>
+      <div><b>Gestão do ativo</b><span>Mobiliário, licenciamento, condomínio, utilidades e manutenção.</span></div>
+      <div><b>Gestão do arrendamento</b><span>Arrendamento de curta ou longa duração, com preço e gestão pensados para a ocupação e a rentabilidade.</span></div>
+      <div><b>Relatórios</b><span>Receitas, custos e ocupação, no mesmo formato todos os trimestres.</span></div>
+      <div><b>Saída e revenda</b><span>Quando chegar a altura, avaliamos, promovemos e vendemos o ativo por si.</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>SMITH &amp; ADAMS GROUP</span><span>04</span></div>
+</section>
+
+<!-- 5 · brands -->
+<section class="pg">
+  <div class="in">
+    <p class="lab">O grupo</p>
+    <h2>Um grupo, seis marcas.</h2>
+    <div class="brands">
+      <div class="brand"><div class="lg"><img src="/assets/brands/hygge-kaffe.png" alt="Hygge Kaffe"></div><p>A nossa marca de restauração, gerida internamente em três espaços em Lisboa.</p></div>
+      <div class="brand"><div class="lg"><img src="/assets/brands/hygge-residences.png" alt="Hygge Residences"></div><p>Residências de marca e apartamentos com serviços, entregues, arrendados e operados pelo grupo.</p></div>
+      <div class="brand"><div class="lg"><img src="/assets/brands/sa-investment-advisory.svg" alt="SA Investment Advisory"></div><p>Consultoria independente de investimento, residência e cidadania para compradores internacionais.</p></div>
+      <div class="brand"><div class="lg"><img src="/assets/brands/sa-real-estate.svg" alt="SA Real Estate"></div><p>Imobiliário residencial em todo o país, verificado antes de chegar a si.</p></div>
+      <div class="brand"><div class="lg"><img src="/assets/brands/sa-property-management.svg" alt="SA Property Management"></div><p>Hóspedes ou inquilinos, manutenção, condomínio e utilidades, com relatórios trimestrais.</p></div>
+      <div class="brand"><div class="lg"><img src="/assets/brands/sa-food-beverage.svg" alt="SA Food &amp; Beverage"></div><p>Desenvolve e opera os restaurantes dos nossos projetos de hotelaria.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>SMITH &amp; ADAMS GROUP</span><span>05</span></div>
+</section>
+
+<!-- 6 · case studies -->
+<section class="pg">
+  <div class="in">
+    <p class="lab">Casos de estudo</p>
+    <h2>Ativos que detemos, gerimos e acompanhamos.</h2>
+    <div class="cases">
+      <div class="case"><img src="/docs/brochure/img/s-juliao.jpg" alt=""><p class="pl">Baixa, Lisboa</p><h3>Hygge Residences S. Julião</h3><p>Doze apartamentos e um restaurante que especificámos, entregámos e continuamos a gerir.</p><dl><div><dt>Unidades</dt><dd>12</dd></div><div><dt>Ocupação</dt><dd>85,2%</dd></div><div><dt>Desde</dt><dd>2022</dd></div></dl></div>
+      <div class="case"><img src="/docs/brochure/img/anjos-40.jpg" alt=""><p class="pl">Anjos, Lisboa</p><h3>Anjos 40</h3><p>Oito apartamentos detidos e arrendados desde 2021, com custos controlados.</p><dl><div><dt>Unidades</dt><dd>8</dd></div><div><dt>Ocupação</dt><dd>86,3%</dd></div><div><dt>Desde</dt><dd>2021</dd></div></dl></div>
+      <div class="case"><img src="/docs/brochure/img/picoas.jpg" alt=""><p class="pl">Picoas, Lisboa</p><h3>Hygge House Picoas</h3><p>Apartamentos com serviços e restauração, com uma só marca e um só operador.</p><dl><div><dt>Unidades</dt><dd>9</dd></div><div><dt>Modelo</dt><dd>Alojamento + restauração</dd></div></dl></div>
+      <div class="case"><img src="/docs/brochure/img/kaffe.jpg" alt=""><p class="pl">Lisboa</p><h3>Hygge Kaffe</h3><p>A nossa marca de restauração, criada e gerida internamente em três espaços.</p><dl><div><dt>Espaços</dt><dd>3</dd></div><div><dt>Margem</dt><dd>23%</dd></div><div><dt>Desde</dt><dd>2022</dd></div></dl></div>
+    </div>
+    <p class="note">Ocupação medida entre 6 de agosto de 2025 e 6 de agosto de 2026. Fonte: Boom, a plataforma através da qual os edifícios são reservados. Resultados passados não garantem resultados futuros.</p>
+  </div>
+  <div class="foot"><span>SMITH &amp; ADAMS GROUP</span><span>06</span></div>
+</section>
+
+<!-- 7 · contact -->
+<section class="pg dark">
+  <div class="in">
+    <img class="logo-w" src="/docs/brochure/img/logo.png" alt="Smith &amp; Adams Group">
+    <h2 style="margin-top:18mm;font-size:32pt">Fale com um especialista.</h2>
+    <p style="margin-top:4mm;max-width:140mm;font-size:11pt">Sem compromisso e sem custos iniciais. Apenas uma visão clara do que é possível, e se a residência faz sentido no plano.</p>
+    <div class="ct">
+      <div>
+        <p class="k">Telefone</p><p class="v">+351 938 227 348<br>+351 214 086 709</p>
+        <p class="k">Email</p><p class="v">geral@smithandadams.com</p>
+        <p class="k">Site</p><p class="v">www.smithandadams.com</p>
+      </div>
+      <div>
+        <p class="k">Escritório de Lisboa</p><p class="v s">Av. José Malhoa 14<br>1070-073 Lisboa, Portugal</p>
+        <p class="k">Escritório do Dubai</p><p class="v s">Office 102-08, Bin Dasmal Building<br>Al Goze Industrial First, Dubai, Emirados Árabes Unidos</p>
+      </div>
+    </div>
+  </div>
+  <p class="legal">Mediação imobiliária pela Benefit Discovery, Lda, AMI 27772 (IMPIC). Esta brochura é meramente informativa e não constitui aconselhamento de investimento, jurídico ou fiscal. Dados de outubro de 2026.</p>
+</section>
+
+</body>
+</html>

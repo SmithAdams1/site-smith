@@ -49,3 +49,8 @@ Used on /real-estate/<area> (scripts/build-area-pages.py).
 - International Living Global Retirement Index 2026: Portugal 4th.
 - Same-sex marriage legal since Lei 9/2010 (31 May 2010). Mainland coastline ~987 km (APA 2014).
 - NOT VERIFIED (omit): number of international schools; InterNations rank.
+
+## VALIDATED by owner (2026-10-27)
+- LP wording "target 7% net yield" (not "minimum") - approved; keep "target/projected" everywhere.
+- Contact consent text naming Smith & Adams (replacing JustCall) - approved.
+- Lisbon 11th in ULI/PwC Emerging Trends in Real Estate Europe 2026 - approved for use as worded on /invest-in-portugal.
