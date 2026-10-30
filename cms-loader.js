@@ -37,7 +37,8 @@
   // switcher navigates between /x and /pt/x.
   function hasPtVariant(enPath) {
     var pages = ['/', '/about', '/invest-in-portugal', '/our-developments',
-      '/property-management', '/contact', '/real-estate'];
+      '/property-management', '/contact', '/real-estate', '/golden-visa',
+      '/d2-visa', '/portugal-tax'];
     return pages.indexOf(enPath) !== -1 ||
       enPath.indexOf('/blog/') === 0 || enPath.indexOf('/property/') === 0 ||
       enPath.indexOf('/real-estate/') === 0 || enPath.indexOf('/case-studies/') === 0;
@@ -791,6 +792,7 @@
     setTimeout(localizeNav, 450); // re-run after async nav injections settle
     localizeLinks();
     setTimeout(localizeLinks, 500); // after async nav injections and CMS values
+    document.addEventListener('cms-loaded', localizeLinks); // CMS html blocks (footer links) arrive later
     applyNavContrast();
     setTimeout(applyNavContrast, 350); // after fonts/layout settle
     window.addEventListener('scroll', applyNavContrast, { passive: true });

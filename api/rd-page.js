@@ -153,7 +153,12 @@ export default async function handler(req, res) {
     '<script type="application/json" id="__RD_BLOCKS__">' + escapeJsonForScript({ blocks }) + '</script>' +
     '<script type="module">' + RD_CLIENT_JS + '</script>';
   const localizedShell = localizeHead(shell, slug, locale);
-  const html = localizedShell.replace('<!--RD_BLOCKS-->', injected);
+  let html = localizedShell.replace('<!--RD_BLOCKS-->', injected);
+  // Under /pt/ a relative './logo.png' resolves to /pt/logo.png (404): root
+  // every relative src/href/srcset, as api/pt-static does.
+  if (locale === 'pt') {
+    html = html.replace(/\b(src|href|srcset)=("|')(?!https?:|\/\/|\/|#|data:|mailto:|tel:|javascript:)(?:\.\/)?/gi, '$1=$2/');
+  }
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
   res.status(200).send(html);

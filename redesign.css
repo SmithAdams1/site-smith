@@ -607,3 +607,14 @@ footer a[href^="mailto:"] { overflow-wrap: anywhere; }
 .sa-nl__note a{color:#9ca3af;text-decoration:underline;}
 .sa-nl__msg{flex-basis:100%;font-size:13px;color:#D6C29A;margin:0;min-height:0;}
 .sa-nl__msg:empty{display:none;}
+
+/* Footer SEO links: every page links to the area landing pages and the
+   invest guides (HoS: "nav bars for all of the sections" at the bottom). */
+.sa-seo{margin-top:clamp(28px,4vw,44px);padding-top:clamp(22px,3vw,30px);border-top:1px solid rgba(255,255,255,.12);}
+.sa-seo__in{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px clamp(24px,4vw,56px);}
+.sa-seo__h{font:600 11px var(--sans,inherit);letter-spacing:.18em;text-transform:uppercase;color:var(--gold,#D6C29A);margin:0 0 10px;}
+.sa-seo__col{display:flex;flex-wrap:wrap;gap:6px 18px;align-content:flex-start;}
+.sa-seo__col .sa-seo__h{flex-basis:100%;}
+.sa-seo__col a{font:14px var(--sans,inherit);color:#c3cbd1;text-decoration:none;}
+.sa-seo__col a:hover{color:#fff;}
+@media(max-width:720px){.sa-seo__in{grid-template-columns:1fr;}}
