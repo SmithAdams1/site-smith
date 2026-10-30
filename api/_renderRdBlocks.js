@@ -595,7 +595,21 @@ export function renderRdBlock(block, locale) {
 
 export function renderRdBlocks(blocks, locale) {
   const arr = Array.isArray(blocks) ? blocks : [];
-  return arr.map(b => renderRdBlock(b, locale)).join('\n\n');
+  // Consecutive paper sections alternate with a warm tint so the page reads as
+  // distinct bands instead of one long cream sheet. Navy/hero sections reset it.
+  let prevPaper = false;
+  return arr.map(b => {
+    let html = renderRdBlock(b, locale);
+    const open = html.match(/<section\b[^>]*>/);
+    if (!open) { prevPaper = false; return html; }
+    if (open[0].includes('background:var(--paper)')) {
+      if (prevPaper) {
+        html = html.replace(open[0], open[0].replace('background:var(--paper)', 'background:var(--tint)').replace('class="rd-sec', 'class="rd-sec rd-sec--tint'));
+        prevPaper = false;
+      } else prevPaper = true;
+    } else prevPaper = false;
+    return html;
+  }).join('\n\n');
 }
 
 export const RD_BLOCK_TYPES = Object.keys(renderers);
