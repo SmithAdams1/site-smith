@@ -632,3 +632,22 @@ footer a[href^="mailto:"] { overflow-wrap: anywhere; }
 .sa-faq details[open] summary::after{content:"\2212";}
 .sa-faq__a{font:15.5px/1.75 var(--sans,inherit);color:var(--ink,#26333C);max-width:75ch;padding:0 0 20px;}
 .sa-faq__a a{color:var(--navy,#11222D);text-decoration:underline;}
+
+/* Footer refresh (HoS: "footer has to be really dynamic, review design").
+   CSS only, so the 37 footers stay identical markup. */
+footer.bg-\[\#0C1E28\], footer[style*="#0C1E28"] { position:relative; }
+footer h4 { font:600 11px var(--sans,inherit) !important; letter-spacing:.2em !important; text-transform:uppercase !important;
+  color:var(--gold,#D6C29A) !important; line-height:1.4 !important; }
+footer .rounded-lg.bg-\[\#132631\] { background:transparent !important; border-radius:0 !important;
+  border-left:1px solid rgba(255,255,255,.14); padding:4px 0 4px clamp(20px,2.5vw,32px) !important; justify-content:flex-start !important; }
+footer .rounded-lg.bg-\[\#132631\] a.inline-block { background:transparent !important; color:#fff !important;
+  border:1px solid rgba(255,255,255,.45); border-radius:2px !important; padding:11px 20px !important; font-size:14px !important;
+  align-self:flex-start; transition:background .25s, border-color .25s; }
+footer .rounded-lg.bg-\[\#132631\] a.inline-block:hover { background:rgba(255,255,255,.08) !important; border-color:#fff; }
+/* links: an underline that draws in on hover */
+footer ul a, .sa-seo__col a, .sa-footer-legal a { background-image:linear-gradient(currentColor,currentColor);
+  background-size:0 1px; background-repeat:no-repeat; background-position:0 100%; transition:background-size .3s ease, color .2s; }
+footer ul a:hover, .sa-seo__col a:hover, .sa-footer-legal a:hover { background-size:100% 1px; color:#fff !important; }
+footer ul li { color:#c3cbd1 !important; }
+.sa-seo__col a { color:#c3cbd1 !important; font-size:14.5px !important; }
+.sa-seo__h { color:var(--gold,#D6C29A) !important; }
