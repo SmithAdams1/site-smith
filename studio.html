@@ -841,7 +841,14 @@
   async function loadContentEditor(){
     if(_contentLoaded) return;
     _contentLoaded = true;
-    const { data, error } = await sb.from('site_content').select('key,value,locale');
+    // Page through: PostgREST caps a response at 1000 rows and the table is past that.
+    let data = [], error = null;
+    for(let from = 0; ; from += 1000){
+      const res = await sb.from('site_content').select('key,value,locale').order('key').order('locale').range(from, from + 999);
+      if(res.error){ error = res.error; break; }
+      data = data.concat(res.data || []);
+      if(!res.data || res.data.length < 1000) break;
+    }
     if(error){ $('content-fields').innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load content</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
     contentMap = {}; contentOrig = {};
     (data || []).forEach(r => {

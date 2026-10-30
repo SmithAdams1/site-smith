@@ -124,3 +124,15 @@ a:hover > .hv-more svg, .hv-more:hover svg { transform:translateX(4px); }
 .hv-case__logo { display:block; align-self:flex-start; height:28px; width:auto; max-width:70%; margin:18px 0 0; }
 .hv-case__body > p.hv-case__tags { font:600 10.5px var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--navy); margin:10px 0 0; }
 .hv-case__body > .hv-case__k { margin-top:6px; }
+
+/* Testimonials, compact (HoS: the section stretched the page). Each quote is
+   clamped to six lines with a Read more; cards no longer grow to the longest. */
+.rd-quotes-carousel { margin-top:clamp(24px,3vw,36px) !important; }
+.rd-quotes-track > .rd-quote { padding:clamp(20px,2vw,26px) clamp(20px,2vw,26px) !important; }
+.rd-quote__mark { font-size:44px !important; margin:0 0 2px !important; }
+.rd-quote > p { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:6; overflow:hidden;
+  margin:0 0 10px !important; flex:0 0 auto !important; }
+.rd-quote.is-open > p { -webkit-line-clamp:unset; }
+.rd-quote__more { align-self:flex-start; background:none; border:0; padding:0; margin:0 0 14px; cursor:pointer;
+  font:600 13px var(--sans); color:var(--navy); text-decoration:underline; }
+.rd-quote__foot { padding-top:14px !important; }

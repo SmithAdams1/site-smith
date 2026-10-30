@@ -156,20 +156,28 @@
       : `in.(${locale},${DEFAULT_LOCALE})`;
 
     try {
-      const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/site_content?select=key,value,locale&locale=${localeFilter}`,
-        {
-          headers: {
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          },
+      // PostgREST returns at most 1000 rows per request and the table is past
+      // that (en + pt), so page through it; otherwise random keys go missing.
+      const rows = [];
+      for (let offset = 0; ; offset += 1000) {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/site_content?select=key,value,locale&locale=${localeFilter}&order=key.asc,locale.asc&limit=1000&offset=${offset}`,
+          {
+            headers: {
+              apikey: SUPABASE_ANON_KEY,
+              Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            },
+          }
+        );
+        if (!res.ok) {
+          console.warn('[cms-loader] fetch failed', res.status);
+          if (!rows.length) return;
+          break;
         }
-      );
-      if (!res.ok) {
-        console.warn('[cms-loader] fetch failed', res.status);
-        return;
+        const page = await res.json();
+        rows.push(...page);
+        if (page.length < 1000) break;
       }
-      const rows = await res.json();
       // Constrói mapa: prefere o locale escolhido, cai no DEFAULT_LOCALE se faltar.
       const map = Object.create(null);
       for (const r of rows) {

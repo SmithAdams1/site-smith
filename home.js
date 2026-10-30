@@ -34,4 +34,20 @@
     window.addEventListener('resize', syncCases);
     syncCases();
   }
+
+  // ---- testimonials: Read more on quotes clamped to six lines ----
+  var pt = /^\/pt(\/|$)/.test(location.pathname);
+  document.querySelectorAll('.rd-quote').forEach(function (q) {
+    var p = q.querySelector(':scope > p');
+    if (!p || q.querySelector('.rd-quote__more')) return;
+    if (p.scrollHeight <= p.clientHeight + 2) return;
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'rd-quote__more';
+    b.textContent = pt ? 'Ler mais' : 'Read more';
+    b.addEventListener('click', function () {
+      var open = q.classList.toggle('is-open');
+      b.textContent = open ? (pt ? 'Ler menos' : 'Show less') : (pt ? 'Ler mais' : 'Read more');
+    });
+    p.insertAdjacentElement('afterend', b);
+  });
 })();
