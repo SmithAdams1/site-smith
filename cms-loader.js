@@ -714,7 +714,11 @@
       }
     });
     document.querySelectorAll('header a[href], #mobile-menu a[href], footer a[href]').forEach(function (a) {
-      var pt = NAV_PT[normHref(a.getAttribute('href'))];
+      // localizeLinks may already have turned /real-estate.html into /pt/real-estate.
+      var raw = a.getAttribute('href') || '';
+      if (/^https?:\/\//.test(raw) && !/^https?:\/\/(www\.)?smithandadams\.com(\/|$)/.test(raw)) return;
+      var h = normHref(raw).replace(/^\/pt(?=\/|$)/, '') || '/';
+      var pt = NAV_PT[h] || NAV_PT[h + '.html'] || (h === '/' ? NAV_PT['/index.html'] : null);
       if (pt && a.childElementCount === 0) a.textContent = pt;
     });
     // "Properties" dropdown trigger keeps its caret child — swap only the text node
@@ -767,7 +771,8 @@
       if (!raw || raw.charAt(0) === '#' || /^(mailto:|tel:|javascript:)/i.test(raw)) return;
       var u;
       try { u = new URL(raw, location.href); } catch (_) { return; }
-      if (u.host !== location.host && !/(^|\.)smithandadams\.com$/.test(u.host)) return;
+      // Only this site (www or apex); subdomains such as recruitment. are other sites.
+      if (u.host !== location.host && !/^(www\.)?smithandadams\.com$/.test(u.host)) return;
       var p = u.pathname.replace(/\.html$/, '').replace(/\/+$/, '') || '/';
       if (p === '/index') p = '/';
       if (p === '/pt' || p.indexOf('/pt/') === 0 || !hasPtVariant(p)) return;
@@ -792,7 +797,7 @@
     setTimeout(localizeNav, 450); // re-run after async nav injections settle
     localizeLinks();
     setTimeout(localizeLinks, 500); // after async nav injections and CMS values
-    document.addEventListener('cms-loaded', localizeLinks); // CMS html blocks (footer links) arrive later
+    document.addEventListener('cms-loaded', function () { localizeNav(); localizeLinks(); }); // CMS html blocks and the Real Estate nav item arrive later
     applyNavContrast();
     setTimeout(applyNavContrast, 350); // after fonts/layout settle
     window.addEventListener('scroll', applyNavContrast, { passive: true });
