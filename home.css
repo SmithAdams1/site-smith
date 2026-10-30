@@ -119,3 +119,8 @@ a:hover > .hv-more svg, .hv-more:hover svg { transform:translateX(4px); }
   .hv-cases__track { grid-auto-columns:80%; }
 }
 
+
+/* case-study logos and categories (HoS: logo per project, category underneath) */
+.hv-case__logo { display:block; align-self:flex-start; height:28px; width:auto; max-width:70%; margin:18px 0 0; }
+.hv-case__body > p.hv-case__tags { font:600 10.5px var(--sans); letter-spacing:.12em; text-transform:uppercase; color:var(--navy); margin:10px 0 0; }
+.hv-case__body > .hv-case__k { margin-top:6px; }

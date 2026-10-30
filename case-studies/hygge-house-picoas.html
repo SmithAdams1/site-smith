@@ -59,15 +59,18 @@
      Type: Playfair Display (statements) + Helvetica Neue (working text)
 ════════════════════════════════════════════════════════════════ -->
 <link rel="stylesheet" href="/redesign.css?v=g31" />
-<link rel="stylesheet" href="/home.css?v=1" />
+<link rel="stylesheet" href="/home.css?v=2" />
 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"/><link rel="manifest" href="/site.webmanifest"/><meta name="theme-color" content="#11222d"/><script defer src="/consent.js"></script><script defer src="/sa-events.js?v=4"></script><script defer src="/_vercel/speed-insights/script.js"></script><link rel="preload" as="image" href="/portfolio/hygge-house-5.webp" fetchpriority="high"/>
 <style id="cs-css">
 .cs-hero{position:relative;min-height:min(78vh,760px);display:flex;align-items:flex-end;background:var(--navy);overflow:hidden}
-.cs-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cs-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cs-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,34,45,.6) 0%,rgba(17,34,45,.2) 30%,rgba(17,34,45,.55) 62%,rgba(17,34,45,.92) 100%)}
 .cs-hero .rd-wrap{position:relative;z-index:1;width:100%;padding-bottom:clamp(40px,6vw,80px)}
 .cs-hero .rd-label{color:var(--stone)}
 .cs-hero h1{color:#fff;font-family:var(--display);font-weight:500;font-size:clamp(36px,5.4vw,80px);letter-spacing:-0.015em;line-height:1.04;margin:14px 0 0}
+.cs-logo{display:block;height:clamp(34px,4vw,48px);width:auto;max-width:60%;margin:0 0 18px}
+.cs-tags{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 0}
+.cs-tags span{font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.35);padding:6px 10px;border-radius:2px}
 .cs-hero p{color:var(--stone);font-family:var(--sans);font-weight:300;font-size:clamp(17px,1.5vw,21px);max-width:52ch;margin:18px 0 0}
 .cs-main{padding:clamp(48px,6vw,88px) 0;background:var(--paper)}
 .cs-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start}
@@ -159,9 +162,11 @@
         <section class="cs-hero">
             <img src="/portfolio/hygge-house-5.webp" alt="Bedroom at Hygge House Picoas, Lisbon" fetchpriority="high" decoding="async">
             <div class="rd-wrap">
+                <img class="cs-logo" src="/assets/brands/hygge-house-white.png" alt="Hygge House Picoas logo">
                 <p class="rd-label">Case study &middot; Picoas, Lisbon</p>
                 <h1>Hygge House Picoas</h1>
                 <p>Serviced apartments and food and beverage under one brand and one operator.</p>
+                <div class="cs-tags"><span>Hospitality</span><span>Restaurant</span></div>
             </div>
         </section>
         <section class="cs-main">

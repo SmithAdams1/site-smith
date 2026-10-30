@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parent.parent
 CASES = [
     {
         'slug': 'hygge-residences-s-juliao',
+        'logo_white': '/assets/brands/hygge-residences-white.png', 'logo': '/assets/brands/hygge-residences.png',
+        'tags': ['Hospitality', 'Multi-unit', 'Restaurant'],
         'name': 'Hygge Residences S. Julião',
         'place': 'Baixa, Lisbon',
         'image': '/portfolio/s-juliao.webp',
@@ -33,6 +35,8 @@ CASES = [
     },
     {
         'slug': 'anjos-40',
+        'logo_white': '/assets/brands/anjos-40-white.svg', 'logo': '/assets/brands/anjos-40.svg',
+        'tags': ['Residential', 'Multi-unit'],
         'name': 'Anjos 40',
         'place': 'Anjos, Lisbon',
         'image': '/portfolio/anjos-40.webp',
@@ -48,6 +52,8 @@ CASES = [
     },
     {
         'slug': 'hygge-house-picoas',
+        'logo_white': '/assets/brands/hygge-house-white.png', 'logo': '/assets/brands/hygge-house.png',
+        'tags': ['Hospitality', 'Restaurant'],
         'name': 'Hygge House Picoas',
         'place': 'Picoas, Lisbon',
         'image': '/portfolio/hygge-house-5.webp',
@@ -63,6 +69,8 @@ CASES = [
     },
     {
         'slug': 'hygge-kaffe',
+        'logo_white': '/assets/brands/hygge-kaffe-white.png', 'logo': '/assets/brands/hygge-kaffe.png',
+        'tags': ['Restaurants'],
         'name': 'Hygge Kaffe',
         'place': 'Lisbon',
         'image': '/assets/hygge-kaffe-1.jpg',
@@ -81,6 +89,7 @@ CASES = [
 # European Portuguese copy, keyed by slug. Names stay as they are (brands).
 PT = {
     'hygge-residences-s-juliao': {
+        'tags': ['Hotelaria', 'Vários apartamentos', 'Restaurante'],
         'place': 'Baixa, Lisboa',
         'alt': 'Sala de um apartamento no Hygge Residences S. Julião, Lisboa',
         'lede': 'Doze apartamentos e um restaurante na Baixa que especificámos, entregámos e continuamos a gerir.',
@@ -92,6 +101,7 @@ PT = {
         'note': 'Ocupação medida entre 6 de agosto de 2025 e 6 de agosto de 2026. Fonte: Boom, a plataforma através da qual o edifício é reservado.',
     },
     'anjos-40': {
+        'tags': ['Residencial', 'Vários apartamentos'],
         'place': 'Anjos, Lisboa',
         'alt': 'Sala de jantar de um apartamento no Anjos 40, Lisboa',
         'lede': 'Oito apartamentos detidos e arrendados desde 2021, com custos controlados.',
@@ -103,6 +113,7 @@ PT = {
         'note': 'Ocupação medida entre 6 de agosto de 2025 e 6 de agosto de 2026. Fonte: Boom, a plataforma através da qual o edifício é reservado.',
     },
     'hygge-house-picoas': {
+        'tags': ['Hotelaria', 'Restaurante'],
         'place': 'Picoas, Lisboa',
         'alt': 'Quarto no Hygge House Picoas, Lisboa',
         'lede': 'Apartamentos com serviços e restauração, com uma só marca e um só operador.',
@@ -114,6 +125,7 @@ PT = {
         'note': '',
     },
     'hygge-kaffe': {
+        'tags': ['Restauração'],
         'place': 'Lisboa',
         'alt': 'Hygge Kaffe, Lisboa',
         'lede': 'A nossa marca de restauração, criada e gerida internamente em três espaços.',
@@ -148,11 +160,14 @@ SERVICE_URL = {
 CSS = """
 <style id="cs-css">
 .cs-hero{position:relative;min-height:min(78vh,760px);display:flex;align-items:flex-end;background:var(--navy);overflow:hidden}
-.cs-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cs-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cs-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,34,45,.6) 0%,rgba(17,34,45,.2) 30%,rgba(17,34,45,.55) 62%,rgba(17,34,45,.92) 100%)}
 .cs-hero .rd-wrap{position:relative;z-index:1;width:100%;padding-bottom:clamp(40px,6vw,80px)}
 .cs-hero .rd-label{color:var(--stone)}
 .cs-hero h1{color:#fff;font-family:var(--display);font-weight:500;font-size:clamp(36px,5.4vw,80px);letter-spacing:-0.015em;line-height:1.04;margin:14px 0 0}
+.cs-logo{display:block;height:clamp(34px,4vw,48px);width:auto;max-width:60%;margin:0 0 18px}
+.cs-tags{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 0}
+.cs-tags span{font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.35);padding:6px 10px;border-radius:2px}
 .cs-hero p{color:var(--stone);font-family:var(--sans);font-weight:300;font-size:clamp(17px,1.5vw,21px);max-width:52ch;margin:18px 0 0}
 .cs-main{padding:clamp(48px,6vw,88px) 0;background:var(--paper)}
 .cs-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start}
@@ -253,9 +268,11 @@ def page(c0, head, tail, lang='en'):
         <section class="cs-hero">
             <img src="{c["image"]}" alt="{esc(c["alt"])}" fetchpriority="high" decoding="async">
             <div class="rd-wrap">
+                <img class="cs-logo" src="{c["logo_white"]}" alt="{esc(c["name"])} logo">
                 <p class="rd-label">{U["cs"]} &middot; {esc(c["place"])}</p>
                 <h1>{esc(c["name"])}</h1>
                 <p>{esc(c["lede"])}</p>
+                <div class="cs-tags">{"".join(f"<span>{esc(t)}</span>" for t in c["tags"])}</div>
             </div>
         </section>
         <section class="cs-main">
