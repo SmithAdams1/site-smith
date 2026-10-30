@@ -618,3 +618,17 @@ footer a[href^="mailto:"] { overflow-wrap: anywhere; }
 .sa-seo__col a{font:14px var(--sans,inherit);color:#c3cbd1;text-decoration:none;}
 .sa-seo__col a:hover{color:#fff;}
 @media(max-width:720px){.sa-seo__in{grid-template-columns:1fr;}}
+
+/* Section FAQs (homepage, Real Estate, Property Management, Hospitality). */
+.sa-faq{background:var(--paper,#FDFCF9);padding:clamp(48px,6vw,88px) var(--mx,20px);}
+.sa-faq__in{max-width:960px;margin:0 auto;}
+.sa-faq__k{font:500 11px var(--sans,inherit);letter-spacing:.24em;text-transform:uppercase;color:var(--slate,#6A7883);margin:0 0 12px;}
+.sa-faq__h{font-family:var(--display,inherit);font-weight:500;color:var(--navy,#11222D);font-size:clamp(26px,3vw,40px);letter-spacing:-.01em;line-height:1.1;margin:0 0 clamp(20px,3vw,32px);}
+.sa-faq__list{border-top:1px solid var(--navy,#11222D);}
+.sa-faq details{border-bottom:1px solid var(--line,#E4E1DA);}
+.sa-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:20px 0;font:500 clamp(17px,1.4vw,19px) var(--display,inherit);color:var(--navy,#11222D);}
+.sa-faq summary::-webkit-details-marker{display:none;}
+.sa-faq summary::after{content:"+";font:400 22px/1 var(--sans,inherit);color:var(--slate,#6A7883);}
+.sa-faq details[open] summary::after{content:"\2212";}
+.sa-faq__a{font:15.5px/1.75 var(--sans,inherit);color:var(--ink,#26333C);max-width:75ch;padding:0 0 20px;}
+.sa-faq__a a{color:var(--navy,#11222D);text-decoration:underline;}

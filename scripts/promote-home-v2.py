@@ -174,8 +174,8 @@ def main():
     s0 = v2.index('<!-- ══════════════════ HERO')
     s1 = v2.index('<!-- ══════════════════ TESTIMONIALS')
     body = '        ' + v2[s0:s1].lstrip()
-    head = head.replace('<link rel="stylesheet" href="/redesign.css?v=g30" />',
-                        '<link rel="stylesheet" href="/redesign.css?v=g30" />\n<link rel="stylesheet" href="/home.css?v=1" />', 1)
+    head = head.replace('<link rel="stylesheet" href="/redesign.css?v=g31" />',
+                        '<link rel="stylesheet" href="/redesign.css?v=g31" />\n<link rel="stylesheet" href="/home.css?v=1" />', 1)
     tail = tail.replace('<script src="/redesign.js?v=g29"></script>',
                         '<script src="/redesign.js?v=g29"></script>\n    <script src="/home.js?v=1" defer></script>', 1)
     # Only the page body is tagged: the nav and footer have their own keys.
