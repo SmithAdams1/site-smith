@@ -809,3 +809,10 @@ chave sem NOME=); recomendado rodar.
   Botoes de brochura na home e no PM usam data-cms (home.hero.brochure_url, pm.brochure_url) -> PDF PT em /pt.
 - /pt/real-estate: links dos cartoes/empreendimentos passam a /pt/... (PRE='pt/' para o href comecar por '/';
   api/pt-static prefixa '/' a hrefs que nao comecem por '/', o que dava '//pt/...').
+
+## 2026-10-30 13:10 - Claude (conta abilio_diz) - Notas George: bloco final (rodapé + contraste)
+- Rodapé (37 páginas, só CSS em redesign.css g33): cartão do escritório passou a coluna com filete, títulos em maiúsculas douradas, botão "Get Directions" em contorno, sublinhado animado no hover. Novas chaves CMS `global.footer.dubai_title` e `global.footer.directions_label`; PT de office_title/description/cta_label/dubai/directions criadas em site_content.
+- Contraste: `renderRdBlocks` alterna `--tint` (#F3EFE7, classe `rd-sec--tint`) em secções paper consecutivas (About, Invest, GV, D2, Tax). PM com 3 faixas tint à mão. Hover em .rd-card (filete dourado), .rd-mvv__v (lift), .rd-cap (fundo champagne).
+- Já feito antes neste bloco: links SEO no rodapé, FAQs por secção, logos+categorias nos case studies, paginação CMS >1000 linhas, tabela D2 vs GV na home, testemunhos compactos, mapa à direita na página de imóvel.
+- Commits: 84fcfee (rodapé), ac65de2 (contraste). Verificado em produção (/pt/about, /invest-in-portugal, /pt/property-management).
+- Por decidir (Abílio): George quer o fixo como número principal (móvel "parece scam"); hoje está móvel principal por decisão anterior.
