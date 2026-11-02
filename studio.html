@@ -363,6 +363,38 @@
   #section-blog .btn.danger{color:#b91c1c;border-color:#f0c4c4;background:#fff;}
   #section-blog .btn.danger:hover{background:#fef2f2;}
   #section-blog .bl-quill{background:#fff;border-radius:9px;}
+  /* AI content agent */
+  #section-ai-articles .re-row,#section-ai-newsletter .re-row{display:flex;gap:14px;align-items:center;padding:12px 14px;margin-bottom:10px;}
+  .ai-sel{border:1.5px solid var(--line);border-radius:9px;padding:8px 10px;font:inherit;font-size:13px;color:var(--navy);background:#fff;}
+  .ai-runs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;font-size:12px;color:var(--muted);}
+  .ai-runs span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 10px;}
+  .ai-runs .err{color:#b91c1c;border-color:#f0c4c4;}
+  .ai-meta{min-width:0;flex:1;}
+  .ai-ttl{font-weight:600;color:var(--navy);font-size:14.5px;}
+  .ai-sub{color:var(--muted);font-size:12.5px;margin-top:3px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .ai-score{width:44px;height:44px;border-radius:10px;background:#11222D;color:#D6C29A;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+  .badge.warn{background:#fef3c7;color:#92400e;}
+  .badge.rej{background:#fee2e2;color:#b91c1c;}
+  .ai-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px;align-items:start;}
+  @media(max-width:1100px){.ai-grid{grid-template-columns:1fr;}}
+  .ai-doc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px 34px;line-height:1.7;color:#26333C;font-size:15px;}
+  .ai-doc h1{font-size:26px;line-height:1.25;color:var(--navy);margin:0 0 6px;}
+  .ai-doc h2{font-size:20px;color:var(--navy);margin:26px 0 8px;} .ai-doc h3{font-size:16.5px;color:var(--navy);margin:20px 0 6px;}
+  .ai-doc table{border-collapse:collapse;width:100%;font-size:13.5px;margin:14px 0;} .ai-doc td,.ai-doc th{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;}
+  .ai-doc a{color:#1d4ed8;} .ai-doc .ai-lede{color:var(--muted);font-size:14px;margin:0 0 18px;}
+  .ai-side .card{padding:16px 18px;margin-bottom:12px;}
+  .ai-side h4{margin:0 0 8px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);}
+  .ai-side ul{margin:0;padding-left:18px;font-size:13px;line-height:1.55;color:#374151;} .ai-side li{margin-bottom:6px;}
+  .ai-side p{font-size:13px;line-height:1.55;color:#374151;margin:0;}
+  .ai-side .off{font-size:10px;font-weight:700;color:#15803d;background:#dcfce7;border-radius:4px;padding:1px 5px;margin-left:4px;}
+  .ai-tabs{display:inline-flex;border:1.5px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:12px;}
+  .ai-tabs button{border:0;background:#fff;padding:7px 14px;font:inherit;font-size:13px;cursor:pointer;color:var(--navy);}
+  .ai-tabs button.on{background:var(--navy);color:#fff;}
+  .ai-side textarea,.nl-f input{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit;font-size:13.5px;}
+  .nl-frame{width:100%;height:900px;border:1px solid var(--line);border-radius:12px;background:#EFECE6;}
+  .nl-f{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:10px;}
+  .nl-f input{margin-top:6px;text-transform:none;letter-spacing:normal;font-weight:400;}
+
   #section-blog .bl-quill .ql-container{min-height:200px;font-size:15px;font-family:inherit;border-bottom-left-radius:9px;border-bottom-right-radius:9px;}
   #section-blog .bl-quill .ql-toolbar{border-top-left-radius:9px;border-top-right-radius:9px;}
   #section-blog .bl-quill .ql-editor{min-height:200px;}
@@ -415,6 +447,14 @@
       <a class="nav-item" data-section="blog" href="#blog">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h13a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3V4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
         <span>Blog</span>
+      </a>
+      <a class="nav-item" data-section="ai-articles" href="#ai-articles">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l1.8 4.6L18 9.4l-4.2 1.8L12 16l-1.8-4.8L6 9.4l4.2-1.8z"/><path d="M19 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>
+        <span>AI Articles</span>
+      </a>
+      <a class="nav-item" data-section="ai-newsletter" href="#ai-newsletter">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <span>Newsletter</span>
       </a>
       <a class="nav-item" data-section="content" href="#content">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3" cy="6" r="1.5"/><circle cx="3" cy="12" r="1.5"/><circle cx="3" cy="18" r="1.5"/></svg>
@@ -692,6 +732,31 @@
       <!-- Inspector column -->
       <aside class="inspector" id="ed-inspector"></aside>
     </section>
+    <section class="section hidden" id="section-ai-articles">
+      <div class="page-head">
+        <div>
+          <h2>AI Articles</h2>
+          <div class="sub">Drafts written by the content agent on the Mac (trends, research, EN + PT). Nothing goes live until you publish it.</div>
+        </div>
+        <div class="row" style="display:flex;gap:8px;align-items:center;">
+          <select id="ai-filter" class="ai-sel"><option value="open">To review</option><option value="approved">Approved</option><option value="published">Published</option><option value="rejected">Rejected</option><option value="all">All</option></select>
+        </div>
+      </div>
+      <div id="ai-runs" class="ai-runs"></div>
+      <div id="ai-list"></div>
+      <div id="ai-review" class="hidden"></div>
+    </section>
+
+    <section class="section hidden" id="section-ai-newsletter">
+      <div class="page-head">
+        <div>
+          <h2>Newsletter</h2>
+          <div class="sub">Issues composed by the agent from approved articles and the market briefing. Review, edit the subject, approve, export.</div>
+        </div>
+      </div>
+      <div id="nl-list"></div>
+      <div id="nl-review" class="hidden"></div>
+    </section>
   </main>
 </div>
 
@@ -725,7 +790,7 @@
   const $  = (id) => document.getElementById(id);
   const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
-  const SECTIONS = ['pages','rd-pages','real-estate','blog','content','media','nav','settings'];
+  const SECTIONS = ['pages','rd-pages','real-estate','blog','ai-articles','ai-newsletter','content','media','nav','settings'];
 
   function show(el, on=true){ if(!el) return; el.classList.toggle('hidden', !on); }
   function toast(msg, ms=2200){
@@ -798,6 +863,8 @@
     if(name === 'nav') loadNavManager();
     if(name === 'real-estate') reLoad();
     if(name === 'blog') blLoad();
+    if(name === 'ai-articles') aiLoad();
+    if(name === 'ai-newsletter') nlLoad();
   }
   function routeFromHash(){
     const raw = (location.hash || '#pages').replace(/^#/, '');
@@ -2986,6 +3053,202 @@
     const cw = blG('bl-cover-wrap'); if(cw) cw.addEventListener('click', e=>{ if(e.target.id==='bl-cover-x'){ blState.cover=null; blRenderCover(); } });
     const file = blG('bl-file'); if(file) file.addEventListener('change', e=>{ if(e.target.files && e.target.files[0]) blUpload(e.target.files[0]); e.target.value=''; });
     const pick = blG('bl-pick'); if(pick) pick.addEventListener('click', ()=> openMediaPicker(u=>{ blState.cover=u; blRenderCover(); }));
+  })();
+
+  // ============================================================
+  // AI content agent: review drafts written on the Mac
+  // (~/Code/sa-content-agent -> ai_articles / ai_newsletters / ai_runs).
+  // Publishing copies an approved draft into `posts` (the live blog).
+  // ============================================================
+  const aiG = id => document.getElementById(id);
+  let aiCur = null, aiLang = 'en';
+  const AI_BADGE = { draft:'<span class="badge warn">To review</span>', approved:'<span class="badge nav">Approved</span>',
+    published:'<span class="badge pub">Published</span>', rejected:'<span class="badge rej">Rejected</span>', sent:'<span class="badge pub">Sent</span>' };
+  const aiDate = iso => iso ? new Date(iso).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
+
+  async function aiRuns(){
+    const { data } = await sb.from('ai_runs').select('kind,started_at,status,stats').order('started_at',{ascending:false}).limit(4);
+    aiG('ai-runs').innerHTML = (data||[]).length
+      ? 'Last agent runs: ' + data.map(r=>`<span class="${r.status==='error'?'err':''}">${escapeHtml(r.kind)} · ${aiDate(r.started_at)} · ${escapeHtml(r.status)}${r.stats&&r.stats.drafts!=null?' · '+r.stats.drafts+' drafts':''}</span>`).join('')
+      : 'The agent has not run yet. On the Mac: <code>cd ~/Code/sa-content-agent && .venv/bin/python articles.py</code>';
+  }
+  async function aiLoad(){
+    aiG('ai-list').classList.remove('hidden'); aiG('ai-review').classList.add('hidden');
+    aiRuns();
+    const f = aiG('ai-filter').value;
+    let q = sb.from('ai_articles').select('id,created_at,status,title,topic,score,category,keyword,to_verify,sources').order('created_at',{ascending:false}).limit(100);
+    if(f==='open') q = q.eq('status','draft'); else if(f!=='all') q = q.eq('status',f);
+    const { data, error } = await q;
+    const box = aiG('ai-list');
+    if(error){ box.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load drafts</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
+    if(!data.length){ box.innerHTML = '<div class="empty"><h3>Nothing here</h3><p>New drafts appear after each agent run.</p></div>'; return; }
+    box.innerHTML = data.map(a=>{
+      const tv = (a.to_verify||[]).length, off = (a.sources||[]).filter(x=>x.official).length;
+      return `<div class="card re-row"><div class="ai-score" title="Relevance score">${Math.round(a.score||0)}</div>
+        <div class="ai-meta"><div class="ai-ttl">${escapeHtml(a.title||a.topic)}</div>
+        <div class="ai-sub">${AI_BADGE[a.status]||''}${a.category?`<span class="badge nav">${escapeHtml(a.category)}</span>`:''}<span>${aiDate(a.created_at)}</span>
+        <span>${(a.sources||[]).length} sources${off?` (${off} official)`:''}</span>${tv?`<span class="badge warn">${tv} to verify</span>`:''}</div></div>
+        <div class="re-actions"><button class="btn ghost ai-open" data-id="${a.id}" type="button">Review</button></div></div>`;
+    }).join('');
+  }
+  function aiFaqHtml(faq, lang){
+    if(!faq || !faq.length) return '';
+    return `<h2>${lang==='pt'?'Perguntas frequentes':'Frequently asked questions'}</h2>` + faq.map(x=>`<h3>${escapeHtml(x.q||'')}</h3><p>${escapeHtml(x.a||'')}</p>`).join('');
+  }
+  function aiPick(a, lang){
+    const pt = (a.translations && a.translations.pt) || {};
+    return lang==='pt'
+      ? { title: pt.title||'', excerpt: pt.excerpt||'', meta: pt.meta_description||'', content: pt.content||'', faq: pt.faq||[] }
+      : { title: a.title||'', excerpt: a.excerpt||'', meta: a.meta_description||'', content: a.content||'', faq: a.faq||[] };
+  }
+  function aiRender(){
+    const a = aiCur, v = aiPick(a, aiLang);
+    const src = (a.sources||[]).map(x=>`<li><a href="${escapeHtml(x.url)}" target="_blank" rel="noopener">${escapeHtml(x.publisher||x.title||x.url)}</a>${x.official?'<span class="off">official</span>':''}${x.date?` <span style="color:var(--muted)">${escapeHtml(String(x.date))}</span>`:''}</li>`).join('');
+    const tv = (a.to_verify||[]).map(x=>`<li>${escapeHtml(typeof x==='string'?x:JSON.stringify(x))}</li>`).join('');
+    const sig = (a.trend_signals||[]).slice(0,8).map(x=>`<li>${x.url?`<a href="${escapeHtml(x.url)}" target="_blank" rel="noopener">${escapeHtml(x.title||'')}</a>`:escapeHtml(x.title||x.keyword||'')}${x.source?` <span style="color:var(--muted)">${escapeHtml(x.source)}</span>`:''}</li>`).join('');
+    const gaps = ((a.dossier&&a.dossier.gap&&a.dossier.gap.gaps)||[]).map(x=>`<li>${escapeHtml(x)}</li>`).join('');
+    const canPub = a.status==='approved';
+    aiG('ai-review').innerHTML = `
+      <div class="page-head"><button class="btn ghost" id="ai-back" type="button">← Back to list</button>
+        <div class="row" style="display:flex;gap:8px;">
+          ${a.status!=='rejected'&&a.status!=='published'?'<button class="btn ghost danger" id="ai-reject" type="button">Reject</button>':''}
+          ${a.status==='draft'?'<button class="btn ghost" id="ai-approve" type="button">Approve</button>':''}
+          ${canPub?'<button class="btn" id="ai-publish" type="button">Publish to blog…</button>':''}
+          ${a.status==='published'&&a.published_post_id?'<button class="btn ghost" id="ai-goblog" type="button">Open in Blog editor</button>':''}
+        </div></div>
+      <div class="ai-grid">
+        <div>
+          <div class="ai-tabs"><button type="button" data-l="en" class="${aiLang==='en'?'on':''}">English</button><button type="button" data-l="pt" class="${aiLang==='pt'?'on':''}">Português</button></div>
+          <article class="ai-doc"><h1>${escapeHtml(v.title)}</h1><p class="ai-lede">${escapeHtml(v.meta)}</p>${v.content}${aiFaqHtml(v.faq, aiLang)}</article>
+        </div>
+        <div class="ai-side">
+          <div class="card"><h4>Status</h4><p>${AI_BADGE[a.status]||''} · score ${Math.round(a.score||0)} · ${escapeHtml(a.category||'')} · ${escapeHtml(a.read_time||'')}</p><p style="margin-top:8px;"><b>Keyword:</b> ${escapeHtml(a.keyword||'')}<br><b>Slug:</b> /blog/${escapeHtml(a.slug||'')}</p></div>
+          ${tv?`<div class="card" style="border-color:#fcd34d;"><h4>Check before publishing</h4><ul>${tv}</ul></div>`:''}
+          <div class="card"><h4>Why now</h4><p>${escapeHtml(a.why||'')}</p>${sig?`<ul style="margin-top:8px;">${sig}</ul>`:''}</div>
+          <div class="card"><h4>Sources used</h4><ul>${src||'<li>none</li>'}</ul></div>
+          ${gaps?`<div class="card"><h4>Gaps vs. what already ranks</h4><ul>${gaps}</ul></div>`:''}
+          <div class="card"><h4>Review notes</h4><textarea id="ai-notes" rows="3" placeholder="Notes for the team (saved on approve/reject)">${escapeHtml(a.review_notes||'')}</textarea></div>
+        </div>
+      </div>`;
+  }
+  async function aiOpen(id){
+    const { data, error } = await sb.from('ai_articles').select('*').eq('id',id).single();
+    if(error||!data){ toast('Could not load draft.'); return; }
+    aiCur = data; aiLang = 'en';
+    aiG('ai-list').classList.add('hidden'); aiG('ai-runs').innerHTML=''; aiG('ai-review').classList.remove('hidden');
+    aiRender(); window.scrollTo(0,0);
+  }
+  async function aiSetStatus(status){
+    const notes = (aiG('ai-notes')||{}).value || null;
+    const { error } = await sb.from('ai_articles').update({ status, review_notes: notes, updated_at: new Date().toISOString() }).eq('id', aiCur.id);
+    if(error){ toast('Error: '+error.message); return false; }
+    aiCur.status = status; aiCur.review_notes = notes; return true;
+  }
+  async function aiPublish(){
+    const a = aiCur;
+    if((a.to_verify||[]).length && !confirm('This draft has items marked "check before publishing". Have they all been verified?')) return;
+    toast('Pick a cover image for the article.');
+    openMediaPicker(async (cover)=>{
+      if(!cover){ toast('A cover image is required.'); return; }
+      const en = aiPick(a,'en'), pt = aiPick(a,'pt');
+      let slug = a.slug || slugify(a.title);
+      const { data: clash } = await sb.from('posts').select('id').eq('slug', slug).limit(1);
+      if(clash && clash.length) slug = slug + '-' + new Date().getFullYear();
+      const payload = { title: en.title, slug, category: a.category||'', read_time: a.read_time||'', excerpt: en.excerpt,
+        content: en.content + aiFaqHtml(en.faq,'en'), image_url: cover,
+        translations: pt.title ? { pt: { title: pt.title, excerpt: pt.excerpt, content: pt.content + aiFaqHtml(pt.faq,'pt') } } : {} };
+      const res = await sb.from('posts').insert(payload).select().single();
+      if(res.error){ toast('Publish error: '+res.error.message); return; }
+      await sb.from('ai_articles').update({ status:'published', published_post_id: res.data.id, slug, updated_at: new Date().toISOString() }).eq('id', a.id);
+      const urls = ['https://www.smithandadams.com/blog/'+slug]; if(payload.translations.pt) urls.push('https://www.smithandadams.com/pt/blog/'+slug);
+      pingIndexNow(urls);
+      toast('Published. Opening it in the Blog editor for final touches.');
+      location.hash = '#blog'; setTimeout(()=>blEdit(res.data.id), 400);
+    });
+  }
+  (function aiWire(){
+    aiG('ai-filter').addEventListener('change', aiLoad);
+    aiG('ai-list').addEventListener('click', e=>{ const b=e.target.closest('.ai-open'); if(b) aiOpen(b.dataset.id); });
+    aiG('ai-review').addEventListener('click', async e=>{
+      const t = e.target.closest('button'); if(!t) return;
+      if(t.dataset.l){ aiLang = t.dataset.l; aiRender(); return; }
+      if(t.id==='ai-back') return aiLoad();
+      if(t.id==='ai-approve'){ if(await aiSetStatus('approved')){ toast('Approved. It can now be published and used in the newsletter.'); aiRender(); } return; }
+      if(t.id==='ai-reject'){ if(confirm('Reject this draft?') && await aiSetStatus('rejected')){ toast('Rejected.'); aiLoad(); } return; }
+      if(t.id==='ai-publish') return aiPublish();
+      if(t.id==='ai-goblog'){ location.hash='#blog'; setTimeout(()=>blEdit(aiCur.published_post_id),400); }
+    });
+  })();
+
+  // ---- Newsletter -------------------------------------------------
+  let nlCur = null, nlLang = 'en';
+  async function nlLoad(){
+    aiG('nl-list').classList.remove('hidden'); aiG('nl-review').classList.add('hidden');
+    const { data, error } = await sb.from('ai_newsletters').select('id,created_at,status,subject,period_label,article_ids,trends').order('created_at',{ascending:false}).limit(50);
+    const box = aiG('nl-list');
+    if(error){ box.innerHTML = `<div class="empty" style="border-color:#f0c4c4;color:#b91c1c;"><h3>Could not load newsletters</h3><p>${escapeHtml(error.message)}</p></div>`; return; }
+    if(!data.length){ box.innerHTML = '<div class="empty"><h3>No issues yet</h3><p>On the Mac: <code>cd ~/Code/sa-content-agent && .venv/bin/python newsletter.py</code></p></div>'; return; }
+    box.innerHTML = data.map(n=>`<div class="card re-row"><div class="ai-meta"><div class="ai-ttl">${escapeHtml(n.subject||'(no subject)')}</div>
+      <div class="ai-sub">${AI_BADGE[n.status]||''}<span>${escapeHtml(n.period_label||'')}</span><span>${(n.article_ids||[]).length} articles · ${(n.trends||[]).length} market items</span><span>${aiDate(n.created_at)}</span></div></div>
+      <div class="re-actions"><button class="btn ghost nl-open" data-id="${n.id}" type="button">Review</button></div></div>`).join('');
+  }
+  function nlView(){
+    const n = nlCur, pt = (n.translations&&n.translations.pt)||{};
+    return nlLang==='pt' ? { subject: pt.subject||'', preheader: pt.preheader||'', html: pt.html||'' } : { subject: n.subject||'', preheader: n.preheader||'', html: n.html||'' };
+  }
+  function nlRender(){
+    const v = nlView(), n = nlCur;
+    aiG('nl-review').innerHTML = `
+      <div class="page-head"><button class="btn ghost" id="nl-back" type="button">← Back to list</button>
+        <div class="row" style="display:flex;gap:8px;">
+          <button class="btn ghost" id="nl-copy" type="button">Copy HTML</button>
+          <button class="btn ghost" id="nl-dl" type="button">Download .html</button>
+          ${n.status==='draft'?'<button class="btn ghost danger" id="nl-reject" type="button">Reject</button><button class="btn" id="nl-approve" type="button">Approve</button>':''}
+          ${n.status==='approved'?'<button class="btn" id="nl-sent" type="button">Mark as sent</button>':''}
+        </div></div>
+      <div class="ai-grid">
+        <div><div class="ai-tabs"><button type="button" data-l="en" class="${nlLang==='en'?'on':''}">English</button><button type="button" data-l="pt" class="${nlLang==='pt'?'on':''}">Português</button></div>
+          <iframe class="nl-frame" id="nl-frame" title="Newsletter preview"></iframe></div>
+        <div class="ai-side">
+          <div class="card"><label class="nl-f">Subject<input id="nl-subject" value="${escapeHtml(v.subject)}"></label>
+            <label class="nl-f">Preheader<input id="nl-pre" value="${escapeHtml(v.preheader)}"></label>
+            <button class="btn ghost" id="nl-save" type="button">Save subject/preheader</button></div>
+          <div class="card"><h4>Status</h4><p>${AI_BADGE[n.status]||''} · ${escapeHtml(n.period_label||'')}</p>
+            <p style="margin-top:8px;">Sending goes through the CRM (SES). The email contains <code>{{unsubscribe_url}}</code> for the sender to fill.</p></div>
+          <div class="card"><h4>Market sources</h4><ul>${(n.sources||[]).map(x=>`<li><a href="${escapeHtml(x.url)}" target="_blank" rel="noopener">${escapeHtml(x.publisher||x.title)}</a></li>`).join('')||'<li>none</li>'}</ul></div>
+        </div></div>`;
+    aiG('nl-frame').srcdoc = v.html;
+  }
+  async function nlOpen(id){
+    const { data, error } = await sb.from('ai_newsletters').select('*').eq('id',id).single();
+    if(error||!data){ toast('Could not load newsletter.'); return; }
+    nlCur = data; nlLang = 'en';
+    aiG('nl-list').classList.add('hidden'); aiG('nl-review').classList.remove('hidden'); nlRender(); window.scrollTo(0,0);
+  }
+  async function nlUpdate(patch, msg){
+    const { error } = await sb.from('ai_newsletters').update({ ...patch, updated_at: new Date().toISOString() }).eq('id', nlCur.id);
+    if(error){ toast('Error: '+error.message); return false; }
+    Object.assign(nlCur, patch); if(msg) toast(msg); return true;
+  }
+  (function nlWire(){
+    aiG('nl-list').addEventListener('click', e=>{ const b=e.target.closest('.nl-open'); if(b) nlOpen(b.dataset.id); });
+    aiG('nl-review').addEventListener('click', async e=>{
+      const t = e.target.closest('button'); if(!t) return;
+      if(t.dataset.l){ nlLang = t.dataset.l; nlRender(); return; }
+      const v = nlView();
+      if(t.id==='nl-back') return nlLoad();
+      if(t.id==='nl-copy'){ await navigator.clipboard.writeText(v.html); toast('HTML copied.'); return; }
+      if(t.id==='nl-dl'){ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([v.html],{type:'text/html'})); a.download=`newsletter-${nlLang}-${(nlCur.created_at||'').slice(0,10)}.html`; a.click(); return; }
+      if(t.id==='nl-save'){
+        const subject = aiG('nl-subject').value.trim(), preheader = aiG('nl-pre').value.trim();
+        if(nlLang==='pt'){ const tr = { ...(nlCur.translations||{}) }; tr.pt = { ...(tr.pt||{}), subject, preheader }; await nlUpdate({ translations: tr }, 'Saved.'); }
+        else await nlUpdate({ subject, preheader }, 'Saved.');
+        return;
+      }
+      if(t.id==='nl-approve'){ if(await nlUpdate({ status:'approved' }, 'Approved.')) nlRender(); return; }
+      if(t.id==='nl-reject'){ if(confirm('Reject this issue?') && await nlUpdate({ status:'rejected' }, 'Rejected.')) nlLoad(); return; }
+      if(t.id==='nl-sent'){ if(confirm('Mark as sent?') && await nlUpdate({ status:'sent', sent_at: new Date().toISOString() }, 'Marked as sent.')) nlRender(); }
+    });
   })();
 
   boot();

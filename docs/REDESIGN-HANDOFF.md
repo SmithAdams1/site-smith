@@ -823,3 +823,10 @@ chave sem NOME=); recomendado rodar.
 - Mantêm foto antiga (sem foto nova na pasta): Suelen, Adam, Mona, Renato, Jahed.
 - Ocultos com `hidden:true` (renderer filtra): todos os membros sem foto, exceto Joana Ribeiro (iniciais). Para mostrar alguém: pôr `photo` e tirar `hidden`.
 - Sem correspondência no site (não usadas): Marta, Savvy, Suzana, Smithers-Site-4 e -5.
+
+## 2026-11-02 18:00 - Claude (conta abilio_diz) - Agente de conteúdos (artigos + newsletter)
+- Projeto novo `~/Code/sa-content-agent` (Python 3.12 venv, git local). Ollama 0.40 + `qwen3.5:9b` instalados via brew (serviço ativo). Nota: no backend MLX do Ollama não há `format: json`, o JSON é extraído da resposta.
+- Pipeline: DDG News + Google Trends RSS -> escolha de temas (local) -> pesquisa + fontes oficiais + extração de factos (local) -> redação EN + PT-PT (Claude, skill sa-content + knowledge/) -> `ai_articles`. `newsletter.py` -> `ai_newsletters`. Corridas em `ai_runs`.
+- Teste real `articles.py --topics`: 124 sinais, 5 temas coerentes em ~4 min.
+- Studio: separadores "AI Articles" (rever, aprovar, rejeitar, publicar para `posts` com capa, abre no editor do Blog) e "Newsletter" (pré-visualização EN/PT, editar assunto, aprovar, copiar/descarregar HTML, marcar enviada). Commit local, por publicar até as tabelas existirem.
+- Pendente do Abílio: correr `schema-ai-content.sql` no Supabase; preencher `~/Code/sa-content-agent/.env` (ANTHROPIC_API_KEY, SUPABASE_SERVICE_ROLE_KEY). Depois: 1.º artigo de teste, envio da newsletter pelo CRM/SES, agendamento launchd.
