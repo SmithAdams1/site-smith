@@ -816,3 +816,10 @@ chave sem NOME=); recomendado rodar.
 - Já feito antes neste bloco: links SEO no rodapé, FAQs por secção, logos+categorias nos case studies, paginação CMS >1000 linhas, tabela D2 vs GV na home, testemunhos compactos, mapa à direita na página de imóvel.
 - Commits: 84fcfee (rodapé), ac65de2 (contraste). Verificado em produção (/pt/about, /invest-in-portugal, /pt/property-management).
 - Por decidir (Abílio): George quer o fixo como número principal (móvel "parece scam"); hoje está móvel principal por decisão anterior.
+
+## 2026-11-02 - Claude (conta abilio_diz) - Fotos da equipa (About > Meet the Team)
+- Fonte: pasta Drive 1exZIdEmquuzwUDx_Vp9xzgbn5C24LT8l (sessão fotográfica fundo azul). Exportadas 680x1020 q80 para /team, cache-bust ?v=2.
+- Substituídas: Abílio, Alex, Bruna, George, Soraia, Taibo, Teresa, João Leite (ficheiro Smithers-Site-3). Novas: Benjamin Sharps, Matilde Boulton, Nayane, Inês Passos ("Inês Marketing").
+- Mantêm foto antiga (sem foto nova na pasta): Suelen, Adam, Mona, Renato, Jahed.
+- Ocultos com `hidden:true` (renderer filtra): todos os membros sem foto, exceto Joana Ribeiro (iniciais). Para mostrar alguém: pôr `photo` e tirar `hidden`.
+- Sem correspondência no site (não usadas): Marta, Savvy, Suzana, Smithers-Site-4 e -5.

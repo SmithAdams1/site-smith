@@ -223,7 +223,7 @@
               {
                 "name": "George Hobson",
                 "role": "Head of Investment & Strategy",
-                "photo": "/team/george.jpg"
+                "photo": "/team/george.jpg?v=2"
               },
               {
                 "name": "Adam Ismail",
@@ -237,12 +237,12 @@
               {
                 "name": "Abílio Diz",
                 "role": "Head of Marketing",
-                "photo": "/team/abilio.jpg"
+                "photo": "/team/abilio.jpg?v=2"
               },
               {
                 "name": "Teresa Cherry Pinto",
                 "role": "Head of Client Relations & Asset Management",
-                "photo": "/team/teresa.jpg"
+                "photo": "/team/teresa.jpg?v=2"
               }
             ]
           },
@@ -256,7 +256,7 @@
               {
                 "name": "Alex Ivatsko",
                 "role": "Digital Marketing Manager",
-                "photo": "/team/alex.jpg"
+                "photo": "/team/alex.jpg?v=2"
               },
               {
                 "name": "Mona Campbel",
@@ -271,17 +271,17 @@
               {
                 "name": "Taibo Karã",
                 "role": "Customer Service Manager",
-                "photo": "/team/taibo.jpg"
+                "photo": "/team/taibo.jpg?v=2"
               },
               {
                 "name": "Soraia Fernandes",
                 "role": "Hospitality Team Manager",
-                "photo": "/team/soraia.jpg"
+                "photo": "/team/soraia.jpg?v=2"
               },
               {
                 "name": "João Leite",
                 "role": "Customer Service Agent",
-                "photo": "/team/joao.jpg"
+                "photo": "/team/joao.jpg?v=2"
               },
               {
                 "name": "Jahed Jahed",
@@ -290,76 +290,93 @@
               },
               {
                 "name": "Matilde Boulton",
-                "role": "Designer"
+                "role": "Designer",
+                "photo": "/team/matilde.jpg?v=2"
               },
               {
                 "name": "Bruna Fernandes",
                 "role": "Comms Team Manager",
-                "photo": "/team/bruna.jpg"
+                "photo": "/team/bruna.jpg?v=2"
               },
               {
                 "name": "Benjamin Sharps",
-                "role": "Senior Investor Advisor"
+                "role": "Senior Investor Advisor",
+                "photo": "/team/benjamin.jpg?v=2"
               },
               {
                 "name": "Heloisa Araújo",
-                "role": "Backoffice"
+                "role": "Backoffice",
+                "hidden": true
               },
               {
                 "name": "Rafael Prado",
-                "role": "OPPS"
+                "role": "OPPS",
+                "hidden": true
               },
               {
                 "name": "Nayane",
-                "role": "OPPS Agent"
+                "role": "OPPS Agent",
+                "photo": "/team/nayane.jpg?v=2"
               },
               {
                 "name": "João Henrique",
-                "role": "OPPS Agent"
+                "role": "OPPS Agent",
+                "hidden": true
               },
               {
                 "name": "Taina",
-                "role": "Backoffice Agent"
+                "role": "Backoffice Agent",
+                "hidden": true
               },
               {
                 "name": "Lisa",
-                "role": "Backoffice Agent"
+                "role": "Backoffice Agent",
+                "hidden": true
               },
               {
                 "name": "Beatriz Rosa",
-                "role": "Backoffice Agent"
+                "role": "Backoffice Agent",
+                "hidden": true
               },
               {
                 "name": "Ismail Ibraim",
-                "role": "Customer Service Agent"
+                "role": "Customer Service Agent",
+                "hidden": true
               },
               {
                 "name": "Dario",
-                "role": "Comms Agent"
+                "role": "Comms Agent",
+                "hidden": true
               },
               {
                 "name": "Sofia",
-                "role": "Comms Agent"
+                "role": "Comms Agent",
+                "hidden": true
               },
               {
                 "name": "Adriel",
-                "role": "Comms Agent"
+                "role": "Comms Agent",
+                "hidden": true
               },
               {
                 "name": "Fabio",
-                "role": "Comms Agent"
+                "role": "Comms Agent",
+                "hidden": true
               },
               {
                 "name": "Inês Passos",
-                "role": "Comms Agent"
+                "role": "Comms Agent",
+                "photo": "/team/ines.jpg?v=2"
               },
               {
                 "name": "Kia",
-                "role": "Comms Agent"
+                "role": "Comms Agent",
+                "hidden": true
               },
               {
                 "name": "Mauro",
-                "role": "Comms Agent"
+                "role": "Comms Agent",
+                "hidden": true
               }
             ]
           }

@@ -541,7 +541,8 @@ const renderers = {
           { label: { en: 'The Team', pt: 'A Equipa' }, layout: 'team', people: Array.isArray(d.team) ? d.team : [] },
         ];
     const sectionsHtml = groups.map((g) => {
-      const people = Array.isArray(g.people) ? g.people : [];
+      // people[].hidden keeps someone in the data (e.g. waiting for a headshot) without showing them.
+      const people = (Array.isArray(g.people) ? g.people : []).filter((p) => p && !p.hidden);
       if (!people.length) return '';
       const lbl = pick(g.label, locale) || '';
       return `<p class="rdt__seclabel">${lbl}</p>\n          <div class="rdt-grid ${layoutGrid(g.layout)}">${people.map((p) => card(p, layoutKind(g.layout))).join('')}</div>`;
