@@ -819,7 +819,7 @@ chave sem NOME=); recomendado rodar.
 
 ## 2026-11-02 - Claude (conta abilio_diz) - Fotos da equipa (About > Meet the Team)
 - Fonte: pasta Drive 1exZIdEmquuzwUDx_Vp9xzgbn5C24LT8l (sessão fotográfica fundo azul). Exportadas 680x1020 q80 para /team, cache-bust ?v=2.
-- Substituídas: Abílio, Alex, Bruna, George, Soraia, Taibo, Teresa, João Leite (ficheiro Smithers-Site-3). Novas: Benjamin Sharps, Matilde Boulton, Nayane, Inês Passos ("Inês Marketing").
+- Substituídas: Abílio, Alex, Bruna, George, Soraia, Taibo, Teresa, João Leite (ficheiro Smithers-Site-3). Novas: Benjamin Sharps, Matilde Boulton, Nayane, Inês Vasconcelos (Public Relations Manager, ficheiro "Inês Marketing"; corrigido 2026-11-02, não é a Inês Passos, que fica oculta).
 - Mantêm foto antiga (sem foto nova na pasta): Suelen, Adam, Mona, Renato, Jahed.
 - Ocultos com `hidden:true` (renderer filtra): todos os membros sem foto, exceto Joana Ribeiro (iniciais). Para mostrar alguém: pôr `photo` e tirar `hidden`.
 - Sem correspondência no site (não usadas): Marta, Savvy, Suzana, Smithers-Site-4 e -5.

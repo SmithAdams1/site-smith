@@ -299,6 +299,11 @@
                 "photo": "/team/bruna.jpg?v=2"
               },
               {
+                "name": "Inês Vasconcelos",
+                "role": "Public Relations Manager",
+                "photo": "/team/ines.jpg?v=2"
+              },
+              {
                 "name": "Benjamin Sharps",
                 "role": "Senior Investor Advisor",
                 "photo": "/team/benjamin.jpg?v=2"
@@ -366,7 +371,7 @@
               {
                 "name": "Inês Passos",
                 "role": "Comms Agent",
-                "photo": "/team/ines.jpg?v=2"
+                "hidden": true
               },
               {
                 "name": "Kia",
