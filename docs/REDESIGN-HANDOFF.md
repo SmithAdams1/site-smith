@@ -836,3 +836,8 @@ chave sem NOME=); recomendado rodar.
 - `articles.py --n 1`: 38 min (sinais 30s, temas 1.5 min, extração local ~10 min, Claude escrita+PT ~25 min). Draft a8d62a5d "Portugal Golden Visa Citizenship Timeline 2026: 10 Years", 1204 palavras, 5 FAQ, 6 fontes (todas secundárias, 0 oficiais), 15 itens to_verify, sem travessões.
 - Agente: Claude em streaming + timeout 600s/1 retry + logs de escrita/tradução (commit no repo do agente).
 - Pendente: push de 211c0fb (Studio tabs) com OK do Abílio; melhorar busca de fontes oficiais (DRE); newsletter teste; launchd.
+
+### 2026-11-03 12:40 (abilio_diz@hotmail.com) - Studio AI Articles: editor de artigos
+- Botão Edit no rascunho (qualquer estado exceto rejected): título/excerpt/meta (contadores 60/160), corpo em contenteditable com toolbar (B/I/H2/H3/P/listas/quote/link/clear) + modo HTML, FAQ editável, EN e PT em separado; slug/categoria/read time/keyword.
+- NÃO usa Quill: Quill 1.3.6 apaga <table> (o editor do Blog tem esse risco para artigos do agente). "Open in Blog editor" substituído por "View live"; editar publicado = "Save and update live post" (atualiza posts + IndexNow; slug bloqueado).
+- Em-dashes convertidos para hífen ao gravar. Testado num harness local com o rascunho real e BD simulada (EN/PT, tabela, HTML mode, FAQ add/remove, publicado vs draft). Não testado com login real.

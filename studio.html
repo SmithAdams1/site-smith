@@ -391,6 +391,21 @@
   .ai-tabs button{border:0;background:#fff;padding:7px 14px;font:inherit;font-size:13px;cursor:pointer;color:var(--navy);}
   .ai-tabs button.on{background:var(--navy);color:#fff;}
   .ai-side textarea,.nl-f input{width:100%;border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit;font-size:13.5px;}
+  .ae-f{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin:0 0 14px;}
+  .ae-f input,.ae-f textarea{display:block;width:100%;margin-top:6px;border:1.5px solid var(--line);border-radius:9px;padding:9px 11px;font:inherit;font-size:14px;text-transform:none;letter-spacing:normal;font-weight:400;color:#26333C;background:#fff;}
+  .ae-f input:disabled{background:#f5f5f4;color:var(--muted);}
+  .ae-f .ae-n{float:right;font-weight:400;letter-spacing:normal;text-transform:none;color:var(--muted);}
+  .ae-f .ae-n.over{color:#b91c1c;}
+  .ae-tb{display:flex;flex-wrap:wrap;gap:4px;padding:6px;border:1.5px solid var(--line);border-bottom:0;border-radius:9px 9px 0 0;background:#fafaf9;position:sticky;top:0;z-index:2;}
+  .ae-tb button{border:1px solid transparent;background:none;border-radius:6px;padding:5px 9px;font:inherit;font-size:12.5px;color:var(--navy);cursor:pointer;}
+  .ae-tb button:hover{background:#fff;border-color:var(--line);} .ae-tb button.on{background:var(--navy);color:#fff;}
+  .ae-tb .sep{width:1px;background:var(--line);margin:2px 4px;}
+  .ae-body{border-radius:0 0 12px 12px !important;min-height:420px;outline:none;}
+  .ae-body:focus{border-color:#94a3b8;}
+  .ae-html{width:100%;min-height:520px;border:1.5px solid var(--line);border-radius:0 0 12px 12px;padding:14px;font:12.5px/1.55 ui-monospace,Menlo,monospace;color:#26333C;}
+  .ae-faq{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px;background:#fff;}
+  .ae-faq input,.ae-faq textarea{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:13.5px;margin-bottom:6px;}
+  .ae-faq input{font-weight:600;color:var(--navy);}
   .nl-frame{width:100%;height:900px;border:1px solid var(--line);border-radius:12px;background:#EFECE6;}
   .nl-f{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);margin-bottom:10px;}
   .nl-f input{margin-top:6px;text-transform:none;letter-spacing:normal;font-weight:400;}
@@ -3112,9 +3127,10 @@
       <div class="page-head"><button class="btn ghost" id="ai-back" type="button">← Back to list</button>
         <div class="row" style="display:flex;gap:8px;">
           ${a.status!=='rejected'&&a.status!=='published'?'<button class="btn ghost danger" id="ai-reject" type="button">Reject</button>':''}
+          ${a.status!=='rejected'?'<button class="btn ghost" id="ai-edit" type="button">Edit</button>':''}
           ${a.status==='draft'?'<button class="btn ghost" id="ai-approve" type="button">Approve</button>':''}
           ${canPub?'<button class="btn" id="ai-publish" type="button">Publish to blog…</button>':''}
-          ${a.status==='published'&&a.published_post_id?'<button class="btn ghost" id="ai-goblog" type="button">Open in Blog editor</button>':''}
+          ${a.status==='published'?`<a class="btn ghost" href="/blog/${escapeHtml(a.slug||'')}" target="_blank" rel="noopener">View live</a>`:''}
         </div></div>
       <div class="ai-grid">
         <div>
@@ -3162,9 +3178,107 @@
       await sb.from('ai_articles').update({ status:'published', published_post_id: res.data.id, slug, updated_at: new Date().toISOString() }).eq('id', a.id);
       const urls = ['https://www.smithandadams.com/blog/'+slug]; if(payload.translations.pt) urls.push('https://www.smithandadams.com/pt/blog/'+slug);
       pingIndexNow(urls);
-      toast('Published. Opening it in the Blog editor for final touches.');
-      location.hash = '#blog'; setTimeout(()=>blEdit(res.data.id), 400);
+      aiCur.status = 'published'; aiCur.published_post_id = res.data.id; aiCur.slug = slug;
+      toast('Published. Further edits made here (Edit) go straight to the live post.');
+      aiRender();
     });
+  }
+  // ---- Editing (contenteditable, not Quill: Quill 1.x drops <table>, which the agent uses) ----
+  let aiEd = null, aiHtmlMode = false;
+  const aiNoDash = t => (t||'').replace(/\s*—\s*/g,' - ').replace(/–/g,'-');
+  function aiEdStart(){
+    const en = aiPick(aiCur,'en'), pt = aiPick(aiCur,'pt'), clone = o => JSON.parse(JSON.stringify(o));
+    aiEd = { lang: aiLang, en: clone(en), pt: clone(pt), slug: aiCur.slug||'', category: aiCur.category||'',
+             read_time: aiCur.read_time||'', keyword: aiCur.keyword||'', dirty: false };
+    aiHtmlMode = false; aiEdRender();
+  }
+  function aiEdCollect(){
+    if(!aiEd || !aiG('ae-title')) return;
+    const v = aiEd[aiEd.lang];
+    v.title = aiG('ae-title').value; v.excerpt = aiG('ae-excerpt').value; v.meta = aiG('ae-meta').value;
+    v.content = aiHtmlMode ? aiG('ae-html').value : aiG('ae-body').innerHTML;
+    v.faq = [...document.querySelectorAll('#ae-faqs .ae-faq')].map(r=>({ q: r.querySelector('input').value.trim(), a: r.querySelector('textarea').value.trim() })).filter(x=>x.q||x.a);
+    aiEd.slug = aiG('ae-slug').value.trim(); aiEd.category = aiG('ae-cat').value.trim();
+    aiEd.read_time = aiG('ae-rt').value.trim(); aiEd.keyword = aiG('ae-kw').value.trim();
+  }
+  function aiEdFaqRow(x){ return `<div class="ae-faq"><input value="${escapeHtml(x.q||'')}" placeholder="Question"><textarea rows="3" placeholder="Answer">${escapeHtml(x.a||'')}</textarea><button class="btn ghost danger ae-faq-del" type="button" style="padding:4px 10px;font-size:12px;">Remove</button></div>`; }
+  function aiEdCount(){
+    [['ae-title',60],['ae-meta',160]].forEach(([id,max])=>{ const el=aiG(id), n=aiG(id+'-n'); if(el&&n){ n.textContent=el.value.length+' / '+max; n.classList.toggle('over', el.value.length>max); } });
+  }
+  function aiEdRender(){
+    const a = aiCur, L = aiEd.lang, v = aiEd[L], pub = a.status==='published';
+    const tv = (a.to_verify||[]).map(x=>`<li>${escapeHtml(typeof x==='string'?x:JSON.stringify(x))}</li>`).join('');
+    const tb = [['b','bold','<b>B</b>'],['i','italic','<i>I</i>'],['sep'],['h2','H2','H2'],['h3','H3','H3'],['p','P','Paragraph'],['sep'],
+      ['ul','insertUnorderedList','• List'],['ol','insertOrderedList','1. List'],['bq','BLOCKQUOTE','Quote'],['sep'],['link','link','Link'],['unlink','unlink','Unlink'],['clear','removeFormat','Clear'],['sep'],['html','html','&lt;/&gt; HTML']]
+      .map(b=>b[0]==='sep'?'<span class="sep"></span>':`<button type="button" data-cmd="${b[1]}" class="${b[0]==='html'&&aiHtmlMode?'on':''}" title="${b[1]}">${b[2]}</button>`).join('');
+    aiG('ai-review').innerHTML = `
+      <div class="page-head"><button class="btn ghost" id="ae-cancel" type="button">← Cancel</button>
+        <div class="row" style="display:flex;gap:8px;align-items:center;">
+          ${pub?'<span style="font-size:12.5px;color:var(--muted);">Saving updates the live post</span>':''}
+          <button class="btn" id="ae-save" type="button">${pub?'Save and update live post':'Save changes'}</button></div></div>
+      <div class="ai-grid">
+        <div>
+          <div class="ai-tabs"><button type="button" data-el="en" class="${L==='en'?'on':''}">English</button><button type="button" data-el="pt" class="${L==='pt'?'on':''}">Português</button></div>
+          <label class="ae-f">Title <span class="ae-n" id="ae-title-n"></span><input id="ae-title" value="${escapeHtml(v.title)}"></label>
+          <label class="ae-f">Excerpt (blog cards and newsletter)<textarea id="ae-excerpt" rows="2">${escapeHtml(v.excerpt)}</textarea></label>
+          <label class="ae-f">Meta description (Google) <span class="ae-n" id="ae-meta-n"></span><textarea id="ae-meta" rows="2">${escapeHtml(v.meta)}</textarea></label>
+          <div class="ae-f" style="margin-bottom:6px;">Article body</div>
+          <div class="ae-tb" id="ae-tb">${tb}</div>
+          ${aiHtmlMode ? `<textarea class="ae-html" id="ae-html" spellcheck="false">${escapeHtml(v.content)}</textarea>`
+                       : `<div class="ai-doc ae-body" id="ae-body" contenteditable="true">${v.content}</div>`}
+          <div class="ae-f" style="margin:22px 0 8px;">FAQ (${L==='pt'?'PT':'EN'})</div>
+          <div id="ae-faqs">${(v.faq||[]).map(aiEdFaqRow).join('')}</div>
+          <button class="btn ghost" id="ae-faq-add" type="button">+ Add question</button>
+        </div>
+        <div class="ai-side">
+          <div class="card"><h4>Settings (both languages)</h4>
+            <label class="ae-f">Slug<input id="ae-slug" value="${escapeHtml(aiEd.slug)}" ${pub?'disabled title="Already live: changing the URL would break links"':''}></label>
+            <label class="ae-f">Category<input id="ae-cat" value="${escapeHtml(aiEd.category)}"></label>
+            <label class="ae-f">Read time<input id="ae-rt" value="${escapeHtml(aiEd.read_time)}"></label>
+            <label class="ae-f" style="margin:0;">Keyword<input id="ae-kw" value="${escapeHtml(aiEd.keyword)}"></label></div>
+          <div class="card"><h4>Tips</h4><p>Tables and links are kept. Click inside a table cell to edit it. For anything the toolbar can't do, switch to HTML. Em-dashes are converted to hyphens on save. Edit each language separately with the tabs above.</p></div>
+          ${tv?`<div class="card" style="border-color:#fcd34d;"><h4>Check before publishing</h4><ul>${tv}</ul></div>`:''}
+        </div>
+      </div>`;
+    aiEdCount();
+  }
+  function aiEdCmd(cmd){
+    if(cmd==='html'){ aiEdCollect(); aiHtmlMode = !aiHtmlMode; aiEdRender(); return; }
+    if(aiHtmlMode){ toast('Switch off HTML view to use the toolbar.'); return; }
+    aiG('ae-body').focus();
+    if(cmd==='link'){ const u = prompt('Link URL (https://... or /page)'); if(u) document.execCommand('createLink', false, u); }
+    else if(['H2','H3','P','BLOCKQUOTE'].includes(cmd)) document.execCommand('formatBlock', false, cmd);
+    else document.execCommand(cmd, false, null);
+    aiEd.dirty = true;
+  }
+  async function aiEdSave(){
+    aiEdCollect();
+    const en = aiEd.en, pt = aiEd.pt, a = aiCur, pub = a.status==='published';
+    if(!en.title.trim()){ toast('English title is required.'); aiEd.lang='en'; aiEdRender(); return; }
+    const clean = v => ({ title: aiNoDash(v.title).trim(), excerpt: aiNoDash(v.excerpt).trim(), meta: aiNoDash(v.meta).trim(),
+      content: aiNoDash(v.content), faq: (v.faq||[]).map(x=>({ q: aiNoDash(x.q), a: aiNoDash(x.a) })) });
+    const E = clean(en), P = clean(pt);
+    const slug = pub ? a.slug : (slugify(aiEd.slug || E.title));
+    const ptRow = { title: P.title, excerpt: P.excerpt, meta_description: P.meta, content: P.content, faq: P.faq };
+    const patch = { title: E.title, excerpt: E.excerpt, meta_description: E.meta, content: E.content, faq: E.faq,
+      slug, category: aiEd.category, read_time: aiEd.read_time, keyword: aiEd.keyword,
+      translations: { ...(a.translations||{}), pt: ptRow }, updated_at: new Date().toISOString() };
+    const btn = aiG('ae-save'); btn.disabled = true;
+    const { error } = await sb.from('ai_articles').update(patch).eq('id', a.id);
+    if(error){ btn.disabled = false; toast('Save error: '+error.message); return; }
+    Object.assign(aiCur, patch);
+    if(pub && a.published_post_id){
+      const { data: post } = await sb.from('posts').select('translations').eq('id', a.published_post_id).single();
+      const tr = { ...((post&&post.translations)||{}) };
+      if(P.title) tr.pt = { ...(tr.pt||{}), title: P.title, excerpt: P.excerpt, content: P.content + aiFaqHtml(P.faq,'pt') };
+      const r = await sb.from('posts').update({ title: E.title, excerpt: E.excerpt, category: aiEd.category, read_time: aiEd.read_time,
+        content: E.content + aiFaqHtml(E.faq,'en'), translations: tr }).eq('id', a.published_post_id);
+      if(r.error){ btn.disabled = false; toast('Saved the draft, but the live post failed: '+r.error.message); return; }
+      const urls = ['https://www.smithandadams.com/blog/'+slug]; if(tr.pt) urls.push('https://www.smithandadams.com/pt/blog/'+slug);
+      pingIndexNow(urls);
+      toast('Saved. The live post is updated.');
+    } else toast('Saved.');
+    aiEd = null; aiLang = 'en'; aiRender(); window.scrollTo(0,0);
   }
   (function aiWire(){
     aiG('ai-filter').addEventListener('change', aiLoad);
@@ -3176,8 +3290,17 @@
       if(t.id==='ai-approve'){ if(await aiSetStatus('approved')){ toast('Approved. It can now be published and used in the newsletter.'); aiRender(); } return; }
       if(t.id==='ai-reject'){ if(confirm('Reject this draft?') && await aiSetStatus('rejected')){ toast('Rejected.'); aiLoad(); } return; }
       if(t.id==='ai-publish') return aiPublish();
-      if(t.id==='ai-goblog'){ location.hash='#blog'; setTimeout(()=>blEdit(aiCur.published_post_id),400); }
+      if(t.id==='ai-edit') return aiEdStart();
+      if(t.dataset.el){ aiEdCollect(); aiEd.lang = t.dataset.el; aiHtmlMode = false; aiEdRender(); return; }
+      if(t.dataset.cmd) return aiEdCmd(t.dataset.cmd);
+      if(t.id==='ae-faq-add'){ aiG('ae-faqs').insertAdjacentHTML('beforeend', aiEdFaqRow({})); aiEd.dirty = true; return; }
+      if(t.classList.contains('ae-faq-del')){ t.closest('.ae-faq').remove(); aiEd.dirty = true; return; }
+      if(t.id==='ae-save') return aiEdSave();
+      if(t.id==='ae-cancel'){ if(aiEd && aiEd.dirty && !confirm('Discard your changes?')) return; aiEd = null; aiRender(); return; }
     });
+    // keep the text selection when clicking toolbar buttons
+    aiG('ai-review').addEventListener('mousedown', e=>{ if(e.target.closest('#ae-tb button')) e.preventDefault(); });
+    aiG('ai-review').addEventListener('input', ()=>{ if(aiEd){ aiEd.dirty = true; aiEdCount(); } });
   })();
 
   // ---- Newsletter -------------------------------------------------
