@@ -841,3 +841,10 @@ chave sem NOME=); recomendado rodar.
 - Botão Edit no rascunho (qualquer estado exceto rejected): título/excerpt/meta (contadores 60/160), corpo em contenteditable com toolbar (B/I/H2/H3/P/listas/quote/link/clear) + modo HTML, FAQ editável, EN e PT em separado; slug/categoria/read time/keyword.
 - NÃO usa Quill: Quill 1.3.6 apaga <table> (o editor do Blog tem esse risco para artigos do agente). "Open in Blog editor" substituído por "View live"; editar publicado = "Save and update live post" (atualiza posts + IndexNow; slug bloqueado).
 - Em-dashes convertidos para hífen ao gravar. Testado num harness local com o rascunho real e BD simulada (EN/PT, tabela, HTML mode, FAQ add/remove, publicado vs draft). Não testado com login real.
+
+### 2026-11-03 13:15 (abilio_diz@hotmail.com) - Agente: fontes oficiais, newsletter, agendamento
+- Editor de artigos (14f80d3) em produção.
+- Fontes oficiais: `site:` no DDG não funciona; agora extrai as leis citadas pela imprensa (regex PT/EN → "Lei Orgânica n.º 1/2026"), pesquisa em PT e filtra domínios oficiais; lê PDFs do DRE (pypdf+cryptography, são AES). Até 2 páginas oficiais por artigo (~4 min cada na IA local). Teste: tirou 10/7 anos corretamente da Lei Orgânica 1/2026, mas errou a data de entrada em vigor (9 vs 19 maio) → manter to_verify.
+- Newsletter teste a623ca8f gerada em ~3 min (1 artigo + 4 notícias), EN/PT. Corrigido: filtro de datas ("+" no query string) e nota final com <p> escapado.
+- Agendamento: `schedule.sh` (seg+qui 03:00 artigos; sex 06:00 newsletter só se a última tiver ≥13 dias). Instalação de LaunchAgents bloqueada ao Claude pelo classificador: Abílio corre `~/Code/sa-content-agent/schedule.sh` (remover: `schedule.sh off`).
+- Pendente: envio da newsletter (CRM/SES), atualizar KB p/ cidadania 10 anos.
