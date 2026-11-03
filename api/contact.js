@@ -16,6 +16,11 @@ export default async function handler(req, res) {
     return ok ? res.status(200).json({ ok: true }) : res.status(502).json({ error: 'Subscription failed' });
   }
 
+  // Sujoy Ghosh referral page (/sujoy): phone-first, email optional, and the
+  // referral attribution is written on the lead itself (not cookie-based) so
+  // the partner's commission can be audited per lead.
+  if (source === 'sujoy' || source === 'sujoy-whatsapp') return handleSujoy(req, res);
+
   const isBrochure = typeof source === 'string' && source.indexOf('brochure-') === 0;
   // Brochure (gated download) and step-1 of the 2-step LP (partial:true) are
   // low-friction: name + email only, captured immediately so an abandoner is
@@ -94,6 +99,65 @@ export default async function handler(req, res) {
     return res.status(200).json({ success: true });
   }
   return res.status(500).json({ error: 'Submission failed. Please try again.' });
+}
+
+const clip = (v, n = 200) => String(v == null ? '' : v).trim().slice(0, n);
+
+async function handleSujoy(req, res) {
+  const b = req.body || {};
+  const ref = /^SG-[A-Z0-9]{4}$/.test(String(b.lead_ref || '')) ? b.lead_ref : null;
+  const code = clip(b.phoneCode, 6);
+  const digits = String(b.phoneNumber || '').replace(/\D/g, '').slice(0, 15);
+  const email = clip(b.email, 160).toLowerCase();
+  const name = `${clip(b.firstName, 80)} ${clip(b.lastName, 80)}`.trim();
+  const hasEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  if (!/^\+\d{1,4}$/.test(code) || digits.length < 6) return res.status(400).json({ error: 'Missing phone' });
+  const phone = `${code} ${digits}`;
+  const attr = b.attribution && typeof b.attribution === 'object' ? b.attribution : {};
+  const utm = {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach((k) => { if (attr[k]) utm[k] = clip(attr[k], 120); });
+
+  // WhatsApp click after submitting: same phone within 24h, so the CRM dedups
+  // onto the lead just created and appends this note (whatsapp_intent = true).
+  if (b.source === 'sujoy-whatsapp') {
+    const ok = await postCrmLead(req, {
+      full_name: name || undefined, email: hasEmail ? email : undefined, phone,
+      notes: `WhatsApp intent: clicked "Talk to the Portugal team"${ref ? ` (${ref})` : ''}`,
+      campaign_name: 'Referral - Sujoy Ghosh', source_name: 'Sujoy Ghosh', attribution: utm,
+    });
+    return res.status(ok ? 200 : 502).json({ ok });
+  }
+
+  if (name.length < 2 || b.consent !== true) return res.status(400).json({ error: 'Missing required fields' });
+  const q = b.qualification && typeof b.qualification === 'object' ? b.qualification : {};
+  const qual = {
+    qualification_persona: clip(q.persona, 60),
+    qualification_objective: (Array.isArray(q.objective) ? q.objective : []).map((x) => clip(x, 60)).slice(0, 8),
+    qualification_timeline: clip(q.timeline, 40),
+    qualification_location: clip(q.location, 120),
+  };
+  const notes = [
+    'Source: Sujoy Ghosh referral page (/sujoy)',
+    ref ? `Reference: ${ref}` : null,
+    `Profile: ${qual.qualification_persona}`,
+    `Looking for: ${qual.qualification_objective.join(', ')}`,
+    `Timeline: ${qual.qualification_timeline}`,
+    `Based in: ${qual.qualification_location}`,
+    hasEmail ? null : 'No email given (phone/WhatsApp only)',
+  ].filter(Boolean).join(' | ');
+
+  const ok = await postCrmLead(req, {
+    full_name: name, email: hasEmail ? email : undefined, phone,
+    campaign_name: 'Referral - Sujoy Ghosh', source_name: 'Sujoy Ghosh', notes, attribution: utm,
+    raw_payload: {
+      source: 'site-sujoy', lead_source: 'Sujoy Ghosh', referral_partner: 'Sujoy Ghosh',
+      landing_page: '/sujoy', lead_ref: ref, ...utm, ...qual,
+      consent: true, created_timestamp: new Date().toISOString(),
+    },
+    // India leads are re-assigned to the India specialist by the CRM itself.
+    assign_to_email: 'benjamin.sharps@smithandadams.com', pipeline_name: 'Benjamin Pipeline',
+  });
+  return ok ? res.status(200).json({ success: true, ref }) : res.status(500).json({ error: 'Submission failed. Please try again.' });
 }
 
 async function postToPipedrive({ firstName, lastName, email, phoneCode, phoneNumber, interest, message }) {

@@ -29,13 +29,17 @@ function deriveSource(lead, attr) {
   }
   if (us.includes('reddit')) return 'Reddit Ads';
   if (lead.source === 'lp-invest') return 'Landing Page';
+  // Referral partners carry their own CRM lead source (e.g. 'Sujoy Ghosh').
+  if (lead.source_name) return lead.source_name;
   return 'Website Organic';
 }
 
 export async function postCrmLead(req, lead) {
   const CRM_API_URL = process.env.CRM_API_URL;
   const CRM_API_KEY = process.env.CRM_API_KEY;
-  if (!CRM_API_URL || !CRM_API_KEY || !lead || !lead.email) return false;
+  // Email is optional for phone-first flows (the /sujoy referral page); the CRM
+  // only needs one of name/email/phone.
+  if (!CRM_API_URL || !CRM_API_KEY || !lead || (!lead.email && !lead.phone)) return false;
   try {
     const cc = String((req.headers && req.headers['x-vercel-ip-country']) || '').toUpperCase();
     const country = COUNTRY_NAMES[cc] || cc || null;
@@ -52,7 +56,7 @@ export async function postCrmLead(req, lead) {
       headers: { Authorization: `Bearer ${CRM_API_KEY}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         full_name: lead.full_name || lead.email,
-        email: lead.email,
+        email: lead.email || undefined,
         phone: lead.phone || undefined,
         source: deriveSource(lead, attr),
         campaign_name: lead.campaign_name || 'Website form',
@@ -65,6 +69,7 @@ export async function postCrmLead(req, lead) {
         utm_campaign: attr.utm_campaign || undefined,
         assign_to_email: lead.assign_to_email || process.env.CRM_ASSIGN_TO || undefined,
         pipeline_name: lead.pipeline_name || process.env.CRM_PIPELINE || 'Benjamin Pipeline',
+        raw_payload: lead.raw_payload || undefined,
       }),
     });
     return crmRes.ok;
