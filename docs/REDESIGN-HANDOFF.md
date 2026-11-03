@@ -830,3 +830,9 @@ chave sem NOME=); recomendado rodar.
 - Teste real `articles.py --topics`: 124 sinais, 5 temas coerentes em ~4 min.
 - Studio: separadores "AI Articles" (rever, aprovar, rejeitar, publicar para `posts` com capa, abre no editor do Blog) e "Newsletter" (pré-visualização EN/PT, editar assunto, aprovar, copiar/descarregar HTML, marcar enviada). Commit local, por publicar até as tabelas existirem.
 - Pendente do Abílio: correr `schema-ai-content.sql` no Supabase; preencher `~/Code/sa-content-agent/.env` (ANTHROPIC_API_KEY, SUPABASE_SERVICE_ROLE_KEY). Depois: 1.º artigo de teste, envio da newsletter pelo CRM/SES, agendamento launchd.
+
+### 2026-11-03 11:50 (abilio_diz@hotmail.com) - Agente de conteúdo: 1.º teste ponta-a-ponta OK
+- Tabelas ai_* criadas no projeto certo (bcjtkfipcfvvitglgpys; 1.ª tentativa foi no projeto Avsar, dar drop lá). Anon lê [] e não insere (RLS OK).
+- `articles.py --n 1`: 38 min (sinais 30s, temas 1.5 min, extração local ~10 min, Claude escrita+PT ~25 min). Draft a8d62a5d "Portugal Golden Visa Citizenship Timeline 2026: 10 Years", 1204 palavras, 5 FAQ, 6 fontes (todas secundárias, 0 oficiais), 15 itens to_verify, sem travessões.
+- Agente: Claude em streaming + timeout 600s/1 retry + logs de escrita/tradução (commit no repo do agente).
+- Pendente: push de 211c0fb (Studio tabs) com OK do Abílio; melhorar busca de fontes oficiais (DRE); newsletter teste; launchd.
