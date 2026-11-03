@@ -848,3 +848,10 @@ chave sem NOME=); recomendado rodar.
 - Newsletter teste a623ca8f gerada em ~3 min (1 artigo + 4 notícias), EN/PT. Corrigido: filtro de datas ("+" no query string) e nota final com <p> escapado.
 - Agendamento: `schedule.sh` (seg+qui 03:00 artigos; sex 06:00 newsletter só se a última tiver ≥13 dias). Instalação de LaunchAgents bloqueada ao Claude pelo classificador: Abílio corre `~/Code/sa-content-agent/schedule.sh` (remover: `schedule.sh off`).
 - Pendente: envio da newsletter (CRM/SES), atualizar KB p/ cidadania 10 anos.
+
+### 2026-11-03 14:10 (abilio_diz@hotmail.com) - /sujoy (landing page de referência Sujoy Ghosh)
+- PRD: /Volumes/Disco/Arquivo Mac/Smith & Adams/Marketing e Ads/S&A_Sujoy.pdf. Respostas do Sujoy (03/11): título "Business Partner" (Furkan alinhado), foto em ~/Downloads (413x531, baixa resolução), LinkedIn, vídeo depois, pede email sujoy@smithandadams.com, WhatsApp: "S&A line" + deu o +91 97399 22559 (ambíguo, por decidir; página usa o móvel S&A por defeito, editável).
+- sujoy.html (estático, noindex, CSS inline, sem nav do site): história, "7 dias" + nota de compliance, timeline (etapa atual por CMS), Why Portugal, CTA fixo a partir do scroll 2, questionário 5 passos (sheet), sucesso + WhatsApp pré-preenchido com SG-XXXX. GA4: todos os eventos do PRD. OG assets/sujoy/sujoy-og.jpg. QR por canal em docs/sujoy-qr/.
+- Lead: /api/contact source=sujoy -> handleSujoy (sem função nova). Telefone obrigatório, email opcional (_crm.js aceita só telefone), raw_payload com referral_partner/lead_ref/UTM/respostas. Clique no WhatsApp = 2.º POST (sujoy-whatsapp) que o CRM deduplica por telefone e acrescenta nota "WhatsApp intent". Leads +91 vão para o Savvinay (regra India do CRM).
+- CMS: chaves sujoy.* (Studio > Content > "Sujoy landing page"); só aparecem depois do seed SQL. Lead source "Sujoy Ghosh" no CRM tem de ser criada (classificador bloqueou escrita no CRM) - SQL dado ao Abílio.
+- Testado: API com CRM simulado (lead, sem consentimento, sem telefone, WhatsApp, contacto normal intacto); fluxo no browser mobile+desktop com fetch simulado. Commit 34a7aa5 local, por publicar.
