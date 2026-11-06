@@ -127,6 +127,7 @@
   /* sheet */
   .sheet{position:fixed;inset:0;z-index:50;display:none;background:rgba(10,18,24,.55);}
   .sheet.open{display:block;}
+  body.sheet-open #sa-consent{display:none !important;}
   .panel{position:absolute;left:0;right:0;bottom:0;top:0;background:var(--paper);display:flex;flex-direction:column;}
   @media(min-width:700px){.panel{top:6vh;bottom:6vh;left:50%;right:auto;width:560px;transform:translateX(-50%);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);}}
   .p-head{display:flex;align-items:center;gap:12px;padding:14px var(--pad);border-bottom:1px solid var(--line);}
@@ -301,7 +302,7 @@
     'sujoy.journey.current': 'Business Setup',
     'sujoy.benefits.items': 'European Residency\nGlobal Optionality\nEuropean Business Presence\nFuture Options for My Family\nPotential Long-Term PR / Citizenship Pathway',
     'sujoy.hero.video_url': '',
-    'sujoy.whatsapp.number': '+351938227348',
+    'sujoy.whatsapp.number': '+919739922559',
     'sujoy.whatsapp.message': "Hi, I came through Sujoy Ghosh's Portugal journey. I'm exploring Portugal for myself/my family and would like to understand whether I qualify.",
     'sujoy.q1.question': 'What best describes you?',
     'sujoy.q1.options': 'Founder\nBusiness Owner\nCXO\nSenior Professional\nInvestor\nOther',
@@ -427,11 +428,11 @@
     lastFocus = document.activeElement;
     ev('qualification_cta_click', { cta_location: where });
     if(!started){ started = true; ev('qualification_started'); }
-    sheet.classList.add('open'); document.body.style.overflow = 'hidden';
+    sheet.classList.add('open'); document.body.classList.add('sheet-open'); document.body.style.overflow = 'hidden';
     render();
   }
   function close(){
-    sheet.classList.remove('open'); document.body.style.overflow = '';
+    sheet.classList.remove('open'); document.body.classList.remove('sheet-open'); document.body.style.overflow = '';
     if(lastFocus) try{ lastFocus.focus(); }catch(e){}
   }
   document.querySelectorAll('.js-qualify').forEach(function(b){ b.addEventListener('click', function(){ open(b.dataset.where); }); });
