@@ -27,253 +27,359 @@
 <link rel="preload" as="image" href="/assets/sujoy/sujoy-hero.webp" type="image/webp" fetchpriority="high"/>
 <link rel="preload" as="font" href="/fonts/Geoform-Regular.woff2" type="font/woff2" crossorigin/>
 <link rel="preload" as="font" href="/fonts/Geoform-Medium.woff2" type="font/woff2" crossorigin/>
+<link rel="stylesheet" href="/tailwind.css?v=g27"/>
+<link rel="stylesheet" href="/redesign.css?v=g33"/>
 <style>
-  @font-face{font-family:'Geoform';src:url('/fonts/Geoform-Regular.woff2') format('woff2');font-weight:400;font-display:swap;}
-  @font-face{font-family:'Geoform';src:url('/fonts/Geoform-Medium.woff2') format('woff2');font-weight:500 600;font-display:swap;}
-  @font-face{font-family:'Geoform';src:url('/fonts/Geoform-Bold.woff2') format('woff2');font-weight:700;font-display:swap;}
-  :root{--navy:#11222D;--ink:#26333C;--slate:#6A7883;--stone:#C3CBD1;--paper:#FDFCF9;--tint:#F3EFE7;--line:#E4E1DA;--gold:#D6C29A;--gold-ink:#8a7a52;--wa:#1f8f4e;
-    --sans:'Geoform','Helvetica Neue',Helvetica,Arial,sans-serif;--pad:20px;--max:1140px;}
-  *{box-sizing:border-box;}
-  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
-  img{max-width:100%;display:block;}
-  a{color:inherit;}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);}
-  .narrow{max-width:640px;margin:0 auto;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:84px;}
+  /* Slightly darker slate on this page only: the site token misses AA on paper at small sizes. */
+  :root{--wa:#1f8f4e;--pad:20px;--slate:#566470;}
+  img{max-width:100%;}
+  .rd :focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .rd-sec{padding:clamp(56px,7vw,104px) 0;}
+  .rd-sec .rd-label,.sg-label-d{display:block;margin-bottom:14px;}
+  .sg-label-d{font:500 11px var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
+  .sg-h1{color:#fff;font-size:clamp(38px,5vw,68px);margin-bottom:24px;}
+  .sg-h2{font-size:clamp(28px,3.4vw,46px);}
+  .sg-sunken{background:var(--sunken);}
+  .rd strong{font-weight:600;}
 
-  /* header */
-  .sg-top{position:sticky;top:0;z-index:20;background:rgba(253,252,249,.94);backdrop-filter:saturate(1.4) blur(8px);-webkit-backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid transparent;transition:border-color .2s;}
-  .sg-top.scrolled{border-bottom-color:var(--line);}
-  .sg-top .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;}
-  .sg-top img{height:22px;width:auto;}
-  .sg-tag{font-size:12.5px;font-weight:500;letter-spacing:.02em;color:var(--navy);white-space:nowrap;}
-  .sg-tag span{color:var(--gold-ink);}
+  /* Only button pair the page adds. Gold stays on navy, per the site's colour rule. */
+  .sg-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 26px;border:1px solid var(--gold);border-radius:2px;background:var(--gold);color:var(--navy);font:600 15px var(--sans);text-decoration:none;cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
+  .sg-btn:hover{background:#e2d2b0;border-color:#e2d2b0;}
+  .sg-btn--ghost{background:transparent;border-color:rgba(255,255,255,.4);color:#fff;font-weight:500;}
+  .sg-btn--ghost:hover{background:transparent;border-color:#fff;}
+  .sg-btn--block{display:flex;width:100%;min-height:56px;}
+  .sg-btn--outline{background:transparent;border-color:var(--navy);color:var(--navy);min-height:48px;padding:12px 20px;flex:none;}
+  .sg-btn--outline:hover{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+  /* header: the global nav, with the qualify CTA on mobile too */
+  .rd-nav .cms-lang-switcher{display:none !important;}
+  .rd-nav .container>button{background:transparent;border:0;padding:0;}
+  .rd-nav nav>div:has(.js-qualify){order:10;margin-left:8px;}
+  .rd-nav .sg-nav-cta{margin-left:auto;margin-right:14px;padding:9px 13px;min-height:40px;display:inline-flex;align-items:center;border-radius:2px;background:var(--navy);color:#fff;font:600 13px var(--sans);white-space:nowrap;text-decoration:none;}
+  body.rd-dark-hero .rd-nav:not(.rd-nav--solid) .sg-nav-cta{background:#fff;color:var(--navy);}
+  @media(min-width:1024px){.rd-nav .sg-nav-cta{display:none;}}
 
   /* hero */
-  .hero{padding:18px 0 8px;}
-  .hero-grid{display:grid;gap:22px;}
-  .hero-media{position:relative;border-radius:16px;overflow:hidden;background:var(--tint);aspect-ratio:4/5;max-height:42vh;max-width:440px;margin:0 auto;}
-  .hero-media img{object-position:50% 22%;}
-  .hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover;}
-  .play{position:absolute;left:14px;bottom:14px;display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;background:rgba(17,34,45,.88);color:#fff;font:500 14px var(--sans);padding:11px 18px 11px 12px;cursor:pointer;}
+  .sg-hero{background:var(--navy);color:#fff;padding:clamp(112px,13vh,160px) 0 clamp(56px,7vw,96px);}
+  .sg-hero__grid{display:grid;gap:44px;}
+  .sg-hero__body{max-width:560px;}
+  .sg-hero__body p{margin:0 0 14px;font-size:17px;line-height:1.65;color:var(--stone);}
+  .sg-hero__body p:first-child{font-size:clamp(17px,1.4vw,19px);}
+  .sg-hero__body strong{color:#fff;}
+  .sg-hero__ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+  .sg-hero__meta{margin:18px 0 0;font-size:14px;color:rgba(255,255,255,.72);}
+  .sg-hero__media{position:relative;max-width:420px;width:100%;}
+  .hero-media{position:relative;overflow:hidden;background:#1a3242;aspect-ratio:4/5;border-radius:2px;}
+  .hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover;object-position:50% 22%;display:block;}
+  .play{position:absolute;left:14px;top:14px;display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;background:rgba(17,34,45,.88);color:#fff;font:500 14px var(--sans);padding:11px 18px 11px 12px;cursor:pointer;}
   .play[hidden]{display:none;}
   .play i{width:28px;height:28px;border-radius:50%;background:var(--gold);display:grid;place-items:center;}
   .play i:after{content:"";border-left:9px solid var(--navy);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px;}
-  .eyebrow{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-ink);margin:0 0 10px;}
-  h1{font-weight:700;color:var(--navy);font-size:clamp(32px,8.4vw,52px);line-height:1.06;letter-spacing:-.02em;margin:0 0 16px;}
-  .lede p{margin:0 0 12px;font-size:17px;}
-  .lede p:first-child{font-weight:500;color:var(--navy);}
+  .sg-idcard{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);background:#fff;color:var(--navy);padding:14px 18px;border-radius:2px;box-shadow:var(--seam);}
+  .sg-idcard b{display:block;font-weight:600;}
+  .sg-idcard span{display:block;font-size:14px;line-height:1.4;color:var(--slate);margin-top:2px;}
 
-  /* 7 days */
-  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 20px;}
-  h2{font-weight:700;color:var(--navy);font-size:clamp(24px,6vw,34px);line-height:1.15;letter-spacing:-.015em;margin:0 0 12px;}
-  .presence{margin:22px auto 0;}
-  .goal{margin:16px 0;border-left:3px solid var(--gold);background:var(--tint);border-radius:0 12px 12px 0;padding:14px 16px;}
-  .goal b{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink);margin-bottom:4px;}
-  .goal p{margin:0;color:var(--navy);font-weight:500;}
-  .note{font-size:13px;line-height:1.55;color:var(--slate);margin:0;}
-  .next{display:flex;align-items:center;justify-content:center;gap:8px;margin:22px 0 0;font-size:14px;font-weight:500;color:var(--navy);text-decoration:none;}
-  .next:after{content:"";width:7px;height:7px;border-right:1.6px solid currentColor;border-bottom:1.6px solid currentColor;transform:rotate(45deg) translateY(-3px);}
+  /* credentials */
+  .sg-creds{background:var(--tint);border-bottom:1px solid var(--line);}
+  .sg-creds .rd-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 36px;padding-top:20px;padding-bottom:20px;}
+  .sg-creds ul{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 32px;font-weight:500;color:var(--navy);}
 
-  section{padding:34px 0 0;}
+  /* two column sections */
+  .sg-split{display:grid;gap:32px;}
+  .sg-stack{display:flex;flex-direction:column;gap:22px;}
+  .sg-goal{background:var(--navy);color:#fff;padding:26px 28px;border-radius:2px;}
+  .sg-goal p:last-child{font-size:clamp(18px,1.6vw,22px);line-height:1.4;font-weight:500;}
+  .sg-note{font-size:13.5px;line-height:1.6;color:var(--slate);border-left:1px solid var(--gold-line);padding-left:16px;}
+
   /* journey */
-  .tl{list-style:none;margin:18px 0 0;padding:0;}
-  .tl li{position:relative;padding:0 0 12px 38px;color:var(--slate);line-height:1.45;}
-  .tl li:before{content:"";position:absolute;left:11px;top:24px;bottom:-1px;width:2px;background:var(--line);}
-  .tl li:last-child:before{display:none;}
-  .tl li i{position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:var(--paper);}
-  .tl li.done{color:var(--ink);}
-  .tl li.done i{background:var(--navy);border-color:var(--navy);}
-  .tl li.done i:after{content:"";position:absolute;left:7px;top:3px;width:5px;height:10px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);}
-  .tl li.done:before{background:var(--navy);}
-  .tl li.now{color:var(--navy);font-weight:600;}
-  .tl li.now i{border-color:var(--gold);background:var(--gold);box-shadow:0 0 0 5px rgba(214,194,154,.3);}
-  .tl li.now em{display:inline-block;margin-left:8px;font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:var(--tint);border:1px solid var(--gold);border-radius:999px;padding:2px 8px;vertical-align:2px;}
+  .sg-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:clamp(28px,4vw,44px);counter-reset:sg;}
+  .sg-step{counter-increment:sg;background:#fff;border-top:3px solid var(--stone);border-radius:2px;padding:20px;display:flex;flex-direction:column;gap:8px;}
+  .sg-step:before{content:counter(sg,decimal-leading-zero);font-size:26px;line-height:1;font-weight:500;color:var(--navy);}
+  .sg-step.done{border-top-color:var(--navy);}
+  .sg-step.now{border-top-color:var(--gold);background:var(--navy);}
+  .sg-step.now:before,.sg-step.now h3{color:#fff;}
+  .sg-step h3{font:500 16px/1.35 var(--sans);color:var(--navy);}
+  .sg-step__status{order:3;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--slate);display:flex;align-items:center;gap:6px;}
+  .sg-step.done .sg-step__status{color:var(--navy);}
+  .sg-step.now .sg-step__status{color:var(--gold);}
 
-  /* benefits */
-  .ben{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
-  .ben div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;font-weight:500;color:var(--navy);font-size:14.5px;line-height:1.35;}
-  .ben div svg{display:block;width:24px;height:24px;margin-bottom:10px;stroke:var(--gold-ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-  .ben div:last-child:nth-child(odd){grid-column:1/-1;}
-  .fine{font-size:12.5px;color:var(--slate);margin:10px 0 0;}
+  /* why */
+  .sg-why{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:32px;margin:clamp(28px,4vw,44px) 0 32px;}
+  .sg-why>div{border-top:1px solid var(--navy);padding-top:22px;display:flex;flex-direction:column;gap:10px;}
+  .sg-why svg{width:26px;height:26px;fill:none;stroke:var(--navy);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+  .sg-why h3{font:500 19px/1.3 var(--sans);color:var(--navy);}
+  .sg-why p{font-size:15.5px;line-height:1.6;color:var(--ink);}
+
+  /* compare */
+  .sg-table{overflow-x:auto;margin-top:clamp(24px,3vw,36px);border:1px solid rgba(255,255,255,.14);-webkit-overflow-scrolling:touch;}
+  .sg-table table{width:100%;min-width:640px;border-collapse:collapse;font-family:var(--sans);font-size:15px;line-height:1.55;}
+  .sg-table th,.sg-table td{text-align:left;vertical-align:top;padding:15px 20px;border-bottom:1px solid rgba(255,255,255,.1);color:var(--stone);}
+  .sg-table tr:last-child>*{border-bottom:0;}
+  .sg-table thead th{font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#fff;border-bottom-color:rgba(255,255,255,.2);}
+  .sg-table tbody th{font-weight:500;color:#fff;width:26%;}
+  .sg-table .hl{background:rgba(255,255,255,.05);color:#fff;}
+  .sg-table thead .hl{color:var(--gold);}
+  .sg-table-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-top:20px;}
+  .sg-table-foot p{font-size:13px;color:var(--stone);}
+  .sg-table-foot a{font:600 14px var(--sans);color:#fff;}
 
   /* qualify */
-  .qual{background:var(--navy);color:#e9edf0;border-radius:18px;padding:26px 20px;}
-  .qual h2{color:#fff;}
-  .qual p{margin:0 0 14px;}
-  .qual .hl{border-left:3px solid var(--gold);padding-left:14px;color:#fff;font-weight:500;margin:18px 0 22px;}
-  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:12px;background:var(--gold);color:var(--navy);font:700 16px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:17px 18px;cursor:pointer;text-decoration:none;}
-  .btn:active{transform:translateY(1px);}
-  .sub{display:block;text-align:center;font-size:13px;color:var(--stone);margin-top:9px;}
+  .sg-chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .sg-chips li{border:1px solid var(--stone);border-radius:2px;padding:6px 13px;font-size:14px;color:var(--navy);}
+  .sg-card{background:var(--navy);color:#fff;border-radius:2px;padding:clamp(26px,3.4vw,42px);display:flex;flex-direction:column;gap:20px;}
+  .sg-card h3{font:500 clamp(24px,2.2vw,30px)/1.2 var(--sans);color:#fff;}
+  .sg-checks{display:flex;flex-direction:column;gap:12px;color:var(--stone);}
+  .sg-checks li{display:flex;gap:10px;align-items:flex-start;line-height:1.45;}
+  .sg-checks svg{flex:none;width:18px;height:18px;margin-top:2px;fill:none;stroke:var(--gold);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+  .sg-card__alt{font-size:13px;line-height:1.6;color:var(--stone);text-align:center;}
+  .sg-card__alt a{color:#fff;text-decoration:underline;text-underline-offset:3px;}
 
-  /* sticky CTA */
-  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));background:rgba(253,252,249,.96);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .25s ease;}
-  .sticky.on{transform:none;}
-  .sticky .btn{max-width:520px;margin:0 auto;padding:15px;}
-  .sticky small{display:block;text-align:center;font-size:12px;color:var(--slate);margin-top:5px;}
+  /* profile */
+  .sg-profile{padding:clamp(48px,5vw,72px) 0;}
+  .sg-profile__in{display:flex;flex-wrap:wrap;align-items:center;gap:24px 32px;}
+  .sg-profile img{width:112px;height:112px;border-radius:50%;object-fit:cover;flex:none;}
+  .sg-profile__info{flex:1 1 320px;min-width:0;}
+  .sg-profile__info b{display:block;font-size:clamp(22px,2vw,28px);font-weight:500;line-height:1.2;color:var(--navy);}
+  .sg-profile__info .role{display:block;margin-top:4px;font-weight:500;color:var(--navy);}
+  .sg-profile__info .meta{display:block;margin-top:6px;font-size:14.5px;line-height:1.55;color:var(--ink);}
 
-  /* profile + footer */
-  .prof{display:flex;gap:16px;align-items:center;}
-  .prof img{width:76px;height:76px;border-radius:50%;object-fit:cover;flex:0 0 auto;}
-  .prof b{display:block;font-size:18px;color:var(--navy);}
-  .prof span{display:block;font-size:14px;line-height:1.45;}
-  .prof .role{color:var(--gold-ink);font-weight:500;}
-  .prof a.li{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:13.5px;font-weight:500;color:#0a66c2;text-decoration:none;}
-  .disc{font-size:12.5px;line-height:1.6;color:var(--slate);border-top:1px solid var(--line);margin-top:28px;padding-top:18px;}
-  footer{padding:26px 0 110px;font-size:12.5px;color:var(--slate);}
-  footer a{color:var(--slate);}
-  footer img{height:18px;width:auto;margin-bottom:10px;opacity:.85;}
+  .sg-disc{padding:0 0 clamp(48px,6vw,72px);}
+  .sg-disc p{max-width:960px;margin:0 auto;font-size:13px;line-height:1.6;color:var(--slate);}
 
-  /* sheet */
-  .sheet{position:fixed;inset:0;z-index:50;display:none;background:rgba(10,18,24,.55);}
+  /* mobile sticky CTA */
+  .sg-sticky{display:none;}
+  @media(max-width:760px){
+    .sg-sticky{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(17,34,45,.97);transform:translateY(110%);transition:transform .25s ease;}
+    .sg-sticky.on{transform:none;}
+  }
+
+  /* questionnaire (behaviour unchanged, corners follow the site) */
+  .sheet{position:fixed;inset:0;z-index:70;display:none;background:rgba(10,18,24,.55);}
   .sheet.open{display:block;}
   body.sheet-open #sa-consent{display:none !important;}
   .panel{position:absolute;left:0;right:0;bottom:0;top:0;background:var(--paper);display:flex;flex-direction:column;}
-  @media(min-width:700px){.panel{top:6vh;bottom:6vh;left:50%;right:auto;width:560px;transform:translateX(-50%);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);}}
+  @media(min-width:700px){.panel{top:6vh;bottom:6vh;left:50%;right:auto;width:560px;transform:translateX(-50%);border-radius:2px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);}}
   .p-head{display:flex;align-items:center;gap:12px;padding:14px var(--pad);border-bottom:1px solid var(--line);}
-  .p-head button{border:0;background:none;font:500 14px var(--sans);color:var(--navy);cursor:pointer;padding:6px 4px;}
+  .p-head button{border:0;background:none;font:500 14px var(--sans);color:var(--navy);cursor:pointer;padding:6px 4px;min-height:44px;}
   .p-head .back[hidden]{visibility:hidden;display:inline-block;}
   .prog{flex:1;}
   .prog small{display:block;font-size:12px;color:var(--slate);text-align:center;margin-bottom:5px;}
   .bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden;}
   .bar i{display:block;height:100%;width:20%;background:var(--navy);transition:width .25s;}
   .p-body{flex:1;overflow:auto;padding:24px var(--pad) 18px;}
-  .p-body h3{font-size:24px;line-height:1.2;color:var(--navy);margin:0 0 6px;font-weight:700;}
+  .p-body h3{font-size:24px;line-height:1.2;color:var(--navy);margin:0 0 6px;font-weight:500;}
   .p-body .hint{font-size:14px;color:var(--slate);margin:0 0 16px;}
   .opts{display:grid;gap:9px;}
-  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:14px 16px;font:500 16px var(--sans);color:var(--navy);cursor:pointer;}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--stone);background:#fff;border-radius:2px;padding:14px 16px;font:500 16px var(--sans);color:var(--navy);cursor:pointer;}
   .opt i{width:20px;height:20px;border:1.5px solid var(--stone);border-radius:50%;flex:0 0 auto;position:relative;}
-  .opt.multi i{border-radius:5px;}
+  .opt.multi i{border-radius:2px;}
   .opt[aria-pressed="true"]{border-color:var(--navy);background:var(--tint);}
   .opt[aria-pressed="true"] i{background:var(--navy);border-color:var(--navy);}
   .opt[aria-pressed="true"] i:after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);}
   .fld{display:block;margin:0 0 14px;font-size:13px;font-weight:600;color:var(--navy);}
-  .fld input,.fld select{display:block;width:100%;margin-top:6px;border:1.5px solid var(--line);border-radius:10px;background:#fff;padding:13px 12px;font:400 16px var(--sans);color:var(--ink);}
-  .fld input:focus,.fld select:focus,.opt:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:1px;}
+  .fld input,.fld select{display:block;width:100%;margin-top:6px;border:1px solid var(--stone);border-radius:2px;background:#fff;padding:13px 12px;font:400 16px var(--sans);color:var(--ink);}
+  .fld input:focus,.fld select:focus,.opt:focus-visible,.btn:focus-visible{outline:2px solid var(--navy);outline-offset:1px;}
   .fld .opt-l{font-weight:400;color:var(--slate);}
   .phone{display:grid;grid-template-columns:118px 1fr;gap:8px;}
   .chk{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--slate);margin:4px 0 0;}
+  .chk a{text-decoration:underline;}
   .chk input{margin-top:3px;width:18px;height:18px;flex:0 0 auto;}
   .err{color:#b42318;font-size:13.5px;margin:10px 0 0;min-height:1em;}
   .p-foot{padding:12px var(--pad) calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line);}
   .p-foot .btn[disabled]{opacity:.45;cursor:default;}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;border:0;border-radius:2px;background:var(--navy);color:#fff;font:600 15px var(--sans);padding:15px 18px;cursor:pointer;text-decoration:none;}
   .done-box{text-align:center;padding-top:10px;}
-  .done-box .tick{width:58px;height:58px;border-radius:50%;background:var(--tint);border:1.5px solid var(--gold);margin:0 auto 16px;position:relative;}
+  .done-box .tick{width:58px;height:58px;border-radius:50%;background:var(--tint);border:1px solid var(--gold);margin:0 auto 16px;position:relative;}
   .done-box .tick:after{content:"";position:absolute;left:21px;top:13px;width:11px;height:22px;border-right:3px solid var(--navy);border-bottom:3px solid var(--navy);transform:rotate(45deg);}
   .done-box p{margin:0 0 18px;}
   .btn.wa{background:var(--wa);color:#fff;}
   .ref{font-size:12.5px;color:var(--slate);margin-top:12px;}
 
-  /* desktop */
   @media(min-width:900px){
     :root{--pad:32px;}
-    .hero{padding:44px 0 10px;}
-    .hero-grid{grid-template-columns:45fr 55fr;gap:56px;align-items:center;}
-    .hero-media{max-width:none;max-height:none;width:100%;}
-    .duo{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
-    section{padding-top:64px;}
-    .ben{grid-template-columns:repeat(3,1fr);}
-    .ben div:last-child:nth-child(odd){grid-column:auto;}
-    .qual{padding:40px 44px;}
-    .qual .btn{max-width:420px;}
+    .sg-hero__grid{grid-template-columns:minmax(0,1fr) minmax(320px,420px);gap:clamp(48px,7vw,104px);align-items:center;}
+    .sg-idcard{left:-20px;bottom:28px;max-width:290px;}
+    .sg-split{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(40px,6vw,88px);align-items:start;}
+    .sg-split--center{align-items:center;}
+    .sg-steps{grid-template-columns:repeat(4,minmax(0,1fr));}
+  }
+  @media(max-width:520px){
+    .sg-hero__ctas .sg-btn{flex:1 1 100%;}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important;}}
 </style>
+<style id="rd-nav-dd">
+/* The Properties dropdown used to be opened by JS listeners attached during the
+   client-side nav rebuild. The nav is now baked into the HTML, so the rebuild is
+   skipped and the dropdown is driven by CSS instead. :focus-within is deliberate
+   - it makes the menu reachable by keyboard, which the JS version was not. */
+.rd-dd{position:relative}
+.rd-dd__menu{position:absolute;left:0;top:100%;padding-top:16px;min-width:232px;
+  opacity:0;visibility:hidden;transform:translateY(6px);
+  transition:opacity .18s ease,visibility .18s ease,transform .18s ease;z-index:60}
+.rd-dd:hover .rd-dd__menu,.rd-dd:focus-within .rd-dd__menu{opacity:1;visibility:visible;transform:none}
+.rd-dd__inner{background:#11222D;border:1px solid rgba(255,255,255,.12);border-radius:2px;
+  padding:6px;box-shadow:0 18px 44px rgba(17,34,45,.28)}
+.rd-dd__item{display:block;padding:11px 16px;color:#fff;text-decoration:none;border-radius:2px;
+  font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;font-weight:500;
+  white-space:nowrap;transition:background .15s}
+.rd-dd__item:hover,.rd-dd__item:focus-visible{background:rgba(255,255,255,.1)}
+/* redesign.css paints every nav link navy with !important, which also hit the
+   items inside this navy panel - the dropdown opened as an empty dark box on
+   every page carrying the new header. These win it back. */
+.rd-nav nav .rd-dd__item{color:#fff !important;opacity:1 !important;font-size:14px !important}
+.rd-nav nav .rd-dd__item:hover{opacity:1 !important}
+</style>
 </head>
-<body>
+<body class="antialiased bg-[#FDFCF9] overflow-x-hidden w-full rd rd-dark-hero">
 
-<header class="sg-top" id="top">
-  <div class="wrap">
-    <a href="https://www.smithandadams.com/" aria-label="Smith &amp; Adams"><img src="/logo.png" alt="Smith &amp; Adams" width="103" height="22"/></a>
-    <div class="sg-tag">Sujoy Ghosh <span>×</span> Portugal</div>
-  </div>
-</header>
+<header class="rd-nav fixed w-full z-50 transition-all duration-300"><div class="container mx-auto px-4 md:px-6 py-6 md:py-6 flex justify-between items-center"><a class="relative z-40" href="index.html"><img alt="Smith &amp; Adams Logo" loading="eager" fetchpriority="high" width="150" height="40" decoding="async" data-nimg="1" class="h-10 w-auto invert-[1]" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></a><nav class="hidden lg:flex items-center space-x-8" data-sa-rebuilt="1"><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/index.html">Home</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/about.html">About Us</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group rd-dd"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="#" onclick="return false;" aria-haspopup="true">Our Services <span style="font-size:.7em;vertical-align:middle;">&#9662;</span></a><div class="rd-dd__menu"><div class="rd-dd__inner" data-nav-group="services"><a class="satoshi rd-dd__item" href="/invest-in-portugal.html">Investment Advisory</a><a class="satoshi rd-dd__item" href="/real-estate.html">Real Estate</a><a class="satoshi rd-dd__item" href="/property-management.html">Property Management</a><a class="satoshi rd-dd__item" href="/hospitality.html">Hospitality &amp; F&amp;B</a><a class="satoshi rd-dd__item" href="https://recruitment.smithandadams.com">Recruitment</a></div></div></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/blog.html">News</a><span class="absolute -bottom-1 left-0 h-0.5 bg-white rounded-full transition-all duration-300 w-0 group-hover:w-full"></span></div><div class="relative group"><a class="text-white transition-colors duration-300 font-satoshi hover:text-gray-300 satoshi" href="/contact.html">Contact Us</a></div><div><a class="bg-white text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium transition-all duration-300 hover:bg-opacity-90 satoshi js-qualify" href="#qualify" data-where="header" data-cta="header">Check if I qualify</a></div><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:16px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></nav><a class="sg-nav-cta lg:hidden js-qualify" href="#qualify" data-where="header" data-cta="header">Check if I qualify</a><button onclick="document.getElementById('mobile-menu').classList.toggle('opacity-0'); document.getElementById('mobile-menu').classList.toggle('opacity-100'); document.getElementById('mobile-menu').classList.toggle('invisible'); document.getElementById('mobile-menu').classList.toggle('pointer-events-none');" aria-label="Toggle menu" class="lg:hidden relative z-50 focus:outline-none"><div class="w-6 flex flex-col justify-between items-end"><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-6"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out my-1 w-4"></span><span class="block h-0.5 bg-white transition-all duration-300 ease-out w-5"></span></div></button></div><div id="mobile-menu" class="fixed top-0 left-0 right-0 bottom-0 bg-[#0C1E28] z-40 flex flex-col items-center justify-center lg:hidden transition-all duration-300 ease-in-out opacity-0 invisible pointer-events-none" style="height:100vh"><div class="flex flex-col items-center justify-center h-full space-y-8"><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/index.html">Home</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/about.html">About Us</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/invest-in-portugal.html">Investment Advisory</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/real-estate.html">Real Estate</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/property-management.html">Property Management</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/hospitality.html">Hospitality &amp; F&amp;B</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="https://recruitment.smithandadams.com">Recruitment</a><a class="text-2xl font-medium transition-colors duration-300 text-gray-300 hover:text-white satoshi" href="/blog.html">News</a><a class="bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi" href="/contact.html">Contact Us</a><div class="cms-lang-switcher" data-baked="1" style="display:inline-flex;align-items:center;gap:7px;margin-left:0;margin-top:24px;font-family:inherit;color:#fff;"><button type="button" data-locale="en" aria-label="English" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:1;font-weight:600;">EN</button><span style="opacity:.32;font-size:12px;">|</span><button type="button" data-locale="pt" aria-label="Portugu&ecirc;s" style="background:none;border:none;padding:2px 1px;cursor:pointer;font-family:inherit;font-size:13px;letter-spacing:.06em;color:inherit;transition:opacity .2s ease;opacity:.55;font-weight:500;">PT</button></div></div></div></div></div></div></div></div></div></div></header>
 
 <main>
-  <!-- Scroll 1: personal story + the 7-days question -->
-  <div class="hero wrap" id="hero">
-    <div class="hero-grid">
-      <div class="hero-media" id="hero-media">
-        <picture>
-          <source srcset="/assets/sujoy/sujoy-hero.webp" type="image/webp"/>
-          <img id="hero-photo" data-cms="sujoy.hero.photo" src="/assets/sujoy/sujoy-hero.jpg" alt="Sujoy Ghosh" width="412" height="515" fetchpriority="high"/>
-        </picture>
-        <button class="play" id="play" type="button" hidden><i></i><span data-cms="sujoy.hero.video_cta">Watch my 45-sec story</span></button>
-      </div>
-      <div>
-        <p class="eyebrow">My Portugal journey</p>
-        <h1 data-cms="sujoy.hero.headline">I'm building my future in Portugal</h1>
-        <div class="lede" data-cms="sujoy.hero.body" data-cms-attr="html">
-          <p>I'm Sujoy Ghosh, a Bangalore-based entrepreneur and technology professional.</p>
-          <p>I wasn't looking to leave India. I was looking for something bigger: European residency, global business access, and long-term optionality for my family.</p>
-          <p>That's why I'm personally going through Portugal's D2 Entrepreneur Residency journey with Smith &amp; Adams.</p>
+  <!-- Hero: same nav behaviour as other dark-hero pages (redesign.js looks for #re-hero) -->
+  <section class="sg-hero" id="re-hero">
+    <div class="rd-wrap sg-hero__grid" id="hero">
+      <div class="sg-hero__copy">
+        <p class="sg-label-d" data-sg="sujoy.hero.eyebrow">Sujoy Ghosh × Portugal · My journey</p>
+        <h1 class="rd-statement sg-h1" data-sg="sujoy.hero.headline">I'm building my future in Portugal</h1>
+        <div class="sg-hero__body" data-sg="sujoy.hero.intro" data-sg-attr="html">
+          <p>I'm a Bangalore-based entrepreneur and technology professional. I wasn't looking to leave India. I was looking for something bigger: European residency, global business access and long-term optionality for my family.</p>
+          <p>So I'm personally going through Portugal's <strong>D2 Entrepreneur Residency</strong> with Smith &amp; Adams.</p>
         </div>
+        <div class="sg-hero__ctas">
+          <button class="sg-btn js-qualify" type="button" data-where="hero" data-cta="hero"><span data-sg="sujoy.cta.label">Check if I qualify</span> <span aria-hidden="true">→</span></button>
+          <a class="sg-btn sg-btn--ghost" href="#journey" data-sg-text="sujoy.presence.next">See where I am today</a>
+        </div>
+        <p class="sg-hero__meta" data-sg="sujoy.hero.meta">60-second check · No obligation · Independent advice</p>
       </div>
-    </div>
-
-    <div class="card presence narrow">
-      <h2 data-cms="sujoy.presence.headline">"Can I do this without moving my entire life to Portugal?"</h2>
-      <p data-cms="sujoy.presence.body">One of Sujoy's biggest questions was physical presence. He had heard claims about spending as little as 7 days per year in Portugal. Rather than treating this as a marketing claim, Sujoy sought independent Portuguese legal advice to understand what level of physical presence could actually be legally defensible for his circumstances.</p>
-      <div class="goal"><b data-cms="sujoy.presence.goal_title">My goal</b><p data-cms="sujoy.presence.goal">Maintain the lowest legally defensible physical presence while building a genuine Portuguese business and protecting my long-term residency pathway.</p></div>
-      <p class="note" data-cms="sujoy.presence.note">D2 residency should not automatically be assumed to have the same 7-day minimum-stay framework associated with Portugal's Golden Visa. Requirements depend on applicable Portuguese law, individual circumstances and decisions of the relevant authorities.</p>
-      <a class="next" href="#journey" data-cms="sujoy.presence.next">See where I am today</a>
-    </div>
-  </div>
-
-  <!-- Scroll 2: proof + benefits + qualification CTA -->
-  <section class="wrap" id="journey">
-    <div class="duo">
-      <div>
-        <h2 data-cms="sujoy.journey.headline">I'm not just talking about it. I'm doing it.</h2>
-        <ol class="tl" id="timeline" aria-label="Sujoy's journey"></ol>
-      </div>
-      <div>
-        <h2 data-cms="sujoy.benefits.headline">Why Portugal?</h2>
-        <div class="ben" id="benefits"></div>
-        <p class="fine" data-cms="sujoy.benefits.fine">Long-term residency and citizenship are possible pathways, never guaranteed outcomes.</p>
+      <div class="sg-hero__media">
+        <div class="hero-media" id="hero-media">
+          <picture>
+            <source srcset="/assets/sujoy/sujoy-hero.webp" type="image/webp"/>
+            <img id="hero-photo" data-sg="sujoy.hero.photo" src="/assets/sujoy/sujoy-hero.jpg" alt="Sujoy Ghosh" width="412" height="515" fetchpriority="high"/>
+          </picture>
+          <button class="play" id="play" type="button" hidden><i></i><span data-sg="sujoy.hero.video_cta">Watch my 45-sec story</span></button>
+        </div>
+        <div class="sg-idcard"><b data-sg="sujoy.profile.name">Sujoy Ghosh</b><span data-sg="sujoy.hero.idline">Business Partner, Smith &amp; Adams · Bengaluru</span></div>
       </div>
     </div>
   </section>
 
-  <section class="wrap" id="qualify">
-    <div class="qual">
-      <h2 data-cms="sujoy.qualify.headline">Could Portugal make sense for you?</h2>
-      <p data-cms="sujoy.qualify.body">If you're a founder, business owner, CXO, senior tech professional or investor, and you've been thinking about creating international optionality for yourself and your family, Sujoy's team can help you explore whether Portugal could be relevant.</p>
-      <p class="hl" data-cms="sujoy.qualify.highlight">I'm already going through the process myself. You don't have to start your research from zero.</p>
-      <button class="btn js-qualify" type="button" data-where="section"><span data-cms="sujoy.cta.label">Check if I qualify</span> <span aria-hidden="true">→</span></button>
-      <span class="sub" data-cms="sujoy.cta.sub">Takes about 60 seconds</span>
+  <section class="sg-creds" aria-label="Background">
+    <div class="rd-wrap"><p class="rd-label" data-sg="sujoy.creds.label">Previously at</p><ul id="creds"></ul></div>
+  </section>
+
+  <section class="rd-sec sg-question">
+    <div class="rd-wrap sg-split">
+      <div>
+        <p class="rd-label" data-sg="sujoy.presence.label">The question I started with</p>
+        <h2 class="rd-statement sg-h2" data-sg="sujoy.presence.headline">"Can I do this without moving my entire life to Portugal?"</h2>
+      </div>
+      <div class="sg-stack">
+        <p class="rd-body" data-sg="sujoy.presence.story" data-sg-attr="html">My biggest question was physical presence. I'd heard claims of spending as little as 7 days a year in Portugal. Rather than treat that as a marketing claim, I sought <strong>independent Portuguese legal advice</strong> on what level of presence would actually be legally defensible for my circumstances.</p>
+        <div class="sg-goal">
+          <p class="sg-label-d" data-sg="sujoy.presence.goal_title">My goal</p>
+          <p data-sg="sujoy.presence.goal">Maintain the lowest legally defensible physical presence while building a genuine Portuguese business and protecting my long-term residency pathway.</p>
+        </div>
+        <p class="sg-note" role="note" data-sg="sujoy.presence.note">D2 residency should not automatically be assumed to have the same 7-day minimum-stay framework associated with Portugal's Golden Visa. Requirements depend on applicable Portuguese law, individual circumstances and decisions of the relevant authorities.</p>
+      </div>
     </div>
   </section>
 
-  <section class="wrap">
-    <div class="narrow">
-      <div class="prof">
-        <img id="avatar" src="/assets/sujoy/sujoy-avatar.webp" alt="" width="76" height="76" loading="lazy"/>
+  <section class="rd-sec sg-sunken" id="journey">
+    <div class="rd-wrap">
+      <p class="rd-label" data-sg="sujoy.journey.label">Where I am today</p>
+      <h2 class="rd-statement sg-h2" data-sg="sujoy.journey.headline">I'm not just talking about it. I'm doing it.</h2>
+      <ol class="sg-steps" id="timeline" aria-label="Sujoy's journey"></ol>
+    </div>
+  </section>
+
+  <section class="rd-sec">
+    <div class="rd-wrap">
+      <p class="rd-label" data-sg="sujoy.benefits.label">Why Portugal</p>
+      <h2 class="rd-statement sg-h2" data-sg="sujoy.why.headline">What I'm actually building towards.</h2>
+      <div class="sg-why" id="benefits"></div>
+      <p class="sg-note" data-sg="sujoy.benefits.fine">Long-term residency and citizenship are possible pathways, never guaranteed outcomes.</p>
+    </div>
+  </section>
+
+  <section class="rd-sec rd-sec--navy">
+    <div class="rd-wrap">
+      <p class="sg-label-d" data-sg="sujoy.compare.label">Why I chose the D2</p>
+      <h2 class="rd-statement sg-h2" data-sg="home.vc.title">D2 or Golden Visa: which route fits you?</h2>
+      <div class="sg-table" tabindex="0" role="region" aria-label="D2 and Golden Visa comparison">
+        <table>
+          <thead><tr><td></td><th scope="col" class="hl"><span data-sg="sujoy.compare.d2">D2 Visa · my route</span></th><th scope="col">Golden Visa</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Best for</th><td class="hl">Entrepreneurs and business owners</td><td>Passive investors</td></tr>
+            <tr><th scope="row">Basis</th><td class="hl">A viable business plan</td><td>A qualifying investment</td></tr>
+            <tr><th scope="row">Entry amount</th><td class="hl">No fixed minimum</td><td>Route-dependent, from &euro;200k to &euro;500k</td></tr>
+            <tr><th scope="row">Does buying a home count?</th><td class="hl">It can support the application</td><td>No, not since October 2023</td></tr>
+            <tr><th scope="row">Physical stay</th><td class="hl">Genuine residence, with exceptions for justified absences</td><td>Light-touch</td></tr>
+            <tr><th scope="row">Path to citizenship</th><td class="hl">Yes, over time</td><td>Yes, over time</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sg-table-foot">
+        <p data-sg="home.vc.note">Information as of 2026, general in nature and not legal advice. We confirm what applies to your case.</p>
+        <a href="/d2-visa"><span data-sg="sujoy.compare.link">Read the full D2 visa guide</span> <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="rd-sec" id="qualify">
+    <div class="rd-wrap sg-split sg-split--center">
+      <div class="sg-stack">
         <div>
-          <b data-cms="sujoy.profile.name">Sujoy Ghosh</b>
-          <span class="role" data-cms="sujoy.profile.role">Business Partner, Smith &amp; Adams</span>
-          <span data-cms="sujoy.profile.line">Entrepreneur | Technology Professional</span>
-          <span data-cms="sujoy.profile.ex">Ex-InMobi, Glance, Skillz &amp; Moonfrog Labs</span>
-          <span data-cms="sujoy.profile.location">Bengaluru, India</span>
-          <a class="li" id="linkedin" data-cms="sujoy.profile.linkedin" href="https://www.linkedin.com/in/sujoy-ghosh-81b133109" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="#0a66c2" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+          <p class="rd-label" data-sg="sujoy.qualify.label">Your turn</p>
+          <h2 class="rd-statement sg-h2" data-sg="sujoy.qualify.headline">Could Portugal make sense for you?</h2>
         </div>
+        <p class="rd-body" data-sg="sujoy.qualify.copy">If you've been thinking about international optionality for yourself and your family, my team can help you explore whether Portugal is relevant. I'm already going through the process. You don't have to start your research from zero.</p>
+        <ul class="sg-chips" id="chips" aria-label="Who this is for"></ul>
       </div>
-      <p class="disc" data-cms="sujoy.disclaimer" data-cms-attr="html">Portugal residency and citizenship outcomes are subject to applicable Portuguese law, individual circumstances and decisions of the competent authorities. Citizenship is not guaranteed. D2 residency should not automatically be assumed to have the same minimum physical-presence requirements as Portugal's Golden Visa. This page shares a personal experience and is not legal or tax advice.</p>
+      <div class="sg-card">
+        <h3 data-sg="sujoy.card.title">Check if you qualify</h3>
+        <ul class="sg-checks" id="checks"></ul>
+        <button class="sg-btn sg-btn--block js-qualify" type="button" data-where="qualify-card" data-cta="qualify-card"><span data-sg="sujoy.card.cta">Start the 60-second check</span> <span aria-hidden="true">→</span></button>
+        <p class="sg-card__alt">Or call <a href="tel:+351938227348">+351 938 227 348</a> · <a href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></p>
+      </div>
     </div>
+  </section>
+
+  <section class="sg-profile sg-sunken">
+    <div class="rd-wrap sg-profile__in">
+      <img id="avatar" src="/assets/sujoy/sujoy-avatar.webp" alt="Sujoy Ghosh" width="120" height="120" loading="lazy"/>
+      <div class="sg-profile__info">
+        <b data-sg="sujoy.profile.name">Sujoy Ghosh</b>
+        <span class="role" data-sg="sujoy.profile.role">Business Partner, Smith &amp; Adams</span>
+        <span class="meta"><span data-sg="sujoy.profile.line">Entrepreneur | Technology Professional</span> · <span data-sg="sujoy.profile.ex">Ex-InMobi, Glance, Skillz &amp; Moonfrog Labs</span> · <span data-sg="sujoy.profile.location">Bengaluru, India</span></span>
+      </div>
+      <a class="sg-btn sg-btn--outline" id="linkedin" data-sg="sujoy.profile.linkedin" href="https://www.linkedin.com/in/sujoy-ghosh-81b133109" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Connect on LinkedIn</a>
+    </div>
+  </section>
+
+  <section class="sa-faq" id="faq">
+    <div class="sa-faq__in">
+      <p class="sa-faq__k" data-sg="faq.home.label">FAQ</p>
+      <h2 class="sa-faq__h" data-sg="faq.home.title" data-sg-attr="html">Questions, answered.</h2>
+      <div class="sa-faq__list">
+        <details name="faq-sujoy" open><summary><span data-sg="faq.home.4.q" data-sg-attr="html">Do I have to live in Portugal?</span></summary><div class="sa-faq__a" data-sg="faq.home.4.a" data-sg-attr="html">It depends on the route. The Golden Visa has a light stay requirement. The D2 visa requires genuine residence, with exceptions for justified absences such as business travel. We confirm what applies to your case.</div></details>
+        <details name="faq-sujoy"><summary><span data-sg="faq.home.2.q" data-sg-attr="html">Does buying property still give a Golden Visa?</span></summary><div class="sa-faq__a" data-sg="faq.home.2.a" data-sg-attr="html">No. The direct real-estate route to the Golden Visa closed in October 2023. The Golden Visa remains available through other investments, such as regulated funds, and property can support residency under the D2 visa.</div></details>
+        <details name="faq-sujoy"><summary><span data-sg="faq.home.3.q" data-sg-attr="html">Is there a cost to speak with you?</span></summary><div class="sa-faq__a" data-sg="faq.home.3.a" data-sg-attr="html">No. The first consultation is free and without obligation. If you decide to go ahead, the scope and any fees are agreed with you before work starts.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sg-disc" aria-label="Legal notice">
+    <div class="rd-wrap"><p data-sg="sujoy.disclaimer" data-sg-attr="html">Portugal residency and citizenship outcomes are subject to applicable Portuguese law, individual circumstances and decisions of the competent authorities. Citizenship is not guaranteed. D2 residency should not automatically be assumed to have the same minimum physical-presence requirements as Portugal's Golden Visa. This page shares a personal experience and is not legal or tax advice.</p></div>
   </section>
 </main>
 
-<footer class="wrap">
-  <div class="narrow">
-    <img src="/logo.png" alt="Smith &amp; Adams" width="84" height="18" loading="lazy"/>
-    <div>© <span id="yr">2026</span> Smith &amp; Adams · Benefit Discovery, Lda · AMI 27772</div>
-    <div><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a> · <a href="https://www.livroreclamacoes.pt/" target="_blank" rel="noopener">Livro de Reclamações</a></div>
-  </div>
-</footer>
+<footer class="w-full py-12 md:py-16 bg-[#0C1E28]"><div class="container mx-auto px-4 md:px-6 max-w-7xl"><div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12"><div class="md:col-span-4 flex flex-col"><a class="cursor-pointer" href="index.html"><div class="relative h-8 w-40"><img alt="Smith &amp; Adams Logo" loading="lazy" width="160" height="32" decoding="async" data-nimg="1" class="invert" style="color:transparent" srcSet="./logo.png 2x" src="./logo.png"/></div></a><p data-cms="global.footer.description" data-cms-attr="html" class="text-gray-300 mt-4 satoshi leading-relaxed max-w-[320px]">Smith &amp; Adams is an independent real estate investment advisory firm in Portugal, helping international investors and Residency Investors build euro-denominated portfolios with secure, transparent returns.</p><div class="flex gap-4 mt-6"><a aria-label="Instagram" data-cms="global.social.instagram" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.instagram.com/smithandadamsgroup/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram text-white hover:text-gray-300" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a aria-label="LinkedIn" data-cms="global.social.linkedin" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.linkedin.com/company/smith-and-adams/"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin text-white hover:text-gray-300" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a aria-label="YouTube" data-cms="global.social.youtube" target="_blank" class="w-8 h-8 flex items-center justify-center transition-all duration-300" href="https://www.youtube.com/@smithandadamsgroup"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube text-white hover:text-gray-300" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a></div></div><div class="md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8 mt-8 md:mt-0"><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Menu</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="index.html">Home</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="about.html">About Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="invest-in-portugal.html">Investment Advisory</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="real-estate.html">Real Estate</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="property-management.html">Property Management</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="hospitality.html">Hospitality &amp; F&amp;B</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="blog.html">News</a></li></ul></div><div class="flex flex-col"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist">Contacts</h4><ul class="list-none mt-4 space-y-3"><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="contact.html">Contact Us</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.phone" href="tel:+351938227348">+351 938 227 348</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a href="tel:+351214086709">+351 214 086 709</a></li><li class="font-normal satoshi text-[15px] text-gray-300"><a data-cms="global.footer.email" href="mailto:geral@smithandadams.com">geral@smithandadams.com</a></li><li class="font-normal satoshi text-[15px] text-gray-300 hover:text-white transition-all ease-in-out cursor-pointer"><a href="https://share.google/xGcxWcLXDJqykmNq6" target="_blank" rel="noopener noreferrer"><span data-cms="global.footer.directions_label">Get Directions</span></a></li></ul></div><div class="flex flex-col col-span-2"><div class="rounded-lg bg-[#132631] p-6 h-full flex flex-col justify-center"><h4 class="font-semibold text-[18px] leading-[27px] text-white geist mb-4" data-cms="global.footer.office_title" data-cms-attr="html">Visit Our Office</h4><p class="font-normal satoshi text-[15px] text-gray-300 mb-4" data-cms="global.footer.office_description" data-cms-attr="html">Located in the heart of Lisbon, our office is easily accessible and ready to welcome you.</p><p class="font-normal satoshi text-[15px] text-gray-300 mb-4"><span class="font-semibold text-white" style="display:block;margin-bottom:2px;" data-cms="global.footer.dubai_title">Dubai Office</span>Office 102-08, Bin Dasmal Building, Al Goze Industrial First, Dubai, United Arab Emirates</p><a data-cms="global.footer.office_cta_url" href="https://share.google/xGcxWcLXDJqykmNq6" rel="noopener noreferrer" target="_blank" class="inline-block bg-white text-[#0C1E28] px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all duration-300 satoshi font-bold text-base text-center"><span data-cms="global.footer.office_cta_label">Get Directions</span></a></div></div></div></div><nav class="sa-seo" aria-label="Explore"><div class="sa-seo__in" data-cms="global.footer.seo" data-cms-attr="html"><div class="sa-seo__col"><p class="sa-seo__h">Properties in Portugal</p><a href="/real-estate/lisbon">Lisbon</a><a href="/real-estate/cascais">Cascais</a><a href="/real-estate/porto">Porto</a><a href="/real-estate/algarve">Algarve</a><a href="/real-estate/silver-coast">Silver Coast</a><a href="/real-estate/comporta">Comporta</a><a href="/real-estate/coimbra">Coimbra</a><a href="/real-estate">All properties</a></div><div class="sa-seo__col"><p class="sa-seo__h">Invest and live in Portugal</p><a href="/invest-in-portugal">Why invest in Portugal</a><a href="/golden-visa">Golden Visa</a><a href="/d2-visa">D2 Visa</a><a href="/portugal-tax">Portugal tax guide</a><a href="/property-management">Property management</a><a href="/hospitality">Hospitality</a></div></div></nav><div class="sa-nl"><div class="sa-nl__copy"><p class="sa-nl__title" data-cms="global.footer.newsletter_title">Subscribe to our newsletter</p><p class="sa-nl__sub" data-cms="global.footer.newsletter_sub">Market insight and news from Portugal, straight to your inbox.</p></div><form class="sa-nl__form" novalidate><input type="email" name="email" required autocomplete="email" placeholder="Your email address" aria-label="Email address"><button type="submit">Subscribe</button></form><p class="sa-nl__note" data-cms="global.footer.newsletter_note" data-cms-attr="html">By subscribing you agree to receive occasional emails from Smith &amp; Adams. Unsubscribe at any time. See our <a href="/privacy">Privacy Policy</a>.</p><p class="sa-nl__msg" role="status" aria-live="polite"></p></div><div class="sa-footer-legal w-full flex flex-col sm:flex-row justify-between items-center gap-2 pt-5 border-t border-gray-700 mt-10"><p data-cms="global.footer.copyright" class="text-center text-gray-400 satoshi" style="font-size:12px;line-height:1.5;margin:0;">Copyright © <!-- -->2026<!-- --> Smith &amp; Adams</p><p class="text-center text-gray-400 satoshi" style="font-size:12px;line-height:1.5;margin:0;">All Rights Reserved &middot; AMI 27772 &middot; <a class="text-gray-300 hover:text-white" href="/terms">Terms and Conditions</a> &middot; <a class="text-gray-300 hover:text-white" href="/privacy">Privacy Policy</a> &middot; <a class="text-gray-300 hover:text-white" href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener noreferrer">Livro de Reclama&ccedil;&otilde;es</a> &middot; <span data-cms="global.footer.google" data-cms-attr="html"><a class="text-gray-300 hover:text-white" href="https://www.google.com/maps/place/?q=place_id:ChIJMfUIT7QzGQ0RUUwpQBkgM_w" target="_blank" rel="noopener noreferrer">&#9733; 4.6 Google (77 reviews)</a></span></p></div></div></footer>
 
-<div class="sticky" id="sticky" aria-hidden="true">
-  <button class="btn js-qualify" type="button" data-where="sticky" tabindex="-1"><span data-cms="sujoy.cta.label">Check if I qualify</span> <span aria-hidden="true">→</span></button>
-  <small data-cms="sujoy.cta.sub">Takes about 60 seconds</small>
+<div class="sg-sticky" id="sticky" aria-hidden="true">
+  <button class="sg-btn sg-btn--block js-qualify" type="button" data-where="sticky-mobile" data-cta="sticky-mobile" tabindex="-1"><span data-sg="sujoy.cta.label">Check if I qualify</span> · 60 sec <span aria-hidden="true">→</span></button>
 </div>
 
 <!-- Qualification flow: full-screen sheet on mobile, centred modal on desktop -->
@@ -289,6 +395,34 @@
   </div>
 </div>
 
+    <script id="header-scroll-script">
+        document.addEventListener('DOMContentLoaded', function () {
+            const header = document.querySelector('header');
+            if (!header) return;
+            const container = header.querySelector('.container');
+            if (window.scrollY > 50) {
+                header.classList.remove('bg-transparent');
+                header.classList.add('bg-[#0C1E28]', 'shadow-sm');
+            }
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 50) {
+                    header.classList.remove('bg-transparent');
+                    header.classList.add('bg-[#0C1E28]', 'shadow-sm');
+                    if (container) {
+                        container.classList.remove('py-6', 'md:py-6');
+                        container.classList.add('py-4', 'md:py-4');
+                    }
+                } else {
+                    header.classList.remove('bg-[#0C1E28]', 'shadow-sm');
+                    header.classList.add('bg-transparent');
+                    if (container) {
+                        container.classList.remove('py-4', 'md:py-4');
+                        container.classList.add('py-6', 'md:py-6');
+                    }
+                }
+            });
+        });
+    </script>
 <script>
 (function(){
   'use strict';
@@ -300,7 +434,10 @@
   var C = {
     'sujoy.journey.stages': 'Research Portugal\nIndependent Legal Review\nPortuguese NIF\nPortuguese Company Incorporated\nFounder & Manager\nBusiness Setup\nD2 / Residency Process\nLong-Term PR / Citizenship Eligibility',
     'sujoy.journey.current': 'Business Setup',
-    'sujoy.benefits.items': 'European Residency\nGlobal Optionality\nEuropean Business Presence\nFuture Options for My Family\nPotential Long-Term PR / Citizenship Pathway',
+    'sujoy.why.items': 'European residency | A legal base in the EU, built on a genuine Portuguese business.\nGlobal business access | A Portuguese company as a platform for European clients and partners.\nOptionality for my family | Long-term choices about where we live, study and work.',
+    'sujoy.creds.items': 'InMobi\nGlance\nSkillz\nMoonfrog Labs',
+    'sujoy.qualify.chips': 'Founders\nBusiness owners\nCXOs\nSenior tech professionals\nInvestors',
+    'sujoy.card.checks': 'Takes about 60 seconds\nFirst consultation free, no obligation\nIndependent advice on D2 and Golden Visa',
     'sujoy.hero.video_url': '',
     'sujoy.whatsapp.number': '+919739922559',
     'sujoy.whatsapp.message': "Hi, I came through Sujoy Ghosh's Portugal journey. I'm exploring Portugal for myself/my family and would like to understand whether I qualify.",
@@ -318,12 +455,11 @@
     'sujoy.success.cta': 'Talk to the Portugal team on WhatsApp'
   };
   var ICONS = [
-    '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.6 6.5c3.8 2.3 9 2.3 12.8 0M5.6 17.5c3.8-2.3 9-2.3 12.8 0"/></svg>',
-    '<svg viewBox="0 0 24 24"><path d="M2.5 16.5 21 9l-3.5-2-4 1.6L6 4.5 4.5 5l5 4.6-4.2 1.7L3 10l-1 .6 2.4 3.3"/><path d="M3 20h18"/></svg>',
-    '<svg viewBox="0 0 24 24"><rect x="4" y="3" width="11" height="18" rx="1"/><path d="M15 9h5v12h-5M7.5 7h4M7.5 11h4M7.5 15h4M17.5 13v.01M17.5 17v.01"/></svg>',
-    '<svg viewBox="0 0 24 24"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M2.5 20c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6M13.5 16.2c.9-1.3 2.1-2 3.5-2 2.5 0 4.5 2 4.5 5.3"/></svg>',
-    '<svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.4 3.4 8.2 8 9 4.6-.8 8-4.6 8-9V6z"/><path d="m8.8 12 2.2 2.2 4.4-4.4"/></svg>'
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
   ];
+  var TICK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
 
   // ---------- analytics (GA4 via the site's Google tag; consent-gated by consent.js) ----------
   function ev(name, params){
@@ -349,47 +485,56 @@
     var ci = st.findIndex(function(s){ return s.toLowerCase() === cur; });
     document.getElementById('timeline').innerHTML = st.map(function(s, i){
       var cls = ci < 0 ? '' : i < ci ? 'done' : i === ci ? 'now' : '';
-      return '<li class="' + cls + '"><i aria-hidden="true"></i>' + esc(s) + (cls === 'now' ? ' <em>Current stage</em>' : cls === 'done' ? '<span class="sr" style="position:absolute;left:-9999px"> (done)</span>' : '') + '</li>';
+      var label = cls === 'done' ? 'Done' : cls === 'now' ? 'Current stage' : 'Next';
+      return '<li class="sg-step ' + cls + '"><h3>' + esc(s) + '</h3><span class="sg-step__status">' + label + '</span></li>';
     }).join('');
-    document.getElementById('benefits').innerHTML = lines('sujoy.benefits.items').map(function(b, i){
-      return '<div>' + ICONS[i % ICONS.length] + esc(b) + '</div>';
+    document.getElementById('benefits').innerHTML = lines('sujoy.why.items').map(function(b, i){
+      var p = b.split('|');
+      return '<div>' + ICONS[i % ICONS.length] + '<h3>' + esc(p[0].trim()) + '</h3><p>' + esc((p[1] || '').trim()) + '</p></div>';
     }).join('');
+    document.getElementById('creds').innerHTML = lines('sujoy.creds.items').map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('');
+    document.getElementById('chips').innerHTML = lines('sujoy.qualify.chips').map(function(s){ return '<li>' + esc(s) + '</li>'; }).join('');
+    document.getElementById('checks').innerHTML = lines('sujoy.card.checks').map(function(s){ return '<li>' + TICK + esc(s) + '</li>'; }).join('');
     var vid = String(C['sujoy.hero.video_url'] || '').trim();
     var play = document.getElementById('play');
     if(vid){ play.hidden = false; ev('sujoy_video_impression'); } else play.hidden = true;
   }
   function applyCms(rows){
     rows.forEach(function(r){ if(r.value != null && String(r.value).trim() !== '') C[r.key] = r.value; });
-    document.querySelectorAll('[data-cms]').forEach(function(el){
-      var v = C[el.dataset.cms]; if(v == null || String(v).trim() === '') return;
+    document.querySelectorAll('[data-sg]').forEach(function(el){
+      var v = C[el.dataset.sg]; if(v == null || String(v).trim() === '') return;
       if(el.tagName === 'IMG'){ if(v === el.getAttribute('src')) return; el.src = v; var s = el.parentNode.querySelector('source'); if(s) s.remove(); return; }
       if(el.tagName === 'A'){ el.href = v; return; }
-      if(el.dataset.cmsAttr === 'html') el.innerHTML = v; else el.textContent = v;
+      if(el.dataset.sgAttr === 'html') el.innerHTML = v; else el.textContent = v;
     });
+    document.querySelectorAll('[data-sg-text]').forEach(function(el){ var v = C[el.dataset.sgText]; if(v) el.textContent = v; });
     renderLists();
   }
   renderLists();
-  fetch(SB + '/rest/v1/site_content?select=key,value&locale=eq.en&key=like.sujoy.*', { headers: { apikey: ANON, Authorization: 'Bearer ' + ANON } })
+  fetch(SB + '/rest/v1/site_content?select=key,value&locale=eq.en&or=(key.like.sujoy.*,key.like.faq.home.*,key.like.home.vc.*)', { headers: { apikey: ANON, Authorization: 'Bearer ' + ANON } })
     .then(function(r){ return r.ok ? r.json() : []; }).then(applyCms).catch(function(){});
 
-  // ---------- header + views + sticky CTA ----------
-  var top = document.getElementById('top'), sticky = document.getElementById('sticky');
-  window.addEventListener('scroll', function(){ top.classList.toggle('scrolled', window.scrollY > 4); }, { passive:true });
+  // ---------- views + sticky CTA ----------
+  var sticky = document.getElementById('sticky');
   if('IntersectionObserver' in window){
     var seen = {};
     var io = new IntersectionObserver(function(es){
       es.forEach(function(e){
         var id = e.target.id;
         if(e.isIntersecting && !seen[id]){ seen[id] = 1; ev(id === 'hero' ? 'hero_view' : 'journey_view'); }
-        if(id === 'journey' && (e.isIntersecting || e.boundingClientRect.top < 0)){ sticky.classList.add('on'); sticky.setAttribute('aria-hidden','false'); sticky.querySelector('button').tabIndex = 0; }
       });
     }, { threshold: 0.25 });
     io.observe(document.getElementById('hero')); io.observe(document.getElementById('journey'));
-    // Hide the sticky bar while the in-page CTA is on screen (no double button).
-    new IntersectionObserver(function(es){ es.forEach(function(e){ if(sticky.classList.contains('on')) sticky.style.visibility = e.isIntersecting ? 'hidden' : ''; }); }, { threshold: 0.6 })
-      .observe(document.querySelector('#qualify .btn'));
+    // Mobile bar: shows once the hero has gone, hides while the qualify block is on screen.
+    var heroOut = false, qualifyIn = false;
+    var syncSticky = function(){
+      var on = heroOut && !qualifyIn;
+      sticky.classList.toggle('on', on); sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+      sticky.querySelector('button').tabIndex = on ? 0 : -1;
+    };
+    new IntersectionObserver(function(es){ heroOut = !es[0].isIntersecting; syncSticky(); }).observe(document.getElementById('re-hero'));
+    new IntersectionObserver(function(es){ qualifyIn = es[0].isIntersecting; syncSticky(); }, { threshold: 0.2 }).observe(document.getElementById('qualify'));
   } else { sticky.classList.add('on'); }
-  document.getElementById('yr').textContent = new Date().getFullYear();
 
   // ---------- video (optional, CMS) ----------
   document.getElementById('play').addEventListener('click', function(){
@@ -435,7 +580,7 @@
     sheet.classList.remove('open'); document.body.classList.remove('sheet-open'); document.body.style.overflow = '';
     if(lastFocus) try{ lastFocus.focus(); }catch(e){}
   }
-  document.querySelectorAll('.js-qualify').forEach(function(b){ b.addEventListener('click', function(){ open(b.dataset.where); }); });
+  document.querySelectorAll('.js-qualify').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); open(b.dataset.where); }); });
   document.getElementById('q-close').addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && sheet.classList.contains('open')) close(); });
   back.addEventListener('click', function(){ if(step > 0 && step < 5){ step--; render(); } });
@@ -566,6 +711,8 @@
   }
 })();
 </script>
+<script defer src="/cms-loader.js"></script>
+<script defer src="/redesign.js?v=g29"></script>
 <script defer src="/consent.js"></script>
 <script defer src="/sa-events.js?v=4"></script>
 </body>
