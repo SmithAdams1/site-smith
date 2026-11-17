@@ -261,7 +261,7 @@
           </picture>
           <button class="play" id="play" type="button" hidden><i></i><span data-sg="sujoy.hero.video_cta">Watch my 45-sec story</span></button>
         </div>
-        <div class="sg-idcard"><b data-sg="sujoy.profile.name">Sujoy Ghosh</b><span data-sg="sujoy.hero.idline">Business Partner, Smith &amp; Adams · Bengaluru</span></div>
+        <div class="sg-idcard"><b data-sg="sujoy.profile.name">Sujoy Ghosh</b><span data-sg="sujoy.hero.idline">Co-founder, Euron Systems (angel-invested) · MBA, IIM Bangalore</span></div>
       </div>
     </div>
   </section>
@@ -387,7 +387,7 @@
   <div class="panel">
     <div class="p-head">
       <button class="back" id="q-back" type="button">← Back</button>
-      <div class="prog"><small id="q-count">1 of 5</small><div class="bar"><i id="q-bar"></i></div></div>
+      <div class="prog"><small id="q-count">1 of 6</small><div class="bar"><i id="q-bar"></i></div></div>
       <button id="q-close" type="button" aria-label="Close">Close</button>
     </div>
     <div class="p-body" id="q-body"></div>
@@ -445,6 +445,8 @@
     'sujoy.q1.options': 'Founder\nBusiness Owner\nCXO\nSenior Professional\nInvestor\nOther',
     'sujoy.q2.question': 'What are you primarily looking for?',
     'sujoy.q2.options': 'European Residency\nFamily Future\nBusiness Expansion\nGlobal Mobility\nInvestment Opportunity\nLong-Term Citizenship Pathway\nJust Exploring',
+    'sujoy.qbudget.question': 'What investment budget are you comfortable exploring?',
+    'sujoy.qbudget.options': 'Below ₹50 lakh\n₹50 lakh - ₹1 crore\n₹1 - 2.5 crore\n₹2.5 crore+',
     'sujoy.q3.question': 'When would you like to explore this?',
     'sujoy.q3.options': 'Immediately\n0-3 Months\n3-6 Months\n6-12 Months\nJust Exploring',
     'sujoy.q4.question': 'Where are you currently based?',
@@ -558,7 +560,7 @@
   var CODES = [['+91','India'],['+971','UAE'],['+65','Singapore'],['+1','USA / Canada'],['+44','UK'],['+61','Australia'],['+64','New Zealand'],
     ['+49','Germany'],['+31','Netherlands'],['+33','France'],['+41','Switzerland'],['+351','Portugal'],['+966','Saudi Arabia'],['+974','Qatar'],
     ['+973','Bahrain'],['+968','Oman'],['+965','Kuwait'],['+852','Hong Kong'],['+60','Malaysia'],['+66','Thailand'],['+81','Japan'],['+27','South Africa'],['+254','Kenya'],['+880','Bangladesh'],['+94','Sri Lanka'],['+977','Nepal']];
-  var A = { persona:'', objective:[], timeline:'', location:'', location_other:'', name:'', code:'+91', phone:'', email:'', consent:false };
+  var A = { persona:'', objective:[], budget:'', timeline:'', location:'', location_other:'', name:'', code:'+91', phone:'', email:'', consent:false };
   var step = 0, started = false, sending = false, ref = '', qDone = {};
   var sheet = document.getElementById('sheet'), body = document.getElementById('q-body'), next = document.getElementById('q-next'),
       back = document.getElementById('q-back'), err = null, lastFocus = null;
@@ -583,9 +585,9 @@
   document.querySelectorAll('.js-qualify').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); open(b.dataset.where); }); });
   document.getElementById('q-close').addEventListener('click', close);
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && sheet.classList.contains('open')) close(); });
-  back.addEventListener('click', function(){ if(step > 0 && step < 5){ step--; render(); } });
+  back.addEventListener('click', function(){ if(step > 0 && step < 6){ step--; render(); } });
 
-  var SINGLE = { 0:'persona', 2:'timeline', 3:'location' };
+  var SINGLE = { 0:'persona', 2:'budget', 3:'timeline', 4:'location' };
   function optsHtml(qkey, multi, sel){
     return '<div class="opts">' + lines('sujoy.' + qkey + '.options').map(function(o){
       var on = multi ? sel.indexOf(o) >= 0 : sel === o;
@@ -596,31 +598,33 @@
   function valid(){
     if(step === 0) return !!A.persona;
     if(step === 1) return A.objective.length > 0;
-    if(step === 2) return !!A.timeline;
-    if(step === 3) return !!A.location && (!isOtherLoc(A.location) || A.location_other.trim().length > 1);
-    if(step === 4) return true;
+    if(step === 2) return !!A.budget;
+    if(step === 3) return !!A.timeline;
+    if(step === 4) return !!A.location && (!isOtherLoc(A.location) || A.location_other.trim().length > 1);
+    if(step === 5) return true;
     return true;
   }
   function render(){
-    var n = Math.min(step + 1, 5);
-    document.getElementById('q-count').textContent = step < 5 ? (n + ' of 5') : 'Done';
-    document.getElementById('q-bar').style.width = (step < 5 ? n * 20 : 100) + '%';
-    back.hidden = step === 0 || step === 5;
+    var n = Math.min(step + 1, 6);
+    document.getElementById('q-count').textContent = step < 6 ? (n + ' of 6') : 'Done';
+    document.getElementById('q-bar').style.width = (step < 6 ? n * 100 / 6 : 100) + '%';
+    back.hidden = step === 0 || step === 6;
     var foot = document.getElementById('q-foot'); foot.style.display = '';
     var h = '';
     if(step === 0) h = '<h3 id="q-title">' + esc(C['sujoy.q1.question']) + '</h3><p class="hint">Choose one.</p>' + optsHtml('q1', false, A.persona);
     if(step === 1) h = '<h3 id="q-title">' + esc(C['sujoy.q2.question']) + '</h3><p class="hint">Choose all that apply.</p>' + optsHtml('q2', true, A.objective);
-    if(step === 2) h = '<h3 id="q-title">' + esc(C['sujoy.q3.question']) + '</h3><p class="hint">Choose one.</p>' + optsHtml('q3', false, A.timeline);
-    if(step === 3) h = '<h3 id="q-title">' + esc(C['sujoy.q4.question']) + '</h3><p class="hint">Choose one.</p>' + optsHtml('q4', false, A.location) +
+    if(step === 2) h = '<h3 id="q-title">' + esc(C['sujoy.qbudget.question']) + '</h3><p class="hint">Choose one.</p>' + optsHtml('qbudget', false, A.budget);
+    if(step === 3) h = '<h3 id="q-title">' + esc(C['sujoy.q3.question']) + '</h3><p class="hint">Choose one.</p>' + optsHtml('q3', false, A.timeline);
+    if(step === 4) h = '<h3 id="q-title">' + esc(C['sujoy.q4.question']) + '</h3><p class="hint">Choose one.</p>' + optsHtml('q4', false, A.location) +
       '<label class="fld" id="loc-other" style="margin-top:14px;' + (isOtherLoc(A.location) ? '' : 'display:none;') + '">City and country<input id="f-loc" autocomplete="address-level2" value="' + esc(A.location_other) + '" placeholder="e.g. Chennai, India"/></label>';
-    if(step === 4) h = '<h3 id="q-title">' + esc(C['sujoy.q5.question']) + '</h3><p class="hint">We only use this to follow up on your enquiry.</p>' +
+    if(step === 5) h = '<h3 id="q-title">' + esc(C['sujoy.q5.question']) + '</h3><p class="hint">We only use this to follow up on your enquiry.</p>' +
       '<label class="fld">Full name<input id="f-name" autocomplete="name" value="' + esc(A.name) + '"/></label>' +
       '<div class="fld">WhatsApp / mobile number<div class="phone" style="margin-top:6px;"><select id="f-code" aria-label="Country code" style="margin-top:0">' +
         CODES.map(function(c){ return '<option value="' + c[0] + '"' + (c[0] === A.code ? ' selected' : '') + '>' + c[0] + ' ' + esc(c[1]) + '</option>'; }).join('') +
       '</select><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel-national" aria-label="Phone number" style="margin-top:0" value="' + esc(A.phone) + '" placeholder="98765 43210"/></div></div>' +
       '<label class="fld">Email <span class="opt-l">(optional, recommended)</span><input id="f-email" type="email" inputmode="email" autocomplete="email" value="' + esc(A.email) + '"/></label>' +
       '<label class="chk"><input id="f-consent" type="checkbox"' + (A.consent ? ' checked' : '') + '/><span>I agree to be contacted by Smith &amp; Adams about my enquiry, by WhatsApp, phone or email, as described in the <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>. I can withdraw at any time.</span></label>';
-    if(step === 5){
+    if(step === 6){
       foot.style.display = 'none';
       h = '<div class="done-box"><div class="tick" aria-hidden="true"></div><h3 id="q-title">' + esc(C['sujoy.success.headline']) + '</h3><p>' + esc(C['sujoy.success.body']) + '</p>' +
         '<a class="btn wa" id="wa" href="' + waHref() + '" target="_blank" rel="noopener">' + esc(C['sujoy.success.cta']) + ' →</a>' +
@@ -628,11 +632,11 @@
     }
     body.innerHTML = h + '<p class="err" id="q-err" role="alert"></p>';
     err = document.getElementById('q-err');
-    next.textContent = step === 4 ? 'Submit' : 'Next';
+    next.textContent = step === 5 ? 'Submit' : 'Next';
     next.disabled = !valid();
     body.scrollTop = 0;
     var f = body.querySelector('.opt[aria-pressed="true"], input, .opt, .btn'); if(f) try{ f.focus({ preventScroll:true }); }catch(e){}
-    if(step === 5){
+    if(step === 6){
       document.getElementById('wa').addEventListener('click', function(){
         // Not a second generate_lead: the lead was already counted on submit.
         ev('whatsapp_clicked', { lead_ref: ref });
@@ -654,8 +658,8 @@
     }
     A[SINGLE[step]] = v;
     body.querySelectorAll('.opt').forEach(function(x){ x.setAttribute('aria-pressed', x === o); });
-    if(step === 3 && isOtherLoc(v)){ document.getElementById('loc-other').style.display = ''; document.getElementById('f-loc').focus(); next.disabled = !valid(); return; }
-    if(step === 3) document.getElementById('loc-other').style.display = 'none';
+    if(step === 4 && isOtherLoc(v)){ document.getElementById('loc-other').style.display = ''; document.getElementById('f-loc').focus(); next.disabled = !valid(); return; }
+    if(step === 4) document.getElementById('loc-other').style.display = 'none';
     next.disabled = !valid();
     setTimeout(advance, 160);   // single choice: move on by itself
   });
@@ -675,8 +679,8 @@
 
   function advance(){
     if(!valid() || sending) return;
-    if(step < 4){ if(!qDone[step]){ qDone[step] = 1; ev('qualification_q' + (step + 1) + '_complete'); } step++; render(); return; }
-    // step 4: validate contact details
+    if(step < 5){ if(!qDone[step]){ qDone[step] = 1; ev('qualification_q' + (step + 1) + '_complete'); } step++; render(); return; }
+    // step 5: validate contact details
     var name = A.name.trim(), digits = A.phone.replace(/[^\d]/g, ''), em = A.email.trim();
     if(name.length < 2){ err.textContent = 'Please enter your full name.'; return; }
     if(digits.length < 6 || digits.length > 14){ err.textContent = 'Please enter a valid WhatsApp or mobile number.'; return; }
@@ -695,7 +699,7 @@
     post({
       source: 'sujoy', firstName: parts.shift(), lastName: parts.join(' '), email: em || undefined,
       phoneCode: A.code, phoneNumber: digits, consent: true, lead_ref: ref,
-      qualification: { persona: A.persona, objective: A.objective, timeline: A.timeline,
+      qualification: { persona: A.persona, objective: A.objective, budget: A.budget, timeline: A.timeline,
         location: isOtherLoc(A.location) ? (A.location + ': ' + A.location_other.trim()) : A.location },
       attribution: utm, landing_page: '/sujoy'
     }).then(function(r){
@@ -703,7 +707,7 @@
       if(!r.ok) throw new Error('http ' + r.status);
       ev('lead_created', { lead_ref: ref });
       if(window.saTrackLead) try{ window.saTrackLead('consultation', { lead_source:'Sujoy Ghosh', email: em, phone: A.code + digits }); }catch(e){}
-      step = 5; render();
+      step = 6; render();
     }).catch(function(){
       sending = false; next.disabled = false; next.textContent = 'Submit';
       err.innerHTML = 'Something went wrong sending your details. Please try again, or <a href="' + waHref() + '" target="_blank" rel="noopener">message the team on WhatsApp</a>.';

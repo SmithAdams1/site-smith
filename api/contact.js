@@ -133,6 +133,7 @@ async function handleSujoy(req, res) {
   const qual = {
     qualification_persona: clip(q.persona, 60),
     qualification_objective: (Array.isArray(q.objective) ? q.objective : []).map((x) => clip(x, 60)).slice(0, 8),
+    qualification_budget: clip(q.budget, 40),
     qualification_timeline: clip(q.timeline, 40),
     qualification_location: clip(q.location, 120),
   };
@@ -141,6 +142,7 @@ async function handleSujoy(req, res) {
     ref ? `Reference: ${ref}` : null,
     `Profile: ${qual.qualification_persona}`,
     `Looking for: ${qual.qualification_objective.join(', ')}`,
+    qual.qualification_budget ? `Budget: ${qual.qualification_budget}` : null,
     `Timeline: ${qual.qualification_timeline}`,
     `Based in: ${qual.qualification_location}`,
     hasEmail ? null : 'No email given (phone/WhatsApp only)',
