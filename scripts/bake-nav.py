@@ -35,7 +35,6 @@ TOP = [('Home', '/index.html'), ('About Us', '/about.html')]
 SERVICES_LABEL = 'Our Services'
 SERVICES_CUR = ('invest-in-portugal', 'real-estate', 'property-management', 'hospitality')
 DROP = [('Investment Advisory', '/invest-in-portugal.html'),
-        ('Real Estate', '/real-estate.html'),
         ('Property Management', '/property-management.html'),
         ('Hospitality &amp; F&amp;B', '/hospitality.html'),
         ('Recruitment', 'https://recruitment.smithandadams.com')]
@@ -82,7 +81,6 @@ MOB_CTA = ('bg-[#ffffff] text-[#0C1E28] px-6 py-3 rounded-[2px] font-medium '
            'transition-all duration-300 hover:bg-[#1a3240] mt-4 satoshi')
 MOB = [('Home', '/index.html'), ('About Us', '/about.html'),
        ('Investment Advisory', '/invest-in-portugal.html'),
-       ('Real Estate', '/real-estate.html'),
        ('Property Management', '/property-management.html'),
        ('Hospitality &amp; F&amp;B', '/hospitality.html'),
        ('Recruitment', 'https://recruitment.smithandadams.com'), ('News', '/blog.html')]
